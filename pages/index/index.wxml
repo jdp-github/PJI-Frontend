@@ -11,5 +11,6 @@
     <text class="user-motto">{{motto}}</text>
     <br/>
     <i class="fa fa-user icon"></i>
+    <wux-button block size="default" type="calm">calm</wux-button>
   </view>
 </view>

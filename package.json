@@ -1,0 +1,23 @@
+{
+  "name": "PJI-Frontend",
+  "version": "1.0.0",
+  "description": "Frontend site for PJI",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jason-ZW/PJI-Frontend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jason-ZW/PJI-Frontend/issues"
+  },
+  "homepage": "https://github.com/Jason-ZW/PJI-Frontend#readme",
+  "dependencies": {
+    "wux-weapp": "^3.3.1"
+  }
+}
