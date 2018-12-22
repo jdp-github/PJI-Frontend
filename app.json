@@ -1,12 +1,13 @@
 {
   "pages":[
-    "pages/index/index",
+    "pages/authorization/authorization",
     "pages/logs/logs"
   ],
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle":"black"
+    "navigationBarTitleText": "PJI-登记系统",
+    "navigationBarTextStyle":"black",
+    "backgroundColor": "#f8f8f8"
   }
 }

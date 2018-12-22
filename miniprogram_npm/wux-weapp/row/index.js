@@ -26,7 +26,7 @@ Component({
     },
     methods: {
     	updateStyle(gutter = this.data.gutter) {
-    		const elements = this.getRelationNodes('../col/index')
+    		const elements = this.getRelationNodes('../col/authorization')
             const rowStyle = gutter > 0 ? `margin-left: ${gutter / -2}px; margin-right: ${gutter / -2}px` : ''
     		const colStyle = gutter > 0 ? `padding-left: ${gutter / 2}px; padding-right: ${gutter / 2}px` : ''
 

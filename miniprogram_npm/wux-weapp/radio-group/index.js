@@ -32,7 +32,7 @@ Component({
     },
     methods: {
         changeValue(value = this.data.value) {
-            const elements = this.getRelationNodes('../radio/index')
+            const elements = this.getRelationNodes('../radio/authorization')
             if (elements.length > 0) {
                 elements.forEach((element, index) => {
                     element.changeValue(value === element.data.value, index)

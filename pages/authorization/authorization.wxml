@@ -1,0 +1,14 @@
+<scroll-view class="page" scroll-y>
+    <view class="page__hd">
+        <wux-avatar size="large" src="http://pbqg2m54r.bkt.clouddn.com/logo.png" />
+        <view class="app-title">PJI-登记系统</view>
+    </view>
+    <view class="page__bd">
+        <wux-wing-blank size="default">
+            <view class="notice-txt">您即将授权的应用是PJI-登记系统，授权后小程序将获得您的用户信息，该信息仅用于微信小程序交互</view>
+        </wux-wing-blank>
+        <wux-wing-blank size="default">
+            <wux-button block type="balanced" class="auth-btn">授权登录</wux-button>
+        </wux-wing-blank>
+    </view>
+</scroll-view>

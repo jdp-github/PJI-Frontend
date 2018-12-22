@@ -47,7 +47,7 @@ Component({
     },
     methods: {
         updated(activeKey, condition) {
-            const elements = this.getRelationNodes('../accordion/index')
+            const elements = this.getRelationNodes('../accordion/authorization')
 
             if (elements.length > 0) {
                 if (condition) {

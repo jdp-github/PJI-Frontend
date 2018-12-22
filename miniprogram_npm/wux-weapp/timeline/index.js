@@ -26,7 +26,7 @@ Component({
     },
     methods: {
     	updateIsLastElement() {
-            const elements = this.getRelationNodes('../timeline-item/index')
+            const elements = this.getRelationNodes('../timeline-item/authorization')
             if (elements.length > 0) {
                 const lastIndex = elements.length - 1
                 const { pending, position } = this.data

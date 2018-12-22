@@ -1,5 +1,0 @@
-{
-  "usingComponents": {
-    "wux-button": "../../miniprogram_npm/wux-weapp/button/index"
-  }
-}

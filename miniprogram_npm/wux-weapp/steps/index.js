@@ -31,7 +31,7 @@ Component({
     },
     methods: {
         updateCurrent() {
-            const elements = this.getRelationNodes('../step/index')
+            const elements = this.getRelationNodes('../step/authorization')
             const { current, direction } = this.data
 
             if (elements.length > 0) {
