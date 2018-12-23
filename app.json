@@ -1,6 +1,10 @@
 {
   "pages":[
+    "pages/person/person",
     "pages/authorization/authorization",
+    "pages/index/index",
+    "pages/case/case",
+    "pages/statement/statement",
     "pages/logs/logs"
   ],
   "window":{

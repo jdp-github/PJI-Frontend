@@ -1,0 +1,38 @@
+<scroll-view class="page" scroll-y>
+    <view class="page__bd">
+        <wux-row class="img-center">
+            <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+        </wux-row>
+        <wux-cell-group title="基本信息" class="info-text">
+             <wux-cell thumb="/img/user.png" title="昵称" extra="{{userInfo.nickName}}"></wux-cell>
+             <wux-cell thumb="/img/phone.png" title="电话" extra="18602486892"></wux-cell>
+             <wux-cell thumb="/img/email.png" title="邮箱" extra="zhaozhenyang@think-show.com"></wux-cell>
+        </wux-cell-group>
+        <wux-cell-group title="系统" class="info-text">
+             <wux-cell thumb="/img/role.png" title="角色" extra="管理员"></wux-cell>
+             <wux-cell thumb="/img/center.png" title="中心" extra="所有"></wux-cell>
+        </wux-cell-group>
+        <wux-cell-group title="中心1" class="info-text">
+             <wux-cell thumb="/img/role.png" title="角色" extra="中心负责人"></wux-cell>
+             <wux-cell thumb="/img/center.png" title="中心" extra="中心1"></wux-cell>
+        </wux-cell-group>
+    </view>
+</scroll-view>
+<wux-tabbar default-current="tab4" position="bottom" theme="assertive">
+    <wux-tabbar-item key="tab1" title="中心">
+        <wux-icon wux-class="icon" type="md-aperture" size="22" slot="icon-on" />
+        <wux-icon wux-class="icon" type="md-aperture" size="22" slot="icon-off" />
+    </wux-tabbar-item>
+    <wux-tabbar-item key="tab2" title="病例">
+        <wux-icon wux-class="icon" type="md-bed" size="22" slot="icon-on" />
+        <wux-icon wux-class="icon" type="md-bed" size="22" slot="icon-off" />
+    </wux-tabbar-item>
+    <wux-tabbar-item key="tab3" title="统计">
+        <wux-icon wux-class="icon" type="md-stats" size="22" slot="icon-on" />
+        <wux-icon wux-class="icon" type="md-stats" size="22" slot="icon-off" />
+    </wux-tabbar-item>
+    <wux-tabbar-item key="tab4" title="个人">
+        <wux-icon wux-class="icon" type="md-person" size="22" slot="icon-on" />
+        <wux-icon wux-class="icon" type="md-person" size="22" slot="icon-off" />
+    </wux-tabbar-item>
+</wux-tabbar>

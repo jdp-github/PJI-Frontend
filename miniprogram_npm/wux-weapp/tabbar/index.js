@@ -43,7 +43,7 @@ Component({
     },
     methods: {
         updated(activeKey, condition) {
-            const elements = this.getRelationNodes('../tabbar-item/authorization')
+            const elements = this.getRelationNodes('../tabbar-item/index')
 
             if (elements.length > 0) {
                 if (condition) {

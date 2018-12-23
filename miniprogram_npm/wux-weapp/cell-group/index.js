@@ -4,13 +4,13 @@ Component({
         '../cell/index': {
             type: 'child',
             linked() {
-                this.updateIsLastElement('../cell/authorization')
+                this.updateIsLastElement('../cell/index')
             },
             linkChanged() {
-                this.updateIsLastElement('../cell/authorization')
+                this.updateIsLastElement('../cell/index')
             },
             unlinked() {
-                this.updateIsLastElement('../cell/authorization')
+                this.updateIsLastElement('../cell/index')
             },
         },
     },
@@ -26,7 +26,7 @@ Component({
     },
     methods: {
         updateIsLastElement() {
-            const elements = this.getRelationNodes('../cell/authorization')
+            const elements = this.getRelationNodes('../cell/index')
             if (elements.length > 0) {
                 const lastIndex = elements.length - 1
                 elements.forEach((element, index) => {

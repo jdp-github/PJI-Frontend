@@ -34,7 +34,7 @@ Component({
         },
         onTap() {
             const { key, disabled } = this.data
-            const parent = this.getRelationNodes('../tabs/authorization')[0]
+            const parent = this.getRelationNodes('../tabs/index')[0]
 
             if (disabled || !parent) return
 

@@ -1,0 +1,12 @@
+<scroll-view class="page" scroll-y>
+    <wux-tabbar default-current="tab3" position="bottom">
+        <wux-tabbar-item key="tab1" title="中心">
+        </wux-tabbar-item>
+        <wux-tabbar-item key="tab2" title="病例">
+        </wux-tabbar-item>
+        <wux-tabbar-item key="tab3" title="统计">
+        </wux-tabbar-item>
+        <wux-tabbar-item key="tab4" title="个人">
+        </wux-tabbar-item>
+    </wux-tabbar>
+</scroll-view>

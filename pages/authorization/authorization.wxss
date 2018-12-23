@@ -1,8 +1,6 @@
 @import "../../css/font-awesome.wxss";
+@import "../../css/common.wxss";
 @import "../../miniprogram_npm/wux-weapp/styles/index.wxss";
-page {
-    height: 100%;
-}
 .page {
     height: 100%;
     display: flex;

@@ -44,7 +44,7 @@ Component({
         },
         onTap() {
             const { index, disabled } = this.data
-            const parent = this.getRelationNodes('../accordion-group/authorization')[0]
+            const parent = this.getRelationNodes('../accordion-group/index')[0]
 
             if (disabled || !parent) {
                 return false

@@ -64,7 +64,7 @@ Component({
     },
     methods: {
         updated(value, condition) {
-            const elements = this.getRelationNodes('../tab/authorization')
+            const elements = this.getRelationNodes('../tab/index')
             const activeKey = getActiveKey(elements, value)
             const { scroll, theme, direction } = this.data
 

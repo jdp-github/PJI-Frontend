@@ -47,7 +47,7 @@ Component({
     methods: {
         radioChange(e) {
             const { value, index, disabled } = this.data
-            const parent = this.getRelationNodes('../radio-group/authorization')[0]
+            const parent = this.getRelationNodes('../radio-group/index')[0]
             const item = {
                 checked: e.detail.checked,
                 value,

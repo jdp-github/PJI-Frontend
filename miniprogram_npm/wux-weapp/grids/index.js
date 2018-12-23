@@ -33,7 +33,7 @@ Component({
     },
     methods: {
     	changeCurrent() {
-    		const elements = this.getRelationNodes('../grid/authorization')
+    		const elements = this.getRelationNodes('../grid/index')
             const { col, bordered, square } = this.data
     		const colNum = parseInt(col) > 0 ? parseInt(col) : 1
     		const width = `${100 / colNum}%`

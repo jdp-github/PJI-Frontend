@@ -32,7 +32,7 @@ Component({
     },
     methods: {
         changeValue(value = this.data.value) {
-            const elements = this.getRelationNodes('../checkbox/authorization')
+            const elements = this.getRelationNodes('../checkbox/index')
             if (elements.length > 0) {
                 elements.forEach((element, index) => {
                     element.changeValue(value.includes(element.data.value), index)
