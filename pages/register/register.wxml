@@ -1,8 +1,81 @@
 <scroll-view class="page" scroll-y>
     <view class="page__hd">
-
+        <wux-row>
+            <wux-col span="4">
+                <view class="page__title">工单申请</view>
+                <view class="page__desc">中心权限申请单</view>
+            </wux-col>
+            <wux-col span="8">
+                <view class="register-no last-row">
+                    申请单号: 2018122412985918395
+                </view>
+            </wux-col>
+        </wux-row>
     </view>
     <view class="page__bd">
-
+        <wux-cell-group title="基本信息">
+            <wux-cell hover-class="none">
+                <wux-col span="1" class="icon-col">
+                    <i class="fa fa-phone input-size"/>
+                </wux-col>
+                <wux-col span="11">
+                    <wux-input label="电话" class="input-size" value="{{ telValue }}" clear="true" controlled error="{{ telError }}" type="number" placeholder="请输入电话号码"  bind:change="onTelChange" bind:error="onTelError" bind:clear="onTelClear" />
+                </wux-col>
+            </wux-cell>
+            <wux-cell hover-class="none">
+                <wux-col span="1" class="icon-col">
+                    <i class="fa fa-envelope-o input-size"/>
+                </wux-col>
+                <wux-col span="11">
+                    <wux-input label="邮箱" class="input-size" placeholder="请输入电子邮箱" />
+                </wux-col>
+            </wux-cell>
+        </wux-cell-group>
+        <wux-cell-group title="申请信息">
+             <wux-cell hover-class="none">
+                <wux-col span="1" class="icon-col">
+                    <i class="fa fa-life-ring input-size input-size-vertical"/>
+                </wux-col>
+                <wux-col span="11">
+                    <wux-select id="wux-center" class="input-select" />
+                    <wux-cell title="请选择所属中心" class="input-size input-select" extra="{{ centerTitle }}" bind:click="onCenterClick"></wux-cell>
+                </wux-col>
+                <wux-col span="1" class="icon-col">
+                    <i class="fa fa-user input-size input-size-vertical"/>
+                </wux-col>
+                <wux-col span="11">
+                    <wux-select id="wux-role" class="input-select" />
+                    <wux-cell title="请选择中心角色" class="input-size input-select" extra="{{ roleTitle }}" bind:click="onRoleClick"></wux-cell>
+                </wux-col>
+            </wux-cell>
+        </wux-cell-group>
+        <wux-cell-group title="申请理由">
+            <wux-cell hover-class="none">
+                <wux-col span="12">
+                    <wux-textarea hasCount rows="3" cursorSpacing="80" placeholder="请输入申请理由..." />
+                </wux-col>
+            </wux-cell>
+        </wux-cell-group>
+        <wux-wing-blank size="default">
+            <wux-button block type="balanced" class="auth-btn">提交申请</wux-button>
+        </wux-wing-blank>
     </view>
 </scroll-view>
+<wux-tabbar position="bottom" theme="assertive">
+    <wux-tabbar-item key="tab1" title="中心">
+        <wux-icon wux-class="icon" type="md-aperture" size="22" slot="icon-on" />
+        <wux-icon wux-class="icon" type="md-aperture" size="22" slot="icon-off" />
+    </wux-tabbar-item>
+    <wux-tabbar-item key="tab2" title="病例">
+        <wux-icon wux-class="icon" type="md-bed" size="22" slot="icon-on" />
+        <wux-icon wux-class="icon" type="md-bed" size="22" slot="icon-off" />
+    </wux-tabbar-item>
+    <wux-tabbar-item key="tab3" title="统计">
+        <wux-icon wux-class="icon" type="md-stats" size="22" slot="icon-on" />
+        <wux-icon wux-class="icon" type="md-stats" size="22" slot="icon-off" />
+    </wux-tabbar-item>
+    <wux-tabbar-item key="tab4" title="个人">
+        <wux-icon wux-class="icon" type="md-person" size="22" slot="icon-on" />
+        <wux-icon wux-class="icon" type="md-person" size="22" slot="icon-off" />
+    </wux-tabbar-item>
+</wux-tabbar>

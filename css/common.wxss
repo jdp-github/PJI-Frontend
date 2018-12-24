@@ -1,8 +1,46 @@
-page {
+page, .page {
     height: 100%;
+    font-size: 28rpx;
 }
+
 .page__bd {
     padding-bottom: 92rpx;
+}
+.page__title {
+    text-align: left;
+    font-size: 30rpx;
+    font-weight: 400;
+}
+.page__desc {
+    margin-top: 10rpx;
+    color: #888888;
+    text-align: left;
+    font-size: 24rpx;
+}
+.last-row {
+    margin-right: 40rpx;
+    text-align: center;
+    border-radius: 6rpx;
+}
+.wux-cell-group__hd {
+    font-size: 18rpx;
+}
+.input-size {
+    font-size: 28rpx;
+}
+.input-size-vertical {
+    font-size: 28rpx;
+    margin: 26rpx 0;
+}
+.input-select {
+    padding-left: 0;
+}
+.icon-col {
+    font-size: 28rpx;
+    text-align: center;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
 }
 .userinfo {
     display: flex;
