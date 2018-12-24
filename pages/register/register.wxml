@@ -1,0 +1,8 @@
+<scroll-view class="page" scroll-y>
+    <view class="page__hd">
+
+    </view>
+    <view class="page__bd">
+
+    </view>
+</scroll-view>

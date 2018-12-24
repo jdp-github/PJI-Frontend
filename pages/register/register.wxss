@@ -9,15 +9,19 @@
     justify-content: space-between;
     padding: 40rpx 0;
     box-sizing: border-box;
-    background-color: #f8f8f8;
 }
-.img-center {
+.page__hd {
     text-align: center;
 }
-.info-text {
-    font-size: 26rpx;
-}
-.wux-fab-button__action {
-    width: 80rpx!important;
-    height: 80rpx!important;
+
+@media screen and (max-height: 812px) {
+    .page {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        padding: 200rpx 0;
+        box-sizing: border-box;
+    }
 }

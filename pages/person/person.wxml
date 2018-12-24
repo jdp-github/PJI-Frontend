@@ -1,3 +1,4 @@
+<wux-fab-button position="topRight" theme="assertive" direction="vertical" scale=".8" reverse="true" actionRotate="false" buttons="{{ buttons }}" spaceBetween="12" />
 <scroll-view class="page" scroll-y>
     <view class="page__bd">
         <wux-row class="img-center">

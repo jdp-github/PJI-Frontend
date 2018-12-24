@@ -9,7 +9,8 @@
     "wux-tabbar-item": "../../miniprogram_npm/wux-weapp/tabbar-item/index",
     "wux-avatar": "../../miniprogram_npm/wux-weapp/avatar/index",
     "wux-cell-group": "../../miniprogram_npm/wux-weapp/cell-group/index",
-    "wux-cell": "../../miniprogram_npm/wux-weapp/cell/index"
+    "wux-cell": "../../miniprogram_npm/wux-weapp/cell/index",
+    "wux-fab-button": "../../miniprogram_npm/wux-weapp/fab-button/index"
   },
   "backgroundColor": "#f8f8f8"
 }

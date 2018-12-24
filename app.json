@@ -1,7 +1,8 @@
 {
   "pages":[
-    "pages/authorization/authorization",
     "pages/person/person",
+    "pages/register/register",
+    "pages/authorization/authorization",
     "pages/index/index",
     "pages/case/case",
     "pages/statement/statement",
