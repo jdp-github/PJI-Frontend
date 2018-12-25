@@ -30,6 +30,22 @@ Component({
             type: Boolean,
             value: true,
         },
+        resSuccess: {
+            type: Boolean,
+            value: false,
+        },
+        resProgress: {
+            type: Boolean,
+            value: false,
+        },
+        resFail: {
+            type: Boolean,
+            value: false,
+        },
+        resWait: {
+            type: Boolean,
+            value: false,
+        }
     },
     data: {
         current: false,

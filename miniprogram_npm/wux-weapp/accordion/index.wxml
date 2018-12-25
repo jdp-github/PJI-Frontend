@@ -4,7 +4,21 @@
             <image class="wux-accordion__thumb" src="{{ thumb }}" />
         </block>
         <block wx:if="{{ title }}">
-            <view class="wux-accordion__title">{{ title }}</view>
+            <view class="wux-accordion__title">
+                <block wx:if="{{ resSuccess }}">
+                    <wux-tag color="green">审批成功</wux-tag>
+                </block>
+                <block wx:if="{{ resFail }}">
+                    <wux-tag color="red">审批失败</wux-tag>
+                </block>
+                <block wx:if="{{ resProgress }}">
+                    <wux-tag color="orange">正在审批</wux-tag>
+                </block>
+                <block wx:if="{{ resWait }}">
+                    <wux-tag color="orange">待审批</wux-tag>
+                </block>
+                {{ title }}
+            </view>
         </block>
         <block wx:else>
             <slot name="header"></slot>

@@ -6,12 +6,13 @@
     "wux-button": "../../../miniprogram_npm/wux-weapp/button/index",
     "wux-cell-group": "../../../miniprogram_npm/wux-weapp/cell-group/index",
     "wux-cell": "../../../miniprogram_npm/wux-weapp/cell/index",
-    "wux-input": "../../../miniprogram_npm/wux-weapp/input/index",
-    "wux-select": "../../../miniprogram_npm/wux-weapp/select/index",
-    "wux-textarea": "../../../miniprogram_npm/wux-weapp/textarea/index",
     "wux-wing-blank": "../../../miniprogram_npm/wux-weapp/wing-blank/index",
     "wux-tabbar": "../../../miniprogram_npm/wux-weapp/tabbar/index",
-    "wux-tabbar-item": "../../../miniprogram_npm/wux-weapp/tabbar-item/index"
+    "wux-tabbar-item": "../../../miniprogram_npm/wux-weapp/tabbar-item/index",
+    "wux-segmented-control": "../../../miniprogram_npm/wux-weapp/segmented-control/index",
+    "wux-accordion-group": "../../../miniprogram_npm/wux-weapp/accordion-group/index",
+    "wux-accordion": "../../../miniprogram_npm/wux-weapp/accordion/index",
+    "wux-tag": "../../../miniprogram_npm/wux-weapp/tag/index"
   },
   "backgroundColor": "#f8f8f8"
 }
