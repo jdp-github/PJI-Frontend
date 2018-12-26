@@ -3,23 +3,33 @@
         <wux-search-bar clear value="{{ searchValue }}" controlled placeholder="请输入中心名称" bind:change="onSearchChange" bind:focus="onSearchFocus" bind:blur="onSearchBlur" bind:confirm="onSearchConfirm" bind:clear="onSearchClear" bind:cancel="onSearchCancel" />
     </view>
     <view class="page__bd">
+        <view class="center-block">
+            <wux-wing-blank size="default" class="center-block">
+                <wux-card title="骨头中心" extra="2018-12-24" thumb="/img/center.png">
+                    <view slot="body">
+
+                    </view>
+                    <view slot="footer">
+                        <view class="wux-assertive">
+                            <i class="fa fa-user" /> 李文浩 (中心负责人)
+                        </view>
+                    </view>
+                </wux-card>
+            </wux-wing-blank>
+        </view>
+        <view class="center-block">
+            <wux-wing-blank size="default">
+                <wux-card title="血液中心" extra="2018-12-23" thumb="/img/center.png">
+                    <view slot="body">
+
+                    </view>
+                    <view slot="footer">
+                        <view class="wux-assertive">
+                            <i class="fa fa-user" /> 季大鹏 (中心负责人)
+                        </view>
+                    </view>
+                </wux-card>
+            </wux-wing-blank>
+        </view>
     </view>
 </scroll-view>
-<wux-tabbar default-current="tab1" position="bottom" theme="assertive">
-    <wux-tabbar-item key="tab1" title="中心">
-        <wux-icon wux-class="icon" type="md-aperture" size="22" slot="icon-on" />
-        <wux-icon wux-class="icon" type="md-aperture" size="22" slot="icon-off" />
-    </wux-tabbar-item>
-    <wux-tabbar-item key="tab2" title="病例">
-        <wux-icon wux-class="icon" type="md-book" size="22" slot="icon-on" />
-        <wux-icon wux-class="icon" type="md-book" size="22" slot="icon-off" />
-    </wux-tabbar-item>
-    <wux-tabbar-item key="tab3" title="统计">
-        <wux-icon wux-class="icon" type="md-stats" size="22" slot="icon-on" />
-        <wux-icon wux-class="icon" type="md-stats" size="22" slot="icon-off" />
-    </wux-tabbar-item>
-    <wux-tabbar-item key="tab4" title="个人">
-        <wux-icon wux-class="icon" type="md-person" size="22" slot="icon-on" />
-        <wux-icon wux-class="icon" type="md-person" size="22" slot="icon-off" />
-    </wux-tabbar-item>
-</wux-tabbar>

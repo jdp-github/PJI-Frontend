@@ -2,9 +2,8 @@
   "usingComponents": {
     "wux-icon": "../../miniprogram_npm/wux-weapp/icon/index",
     "wux-button": "../../miniprogram_npm/wux-weapp/button/index",
+    "wux-card": "../../miniprogram_npm/wux-weapp/card/index",
     "wux-wing-blank": "../../miniprogram_npm/wux-weapp/wing-blank/index",
-    "wux-tabbar": "../../miniprogram_npm/wux-weapp/tabbar/index",
-    "wux-tabbar-item": "../../miniprogram_npm/wux-weapp/tabbar-item/index",
     "wux-search-bar": "../../miniprogram_npm/wux-weapp/search-bar/index"
   },
   "backgroundColor": "#f8f8f8"
