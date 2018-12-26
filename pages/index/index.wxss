@@ -7,10 +7,19 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    padding: 40rpx 0;
+    padding-bottom: 40rpx;
     box-sizing: border-box;
     background-color: #f8f8f8;
 }
 .center-block {
     margin: 20rpx 0;
+}
+.progress-view {
+    margin-top: 10rpx;
+}
+.people-view {
+    color: #515151;
+}
+.btn-padding {
+    padding-left: 6rpx;
 }

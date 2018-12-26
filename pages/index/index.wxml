@@ -7,10 +7,31 @@
             <wux-wing-blank size="default" class="center-block">
                 <wux-card title="骨头中心" extra="2018-12-24" thumb="/img/center.png">
                     <view slot="body">
-
+                        <view>
+                            <wux-tag color="#ef473a">已完成: 90</wux-tag>
+                            <wux-tag>未审核: 5</wux-tag>
+                            <wux-tag>录入未完成: 5</wux-tag>
+                        </view>
+                        <view class="progress-view">
+                            <wux-progress status="error" percent="90" />
+                        </view>
+                        <view class="btn-row">
+                            <wux-row>
+                                <wux-col span="6">
+                                    <view>
+                                        <wux-button block clear type="dark" size="small"><i class="fa fa-cog" ></i> 设置</wux-button>
+                                    </view>
+                                </wux-col>
+                                <wux-col span="6">
+                                    <view class="btn-padding">
+                                        <wux-button block clear type="balanced" size="small"><i class="fa fa-address-card-o"></i> 病例</wux-button>
+                                    </view>
+                                </wux-col>
+                            </wux-row>
+                        </view>
                     </view>
                     <view slot="footer">
-                        <view class="wux-assertive">
+                        <view class="people-view">
                             <i class="fa fa-user" /> 李文浩 (中心负责人)
                         </view>
                     </view>
@@ -21,10 +42,31 @@
             <wux-wing-blank size="default">
                 <wux-card title="血液中心" extra="2018-12-23" thumb="/img/center.png">
                     <view slot="body">
-
+                        <view>
+                            <wux-tag color="#ef473a">已完成: 70</wux-tag>
+                            <wux-tag>未审核: 5</wux-tag>
+                            <wux-tag>录入未完成: 25</wux-tag>
+                        </view>
+                        <view class="progress-view">
+                            <wux-progress status="error" percent="70" />
+                        </view>
+                        <view class="btn-row">
+                            <wux-row>
+                                <wux-col span="6">
+                                    <view>
+                                        <wux-button block clear type="dark" size="small"><i class="fa fa-cog" ></i> 设置</wux-button>
+                                    </view>
+                                </wux-col>
+                                <wux-col span="6">
+                                    <view class="btn-padding">
+                                        <wux-button block clear type="balanced" size="small"><i class="fa fa-address-card-o"></i> 病例</wux-button>
+                                    </view>
+                                </wux-col>
+                            </wux-row>
+                        </view>
                     </view>
                     <view slot="footer">
-                        <view class="wux-assertive">
+                        <view class="people-view">
                             <i class="fa fa-user" /> 季大鹏 (中心负责人)
                         </view>
                     </view>

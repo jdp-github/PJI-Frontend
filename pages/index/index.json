@@ -4,7 +4,11 @@
     "wux-button": "../../miniprogram_npm/wux-weapp/button/index",
     "wux-card": "../../miniprogram_npm/wux-weapp/card/index",
     "wux-wing-blank": "../../miniprogram_npm/wux-weapp/wing-blank/index",
-    "wux-search-bar": "../../miniprogram_npm/wux-weapp/search-bar/index"
+    "wux-search-bar": "../../miniprogram_npm/wux-weapp/search-bar/index",
+    "wux-progress": "../../miniprogram_npm/wux-weapp/progress/index",
+    "wux-tag": "../../miniprogram_npm/wux-weapp/tag/index",
+    "wux-row": "../../miniprogram_npm/wux-weapp/row/index",
+    "wux-col": "../../miniprogram_npm/wux-weapp/col/index"
   },
   "backgroundColor": "#f8f8f8"
 }
