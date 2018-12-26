@@ -13,8 +13,8 @@
 		"nodeModules": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.0.4",
-	"appid": "wxfe1aec4e31204cde",
+	"libVersion": "2.4.3",
+	"appid": "wx1a597e61cecd1a6f",
 	"projectname": "PJI-Frontend",
 	"debugOptions": {
 		"hidedInDevtools": []

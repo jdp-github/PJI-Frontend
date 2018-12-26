@@ -7,41 +7,52 @@
             </wux-col>
             <wux-col span="8">
                 <view class="register-no last-row">
-                    申请单号: 2018122412985918395
+                    申请单号: {{workOrderNO}}
                 </view>
             </wux-col>
         </wux-row>
     </view>
     <view class="page__bd">
         <wux-cell-group title="基本信息">
+            <!-- 姓名 -->
             <wux-cell hover-class="none">
                 <wux-col span="1" class="icon-col">
-                    <i class="fa fa-phone input-size"/>
+                    <i class="fa fa-address-book input-size" />
                 </wux-col>
                 <wux-col span="11">
-                    <wux-input label="电话" class="input-size" value="{{ telValue }}" clear="true" controlled error="{{ telError }}" type="number" placeholder="请输入电话号码"  bind:change="onTelChange" bind:error="onTelError" bind:clear="onTelClear" />
+                    <wux-input label="姓名" class="input-size" value="{{ name }}" clear="true" maxlength="10" controlled="true" placeholder="请输入姓名" bind:clear="onNameClear" bind:change="onNameChange" />
                 </wux-col>
             </wux-cell>
+            <!-- 电话 -->
             <wux-cell hover-class="none">
                 <wux-col span="1" class="icon-col">
-                    <i class="fa fa-envelope-o input-size"/>
+                    <i class="fa fa-phone input-size" />
                 </wux-col>
                 <wux-col span="11">
-                    <wux-input label="邮箱" class="input-size" placeholder="请输入电子邮箱" />
+                    <wux-input label="电话" class="input-size" value="{{ telValue }}" clear="true" controlled="true" error="{{ telError }}" type="number" maxlength="20" placeholder="请输入电话号码" bind:change="onTelChange" bind:error="onTelError" bind:clear="onTelClear" />
+                </wux-col>
+            </wux-cell>
+            <!-- 邮箱 -->
+            <wux-cell hover-class="none">
+                <wux-col span="1" class="icon-col">
+                    <i class="fa fa-envelope-o input-size" />
+                </wux-col>
+                <wux-col span="11">
+                    <wux-input label="邮箱" class="input-size" clear="true" controlled="true" value='{{email}}' placeholder="请输入电子邮箱" bind:clear="onEMailClear" bind:change="onEMailChange" />
                 </wux-col>
             </wux-cell>
         </wux-cell-group>
         <wux-cell-group title="申请信息">
-             <wux-cell hover-class="none">
+            <wux-cell hover-class="none">
                 <wux-col span="1" class="icon-col">
-                    <i class="fa fa-life-ring input-size input-size-vertical"/>
+                    <i class="fa fa-life-ring input-size input-size-vertical" />
                 </wux-col>
                 <wux-col span="11">
                     <wux-select id="wux-center" class="input-select" />
                     <wux-cell title="请选择所属中心" class="input-size input-select" extra="{{ centerTitle }}" bind:click="onCenterClick"></wux-cell>
                 </wux-col>
                 <wux-col span="1" class="icon-col">
-                    <i class="fa fa-user input-size input-size-vertical"/>
+                    <i class="fa fa-user input-size input-size-vertical" />
                 </wux-col>
                 <wux-col span="11">
                     <wux-select id="wux-role" class="input-select" />
@@ -52,12 +63,12 @@
         <wux-cell-group title="申请理由">
             <wux-cell hover-class="none">
                 <wux-col span="12">
-                    <wux-textarea hasCount rows="3" cursorSpacing="80" placeholder="请输入申请理由..." />
+                    <wux-textarea hasCount rows="3" cursorSpacing="80" controlled="true" value='{{requestReason}}' clear="true" placeholder="请输入申请理由..." bind:change="onReasonChange" bind:clear="onReasonClear" />
                 </wux-col>
             </wux-cell>
         </wux-cell-group>
         <wux-wing-blank size="default">
-            <wux-button block type="balanced" class="auth-btn">提交申请</wux-button>
+            <wux-button block type="balanced" bind:click="onCommitClick" class="auth-btn">提交申请</wux-button>
         </wux-wing-blank>
     </view>
 </scroll-view>

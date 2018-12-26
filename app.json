@@ -1,44 +1,44 @@
 {
-  "pages":[
-    "pages/register/register",
-    "pages/index/index",
-    "pages/register/registerItem/registerItem",
-    "pages/authorization/authorization",
-    "pages/person/person",
-    "pages/case/case",
-    "pages/statement/statement",
-    "pages/logs/logs"
-  ],
-  "window":{
-    "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "PJI-登记系统",
-    "navigationBarTextStyle":"black",
-    "backgroundColor": "#f8f8f8"
-  },
-  "tabBar": {
-    "selectedColor": "#ef473a",
-    "borderStyle": "#d9d9d9",
-    "backgroundColor": "#fff",
-    "list": [
-      {
-        "selectedIconPath": "/img/center-red.png",
-        "iconPath": "/img/center.png",
-        "pagePath": "pages/index/index",
-        "text": "中心"
-      },
-      {
-        "selectedIconPath": "/img/stats-red.png",
-        "iconPath": "/img/stats.png",
-        "pagePath": "pages/statement/statement",
-        "text": "统计"
-      },
-      {
-        "selectedIconPath": "/img/user-red.png",
-        "iconPath": "/img/user.png",
-        "pagePath": "pages/person/person",
-        "text": "我"
-      }
-    ]
-  }
+	"pages": [
+		"pages/authorization/authorization",
+		"pages/register/register",
+		"pages/index/index",
+		"pages/register/registerItem/registerItem",
+		"pages/person/person",
+		"pages/case/case",
+		"pages/statement/statement",
+		"pages/logs/logs"
+	],
+	"window": {
+		"backgroundTextStyle": "light",
+		"navigationBarBackgroundColor": "#fff",
+		"navigationBarTitleText": "PJI-登记系统",
+		"navigationBarTextStyle": "black",
+		"backgroundColor": "#f8f8f8"
+	},
+	"tabBar": {
+		"selectedColor": "#ef473a",
+		"borderStyle": "#d9d9d9",
+		"backgroundColor": "#fff",
+		"list": [
+			{
+				"selectedIconPath": "/img/center-red.png",
+				"iconPath": "/img/center.png",
+				"pagePath": "pages/index/index",
+				"text": "中心"
+			},
+			{
+				"selectedIconPath": "/img/stats-red.png",
+				"iconPath": "/img/stats.png",
+				"pagePath": "pages/statement/statement",
+				"text": "统计"
+			},
+			{
+				"selectedIconPath": "/img/user-red.png",
+				"iconPath": "/img/user.png",
+				"pagePath": "pages/person/person",
+				"text": "我"
+			}
+		]
+	}
 }

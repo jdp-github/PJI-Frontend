@@ -8,17 +8,13 @@ Page({
             value: e.detail.value,
         })
     },
-    onSearchFocus(e) {
-    },
-    onSearchBlur(e) {
-    },
-    onSearchConfirm(e) {
-    },
+    onSearchFocus(e) {},
+    onSearchBlur(e) {},
+    onSearchConfirm(e) {},
     onSearchClear(e) {
         this.setData({
             searchValue: '',
         })
     },
-    onSearchCancel(e) {
-    },
+    onSearchCancel(e) {},
 });
