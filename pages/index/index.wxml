@@ -1,12 +1,25 @@
 <scroll-view class="page" scroll-y>
-    <wux-tabbar default-current="tab1" position="bottom">
-        <wux-tabbar-item key="tab1" title="中心">
-        </wux-tabbar-item>
-        <wux-tabbar-item key="tab2" title="病例">
-        </wux-tabbar-item>
-        <wux-tabbar-item key="tab3" title="统计">
-        </wux-tabbar-item>
-        <wux-tabbar-item key="tab4" title="个人">
-        </wux-tabbar-item>
-    </wux-tabbar>
+    <view class="page__hd">
+        <wux-search-bar clear value="{{ searchValue }}" controlled placeholder="请输入中心名称" bind:change="onSearchChange" bind:focus="onSearchFocus" bind:blur="onSearchBlur" bind:confirm="onSearchConfirm" bind:clear="onSearchClear" bind:cancel="onSearchCancel" />
+    </view>
+    <view class="page__bd">
+    </view>
 </scroll-view>
+<wux-tabbar default-current="tab1" position="bottom" theme="assertive">
+    <wux-tabbar-item key="tab1" title="中心">
+        <wux-icon wux-class="icon" type="md-aperture" size="22" slot="icon-on" />
+        <wux-icon wux-class="icon" type="md-aperture" size="22" slot="icon-off" />
+    </wux-tabbar-item>
+    <wux-tabbar-item key="tab2" title="病例">
+        <wux-icon wux-class="icon" type="md-book" size="22" slot="icon-on" />
+        <wux-icon wux-class="icon" type="md-book" size="22" slot="icon-off" />
+    </wux-tabbar-item>
+    <wux-tabbar-item key="tab3" title="统计">
+        <wux-icon wux-class="icon" type="md-stats" size="22" slot="icon-on" />
+        <wux-icon wux-class="icon" type="md-stats" size="22" slot="icon-off" />
+    </wux-tabbar-item>
+    <wux-tabbar-item key="tab4" title="个人">
+        <wux-icon wux-class="icon" type="md-person" size="22" slot="icon-on" />
+        <wux-icon wux-class="icon" type="md-person" size="22" slot="icon-off" />
+    </wux-tabbar-item>
+</wux-tabbar>
