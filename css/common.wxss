@@ -30,7 +30,7 @@ page, .page {
 }
 .input-size-vertical {
     font-size: 28rpx;
-    margin: 26rpx 0;
+    margin-top: 26rpx;
 }
 .input-select {
     padding-left: 0;
