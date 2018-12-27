@@ -73,5 +73,8 @@
                 </wux-card>
             </wux-wing-blank>
         </view>
+        <view class="center-block btn-view">
+            <wux-button block type="balanced"><i class="fa fa-plus"></i> 新增中心</wux-button>
+        </view>
     </view>
 </scroll-view>
