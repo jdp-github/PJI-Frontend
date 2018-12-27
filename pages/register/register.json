@@ -9,7 +9,8 @@
     "wux-input": "../../miniprogram_npm/wux-weapp/input/index",
     "wux-select": "../../miniprogram_npm/wux-weapp/select/index",
     "wux-textarea": "../../miniprogram_npm/wux-weapp/textarea/index",
-    "wux-wing-blank": "../../miniprogram_npm/wux-weapp/wing-blank/index"
+    "wux-wing-blank": "../../miniprogram_npm/wux-weapp/wing-blank/index",
+	"wux-toast": "../../miniprogram_npm/wux-weapp/toast/index"
   },
   "backgroundColor": "#f8f8f8"
 }

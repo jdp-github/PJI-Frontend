@@ -1,7 +1,7 @@
 "use strict";
 Page({
     data: {
-        avatar: ''
+        avatarUrl: ''
     },
     onLoad: function(options) {
         wx.getSetting({
@@ -12,8 +12,8 @@ Page({
                         success: function(res) {
                             console.log(res)
                             wx.setStorage({
-                                key: "avatar",
-                                data: res.userInfo.avatar
+                                key: "avatarUrl",
+                                data: res.userInfo.avatarUrl
                             })
                             // wx.switchTab({
                             //     url: '../index/index'
@@ -25,18 +25,21 @@ Page({
         })
     },
     bindGetUserInfo: function(e) {
-        console.log("bindGetUserInfo:" + JSON.stringify(e))
+        // console.log("bindGetUserInfo:" + JSON.stringify(e))
         // 同意授权
         if (e.detail.errMsg.indexOf('ok') != -1) {
+            console.log(e.detail.userInfo.avatarUrl)
             this.setData({
-                avatar: e.detail.userInfo.avatar
+                avatarUrl: e.detail.userInfo.avatarUrl
             })
             wx.setStorage({
-                key: "avatar",
-                data: e.detail.userInfo.avatar
+                key: "avatarUrl",
+                data: e.detail.userInfo.avatarUrl
             })
             if (e.target.dataset.id == "login") {
-
+                wx.redirectTo({
+                    url: '../index/index',
+                })
             } else if (e.target.dataset.id == "registe") {
                 wx.navigateTo({
                     url: '../register/register'

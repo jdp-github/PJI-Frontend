@@ -1,6 +1,7 @@
 "use strict";
 import {
-    $wuxSelect
+    $wuxSelect,
+    $wuxToast
 } from '../../miniprogram_npm/wux-weapp/index'
 
 const isTel = (value) => !/^1[34578]\d{9}$/.test(value);
@@ -11,7 +12,6 @@ Page({
         workOrderNO: 'sss',
         name: '',
         telValue: '',
-        // telError: false,
         email: '',
         centerValue: '',
         centerTitle: '',
@@ -116,6 +116,38 @@ Page({
     },
 
     onCommitClick() {
-        console.log(this.data.name + ":" + this.data.telValue + ":" + this.data.email + ":" + this.data.requestReason)
+        // if (this.data.name.length == 0) {
+        //     this.showToast("请输入姓名")
+        //     return
+        // }
+        // if (this.data.telValue.length == 0) {
+        //     this.showToast("请输入电话")
+        //     return
+        // }
+        // if (this.data.telError) {
+        //     this.showToast("请输入正确的电话")
+        //     return
+        // }
+        // if (this.data.centerValue.length == 0) {
+        //     this.showToast("请选择所属中心")
+        //     return
+        // }
+        // if (this.data.roleValue.length == 0) {
+        //     this.showToast("请选择中心角色")
+        //     return
+        // }
+
+        wx.navigateBack({
+            delta: 2
+        })
+        // console.log(this.data.name + ":" + this.data.telValue + ":" + this.data.email + ":" + this.data.requestReason)
+    },
+
+    showToast(msg) {
+        $wuxToast().show({
+            duration: 1500,
+            color: '#fff',
+            text: msg
+        })
     }
 });

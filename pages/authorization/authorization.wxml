@@ -1,6 +1,6 @@
 <scroll-view class="page" scroll-y>
     <view class="page__hd">
-        <wux-avatar size="large" src="{{avatar}}" />
+        <wux-avatar size="large" src="{{avatarUrl}}" />
         <view class="app-title">PJI-登记系统</view>
     </view>
     <view class="page__bd">

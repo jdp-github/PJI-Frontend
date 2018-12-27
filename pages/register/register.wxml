@@ -69,6 +69,7 @@
         </wux-cell-group>
         <wux-wing-blank size="default">
             <wux-button block type="balanced" bind:click="onCommitClick" class="auth-btn">提交申请</wux-button>
+            <wux-toast id="wux-toast" />
         </wux-wing-blank>
     </view>
 </scroll-view>
