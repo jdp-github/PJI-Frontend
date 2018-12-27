@@ -8,7 +8,11 @@
     "wux-progress": "../../miniprogram_npm/wux-weapp/progress/index",
     "wux-tag": "../../miniprogram_npm/wux-weapp/tag/index",
     "wux-row": "../../miniprogram_npm/wux-weapp/row/index",
-    "wux-col": "../../miniprogram_npm/wux-weapp/col/index"
+    "wux-col": "../../miniprogram_npm/wux-weapp/col/index",
+    "wux-popup": "../../miniprogram_npm/wux-weapp/popup/index",
+    "wux-input": "../../miniprogram_npm/wux-weapp/input/index",
+    "wux-cell-group": "../../miniprogram_npm/wux-weapp/cell-group/index",
+    "wux-cell": "../../miniprogram_npm/wux-weapp/cell/index"
   },
   "backgroundColor": "#f8f8f8"
 }

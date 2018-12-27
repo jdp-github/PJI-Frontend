@@ -1,7 +1,7 @@
-<scroll-view class="page" scroll-y>
-    <view class="page__hd">
-        <wux-search-bar clear value="{{ searchValue }}" controlled placeholder="请输入中心名称" bind:change="onSearchChange" bind:focus="onSearchFocus" bind:blur="onSearchBlur" bind:confirm="onSearchConfirm" bind:clear="onSearchClear" bind:cancel="onSearchCancel" />
-    </view>
+<view class="page__hd">
+    <wux-search-bar clear value="{{ searchValue }}" controlled placeholder="请输入中心名称" bind:change="onSearchChange" bind:focus="onSearchFocus" bind:blur="onSearchBlur" bind:confirm="onSearchConfirm" bind:clear="onSearchClear" bind:cancel="onSearchCancel" />
+</view>
+<view class="page">
     <view class="page__bd">
         <view class="center-block">
             <wux-wing-blank size="default" class="center-block">
@@ -74,7 +74,12 @@
             </wux-wing-blank>
         </view>
         <view class="center-block btn-view">
-            <wux-button block type="balanced"><i class="fa fa-plus"></i> 新增中心</wux-button>
+            <wux-button block type="balanced" bind:click="addCenter"><i class="fa fa-plus"></i> 新增中心</wux-button>
         </view>
     </view>
-</scroll-view>
+</view>
+<wux-popup position="center" visible="{{ visibleCenter }}" bind:close="onCenterClose">
+
+            <wux-button block type="dark" clear bindtap="closeCenter">取消</wux-button>
+            <wux-button block type="balanced" bindtap="closeCenter">确定</wux-button>
+</wux-popup>
