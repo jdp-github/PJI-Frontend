@@ -8,8 +8,9 @@
             <view class="notice-txt">您即将授权的应用是PJI-登记系统，授权后小程序将获得您的用户信息，该信息仅用于微信小程序交互</view>
         </wux-wing-blank>
         <wux-wing-blank size="default">
-            <wux-button block type="assertive" class="auth-btn" data-id="login" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</wux-button>
-            <wux-button block type="balanced" class="auth-btn" data-id="registe" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">申请使用</wux-button>
+            <wux-button block type="assertive" class="auth-btn" data-type="login" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</wux-button>
+            <wux-button block type="balanced" class="auth-btn" data-type="registe" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">申请使用</wux-button>
         </wux-wing-blank>
+        <wux-toast id="wux-toast" />
     </view>
 </scroll-view>

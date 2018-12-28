@@ -4,6 +4,8 @@ import {
     $wuxToast
 } from '../../miniprogram_npm/wux-weapp/index'
 
+var app = getApp();
+var constant = require('../constant.js');
 const isTel = (value) => !/^1[34578]\d{9}$/.test(value);
 
 Page({
@@ -115,7 +117,7 @@ Page({
         })
     },
 
-    onCommitClick() {
+    onRegisteClick() {
         // if (this.data.name.length == 0) {
         //     this.showToast("请输入姓名")
         //     return
@@ -137,10 +139,37 @@ Page({
         //     return
         // }
 
-        wx.navigateBack({
-            delta: 2
+        this.registe()
+    },
+
+    registe() {
+        var that = this
+        wx.request({
+            url: constant.basePath,
+            data: {
+                service: 'Staff.WxRegist',
+                name: that.name,
+                phone: that.telValue,
+                email: that.email,
+                center_id: that.centerValue,
+                role_id: that.roleValue,
+                apply_reason: that.requestReason,
+                openid: app.globalData.openid
+            },
+            header: {
+                'content-type': 'application/json'
+            },
+            success(res) {
+                if (res.code == constant.response_success) {
+                    showToast('申请提交成功，需上级审批，请耐心等待')
+                    wx.navigateBack({
+                        delta: 2
+                    })
+                } else if (res.code == 2) {
+                    showToast('手机号格式不正确')
+                }
+            }
         })
-        // console.log(this.data.name + ":" + this.data.telValue + ":" + this.data.email + ":" + this.data.requestReason)
     },
 
     showToast(msg) {
