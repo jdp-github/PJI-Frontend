@@ -10,7 +10,7 @@ Page({
             groups: ['001'],
         },
             {
-                type: 'sort',
+                type: 'text',
                 label: '中心',
                 value: 'center',
                 groups: ['002'],
@@ -42,9 +42,6 @@ Page({
                 if (n.value === 'name') {
                     params.sort = n.value;
                     params.order = n.sort === 1 ? 'asc' : 'desc'
-                } else if (n.value === 'center') {
-                    params.sort = n.value;
-                    params.order = n.sort === 1 ? 'asc' : 'desc'
                 } else if (n.value === 'role') {
                     params.sort = n.value;
                     params.order = n.sort === 1 ? 'asc' : 'desc'
@@ -68,8 +65,8 @@ Page({
                 {
                     avatar: "https://avatars3.githubusercontent.com/u/36479205?s=400&u=cb3d4cf7f58f5cfe4602199485cfec3b60527d08&v=4",
                     name: "季大鹏",
-                    center: '血液中心',
-                    role: '中心管理员',
+                    center: '骨头中心',
+                    role: '中心项目负责人',
                     authorization_date: "2018-12-24"
                 }
             ]
