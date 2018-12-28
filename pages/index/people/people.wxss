@@ -1,0 +1,29 @@
+@import "../../../css/font-awesome.wxss";
+@import "../../../css/common.wxss";
+@import "../../../css/weui.wxss";
+@import "../../../miniprogram_npm/wux-weapp/styles/index.wxss";
+.page {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 40rpx;
+    box-sizing: border-box;
+    background-color: #f8f8f8;
+    padding-top: 90rpx;
+    width: 100%;
+}
+.page__hd {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 999;
+}
+.page__bd {
+    width: 100%;
+}
+.center-block {
+    margin-bottom: 20rpx;
+}

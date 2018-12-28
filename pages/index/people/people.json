@@ -1,0 +1,16 @@
+{
+  "usingComponents": {
+    "wux-icon": "../../../miniprogram_npm/wux-weapp/icon/index",
+    "wux-button": "../../../miniprogram_npm/wux-weapp/button/index",
+    "wux-wing-blank": "../../../miniprogram_npm/wux-weapp/wing-blank/index",
+    "wux-search-bar": "../../../miniprogram_npm/wux-weapp/search-bar/index",
+    "wux-row": "../../../miniprogram_npm/wux-weapp/row/index",
+    "wux-col": "../../../miniprogram_npm/wux-weapp/col/index",
+    "wux-popup": "../../../miniprogram_npm/wux-weapp/popup/index",
+    "wux-input": "../../../miniprogram_npm/wux-weapp/input/index",
+    "wux-cell-group": "../../../miniprogram_npm/wux-weapp/cell-group/index",
+    "wux-cell": "../../../miniprogram_npm/wux-weapp/cell/index",
+    "wux-filterbar": "../../../miniprogram_npm/wux-weapp/filterbar/index"
+  },
+  "backgroundColor": "#f8f8f8"
+}
