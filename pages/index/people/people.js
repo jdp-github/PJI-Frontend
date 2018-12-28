@@ -4,11 +4,11 @@ Page({
     data: {
         searchValue: '',
         filterItems: [{
-            type: 'sort',
-            label: '姓名',
-            value: 'name',
-            groups: ['001'],
-        },
+                type: 'sort',
+                label: '姓名',
+                value: 'name',
+                groups: ['001'],
+            },
             {
                 type: 'text',
                 label: '中心',
