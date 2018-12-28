@@ -8,7 +8,7 @@
                 <wux-card title="骨头中心" extra="2018-12-24" thumb="/img/center.png">
                     <view slot="body">
                         <view>
-                            <wux-tag>已完成: 90</wux-tag>
+                            <wux-tag color="green">已完成: 90</wux-tag>
                             <wux-tag>未审核: 5</wux-tag>
                             <wux-tag>录入未完成: 5</wux-tag>
                         </view>
@@ -43,7 +43,7 @@
                 <wux-card title="血液中心" extra="2018-12-23" thumb="/img/center.png">
                     <view slot="body">
                         <view>
-                            <wux-tag>已完成: 70</wux-tag>
+                            <wux-tag color="green">已完成: 70</wux-tag>
                             <wux-tag>未审核: 5</wux-tag>
                             <wux-tag>录入未完成: 25</wux-tag>
                         </view>
