@@ -8,12 +8,12 @@
                 <wux-card title="骨头中心" extra="2018-12-24" thumb="/img/center.png">
                     <view slot="body">
                         <view>
-                            <wux-tag color="#ef473a">已完成: 90</wux-tag>
+                            <wux-tag>已完成: 90</wux-tag>
                             <wux-tag>未审核: 5</wux-tag>
                             <wux-tag>录入未完成: 5</wux-tag>
                         </view>
                         <view class="progress-view">
-                            <wux-progress status="error" percent="90" />
+                            <wux-progress bar-style="background-color: #5cb85c" percent="90" />
                         </view>
                         <view class="btn-row">
                             <wux-row>
@@ -43,12 +43,12 @@
                 <wux-card title="血液中心" extra="2018-12-23" thumb="/img/center.png">
                     <view slot="body">
                         <view>
-                            <wux-tag color="#ef473a">已完成: 70</wux-tag>
+                            <wux-tag>已完成: 70</wux-tag>
                             <wux-tag>未审核: 5</wux-tag>
                             <wux-tag>录入未完成: 25</wux-tag>
                         </view>
                         <view class="progress-view">
-                            <wux-progress status="error" percent="70" />
+                            <wux-progress bar-style="background-color: #5cb85c" percent="70" />
                         </view>
                         <view class="btn-row">
                             <wux-row>
@@ -73,13 +73,30 @@
                 </wux-card>
             </wux-wing-blank>
         </view>
-        <view class="center-block btn-view">
-            <wux-button block type="balanced" bind:click="addCenter"><i class="fa fa-plus"></i> 新增中心</wux-button>
+        <view class="center-block btn-view-block">
+            <view class="btn-view">
+            <wux-button block type="assertive" bind:click="addCenter"><i class="fa fa-plus"></i> 新增中心</wux-button>
+            </view>
         </view>
     </view>
 </view>
-<wux-popup position="center" visible="{{ visibleCenter }}" bind:close="onCenterClose">
-
-            <wux-button block type="dark" clear bindtap="closeCenter">取消</wux-button>
-            <wux-button block type="balanced" bindtap="closeCenter">确定</wux-button>
+<wux-popup position="center" visible="{{ visibleCenter }}" title="新增中心" noFoot="true" bind:close="onCenterClose">
+    <view class="input-field">
+       <wux-cell-group title="基本信息">
+           <wux-cell hover-class="none">
+               <wux-col span="1" class="icon-col">
+                   <i class="fa fa-dot-circle-o"/>
+               </wux-col>
+               <wux-col span="11">
+                   <wux-input label="名称" class="input-size" clear="true" maxlength="10" controlled="true" placeholder="请输入" />
+               </wux-col>
+           </wux-cell>
+       </wux-cell-group>
+    </view>
+    <wux-col class="popup-btn-view" span="6">
+        <wux-button block type="dark" clear bindtap="closeCenter">取消</wux-button>
+    </wux-col>
+    <wux-col class="popup-btn-view" span="6">
+        <wux-button block type="assertive" bindtap="closeCenter">确定</wux-button>
+    </wux-col>
 </wux-popup>

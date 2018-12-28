@@ -50,6 +50,10 @@ Component({
             type: Number,
             value: 1000,
         },
+        noFoot: {
+            type: Boolean,
+            value: false
+        }
     },
     data: {
         transitionName: '',
