@@ -94,9 +94,9 @@
        </wux-cell-group>
     </view>
     <wux-col class="popup-btn-view" span="6">
-        <wux-button block type="dark" clear bindtap="closeCenter">取消</wux-button>
+        <wux-button block type="dark" clear bindtap="closeCenter" size="small">取消</wux-button>
     </wux-col>
     <wux-col class="popup-btn-view" span="6">
-        <wux-button block type="assertive" bindtap="closeCenter">确定</wux-button>
+        <wux-button block type="assertive" bindtap="closeCenter" size="small">确定</wux-button>
     </wux-col>
 </wux-popup>
