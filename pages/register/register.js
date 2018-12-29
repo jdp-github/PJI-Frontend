@@ -5,7 +5,7 @@ import {
 } from '../../miniprogram_npm/wux-weapp/index'
 
 var app = getApp();
-var constant = require('../constant.js');
+var constant = require('../../utils/constant.js');
 const isTel = (value) => !/^1[34578]\d{9}$/.test(value);
 
 Page({

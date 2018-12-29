@@ -3,8 +3,21 @@ import {
     $wuxToast
 } from '../../miniprogram_npm/wux-weapp/index'
 
-var constant = require('../constant.js');
+var constant = require('../../utils/constant.js');
 var app = getApp();
+
+// 登录凭证校验失败
+const LOGIN_VERIFY_FAIL = 1
+// 未注册或未绑定
+const UN_REGISTE = 2
+// 账号冻结
+const USER_FROZEN = 3
+// 系统错误，用户没有申请记录
+const NO_REGISTE = 4
+// 用户申请中状态
+const REQUESTING = 5
+// 用户审批未通过状态
+const UN_PASS = 6
 
 Page({
     data: {
@@ -38,7 +51,6 @@ Page({
         var that = this
         // 同意授权
         if (e.detail.errMsg.indexOf('ok') != -1) {
-            console.log(e.detail.userInfo.avatarUrl)
             // 更新头像
             this.setData({
                 avatarUrl: e.detail.userInfo.avatarUrl
@@ -72,8 +84,6 @@ Page({
                 'content-type': 'application/json'
             },
             success(res) {
-                // 存储是否为管理员
-                app.globalData.is_admin = res.info.is_admin;
                 // 存储openid
                 app.globalData.openid = res.info.openid;
                 if (type == "login") { // 登录
@@ -86,26 +96,29 @@ Page({
     },
 
     login(res) {
-        if (res.code == constant.un_registe) { // 未注册
+        if (res.code == UN_REGISTE) { // 未注册
             this.showToast("尚未申请使用，请点击[申请使用]")
-        } else if (res.code == constant.un_pass) { // 未通过注册
+        } else if (res.code == UN_PASS) { // 未通过注册
             this.showToast("申请未通过，请点击[申请使用]")
-        } else if (res.code == constant.requesting) { // 注册中
+        } else if (res.code == REQUESTING) { // 注册中
             this.showToast("申请审批中，请耐心等待")
         } else if (res.code == constant.response_success) { // 已注册
+            // 存储是否为管理员
+            console.log("Staff.CheckStaffStatus:" + JSON.stringify(res))
+            app.globalData.is_admin = res.info.is_admin;
             wx.redirectTo({
                 url: '../index/index',
             })
         }
     },
     registe(res) {
-        if (res.code == constant.un_registe ||
+        if (res.code == UN_REGISTE ||
             res.code == constant.response_success ||
-            res.code == constant.un_pass) { // 未注册 or 已注册 or 未通过注册
+            res.code == UN_PASS) { // 未注册 or 已注册 or 未通过注册
             wx.navigateTo({
                 url: '../register/register'
             })
-        } else if (res.code == constant.requesting) { // 注册中
+        } else if (res.code == REQUESTING) { // 注册中
             this.showToast("申请审批中，请耐心等待")
         }
     },
