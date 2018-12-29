@@ -77,15 +77,15 @@ Page({
             url: constant.basePath,
             data: {
                 service: 'Staff.CheckStaffStatus',
-                phone: '12323544212', // TODO 
                 code: wxCode
             },
             header: {
                 'content-type': 'application/json'
             },
             success(res) {
+                // console.log(res)
                 // 存储openid
-                app.globalData.openid = res.info.openid;
+                app.globalData.openid = res.data.data.info.openid;
                 if (type == "login") { // 登录
                     that.login(res)
                 } else if (type == "registe") { // 注册
@@ -96,36 +96,38 @@ Page({
     },
 
     login(res) {
-        if (res.code == UN_REGISTE) { // 未注册
-            this.showToast("尚未申请使用，请点击[申请使用]")
-        } else if (res.code == UN_PASS) { // 未通过注册
-            this.showToast("申请未通过，请点击[申请使用]")
-        } else if (res.code == REQUESTING) { // 注册中
+        var code = res.data.data.code
+        if (code == UN_REGISTE) { // 未注册
+            this.showToast("尚未申请使用，请点击 申请使用")
+        } else if (code == UN_PASS) { // 未通过注册
+            this.showToast("申请未通过，请点击 申请使用")
+        } else if (code == REQUESTING) { // 注册中
             this.showToast("申请审批中，请耐心等待")
-        } else if (res.code == constant.response_success) { // 已注册
+        } else if (code == constant.response_success) { // 已注册
             // 存储是否为管理员
             console.log("Staff.CheckStaffStatus:" + JSON.stringify(res))
-            app.globalData.is_admin = res.info.is_admin;
+            app.globalData.is_admin = res.data.data.info.is_admin;
             wx.redirectTo({
                 url: '../index/index',
             })
         }
     },
     registe(res) {
-        if (res.code == UN_REGISTE ||
-            res.code == constant.response_success ||
-            res.code == UN_PASS) { // 未注册 or 已注册 or 未通过注册
+        var code = res.data.data.code
+        if (code == UN_REGISTE ||
+            code == constant.response_success ||
+            code == UN_PASS) { // 未注册 or 已注册 or 未通过注册
             wx.navigateTo({
                 url: '../register/register'
             })
-        } else if (res.code == REQUESTING) { // 注册中
+        } else if (code == REQUESTING) { // 注册中
             this.showToast("申请审批中，请耐心等待")
         }
     },
 
     showToast(msg) {
         $wuxToast().show({
-            duration: 1500,
+            duration: 2000,
             color: '#fff',
             text: msg
         })
