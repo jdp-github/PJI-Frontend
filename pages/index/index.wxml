@@ -19,12 +19,12 @@
                             <wux-row>
                                 <wux-col span="6">
                                     <view>
-                                        <wux-button block clear type="dark" size="small"><i class="fa fa-users" ></i> 人员</wux-button>
+                                        <wux-button block clear type="dark" size="small"><i class="fa fa-cog" ></i> 管理</wux-button>
                                     </view>
                                 </wux-col>
                                 <wux-col span="6">
                                     <view class="btn-padding">
-                                        <wux-button block clear type="balanced" size="small"><i class="fa fa-address-card-o"></i> 病例</wux-button>
+                                        <wux-button block clear type="assertive" size="small"><i class="fa fa-address-card-o"></i> 病例</wux-button>
                                     </view>
                                 </wux-col>
                             </wux-row>
@@ -54,12 +54,12 @@
                             <wux-row>
                                 <wux-col span="6">
                                     <view>
-                                        <wux-button block clear type="dark" size="small"><i class="fa fa-users" ></i> 人员</wux-button>
+                                        <wux-button block clear type="dark" size="small"><i class="fa fa-cog" ></i> 管理</wux-button>
                                     </view>
                                 </wux-col>
                                 <wux-col span="6">
                                     <view class="btn-padding">
-                                        <wux-button block clear type="balanced" size="small"><i class="fa fa-address-card-o"></i> 病例</wux-button>
+                                        <wux-button block clear type="assertive" size="small"><i class="fa fa-address-card-o"></i> 病例</wux-button>
                                     </view>
                                 </wux-col>
                             </wux-row>
