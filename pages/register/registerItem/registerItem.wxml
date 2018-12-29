@@ -63,8 +63,8 @@
                             <wux-cell title="申请角色" extra="项目负责人"></wux-cell>
                             <wux-cell title="申请日期" extra="2018-12-24"></wux-cell>
                             <wux-row class="btn-col">
-                                <wux-button block type="balanced" class="auth-btn">批准</wux-button>
-                                <wux-button block type="assertive" class="auth-btn">拒绝</wux-button>
+                                <wux-button block type="assertive" class="auth-btn">批准</wux-button>
+                                <wux-button block type="dark" class="auth-btn">拒绝</wux-button>
                             </wux-row>
                         </view>
                     </wux-accordion>
