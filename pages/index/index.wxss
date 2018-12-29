@@ -48,9 +48,12 @@
     width: 300rpx;
 }
 .popup-btn-view {
-    width: 200rpx;
+    width: 60rpx;
 }
 .input-field {
     text-align: left;
     margin-bottom: 30rpx;
+    display: flex;
+    align-items: flex-end;
+    width: 100%;
 }

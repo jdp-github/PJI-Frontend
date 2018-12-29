@@ -3,6 +3,7 @@ const app = getApp();
 Page({
     data: {
         searchValue: '',
+        visiblePeople: false,
         filterItems: [{
                 type: 'sort',
                 label: '姓名',
@@ -66,7 +67,7 @@ Page({
                     avatar: "https://avatars3.githubusercontent.com/u/36479205?s=400&u=cb3d4cf7f58f5cfe4602199485cfec3b60527d08&v=4",
                     name: "季大鹏",
                     center: '骨头中心',
-                    role: '中心项目负责人',
+                    role: '项目负责人',
                     authorization_date: "2018-12-24"
                 }
             ]
@@ -96,5 +97,17 @@ Page({
             searchValue: '',
         });
     },
-    onSearchCancel(e) {}
+    onSearchCancel(e) {},
+    operationBtn(e) {
+        this.setData({
+            visiblePeople: true,
+        });
+    },
+    onPeopleClose(e) {
+    },
+    closePeople(e) {
+        this.setData({
+            visiblePeople: false,
+        })
+    }
 });

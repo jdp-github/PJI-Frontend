@@ -85,7 +85,7 @@
        <wux-cell-group title="基本信息">
            <wux-cell hover-class="none">
                <wux-col span="1" class="icon-col">
-                   <i class="fa fa-dot-circle-o"/>
+                   <i class="fa fa-dot-circle-o" style="margin-top: 4px;"/>
                </wux-col>
                <wux-col span="11">
                    <wux-input label="名称" class="input-size" clear="true" maxlength="10" controlled="true" placeholder="请输入" />
@@ -93,10 +93,12 @@
            </wux-cell>
        </wux-cell-group>
     </view>
-    <wux-col class="popup-btn-view" span="6">
-        <wux-button block type="dark" clear bindtap="closeCenter" size="small">取消</wux-button>
-    </wux-col>
-    <wux-col class="popup-btn-view" span="6">
-        <wux-button block type="assertive" bindtap="closeCenter" size="small">确定</wux-button>
-    </wux-col>
+     <wux-row>
+       <wux-col class="popup-btn-view" span="6">
+           <wux-button block type="dark" bindtap="closeCenter" size="default" class="popup-btn">取消</wux-button>
+       </wux-col>
+       <wux-col class="popup-btn-view" span="6">
+           <wux-button block type="assertive" bindtap="closeCenter" size="default">确定</wux-button>
+       </wux-col>
+   </wux-row>
 </wux-popup>

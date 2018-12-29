@@ -10,7 +10,8 @@
     "wux-input": "../../../miniprogram_npm/wux-weapp/input/index",
     "wux-cell-group": "../../../miniprogram_npm/wux-weapp/cell-group/index",
     "wux-cell": "../../../miniprogram_npm/wux-weapp/cell/index",
-    "wux-filterbar": "../../../miniprogram_npm/wux-weapp/filterbar/index"
+    "wux-filterbar": "../../../miniprogram_npm/wux-weapp/filterbar/index",
+    "wux-selectable": "../../../miniprogram_npm/wux-weapp/selectable/index"
   },
   "backgroundColor": "#f8f8f8"
 }

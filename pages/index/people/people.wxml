@@ -21,7 +21,7 @@
                             </wux-col>
                             <wux-col span="4">
                                 <view class="panel-btn-view">
-                                    <wux-button block type="assertive" size="small"><i class="fa fa-cog"></i> 修改/删除</wux-button>
+                                    <wux-button block type="assertive" size="small" bind:click="operationBtn"><i class="fa fa-cog"></i> 修改/删除</wux-button>
                                 </view>
                             </wux-col>
                         </view>
@@ -31,3 +31,35 @@
         </view>
     </view>
 </view>
+<wux-popup position="center" visible="{{ visiblePeople }}" title="季大鹏" noFoot="true" bind:close="onPeopleClose">
+    <view class="input-field">
+           <wux-cell hover-class="none">
+               <view class="radio-view">
+                   <wux-selectable color="assertive" value="1" defaultChecked /> 中心负责人
+               </view>
+           </wux-cell>
+           <wux-cell hover-class="none">
+              <view class="radio-view">
+                  <wux-selectable color="assertive" value="2" /> 项目负责人
+              </view>
+          </wux-cell>
+          <wux-cell hover-class="none">
+             <view class="radio-view">
+                 <wux-selectable color="assertive" value="3" /> 研究员
+             </view>
+         </wux-cell>
+    </view>
+    <view class="btn-field">
+        <wux-row>
+            <wux-col span="4">
+                <wux-button size="default" type="assertive"><i class="fa fa-check"/> 保存</wux-button>
+            </wux-col>
+            <wux-col span="4">
+                <wux-button size="default" type="dark"><i class="fa fa-close"/> 删除</wux-button>
+            </wux-col>
+            <wux-col span="4">
+                <wux-button size="default" type="dark"><i class="fa fa-power-off"/> 关闭</wux-button>
+            </wux-col>
+        </wux-row>
+    </view>
+</wux-popup>
