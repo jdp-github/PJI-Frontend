@@ -95,10 +95,10 @@
     </view>
      <wux-row>
        <wux-col class="popup-btn-view" span="6">
-           <wux-button block type="dark" bindtap="closeCenter" size="default" class="popup-btn">取消</wux-button>
+           <wux-button block type="assertive" bindtap="closeCenter" size="default">确定</wux-button>
        </wux-col>
        <wux-col class="popup-btn-view" span="6">
-           <wux-button block type="assertive" bindtap="closeCenter" size="default">确定</wux-button>
+           <wux-button block type="dark" bindtap="closeCenter" size="default" class="popup-btn">取消</wux-button>
        </wux-col>
    </wux-row>
 </wux-popup>
