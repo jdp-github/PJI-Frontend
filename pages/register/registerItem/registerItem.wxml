@@ -5,7 +5,7 @@
     <view class="page__bd">
         <wux-row class="segemented-row" wx:if="{{segementedKey1}}">
             <view class="segemented-view">
-                <wux-accordion-group title="申请列表" controlled current="{{ currentRegister }}" bind:change="onRegisterChange">
+                <wux-accordion-group title="我的申请" controlled current="{{ currentRegister }}" bind:change="onRegisterChange">
                     <wux-accordion title="李文浩-负责人-中心1" resSuccess>
                         <view class="normal-font">
                             <view class="register-no last-row">
@@ -50,7 +50,7 @@
         </wux-row>
         <wux-row class="segemented-row" wx:if="{{segementedKey2}}">
             <view class="segemented-view">
-                <wux-accordion-group title="审批列表" controlled current="{{ currentApprove }}" bind:change="onApproveChange">
+                <wux-accordion-group title="需我审批" controlled current="{{ currentApprove }}" bind:change="onApproveChange">
                     <wux-accordion title="季大鹏-项目负责人-中心2" resWait>
                         <view class="normal-font">
                             <view class="register-no last-row">

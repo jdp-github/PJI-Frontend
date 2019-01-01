@@ -1,7 +1,8 @@
 "use strict";
 import {
     $wuxSelect,
-    $wuxToast
+    $wuxToast,
+    $wuxLoading
 } from '../../miniprogram_npm/wux-weapp/index'
 
 var app = getApp();
@@ -15,8 +16,12 @@ Page({
         name: '',
         telValue: '',
         email: '',
+        centerObjList: [],
+        centValueList: [],
         centerValue: '',
         centerTitle: '',
+        roleObjList: [],
+        roleValueList: [],
         roleValue: '',
         roleTitle: '',
         requestReason: ''
@@ -24,15 +29,72 @@ Page({
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function(options) {},
+    onLoad: function(options) {
+        var that = this
+        that.showLoading()
+        // 中心列表
+        wx.request({
+            url: constant.basePath,
+            data: {
+                service: 'Center.GetCenterList'
+            },
+            header: {
+                'content-type': 'application/json'
+            },
+            success(res) {
+                that.hideLoading()
+                if (res.data.data.code == constant.response_success) {
+                    that.setData({
+                        centerObjList: res.data.data.list
+                    })
+
+                    for (var i = 0, len = that.data.centerObjList.length; i < len; i++) {
+                        that.data.centValueList[i] = that.data.centerObjList[i].name
+                    }
+                    that.setData({
+                        centValueList: that.data.centValueList
+                    })
+                }
+            },
+            fail(res) {
+                that.hideLoading()
+            }
+        })
+        // 角色列表
+        wx.request({
+            url: constant.basePath,
+            data: {
+                service: 'Center.GetCenterRole'
+            },
+            header: {
+                'content-type': 'application/json'
+            },
+            success(res) {
+                that.hideLoading()
+                if (res.data.data.code == constant.response_success) {
+                    that.setData({
+                        roleObjList: res.data.data.list
+                    })
+                    for (var i = 0, len = that.data.roleObjList.length; i < len; i++) {
+                        that.data.roleValueList[i] = that.data.roleObjList[i].name
+                    }
+                    that.setData({
+                        roleValueList: that.data.roleValueList
+                    })
+                    console.log("role:")
+                }
+            },
+            fail(res) {
+                that.hideLoading()
+            }
+        })
+    },
+
     onCenterClick() {
+        console.log("center:" + JSON.stringify(this.data.centValueList))
         $wuxSelect('#wux-center').open({
             value: this.data.centerValue,
-            options: [
-                '中心1',
-                '中心2',
-                '中心3',
-            ],
+            options: this.data.centValueList,
             onConfirm: (value, index, options) => {
                 if (index !== -1) {
                     this.setData({
@@ -44,13 +106,10 @@ Page({
         });
     },
     onRoleClick() {
+        console.log("role:")
         $wuxSelect('#wux-role').open({
             value: this.data.roleValue,
-            options: [
-                '中心负责人',
-                "项目负责人",
-                '研究员',
-            ],
+            options: this.data.roleValueList,
             onConfirm: (value, index, options) => {
                 if (index !== -1) {
                     this.setData({
@@ -177,6 +236,19 @@ Page({
             duration: 1500,
             color: '#fff',
             text: msg
+        })
+    },
+
+    showLoading() {
+        this.$wuxLoading = $wuxLoading()
+        this.$wuxLoading.show({
+            text: '数据加载中',
+        })
+    },
+
+    hideLoading() {
+        setTimeout(() => {
+            this.$wuxLoading.hide()
         })
     }
 });

@@ -12,5 +12,6 @@
             <wux-button block type="balanced" class="auth-btn" data-type="registe" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">申请使用</wux-button>
         </wux-wing-blank>
         <wux-toast id="wux-toast" />
+		<wux-loading id="wux-loading" />
     </view>
 </scroll-view>

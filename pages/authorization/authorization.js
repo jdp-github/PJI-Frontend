@@ -1,6 +1,7 @@
 "use strict";
 import {
-    $wuxToast
+    $wuxToast,
+    $wuxLoading
 } from '../../miniprogram_npm/wux-weapp/index'
 
 var constant = require('../../utils/constant.js');
@@ -49,6 +50,7 @@ Page({
     bindGetUserInfo: function(e) {
         // console.log("bindGetUserInfo:" + JSON.stringify(e))
         var that = this
+        that.showLoading()
         // 同意授权
         if (e.detail.errMsg.indexOf('ok') != -1) {
             // 更新头像
@@ -63,8 +65,14 @@ Page({
                     if (res.code) {
                         that.checkUserState(res.code, e.target.dataset.type)
                     } else {
+                        that.showToast(res.errMsg)
+                        that.hideLoading()
                         console.log('登录失败！' + res.errMsg)
                     }
+                },
+                fail(res) {
+                    that.showToast(res.errMsg)
+                    that.hideLoading()
                 }
             })
         }
@@ -91,11 +99,15 @@ Page({
                 } else if (type == "registe") { // 注册
                     that.registe(res)
                 }
+            },
+            fail(res) {
+                that.hideLoading()
             }
         })
     },
 
     login(res) {
+        this.hideLoading()
         var code = res.data.data.code
         if (code == UN_REGISTE) { // 未注册
             this.showToast("尚未申请使用，请点击 申请使用")
@@ -112,7 +124,9 @@ Page({
             })
         }
     },
+
     registe(res) {
+        this.hideLoading()
         var code = res.data.data.code
         if (code == UN_REGISTE ||
             code == constant.response_success ||
@@ -130,6 +144,19 @@ Page({
             duration: 2000,
             color: '#fff',
             text: msg
+        })
+    },
+
+    showLoading() {
+        this.$wuxLoading = $wuxLoading()
+        this.$wuxLoading.show({
+            text: '数据加载中',
+        })
+    },
+
+    hideLoading() {
+        setTimeout(() => {
+            this.$wuxLoading.hide()
         })
     }
 });
