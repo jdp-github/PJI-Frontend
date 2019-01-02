@@ -1,12 +1,12 @@
 {
     "pages": [
+        "pages/case/case",
         "pages/register/register",
         "pages/authorization/authorization",
         "pages/index/people/people",
         "pages/index/index",
         "pages/register/registerItem/registerItem",
         "pages/person/person",
-        "pages/case/case",
         "pages/statement/statement",
         "pages/logs/logs"
     ],

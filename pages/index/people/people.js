@@ -32,7 +32,6 @@ Page({
     },
     onLoad() {
         this.getUsers();
-
     },
     onFilterChange(e) {
         const checkedItems = e.detail.checkedItems;
