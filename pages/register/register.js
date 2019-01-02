@@ -172,8 +172,12 @@ Page({
             requestReason: '',
         })
     },
+    onReasonFocus() {
+        $wuxSelect('#wux-center').close();
+        $wuxSelect('#wux-role').close();
+    },
 
-    onRegisteClick() {
+    onRegisterClick() {
         // if (this.data.name.length == 0) {
         //     this.showToast("请输入姓名")
         //     return
@@ -195,10 +199,10 @@ Page({
         //     return
         // }
 
-        this.registe()
+        this.register()
     },
 
-    registe() {
+    register() {
         var that = this
         wx.request({
             url: constant.basePath,
