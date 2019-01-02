@@ -7,7 +7,7 @@
             </wux-col>
             <wux-col span="8">
                 <view class="register-no last-row">
-                    申请单号: {{workOrderNO}}
+                    申请单号: 后台自动生成
                 </view>
             </wux-col>
         </wux-row>

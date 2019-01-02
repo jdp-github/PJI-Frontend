@@ -11,8 +11,6 @@ const isTel = (value) => !/^1[34578]\d{9}$/.test(value);
 
 Page({
     data: {
-        // 工单号
-        workOrderNO: 'sss',
         name: '',
         telValue: '',
         email: '',
@@ -81,7 +79,6 @@ Page({
                     that.setData({
                         roleValueList: that.data.roleValueList
                     })
-                    console.log("role:")
                 }
             },
             fail(res) {
