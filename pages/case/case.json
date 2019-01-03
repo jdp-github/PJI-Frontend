@@ -12,7 +12,8 @@
     "wux-cell": "../../miniprogram_npm/wux-weapp/cell/index",
     "wux-filterbar": "../../miniprogram_npm/wux-weapp/filterbar/index",
     "wux-selectable": "../../miniprogram_npm/wux-weapp/selectable/index",
-    "wux-progress": "../../miniprogram_npm/wux-weapp/progress/index"
+    "wux-progress": "../../miniprogram_npm/wux-weapp/progress/index",
+    "wux-tag": "../../miniprogram_npm/wux-weapp/tag/index"
   },
   "backgroundColor": "#f8f8f8"
 }

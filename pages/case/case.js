@@ -29,8 +29,8 @@ Page({
             },
             {
                 type: 'sort',
-                label: '锁定',
-                value: 'lock',
+                label: '感染',
+                value: 'infect',
                 groups: ['005'],
             },
         ],
@@ -53,7 +53,7 @@ Page({
                 } else if (n.value === 'completeness') {
                     params.sort = n.value;
                     params.order = n.sort === 1 ? 'asc' : 'desc'
-                } else if (n.value === 'lock') {
+                } else if (n.value === 'infect') {
                     params.sort = n.value;
                     params.order = n.sort === 1 ? 'asc' : 'desc'
                 }
@@ -74,14 +74,18 @@ Page({
                     id: 'Y1234567',
                     create_date: '2018-12-24',
                     completeness: "90",
-                    lock: true
+                    lock: true,
+                    infect: true,
+                    type: "置换术后",
                 },
                 {
                     name: "赵振阳",
                     id: 'Y1234568',
                     create_date: '2018-12-24',
                     completeness: "30",
-                    lock: true
+                    lock: true,
+                    infect: true,
+                    type: "置换术后",
                 }
             ]
         });

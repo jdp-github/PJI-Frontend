@@ -5,22 +5,35 @@
     <view class="page__bd">
         <view class="case-block">
             <wux-filterbar items="{{ filterItems }}" bind:change="onFilterChange" bind:open="onFilterOpen" bind:close="onFilterClose" />
+            <view class="operation-view">
+                <wux-button block size="small" type="assertive"><i class="fa fa-plus"></i> 新增病例</wux-button>
+                <view class="infect-view">
+                    <i class="fa fa-square wux-energized" aria-hidden="true" style="color: #ffc900"></i> 感染
+                    <i class="fa fa-square wux-balanced" aria-hidden="true" style="color: #f8f8f8"></i> 非感染
+                </view>
+            </view>
             <view class="weui-panel weui-panel_access">
                 <view class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active" wx:for="{{ cases }}" wx:key="">
                     <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                        <wux-col span="1">
+                            <view class="lock-view">
+                                <i class="fa fa-lock" aria-hidden="true"></i>
+                            </view>
+                            <view class="infect-view wux-energized">
+                                <i class="fa fa-square" aria-hidden="true"></i>
+                            </view>
+                        </wux-col>
                         <wux-col span="5">
                             <view class="weui-media-box__title">{{ item.name }}</view>
-                            <view class="weui-media-box__desc">{{ item.id }}</view>
+                            <view class="weui-media-box__desc"><wux-tag color="red">{{ item.id }}</wux-tag></view>
                             <view class="weui-media-box__info">
                                 <view class="weui-media-box__info__meta">建档日期: {{ item.create_date }}</view>
                             </view>
                         </wux-col>
-                        <wux-col span="4">
-                            <view class="weui-media-box__title" style="color: #999;">完成度: {{ item.completeness }}%</view>
+                        <wux-col span="6">
+                            <view class="weui-media-box__title">类型: {{ item.type }}</view>
+                            <view class="weui-media-box__title" style="color: #999; margin-top: 35rpx;">完成度: {{ item.completeness }}%</view>
                             <wux-progress bar-style="background-color: #5cb85c" percent="{{ item.completeness }}" />
-                        </wux-col>
-                        <wux-col span="3">
-
                         </wux-col>
                     </view>
                 </view>
