@@ -8,7 +8,7 @@
             <view class="operation-view">
                 <wux-button block size="small" type="assertive"><i class="fa fa-plus"></i> 新增病例</wux-button>
                 <view class="infect-view">
-                    <i class="fa fa-square wux-energized" aria-hidden="true" style="color: #ffc900"></i> 感染
+                    <i class="fa fa-square wux-assertive" aria-hidden="true" style="color: #ffc900"></i> 感染
                     <i class="fa fa-square wux-balanced" aria-hidden="true" style="color: #f8f8f8"></i> 非感染
                 </view>
             </view>
@@ -19,7 +19,7 @@
                             <view class="lock-view">
                                 <i class="fa fa-lock" aria-hidden="true"></i>
                             </view>
-                            <view class="infect-view wux-energized">
+                            <view class="infect-view wux-assertive">
                                 <i class="fa fa-square" aria-hidden="true"></i>
                             </view>
                         </wux-col>
