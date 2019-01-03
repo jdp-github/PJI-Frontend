@@ -114,6 +114,5 @@ Page({
         this.setData({
             pageStyle: '',
         })
-    },
-
+    }
 });
