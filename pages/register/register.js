@@ -17,11 +17,11 @@ Page({
         centerObjList: [],
         centValueList: [],
         centerValue: '',
-        centerTitle: '',
+        centerIndex: '',
         roleObjList: [],
         roleValueList: [],
         roleValue: '',
-        roleTitle: '',
+        roleIndex: '',
         requestReason: ''
     },
     /**
@@ -73,6 +73,7 @@ Page({
                     that.setData({
                         roleObjList: res.data.data.list
                     })
+                    console.log(JSON.stringify(that.data.roleObjList))
                     for (var i = 0, len = that.data.roleObjList.length; i < len; i++) {
                         that.data.roleValueList[i] = that.data.roleObjList[i].name
                     }
@@ -88,7 +89,6 @@ Page({
     },
 
     onCenterClick() {
-        console.log("center:" + JSON.stringify(this.data.centValueList))
         $wuxSelect('#wux-center').open({
             value: this.data.centerValue,
             options: this.data.centValueList,
@@ -96,14 +96,13 @@ Page({
                 if (index !== -1) {
                     this.setData({
                         centerValue: value,
-                        centerTitle: options[index],
+                        centerIndex: index,
                     })
                 }
             },
         });
     },
     onRoleClick() {
-        console.log("role:")
         $wuxSelect('#wux-role').open({
             value: this.data.roleValue,
             options: this.data.roleValueList,
@@ -111,7 +110,7 @@ Page({
                 if (index !== -1) {
                     this.setData({
                         roleValue: value,
-                        roleTitle: options[index],
+                        roleIndex: index,
                     })
                 }
             },
@@ -204,16 +203,18 @@ Page({
 
     register() {
         var that = this
+        console.log(that.data.centerObjList[that.data.centerIndex].id)
+		console.log(that.data.roleObjList[that.data.roleIndex].id)
         wx.request({
             url: constant.basePath,
             data: {
                 service: 'Staff.WxRegist',
-                name: that.name,
-                phone: that.telValue,
-                email: that.email,
-                center_id: that.centerValue,
-                role_id: that.roleValue,
-                apply_reason: that.requestReason,
+                name: that.data.name,
+				phone: that.data.telValue,
+				email: that.data.email,
+				center_id: that.data.centerObjList[that.data.centerIndex].id,
+				role_id: that.data.roleObjList[that.data.roleIndex].id,
+				apply_reason: that.data.requestReason,
                 openid: app.globalData.openid
             },
             header: {
