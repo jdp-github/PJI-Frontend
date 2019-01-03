@@ -1,6 +1,6 @@
 "use strict";
 App({
-    onLaunch: function () {
+    onLaunch: function() {
         // wx.getSetting({
         //     success: res => {
         //         if (res.authSetting['scope.userInfo']) {
@@ -18,6 +18,7 @@ App({
     },
     globalData: {
         is_admin: 0,
-		openid:''
+        openid: '',
+        avatarUrl: ''
     }
 });

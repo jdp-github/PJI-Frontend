@@ -32,10 +32,7 @@ Page({
                     // 已经授权，可以直接调用 getUserInfo 获取头像昵称
                     wx.getUserInfo({
                         success: function(res) {
-                            wx.setStorage({
-                                key: "avatarUrl",
-                                data: res.userInfo.avatarUrl
-                            })
+                            app.globalData.avatarUrl = res.userInfo.avatarUrl
                             that.setData({
                                 avatarUrl: res.userInfo.avatarUrl
                             })
@@ -50,14 +47,15 @@ Page({
         // console.log("bindGetUserInfo:" + JSON.stringify(e))
         var that = this
         wx.showLoading({
-			title: '数据加载中...',
-		})
+            title: '数据加载中...',
+        })
         // 同意授权
         if (e.detail.errMsg.indexOf('ok') != -1) {
             // 更新头像
             this.setData({
                 avatarUrl: e.detail.userInfo.avatarUrl
             })
+			app.globalData.avatarUrl = e.detail.userInfo.avatarUrl
             // 微信登录
             wx.login({
                 timeout: 1000 * 10, // 超时时间(ms)
@@ -73,7 +71,7 @@ Page({
                 },
                 fail(res) {
                     that.showToast(res.errMsg)
-					wx.hideLoading()
+                    wx.hideLoading()
                 }
             })
         }
@@ -102,13 +100,13 @@ Page({
                 }
             },
             fail(res) {
-				wx.hideLoading()
+                wx.hideLoading()
             }
         })
     },
 
     login(res) {
-		wx.hideLoading()
+        wx.hideLoading()
         var code = res.data.data.code
         if (code == UN_REGISTE) { // 未注册
             this.showToast("尚未申请使用，请点击 申请使用")
@@ -127,7 +125,7 @@ Page({
     },
 
     registe(res) {
-		wx.hideLoading()
+        wx.hideLoading()
         var code = res.data.data.code
         if (code == UN_REGISTE ||
             code == constant.response_success ||
