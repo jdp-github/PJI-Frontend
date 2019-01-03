@@ -3,6 +3,9 @@
 </view>
 <view class="page">
     <view class="page__bd">
+        <view class="operation-view">
+            <wux-button block type="assertive" bind:click="addCenter" size="small"><i class="fa fa-plus"></i> 新增中心</wux-button>
+        </view>
         <view class="center-block">
             <wux-wing-blank size="default" class="center-block">
                 <wux-card title="骨头中心" extra="2018-12-24" thumb="/img/center.png">
@@ -72,11 +75,6 @@
                     </view>
                 </wux-card>
             </wux-wing-blank>
-        </view>
-        <view class="center-block btn-view-block">
-            <view class="btn-view">
-            <wux-button block type="assertive" bind:click="addCenter"><i class="fa fa-plus"></i> 新增中心</wux-button>
-            </view>
         </view>
     </view>
 </view>

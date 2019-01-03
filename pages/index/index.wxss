@@ -57,3 +57,9 @@
     align-items: flex-end;
     width: 100%;
 }
+.infect-view {
+    font-size: 22rpx;
+}
+.operation-view {
+    padding: 0 20rpx;
+}

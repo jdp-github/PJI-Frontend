@@ -1,10 +1,10 @@
 {
     "pages": [
+        "pages/index/index",
         "pages/case/case",
         "pages/register/register",
         "pages/authorization/authorization",
         "pages/index/people/people",
-        "pages/index/index",
         "pages/register/registerItem/registerItem",
         "pages/person/person",
         "pages/statement/statement",
