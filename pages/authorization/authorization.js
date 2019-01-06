@@ -55,7 +55,7 @@ Page({
             this.setData({
                 avatarUrl: e.detail.userInfo.avatarUrl
             })
-			app.globalData.avatarUrl = e.detail.userInfo.avatarUrl
+            app.globalData.avatarUrl = e.detail.userInfo.avatarUrl
             // 微信登录
             wx.login({
                 timeout: 1000 * 10, // 超时时间(ms)
@@ -106,21 +106,44 @@ Page({
     },
 
     login(res) {
-        wx.hideLoading()
         var code = res.data.data.code
         if (code == UN_REGISTE) { // 未注册
+            wx.hideLoading()
             this.showToast("尚未申请使用，请点击 申请使用")
         } else if (code == UN_PASS) { // 未通过注册
+            wx.hideLoading()
             this.showToast("申请未通过，请点击 申请使用")
         } else if (code == REQUESTING) { // 注册中
+            wx.hideLoading()
             this.showToast("申请审批中，请耐心等待")
         } else if (code == constant.response_success) { // 已注册
             // 存储是否为管理员
-            console.log("Staff.CheckStaffStatus:" + JSON.stringify(res))
+            // console.log("Staff.CheckStaffStatus:" + JSON.stringify(res))
             app.globalData.is_admin = res.data.data.info.is_admin;
-            wx.redirectTo({
-                url: '../index/index',
+            // 自己系统登录
+            wx.request({
+                url: constant.basePath,
+                data: {
+                    service: 'Staff.WxLogin',
+                    openid: app.globalData.openid
+                },
+                header: {
+                    'content-type': 'application/json'
+                },
+                success(res) {
+                    wx.hideLoading()
+                    wx.redirectTo({
+                        url: '../index/index',
+                    })
+                },
+                fail(res) {
+                    wx.hideLoading()
+					wx.showToast({
+						title: '登录出错',
+					})
+                }
             })
+
         }
     },
 

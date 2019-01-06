@@ -1,6 +1,7 @@
 "use strict";
 
 var app = getApp();
+var constant = require('../../../utils/constant.js');
 
 Page({
     data: {
@@ -13,9 +14,11 @@ Page({
         registeList: [],
         approveList: []
     },
-    onLoad() {
 
+    onLoad() {
+        this.requestRegiste()
     },
+
     onSegmentedChange(e) {
         console.log("onSegmentedChange")
         if (e.detail.key === 0) {
@@ -30,17 +33,21 @@ Page({
             });
         }
     },
+
     onRegisterChange(e) {
         console.log("onRegisterChange")
         this.setData({
             currentRegister: e.detail.key,
         })
+        this.requestRegiste()
     },
+
     onApproveChange(e) {
         console.log("onApproveChange")
         this.setData({
             currentApprove: e.detail.key,
         })
+        this.requestApprove()
     },
 
     // 我的申请
@@ -53,7 +60,7 @@ Page({
             url: constant.basePath,
             data: {
                 service: 'Staff.GetApplyList',
-                token: app.globalData.openid
+                openid: app.globalData.openid
             },
             header: {
                 'content-type': 'application/json'
@@ -69,6 +76,7 @@ Page({
             }
         })
     },
+
     // 需我审批
     requestApprove() {
         var that = this
@@ -79,7 +87,7 @@ Page({
             url: constant.basePath,
             data: {
                 service: 'Staff.GetApproveList',
-                token: app.globalData.openid
+                openid: app.globalData.openid
             },
             header: {
                 'content-type': 'application/json'
@@ -94,5 +102,61 @@ Page({
                 wx.hideLoading()
             }
         })
+    },
+
+    // 批准
+    onApprove(e) {
+        wx.showLoading({
+            title: '请求中...',
+        })
+        wx.request({
+            url: constant.basePath,
+            data: {
+                service: 'Staff.Approve',
+                openid: app.globalData.openid,
+                apply_id: e.target.dataset.applyid,
+                type: 1
+            },
+            header: {
+                'content-type': 'application/json'
+            },
+            success(res) {
+                wx.hideLoading()
+                // TODO
+                that.requestApprove();
+            },
+            fail(res) {
+                wx.hideLoading()
+            }
+        })
+    },
+
+    // 拒绝
+    onRefuse(e) {
+        var that = this
+        wx.showLoading({
+            title: '请求中...',
+        })
+        wx.request({
+            url: constant.basePath,
+            data: {
+                service: 'Staff.Approve',
+                openid: app.globalData.openid,
+                apply_id: e.target.dataset.applyid,
+                type: 2
+            },
+            header: {
+                'content-type': 'application/json'
+            },
+            success(res) {
+                wx.hideLoading()
+                // TODO
+                that.requestApprove();
+            },
+            fail(res) {
+                wx.hideLoading()
+            }
+        })
+
     }
 });

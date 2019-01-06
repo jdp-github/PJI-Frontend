@@ -204,17 +204,17 @@ Page({
     register() {
         var that = this
         console.log(that.data.centerObjList[that.data.centerIndex].id)
-		console.log(that.data.roleObjList[that.data.roleIndex].id)
+        console.log(that.data.roleObjList[that.data.roleIndex].id)
         wx.request({
             url: constant.basePath,
             data: {
-                service: 'Staff.WxRegist',
+                service: 'Staff.Apply',
                 name: that.data.name,
-				phone: that.data.telValue,
-				email: that.data.email,
-				center_id: that.data.centerObjList[that.data.centerIndex].id,
-				role_id: that.data.roleObjList[that.data.roleIndex].id,
-				apply_reason: that.data.requestReason,
+                phone: that.data.telValue,
+                email: that.data.email,
+                center_id: that.data.centerObjList[that.data.centerIndex].id,
+                role_id: that.data.roleObjList[that.data.roleIndex].id,
+                apply_reason: that.data.requestReason,
                 openid: app.globalData.openid
             },
             header: {

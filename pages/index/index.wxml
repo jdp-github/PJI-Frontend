@@ -1,102 +1,119 @@
 <view class="page__hd">
+    <!-- 搜索框 -->
     <wux-search-bar clear value="{{ searchValue }}" controlled placeholder="请输入中心名称" bind:change="onSearchChange" bind:focus="onSearchFocus" bind:blur="onSearchBlur" bind:confirm="onSearchConfirm" bind:clear="onSearchClear" bind:cancel="onSearchCancel" />
 </view>
 <view class="page">
     <view class="page__bd">
+        <!-- 按钮 -->
         <view class="operation-view">
-            <wux-button block type="assertive" bind:click="addCenter" size="small"><i class="fa fa-plus"></i> 新增中心</wux-button>
+            <wux-button block type="assertive" bind:click="addCenter" size="small">
+                <i class="fa fa-plus"></i> 新增中心</wux-button>
         </view>
-        <view class="center-block">
-            <wux-wing-blank size="default" class="center-block">
-                <wux-card title="骨头中心" extra="2018-12-24" thumb="/img/center.png">
-                    <view slot="body">
-                        <view>
-                            <wux-tag color="green">已完成: 90</wux-tag>
-                            <wux-tag>未审核: 5</wux-tag>
-                            <wux-tag>录入未完成: 5</wux-tag>
+
+        <!-- list -->
+        <view wx:for="{{centerList}}" wx:key="{{item.center_id}}">
+            <!-- item -->
+            <view class="center-block">
+                <wux-wing-blank size="default" class="center-block">
+                    <wux-card title="{{item.center_name}}" extra="{{item.center_ctime}}" thumb="/img/center.png">
+                        <view slot="body">
+                            <view>
+                                <wux-tag color="green">已完成: {{item.completed_cases}}</wux-tag>
+                                <wux-tag>未审核: {{item.no_approve_cases}}</wux-tag>
+                                <wux-tag>录入未完成: {{item.no_completed_cases}}</wux-tag>
+                            </view>
+                            <view class="progress-view">
+                                <wux-progress bar-style="background-color: #5cb85c" percent="90" />
+                            </view>
+                            <view class="btn-row">
+                                <wux-row>
+									<!-- 管理 -->
+                                    <wux-col span="6">
+                                        <view>
+                                            <wux-button block clear type="dark" size="small" bind:click="onManage">
+                                                <i class="fa fa-cog"></i> 管理</wux-button>
+                                        </view>
+                                    </wux-col>
+									<!-- 病例 -->
+                                    <wux-col span="6">
+                                        <view class="btn-padding">
+                                            <wux-button block clear type="assertive" size="small" bind:click="onManage">
+                                                <i class="fa fa-address-card-o"></i> 病例</wux-button>
+                                        </view>
+                                    </wux-col>
+                                </wux-row>
+                            </view>
                         </view>
-                        <view class="progress-view">
-                            <wux-progress bar-style="background-color: #5cb85c" percent="90" />
+                        <view slot="footer">
+                            <view class="people-view">
+                                <i class="fa fa-user" /> {{item.center_leader}} (中心负责人)
+                            </view>
                         </view>
-                        <view class="btn-row">
-                            <wux-row>
-                                <wux-col span="6">
-                                    <view>
-                                        <wux-button block clear type="dark" size="small"><i class="fa fa-cog" ></i> 管理</wux-button>
-                                    </view>
-                                </wux-col>
-                                <wux-col span="6">
-                                    <view class="btn-padding">
-                                        <wux-button block clear type="assertive" size="small"><i class="fa fa-address-card-o"></i> 病例</wux-button>
-                                    </view>
-                                </wux-col>
-                            </wux-row>
+                    </wux-card>
+                </wux-wing-blank>
+            </view>
+            <!-- item -->
+            <view class="center-block">
+                <wux-wing-blank size="default">
+                    <wux-card title="血液中心" extra="2018-12-23" thumb="/img/center.png">
+                        <view slot="body">
+                            <view>
+                                <wux-tag color="green">已完成: 70</wux-tag>
+                                <wux-tag>未审核: 5</wux-tag>
+                                <wux-tag>录入未完成: 25</wux-tag>
+                            </view>
+                            <view class="progress-view">
+                                <wux-progress bar-style="background-color: #5cb85c" percent="70" />
+                            </view>
+                            <view class="btn-row">
+                                <wux-row>
+                                    <wux-col span="6">
+                                        <view>
+                                            <wux-button block clear type="dark" size="small">
+                                                <i class="fa fa-cog"></i> 管理</wux-button>
+                                        </view>
+                                    </wux-col>
+                                    <wux-col span="6">
+                                        <view class="btn-padding">
+                                            <wux-button block clear type="assertive" size="small">
+                                                <i class="fa fa-address-card-o"></i> 病例</wux-button>
+                                        </view>
+                                    </wux-col>
+                                </wux-row>
+                            </view>
                         </view>
-                    </view>
-                    <view slot="footer">
-                        <view class="people-view">
-                            <i class="fa fa-user" /> 李文浩 (中心负责人)
+                        <view slot="footer">
+                            <view class="people-view">
+                                <i class="fa fa-user" /> 季大鹏 (中心负责人)
+                            </view>
                         </view>
-                    </view>
-                </wux-card>
-            </wux-wing-blank>
+                    </wux-card>
+                </wux-wing-blank>
+            </view>
+            <view>
+            </view>
         </view>
-        <view class="center-block">
-            <wux-wing-blank size="default">
-                <wux-card title="血液中心" extra="2018-12-23" thumb="/img/center.png">
-                    <view slot="body">
-                        <view>
-                            <wux-tag color="green">已完成: 70</wux-tag>
-                            <wux-tag>未审核: 5</wux-tag>
-                            <wux-tag>录入未完成: 25</wux-tag>
-                        </view>
-                        <view class="progress-view">
-                            <wux-progress bar-style="background-color: #5cb85c" percent="70" />
-                        </view>
-                        <view class="btn-row">
-                            <wux-row>
-                                <wux-col span="6">
-                                    <view>
-                                        <wux-button block clear type="dark" size="small"><i class="fa fa-cog" ></i> 管理</wux-button>
-                                    </view>
-                                </wux-col>
-                                <wux-col span="6">
-                                    <view class="btn-padding">
-                                        <wux-button block clear type="assertive" size="small"><i class="fa fa-address-card-o"></i> 病例</wux-button>
-                                    </view>
-                                </wux-col>
-                            </wux-row>
-                        </view>
-                    </view>
-                    <view slot="footer">
-                        <view class="people-view">
-                            <i class="fa fa-user" /> 季大鹏 (中心负责人)
-                        </view>
-                    </view>
-                </wux-card>
-            </wux-wing-blank>
-        </view>
-    </view>
-</view>
-<wux-popup position="center" visible="{{ visibleCenter }}" title="新增中心" noFoot="true" bind:close="onCenterClose">
-    <view class="input-field">
-       <wux-cell-group title="基本信息">
-           <wux-cell hover-class="none">
-               <wux-col span="1" class="icon-col">
-                   <i class="fa fa-dot-circle-o" style="margin-top: 4px;"/>
-               </wux-col>
-               <wux-col span="11">
-                   <wux-input label="名称" class="input-size" clear="true" maxlength="10" controlled="true" placeholder="请输入" />
-               </wux-col>
-           </wux-cell>
-       </wux-cell-group>
-    </view>
-     <wux-row>
-       <wux-col class="popup-btn-view" span="6">
-           <wux-button block type="assertive" bindtap="closeCenter" size="default">确定</wux-button>
-       </wux-col>
-       <wux-col class="popup-btn-view" span="6">
-           <wux-button block type="dark" bindtap="closeCenter" size="default" class="popup-btn">取消</wux-button>
-       </wux-col>
-   </wux-row>
-</wux-popup>
+
+        <!-- 弹窗 -->
+        <wux-popup position="center" visible="{{ visibleCenter }}" title="新增中心" noFoot="true" bind:close="onCenterClose">
+            <view class="input-field">
+                <wux-cell-group title="基本信息">
+                    <wux-cell hover-class="none">
+                        <wux-col span="1" class="icon-col">
+                            <i class="fa fa-dot-circle-o" style="margin-top: 4px;" />
+                        </wux-col>
+                        <wux-col span="11">
+                            <wux-input label="名称" class="input-size" clear="true" maxlength="10" controlled="true" placeholder="请输入" />
+                        </wux-col>
+                    </wux-cell>
+                </wux-cell-group>
+            </view>
+            <wux-row>
+                <wux-col class="popup-btn-view" span="6">
+                    <wux-button block type="assertive" bindtap="closeCenter" size="default">确定</wux-button>
+                </wux-col>
+                <wux-col class="popup-btn-view" span="6">
+                    <wux-button block type="dark" bindtap="closeCenter" size="default" class="popup-btn">取消</wux-button>
+                </wux-col>
+            </wux-row>
+        </wux-popup>

@@ -38,7 +38,7 @@ Page({
             url: constant.basePath,
             data: {
                 service: 'Staff.GetStaffInfo',
-                token: app.globalData.openid
+				openid: app.globalData.openid
             },
             header: {
                 'content-type': 'application/json'
