@@ -17,7 +17,7 @@ App({
         // });
     },
     globalData: {
-        is_admin: 0,
+        is_admin: 0, // 管理员flag 0否，1是
         openid: '',
         avatarUrl: ''
     }

@@ -2,6 +2,9 @@
 const app = getApp();
 Page({
     data: {
+        centerId: '',
+        staffList: [],
+        staffTempList: [], // 存储数据，搜索清空是恢复数据用
         searchValue: '',
         visiblePeople: false,
         filterItems: [{
@@ -30,9 +33,37 @@ Page({
             },
         ],
     },
-    onLoad() {
-        this.getUsers();
+    onLoad: function(options) {
+        // this.setData({
+        //     centerId: options.centerId
+        // })
+        // this.initData();
+        this.getUsers()
     },
+
+    getUsers(params = {}) {
+        wx.showLoading();
+        this.setData({
+            staffList: [{
+                    staff_avatar: "https://avatars3.githubusercontent.com/u/36479205?s=400&u=cb3d4cf7f58f5cfe4602199485cfec3b60527d08&v=4",
+                    staff_name: "李文浩",
+                    center: '骨头中心',
+                    role_name: '中心管理员',
+                    auth_time: "2018-12-24"
+                },
+                {
+                    staff_avatar: "https://avatars3.githubusercontent.com/u/36479205?s=400&u=cb3d4cf7f58f5cfe4602199485cfec3b60527d08&v=4",
+                    staff_name: "季大鹏",
+                    center: '骨头中心',
+                    role_name: '项目负责人',
+                    auth_time: "2018-12-24"
+                }
+            ]
+        });
+        wx.hideLoading();
+    },
+
+    // ------------- filter begin ------------- //
     onFilterChange(e) {
         const checkedItems = e.detail.checkedItems;
         const params = {};
@@ -48,31 +79,8 @@ Page({
                 }
             }
         });
+    },
 
-        this.getUsers(params)
-    },
-    getUsers(params = {}) {
-        wx.showLoading();
-        this.setData({
-            users: [
-                {
-                    avatar: "https://avatars3.githubusercontent.com/u/36479205?s=400&u=cb3d4cf7f58f5cfe4602199485cfec3b60527d08&v=4",
-                    name: "李文浩",
-                    center: '骨头中心',
-                    role: '中心管理员',
-                    authorization_date: "2018-12-24"
-                },
-                {
-                    avatar: "https://avatars3.githubusercontent.com/u/36479205?s=400&u=cb3d4cf7f58f5cfe4602199485cfec3b60527d08&v=4",
-                    name: "季大鹏",
-                    center: '骨头中心',
-                    role: '项目负责人',
-                    authorization_date: "2018-12-24"
-                }
-            ]
-        });
-        wx.hideLoading();
-    },
     onFilterOpen(e) {
         this.setData({
             pageStyle: 'height: 100%; overflow: hidden',
@@ -83,30 +91,96 @@ Page({
             pageStyle: '',
         })
     },
+    // ------------- filter end ------------- //
+
+    // ------------- search begin ------------- //
     onSearchChange(e) {
-        this.setData({
-            value: e.detail.value,
-        });
+        var that = this
+        wx.request({
+            url: constant.basePath,
+            data: {
+                service: 'Center.SearchCenterMember',
+                center_id: that.data.centerId,
+                keyword: 'e.detail.value'
+            },
+            header: {
+                'content-type': 'application/json'
+            },
+            success(res) {
+                // console.log(JSON.stringify(res))
+                wx.hideLoading()
+                that.setData({
+                    staffList: res.data.data.list
+                })
+            },
+            fail(res) {
+                wx.hideLoading()
+            }
+        })
     },
     onSearchFocus(e) {},
     onSearchBlur(e) {},
     onSearchConfirm(e) {},
     onSearchClear(e) {
         this.setData({
-            searchValue: '',
+            staffList: this.data.staffTempList
         });
     },
     onSearchCancel(e) {},
+    // ------------- search end ------------- //
+
+    // ------------- pop begin ------------- //
     operationBtn(e) {
         this.setData({
             visiblePeople: true,
         });
     },
-    onPeopleClose(e) {
-    },
-    closePeople(e) {
+    onPeopleClose(e) {},
+    // 保存
+    popSave() {
         this.setData({
             visiblePeople: false,
+        })
+    },
+    // 删除
+    popDele() {
+        this.setData({
+            visiblePeople: false,
+        })
+    },
+    // 取消
+    popCancel(e) {
+        this.setData({
+            visiblePeople: false,
+        })
+    },
+    // ------------- pop end ------------- //
+
+    initData() {
+        var that = this
+        wx.showLoading({
+            title: '请求数据中...',
+        })
+        wx.request({
+            url: constant.basePath,
+            data: {
+                service: 'Center.GetCenterMember',
+                center_id: that.data.centerId
+            },
+            header: {
+                'content-type': 'application/json'
+            },
+            success(res) {
+                // console.log(JSON.stringify(res))
+                wx.hideLoading()
+                that.setData({
+                    staffList: res.data.data.list,
+                    staffTempList: res.data.data.list
+                })
+            },
+            fail(res) {
+                wx.hideLoading()
+            }
         })
     }
 });
