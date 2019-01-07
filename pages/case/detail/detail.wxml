@@ -45,6 +45,141 @@
             <wux-cell-group title="">
                  <wux-cell title="性别" extra="{{ sexTitle }}" bind:click="onClickSex"></wux-cell>
             </wux-cell-group>
+            <wux-cell-group title="">
+                <wux-row>
+                    <wux-col span="4">
+                        <view class="input-text">
+                            年龄
+                        </view>
+                    </wux-col>
+                    <wux-col span="4" push="4">
+                        <view class="input-text-right">
+                             <input type="number" value="18" />
+                        </view>
+                    </wux-col>
+                </wux-row>
+            </wux-cell-group>
+            <wux-cell-group title="">
+                <wux-row>
+                    <wux-col span="4">
+                        <view class="input-text">
+                            身高
+                        </view>
+                    </wux-col>
+                    <wux-col span="4" push="4">
+                        <view class="input-text-right">
+                             <input type="number" value="1.82 m" />
+                        </view>
+                    </wux-col>
+                </wux-row>
+            </wux-cell-group>
+            <wux-cell-group title="">
+                <wux-row>
+                    <wux-col span="4">
+                        <view class="input-text">
+                            体重
+                        </view>
+                    </wux-col>
+                    <wux-col span="4" push="4">
+                        <view class="input-text-right">
+                             <input type="number" value="50.2 kg" />
+                        </view>
+                    </wux-col>
+                </wux-row>
+            </wux-cell-group>
+            <wux-cell-group title="">
+                <wux-row>
+                    <wux-col span="4">
+                        <view class="input-text">
+                            BMI
+                        </view>
+                    </wux-col>
+                    <wux-col span="4" push="4">
+                        <view class="input-text-right">
+                             <input type="number" value="27.58 kg/m2" />
+                        </view>
+                    </wux-col>
+                </wux-row>
+            </wux-cell-group>
+            <wux-cell-group title="">
+                 <wux-cell title="类型" extra="{{ typeTitle }}" bind:click="onClickType"></wux-cell>
+            </wux-cell-group>
+            <wux-cell-group title="">
+                <wux-row>
+                    <wux-col span="4">
+                        <view class="input-text">
+                            诊断
+                        </view>
+                    </wux-col>
+                    <wux-col span="4" push="4">
+                        <view class="input-text-right">
+                             <input value="没啥大毛病" />
+                        </view>
+                    </wux-col>
+                </wux-row>
+            </wux-cell-group>
+            <wux-cell-group title="">
+                <wux-cell title="是否合并自身免疫性疾病" extra="{{ mergeTitle }}" bind:click="onClickMerge"></wux-cell>
+            </wux-cell-group>
+            <wux-cell-group title="">
+                <wux-row>
+                    <wux-col span="4">
+                        <view class="input-text">
+                            其他伴随疾病
+                        </view>
+                    </wux-col>
+                    <wux-col span="4" push="4">
+                        <view class="input-text-right">
+                             <input value="无" />
+                        </view>
+                    </wux-col>
+                </wux-row>
+            </wux-cell-group>
+            <wux-cell-group title="">
+                <wux-cell title="近期（2周）应用抗生素" extra="{{ antibioticTitle }}" bind:click="onClickAntibiotic"></wux-cell>
+            </wux-cell-group>
+            <wux-cell-group title="">
+                <wux-row>
+                    <wux-col span="4">
+                        <view class="input-text">
+                            最终处理
+                        </view>
+                    </wux-col>
+                    <wux-col span="4" push="4">
+                        <view class="input-text-right">
+                             <input value="无" />
+                        </view>
+                    </wux-col>
+                </wux-row>
+            </wux-cell-group>
+            <wux-cell-group title="">
+                <wux-row>
+                    <wux-col span="4">
+                        <view class="input-text">
+                            联系电话1
+                        </view>
+                    </wux-col>
+                    <wux-col span="4" push="4">
+                        <view class="input-text-right">
+                             <input type="number" value="13802486892" />
+                        </view>
+                    </wux-col>
+                </wux-row>
+            </wux-cell-group>
+            <wux-cell-group title="">
+                <wux-row>
+                    <wux-col span="4">
+                        <view class="input-text">
+                            联系电话2
+                        </view>
+                    </wux-col>
+                    <wux-col span="4" push="4">
+                        <view class="input-text-right">
+                             <input type="number" value="13802486892" />
+                        </view>
+                    </wux-col>
+                </wux-row>
+            </wux-cell-group>
         </view>
     </scroll-view>
     <view class="btn-steps">
@@ -58,4 +193,7 @@
 </view>
 <wux-select id="selectCenter" />
 <wux-select id="selectSex" />
+<wux-select id="selectType" />
+<wux-select id="selectMerge" />
+<wux-select id="selectAntibiotic" />
 <wux-calendar id="createCalendar" />

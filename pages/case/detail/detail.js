@@ -11,6 +11,12 @@ Page({
         centerTitle: '血液中心',
         sexValue: '男',
         sexTitle: '男',
+        typeValue: '置换术后',
+        typeTitle: '置换术后',
+        mergeValue: '是',
+        mergeTitle: '是',
+        antibioticValue: '是',
+        antibioticTitle: '是',
         createDateValue: ['2018-12-24'],
     },
     onNextStep: function() {
@@ -53,6 +59,57 @@ Page({
                     this.setData({
                         sexValue: value,
                         sexTitle: options[index],
+                    })
+                }
+            },
+        });
+    },
+    onClickType: function() {
+        $wuxSelect('#selectType').open({
+            typeValue: this.data.typeValue,
+            options: [
+                '置换术后',
+                '占位器',
+            ],
+            onConfirm: (value, index, options) => {
+                if (index !== -1) {
+                    this.setData({
+                        typeValue: value,
+                        typeTitle: options[index],
+                    })
+                }
+            },
+        });
+    },
+    onClickMerge: function() {
+        $wuxSelect('#selectMerge').open({
+            mergeValue: this.data.mergeValue,
+            options: [
+                '是',
+                '否',
+            ],
+            onConfirm: (value, index, options) => {
+                if (index !== -1) {
+                    this.setData({
+                        mergeValue: value,
+                        mergeTitle: options[index],
+                    })
+                }
+            },
+        });
+    },
+    onClickAntibiotic: function() {
+        $wuxSelect('#selectAntibiotic').open({
+            antibioticValue: this.data.antibioticValue,
+            options: [
+                '是',
+                '否',
+            ],
+            onConfirm: (value, index, options) => {
+                if (index !== -1) {
+                    this.setData({
+                        antibioticValue: value,
+                        antibioticTitle: options[index],
                     })
                 }
             },

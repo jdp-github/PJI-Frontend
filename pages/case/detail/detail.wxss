@@ -11,7 +11,7 @@
     padding-bottom: 40rpx;
     box-sizing: border-box;
     background-color: #f8f8f8;
-    padding-top: 90rpx;
+    padding-top: 100rpx;
     width: 100%;
 }
 .page__hd {
@@ -24,7 +24,7 @@
     background-color: #f8f8f8;
 }
 .btn-steps {
-    padding: 0 30rpx;
+    padding: 30rpx 30rpx;
 }
 .main-container {
     padding-top: 120rpx;
