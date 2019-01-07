@@ -90,9 +90,9 @@
                     </wux-card>
                 </wux-wing-blank>
             </view>
-            <view>
-            </view>
         </view>
+    </view>
+</view>
 
         <!-- 弹窗 -->
         <wux-popup position="center" visible="{{ visibleCenter }}" title="新增中心" noFoot="true" bind:close="onCenterClose">
