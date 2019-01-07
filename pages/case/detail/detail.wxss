@@ -1,0 +1,49 @@
+@import "../../../css/font-awesome.wxss";
+@import "../../../css/common.wxss";
+@import "../../../css/weui.wxss";
+@import "../../../miniprogram_npm/wux-weapp/styles/index.wxss";
+.page {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 40rpx;
+    box-sizing: border-box;
+    background-color: #f8f8f8;
+    padding-top: 90rpx;
+    width: 100%;
+}
+.page__hd {
+    padding-top: 30rpx;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    background-color: #f8f8f8;
+}
+.btn-steps {
+    padding: 0 30rpx;
+}
+.main-container {
+    padding-top: 120rpx;
+}
+.input-view {
+    padding: 20rpx;
+    padding-left: 30rpx;
+}
+.input-text {
+    padding: 20rpx;
+    padding-left: 30rpx;
+    padding-top: 25rpx;
+    background-color: #fff;
+}
+.input-text-right {
+    text-align: right;
+    padding: 15rpx;
+    padding-left: 30rpx;
+    padding-right: 30rpx;
+    background-color: #fff;
+    color: grey;
+}

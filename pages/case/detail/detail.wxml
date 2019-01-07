@@ -1,0 +1,61 @@
+<view class="page__hd">
+    <wux-steps current="{{ currentStep }}">
+        <wux-step title="基本信息" content="病历基本信息"></wux-step>
+        <wux-step title="诊断依据" content="病历诊断依据"></wux-step>
+        <wux-step title="测试结果" content="病历测试结果"></wux-step>
+    </wux-steps>
+</view>
+<view class="page">
+    <scroll-view scroll-y>
+        <view class="main-container">
+            <wux-cell-group title="">
+                <wux-cell title="所属中心" extra="{{ centerTitle }}" bind:click="onClickCenter"></wux-cell>
+            </wux-cell-group>
+            <wux-cell-group title="">
+                <wux-row>
+                    <wux-col span="4">
+                        <view class="input-text">
+                            姓名
+                        </view>
+                    </wux-col>
+                    <wux-col span="4" push="4">
+                        <view class="input-text-right">
+                             <input value="小王八" />
+                        </view>
+                    </wux-col>
+                </wux-row>
+            </wux-cell-group>
+            <wux-cell-group title="">
+                <wux-row>
+                    <wux-col span="4">
+                        <view class="input-text">
+                            ID
+                        </view>
+                    </wux-col>
+                    <wux-col span="4" push="4">
+                        <view class="input-text-right">
+                             <input value="abcd123456" />
+                        </view>
+                    </wux-col>
+                </wux-row>
+            </wux-cell-group>
+            <wux-cell-group title="">
+                 <wux-cell title="建档日期" extra="{{ createDateValue }}" bind:click="openCalendar"></wux-cell>
+            </wux-cell-group>
+            <wux-cell-group title="">
+                 <wux-cell title="性别" extra="{{ sexTitle }}" bind:click="onClickSex"></wux-cell>
+            </wux-cell-group>
+        </view>
+    </scroll-view>
+    <view class="btn-steps">
+        <wux-col span="6">
+            <wux-button type="dark" bindtap="onPrevStep">上一步</wux-button>
+        </wux-col>
+        <wux-col span="6">
+            <wux-button type="assertive" bindtap="onNextStep">下一步</wux-button>
+        </wux-col>
+    </view>
+</view>
+<wux-select id="selectCenter" />
+<wux-select id="selectSex" />
+<wux-calendar id="createCalendar" />

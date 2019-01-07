@@ -1,5 +1,6 @@
 {
     "pages": [
+        "pages/case/detail/detail",
         "pages/register/register",
         "pages/case/case",
         "pages/index/index",
