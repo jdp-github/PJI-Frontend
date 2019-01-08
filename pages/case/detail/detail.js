@@ -19,6 +19,18 @@ Page({
         mergeTitle: '是',
         antibioticValue: '是',
         antibioticTitle: '是',
+        sinusTractValue: '是',
+        sinusTractTitle: '是',
+        lePrevValue: '500',
+        lePrevTitle: '500',
+        leAfterValue: '500',
+        leAfterTitle: '500',
+        pathologyValue: '<5',
+        pathologyTitle: '<5',
+        msisValue: '感染',
+        msisTitle: '感染',
+        finalHandleValue: '手术-占位器植入',
+        finalHandleTitle: '手术-占位器植入',
         createDateValue: ['2018-12-24'],
         focusSpecialEvent: false,
         focusBriefHistory: false,
@@ -131,6 +143,125 @@ Page({
                     this.setData({
                         antibioticValue: value,
                         antibioticTitle: options[index],
+                    })
+                }
+            },
+        });
+    },
+    onClickSinusTract: function() {
+        $wuxSelect('#selectSinusTract').open({
+            sinusTractValue: this.data.sinusTractValue,
+            options: [
+                '是',
+                '否',
+            ],
+            onConfirm: (value, index, options) => {
+                if (index !== -1) {
+                    this.setData({
+                        sinusTractValue: value,
+                        sinusTractTitle: options[index],
+                    })
+                }
+            },
+        });
+    },
+    onClickLePrev: function() {
+        $wuxSelect('#selectLePrev').open({
+            lePrevValue: this.data.lePrevValue,
+            options: [
+                '500',
+                '250',
+                '75',
+                '25',
+                'neg.',
+                '未测',
+                '有干扰'
+            ],
+            onConfirm: (value, index, options) => {
+                if (index !== -1) {
+                    this.setData({
+                        lePrevValue: value,
+                        lePrevTitle: options[index],
+                    })
+                }
+            },
+        });
+    },
+    onClickLeAfter: function() {
+        $wuxSelect('#selectLeAfter').open({
+            leAfterValue: this.data.leAfterValue,
+            options: [
+                '500',
+                '250',
+                '75',
+                '25',
+                'neg.',
+                '未测',
+                '有干扰'
+            ],
+            onConfirm: (value, index, options) => {
+                if (index !== -1) {
+                    this.setData({
+                        leAfterValue: value,
+                        leAfterTitle: options[index],
+                    })
+                }
+            },
+        });
+    },
+    onClickPathology: function() {
+        $wuxSelect('#selectPathology').open({
+            pathologyValue: this.data.pathologyValue,
+            options: [
+                '<5',
+                '5-10',
+                '>10',
+                '未测'
+            ],
+            onConfirm: (value, index, options) => {
+                if (index !== -1) {
+                    this.setData({
+                        pathologyValue: value,
+                        pathologyTitle: options[index],
+                    })
+                }
+            },
+        });
+    },
+    onClickMSIS: function() {
+        $wuxSelect('#selectMSIS').open({
+            msisValue: this.data.msisValue,
+            options: [
+                '感染',
+                '非感染',
+                '不能确定'
+            ],
+            onConfirm: (value, index, options) => {
+                if (index !== -1) {
+                    this.setData({
+                        msisValue: value,
+                        msisTitle: options[index],
+                    })
+                }
+            },
+        });
+    },
+    onClickFinalHandle: function() {
+        $wuxSelect('#selectFinalHandle').open({
+            finalHandleValue: this.data.finalHandleValue,
+            options: [
+                '手术-占位器植入',
+                '手术-假体植入',
+                '手术-清创换垫',
+                '未手术-抗生素压制',
+                '未手术-门诊随访',
+                '失访-不详'
+            ],
+            onConfirm: (value, index, options) => {
+                if (index !== -1) {
+                    this.setData({
+                        finalHandleValue: value,
+                        finalHandleTitle: options[index],
                     })
                 }
             },

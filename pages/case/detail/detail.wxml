@@ -6,7 +6,7 @@
     </wux-steps>
 </view>
 <view class="page">
-    <scroll-view scroll-y>
+    <scroll-view scroll-y id="step1" wx:if="{{ currentStep == 0 }}">
         <view class="main-container">
             <wux-cell-group title="">
                 <wux-cell title="所属中心" extra="{{ centerTitle }}" bind:click="onClickCenter"></wux-cell>
@@ -201,6 +201,142 @@
             </wux-cell-group>
         </view>
     </scroll-view>
+    <scroll-view scroll-y id="step2" wx:if="{{ currentStep == 1 }}">
+        <view class="main-container">
+            <wux-cell-group title="">
+                 <wux-cell title="窦道" extra="{{ sinusTractTitle }}" bind:click="onClickSinusTract"></wux-cell>
+            </wux-cell-group>
+            <wux-cell-group title="">
+                <wux-row>
+                    <wux-col span="4">
+                        <view class="input-text">
+                            术前ESR(mm/h)
+                        </view>
+                    </wux-col>
+                    <wux-col span="4" push="4">
+                        <view class="input-text-right">
+                             <input type="text" value="30.12 mm/h" />
+                        </view>
+                    </wux-col>
+                </wux-row>
+            </wux-cell-group>
+            <wux-cell-group title="">
+                <wux-row>
+                    <wux-col span="5">
+                        <view class="input-text">
+                            标准化的CRP(mg/l)
+                        </view>
+                    </wux-col>
+                    <wux-col span="4" push="3">
+                        <view class="input-text-right">
+                             <input type="text" value="30.12 mg/l" />
+                        </view>
+                    </wux-col>
+                </wux-row>
+            </wux-cell-group>
+            <wux-cell-group title="">
+                <wux-row>
+                    <wux-col span="5">
+                        <view class="input-text">
+                            术前CRP(mg/dl)
+                        </view>
+                    </wux-col>
+                    <wux-col span="4" push="3">
+                        <view class="input-text-right">
+                             <input type="text" value="30.12 mg/dl" />
+                        </view>
+                    </wux-col>
+                </wux-row>
+            </wux-cell-group>
+            <wux-cell-group title="">
+                 <wux-cell title="LE试纸(原液)" extra="{{ lePrevTitle }}" bind:click="onClickLePrev"></wux-cell>
+            </wux-cell-group>
+            <wux-cell-group title="">
+                 <wux-cell title="LE试纸(离心后)" extra="{{ leAfterTitle }}" bind:click="onClickLeAfter"></wux-cell>
+            </wux-cell-group>
+            <wux-cell-group title="">
+                <wux-row>
+                    <wux-col span="5">
+                        <view class="input-text">
+                            关节液白细胞计数
+                        </view>
+                    </wux-col>
+                    <wux-col span="4" push="3">
+                        <view class="input-text-right">
+                             <input type="text" value="500 /μL" />
+                        </view>
+                    </wux-col>
+                </wux-row>
+            </wux-cell-group>
+            <wux-cell-group title="">
+                <wux-row>
+                    <wux-col span="5">
+                        <view class="input-text">
+                            中性粒细胞平百分比
+                        </view>
+                    </wux-col>
+                    <wux-col span="4" push="3">
+                        <view class="input-text-right">
+                             <input type="text" value="75%" />
+                        </view>
+                    </wux-col>
+                </wux-row>
+            </wux-cell-group>
+            <wux-cell-group title="">
+                <wux-row>
+                    <wux-col span="5">
+                        <view class="input-text">
+                            1号组织培养结果
+                        </view>
+                    </wux-col>
+                    <wux-col span="4" push="3">
+                        <view class="input-text-right">
+                             <input type="text" value="无" />
+                        </view>
+                    </wux-col>
+                </wux-row>
+            </wux-cell-group>
+            <wux-cell-group title="">
+                <wux-row>
+                    <wux-col span="5">
+                        <view class="input-text">
+                            2号组织培养结果
+                        </view>
+                    </wux-col>
+                    <wux-col span="4" push="3">
+                        <view class="input-text-right">
+                             <input type="text" value="无" />
+                        </view>
+                    </wux-col>
+                </wux-row>
+            </wux-cell-group>
+            <wux-cell-group title="">
+                <wux-row>
+                    <wux-col span="5">
+                        <view class="input-text">
+                            3号组织培养结果
+                        </view>
+                    </wux-col>
+                    <wux-col span="4" push="3">
+                        <view class="input-text-right">
+                             <input type="text" value="无" />
+                        </view>
+                    </wux-col>
+                </wux-row>
+            </wux-cell-group>
+            <wux-cell-group title="">
+                 <wux-cell title="病理" extra="{{ pathologyTitle }}" bind:click="onClickPathology"></wux-cell>
+            </wux-cell-group>
+            <wux-cell-group title="">
+                 <wux-cell title="MSIS最终判定" extra="{{ msisTitle }}" bind:click="onClickMSIS"></wux-cell>
+            </wux-cell-group>
+            <wux-cell-group title="">
+                 <wux-cell title="最终处理" extra="{{ finalHandleTitle }}" bind:click="onClickFinalHandle"></wux-cell>
+            </wux-cell-group>
+        </view>
+    </scroll-view>
+    <scroll-view scroll-y id="step3" wx:if="{{ currentStep == 2 }}">
+    </scroll-view>
     <view class="btn-steps">
         <wux-col span="6">
             <wux-button type="dark" bindtap="onPrevStep">上一步</wux-button>
@@ -216,4 +352,10 @@
 <wux-select id="selectPart" />
 <wux-select id="selectMerge" />
 <wux-select id="selectAntibiotic" />
+<wux-select id="selectSinusTract" />
+<wux-select id="selectLePrev" />
+<wux-select id="selectLeAfter" />
+<wux-select id="selectPathology" />
+<wux-select id="selectMSIS" />
+<wux-select id="selectFinalHandle" />
 <wux-calendar id="createCalendar" />
