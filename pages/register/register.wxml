@@ -48,13 +48,13 @@
                     <i class="fa fa-life-ring input-size input-size-vertical" />
                 </wux-col>
                 <wux-col span="11">
-                    <wux-cell title="请选择所属中心" class="input-size input-select" extra="{{ centerTitle }}" bind:click="onCenterClick"></wux-cell>
+                    <wux-cell title="所属中心" class="input-size input-select" extra="{{ centerValue }}" bind:click="onCenterClick"></wux-cell>
                 </wux-col>
                 <wux-col span="1" class="icon-col">
                     <i class="fa fa-user input-size input-size-vertical" />
                 </wux-col>
                 <wux-col span="11">
-                    <wux-cell title="请选择中心角色" class="input-size input-select" extra="{{ roleTitle }}" bind:click="onRoleClick"></wux-cell>
+                    <wux-cell title="中心角色" class="input-size input-select" extra="{{ roleValue }}" bind:click="onRoleClick"></wux-cell>
                 </wux-col>
             </wux-cell>
         </wux-cell-group>
