@@ -251,6 +251,6 @@ Page({
     hideLoading() {
         setTimeout(() => {
             this.$wuxLoading.hide()
-        })
+        }, 1500)
     }
 });
