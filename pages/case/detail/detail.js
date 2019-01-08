@@ -13,11 +13,15 @@ Page({
         sexTitle: '男',
         typeValue: '置换术后',
         typeTitle: '置换术后',
+        partValue: '髋',
+        partTitle: '髋',
         mergeValue: '是',
         mergeTitle: '是',
         antibioticValue: '是',
         antibioticTitle: '是',
         createDateValue: ['2018-12-24'],
+        focusSpecialEvent: false,
+        focusBriefHistory: false,
     },
     onNextStep: function() {
         this.setData({
@@ -81,6 +85,23 @@ Page({
             },
         });
     },
+    onClickPart: function() {
+        $wuxSelect('#selectPart').open({
+            partValue: this.data.partValue,
+            options: [
+                '髋',
+                '膝',
+            ],
+            onConfirm: (value, index, options) => {
+                if (index !== -1) {
+                    this.setData({
+                        partValue: value,
+                        partTitle: options[index],
+                    })
+                }
+            },
+        });
+    },
     onClickMerge: function() {
         $wuxSelect('#selectMerge').open({
             mergeValue: this.data.mergeValue,
@@ -123,6 +144,16 @@ Page({
                     createDateValue: displayValues,
                 })
             },
+        })
+    },
+    onSpecialEventClick: function() {
+        this.setData({
+            focusSpecialEvent: true
+        })
+    },
+    onBriefHistoryClick: function() {
+        this.setData({
+            focusBriefHistory: true
         })
     }
 });

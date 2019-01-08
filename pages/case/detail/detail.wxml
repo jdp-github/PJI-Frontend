@@ -105,15 +105,18 @@
                  <wux-cell title="类型" extra="{{ typeTitle }}" bind:click="onClickType"></wux-cell>
             </wux-cell-group>
             <wux-cell-group title="">
+                 <wux-cell title="部位" extra="{{ partTitle }}" bind:click="onClickPart"></wux-cell>
+            </wux-cell-group>
+            <wux-cell-group title="">
                 <wux-row>
                     <wux-col span="4">
                         <view class="input-text">
-                            诊断
+                            病症出现时长
                         </view>
                     </wux-col>
                     <wux-col span="4" push="4">
                         <view class="input-text-right">
-                             <input value="没啥大毛病" />
+                             <input type="text" value="5月(急性)" />
                         </view>
                     </wux-col>
                 </wux-row>
@@ -180,6 +183,22 @@
                     </wux-col>
                 </wux-row>
             </wux-cell-group>
+            <wux-cell-group title="">
+                <view class="textarea-title">
+                    特殊事项
+                </view>
+                <view class="textarea-view">
+                    <textarea focus="{{focusSpecialEvent}}" bindtap="onSpecialEventClick" />
+                </view>
+            </wux-cell-group>
+            <wux-cell-group title="">
+                <view class="textarea-title">
+                    简要病史
+                </view>
+                <view class="textarea-view">
+                    <textarea focus="{{focusBriefHistory}}" bindtap="onBriefHistoryClick" />
+                </view>
+            </wux-cell-group>
         </view>
     </scroll-view>
     <view class="btn-steps">
@@ -194,6 +213,7 @@
 <wux-select id="selectCenter" />
 <wux-select id="selectSex" />
 <wux-select id="selectType" />
+<wux-select id="selectPart" />
 <wux-select id="selectMerge" />
 <wux-select id="selectAntibiotic" />
 <wux-calendar id="createCalendar" />

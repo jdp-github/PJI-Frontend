@@ -47,3 +47,11 @@
     background-color: #fff;
     color: grey;
 }
+.textarea-view {
+    padding: 15rpx 30rpx;
+    color: grey;
+    padding-top: 0rpx;
+}
+.textarea-title {
+    padding: 15rpx 30rpx;
+}
