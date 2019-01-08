@@ -1,8 +1,12 @@
 "use strict";
 const app = getApp();
+var constant = require('../../../utils/constant.js');
+
 Page({
     data: {
+        isAdmin: 0,
         centerId: '',
+        roleList: [],
         staffList: [],
         staffTempList: [], // 存储数据，搜索清空是恢复数据用
         searchValue: '',
@@ -14,18 +18,6 @@ Page({
                 groups: ['001'],
             },
             {
-                type: 'text',
-                label: '中心',
-                value: 'center',
-                groups: ['002'],
-            },
-            {
-                type: 'sort',
-                label: '角色',
-                value: 'role',
-                groups: ['003'],
-            },
-            {
                 type: 'sort',
                 label: '授权日期',
                 value: 'authorization_date',
@@ -34,10 +26,12 @@ Page({
         ],
     },
     onLoad: function(options) {
-        // this.setData({
-        //     centerId: options.centerId
-        // })
+        this.setData({
+            centerId: options.centerId,
+            isAdmin: app.globalData.is_admin
+        })
         // this.initData();
+        this.requestRoleList()
         this.getUsers()
     },
 
@@ -135,28 +129,61 @@ Page({
             visiblePeople: true,
         });
     },
-    onPeopleClose(e) {},
-    // 保存
-    popSave() {
+    onRoleChange(e) {
+        console.log(e)
         this.setData({
             visiblePeople: false,
-        })
+        });
     },
-    // 删除
-    popDele() {
-        this.setData({
-            visiblePeople: false,
-        })
-    },
-    // 取消
-    popCancel(e) {
-        this.setData({
-            visiblePeople: false,
-        })
-    },
+    // onPeopleClose(e) {},
+    // // 保存
+    // popSave() {
+    //     this.setData({
+    //         visiblePeople: false,
+    //     })
+    // },
+    // // 删除
+    // popDele() {
+    //     this.setData({
+    //         visiblePeople: false,
+    //     })
+    // },
+    // // 取消
+    // popCancel(e) {
+    //     this.setData({
+    //         visiblePeople: false,
+    //     })
+    // },
     // ------------- pop end ------------- //
 
     initData() {
+        this.requestRoleList()
+        this.requestCenterStaffList()
+    },
+
+    // 角色列表
+    requestRoleList() {
+        var that = this
+        wx.request({
+            url: constant.basePath,
+            data: {
+                service: 'Center.GetCenterRole'
+            },
+            header: {
+                'content-type': 'application/json'
+            },
+            success(res) {
+                console.log(JSON.stringify(res))
+                that.setData({
+                    roleList: res.data.data.list
+                })
+            },
+            fail(res) {}
+        })
+    },
+
+    // 中心人员
+    requestCenterStaffList() {
         var that = this
         wx.showLoading({
             title: '请求数据中...',

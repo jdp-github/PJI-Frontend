@@ -17,6 +17,7 @@ Page({
     },
 
     initData() {
+        var that = this
         wx.showLoading({
             title: '请求数据中...',
         })
@@ -32,6 +33,7 @@ Page({
             success(res) {
                 // console.log(JSON.stringify(res))
                 wx.hideLoading()
+
                 that.setData({
                     centerList: res.data.data.list,
                     centerTempList: res.data.data.list
