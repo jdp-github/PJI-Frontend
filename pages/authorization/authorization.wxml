@@ -11,6 +11,6 @@
             <wux-button block type="assertive" class="auth-btn" data-type="login" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</wux-button>
             <wux-button block type="balanced" class="auth-btn" data-type="registe" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">申请使用</wux-button>
         </wux-wing-blank>
-        <wux-toast id="wux-toast" />
     </view>
 </scroll-view>
+<wux-toast id="wux-toast" />
