@@ -31,9 +31,14 @@ Page({
         msisTitle: '感染',
         finalHandleValue: '手术-占位器植入',
         finalHandleTitle: '手术-占位器植入',
+        flushValue: '是',
+        flushTitle: '是',
         createDateValue: ['2018-12-24'],
+        punctureDateValue: ['2018-12-24'],
+        surgeryDateValue: ['2018-12-24'],
         focusSpecialEvent: false,
         focusBriefHistory: false,
+        focusSynovialFluid: false,
     },
     onNextStep: function() {
         this.setData({
@@ -267,12 +272,49 @@ Page({
             },
         });
     },
+    onClickFlush: function() {
+        $wuxSelect('#selectFlush').open({
+            flushValue: this.data.flushValue,
+            options: [
+                '是',
+                '否',
+            ],
+            onConfirm: (value, index, options) => {
+                if (index !== -1) {
+                    this.setData({
+                        flushValue: value,
+                        flushTitle: options[index],
+                    })
+                }
+            },
+        });
+    },
     openCalendar: function() {
         $wuxCalendar("#createCalendar").open({
             value: this.data.createDateValue,
             onChange: (values, displayValues) => {
                 this.setData({
                     createDateValue: displayValues,
+                })
+            },
+        })
+    },
+    openPuncture: function() {
+        $wuxCalendar("#createPuncture").open({
+            value: this.data.punctureDateValue,
+            onChange: (values, displayValues) => {
+                this.setData({
+                    punctureDateValue: displayValues,
+                })
+            },
+        })
+    },
+    openSurgery: function() {
+        $wuxCalendar("#createSurgery").open({
+            value: this.data.punctureDateValue,
+            onChange: (values, displayValues) => {
+                this.setData({
+                    surgeryDateValue: displayValues,
                 })
             },
         })
@@ -286,5 +328,10 @@ Page({
         this.setData({
             focusBriefHistory: true
         })
-    }
+    },
+    onSynovialFluidClick: function() {
+        this.setData({
+            focusSynovialFluid: true
+        })
+    },
 });

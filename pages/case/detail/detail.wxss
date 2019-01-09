@@ -55,3 +55,13 @@
 .textarea-title {
     padding: 15rpx 30rpx;
 }
+.information-view {
+    padding: 30rpx 30rpx;
+}
+.information-avatar {
+    float: left;
+}
+.information-avatar-left {
+    margin-left: 30rpx;
+    float: left;
+}
