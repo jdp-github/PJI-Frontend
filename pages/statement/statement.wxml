@@ -1,2 +1,22 @@
 <scroll-view class="page" scroll-y>
+    <view class="state-view">
+        <wux-wing-blank size="default">
+            <wux-card title="感染比例" extra="感染/非感染">
+                <view slot="body" class="chart-view">
+                    <view class="container">
+                        <ec-canvas id="mychart-dom-bar" canvas-id="mychart-bar" ec="{{ infectEc }}"></ec-canvas>
+                    </view>
+                </view>
+                <view slot="footer">2018-12-24</view>
+            </wux-card>
+        </wux-wing-blank>
+    </view>
+    <view class="state-view">
+        <wux-wing-blank size="default">
+            <wux-card title="类型比例" extra="类型">
+                <view slot="body">卡片内容</view>
+                <view slot="footer">2018-12-25</view>
+            </wux-card>
+        </wux-wing-blank>
+    </view>
 </scroll-view>

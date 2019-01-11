@@ -2,7 +2,9 @@
   "usingComponents": {
     "wux-icon": "../../miniprogram_npm/wux-weapp/icon/index",
     "wux-button": "../../miniprogram_npm/wux-weapp/button/index",
-    "wux-wing-blank": "../../miniprogram_npm/wux-weapp/wing-blank/index"
+    "wux-wing-blank": "../../miniprogram_npm/wux-weapp/wing-blank/index",
+    "wux-card": "../../miniprogram_npm/wux-weapp/card/index",
+    "ec-canvas": "../../ec-canvas/ec-canvas"
   },
   "backgroundColor": "#f8f8f8"
 }

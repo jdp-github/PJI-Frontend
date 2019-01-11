@@ -1,5 +1,6 @@
 {
     "pages": [
+        "pages/statement/statement",
         "pages/case/detail/detail",
         "pages/authorization/authorization",
         "pages/register/register",
@@ -8,7 +9,6 @@
         "pages/index/people/people",
         "pages/register/registerItem/registerItem",
         "pages/person/person",
-        "pages/statement/statement",
         "pages/logs/logs"
     ],
     "window": {
