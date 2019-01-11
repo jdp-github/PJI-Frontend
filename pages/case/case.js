@@ -73,7 +73,7 @@ Page({
                     name: "李文浩",
                     id: 'Y1234567',
                     create_date: '2018-12-24',
-                    completeness: "90",
+                    completeness: "100",
                     lock: true,
                     infect: true,
                     type: "置换术后",
