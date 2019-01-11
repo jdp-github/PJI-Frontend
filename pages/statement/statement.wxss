@@ -5,8 +5,13 @@ ec-canvas {
 }
 .state-view {
     margin-top: 30rpx;
+    margin-bottom: 30rpx;
 }
 .chart-view {
     width: 100%;
     height: 400rpx;
+}
+.chart-view-special {
+    width: 100%;
+    height: 800rpx;
 }

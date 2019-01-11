@@ -1,10 +1,22 @@
 <scroll-view class="page" scroll-y>
     <view class="state-view">
         <wux-wing-blank size="default">
+            <wux-card title="录入完成比例" extra="已审核/未审核/未完成">
+                <view slot="body" class="chart-view-special">
+                    <view class="container">
+                        <ec-canvas id="finishChart" canvas-id="finishChart" ec="{{ finishEc }}"></ec-canvas>
+                    </view>
+                </view>
+                <view slot="footer">2018-12-25</view>
+            </wux-card>
+        </wux-wing-blank>
+    </view>
+    <view class="state-view">
+        <wux-wing-blank size="default">
             <wux-card title="感染比例" extra="感染/非感染">
                 <view slot="body" class="chart-view">
                     <view class="container">
-                        <ec-canvas id="mychart-dom-bar" canvas-id="mychart-bar" ec="{{ infectEc }}"></ec-canvas>
+                        <ec-canvas id="infectChart" canvas-id="infectChart" ec="{{ infectEc }}"></ec-canvas>
                     </view>
                 </view>
                 <view slot="footer">2018-12-24</view>
@@ -13,8 +25,12 @@
     </view>
     <view class="state-view">
         <wux-wing-blank size="default">
-            <wux-card title="类型比例" extra="类型">
-                <view slot="body">卡片内容</view>
+            <wux-card title="类型比例" extra="置换术后/占位器">
+                <view slot="body" class="chart-view">
+                    <view class="container">
+                        <ec-canvas id="typeChart" canvas-id="typeChart" ec="{{ typeEc }}"></ec-canvas>
+                    </view>
+                </view>
                 <view slot="footer">2018-12-25</view>
             </wux-card>
         </wux-wing-blank>
