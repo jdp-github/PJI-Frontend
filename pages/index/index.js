@@ -53,7 +53,11 @@ Page({
   },
 
   // 点击病历
-  onRecordClick(e) {},
+  onRecordClick(e) {
+    wx.navigateTo({
+      url: '/case/case?centerId=' + e.target.dataset.centerId
+    })
+  },
 
   // ------------------ search begin ------------------ //
   onSearchChange(e) {

@@ -1,519 +1,519 @@
 <view class="page__hd">
-    <wux-steps current="{{ currentStep }}">
-        <wux-step title="基本信息" content="病历基本信息"></wux-step>
-        <wux-step title="诊断依据" content="病历诊断依据"></wux-step>
-        <wux-step title="测试结果" content="病历测试结果"></wux-step>
-    </wux-steps>
+  <wux-steps current="{{ currentStep }}">
+    <wux-step title="基本信息" content="病历基本信息"></wux-step>
+    <wux-step title="诊断依据" content="病历诊断依据"></wux-step>
+    <wux-step title="测试结果" content="病历测试结果"></wux-step>
+  </wux-steps>
 </view>
 <view class="page">
-    <scroll-view scroll-y id="step1" wx:if="{{ currentStep == 0 }}">
-        <view class="main-container">
-            <wux-cell-group title="">
-                <wux-cell title="所属中心" extra="{{ centerTitle }}" bind:click="onClickCenter"></wux-cell>
-            </wux-cell-group>
-            <wux-cell-group title="">
-                <wux-row>
-                    <wux-col span="4">
-                        <view class="input-text">
-                            姓名
-                        </view>
-                    </wux-col>
-                    <wux-col span="4" push="4">
-                        <view class="input-text-right">
-                             <input value="小王八" />
-                        </view>
-                    </wux-col>
-                </wux-row>
-            </wux-cell-group>
-            <wux-cell-group title="">
-                <wux-row>
-                    <wux-col span="4">
-                        <view class="input-text">
-                            ID
-                        </view>
-                    </wux-col>
-                    <wux-col span="4" push="4">
-                        <view class="input-text-right">
-                             <input value="abcd123456" />
-                        </view>
-                    </wux-col>
-                </wux-row>
-            </wux-cell-group>
-            <wux-cell-group title="">
-                 <wux-cell title="建档日期" extra="{{ createDateValue }}" bind:click="openCalendar"></wux-cell>
-            </wux-cell-group>
-            <wux-cell-group title="">
-                 <wux-cell title="性别" extra="{{ sexTitle }}" bind:click="onClickSex"></wux-cell>
-            </wux-cell-group>
-            <wux-cell-group title="">
-                <wux-row>
-                    <wux-col span="4">
-                        <view class="input-text">
-                            年龄
-                        </view>
-                    </wux-col>
-                    <wux-col span="4" push="4">
-                        <view class="input-text-right">
-                             <input type="number" value="18" />
-                        </view>
-                    </wux-col>
-                </wux-row>
-            </wux-cell-group>
-            <wux-cell-group title="">
-                <wux-row>
-                    <wux-col span="4">
-                        <view class="input-text">
-                            身高
-                        </view>
-                    </wux-col>
-                    <wux-col span="4" push="4">
-                        <view class="input-text-right">
-                             <input type="number" value="1.82 m" />
-                        </view>
-                    </wux-col>
-                </wux-row>
-            </wux-cell-group>
-            <wux-cell-group title="">
-                <wux-row>
-                    <wux-col span="4">
-                        <view class="input-text">
-                            体重
-                        </view>
-                    </wux-col>
-                    <wux-col span="4" push="4">
-                        <view class="input-text-right">
-                             <input type="number" value="50.2 kg" />
-                        </view>
-                    </wux-col>
-                </wux-row>
-            </wux-cell-group>
-            <wux-cell-group title="">
-                <wux-row>
-                    <wux-col span="4">
-                        <view class="input-text">
-                            BMI
-                        </view>
-                    </wux-col>
-                    <wux-col span="4" push="4">
-                        <view class="input-text-right">
-                             <input type="number" value="27.58 kg/m2" />
-                        </view>
-                    </wux-col>
-                </wux-row>
-            </wux-cell-group>
-            <wux-cell-group title="">
-                 <wux-cell title="类型" extra="{{ typeTitle }}" bind:click="onClickType"></wux-cell>
-            </wux-cell-group>
-            <wux-cell-group title="">
-                 <wux-cell title="部位" extra="{{ partTitle }}" bind:click="onClickPart"></wux-cell>
-            </wux-cell-group>
-            <wux-cell-group title="">
-                <wux-row>
-                    <wux-col span="4">
-                        <view class="input-text">
-                            病症出现时长
-                        </view>
-                    </wux-col>
-                    <wux-col span="4" push="4">
-                        <view class="input-text-right">
-                             <input type="text" value="5月(急性)" />
-                        </view>
-                    </wux-col>
-                </wux-row>
-            </wux-cell-group>
-            <wux-cell-group title="">
-                <wux-cell title="是否合并自身免疫性疾病" extra="{{ mergeTitle }}" bind:click="onClickMerge"></wux-cell>
-            </wux-cell-group>
-            <wux-cell-group title="">
-                <wux-row>
-                    <wux-col span="4">
-                        <view class="input-text">
-                            其他伴随疾病
-                        </view>
-                    </wux-col>
-                    <wux-col span="4" push="4">
-                        <view class="input-text-right">
-                             <input value="无" />
-                        </view>
-                    </wux-col>
-                </wux-row>
-            </wux-cell-group>
-            <wux-cell-group title="">
-                <wux-cell title="近期（2周）应用抗生素" extra="{{ antibioticTitle }}" bind:click="onClickAntibiotic"></wux-cell>
-            </wux-cell-group>
-            <wux-cell-group title="">
-                <wux-row>
-                    <wux-col span="4">
-                        <view class="input-text">
-                            最终处理
-                        </view>
-                    </wux-col>
-                    <wux-col span="4" push="4">
-                        <view class="input-text-right">
-                             <input value="无" />
-                        </view>
-                    </wux-col>
-                </wux-row>
-            </wux-cell-group>
-            <wux-cell-group title="">
-                <wux-row>
-                    <wux-col span="4">
-                        <view class="input-text">
-                            联系电话1
-                        </view>
-                    </wux-col>
-                    <wux-col span="4" push="4">
-                        <view class="input-text-right">
-                             <input type="number" value="13802486892" />
-                        </view>
-                    </wux-col>
-                </wux-row>
-            </wux-cell-group>
-            <wux-cell-group title="">
-                <wux-row>
-                    <wux-col span="4">
-                        <view class="input-text">
-                            联系电话2
-                        </view>
-                    </wux-col>
-                    <wux-col span="4" push="4">
-                        <view class="input-text-right">
-                             <input type="number" value="13802486892" />
-                        </view>
-                    </wux-col>
-                </wux-row>
-            </wux-cell-group>
-            <wux-cell-group title="">
-                <view class="textarea-title">
-                    特殊事项
-                </view>
-                <view class="textarea-view">
-                    <textarea focus="{{focusSpecialEvent}}" bindtap="onSpecialEventClick" />
-                </view>
-            </wux-cell-group>
-            <wux-cell-group title="">
-                <view class="textarea-title">
-                    简要病史
-                </view>
-                <view class="textarea-view">
-                    <textarea focus="{{focusBriefHistory}}" bindtap="onBriefHistoryClick" />
-                </view>
-            </wux-cell-group>
+  <scroll-view scroll-y id="step1" wx:if="{{ currentStep == 0 }}">
+    <view class="main-container">
+      <wux-cell-group title="">
+        <wux-cell title="所属中心" extra="{{ centerTitle }}" bind:click="onClickCenter"></wux-cell>
+      </wux-cell-group>
+      <wux-cell-group title="">
+        <wux-row>
+          <wux-col span="4">
+            <view class="input-text">
+              姓名
+            </view>
+          </wux-col>
+          <wux-col span="4" push="4">
+            <view class="input-text-right">
+              <input value="小王八" />
+            </view>
+          </wux-col>
+        </wux-row>
+      </wux-cell-group>
+      <wux-cell-group title="">
+        <wux-row>
+          <wux-col span="4">
+            <view class="input-text">
+              ID
+            </view>
+          </wux-col>
+          <wux-col span="4" push="4">
+            <view class="input-text-right">
+              <input value="abcd123456" />
+            </view>
+          </wux-col>
+        </wux-row>
+      </wux-cell-group>
+      <wux-cell-group title="">
+        <wux-cell title="建档日期" extra="{{ createDateValue }}" bind:click="openCalendar"></wux-cell>
+      </wux-cell-group>
+      <wux-cell-group title="">
+        <wux-cell title="性别" extra="{{ sexTitle }}" bind:click="onClickSex"></wux-cell>
+      </wux-cell-group>
+      <wux-cell-group title="">
+        <wux-row>
+          <wux-col span="4">
+            <view class="input-text">
+              年龄
+            </view>
+          </wux-col>
+          <wux-col span="4" push="4">
+            <view class="input-text-right">
+              <input type="number" value="18" />
+            </view>
+          </wux-col>
+        </wux-row>
+      </wux-cell-group>
+      <wux-cell-group title="">
+        <wux-row>
+          <wux-col span="4">
+            <view class="input-text">
+              身高
+            </view>
+          </wux-col>
+          <wux-col span="4" push="4">
+            <view class="input-text-right">
+              <input type="number" value="1.82 m" />
+            </view>
+          </wux-col>
+        </wux-row>
+      </wux-cell-group>
+      <wux-cell-group title="">
+        <wux-row>
+          <wux-col span="4">
+            <view class="input-text">
+              体重
+            </view>
+          </wux-col>
+          <wux-col span="4" push="4">
+            <view class="input-text-right">
+              <input type="number" value="50.2 kg" />
+            </view>
+          </wux-col>
+        </wux-row>
+      </wux-cell-group>
+      <wux-cell-group title="">
+        <wux-row>
+          <wux-col span="4">
+            <view class="input-text">
+              BMI
+            </view>
+          </wux-col>
+          <wux-col span="4" push="4">
+            <view class="input-text-right">
+              <input type="number" value="27.58 kg/m2" />
+            </view>
+          </wux-col>
+        </wux-row>
+      </wux-cell-group>
+      <wux-cell-group title="">
+        <wux-cell title="类型" extra="{{ typeTitle }}" bind:click="onClickType"></wux-cell>
+      </wux-cell-group>
+      <wux-cell-group title="">
+        <wux-cell title="部位" extra="{{ partTitle }}" bind:click="onClickPart"></wux-cell>
+      </wux-cell-group>
+      <wux-cell-group title="">
+        <wux-row>
+          <wux-col span="4">
+            <view class="input-text">
+              病症出现时长
+            </view>
+          </wux-col>
+          <wux-col span="4" push="4">
+            <view class="input-text-right">
+              <input type="text" value="5月(急性)" />
+            </view>
+          </wux-col>
+        </wux-row>
+      </wux-cell-group>
+      <wux-cell-group title="">
+        <wux-cell title="是否合并自身免疫性疾病" extra="{{ mergeTitle }}" bind:click="onClickMerge"></wux-cell>
+      </wux-cell-group>
+      <wux-cell-group title="">
+        <wux-row>
+          <wux-col span="4">
+            <view class="input-text">
+              其他伴随疾病
+            </view>
+          </wux-col>
+          <wux-col span="4" push="4">
+            <view class="input-text-right">
+              <input value="无" />
+            </view>
+          </wux-col>
+        </wux-row>
+      </wux-cell-group>
+      <wux-cell-group title="">
+        <wux-cell title="近期（2周）应用抗生素" extra="{{ antibioticTitle }}" bind:click="onClickAntibiotic"></wux-cell>
+      </wux-cell-group>
+      <wux-cell-group title="">
+        <wux-row>
+          <wux-col span="4">
+            <view class="input-text">
+              最终处理
+            </view>
+          </wux-col>
+          <wux-col span="4" push="4">
+            <view class="input-text-right">
+              <input value="无" />
+            </view>
+          </wux-col>
+        </wux-row>
+      </wux-cell-group>
+      <wux-cell-group title="">
+        <wux-row>
+          <wux-col span="4">
+            <view class="input-text">
+              联系电话1
+            </view>
+          </wux-col>
+          <wux-col span="4" push="4">
+            <view class="input-text-right">
+              <input type="number" value="13802486892" />
+            </view>
+          </wux-col>
+        </wux-row>
+      </wux-cell-group>
+      <wux-cell-group title="">
+        <wux-row>
+          <wux-col span="4">
+            <view class="input-text">
+              联系电话2
+            </view>
+          </wux-col>
+          <wux-col span="4" push="4">
+            <view class="input-text-right">
+              <input type="number" value="13802486892" />
+            </view>
+          </wux-col>
+        </wux-row>
+      </wux-cell-group>
+      <wux-cell-group title="">
+        <view class="textarea-title">
+          特殊事项
         </view>
-    </scroll-view>
-    <scroll-view scroll-y id="step2" wx:if="{{ currentStep == 1 }}">
-        <view class="main-container">
-            <wux-cell-group title="">
-                 <wux-cell title="窦道" extra="{{ sinusTractTitle }}" bind:click="onClickSinusTract"></wux-cell>
-            </wux-cell-group>
-            <wux-cell-group title="">
-                <wux-row>
-                    <wux-col span="4">
-                        <view class="input-text">
-                            术前ESR(mm/h)
-                        </view>
-                    </wux-col>
-                    <wux-col span="4" push="4">
-                        <view class="input-text-right">
-                             <input type="text" value="30.12 mm/h" />
-                        </view>
-                    </wux-col>
-                </wux-row>
-            </wux-cell-group>
-            <wux-cell-group title="">
-                <wux-row>
-                    <wux-col span="5">
-                        <view class="input-text">
-                            标准化的CRP(mg/l)
-                        </view>
-                    </wux-col>
-                    <wux-col span="4" push="3">
-                        <view class="input-text-right">
-                             <input type="text" value="30.12 mg/l" />
-                        </view>
-                    </wux-col>
-                </wux-row>
-            </wux-cell-group>
-            <wux-cell-group title="">
-                <wux-row>
-                    <wux-col span="5">
-                        <view class="input-text">
-                            术前CRP(mg/dl)
-                        </view>
-                    </wux-col>
-                    <wux-col span="4" push="3">
-                        <view class="input-text-right">
-                             <input type="text" value="30.12 mg/dl" />
-                        </view>
-                    </wux-col>
-                </wux-row>
-            </wux-cell-group>
-            <wux-cell-group title="">
-                 <wux-cell title="LE试纸(原液)" extra="{{ lePrevTitle }}" bind:click="onClickLePrev"></wux-cell>
-            </wux-cell-group>
-            <wux-cell-group title="">
-                 <wux-cell title="LE试纸(离心后)" extra="{{ leAfterTitle }}" bind:click="onClickLeAfter"></wux-cell>
-            </wux-cell-group>
-            <wux-cell-group title="">
-                <wux-row>
-                    <wux-col span="5">
-                        <view class="input-text">
-                            关节液白细胞计数
-                        </view>
-                    </wux-col>
-                    <wux-col span="4" push="3">
-                        <view class="input-text-right">
-                             <input type="text" value="500 /μL" />
-                        </view>
-                    </wux-col>
-                </wux-row>
-            </wux-cell-group>
-            <wux-cell-group title="">
-                <wux-row>
-                    <wux-col span="5">
-                        <view class="input-text">
-                            中性粒细胞平百分比
-                        </view>
-                    </wux-col>
-                    <wux-col span="4" push="3">
-                        <view class="input-text-right">
-                             <input type="text" value="75%" />
-                        </view>
-                    </wux-col>
-                </wux-row>
-            </wux-cell-group>
-            <wux-cell-group title="">
-                <wux-row>
-                    <wux-col span="5">
-                        <view class="input-text">
-                            1号组织培养结果
-                        </view>
-                    </wux-col>
-                    <wux-col span="4" push="3">
-                        <view class="input-text-right">
-                             <input type="text" value="无" />
-                        </view>
-                    </wux-col>
-                </wux-row>
-            </wux-cell-group>
-            <wux-cell-group title="">
-                <wux-row>
-                    <wux-col span="5">
-                        <view class="input-text">
-                            2号组织培养结果
-                        </view>
-                    </wux-col>
-                    <wux-col span="4" push="3">
-                        <view class="input-text-right">
-                             <input type="text" value="无" />
-                        </view>
-                    </wux-col>
-                </wux-row>
-            </wux-cell-group>
-            <wux-cell-group title="">
-                <wux-row>
-                    <wux-col span="5">
-                        <view class="input-text">
-                            3号组织培养结果
-                        </view>
-                    </wux-col>
-                    <wux-col span="4" push="3">
-                        <view class="input-text-right">
-                             <input type="text" value="无" />
-                        </view>
-                    </wux-col>
-                </wux-row>
-            </wux-cell-group>
-            <wux-cell-group title="">
-                <wux-row>
-                    <wux-col span="5">
-                        <view class="input-text">
-                            4号组织培养结果
-                        </view>
-                    </wux-col>
-                    <wux-col span="4" push="3">
-                        <view class="input-text-right">
-                             <input type="text" value="无" />
-                        </view>
-                    </wux-col>
-                </wux-row>
-            </wux-cell-group>
-            <wux-cell-group title="">
-                 <wux-cell title="病理" extra="{{ pathologyTitle }}" bind:click="onClickPathology"></wux-cell>
-            </wux-cell-group>
-            <wux-cell-group title="">
-                 <wux-cell title="MSIS最终判定" extra="{{ msisTitle }}" bind:click="onClickMSIS"></wux-cell>
-            </wux-cell-group>
-            <wux-cell-group title="">
-                 <wux-cell title="最终处理" extra="{{ finalHandleTitle }}" bind:click="onClickFinalHandle"></wux-cell>
-            </wux-cell-group>
+        <view class="textarea-view">
+          <textarea focus="{{focusSpecialEvent}}" bindtap="onSpecialEventClick" />
         </view>
-    </scroll-view>
-    <scroll-view scroll-y id="step3" wx:if="{{ currentStep == 2 }}">
-        <view class="main-container">
-            <wux-cell-group title="">
-                 <wux-cell title="穿刺日期" extra="{{ punctureDateValue }}" bind:click="openPuncture"></wux-cell>
-            </wux-cell-group>
-            <wux-cell-group title="">
-                <view class="textarea-title">
-                    穿刺中关节液情况概述 & 是否稀释
-                </view>
-                <view class="textarea-view">
-                    <textarea focus="{{focusSynovialFluid}}" bindtap="onSynovialFluidClick" />
-                </view>
-            </wux-cell-group>
-            <wux-cell-group title="">
-                <wux-cell title="是否冲洗" extra="{{ flushTitle }}" bind:click="onClickFlush"></wux-cell>
-            </wux-cell-group>
-            <wux-cell-group title="">
-                <wux-row>
-                    <wux-col span="5">
-                        <view class="input-text">
-                            抽出关节液/冲洗液量
-                        </view>
-                    </wux-col>
-                    <wux-col span="4" push="3">
-                        <view class="input-text-right">
-                             <input type="text" value="1.1 ml" />
-                        </view>
-                    </wux-col>
-                </wux-row>
-            </wux-cell-group>
-            <wux-cell-group title="">
-                <wux-row>
-                    <wux-col span="5">
-                        <view class="input-text">
-                            打入培养瓶内液体量
-                        </view>
-                    </wux-col>
-                    <wux-col span="4" push="3">
-                        <view class="input-text-right">
-                             <input type="text" value="1.1 ml" />
-                        </view>
-                    </wux-col>
-                </wux-row>
-            </wux-cell-group>
-            <wux-cell-group title="">
-                <wux-row>
-                    <wux-col span="5">
-                        <view class="input-text">
-                            细菌名称
-                        </view>
-                    </wux-col>
-                    <wux-col span="4" push="3">
-                        <view class="input-text-right">
-                             <input type="text" value="顽强的细菌" />
-                        </view>
-                    </wux-col>
-                </wux-row>
-            </wux-cell-group>
-            <wux-cell-group title="">
-                <wux-row>
-                    <wux-col span="5">
-                        <view class="input-text">
-                            送检NGS量
-                        </view>
-                    </wux-col>
-                    <wux-col span="4" push="3">
-                        <view class="input-text-right">
-                             <input type="text" value="1.1 ml" />
-                        </view>
-                    </wux-col>
-                </wux-row>
-            </wux-cell-group>
-            <wux-cell-group title="">
-                <wux-row>
-                    <wux-col span="5">
-                        <view class="input-text">
-                            NGS结果
-                        </view>
-                    </wux-col>
-                    <wux-col span="4" push="3">
-                        <view class="input-text-right">
-                             <input type="text" value="没啥事儿" />
-                        </view>
-                    </wux-col>
-                </wux-row>
-            </wux-cell-group>
-            <wux-cell-group title="">
-                 <wux-cell title="手术日期" extra="{{ surgeryDateValue }}" bind:click="openSurgery"></wux-cell>
-            </wux-cell-group>
-            <wux-cell-group title="">
-                <wux-row>
-                    <wux-col span="5">
-                        <view class="input-text">
-                            组织NGS结果
-                        </view>
-                    </wux-col>
-                    <wux-col span="4" push="3">
-                        <view class="input-text-right">
-                             <input type="text" value="没啥事儿" />
-                        </view>
-                    </wux-col>
-                </wux-row>
-            </wux-cell-group>
-            <wux-cell-group title="">
-                <wux-row>
-                    <wux-col span="5">
-                        <view class="input-text">
-                            超声裂解培养结果
-                        </view>
-                    </wux-col>
-                    <wux-col span="4" push="3">
-                        <view class="input-text-right">
-                             <input type="text" value="没啥事儿" />
-                        </view>
-                    </wux-col>
-                </wux-row>
-            </wux-cell-group>
-            <wux-cell-group title="">
-                <wux-row>
-                    <wux-col span="5">
-                        <view class="input-text">
-                            超声裂解NGS结果
-                        </view>
-                    </wux-col>
-                    <wux-col span="4" push="3">
-                        <view class="input-text-right">
-                             <input type="text" value="没啥事儿" />
-                        </view>
-                    </wux-col>
-                </wux-row>
-            </wux-cell-group>
+      </wux-cell-group>
+      <wux-cell-group title="">
+        <view class="textarea-title">
+          简要病史
         </view>
-    </scroll-view>
-    <view class="information-view">
-        <!-- 超过3个的话只显示3个就行 -->
-        <view class="information-avatar">
-            录入者:
+        <view class="textarea-view">
+          <textarea focus="{{focusBriefHistory}}" bindtap="onBriefHistoryClick" />
         </view>
-        <view class="information-avatar-left">
-            <wux-avatar shape="square" size="small">U</wux-avatar> 小季
-        </view>
-        <view class="information-avatar-left">
-            <wux-avatar shape="square" size="small">U</wux-avatar> 小李
-        </view>
-        <view class="information-avatar-left">
-            <wux-avatar shape="square" size="small">U</wux-avatar> 小赵
-        </view>
+      </wux-cell-group>
     </view>
-    <view class="information-view">
-        <!-- 审核后锁定该条目 -->
-        <view class="information-avatar">
-            审核者:
-        </view>
-        <view class="information-avatar-left">
-            <wux-avatar shape="square" size="small">U</wux-avatar> 小季
-        </view>
+  </scroll-view>
+  <scroll-view scroll-y id="step2" wx:if="{{ currentStep == 1 }}">
+    <view class="main-container">
+      <wux-cell-group title="">
+        <wux-cell title="窦道" extra="{{ sinusTractTitle }}" bind:click="onClickSinusTract"></wux-cell>
+      </wux-cell-group>
+      <wux-cell-group title="">
+        <wux-row>
+          <wux-col span="4">
+            <view class="input-text">
+              术前ESR(mm/h)
+            </view>
+          </wux-col>
+          <wux-col span="4" push="4">
+            <view class="input-text-right">
+              <input type="text" value="30.12 mm/h" />
+            </view>
+          </wux-col>
+        </wux-row>
+      </wux-cell-group>
+      <wux-cell-group title="">
+        <wux-row>
+          <wux-col span="5">
+            <view class="input-text">
+              标准化的CRP(mg/l)
+            </view>
+          </wux-col>
+          <wux-col span="4" push="3">
+            <view class="input-text-right">
+              <input type="text" value="30.12 mg/l" />
+            </view>
+          </wux-col>
+        </wux-row>
+      </wux-cell-group>
+      <wux-cell-group title="">
+        <wux-row>
+          <wux-col span="5">
+            <view class="input-text">
+              术前CRP(mg/dl)
+            </view>
+          </wux-col>
+          <wux-col span="4" push="3">
+            <view class="input-text-right">
+              <input type="text" value="30.12 mg/dl" />
+            </view>
+          </wux-col>
+        </wux-row>
+      </wux-cell-group>
+      <wux-cell-group title="">
+        <wux-cell title="LE试纸(原液)" extra="{{ lePrevTitle }}" bind:click="onClickLePrev"></wux-cell>
+      </wux-cell-group>
+      <wux-cell-group title="">
+        <wux-cell title="LE试纸(离心后)" extra="{{ leAfterTitle }}" bind:click="onClickLeAfter"></wux-cell>
+      </wux-cell-group>
+      <wux-cell-group title="">
+        <wux-row>
+          <wux-col span="5">
+            <view class="input-text">
+              关节液白细胞计数
+            </view>
+          </wux-col>
+          <wux-col span="4" push="3">
+            <view class="input-text-right">
+              <input type="text" value="500 /μL" />
+            </view>
+          </wux-col>
+        </wux-row>
+      </wux-cell-group>
+      <wux-cell-group title="">
+        <wux-row>
+          <wux-col span="5">
+            <view class="input-text">
+              中性粒细胞平百分比
+            </view>
+          </wux-col>
+          <wux-col span="4" push="3">
+            <view class="input-text-right">
+              <input type="text" value="75%" />
+            </view>
+          </wux-col>
+        </wux-row>
+      </wux-cell-group>
+      <wux-cell-group title="">
+        <wux-row>
+          <wux-col span="5">
+            <view class="input-text">
+              1号组织培养结果
+            </view>
+          </wux-col>
+          <wux-col span="4" push="3">
+            <view class="input-text-right">
+              <input type="text" value="无" />
+            </view>
+          </wux-col>
+        </wux-row>
+      </wux-cell-group>
+      <wux-cell-group title="">
+        <wux-row>
+          <wux-col span="5">
+            <view class="input-text">
+              2号组织培养结果
+            </view>
+          </wux-col>
+          <wux-col span="4" push="3">
+            <view class="input-text-right">
+              <input type="text" value="无" />
+            </view>
+          </wux-col>
+        </wux-row>
+      </wux-cell-group>
+      <wux-cell-group title="">
+        <wux-row>
+          <wux-col span="5">
+            <view class="input-text">
+              3号组织培养结果
+            </view>
+          </wux-col>
+          <wux-col span="4" push="3">
+            <view class="input-text-right">
+              <input type="text" value="无" />
+            </view>
+          </wux-col>
+        </wux-row>
+      </wux-cell-group>
+      <wux-cell-group title="">
+        <wux-row>
+          <wux-col span="5">
+            <view class="input-text">
+              4号组织培养结果
+            </view>
+          </wux-col>
+          <wux-col span="4" push="3">
+            <view class="input-text-right">
+              <input type="text" value="无" />
+            </view>
+          </wux-col>
+        </wux-row>
+      </wux-cell-group>
+      <wux-cell-group title="">
+        <wux-cell title="病理" extra="{{ pathologyTitle }}" bind:click="onClickPathology"></wux-cell>
+      </wux-cell-group>
+      <wux-cell-group title="">
+        <wux-cell title="MSIS最终判定" extra="{{ msisTitle }}" bind:click="onClickMSIS"></wux-cell>
+      </wux-cell-group>
+      <wux-cell-group title="">
+        <wux-cell title="最终处理" extra="{{ finalHandleTitle }}" bind:click="onClickFinalHandle"></wux-cell>
+      </wux-cell-group>
     </view>
-    <view class="btn-steps">
-        <wux-col span="6">
-            <wux-button type="dark" bindtap="onPrevStep">上一步</wux-button>
-        </wux-col>
-        <wux-col span="6">
-            <wux-button type="assertive" bindtap="onNextStep">下一步</wux-button>
-        </wux-col>
+  </scroll-view>
+  <scroll-view scroll-y id="step3" wx:if="{{ currentStep == 2 }}">
+    <view class="main-container">
+      <wux-cell-group title="">
+        <wux-cell title="穿刺日期" extra="{{ punctureDateValue }}" bind:click="openPuncture"></wux-cell>
+      </wux-cell-group>
+      <wux-cell-group title="">
+        <view class="textarea-title">
+          穿刺中关节液情况概述 & 是否稀释
+        </view>
+        <view class="textarea-view">
+          <textarea focus="{{focusSynovialFluid}}" bindtap="onSynovialFluidClick" />
+        </view>
+      </wux-cell-group>
+      <wux-cell-group title="">
+        <wux-cell title="是否冲洗" extra="{{ flushTitle }}" bind:click="onClickFlush"></wux-cell>
+      </wux-cell-group>
+      <wux-cell-group title="">
+        <wux-row>
+          <wux-col span="5">
+            <view class="input-text">
+              抽出关节液/冲洗液量
+            </view>
+          </wux-col>
+          <wux-col span="4" push="3">
+            <view class="input-text-right">
+              <input type="text" value="1.1 ml" />
+            </view>
+          </wux-col>
+        </wux-row>
+      </wux-cell-group>
+      <wux-cell-group title="">
+        <wux-row>
+          <wux-col span="5">
+            <view class="input-text">
+              打入培养瓶内液体量
+            </view>
+          </wux-col>
+          <wux-col span="4" push="3">
+            <view class="input-text-right">
+              <input type="text" value="1.1 ml" />
+            </view>
+          </wux-col>
+        </wux-row>
+      </wux-cell-group>
+      <wux-cell-group title="">
+        <wux-row>
+          <wux-col span="5">
+            <view class="input-text">
+              细菌名称
+            </view>
+          </wux-col>
+          <wux-col span="4" push="3">
+            <view class="input-text-right">
+              <input type="text" value="顽强的细菌" />
+            </view>
+          </wux-col>
+        </wux-row>
+      </wux-cell-group>
+      <wux-cell-group title="">
+        <wux-row>
+          <wux-col span="5">
+            <view class="input-text">
+              送检NGS量
+            </view>
+          </wux-col>
+          <wux-col span="4" push="3">
+            <view class="input-text-right">
+              <input type="text" value="1.1 ml" />
+            </view>
+          </wux-col>
+        </wux-row>
+      </wux-cell-group>
+      <wux-cell-group title="">
+        <wux-row>
+          <wux-col span="5">
+            <view class="input-text">
+              NGS结果
+            </view>
+          </wux-col>
+          <wux-col span="4" push="3">
+            <view class="input-text-right">
+              <input type="text" value="没啥事儿" />
+            </view>
+          </wux-col>
+        </wux-row>
+      </wux-cell-group>
+      <wux-cell-group title="">
+        <wux-cell title="手术日期" extra="{{ surgeryDateValue }}" bind:click="openSurgery"></wux-cell>
+      </wux-cell-group>
+      <wux-cell-group title="">
+        <wux-row>
+          <wux-col span="5">
+            <view class="input-text">
+              组织NGS结果
+            </view>
+          </wux-col>
+          <wux-col span="4" push="3">
+            <view class="input-text-right">
+              <input type="text" value="没啥事儿" />
+            </view>
+          </wux-col>
+        </wux-row>
+      </wux-cell-group>
+      <wux-cell-group title="">
+        <wux-row>
+          <wux-col span="5">
+            <view class="input-text">
+              超声裂解培养结果
+            </view>
+          </wux-col>
+          <wux-col span="4" push="3">
+            <view class="input-text-right">
+              <input type="text" value="没啥事儿" />
+            </view>
+          </wux-col>
+        </wux-row>
+      </wux-cell-group>
+      <wux-cell-group title="">
+        <wux-row>
+          <wux-col span="5">
+            <view class="input-text">
+              超声裂解NGS结果
+            </view>
+          </wux-col>
+          <wux-col span="4" push="3">
+            <view class="input-text-right">
+              <input type="text" value="没啥事儿" />
+            </view>
+          </wux-col>
+        </wux-row>
+      </wux-cell-group>
     </view>
+  </scroll-view>
+  <view class="information-view">
+    <!-- 超过3个的话只显示3个就行 -->
+    <view class="information-avatar">
+      录入者:
+    </view>
+    <view class="information-avatar-left">
+      <wux-avatar shape="square" size="small">U</wux-avatar> 小季
+    </view>
+    <view class="information-avatar-left">
+      <wux-avatar shape="square" size="small">U</wux-avatar> 小李
+    </view>
+    <view class="information-avatar-left">
+      <wux-avatar shape="square" size="small">U</wux-avatar> 小赵
+    </view>
+  </view>
+  <view class="information-view">
+    <!-- 审核后锁定该条目 -->
+    <view class="information-avatar">
+      审核者:
+    </view>
+    <view class="information-avatar-left">
+      <wux-avatar shape="square" size="small">U</wux-avatar> 小季
+    </view>
+  </view>
+  <view class="btn-steps">
+    <wux-col span="6">
+      <wux-button type="dark" bindtap="onPrevStep">上一步</wux-button>
+    </wux-col>
+    <wux-col span="6">
+      <wux-button type="assertive" bindtap="onNextStep">下一步</wux-button>
+    </wux-col>
+  </view>
 </view>
 <wux-select id="selectCenter" />
 <wux-select id="selectSex" />

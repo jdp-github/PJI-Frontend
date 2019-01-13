@@ -6,7 +6,7 @@
     <view class="case-block">
       <wux-filterbar items="{{ filterItems }}" bind:change="onFilterChange" bind:open="onFilterOpen" bind:close="onFilterClose" />
       <view class="operation-view">
-        <wux-button block size="small" type="assertive">
+        <wux-button block size="small" type="assertive" bindtap='addCase'>
           <i class="fa fa-plus"></i> 新增病例</wux-button>
         <view class="infect-view">
           <i class="fa fa-square wux-assertive" aria-hidden="true" style="color: #ffc900"></i> 感染
@@ -14,35 +14,38 @@
         </view>
       </view>
       <view class="weui-panel weui-panel_access">
-        <a class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active" wx:for="{{ cases }}" wx:key="">
-          <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+        <a class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active" wx:for="{{ caseList }}" wx:key="">
+          <!-- item -->
+          <view class="weui-media-box__bd weui-media-box__bd_in-appmsg" bindtap='onItemClick' data-selectedCase="{{item}}">
             <wux-col span="1">
-              <view class="lock-view">
-                <i class="fa fa-lock" aria-hidden="true"></i>
-              </view>
-              <view class="infect-view wux-assertive">
+              <!-- MSIS最终判定。1：不能确定；2：非感染；3：感染 -->
+              <view class="{{item.msis == 3 ? 'infect-view wux-assertive' : 'infect-view wux-balanced'}}">
                 <i class="fa fa-square" aria-hidden="true"></i>
+              </view>
+              <!-- 状态：0未完成，1已完成未审核，2已审核 -->
+              <view class="lock-view" hidden='{{item.state != 2}}'>
+                <i class="fa fa-lock" aria-hidden="true"></i>
               </view>
             </wux-col>
             <wux-col span="4">
-              <view class="weui-media-box__title">{{ item.name }}</view>
+              <view class="weui-media-box__title">{{ item.patient_name }}</view>
               <view class="weui-media-box__desc">
-                <wux-tag color="red">{{ item.id }}</wux-tag>
+                <wux-tag color="red">{{ item.case_no }}</wux-tag>
               </view>
               <view class="weui-media-box__info">
-                <view class="weui-media-box__info__meta">{{ item.create_date }}</view>
+                <view class="weui-media-box__info__meta">{{ item.create_time }}</view>
               </view>
             </wux-col>
             <wux-col span="4" pull="1">
               <view class="weui-media-box__title">类型: {{ item.type }}</view>
-              <view class="weui-media-box__title" style="color: #999; margin-top: 35rpx;">完成度: {{ item.completeness }}%</view>
-              <wux-progress bar-style="background-color: #5cb85c" percent="{{ item.completeness }}" />
+              <view class="weui-media-box__title" style="color: #999; margin-top: 35rpx;">完成度: {{ item.progress }}%</view>
+              <wux-progress bar-style="background-color: #5cb85c" percent="{{ item.progress }}" />
             </wux-col>
             <wux-col span="3">
-              <wux-button block size="small" type="assertive">
+              <wux-button block size="small" type="assertive" catchtap='onDele' data-selectedCase="{{item}}" hidden='{{item.delete_button == 0}}'>
                 <i class="fa fa-cog"></i> 删除</wux-button>
-              <wux-button block size="small" type="calm">
-                <i class="fa fa-exchange"></i> 审批</wux-button>
+              <wux-button block size="small" type="calm" catchtap='onApprove' data-selectedCase="{{item}}" hidden='{{item.approve_button == 0}}'>
+                <i class="fa fa-exchange"></i> {{item.state == 2 ? '解锁':'审批'}}</wux-button>
             </wux-col>
           </view>
         </a>
