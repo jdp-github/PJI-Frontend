@@ -121,6 +121,7 @@ Page({
       centerId: options.centerId,
       isAdmin: app.globalData.is_admin
     })
+    app.globalData.centerId = this.data.centerId
     this.initData()
     this.getCases();
   },
@@ -151,10 +152,7 @@ Page({
   },
 
   initData() {
-    // wx.showLoading({
-    //   title: '请求数据中...',
-    // })
-    this.requestCaseList()
+    this.requestCaseList(this.data.searchValue, this.data.sortType)
   },
 
   requestCaseList(searchValue, sortType) {
@@ -166,7 +164,7 @@ Page({
       url: constant.basePath,
       data: {
         service: 'Case.SearchCaseList',
-        center_id: that.data.centerId,
+        center_id: app.globalData.centerId,
         keyword: searchValue,
         sort: sortType
       },

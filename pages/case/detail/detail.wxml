@@ -112,6 +112,7 @@
             <wux-cell-group title="">
                 <wux-cell title="部位" extra="{{ part }}" bind:click="onClickPart"></wux-cell>
             </wux-cell-group>
+            <!-- 病症出现时长 -->
             <wux-cell-group title="">
                 <wux-row>
                     <wux-col span="4">
@@ -126,6 +127,15 @@
                     </wux-col>
                 </wux-row>
             </wux-cell-group>
+            <!-- 时间 -->
+            <wux-cell-group title="">
+                <wux-cell title="时间" extra="{{ duration_symptoms_unit_value }}" bind:click="onClickDurationUnit"></wux-cell>
+            </wux-cell-group>
+            <!-- 性质 -->
+            <wux-cell-group title="">
+                <wux-cell title="性质" extra="{{ duration_symptoms_prop_value }}" bind:click="onClickUnrationProp"></wux-cell>
+            </wux-cell-group>
+            <!-- 诊断 -->
             <wux-cell-group title="">
                 <wux-row>
                     <wux-col span="4">
@@ -141,7 +151,7 @@
                 </wux-row>
             </wux-cell-group>
             <wux-cell-group title="">
-                <wux-cell title="是否合并自身免疫性疾病" extra="{{ mergeValue }}" bind:click="onClickMerge"></wux-cell>
+                <wux-cell title="是否合并自身免疫性疾病" extra="{{ is_merge_disease_value }}" bind:click="onClickMerge"></wux-cell>
             </wux-cell-group>
             <wux-cell-group title="">
                 <wux-row>
@@ -158,7 +168,7 @@
                 </wux-row>
             </wux-cell-group>
             <wux-cell-group title="">
-                <wux-cell title="近期（2周）应用抗生素" extra="{{ antibioticValue }}" bind:click="onClickAntibiotic"></wux-cell>
+                <wux-cell title="近期（2周）应用抗生素" extra="{{ is_used_antibiotics_value }}" bind:click="onClickAntibiotic"></wux-cell>
             </wux-cell-group>
             <wux-cell-group title="">
                 <wux-row>
@@ -209,7 +219,7 @@
     <scroll-view scroll-y id="step2" wx:if="{{ currentStep == 1 }}">
         <view class="main-container">
             <wux-cell-group title="">
-                <wux-cell title="窦道" extra="{{ siousValue }}" bind:click="onClickSinusTract"></wux-cell>
+                <wux-cell title="窦道" extra="{{ sious_value }}" bind:click="onClickSinusTract"></wux-cell>
             </wux-cell-group>
             <wux-cell-group title="">
                 <wux-row>
@@ -512,6 +522,8 @@
 <wux-select id="selectSex" />
 <wux-select id="selectType" />
 <wux-select id="selectPart" />
+<wux-select id="selectDurationUnit" />
+<wux-select id="selectDurationProp" />
 <wux-select id="selectMerge" />
 <wux-select id="selectAntibiotic" />
 <wux-select id="selectSinusTract" />
