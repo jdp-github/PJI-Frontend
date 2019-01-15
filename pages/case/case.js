@@ -1,6 +1,7 @@
 "use strict";
 const app = getApp();
 var constant = require('../../utils/constant.js');
+var util = require('../../utils/util.js');
 
 const SORT_BY_NAME_ASC = 1
 const SORT_BY_NAME_DESC = -1
@@ -20,7 +21,6 @@ Page({
     searchValue: '',
     sortType: SORT_BY_NAME_ASC,
     caseList: [],
-    selectedCase: {},
     filterItems: [{
         type: 'sort',
         label: '姓名',
@@ -113,7 +113,9 @@ Page({
     });
     this.requestCaseList(this.data.searchValue, this.data.sortType)
   },
-  onSearchCancel(e) {},
+  onSearchCancel(e) {
+    this.onSearchClear()
+  },
   // -------- search end -------- //
 
   onLoad: function(options) {
@@ -121,34 +123,9 @@ Page({
       centerId: options.centerId,
       isAdmin: app.globalData.is_admin
     })
-    app.globalData.centerId = this.data.centerId
+    app.globalData.centerId = options.centerId
     this.initData()
-    this.getCases();
-  },
-  getCases(params = {}) {
-    wx.showLoading();
-    this.setData({
-      caseList: [{
-          patient_name: "李文浩",
-          case_no: 'Y1234567',
-          create_time: '2018-12-24',
-          progress: "100",
-          state: 1,
-          msis: 1,
-          type: "置换术后",
-        },
-        {
-          patient_name: "赵振阳",
-          case_no: 'Y1234568',
-          create_time: '2018-12-24',
-          progress: "30",
-          state: 2,
-          msis: 3,
-          type: "置换术后",
-        }
-      ]
-    });
-    wx.hideLoading();
+    // this.getCases();
   },
 
   initData() {
@@ -164,6 +141,7 @@ Page({
       url: constant.basePath,
       data: {
         service: 'Case.SearchCaseList',
+        openid: app.globalData.openid,
         center_id: app.globalData.centerId,
         keyword: searchValue,
         sort: sortType
@@ -172,11 +150,22 @@ Page({
         'content-type': 'application/json'
       },
       success(res) {
-        // console.log(JSON.stringify(res))
+        console.log(JSON.stringify(res))
         wx.hideLoading()
-        that.setData({
-          caseList: res.data.data.list
-        })
+        if (res.data.data.code == constant.response_success) {
+          for (var i, len = res.data.data.list; i < len; i++) {
+            var caseInfo = res.data.data.list[0]
+            caseInfo.create_time = util.formatTime(caseInfo.create_time, 'Y-M-D')
+          }
+          that.setData({
+            caseList: res.data.data.list
+          })
+        } else {
+          wx.showToast({
+            icon: 'none',
+            title: res.data.data.msg,
+          })
+        }
       },
       fail(res) {
         wx.hideLoading()
@@ -185,13 +174,13 @@ Page({
   },
 
   onDele(e) {
-    var seletedCase = e.target.dataset.selectedCase
+    var selectedCase = e.target.dataset.selectedCase
     wx.showModal({
       title: '提示',
-      content: '确定删除' + seletedCase.patient_name + "的病历?",
+      content: '确定删除' + selectedCase.patient_name + "的病历?",
       success(res) {
         if (res.confirm) {
-          this.deleCase(seletedCase.case_id)
+          this.deleCase(selectedCase.case_id)
         } else if (res.cancel) {
 
         }
@@ -217,7 +206,14 @@ Page({
       success(res) {
         // console.log(JSON.stringify(res))
         wx.hideLoading()
-        that.requestCaseList(that.data.searchValue, that.data.sortType)
+        if (res.data.data.code == constant.response_success) {
+          that.requestCaseList(that.data.searchValue, that.data.sortType)
+        } else {
+          wx.showToast({
+            icon: 'none',
+            title: res.data.data.msg,
+          })
+        }
       },
       fail(res) {
         wx.hideLoading()
@@ -248,7 +244,14 @@ Page({
       },
       success(res) {
         wx.hideLoading()
-        that.requestCaseList(that.data.searchValue, that.data.sortType)
+        if (res.data.data.code == constant.response_success) {
+          that.requestCaseList(that.data.searchValue, that.data.sortType)
+        } else {
+          wx.showToast({
+            icon: 'none',
+            title: res.data.data.msg,
+          })
+        }
       },
       fail(res) {
         wx.hideLoading()
@@ -290,7 +293,7 @@ Page({
   },
   addCase() {
     wx.navigateTo({
-      url: '/case/detail/detail?case_id='
+      url: '../case/detail/detail?case_id='
     })
   }
 });

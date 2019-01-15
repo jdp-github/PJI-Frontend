@@ -22,7 +22,6 @@
                 </view>
               </wux-col>
               <wux-col span="4">
-
                 <view class="panel-btn-view" hidden="{{isAdmin == 0}}">
                   <wux-button block type="assertive" size="small" bind:click="operationBtn" data-staff="{{item}}">
                     <i class="fa fa-cog"></i> 修改/删除</wux-button>
