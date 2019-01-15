@@ -541,7 +541,7 @@ Page({
             center_name: caseInfo.center_name,
             patient_name: caseInfo.patient_name,
             case_no: caseInfo.case_no,
-            create_time: [util.formatTime('Y-M-D', caseInfo.create_time)],
+            create_time: [util.formatTime(caseInfo.create_time, 'Y-M-D')],
             sex: this.data.sexList[caseInfo.sex - 1],
             age: caseInfo.age,
             height: caseInfo.height,
@@ -580,7 +580,7 @@ Page({
         })
         // 第三页
         this.setData({
-            puncture_date: [util.formatTime('Y-M-D', caseInfo.puncture_date)],
+            puncture_date: [util.formatTime(caseInfo.puncture_date, 'Y-M-D')],
             middle_joint_fluid: caseInfo.middle_joint_fluid,
             is_rinse_value: this.data.is_rinse_list[caseInfo.is_rinse - 1],
             rinse_fluid_volume: caseInfo.rinse_fluid_volume,
@@ -588,7 +588,7 @@ Page({
             germ_name: caseInfo.germ_name,
             ngs_volume: caseInfo.ngs_volume,
             ngs_result: caseInfo.ngs_result,
-            operation_date: [util.formatTime('Y-M-D', caseInfo.operation_date)],
+            operation_date: [util.formatTime(caseInfo.operation_date, 'Y-M-D')],
             tissue_ngs_result: caseInfo.tissue_ngs_result,
             ultrasonic_degradation_result: caseInfo.ultrasonic_degradation_result,
             ultrasonic_degradation_ngs_result: caseInfo.ultrasonic_degradation_ngs_result,

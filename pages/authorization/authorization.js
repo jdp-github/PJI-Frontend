@@ -60,7 +60,7 @@ Page({
             wx.login({
                 timeout: 1000 * 10, // 超时时间(ms)
                 success(res) {
-                    console.log(res)
+                    // console.log(res)
                     if (res.code) {
                         that.checkUserState(res.code, e.target.dataset.type)
                     } else {
@@ -74,6 +74,8 @@ Page({
                     wx.hideLoading()
                 }
             })
+        } else {
+            wx.hideLoading()
         }
     },
 
@@ -90,7 +92,7 @@ Page({
                 'content-type': 'application/json'
             },
             success(res) {
-                // console.log(res)
+                wx.hideLoading()
                 // 存储openid
                 app.globalData.openid = res.data.data.info.openid;
                 if (type == "login") { // 登录
@@ -106,13 +108,17 @@ Page({
     },
 
     login(res) {
+        // debugger
         var code = res.data.data.code
         if (code == UN_REGISTE) { // 未注册
             wx.hideLoading()
-            this.showToast("尚未申请使用，请点击 申请使用")
+            this.showToast("尚未申请使用，请点击申请使用")
+        } else if (code == LOGIN_VERIFY_FAIL) { // 登录凭证校验失败
+            wx.hideLoading()
+            this.showToast("登录凭证校验失败")
         } else if (code == UN_PASS) { // 未通过注册
             wx.hideLoading()
-            this.showToast("申请未通过，请点击 申请使用")
+            this.showToast("申请未通过，请点击申请使用")
         } else if (code == REQUESTING) { // 注册中
             wx.hideLoading()
             this.showToast("申请审批中，请耐心等待")
@@ -132,15 +138,20 @@ Page({
                 },
                 success(res) {
                     wx.hideLoading()
-                    wx.redirectTo({
-                        url: '../index/index',
-                    })
+                    if (res.data.data.code == constant.response_success) {
+                        wx.switchTab({
+                            url: '../index/index'
+                        })
+                    } else {
+                        that.showToast(res.data.data.msg)
+                    }
+
                 },
                 fail(res) {
                     wx.hideLoading()
-					wx.showToast({
-						title: '登录出错',
-					})
+                    wx.showToast({
+                        title: '登录出错',
+                    })
                 }
             })
 
@@ -158,14 +169,15 @@ Page({
             })
         } else if (code == REQUESTING) { // 注册中
             this.showToast("申请审批中，请耐心等待")
+        } else if (code == LOGIN_VERIFY_FAIL) {
+            this.showToast("登录凭证校验失败")
         }
     },
 
     showToast(msg) {
-        $wuxToast().show({
-            duration: 2000,
-            color: '#fff',
-            text: msg
+        wx.showToast({
+            icon: 'none',
+            title: msg,
         })
     },
 });

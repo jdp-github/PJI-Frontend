@@ -1,28 +1,24 @@
 <wux-fab-button position="topRight" theme="assertive" direction="vertical" scale=".8" reverse="true" actionRotate="false" buttons="{{ buttons }}" spaceBetween="12" bind:click="onApplyClick" />
 <scroll-view class="page" scroll-y>
-  <view class="page__bd">
-    <!-- 头像 -->
-    <wux-row class="img-center">
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{avatarUrl}}" mode="cover"></image>
-    </wux-row>
-    <wux-cell-group title="基本信息" class="info-text">
-      <!-- 姓名 -->
-      <wux-cell thumb="/img/user.png" title="姓名" extra="{{userInfo.name}}"></wux-cell>
-      <!-- 电话 -->
-      <wux-cell thumb="/img/phone.png" title="电话" extra="{{userInfo.phone}}"></wux-cell>
-      <!-- 邮箱 -->
-      <wux-cell thumb="/img/email.png" title="邮箱" extra="{{userInfo.email}}"></wux-cell>
-    </wux-cell-group>
-    <!-- 所属中心 -->
-    <view wx:for="{{userInfo.center_list}}" wx:key="">
-      <wux-cell-group title="{{item.center_name}}" class="info-text">
-        <wux-cell thumb="/img/role.png" title="角色" extra="{{item.role_list[0]}}"></wux-cell>
-        <wux-cell thumb="/img/center.png" title="中心" extra="{{item.center_name}}"></wux-cell>
-      </wux-cell-group>
+    <view class="page__bd">
+        <!-- 头像 -->
+        <wux-row class="img-center">
+            <image bindtap="bindViewTap" class="userinfo-avatar" src="{{avatarUrl}}" mode="cover"></image>
+        </wux-row>
+        <wux-cell-group title="基本信息" class="info-text">
+            <!-- 姓名 -->
+            <wux-cell thumb="/img/user.png" title="姓名" extra="{{userInfo.name}}"></wux-cell>
+            <!-- 电话 -->
+            <wux-cell thumb="/img/phone.png" title="电话" extra="{{userInfo.phone}}"></wux-cell>
+            <!-- 邮箱 -->
+            <wux-cell thumb="/img/email.png" title="邮箱" extra="{{userInfo.email}}"></wux-cell>
+        </wux-cell-group>
+        <!-- 所属中心 -->
+        <view wx:for="{{userInfo.center_list}}" wx:key="">
+            <wux-cell-group title="{{item.center_name}}" class="info-text">
+                <wux-cell thumb="/img/role.png" title="角色" extra="{{item.role_list[0].role_name}}"></wux-cell>
+                <wux-cell thumb="/img/center.png" title="中心" extra="{{item.center_name}}"></wux-cell>
+            </wux-cell-group>
+        </view>
     </view>
-    <wux-cell-group title="中心1" class="info-text">
-      <wux-cell thumb="/img/role.png" title="角色" extra="中心负责人"></wux-cell>
-      <wux-cell thumb="/img/center.png" title="中心" extra="中心1"></wux-cell>
-    </wux-cell-group>
-  </view>
 </scroll-view>

@@ -233,7 +233,7 @@ Page({
         } else if (res.data.data.code == 2) {
           that.showToast('手机号格式不正确')
         } else {
-          that.showToast('申请提交失败 ' + res.data.data.msg)
+          that.showToast(res.data.data.msg)
         }
       },
       fail(res) {

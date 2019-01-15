@@ -1,5 +1,5 @@
 // utils/constant.js
-let basePath = "https://pji.lytall.com/api/Public/PJI/";
+let basePath = "https://pji.think-show.com/api/Public/PJI/";
 let response_success = 0;
 
 module.exports = {

@@ -38,7 +38,7 @@
                     <i class="fa fa-envelope-o input-size" />
                 </wux-col>
                 <wux-col span="11">
-                    <wux-input label="邮箱" class="input-size" clear="true" controlled="true" value='{{email}}' placeholder="请输入电子邮箱" bind:clear="onEMailClear" bind:change="onEMailChange" />
+                    <wux-input label="邮箱" class="input-size" clear="true" controlled="true" value='{{email}}' placeholder="请输入电子邮箱" bind:clear="onEMailClear" bind:change="onEMailChange" maxlength="50"/>
                 </wux-col>
             </wux-cell>
         </wux-cell-group>
