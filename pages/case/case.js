@@ -290,7 +290,7 @@ Page({
   },
   addCase() {
     wx.navigateTo({
-      url: '/case/detail/detail?case_id=0'
+      url: '/case/detail/detail?case_id='
     })
   }
 });
