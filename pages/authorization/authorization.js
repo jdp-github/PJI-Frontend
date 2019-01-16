@@ -92,6 +92,7 @@ Page({
                 'content-type': 'application/json'
             },
             success(res) {
+                console.log("Staff.CheckStaffStatus:" + JSON.stringify(res))
                 wx.hideLoading()
                 // 存储openid
                 app.globalData.openid = res.data.data.info.openid;
@@ -137,6 +138,7 @@ Page({
                     'content-type': 'application/json'
                 },
                 success(res) {
+                    console.log("Staff.WxLogin:" + JSON.stringify(res))
                     wx.hideLoading()
                     if (res.data.data.code == constant.response_success) {
                         wx.switchTab({

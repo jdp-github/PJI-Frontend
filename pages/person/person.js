@@ -44,7 +44,7 @@ Page({
                 'content-type': 'application/json'
             },
             success(res) {
-                console.log(JSON.stringify(res))
+                console.log("Staff.GetStaffInfo:" + JSON.stringify(res))
                 wx.hideLoading()
                 if (res.data.data.code == constant.response_success) {
                     that.setData({
