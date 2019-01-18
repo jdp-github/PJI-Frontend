@@ -219,7 +219,7 @@
                     特殊事项
                 </view>
                 <view class="textarea-view">
-                    <textarea focus="{{focusSpecialEvent}}" bindtap="onSpecialEventClick" value='{{special_matter}}' data-prop='focusSpecialEvent' bindinput="onInput"/>
+                    <textarea focus="{{focusSpecialEvent}}" bindtap="onSpecialEventClick" value='{{special_matter}}' data-prop='special_matter' bindinput="onInput"/>
                 </view>
             </wux-cell-group>
             <wux-cell-group title="">
@@ -227,7 +227,7 @@
                     简要病史
                 </view>
                 <view class="textarea-view">
-                    <textarea focus="{{focusBriefHistory}}" bindtap="onBriefHistoryClick" value='{{medical_history}}' data-prop='focusBriefHistory' bindinput="onInput"/>
+                    <textarea focus="{{focusBriefHistory}}" bindtap="onBriefHistoryClick" value='{{medical_history}}' data-prop='medical_history' bindinput="onInput"/>
                 </view>
             </wux-cell-group>
         </view>
