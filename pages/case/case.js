@@ -124,6 +124,7 @@ Page({
             isAdmin: app.globalData.is_admin
         })
         app.globalData.centerId = options.centerId
+        app.globalData.centerName = options.centerName
         this.initData()
         // this.getCases();
     },

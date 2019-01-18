@@ -2,6 +2,7 @@
 @import "../../../css/common.wxss";
 @import "../../../css/weui.wxss";
 @import "../../../miniprogram_npm/wux-weapp/styles/index.wxss";
+
 .page {
     height: 100%;
     display: flex;
@@ -14,6 +15,7 @@
     padding-top: 100rpx;
     width: 100%;
 }
+
 .page__hd {
     padding-top: 30rpx;
     position: fixed;
@@ -23,22 +25,52 @@
     z-index: 999;
     background-color: #f8f8f8;
 }
+
 .btn-steps {
     padding: 30rpx 30rpx;
 }
+
 .main-container {
     padding-top: 120rpx;
 }
+
 .input-view {
     padding: 20rpx;
     padding-left: 30rpx;
 }
+
 .input-text {
     padding: 20rpx;
     padding-left: 30rpx;
     padding-top: 25rpx;
     background-color: #fff;
 }
+
+.input-text-long {
+    padding-left: 20rpx;
+}
+
+.input-text-value {
+    padding: 20rpx;
+    color: grey;
+}
+
+.input-text-unit {
+    padding: 20rpx;
+    padding-right: 30rpx;
+    margin-top: 5rpx;
+    margin-left: -25rpx;
+    color: grey;
+}
+
+.input-text-unit-bmi {
+    margin-left: -80rpx;
+}
+
+.input-text-unit-esr{
+    margin-left: -10rpx;
+}
+
 .input-text-right {
     text-align: right;
     padding: 15rpx;
@@ -47,20 +79,25 @@
     background-color: #fff;
     color: grey;
 }
+
 .textarea-view {
     padding: 15rpx 30rpx;
     color: grey;
     padding-top: 0rpx;
 }
+
 .textarea-title {
     padding: 15rpx 30rpx;
 }
+
 .information-view {
     padding: 30rpx 30rpx;
 }
+
 .information-avatar {
     float: left;
 }
+
 .information-avatar-left {
     margin-left: 30rpx;
     float: left;

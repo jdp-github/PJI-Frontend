@@ -37,7 +37,7 @@
                                     <!-- 病例 -->
                                     <wux-col span="6">
                                         <view class="btn-padding">
-                                            <wux-button block clear type="assertive" size="small" data-centerId="{{item.center_id}}" bind:click="onRecordClick">
+                                            <wux-button block clear type="assertive" size="small" data-center="{{item}}" bind:click="onRecordClick">
                                                 <i class="fa fa-address-card-o"></i> 病例</wux-button>
                                         </view>
                                     </wux-col>

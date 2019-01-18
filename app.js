@@ -21,6 +21,7 @@ App({
     openid: '',
     avatarUrl: '',
     // 返回页面刷新用
-    centerId: ''
+    centerId: '',
+    centerName:''
   }
 });

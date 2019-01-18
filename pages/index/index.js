@@ -77,7 +77,7 @@ Page({
     onRecordClick(e) {
         // console.log(e)
         wx.navigateTo({
-            url: '../case/case?centerId=' + e.target.dataset.centerid
+            url: '../case/case?centerId=' + e.target.dataset.center.center_id + "&centerName=" + e.target.dataset.center.center_name
         })
     },
 
