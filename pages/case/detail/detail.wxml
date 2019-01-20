@@ -126,7 +126,7 @@
             <wux-cell-group class="special" title="">
                 <wux-row>
                     <view style="width: 100%; margin-left: 30rpx; border-bottom: 1px solid #ddd;">
-                         <view class="input-text" maxlength="5" style="width: 200rpx; float: left; padding-left: 0rpx; border-radius: 0;">
+                         <view class="input-text" maxlength="5" style="width: 200rpx; float: left; padding-left: 0rpx; border-radius: 0; border-bottom: 1px solid #ddd;">
                             病症出现时长
                         </view>
                         <view class="input-text-right">
@@ -425,12 +425,12 @@
             </wux-cell-group>
             <wux-cell-group title="">
                 <wux-row>
-                    <wux-col span="5">
+                    <wux-col span="6">
                         <view class="input-text">
                             细菌名称
                         </view>
                     </wux-col>
-                    <wux-col span="4" push="3">
+                    <wux-col span="6">
                         <view class="input-text-right">
                             <input type="text" value="{{germ_name}}" data-prop='germ_name' bindinput="onInput"/>
                         </view>
@@ -456,12 +456,12 @@
             </wux-cell-group>
             <wux-cell-group title="">
                 <wux-row>
-                    <wux-col span="5">
+                    <wux-col span="6">
                         <view class="input-text">
                             NGS结果
                         </view>
                     </wux-col>
-                    <wux-col span="4" push="3">
+                    <wux-col span="6">
                         <view class="input-text-right">
                             <input type="text" value="{{ngs_result}}" data-prop='ngs_result' bindinput="onInput"/>
                         </view>
@@ -469,16 +469,18 @@
                 </wux-row>
             </wux-cell-group>
             <wux-cell-group title="">
-                <wux-cell title="手术日期" extra="{{ operation_date }}" bind:click="openSurgery"></wux-cell>
+                <view style="margin-left: 10rpx;">
+                    <wux-cell title="手术日期" extra="{{ operation_date }}" bind:click="openSurgery"></wux-cell>
+                </view>
             </wux-cell-group>
             <wux-cell-group title="">
                 <wux-row>
-                    <wux-col span="5">
+                    <wux-col span="6">
                         <view class="input-text">
                             组织NGS结果
                         </view>
                     </wux-col>
-                    <wux-col span="4" push="3">
+                    <wux-col span="6">
                         <view class="input-text-right">
                             <input type="text" value="{{tissue_ngs_result}}" data-prop='tissue_ngs_result' bindinput="onInput"/>
                         </view>
@@ -487,12 +489,12 @@
             </wux-cell-group>
             <wux-cell-group title="">
                 <wux-row>
-                    <wux-col span="5">
+                    <wux-col span="6">
                         <view class="input-text">
                             超声裂解培养结果
                         </view>
                     </wux-col>
-                    <wux-col span="4" push="3">
+                    <wux-col span="6">
                         <view class="input-text-right">
                             <input type="text" value="{{ultrasonic_degradation_result}}" data-prop='ultrasonic_degradation_result' bindinput="onInput"/>
                         </view>
@@ -501,12 +503,12 @@
             </wux-cell-group>
             <wux-cell-group title="">
                 <wux-row>
-                    <wux-col span="5">
+                    <wux-col span="6">
                         <view class="input-text">
                             超声裂解NGS结果
                         </view>
                     </wux-col>
-                    <wux-col span="4" push="3">
+                    <wux-col span="6">
                         <view class="input-text-right">
                             <input type="text" value="{{ultrasonic_degradation_ngs_result}}" data-prop='ultrasonic_degradation_ngs_result' bindinput="onInput"/>
                         </view>
