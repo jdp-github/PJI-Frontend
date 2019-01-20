@@ -231,7 +231,7 @@ Page({
 
   onApprove(e) {
     var that = this
-    var selectedCase = e.target.dataset.selectedCase
+    var selectedCase = e.target.dataset.selectedcase
     var isApprove = selectedCase.state == 2
     var title = isApprove ? '解锁中...' : '锁定病历中...'
     // 1审批，2解锁
