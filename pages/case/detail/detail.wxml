@@ -59,7 +59,7 @@
                     </wux-col>
                     <wux-col span="4" push="4">
                         <view class="input-text-right">
-                            <input type="number" value="{{age}}" maxlength='2' data-prop='age' bindinput="onInput"/>
+                            <input type="number" value="{{age}}" maxlength='3' data-prop='age' bindinput="onInput"/>
                         </view>
                     </wux-col>
                 </wux-row>
@@ -91,7 +91,7 @@
                     </wux-col>
                     <wux-col span="9">
                         <view class="input-text-value" style="text-align: right;">
-                            <input style="padding-right: 15rpx;" type="digit" maxlength='4' value="{{weight}}" data-prop='weight' bindinput="onInput"/>
+                            <input style="padding-right: 15rpx;" type="digit" maxlength='5' value="{{weight}}" data-prop='weight' bindinput="onInput"/>
                             <view style="padding-right: 15rpx;" class="input-text-unit">
                                 kg
                             </view>
@@ -235,7 +235,7 @@
                     </wux-col>
                     <wux-col span="7">
                         <view class="input-text-value input-text-unit-esr" style="text-align: right;">
-                            <input type="number" maxlength='3' value="{{preoperative_esr}}" data-prop='preoperative_esr' bindinput="onInput"/>
+                            <input type="number" maxlength='4' value="{{preoperative_esr}}" data-prop='preoperative_esr' bindinput="onInput"/>
                         </view>
                         <view class="input-text-unit input-text-unit-esr" style="text-align: right;">
                             mm/h
@@ -269,7 +269,7 @@
                     </wux-col>
                     <wux-col span="7">
                         <view class="input-text-value input-text-unit-esr" style="text-align: right;">
-                            <input type="number" maxlength='6' value="{{preoperative_crp}}" data-prop='preoperative_crp' bindinput="onInput"/>
+                            <input type="number" maxlength='8' value="{{preoperative_crp}}" data-prop='preoperative_crp' bindinput="onInput"/>
                         </view>
                         <view class="input-text-unit input-text-unit-esr" style="text-align: right;">
                             mg/dl
@@ -292,7 +292,7 @@
                     </wux-col>
                     <wux-col span="7">
                         <view class="input-text-value input-text-unit-esr" style="text-align: right;">
-                            <input type="number" maxlength='5' value="{{joint_fluid_leukocyte}}" data-prop='joint_fluid_leukocyte' bindinput="onInput"/>
+                            <input type="number" maxlength='6' value="{{joint_fluid_leukocyte}}" data-prop='joint_fluid_leukocyte' bindinput="onInput"/>
                         </view>
                         <view class="input-text-unit input-text-unit-esr" style="text-align: right;">
                             μL
@@ -395,7 +395,7 @@
                     </wux-col>
                     <wux-col span="6">
                         <view class="input-text-value input-text-unit-esr" style="text-align: right;">
-                            <input type="digit" maxlength='4' value="{{rinse_fluid_volume}}" data-prop='rinse_fluid_volume' bindinput="onInput"/>
+                            <input type="digit" maxlength='6' value="{{rinse_fluid_volume}}" data-prop='rinse_fluid_volume' bindinput="onInput"/>
                         </view>
                         <view class="input-text-unit input-text-unit-esr" style="text-align: right;">
                             ml
@@ -443,7 +443,7 @@
                     </wux-col>
                     <wux-col span="6">
                         <view class="input-text-value input-text-unit-esr" style="text-align: right;">
-                            <input type="digit" maxlength='4' value="{{ngs_volume}}" data-prop='ngs_volume' bindinput="onInput"/>
+                            <input type="digit" maxlength='6' value="{{ngs_volume}}" data-prop='ngs_volume' bindinput="onInput"/>
                         </view>
                         <view class="input-text-unit input-text-unit-esr" style="text-align: right;">
                             ml
