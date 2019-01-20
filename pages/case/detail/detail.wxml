@@ -126,11 +126,8 @@
             <wux-cell-group class="special" title="">
                 <wux-row>
                     <view style="width: 100%; margin-left: 30rpx; border-bottom: 1px solid #ddd;">
-                         <view class="input-text" maxlength="5" style="width: 200rpx; float: left; padding-left: 0rpx; border-radius: 0; border-bottom: 1px solid #ddd;">
-                            病症出现时长
-                        </view>
                         <view class="input-text-right">
-                            <input style="padding-right: 30rpx;" type="number" maxlength='4' value="{{duration_symptoms}}" data-prop='duration_symptoms' bindinput="onInput"/>
+                            <view style="float: left; color:black; margin-left:-25rpx; margin-top:10rpx;">病症出现时长</view> <input style="padding-right: 30rpx;" type="number" maxlength='4' value="{{duration_symptoms}}" data-prop='duration_symptoms' bindinput="onInput"/>
                         </view>
                     </view>
                 </wux-row>
