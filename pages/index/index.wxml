@@ -23,7 +23,7 @@
                                 <wux-tag>录入未完成: {{item.no_completed_cases}}</wux-tag>
                             </view>
                             <view class="progress-view">
-                                <wux-progress bar-style="background-color: #5cb85c" percent="{{item.completed_cases/(item.completed_cases+item.no_approve_cases+item.no_completed_cases)*100}}" />
+                                <wux-progress shape="square" strokeWidth="2" bar-style="background-color: #5cb85c" percent="{{item.completed_cases/(item.completed_cases+item.no_approve_cases+item.no_completed_cases)*100}}" />
                             </view>
                             <view class="btn-row">
                                 <wux-row>
