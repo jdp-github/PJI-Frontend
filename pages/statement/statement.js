@@ -204,7 +204,7 @@ Page({
     finishEc: {
       onInit: initFinishChart,
     },
-    show: false
+    show: true
   },
 
   onCenterClick() {
