@@ -15,7 +15,7 @@ function initFinishChart(canvas, width, height) {
   let pages = getCurrentPages();
   let currentPage = pages[pages.length - 1];
 
-  finishChart = echarts.init(canvas, null, {
+  finishChart = echarts.init(canvas, {}, {
     width: width,
     height: height
   });
@@ -85,7 +85,7 @@ function initFinishChart(canvas, width, height) {
 }
 
 function initInfectChart(canvas, width, height) {
-  infectChart = echarts.init(canvas, null, {
+  infectChart = echarts.init(canvas, {}, {
     width: width,
     height: height
   });
@@ -135,7 +135,7 @@ function initInfectChart(canvas, width, height) {
 }
 
 function initTypeChart(canvas, width, height) {
-  typeChart = echarts.init(canvas, null, {
+  typeChart = echarts.init(canvas, {}, {
     width: width,
     height: height
   });
@@ -292,7 +292,6 @@ Page({
       },
       success(res) {
         console.log("Statistics.GetCharts:" + JSON.stringify(res));
-        setTimeout(function() {}, 5000);
         wx.hideLoading();
         if (res.data.data.code == constant.response_success) {
           that.setData({
@@ -326,7 +325,7 @@ Page({
               name: '占位器'
             },
           ];
-          typeChart.setOption(typeOption)
+          typeChart.setOption(typeOption);
         } else {
           wx.showToast({
             icon: 'none',
