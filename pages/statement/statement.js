@@ -58,7 +58,7 @@ function initFinishChart(canvas, width, height) {
         },
         // data: [320, 332, 301, 334, 390, 330]
         // TODO jidp
-        data: currentPage.data.finished_list.approve
+        data: parseInt(currentPage.data.finished_list.approve)
       },
       {
         name: '未审核',
@@ -72,7 +72,7 @@ function initFinishChart(canvas, width, height) {
         },
         // data: [120, 132, 101, 134, 90, 230]
         // TODO jidp
-        data: currentPage.data.finished_list.notapprove
+        data: parseInt(currentPage.data.finished_list.notapprove)
       },
       {
         name: '未完成',
@@ -86,7 +86,7 @@ function initFinishChart(canvas, width, height) {
         },
         // data: [220, 182, 191, 234, 290, 330]
         // TODO jidp
-        data: currentPage.data.finished_list.notcomplete
+        data: parseInt(currentPage.data.finished_list.notcomplete)
       },
     ]
   };
@@ -144,13 +144,13 @@ function initInfectChart(canvas, width, height) {
       data: [{
           // value: 35,
           // TODO jidp
-          value: currentPage.data.infect_list.infect,
+          value: parseInt(currentPage.data.infect_list.infect),
           name: '感染'
         },
         {
           // value: 310,
           // TODO jidp
-          value: currentPage.data.infect_list.notinfect,
+          value: parseInt(currentPage.data.infect_list.notinfect),
           name: '非感染'
         },
       ]
@@ -209,12 +209,12 @@ function initTypeChart(canvas, width, height) {
       },
       data: [{
           // TODO jidp 40
-          value: currentPage.data.type_list.displace,
+          value: parseInt(currentPage.data.type_list.displace),
           name: '置换术后'
         },
         {
           // TODO jidp 310
-          value: currentPage.data.type_list.seize,
+          value: parseInt(currentPage.data.type_list.seize),
           name: '占位器'
         },
       ]

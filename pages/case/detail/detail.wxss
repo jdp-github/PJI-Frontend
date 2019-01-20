@@ -56,19 +56,12 @@
 }
 
 .input-text-unit {
-    padding: 20rpx;
-    padding-right: 30rpx;
-    margin-top: 5rpx;
-    margin-left: -25rpx;
+    margin-top: 25rpx;
     color: grey;
 }
 
-.input-text-unit-bmi {
-    margin-left: -80rpx;
-}
-
-.input-text-unit-esr{
-    margin-left: -10rpx;
+.input-text-unit-bmi, .input-text-unit-esr {
+    padding-right: 30rpx;
 }
 
 .input-text-right {
