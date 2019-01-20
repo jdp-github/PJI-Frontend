@@ -20,9 +20,9 @@
                             姓名
                         </view>
                     </wux-col>
-                    <wux-col span="4" push="4">
+                    <wux-col span="8">
                         <view class="input-text-right">
-                            <input value="{{patient_name}}" maxlength='5' data-prop='patient_name' bindinput="onInput" />
+                            <input style="width: 100%;" value="{{patient_name}}" data-prop='patient_name' bindinput="onInput" />
                         </view>
                     </wux-col>
                 </wux-row>
@@ -35,7 +35,7 @@
                             ID
                         </view>
                     </wux-col>
-                    <wux-col span="4" push="4">
+                    <wux-col span="8">
                         <view class="input-text-right">
                             <input value="{{case_no}}" data-prop='case_no' bindinput="onInput"/>
                         </view>
@@ -72,14 +72,9 @@
                             身高
                         </view>
                     </wux-col>
-                    <wux-col span="5" push="5">
+                    <wux-col span="9" style="text-align: right;">
                         <view class="input-text-value">
-                            <input type="digit" maxlength='4' value="{{height}}" data-prop='height' bindinput="onInput"/>
-                        </view>
-                    </wux-col>
-                    <wux-col span="1" offset="3">
-                        <view class="input-text-unit">
-                            m
+                            <input type="digit" maxlength='4' value="{{height}} m" data-prop='height' bindinput="onInput"/>
                         </view>
                     </wux-col>
                 </wux-row>
@@ -91,14 +86,9 @@
                             体重
                         </view>
                     </wux-col>
-                    <wux-col span="5" push="5">
+                    <wux-col span="9" style="text-align: right; border-bottom: none;">
                         <view class="input-text-value">
-                            <input type="digit" maxlength='4' value="{{weight}}" data-prop='weight' bindinput="onInput"/>
-                        </view>
-                    </wux-col>
-                    <wux-col span="1" offset="3">
-                        <view class="input-text-unit">
-                            kg
+                            <input type="digit" maxlength='4' value="{{weight}} kg" data-prop='weight' bindinput="onInput"/>
                         </view>
                     </wux-col>
                 </wux-row>
@@ -110,14 +100,9 @@
                             BMI
                         </view>
                     </wux-col>
-                    <wux-col span="5" push="5">
+                    <wux-col span="9" style="text-align: right; border-bottom: none;">
                         <view class="input-text-value">
-                            <input type="digit" maxlength='6' value="{{bmi}}" data-prop='bmi' bindinput="onInput"/>
-                        </view>
-                    </wux-col>
-                    <wux-col span="1" offset="3">
-                        <view class="input-text-unit input-text-unit-bmi">
-                            kg/m2
+                            <input type="digit" maxlength='6' value='{{bmi}} kgm2' data-prop='bmi' bindinput="onInput"/>
                         </view>
                     </wux-col>
                 </wux-row>
@@ -129,7 +114,7 @@
                 <wux-cell title="部位" extra="{{ part }}" bind:click="onClickPart"></wux-cell>
             </wux-cell-group>
             <!-- 病症出现时长 -->
-            <wux-cell-group title="病症出现时长">
+            <wux-cell-group title="">
                 <wux-row>
                     <wux-col span="4">
                         <view class="input-text" maxlength="5">
@@ -176,7 +161,7 @@
                             其他伴随疾病
                         </view>
                     </wux-col>
-                    <wux-col span="4" push="4">
+                    <wux-col span="8">
                         <view class="input-text-right">
                             <input type='text' value="{{other_concomitant_diseases}}" data-prop='other_concomitant_diseases' bindinput="onInput"/>
                         </view>
@@ -193,7 +178,7 @@
                             联系电话1
                         </view>
                     </wux-col>
-                    <wux-col span="4" push="4">
+                    <wux-col span="8">
                         <view class="input-text-right">
                             <input type="number" maxlength='16' value="{{telphone1}}" data-prop='telphone1' bindinput="onInput"/>
                         </view>
@@ -207,7 +192,7 @@
                             联系电话2
                         </view>
                     </wux-col>
-                    <wux-col span="4" push="4">
+                    <wux-col span="8">
                         <view class="input-text-right">
                             <input type="number" maxlength='16' value="{{telphone2}}" data-prop='telphone2' bindinput="onInput"/>
                         </view>
@@ -244,14 +229,9 @@
                             术前ESR
                         </view>
                     </wux-col>
-                    <wux-col span="3" push="3">
+                    <wux-col span="7" style="text-align: right;">
                         <view class="input-text-value">
-                            <input type="number" maxlength='3' value="{{preoperative_esr}}" data-prop='preoperative_esr' bindinput="onInput"/>
-                        </view>
-                    </wux-col>
-                    <wux-col span="1" offset="2">
-                        <view class="input-text-unit input-text-unit-esr">
-                            mm/h
+                            <input type="number" maxlength='3' value="{{preoperative_esr}} mmh" data-prop='preoperative_esr' bindinput="onInput"/>
                         </view>
                     </wux-col>
                 </wux-row>
@@ -263,14 +243,9 @@
                             标准化的CRP
                         </view>
                     </wux-col>
-                    <wux-col span="3" push="3">
-                        <view class="input-text-value">
-                            <input type="number" maxlength='6' value="{{normal_crp}}" data-prop='normal_crp' bindinput="onInput"/>
-                        </view>
-                    </wux-col>
-                    <wux-col span="1" offset="2">
-                        <view class="input-text-unit input-text-unit-esr">
-                            mg/l
+                    <wux-col span="7">
+                        <view class="input-text-value" style="text-align: right;">
+                            <input type="number" maxlength='6' value="{{normal_crp}} mgl" data-prop='normal_crp' bindinput="onInput"/>
                         </view>
                     </wux-col>
                 </wux-row>
@@ -282,14 +257,9 @@
                             术前CRP
                         </view>
                     </wux-col>
-                    <wux-col span="3" push="3">
+                    <wux-col span="7" style="text-align: right;">
                         <view class="input-text-value">
-                            <input type="number" maxlength='6' value="{{preoperative_crp}}" data-prop='preoperative_crp' bindinput="onInput"/>
-                        </view>
-                    </wux-col>
-                    <wux-col span="1" offset="2">
-                        <view class="input-text-unit input-text-unit-esr">
-                            mg/dl
+                            <input type="number" maxlength='6' value="{{preoperative_crp}} mgdl" data-prop='preoperative_crp' bindinput="onInput"/>
                         </view>
                     </wux-col>
                 </wux-row>
@@ -307,14 +277,9 @@
                             关节液白细胞计数
                         </view>
                     </wux-col>
-                    <wux-col span="4" push="3">
+                    <wux-col span="7" style="text-align: right;">
                         <view class="input-text-value">
-                            <input type="number" maxlength='5' value="{{joint_fluid_leukocyte}}" data-prop='joint_fluid_leukocyte' bindinput="onInput"/>
-                        </view>
-                    </wux-col>
-                    <wux-col span="1" offset="2">
-                        <view class="input-text-unit">
-                            μL
+                            <input type="number" maxlength='5' value="{{joint_fluid_leukocyte}} μL" data-prop='joint_fluid_leukocyte' bindinput="onInput"/>
                         </view>
                     </wux-col>
                 </wux-row>
@@ -326,14 +291,9 @@
                             中性粒细胞平百分比
                         </view>
                     </wux-col>
-                    <wux-col span="4" push="3">
+                    <wux-col span="7" style="text-align: right;">
                         <view class="input-text-value">
-                            <input type="number" maxlength='3' value="{{neutrophils_percent}}" data-prop='neutrophils_percent' bindinput="onInput"/>
-                        </view>
-                    </wux-col>
-                    <wux-col span="1" offset="2">
-                        <view class="input-text-unit input-text-unit-esr">
-                            %
+                            <input type="number" maxlength='3' value="{{neutrophils_percent}} %" data-prop='neutrophils_percent' bindinput="onInput"/>
                         </view>
                     </wux-col>
                 </wux-row>
@@ -345,7 +305,7 @@
                             1号组织培养结果
                         </view>
                     </wux-col>
-                    <wux-col span="4" push="3">
+                    <wux-col span="7">
                         <view class="input-text-right">
                             <input type="text" value="{{culture_result1}}" data-prop='culture_result1' bindinput="onInput"/>
                         </view>
@@ -359,7 +319,7 @@
                             2号组织培养结果
                         </view>
                     </wux-col>
-                    <wux-col span="4" push="3">
+                    <wux-col span="7">
                         <view class="input-text-right">
                             <input type="text" value="{{culture_result2}}" data-prop='culture_result2' bindinput="onInput"/>
                         </view>
@@ -373,7 +333,7 @@
                             3号组织培养结果
                         </view>
                     </wux-col>
-                    <wux-col span="4" push="3">
+                    <wux-col span="7">
                         <view class="input-text-right">
                             <input type="text" value="{{culture_result3}}" data-prop='culture_result3' bindinput="onInput"/>
                         </view>
@@ -414,33 +374,23 @@
                             抽出关节液/冲洗液量
                         </view>
                     </wux-col>
-                    <wux-col span="3" push="3">
+                    <wux-col span="6" style="text-align: right;">
                         <view class="input-text-value">
-                            <input type="digit" maxlength='4' value="{{rinse_fluid_volume}}" data-prop='rinse_fluid_volume' bindinput="onInput"/>
-                        </view>
-                    </wux-col>
-                    <wux-col span="1" offset="2">
-                        <view class="input-text-unit">
-                            ml
+                            <input type="digit" maxlength='4' value="{{rinse_fluid_volume}} ml" data-prop='rinse_fluid_volume' bindinput="onInput"/>
                         </view>
                     </wux-col>
                 </wux-row>
             </wux-cell-group>
             <wux-cell-group title="">
                 <wux-row>
-                    <wux-col span="6">
+                    <wux-col span="5">
                         <view class="input-text">
                             打入培养瓶内液体量
                         </view>
                     </wux-col>
-                    <wux-col span="3" push="3">
+                    <wux-col span="7" style="text-align: right;">
                         <view class="input-text-value">
-                            <input type="digit" maxlength='5' value="{{culture_bottle_fluid_volume}}" data-prop='culture_bottle_fluid_volume' bindinput="onInput"/>
-                        </view>
-                    </wux-col>
-                    <wux-col span="1" offset="2">
-                        <view class="input-text-unit">
-                            ml
+                            <input type="digit" maxlength='5' value="{{culture_bottle_fluid_volume}} ml" data-prop='culture_bottle_fluid_volume' bindinput="onInput"/>
                         </view>
                     </wux-col>
                 </wux-row>
@@ -452,7 +402,7 @@
                             细菌名称
                         </view>
                     </wux-col>
-                    <wux-col span="4" push="3">
+                    <wux-col span="7">
                         <view class="input-text-right">
                             <input type="text" value="{{germ_name}}" data-prop='germ_name' bindinput="onInput"/>
                         </view>
@@ -461,19 +411,14 @@
             </wux-cell-group>
             <wux-cell-group title="">
                 <wux-row>
-                    <wux-col span="6">
+                    <wux-col span="5">
                         <view class="input-text">
                             送检NGS量
                         </view>
                     </wux-col>
-                    <wux-col span="3" push="3">
+                    <wux-col span="7" style="text-align: right;">
                         <view class="input-text-value">
-                            <input type="digit" maxlength='4' value="{{ngs_volume}}" data-prop='ngs_volume' bindinput="onInput"/>
-                        </view>
-                    </wux-col>
-                    <wux-col span="1" offset="2">
-                        <view class="input-text-unit">
-                            ml
+                            <input type="digit" maxlength='4' value="{{ngs_volume}} ml" data-prop='ngs_volume' bindinput="onInput"/>
                         </view>
                     </wux-col>
                 </wux-row>
@@ -485,7 +430,7 @@
                             NGS结果
                         </view>
                     </wux-col>
-                    <wux-col span="4" push="3">
+                    <wux-col span="7">
                         <view class="input-text-right">
                             <input type="text" value="{{ngs_result}}" data-prop='ngs_result' bindinput="onInput"/>
                         </view>
@@ -502,7 +447,7 @@
                             组织NGS结果
                         </view>
                     </wux-col>
-                    <wux-col span="4" push="3">
+                    <wux-col span="7">
                         <view class="input-text-right">
                             <input type="text" value="{{tissue_ngs_result}}" data-prop='tissue_ngs_result' bindinput="onInput"/>
                         </view>
@@ -516,7 +461,7 @@
                             超声裂解培养结果
                         </view>
                     </wux-col>
-                    <wux-col span="4" push="3">
+                    <wux-col span="7">
                         <view class="input-text-right">
                             <input type="text" value="{{ultrasonic_degradation_result}}" data-prop='ultrasonic_degradation_result' bindinput="onInput"/>
                         </view>
@@ -530,7 +475,7 @@
                             超声裂解NGS结果
                         </view>
                     </wux-col>
-                    <wux-col span="4" push="3">
+                    <wux-col span="7">
                         <view class="input-text-right">
                             <input type="text" value="{{ultrasonic_degradation_ngs_result}}" data-prop='ultrasonic_degradation_ngs_result' bindinput="onInput"/>
                         </view>

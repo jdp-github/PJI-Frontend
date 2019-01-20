@@ -140,7 +140,6 @@ Page({
     // 手术日期
     operation_date: [],
     // 组织NGS结果
-    tissue_ngs_result: '',
     // 超声裂解培养结果
     ultrasonic_degradation_result: '',
     // 超声裂解NGS结果

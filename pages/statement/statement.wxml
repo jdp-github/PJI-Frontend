@@ -8,6 +8,7 @@
         <i class="fa fa-user input-size input-size-vertical" />
       </wux-col>
     </wux-cell-group>
+    <view style="margin-top: 30rpx;"></view>
     <wux-wing-blank size="default">
       <wux-card title="录入完成比例" extra="已审核/未审核/未完成">
         <view slot="body" class="chart-view-special">
