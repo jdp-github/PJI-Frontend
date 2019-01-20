@@ -47,7 +47,7 @@ Page({
     partList: ['髋', '膝'],
     part: '髋',
     partIndex: 0,
-    // 病征出现时长 TODO
+    // 病症出现时长 TODO
     duration_symptoms: '',
     duration_symptoms_unit_list: ['天', '月'],
     duration_symptoms_unit_value: '',
@@ -171,6 +171,10 @@ Page({
       this.setData({
         currentStep: 2,
       });
+
+      if (!this.isValueRight()) {
+        return
+      }
       wx.showModal({
         title: '确定提交病历?',
         success(res) {
@@ -469,7 +473,6 @@ Page({
   },
 
   onInput: function(e) {
-    console.log(JSON.stringify(e))
     if (e.target.dataset.prop == "patient_name") {
       this.setData({
         patient_name: e.detail.value
@@ -486,10 +489,22 @@ Page({
       this.setData({
         height: e.detail.value
       })
+      if (this.data.weight != 0 && this.data.height != 0) {
+        var calcBMI = this.data.weight / (this.data.height * this.data.height)
+        this.setData({
+          bmi: calcBMI.toFixed(2)
+        })
+      }
     } else if (e.target.dataset.prop == "weight") {
       this.setData({
         weight: e.detail.value
       })
+      if (this.data.weight != 0 && this.data.height != 0) {
+        var calcBMI = this.data.weight / (this.data.height * this.data.height)
+        this.setData({
+          bmi: calcBMI.toFixed(2)
+        })
+      }
     } else if (e.target.dataset.prop == "bmi") {
       this.setData({
         bmi: e.detail.value
@@ -654,6 +669,7 @@ Page({
         'content-type': 'application/json'
       },
       success(res) {
+        console.log("Case.GetCaseInfo:" + JSON.stringify(res))
         wx.hideLoading()
         if (res.data.data.code == constant.response_success) {
           var caseInfo = res.data.data.info
@@ -687,8 +703,8 @@ Page({
       part: this.data.partList[caseInfo.part - 1],
       medical_history: caseInfo.medical_history,
       duration_symptoms: caseInfo.duration_symptoms,
-      duration_symptoms_unit_value: caseInfo.duration_symptoms_unit,
-      duration_symptoms_prop_value: caseInfo.duration_symptoms_prop,
+      duration_symptoms_unit_value: this.data.duration_symptoms_unit_list[caseInfo.duration_symptoms_unit],
+      duration_symptoms_prop_value: this.data.duration_symptoms_prop_list[caseInfo.duration_symptoms_prop],
       diagnose: caseInfo.diagnose,
       is_merge_disease_value: this.data.is_merge_disease_list[caseInfo.is_merge_disease - 1],
       other_concomitant_diseases: caseInfo.other_concomitant_diseases,
@@ -737,13 +753,12 @@ Page({
   },
 
   editCase() {
-    if (!this.isValueRight()) {
-      return
-    }
+    
     var that = this
     wx.showLoading({
       title: '更改病历中...',
     })
+    console.log("editCase:" + that.makeJsonData())
     wx.request({
       url: constant.basePath,
       data: {
@@ -775,15 +790,11 @@ Page({
     })
   },
   addCase() {
-    if (!this.isValueRight()) {
-      return
-    }
-
     var that = this
     wx.showLoading({
       title: '新增病历中...',
     })
-    console.log(that.makeJsonData())
+    console.log("addCase:" + that.makeJsonData())
     wx.request({
       url: constant.basePath,
       data: {
@@ -829,6 +840,13 @@ Page({
       })
       return false
     }
+    if (this.data.case_no.length <= 0) {
+      wx.showToast({
+        icon: 'none',
+        title: '请填写ID',
+      })
+      return false
+    }
     return true
   },
 
@@ -849,7 +867,7 @@ Page({
       "center_id": app.globalData.centerId,
       "patient_name": that.data.patient_name,
       "case_no": that.data.case_no,
-      "create_time": new Date(that.data.create_time[0]).getTime(),
+      "create_time": new Date(that.data.create_time[0]).getTime()/1000,
       "special_matter": that.data.special_matter,
       "sex": that.data.sexIndex + 1,
       "age": that.data.age,
@@ -882,7 +900,7 @@ Page({
       "pathology": that.data.pathologyIndex + 1,
       "msis": that.data.msisIndex + 1,
       "final_disposal": that.data.final_disposal_index + 1,
-      "puncture_date": new Date(that.data.puncture_date[0]).getTime(),
+      "puncture_date": new Date(that.data.puncture_date[0]).getTime()/1000,
       "middle_joint_fluid": that.data.middle_joint_fluid,
       "is_rinse": that.data.is_rinse_index + 1,
       "rinse_fluid_volume": that.data.rinse_fluid_volume,
@@ -890,10 +908,17 @@ Page({
       "germ_name": that.data.germ_name,
       "ngs_volume": that.data.ngs_volume,
       "ngs_result": that.data.ngs_result,
-      "operation_date": new Date(that.data.operation_date[0]).getTime(),
+      "operation_date": new Date(that.data.operation_date[0]).getTime()/1000,
       "tissue_ngs_result": that.data.tissue_ngs_result,
       "ultrasonic_degradation_result": that.data.ultrasonic_degradation_result,
       "ultrasonic_degradation_ngs_result": that.data.ultrasonic_degradation_ngs_result
+    }
+
+    // 新增的病历，建档时间如果不填的话，默认为当前时间
+    if (this.data.isCreateCase && this.data.create_time.length == 0) {
+      var timestamp = Date.parse(new Date());
+      timestamp = timestamp / 1000;
+      caseObj.create_time = timestamp
     }
 
     return JSON.stringify(caseObj)

@@ -109,7 +109,7 @@ Page({
     },
 
     login(res) {
-        // debugger
+        console.log(JSON.stringify(res))
         var code = res.data.data.code
         if (code == UN_REGISTE) { // 未注册
             wx.hideLoading()

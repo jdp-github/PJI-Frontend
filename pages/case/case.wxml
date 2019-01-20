@@ -37,9 +37,9 @@
               </view>
             </wux-col>
             <wux-col span="4" pull="1">
-              <view class="weui-media-box__title">类型: {{ item.type }}</view>
-              <view class="weui-media-box__title" style="color: #999; margin-top: 35rpx;">完成度: {{ item.progress }}%</view>
-              <wux-progress bar-style="background-color: #5cb85c" percent="{{ item.progress }}" />
+              <view class="weui-media-box__title">类型: {{ item.type_name }}</view>
+              <view class="weui-media-box__title" style="color: #999; margin-top: 35rpx;">完成度: {{ item.progress*100 }}%</view>
+              <wux-progress bar-style="background-color: #5cb85c" percent="{{ item.progress*100 }}" />
             </wux-col>
             <wux-col span="3">
               <wux-button block size="small" type="assertive" catchtap='onDele' data-selectedCase="{{item}}" hidden='{{item.delete_button == 0}}'>

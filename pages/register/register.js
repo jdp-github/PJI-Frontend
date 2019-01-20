@@ -213,6 +213,7 @@ Page({
             url: constant.basePath,
             data: {
                 service: 'Staff.Apply',
+ avatar: app.globalData.avatarUrl,
                 name: that.data.name,
                 phone: that.data.telValue,
                 email: that.data.email,
@@ -233,8 +234,7 @@ Page({
                     wx.navigateBack({
                         delta: 2
                     })
-                } else if (res.data.data.code == 2) {
-                    that.showToast('手机号格式不正确')
+               
                 } else {
                     that.showToast(res.data.data.msg)
                 }

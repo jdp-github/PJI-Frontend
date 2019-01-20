@@ -154,8 +154,8 @@ Page({
                 console.log("Case.SearchCaseList:" + JSON.stringify(res))
                 wx.hideLoading()
                 if (res.data.data.code == constant.response_success) {
-                    for (var i, len = res.data.data.list; i < len; i++) {
-                        var caseInfo = res.data.data.list[0]
+                    for (var i = 0, len = res.data.data.list.length; i < len; i++) {
+            var caseInfo = res.data.data.list[i]
                         caseInfo.create_time = util.formatTime(caseInfo.create_time, 'Y-M-D')
                     }
                     that.setData({
@@ -175,13 +175,14 @@ Page({
     },
 
     onDele(e) {
+ var that = this
         var selectedCase = e.target.dataset.selectedCase
         wx.showModal({
             title: '提示',
             content: '确定删除' + selectedCase.patient_name + "的病历?",
             success(res) {
                 if (res.confirm) {
-                    this.deleCase(selectedCase.case_id)
+                     that.deleCase(selectedCase.case_id)
                 } else if (res.cancel) {
 
                 }
@@ -210,10 +211,10 @@ Page({
                 if (res.data.data.code == constant.response_success) {
                     that.requestCaseList(that.data.searchValue, that.data.sortType)
                 } else {
-                    wx.showToast({
-                        icon: 'none',
-                        title: res.data.data.msg,
-                    })
+                     wx.showModal({
+            showCancel: false,
+            content: res.data.data.msg,
+          })
                 }
             },
             fail(res) {
@@ -265,7 +266,7 @@ Page({
         wx.showLoading({
             title: '鉴权中...',
         })
-        var selectedCase = e.target.dataset.selectedCase
+        var selectedCase = e.currentTarget.dataset.selectedcase
         wx.request({
             url: constant.basePath,
             data: {
@@ -281,12 +282,14 @@ Page({
                 wx.hideLoading()
                 if (res.data.data.code == 0) {
                     wx.navigateTo({
-                        url: '/case/detail/detail?case_id=' + selectedCase.case_id
+                        url: '../case/detail/detail?case_id=' + selectedCase.case_id
                     })
                 } else {
-                    wx.showToast({
-                        title: res.data.data.msg,
-                    })
+                   wx.showModal({
+            title: '',
+            content: res.data.data.msg,
+            showCancel: false
+          })
                 }
             },
             fail(res) {
