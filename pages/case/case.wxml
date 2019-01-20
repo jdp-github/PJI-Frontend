@@ -42,9 +42,11 @@
               <wux-progress bar-style="background-color: #5cb85c" percent="{{ item.progress*100 }}" />
             </wux-col>
             <wux-col span="3">
-              <wux-button block size="small" type="assertive" catchtap='onDele' data-selectedCase="{{item}}" hidden='{{item.delete_button == 0}}'>
+              <!-- 删除 -->
+              <wux-button block size="small" type="assertive" catchtap='onDele' data-selectedCase="{{item}}" style="{{item.delete_button == 0?'display: none':'display: block'}}">
                 <i class="fa fa-cog"></i> 删除</wux-button>
-              <wux-button block size="small" type="calm" catchtap='onApprove' data-selectedCase="{{item}}" hidden='{{item.approve_button == 0}}'>
+              <!-- 审批 -->
+              <wux-button block size="small" type="calm" catchtap='onApprove' data-selectedCase="{{item}}" style="{{item.approve_button == 0?'display: none':'display: block'}}">
                 <i class="fa fa-exchange"></i> {{item.state == 2 ? '解锁':'审批'}}</wux-button>
             </wux-col>
           </view>
