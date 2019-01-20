@@ -228,12 +228,12 @@
             </wux-cell-group>
             <wux-cell-group title="">
                 <wux-row>
-                    <wux-col span="5">
-                        <view class="input-text">
+                    <wux-col span="6">
+                        <view class="input-text-no-padding">
                             术前ESR
                         </view>
                     </wux-col>
-                    <wux-col span="7">
+                    <wux-col span="6">
                         <view class="input-text-value input-text-unit-esr" style="text-align: right;">
                             <input type="number" maxlength='4' value="{{preoperative_esr}}" data-prop='preoperative_esr' bindinput="onInput"/>
                         </view>
@@ -245,12 +245,12 @@
             </wux-cell-group>
             <wux-cell-group title="">
                 <wux-row>
-                    <wux-col span="5">
-                        <view class="input-text">
+                    <wux-col span="6">
+                        <view class="input-text-no-padding">
                             标准化的CRP
                         </view>
                     </wux-col>
-                    <wux-col span="7">
+                    <wux-col span="6">
                         <view class="input-text-value input-text-unit-esr" style="text-align: right;">
                             <input type="number" maxlength='6' value="{{normal_crp}}" data-prop='normal_crp' bindinput="onInput"/>
                         </view>
@@ -262,12 +262,12 @@
             </wux-cell-group>
             <wux-cell-group title="">
                 <wux-row>
-                    <wux-col span="5">
-                        <view class="input-text">
+                    <wux-col span="6" style="padding-left: 0rpx; padding-right: 0rpx;">
+                        <view class="input-text-no-padding">
                             术前CRP
                         </view>
                     </wux-col>
-                    <wux-col span="7">
+                    <wux-col span="6" style="padding-left: 0rpx; padding-right: 0rpx;">
                         <view class="input-text-value input-text-unit-esr" style="text-align: right;">
                             <input type="number" maxlength='8' value="{{preoperative_crp}}" data-prop='preoperative_crp' bindinput="onInput"/>
                         </view>
@@ -285,12 +285,12 @@
             </wux-cell-group>
             <wux-cell-group title="">
                 <wux-row>
-                    <wux-col span="5">
-                        <view class="input-text">
+                    <wux-col span="6" style="padding-left: 0rpx; padding-right: 0rpx;">
+                        <view class="input-text-no-padding">
                             关节液白细胞计数
                         </view>
                     </wux-col>
-                    <wux-col span="7">
+                    <wux-col span="6" style="padding-left: 0rpx; padding-right: 0rpx;">
                         <view class="input-text-value input-text-unit-esr" style="text-align: right;">
                             <input type="number" maxlength='6' value="{{joint_fluid_leukocyte}}" data-prop='joint_fluid_leukocyte' bindinput="onInput"/>
                         </view>
@@ -302,12 +302,12 @@
             </wux-cell-group>
             <wux-cell-group title="">
                 <wux-row>
-                    <wux-col span="5">
-                        <view class="input-text">
+                    <wux-col span="6" style="padding-left: 0rpx; padding-right: 0rpx;">
+                        <view class="input-text-no-padding">
                             中性粒细胞平百分比
                         </view>
                     </wux-col>
-                    <wux-col span="7">
+                    <wux-col span="6" style="padding-left: 0rpx; padding-right: 0rpx;">
                         <view class="input-text-value input-text-unit-esr" style="text-align: right;">
                             <input type="number" maxlength='3' value="{{neutrophils_percent}}" data-prop='neutrophils_percent' bindinput="onInput"/>
                         </view>
@@ -319,13 +319,13 @@
             </wux-cell-group>
             <wux-cell-group title="">
                 <wux-row>
-                    <wux-col span="5">
-                        <view class="input-text">
+                    <wux-col span="6" style="padding-left: 0rpx; padding-right: 0rpx;">
+                        <view class="input-text-no-padding">
                             1号组织培养结果
                         </view>
                     </wux-col>
-                    <wux-col span="4" push="3">
-                        <view class="input-text-right">
+                    <wux-col span="4" push="2" style="padding-left: 0rpx; padding-right: 0rpx;">
+                        <view class="input-text-right-no-padding">
                             <input type="text" value="{{culture_result1}}" data-prop='culture_result1' bindinput="onInput"/>
                         </view>
                     </wux-col>
@@ -333,13 +333,13 @@
             </wux-cell-group>
             <wux-cell-group title="">
                 <wux-row>
-                    <wux-col span="5">
-                        <view class="input-text">
+                    <wux-col span="6" style="padding-left: 0rpx; padding-right: 0rpx;">
+                        <view class="input-text-no-padding">
                             2号组织培养结果
                         </view>
                     </wux-col>
-                    <wux-col span="4" push="3">
-                        <view class="input-text-right">
+                    <wux-col span="4" push="2" style="padding-left: 0rpx; padding-right: 0rpx;">
+                        <view class="input-text-right-no-padding">
                             <input type="text" value="{{culture_result2}}" data-prop='culture_result2' bindinput="onInput"/>
                         </view>
                     </wux-col>
@@ -347,13 +347,13 @@
             </wux-cell-group>
             <wux-cell-group title="">
                 <wux-row>
-                    <wux-col span="5">
-                        <view class="input-text">
+                    <wux-col span="6" style="padding-left: 0rpx; padding-right: 0rpx;">
+                        <view class="input-text-no-padding">
                             3号组织培养结果
                         </view>
                     </wux-col>
-                    <wux-col span="4" push="3">
-                        <view class="input-text-right">
+                    <wux-col span="4" push="2">
+                        <view class="input-text-right-no-padding">
                             <input type="text" value="{{culture_result3}}" data-prop='culture_result3' bindinput="onInput"/>
                         </view>
                     </wux-col>
@@ -388,12 +388,12 @@
             </wux-cell-group>
             <wux-cell-group title="">
                 <wux-row>
-                    <wux-col span="6">
+                    <wux-col span="6" style="padding-left: 0rpx; padding-right: 0rpx;">
                         <view class="input-text input-text-long">
                             抽出关节液/冲洗液量
                         </view>
                     </wux-col>
-                    <wux-col span="6">
+                    <wux-col span="6" style="padding-left: 0rpx; padding-right: 0rpx;">
                         <view class="input-text-value input-text-unit-esr" style="text-align: right;">
                             <input type="digit" maxlength='6' value="{{rinse_fluid_volume}}" data-prop='rinse_fluid_volume' bindinput="onInput"/>
                         </view>
@@ -406,7 +406,7 @@
             <wux-cell-group title="">
                 <wux-row>
                     <wux-col span="6">
-                        <view class="input-text">
+                        <view class="input-text-no-padding">
                             打入培养瓶内液体量
                         </view>
                     </wux-col>
@@ -423,7 +423,7 @@
             <wux-cell-group title="">
                 <wux-row>
                     <wux-col span="6">
-                        <view class="input-text">
+                        <view class="input-text-no-padding">
                             细菌名称
                         </view>
                     </wux-col>
@@ -437,7 +437,7 @@
             <wux-cell-group title="">
                 <wux-row>
                     <wux-col span="6">
-                        <view class="input-text">
+                        <view class="input-text-no-padding">
                             送检NGS量
                         </view>
                     </wux-col>
@@ -454,7 +454,7 @@
             <wux-cell-group title="">
                 <wux-row>
                     <wux-col span="6">
-                        <view class="input-text">
+                        <view class="input-text-no-padding">
                             NGS结果
                         </view>
                     </wux-col>
@@ -466,14 +466,14 @@
                 </wux-row>
             </wux-cell-group>
             <wux-cell-group title="">
-                <view style="margin-left: 10rpx;">
+                <view>
                     <wux-cell title="手术日期" extra="{{ operation_date }}" bind:click="openSurgery"></wux-cell>
                 </view>
             </wux-cell-group>
             <wux-cell-group title="">
                 <wux-row>
                     <wux-col span="6">
-                        <view class="input-text">
+                        <view class="input-text-no-padding">
                             组织NGS结果
                         </view>
                     </wux-col>
@@ -487,7 +487,7 @@
             <wux-cell-group title="">
                 <wux-row>
                     <wux-col span="6">
-                        <view class="input-text">
+                        <view class="input-text-no-padding">
                             超声裂解培养结果
                         </view>
                     </wux-col>
@@ -501,7 +501,7 @@
             <wux-cell-group title="">
                 <wux-row>
                     <wux-col span="6">
-                        <view class="input-text">
+                        <view class="input-text-no-padding">
                             超声裂解NGS结果
                         </view>
                     </wux-col>

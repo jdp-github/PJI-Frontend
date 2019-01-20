@@ -46,6 +46,12 @@
     background-color: #fff;
 }
 
+.input-text-no-padding {
+    padding: 20rpx;
+    padding-top: 25rpx;
+    background-color: #fff;
+}
+
 .input-text-long {
     padding-left: 20rpx;
 }
@@ -69,6 +75,12 @@
     padding: 15rpx;
     padding-left: 30rpx;
     padding-right: 30rpx;
+    background-color: #fff;
+    color: grey;
+}
+.input-text-right-no-padding {
+text-align: right;
+    padding: 15rpx;
     background-color: #fff;
     color: grey;
 }
