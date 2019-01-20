@@ -14,5 +14,6 @@
     "wux-cell-group": "../../miniprogram_npm/wux-weapp/cell-group/index",
     "wux-cell": "../../miniprogram_npm/wux-weapp/cell/index"
   },
-  "backgroundColor": "#f8f8f8"
+  "backgroundColor": "#f8f8f8",
+  "enablePullDownRefresh": true
 }

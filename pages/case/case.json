@@ -15,5 +15,6 @@
     "wux-progress": "../../miniprogram_npm/wux-weapp/progress/index",
     "wux-tag": "../../miniprogram_npm/wux-weapp/tag/index"
   },
-  "backgroundColor": "#f8f8f8"
+  "backgroundColor": "#f8f8f8",
+  "enablePullDownRefresh": true
 }

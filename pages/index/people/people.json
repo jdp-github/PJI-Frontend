@@ -15,5 +15,6 @@
 		"wux-radio-group": "../..//miniprogram_npm/wux-weapp/radio-group/index",
 		"wux-radio": "../..//miniprogram_npm/wux-weapp/radio/index"
 	},
-	"backgroundColor": "#f8f8f8"
+	"backgroundColor": "#f8f8f8",
+  "enablePullDownRefresh": true
 }
