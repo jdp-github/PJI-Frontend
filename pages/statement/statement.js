@@ -7,221 +7,131 @@ import {
 let app = getApp();
 let constant = require('../../utils/constant.js');
 
-let infectChart = null;
-let typeChart = null;
-let finishChart = null;
+var infectChart = null;
+var typeChart = null;
+var finishChart = null;
 
 function initFinishChart(canvas, width, height) {
-  let pages = getCurrentPages();
-  let currentPage = pages[pages.length - 1];
 
   finishChart = echarts.init(canvas, null, {
     width: width,
     height: height
   });
   canvas.setChart(finishChart);
-
-  let option = {
-    tooltip: {
-      trigger: 'axis',
-      axisPointer: {
-        type: 'shadow'
-      }
-    },
-    legend: {
-      data: ['已审核', '未审核', '未完成']
-    },
-    grid: {
-      left: '3%',
-      right: '8%',
-      bottom: '3%',
-      containLabel: true
-    },
-    xAxis: [{
-      type: 'category',
-      // TODO jidp
-      data: currentPage.data.finished_list.months
-      // data: ['1月', '2月', '3月', '4月', '5月', '6月']
-    }],
-    yAxis: [{
-      type: 'value'
-    }],
-    series: [{
-        name: '已审核',
-        type: 'bar',
-        stack: 'total',
-        label: {
-          normal: {
-            show: true,
-            position: 'insideTop'
-          }
+    let finishOption = {
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'shadow'
+            }
         },
-        // data: [320, 332, 301, 334, 390, 330]
-        // TODO jidp
-        data: parseInt(currentPage.data.finished_list.approve)
-      },
-      {
-        name: '未审核',
-        type: 'bar',
-        stack: 'total',
-        label: {
-          normal: {
-            show: true,
-            position: 'insideTop'
-          }
+        legend: {
+            data: ['已审核', '未审核', '未完成']
         },
-        // data: [120, 132, 101, 134, 90, 230]
-        // TODO jidp
-        data: parseInt(currentPage.data.finished_list.notapprove)
-      },
-      {
-        name: '未完成',
-        type: 'bar',
-        stack: 'total',
-        label: {
-          normal: {
-            show: true,
-            position: 'insideTop'
-          }
+        grid: {
+            left: '3%',
+            right: '8%',
+            bottom: '3%',
+            containLabel: true
         },
-        // data: [220, 182, 191, 234, 290, 330]
-        // TODO jidp
-        data: parseInt(currentPage.data.finished_list.notcomplete)
-      },
-    ]
-  };
-
-  finishChart.setOption(option);
+    };
+    finishChart.setOption(finishOption, true);
   return finishChart;
 }
 
 function initInfectChart(canvas, width, height) {
-  let pages = getCurrentPages();
-  let currentPage = pages[pages.length - 1];
-
   infectChart = echarts.init(canvas, null, {
     width: width,
     height: height
   });
   canvas.setChart(infectChart);
+    let infectOption = {
+        color: ['#ef473a', '#91c7ae'],
+        tooltip: {
+            trigger: 'item',
+            formatter: "{a} <br/>{b}: {c} ({d}%)"
+        },
+        legend: {
+            orient: 'vertical',
+            x: 'left',
+            data: ['感染', '非感染']
+        },
+        series: [{
+            name: '感染/非感染',
+            type: 'pie',
+            radius: ['50%', '70%'],
+            avoidLabelOverlap: false,
+            label: {
+                normal: {
+                    show: false,
+                    position: 'center',
+                    formatter: '{b} \n {c} ({d}%)',
 
-  var option = {
-    color: ['#ef473a', '#91c7ae'],
-    tooltip: {
-      trigger: 'item',
-      formatter: "{a} <br/>{b}: {c} ({d}%)"
-    },
-    legend: {
-      orient: 'vertical',
-      x: 'left',
-      data: ['感染', '非感染']
-    },
-    series: [{
-      name: '感染/非感染',
-      type: 'pie',
-      radius: ['50%', '70%'],
-      avoidLabelOverlap: false,
-      label: {
-        normal: {
-          show: false,
-          position: 'center',
-          formatter: '{b} \n {c} ({d}%)',
-
-        },
-        emphasis: {
-          show: true,
-          textStyle: {
-            fontSize: '14',
-            fontWeight: '300',
-          }
-        },
-      },
-      labelLine: {
-        normal: {
-          show: false
-        }
-      },
-      data: [{
-          // value: 35,
-          // TODO jidp
-          value: parseInt(currentPage.data.infect_list.infect),
-          name: '感染'
-        },
-        {
-          // value: 310,
-          // TODO jidp
-          value: parseInt(currentPage.data.infect_list.notinfect),
-          name: '非感染'
-        },
-      ]
-    }]
-  };
-
-  infectChart.setOption(option);
+                },
+                emphasis: {
+                    show: true,
+                    textStyle: {
+                        fontSize: '14',
+                        fontWeight: '300',
+                    }
+                },
+            },
+            labelLine: {
+                normal: {
+                    show: false
+                }
+            },
+        }]
+    };
+    infectChart.setOption(infectOption, true);
   return infectChart;
 }
 
 function initTypeChart(canvas, width, height) {
-  let pages = getCurrentPages();
-  let currentPage = pages[pages.length - 1];
-
   typeChart = echarts.init(canvas, null, {
     width: width,
     height: height
   });
   canvas.setChart(typeChart);
-
-  var option = {
-    color: ['#334b5c', '#de9325'],
-    tooltip: {
-      trigger: 'item',
-      formatter: "{a} <br/>{b}: {c} ({d}%)"
-    },
-    legend: {
-      orient: 'vertical',
-      x: 'left',
-      data: ['置换术后', '占位器']
-    },
-    series: [{
-      name: '置换术后/占位器',
-      type: 'pie',
-      radius: ['50%', '70%'],
-      avoidLabelOverlap: false,
-      label: {
-        normal: {
-          show: false,
-          position: 'center',
-          formatter: '{b} \n {c} ({d}%)',
-
-        },
-        emphasis: {
-          show: true,
-          textStyle: {
-            fontSize: '14',
-            fontWeight: '300',
-          }
-        },
+  let typeOption = {
+      color: ['#334b5c', '#de9325'],
+      tooltip: {
+          trigger: 'item',
+          formatter: "{a} <br/>{b}: {c} ({d}%)"
       },
-      labelLine: {
-        normal: {
-          show: false
-        }
+      legend: {
+          orient: 'vertical',
+          x: 'left',
+          data: ['置换术后', '占位器']
       },
-      data: [{
-          // TODO jidp 40
-          value: parseInt(currentPage.data.type_list.displace),
-          name: '置换术后'
-        },
-        {
-          // TODO jidp 310
-          value: parseInt(currentPage.data.type_list.seize),
-          name: '占位器'
-        },
-      ]
-    }]
+      series: [{
+          name: '置换术后/占位器',
+          type: 'pie',
+          radius: ['50%', '70%'],
+          avoidLabelOverlap: false,
+          label: {
+              normal: {
+                  show: false,
+                  position: 'center',
+                  formatter: '{b} \n {c} ({d}%)',
+
+              },
+              emphasis: {
+                  show: true,
+                  textStyle: {
+                      fontSize: '14',
+                      fontWeight: '300',
+                  }
+              },
+          },
+          labelLine: {
+              normal: {
+                  show: false
+              }
+          },
+      }],
   };
-
-  typeChart.setOption(option);
+  typeChart.setOption(typeOption, true);
   return typeChart;
 }
 
@@ -325,13 +235,186 @@ Page({
       },
       success(res) {
         wx.hideLoading();
-        console.log("Statistics.GetCharts:" + JSON.stringify(res));
         if (res.data.data.code == constant.response_success) {
           that.setData({
             finished_list: res.data.data.finished_list,
             infect_list: res.data.data.infect_list,
             type_list: res.data.data.type_list
           });
+          let infectOption = {
+                color: ['#ef473a', '#91c7ae'],
+                tooltip: {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b}: {c} ({d}%)"
+                },
+                legend: {
+                    orient: 'vertical',
+                    x: 'left',
+                    data: ['感染', '非感染']
+                },
+                series: [{
+                    name: '感染/非感染',
+                    type: 'pie',
+                    radius: ['50%', '70%'],
+                    avoidLabelOverlap: false,
+                    label: {
+                        normal: {
+                            show: false,
+                            position: 'center',
+                            formatter: '{b} \n {c} ({d}%)',
+
+                        },
+                        emphasis: {
+                            show: true,
+                            textStyle: {
+                                fontSize: '14',
+                                fontWeight: '300',
+                            }
+                        },
+                    },
+                    labelLine: {
+                        normal: {
+                            show: false
+                        }
+                    },
+                    data: [{
+                        // value: 35,
+                        // TODO jidp
+                        value: that.data.infect_list.infect,
+                        name: '感染'
+                    },
+                        {
+                            // value: 310,
+                            // TODO jidp
+                            value: that.data.infect_list.notinfect,
+                            name: '非感染'
+                        },
+                    ]
+                }]
+            };
+          infectChart.setOption(infectOption, true);
+          let finishOption = {
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'shadow'
+                    }
+                },
+                legend: {
+                    data: ['已审核', '未审核', '未完成']
+                },
+                grid: {
+                    left: '3%',
+                    right: '8%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                xAxis: [{
+                    type: 'category',
+                    // TODO jidp
+                    data: that.data.finished_list.months
+                    // data: ['1月', '2月', '3月', '4月', '5月', '6月']
+                }],
+                yAxis: [{
+                    type: 'value'
+                }],
+                series: [{
+                    name: '已审核',
+                    type: 'bar',
+                    stack: 'total',
+                    label: {
+                        normal: {
+                            show: false,
+                            position: 'insideBottom'
+                        }
+                    },
+                    // data: [320, 332, 301, 334, 390, 330]
+                    // TODO jidp
+                    data: that.data.finished_list.approve
+                },
+                    {
+                        name: '未审核',
+                        type: 'bar',
+                        stack: 'total',
+                        label: {
+                            normal: {
+                                show: false,
+                                position: 'insideBottom'
+                            }
+                        },
+                        // data: [120, 132, 101, 134, 90, 230]
+                        // TODO jidp
+                        data: that.data.finished_list.notapprove
+                    },
+                    {
+                        name: '未完成',
+                        type: 'bar',
+                        stack: 'total',
+                        label: {
+                            normal: {
+                                show: false,
+                                position: 'insideBottom'
+                            }
+                        },
+                        // data: [220, 182, 191, 234, 290, 330]
+                        // TODO jidp
+                        data: that.data.finished_list.notcomplete
+                    },
+                ]
+            };
+          finishChart.setOption(finishOption, true);
+
+          let typeOption = {
+                color: ['#334b5c', '#de9325'],
+                tooltip: {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b}: {c} ({d}%)"
+                },
+                legend: {
+                    orient: 'vertical',
+                    x: 'left',
+                    data: ['置换术后', '占位器']
+                },
+                series: [{
+                    name: '置换术后/占位器',
+                    type: 'pie',
+                    radius: ['50%', '70%'],
+                    avoidLabelOverlap: false,
+                    label: {
+                        normal: {
+                            show: false,
+                            position: 'center',
+                            formatter: '{b} \n {c} ({d}%)',
+
+                        },
+                        emphasis: {
+                            show: true,
+                            textStyle: {
+                                fontSize: '14',
+                                fontWeight: '300',
+                            }
+                        },
+                    },
+                    labelLine: {
+                        normal: {
+                            show: false
+                        }
+                    },
+                    data: [{
+                        // TODO jidp 40
+                        value: that.data.type_list.displace,
+                        name: '置换术后'
+                    },
+                        {
+                            // TODO jidp 310
+                            value: that.data.type_list.seize,
+                            name: '占位器'
+                        },
+                    ]
+                }]
+            };
+
+          typeChart.setOption(typeOption, true);
         } else {
           wx.showToast({
             icon: 'none',
