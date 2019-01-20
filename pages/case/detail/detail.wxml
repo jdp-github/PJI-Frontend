@@ -108,9 +108,9 @@
                     </wux-col>
                     <wux-col span="9">
                         <view class="input-text-value" style="text-align: right;">
-                            <!-- <input style="padding-right: 15rpx;" type="digit" maxlength='6' value="{{bmi}}" data-prop='bmi' bindinput="onInput"/> -->
+                            <input style="padding-right: 15rpx;" type="digit" maxlength='6' value="{{bmi}}" data-prop='bmi' bindinput="onInput"/>
                             <view style="padding-right: 15rpx;" class="input-text-unit input-text-unit-bmi">
-                                {{bmi}} kg/㎡
+                                kg/㎡
                             </view>
                         </view>
                     </wux-col>
@@ -130,7 +130,7 @@
                             病症出现时长
                         </view>
                         <view class="input-text-right">
-                            <input type="number" maxlength='4' value="{{duration_symptoms}}" data-prop='duration_symptoms' bindinput="onInput"/>
+                            <input style="padding-right: 30rpx;" type="number" maxlength='4' value="{{duration_symptoms}}" data-prop='duration_symptoms' bindinput="onInput"/>
                         </view>
                     </view>
                 </wux-row>
