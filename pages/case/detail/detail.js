@@ -757,7 +757,7 @@ Page({
         'content-type': 'application/json'
       },
       success(res) {
-        // console.log(JSON.stringify(res))
+        console.log("Case.EditCase:" + JSON.stringify(res))
         wx.hideLoading()
         if (res.data.data.code == constant.response_success) {
           that.reloadPrePage()

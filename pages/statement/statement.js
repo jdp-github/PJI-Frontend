@@ -12,6 +12,9 @@ let typeChart = null;
 let finishChart = null;
 
 function initFinishChart(canvas, width, height) {
+  var pages = getCurrentPages()
+  var currentPage = pages[pages.length - 1]
+
   finishChart = echarts.init(canvas, null, {
     width: width,
     height: height
@@ -36,7 +39,9 @@ function initFinishChart(canvas, width, height) {
     },
     xAxis: [{
       type: 'category',
-      data: ['1月', '2月', '3月', '4月', '5月', '6月']
+      // TODO jidp
+      data: currentPage.data.finished_list.months
+      // data: ['1月', '2月', '3月', '4月', '5月', '6月']
     }],
     yAxis: [{
       type: 'value'
@@ -51,7 +56,9 @@ function initFinishChart(canvas, width, height) {
             position: 'insideTop'
           }
         },
-        data: [320, 332, 301, 334, 390, 330]
+        // data: [320, 332, 301, 334, 390, 330]
+        // TODO jidp
+        data: currentPage.data.finished_list.approve
       },
       {
         name: '未审核',
@@ -63,7 +70,9 @@ function initFinishChart(canvas, width, height) {
             position: 'insideTop'
           }
         },
-        data: [120, 132, 101, 134, 90, 230]
+        // data: [120, 132, 101, 134, 90, 230]
+        // TODO jidp
+        data: currentPage.data.finished_list.notapprove
       },
       {
         name: '未完成',
@@ -75,7 +84,9 @@ function initFinishChart(canvas, width, height) {
             position: 'insideTop'
           }
         },
-        data: [220, 182, 191, 234, 290, 330]
+        // data: [220, 182, 191, 234, 290, 330]
+        // TODO jidp
+        data: currentPage.data.finished_list.notcomplete
       },
     ]
   };
@@ -85,6 +96,9 @@ function initFinishChart(canvas, width, height) {
 }
 
 function initInfectChart(canvas, width, height) {
+  var pages = getCurrentPages()
+  var currentPage = pages[pages.length - 1]
+
   infectChart = echarts.init(canvas, null, {
     width: width,
     height: height
@@ -128,11 +142,15 @@ function initInfectChart(canvas, width, height) {
         }
       },
       data: [{
-          value: 335,
+          // value: 35,
+          // TODO jidp
+          value: currentPage.data.infect_list.infect,
           name: '感染'
         },
         {
-          value: 310,
+          // value: 310,
+          // TODO jidp
+          value: currentPage.data.infect_list.notinfect,
           name: '非感染'
         },
       ]
@@ -144,6 +162,9 @@ function initInfectChart(canvas, width, height) {
 }
 
 function initTypeChart(canvas, width, height) {
+  var pages = getCurrentPages()
+  var currentPage = pages[pages.length - 1]
+
   typeChart = echarts.init(canvas, null, {
     width: width,
     height: height
@@ -187,11 +208,13 @@ function initTypeChart(canvas, width, height) {
         }
       },
       data: [{
-          value: 40,
+          // TODO jidp 40
+          value: currentPage.data.type_list.displace,
           name: '置换术后'
         },
         {
-          value: 310,
+          // TODO jidp 310
+          value: currentPage.data.type_list.seize,
           name: '占位器'
         },
       ]
@@ -209,6 +232,10 @@ Page({
     centValueList: [],
     centerValue: '',
     centerIndex: '',
+    // 图表数据
+    finished_list: [],
+    infect_list: [],
+    type_list: [],
     infectEc: {
       onInit: initInfectChart,
     },
@@ -299,7 +326,16 @@ Page({
         wx.hideLoading()
         console.log("Statistics.GetCharts:" + JSON.stringify(res))
         if (res.data.data.code == constant.response_success) {
-          
+          that.setData({
+            finished_list: res.data.data.finished_list,
+            infect_list: res.data.data.infect_list,
+            type_list: res.data.data.type_list
+          })
+        } else {
+          wx.showToast({
+            icon: 'none',
+            title: res.data.data.msg,
+          })
         }
       },
       fail(res) {
