@@ -16,7 +16,8 @@
     "wux-step": "../../../miniprogram_npm/wux-weapp/step/index",
     "wux-select": "../../../miniprogram_npm/wux-weapp/select/index",
     "wux-calendar": "../../../miniprogram_npm/wux-weapp/calendar/index",
-    "wux-avatar": "../../../miniprogram_npm/wux-weapp/avatar/index"
+    "wux-avatar": "../../../miniprogram_npm/wux-weapp/avatar/index",
+    "wux-alert": "../../../miniprogram_npm/wux-weapp/alert/index"
   },
   "backgroundColor": "#f8f8f8"
 }

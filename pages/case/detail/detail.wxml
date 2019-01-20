@@ -515,25 +515,25 @@
         </view>
     </scroll-view>
     <!-- 录入者 -->
-    <view class="information-view" hidden='{{!showWriter}}'>
-        <!-- 超过3个的话只显示3个就行 -->
-        <view class="information-avatar">
-            录入者:
-        </view>
-        <view wx:for="{{write_staff_list}}" wx:key="">
-            <view class="information-avatar-left">
-                <wux-avatar shape="square" size="small" src="{{item.staff_avatar}}">U</wux-avatar> {{item.staff_name}}
+    <view class="information-view" hidden='{{!showWriter}}' style="padding: 5rpx 30rpx; margin: 0rpx 30rpx;">
+        <view style="margin-left: 30rpx; margin-right: 30rpx;">
+        <wux-alert theme="positive">
+            <view wx:for="{{write_staff_list}}" wx:key="">
+                <view class="information-avatar-left">
+                    <wux-avatar shape="square" size="small">录</wux-avatar> {{item.staff_name}}
+                </view>
             </view>
+        </wux-alert>
         </view>
     </view>
     <!-- 审核者 -->
-    <view class="information-view" hidden='{{!showAuditor}}'>
-        <!-- 审核后锁定该条目 -->
-        <view class="information-avatar">
-            审核者:
-        </view>
-        <view class="information-avatar-left">
-            <wux-avatar shape="square" size="small" src="{{auditor_avatar}}"></wux-avatar> {{auditor_name}}
+    <view class="information-view" hidden='{{!showAuditor}}' style="padding: 5rpx 30rpx; margin: 0rpx 30rpx;">
+        <view style="margin-left: 30rpx; margin-right: 30rpx;">
+            <wux-alert theme="assertive">
+                <view class="information-avatar-left">
+                    <wux-avatar shape="square" size="small">审</wux-avatar> {{auditor_name}}
+                </view>
+            </wux-alert>
         </view>
     </view>
     <view class="btn-steps">

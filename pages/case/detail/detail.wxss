@@ -84,7 +84,10 @@
 }
 
 .information-view {
+    float: right;
+    width: 100%;
     padding: 30rpx 30rpx;
+    padding-bottom: 15rpx;
 }
 
 .information-avatar {
