@@ -2,18 +2,18 @@ import * as echarts from '../../ec-canvas/echarts';
 
 import {
   $wuxSelect
-} from '../../miniprogram_npm/wux-weapp/index'
+} from '../../miniprogram_npm/wux-weapp/index';
 
-var app = getApp();
-var constant = require('../../utils/constant.js');
+let app = getApp();
+let constant = require('../../utils/constant.js');
 
 let infectChart = null;
 let typeChart = null;
 let finishChart = null;
 
 function initFinishChart(canvas, width, height) {
-  var pages = getCurrentPages()
-  var currentPage = pages[pages.length - 1]
+  let pages = getCurrentPages();
+  let currentPage = pages[pages.length - 1];
 
   finishChart = echarts.init(canvas, null, {
     width: width,
@@ -21,7 +21,7 @@ function initFinishChart(canvas, width, height) {
   });
   canvas.setChart(finishChart);
 
-  var option = {
+  let option = {
     tooltip: {
       trigger: 'axis',
       axisPointer: {
@@ -96,8 +96,8 @@ function initFinishChart(canvas, width, height) {
 }
 
 function initInfectChart(canvas, width, height) {
-  var pages = getCurrentPages()
-  var currentPage = pages[pages.length - 1]
+  let pages = getCurrentPages();
+  let currentPage = pages[pages.length - 1];
 
   infectChart = echarts.init(canvas, null, {
     width: width,
@@ -162,8 +162,8 @@ function initInfectChart(canvas, width, height) {
 }
 
 function initTypeChart(canvas, width, height) {
-  var pages = getCurrentPages()
-  var currentPage = pages[pages.length - 1]
+  let pages = getCurrentPages();
+  let currentPage = pages[pages.length - 1];
 
   typeChart = echarts.init(canvas, null, {
     width: width,
@@ -256,27 +256,28 @@ Page({
           this.setData({
             centerValue: value,
             centerIndex: index,
-          })
+          });
         }
-        this.requestChats()
+        this.requestChats(false);
       },
     });
   },
 
   onLoad: function(options) {
-    this.initData()
+    this.initData();
   },
 
   initData() {
-    this.requestCenterList()
+    this.requestCenterList();
+    this.requestChats(true);
   },
 
   // 中心列表
   requestCenterList() {
     wx.showLoading({
       title: '请求数据中...',
-    })
-    var that = this
+    });
+    let that = this;
 
     wx.request({
       url: constant.basePath,
@@ -287,12 +288,12 @@ Page({
         'content-type': 'application/json'
       },
       success(res) {
-        wx.hideLoading()
-        console.log("Center.GetCenterList:" + JSON.stringify(res))
+        wx.hideLoading();
+        console.log("Center.GetCenterList:" + JSON.stringify(res));
         if (res.data.data.code == constant.response_success) {
           that.setData({
             centerObjList: res.data.data.list
-          })
+          });
 
           for (var i = 0, len = that.data.centerObjList.length; i < len; i++) {
             that.data.centValueList[i] = that.data.centerObjList[i].name
@@ -303,44 +304,44 @@ Page({
         }
       },
       fail(res) {
-        wx.hideLoading()
+        wx.hideLoading();
       }
     })
   },
-  requestChats() {
+  requestChats(all) {
     wx.showLoading({
       title: '请求数据中...',
-    })
-    var that = this
+    });
+    let that = this;
 
     wx.request({
       url: constant.basePath,
       data: {
         service: 'Statistics.GetCharts',
-        center_id: that.data.centerObjList[that.data.centerIndex].id
+        center_id: all ? "" : that.data.centerObjList[that.data.centerIndex].id
       },
       header: {
         'content-type': 'application/json'
       },
       success(res) {
-        wx.hideLoading()
-        console.log("Statistics.GetCharts:" + JSON.stringify(res))
+        wx.hideLoading();
+        console.log("Statistics.GetCharts:" + JSON.stringify(res));
         if (res.data.data.code == constant.response_success) {
           that.setData({
             finished_list: res.data.data.finished_list,
             infect_list: res.data.data.infect_list,
             type_list: res.data.data.type_list
-          })
+          });
         } else {
           wx.showToast({
             icon: 'none',
             title: res.data.data.msg,
-          })
+          });
         }
       },
       fail(res) {
-        wx.hideLoading()
+        wx.hideLoading();
       }
-    })
+    });
   }
 });
