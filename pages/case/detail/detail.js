@@ -748,12 +748,15 @@ Page({
     // 底
     this.setData({
       showWriter: caseInfo.write_staff_list.length > 0,
+      write_staff_list: caseInfo.write_staff_list,
+      auditor_avatar: caseInfo.auditor_avatar,
+      auditor_name: caseInfo.auditor_name,
       showAuditor: caseInfo.auditor_name.length > 0
     })
   },
 
   editCase() {
-    
+
     var that = this
     wx.showLoading({
       title: '更改病历中...',
@@ -867,7 +870,7 @@ Page({
       "center_id": app.globalData.centerId,
       "patient_name": that.data.patient_name,
       "case_no": that.data.case_no,
-      "create_time": new Date(that.data.create_time[0]).getTime()/1000,
+      "create_time": new Date(that.data.create_time[0]).getTime() / 1000,
       "special_matter": that.data.special_matter,
       "sex": that.data.sexIndex + 1,
       "age": that.data.age,
@@ -900,7 +903,7 @@ Page({
       "pathology": that.data.pathologyIndex + 1,
       "msis": that.data.msisIndex + 1,
       "final_disposal": that.data.final_disposal_index + 1,
-      "puncture_date": new Date(that.data.puncture_date[0]).getTime()/1000,
+      "puncture_date": new Date(that.data.puncture_date[0]).getTime() / 1000,
       "middle_joint_fluid": that.data.middle_joint_fluid,
       "is_rinse": that.data.is_rinse_index + 1,
       "rinse_fluid_volume": that.data.rinse_fluid_volume,
@@ -908,7 +911,7 @@ Page({
       "germ_name": that.data.germ_name,
       "ngs_volume": that.data.ngs_volume,
       "ngs_result": that.data.ngs_result,
-      "operation_date": new Date(that.data.operation_date[0]).getTime()/1000,
+      "operation_date": new Date(that.data.operation_date[0]).getTime() / 1000,
       "tissue_ngs_result": that.data.tissue_ngs_result,
       "ultrasonic_degradation_result": that.data.ultrasonic_degradation_result,
       "ultrasonic_degradation_ngs_result": that.data.ultrasonic_degradation_ngs_result
