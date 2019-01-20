@@ -291,8 +291,8 @@ Page({
         'content-type': 'application/json'
       },
       success(res) {
-        console.log("Statistics.GetCharts:" + JSON.stringify(res))
-        setTimeout(function() {}, 2000);
+        console.log("Statistics.GetCharts:" + JSON.stringify(res));
+        setTimeout(function() {}, 5000);
         wx.hideLoading();
         if (res.data.data.code == constant.response_success) {
           that.setData({
