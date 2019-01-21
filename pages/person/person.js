@@ -19,6 +19,10 @@ Page({
         this.requestUserInfo();
     },
 
+    onPullDownRefresh() {
+        this.requestUserInfo()
+    },
+
     onApplyClick(e) {
         console.log(e)
         if (e.detail.index == 0) {
@@ -46,6 +50,7 @@ Page({
             success(res) {
                 console.log("Staff.GetStaffInfo:" + JSON.stringify(res))
                 wx.hideLoading()
+                wx.stopPullDownRefresh()
                 if (res.data.data.code == constant.response_success) {
                     that.setData({
                         userInfo: res.data.data.info
@@ -59,6 +64,7 @@ Page({
             },
             fail(res) {
                 wx.hideLoading()
+                wx.stopPullDownRefresh()
             }
         })
     }

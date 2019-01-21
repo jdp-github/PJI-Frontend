@@ -1,14 +1,15 @@
 {
-  "usingComponents": {
-    "wux-icon": "../../miniprogram_npm/wux-weapp/icon/index",
-    "wux-row": "../../miniprogram_npm/wux-weapp/row/index",
-    "wux-col": "../../miniprogram_npm/wux-weapp/col/index",
-    "wux-button": "../../miniprogram_npm/wux-weapp/button/index",
-    "wux-wing-blank": "../../miniprogram_npm/wux-weapp/wing-blank/index",
-    "wux-avatar": "../../miniprogram_npm/wux-weapp/avatar/index",
-    "wux-cell-group": "../../miniprogram_npm/wux-weapp/cell-group/index",
-    "wux-cell": "../../miniprogram_npm/wux-weapp/cell/index",
-    "wux-fab-button": "../../miniprogram_npm/wux-weapp/fab-button/index"
-  },
-  "backgroundColor": "#f8f8f8"
+    "usingComponents": {
+        "wux-icon": "../../miniprogram_npm/wux-weapp/icon/index",
+        "wux-row": "../../miniprogram_npm/wux-weapp/row/index",
+        "wux-col": "../../miniprogram_npm/wux-weapp/col/index",
+        "wux-button": "../../miniprogram_npm/wux-weapp/button/index",
+        "wux-wing-blank": "../../miniprogram_npm/wux-weapp/wing-blank/index",
+        "wux-avatar": "../../miniprogram_npm/wux-weapp/avatar/index",
+        "wux-cell-group": "../../miniprogram_npm/wux-weapp/cell-group/index",
+        "wux-cell": "../../miniprogram_npm/wux-weapp/cell/index",
+        "wux-fab-button": "../../miniprogram_npm/wux-weapp/fab-button/index"
+    },
+    "backgroundColor": "#f8f8f8",
+    "enablePullDownRefresh": true
 }

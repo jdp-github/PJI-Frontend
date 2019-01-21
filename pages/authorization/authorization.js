@@ -118,6 +118,7 @@ Page({
   login(res) {
     console.log(JSON.stringify(res))
     var code = res.data.data.code
+    var that = this
     // if (code == UN_REGISTE) { // 未注册
     //   wx.hideLoading()
     //   this.showToast("尚未申请使用，请点击申请使用")
