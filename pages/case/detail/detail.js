@@ -254,6 +254,29 @@ Page({
       },
     });
   },
+  onDurationSymptoms: function() {
+      if (this.data.duration_symptoms > 28 && this.data.duration_symptoms_unit_value == "天") {
+          this.setData({
+              duration_symptoms_prop_value: '急性',
+              duration_symptoms_prop_index: 0,
+          })
+      } else if(this.data.duration_symptoms <= 28 && this.data.duration_symptoms_unit_value == "天") {
+          this.setData({
+              duration_symptoms_prop_value: '慢性',
+              duration_symptoms_prop_index: 1,
+          })
+      } else if (this.data.duration_symptoms > 1 && this.data.duration_symptoms_unit_value == "月") {
+          this.setData({
+              duration_symptoms_prop_value: '急性',
+              duration_symptoms_prop_index: 0,
+          })
+      } else {
+          this.setData({
+              duration_symptoms_prop_value: '慢性',
+              duration_symptoms_prop_index: 1,
+          })
+      }
+  },
   // 症状出现时长单位。1：天，2：月
   onClickDurationUnit: function() {
     $wuxSelect('#selectDurationUnit').open({
@@ -264,7 +287,28 @@ Page({
           this.setData({
             duration_symptoms_unit_value: value,
             duration_symptoms_unit_index: index,
-          })
+          });
+            if (this.data.duration_symptoms > 28 && this.data.duration_symptoms_unit_value == "天") {
+                this.setData({
+                    duration_symptoms_prop_value: '急性',
+                    duration_symptoms_prop_index: 0,
+                })
+            } else if(this.data.duration_symptoms <= 28 && this.data.duration_symptoms_unit_value == "天") {
+                this.setData({
+                    duration_symptoms_prop_value: '慢性',
+                    duration_symptoms_prop_index: 1,
+                })
+            } else if (this.data.duration_symptoms > 1 && this.data.duration_symptoms_unit_value == "月") {
+                this.setData({
+                    duration_symptoms_prop_value: '急性',
+                    duration_symptoms_prop_index: 0,
+                })
+            } else {
+                this.setData({
+                    duration_symptoms_prop_value: '慢性',
+                    duration_symptoms_prop_index: 1,
+                })
+            }
         }
       },
     });
@@ -276,10 +320,27 @@ Page({
       options: this.data.duration_symptoms_prop_list,
       onConfirm: (value, index, options) => {
         if (index !== -1) {
-          this.setData({
-            duration_symptoms_prop_value: value,
-            duration_symptoms_prop_index: index,
-          })
+          if (this.data.duration_symptoms > 28 && this.data.duration_symptoms_unit_value == "天") {
+              this.setData({
+                  duration_symptoms_prop_value: '急性',
+                  duration_symptoms_prop_index: 0,
+              })
+          } else if(this.data.duration_symptoms <= 28 && this.data.duration_symptoms_unit_value == "天") {
+              this.setData({
+                  duration_symptoms_prop_value: '慢性',
+                  duration_symptoms_prop_index: 1,
+              })
+          } else if (this.data.duration_symptoms > 1 && this.data.duration_symptoms_unit_value == "月") {
+              this.setData({
+                  duration_symptoms_prop_value: '急性',
+                  duration_symptoms_prop_index: 0,
+              })
+          } else {
+              this.setData({
+                  duration_symptoms_prop_value: '慢性',
+                  duration_symptoms_prop_index: 1,
+              })
+          }
         }
       },
     });
