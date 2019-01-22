@@ -22,7 +22,7 @@
                     </wux-col>
                     <wux-col span="4" push="4">
                         <view class="input-text-right">
-                            <input value="{{patient_name}}" maxlength='5' data-prop='patient_name' bindinput="onInput" />
+                            <input value="{{patient_name}}" maxlength='5' data-prop='patient_name' bindinput="onInput" disabled="{{!isCreateCase}}" />
                         </view>
                     </wux-col>
                 </wux-row>
@@ -37,7 +37,7 @@
                     </wux-col>
                     <wux-col span="4" push="4">
                         <view class="input-text-right">
-                            <input value="{{case_no}}" data-prop='case_no' bindinput="onInput"/>
+                            <input value="{{case_no}}" data-prop='case_no' bindinput="onInput" disabled="{{!isCreateCase}}"/>
                         </view>
                     </wux-col>
                 </wux-row>
@@ -59,7 +59,7 @@
                     </wux-col>
                     <wux-col span="4" push="4">
                         <view class="input-text-right">
-                            <input type="number" value="{{age}}" maxlength='3' data-prop='age' bindinput="onInput"/>
+                            <input type="number" value="{{age}}" maxlength='3' data-prop='age' bindinput="onInput" />
                         </view>
                     </wux-col>
                 </wux-row>
@@ -74,7 +74,7 @@
                     </wux-col>
                     <wux-col span="9">
                         <view class="input-text-value" style="text-align: right;">
-                            <input style="padding-right: 15rpx;" type="digit" maxlength='4' value="{{height}}" data-prop='height' bindinput="onInput"/>
+                            <input style="padding-right: 15rpx;" type="digit" maxlength='4' value="{{height}}" data-prop='height' bindinput="onInput" />
                             <view style="padding-right: 15rpx;" class="input-text-unit">
                                 m
                             </view>
@@ -91,7 +91,7 @@
                     </wux-col>
                     <wux-col span="9">
                         <view class="input-text-value" style="text-align: right;">
-                            <input style="padding-right: 15rpx;" type="digit" maxlength='5' value="{{weight}}" data-prop='weight' bindinput="onInput"/>
+                            <input style="padding-right: 15rpx;" type="digit" maxlength='5' value="{{weight}}" data-prop='weight' bindinput="onInput" />
                             <view style="padding-right: 15rpx;" class="input-text-unit">
                                 kg
                             </view>
@@ -108,7 +108,7 @@
                     </wux-col>
                     <wux-col span="9">
                         <view class="input-text-value" style="text-align: right;">
-                            <input style="padding-right: 15rpx;" type="digit" maxlength='6' value="{{bmi}}" data-prop='bmi' bindinput="onInput"/>
+                            <input style="padding-right: 15rpx;" type="digit" maxlength='6' value="{{bmi}}" data-prop='bmi' bindinput="onInput" />
                             <view style="padding-right: 15rpx;" class="input-text-unit input-text-unit-bmi">
                                 kg/㎡
                             </view>
@@ -127,7 +127,8 @@
                 <wux-row>
                     <view style="width: 100%; margin-left: 30rpx; border-bottom: 1px solid #ddd;">
                         <view class="input-text-right">
-                            <view style="float: left; color:black; margin-left:-25rpx; margin-top:10rpx;">病症出现时长</view> <input style="padding-right: 30rpx;" type="number" maxlength='4' value="{{duration_symptoms}}" data-prop='duration_symptoms' bindinput="onInput"/>
+                            <view style="float: left; color:black; margin-left:-25rpx; margin-top:10rpx;">病症出现时长</view>
+                            <input style="padding-right: 30rpx;" type="number" maxlength='4' value="{{duration_symptoms}}" data-prop='duration_symptoms' bindinput="onInput" />
                         </view>
                     </view>
                 </wux-row>
@@ -150,7 +151,7 @@
                     </wux-col>
                     <wux-col span="4" push="4">
                         <view class="input-text-right">
-                            <input type="text" value="{{diagnose}}" placeholder='输入诊断意见' data-prop='diagnose' bindinput="onInput"/>
+                            <input type="text" value="{{diagnose}}" placeholder='输入诊断意见' data-prop='diagnose' bindinput="onInput" />
                         </view>
                     </wux-col>
                 </wux-row>
@@ -167,7 +168,7 @@
                     </wux-col>
                     <wux-col span="4" push="4">
                         <view class="input-text-right">
-                            <input type='text' value="{{other_concomitant_diseases}}" data-prop='other_concomitant_diseases' bindinput="onInput"/>
+                            <input type='text' value="{{other_concomitant_diseases}}" data-prop='other_concomitant_diseases' bindinput="onInput" />
                         </view>
                     </wux-col>
                 </wux-row>
@@ -184,7 +185,7 @@
                     </wux-col>
                     <wux-col span="4" push="4">
                         <view class="input-text-right">
-                            <input type="number" maxlength='16' value="{{telphone1}}" data-prop='telphone1' bindinput="onInput"/>
+                            <input type="number" maxlength='16' value="{{telphone1}}" data-prop='telphone1' bindinput="onInput" />
                         </view>
                     </wux-col>
                 </wux-row>
@@ -198,7 +199,7 @@
                     </wux-col>
                     <wux-col span="4" push="4">
                         <view class="input-text-right">
-                            <input type="number" maxlength='16' value="{{telphone2}}" data-prop='telphone2' bindinput="onInput"/>
+                            <input type="number" maxlength='16' value="{{telphone2}}" data-prop='telphone2' bindinput="onInput" />
                         </view>
                     </wux-col>
                 </wux-row>
@@ -208,7 +209,7 @@
                     特殊事项
                 </view>
                 <view class="textarea-view">
-                    <textarea focus="{{focusSpecialEvent}}" bindtap="onSpecialEventClick" value='{{special_matter}}' data-prop='special_matter' bindinput="onInput"/>
+                    <textarea focus="{{focusSpecialEvent}}" bindtap="onSpecialEventClick" value='{{special_matter}}' data-prop='special_matter' bindinput="onInput" />
                 </view>
             </wux-cell-group>
             <wux-cell-group title="">
@@ -216,7 +217,7 @@
                     简要病史
                 </view>
                 <view class="textarea-view">
-                    <textarea focus="{{focusBriefHistory}}" bindtap="onBriefHistoryClick" value='{{medical_history}}' data-prop='medical_history' bindinput="onInput"/>
+                    <textarea focus="{{focusBriefHistory}}" bindtap="onBriefHistoryClick" value='{{medical_history}}' data-prop='medical_history' bindinput="onInput" />
                 </view>
             </wux-cell-group>
         </view>
@@ -235,7 +236,7 @@
                     </wux-col>
                     <wux-col span="6">
                         <view class="input-text-value input-text-unit-esr" style="text-align: right;">
-                            <input type="number" maxlength='4' value="{{preoperative_esr}}" data-prop='preoperative_esr' bindinput="onInput"/>
+                            <input type="number" maxlength='4' value="{{preoperative_esr}}" data-prop='preoperative_esr' bindinput="onInput" />
                         </view>
                         <view class="input-text-unit input-text-unit-esr" style="text-align: right;">
                             mm/h
@@ -252,7 +253,7 @@
                     </wux-col>
                     <wux-col span="6">
                         <view class="input-text-value input-text-unit-esr" style="text-align: right;">
-                            <input type="number" maxlength='6' value="{{normal_crp}}" data-prop='normal_crp' bindinput="onInput"/>
+                            <input type="number" maxlength='6' value="{{normal_crp}}" data-prop='normal_crp' bindinput="onInput" />
                         </view>
                         <view class="input-text-unit input-text-unit-esr" style="text-align: right;">
                             mg/l
@@ -269,7 +270,7 @@
                     </wux-col>
                     <wux-col span="6" style="padding-left: 0rpx; padding-right: 0rpx;">
                         <view class="input-text-value input-text-unit-esr" style="text-align: right;">
-                            <input type="number" maxlength='8' value="{{preoperative_crp}}" data-prop='preoperative_crp' bindinput="onInput"/>
+                            <input type="number" maxlength='8' value="{{preoperative_crp}}" data-prop='preoperative_crp' bindinput="onInput" />
                         </view>
                         <view class="input-text-unit input-text-unit-esr" style="text-align: right;">
                             mg/dl
@@ -292,7 +293,7 @@
                     </wux-col>
                     <wux-col span="6" style="padding-left: 0rpx; padding-right: 0rpx;">
                         <view class="input-text-value input-text-unit-esr" style="text-align: right;">
-                            <input type="number" maxlength='6' value="{{joint_fluid_leukocyte}}" data-prop='joint_fluid_leukocyte' bindinput="onInput"/>
+                            <input type="number" maxlength='6' value="{{joint_fluid_leukocyte}}" data-prop='joint_fluid_leukocyte' bindinput="onInput" />
                         </view>
                         <view class="input-text-unit input-text-unit-esr" style="text-align: right;">
                             μL
@@ -309,7 +310,7 @@
                     </wux-col>
                     <wux-col span="6" style="padding-left: 0rpx; padding-right: 0rpx;">
                         <view class="input-text-value input-text-unit-esr" style="text-align: right;">
-                            <input type="number" maxlength='3' value="{{neutrophils_percent}}" data-prop='neutrophils_percent' bindinput="onInput"/>
+                            <input type="number" maxlength='3' value="{{neutrophils_percent}}" data-prop='neutrophils_percent' bindinput="onInput" />
                         </view>
                         <view class="input-text-unit input-text-unit-esr" style="text-align: right;">
                             %
@@ -326,7 +327,7 @@
                     </wux-col>
                     <wux-col span="4" push="2" style="padding-left: 0rpx; padding-right: 0rpx;">
                         <view class="input-text-right-no-padding">
-                            <input type="text" value="{{culture_result1}}" data-prop='culture_result1' bindinput="onInput"/>
+                            <input type="text" value="{{culture_result1}}" data-prop='culture_result1' bindinput="onInput" />
                         </view>
                     </wux-col>
                 </wux-row>
@@ -340,7 +341,7 @@
                     </wux-col>
                     <wux-col span="4" push="2" style="padding-left: 0rpx; padding-right: 0rpx;">
                         <view class="input-text-right-no-padding">
-                            <input type="text" value="{{culture_result2}}" data-prop='culture_result2' bindinput="onInput"/>
+                            <input type="text" value="{{culture_result2}}" data-prop='culture_result2' bindinput="onInput" />
                         </view>
                     </wux-col>
                 </wux-row>
@@ -354,7 +355,7 @@
                     </wux-col>
                     <wux-col span="4" push="2">
                         <view class="input-text-right-no-padding">
-                            <input type="text" value="{{culture_result3}}" data-prop='culture_result3' bindinput="onInput"/>
+                            <input type="text" value="{{culture_result3}}" data-prop='culture_result3' bindinput="onInput" />
                         </view>
                     </wux-col>
                 </wux-row>
@@ -380,7 +381,7 @@
                     穿刺中关节液情况概述 & 是否稀释
                 </view>
                 <view class="textarea-view">
-                    <textarea focus="{{focusSynovialFluid}}" bindtap="onSynovialFluidClick" value='{{middle_joint_fluid}}' data-prop='middle_joint_fluid' bindinput="onInput"/>
+                    <textarea focus="{{focusSynovialFluid}}" bindtap="onSynovialFluidClick" value='{{middle_joint_fluid}}' data-prop='middle_joint_fluid' bindinput="onInput" />
                 </view>
             </wux-cell-group>
             <wux-cell-group title="">
@@ -395,7 +396,7 @@
                     </wux-col>
                     <wux-col span="6" style="padding-left: 0rpx; padding-right: 0rpx;">
                         <view class="input-text-value input-text-unit-esr" style="text-align: right;">
-                            <input type="digit" maxlength='6' value="{{rinse_fluid_volume}}" data-prop='rinse_fluid_volume' bindinput="onInput"/>
+                            <input type="digit" maxlength='6' value="{{rinse_fluid_volume}}" data-prop='rinse_fluid_volume' bindinput="onInput" />
                         </view>
                         <view class="input-text-unit input-text-unit-esr" style="text-align: right;">
                             ml
@@ -412,7 +413,7 @@
                     </wux-col>
                     <wux-col span="6">
                         <view class="input-text-value input-text-unit-esr" style="text-align: right;">
-                            <input type="digit" maxlength='5' value="{{culture_bottle_fluid_volume}}" data-prop='culture_bottle_fluid_volume' bindinput="onInput"/>
+                            <input type="digit" maxlength='5' value="{{culture_bottle_fluid_volume}}" data-prop='culture_bottle_fluid_volume' bindinput="onInput" />
                         </view>
                         <view class="input-text-unit input-text-unit-esr" style="text-align: right;">
                             ml
@@ -429,7 +430,7 @@
                     </wux-col>
                     <wux-col span="6">
                         <view class="input-text-right">
-                            <input type="text" value="{{germ_name}}" data-prop='germ_name' bindinput="onInput"/>
+                            <input type="text" value="{{germ_name}}" data-prop='germ_name' bindinput="onInput" />
                         </view>
                     </wux-col>
                 </wux-row>
@@ -443,7 +444,7 @@
                     </wux-col>
                     <wux-col span="6">
                         <view class="input-text-value input-text-unit-esr" style="text-align: right;">
-                            <input type="digit" maxlength='6' value="{{ngs_volume}}" data-prop='ngs_volume' bindinput="onInput"/>
+                            <input type="digit" maxlength='6' value="{{ngs_volume}}" data-prop='ngs_volume' bindinput="onInput" />
                         </view>
                         <view class="input-text-unit input-text-unit-esr" style="text-align: right;">
                             ml
@@ -460,7 +461,7 @@
                     </wux-col>
                     <wux-col span="6">
                         <view class="input-text-right">
-                            <input type="text" value="{{ngs_result}}" data-prop='ngs_result' bindinput="onInput"/>
+                            <input type="text" value="{{ngs_result}}" data-prop='ngs_result' bindinput="onInput" />
                         </view>
                     </wux-col>
                 </wux-row>
@@ -479,7 +480,7 @@
                     </wux-col>
                     <wux-col span="6">
                         <view class="input-text-right">
-                            <input type="text" value="{{tissue_ngs_result}}" data-prop='tissue_ngs_result' bindinput="onInput"/>
+                            <input type="text" value="{{tissue_ngs_result}}" data-prop='tissue_ngs_result' bindinput="onInput" />
                         </view>
                     </wux-col>
                 </wux-row>
@@ -493,7 +494,7 @@
                     </wux-col>
                     <wux-col span="6">
                         <view class="input-text-right">
-                            <input type="text" value="{{ultrasonic_degradation_result}}" data-prop='ultrasonic_degradation_result' bindinput="onInput"/>
+                            <input type="text" value="{{ultrasonic_degradation_result}}" data-prop='ultrasonic_degradation_result' bindinput="onInput" />
                         </view>
                     </wux-col>
                 </wux-row>
@@ -507,7 +508,7 @@
                     </wux-col>
                     <wux-col span="6">
                         <view class="input-text-right">
-                            <input type="text" value="{{ultrasonic_degradation_ngs_result}}" data-prop='ultrasonic_degradation_ngs_result' bindinput="onInput"/>
+                            <input type="text" value="{{ultrasonic_degradation_ngs_result}}" data-prop='ultrasonic_degradation_ngs_result' bindinput="onInput" />
                         </view>
                     </wux-col>
                 </wux-row>
@@ -517,13 +518,13 @@
     <!-- 录入者 -->
     <view class="information-view" hidden='{{!showWriter}}' style="padding: 5rpx 30rpx; margin: 0rpx 30rpx;">
         <view style="margin-left: 30rpx; margin-right: 30rpx;">
-        <wux-alert theme="positive">
-            <view wx:for="{{write_staff_list}}" wx:key="">
-                <view class="information-avatar-left">
-                    <wux-avatar shape="square" size="small">录</wux-avatar> {{item.staff_name}}
+            <wux-alert theme="positive">
+                <view wx:for="{{write_staff_list}}" wx:key="">
+                    <view class="information-avatar-left">
+                        <wux-avatar shape="square" size="small">录</wux-avatar> {{item.staff_name}}
+                    </view>
                 </view>
-            </view>
-        </wux-alert>
+            </wux-alert>
         </view>
     </view>
     <!-- 审核者 -->

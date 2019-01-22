@@ -1,4 +1,4 @@
-<wux-fab-button position="topRight" theme="assertive" direction="vertical" scale=".8" reverse="true" actionRotate="false" buttons="{{ buttons }}" spaceBetween="12" bind:click="onApplyClick" />
+<!-- <wux-fab-button position="topRight" theme="assertive" direction="vertical" scale=".8" reverse="true" actionRotate="false" buttons="{{ buttons }}" spaceBetween="12" bind:click="onApplyClick" /> -->
 <scroll-view class="page" scroll-y>
     <view class="page__bd">
         <!-- 头像 -->
@@ -12,6 +12,8 @@
             <wux-cell thumb="/img/phone.png" title="电话" extra="{{userInfo.phone}}"></wux-cell>
             <!-- 邮箱 -->
             <wux-cell thumb="/img/email.png" title="邮箱" extra="{{userInfo.email}}"></wux-cell>
+            <!-- 邮箱 -->
+            <wux-cell thumb="/img/approve.png" title="申请" bind:click="onApplyClick"></wux-cell>
         </wux-cell-group>
         <!-- 所属中心 -->
         <view wx:for="{{userInfo.center_list}}" wx:key="">
