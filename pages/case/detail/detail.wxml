@@ -10,7 +10,7 @@
         <view class="main-container">
             <!-- 中心 -->
             <wux-cell-group title="">
-                <wux-cell title="所属中心" extra="{{ center_name }}" bind:click="onClickCenter"></wux-cell>
+                <wux-cell title="所属中心" extra="{{ center_name }}" bind:click="onClickCenter" disabled></wux-cell>
             </wux-cell-group>
             <!-- 姓名 -->
             <wux-cell-group title="">
@@ -20,7 +20,7 @@
                             姓名
                         </view>
                     </wux-col>
-                    <wux-col span="4" push="4">
+                    <wux-col span="8">
                         <view class="input-text-right">
                             <input value="{{patient_name}}" maxlength='5' data-prop='patient_name' bindinput="onInput" disabled="{{!isCreateCase}}" />
                         </view>
@@ -35,7 +35,7 @@
                             ID
                         </view>
                     </wux-col>
-                    <wux-col span="4" push="4">
+                    <wux-col span="8">
                         <view class="input-text-right">
                             <input value="{{case_no}}" data-prop='case_no' bindinput="onInput" disabled="{{!isCreateCase}}"/>
                         </view>
@@ -57,7 +57,7 @@
                             年龄
                         </view>
                     </wux-col>
-                    <wux-col span="4" push="4">
+                    <wux-col span="8">
                         <view class="input-text-right">
                             <input type="number" value="{{age}}" maxlength='3' data-prop='age' bindinput="onInput" />
                         </view>
@@ -69,15 +69,12 @@
                 <wux-row>
                     <wux-col span="3">
                         <view class="input-text">
-                            身高
+                            身高 (m)
                         </view>
                     </wux-col>
                     <wux-col span="9">
                         <view class="input-text-value" style="text-align: right;">
-                            <input style="padding-right: 15rpx;" type="digit" maxlength='4' value="{{height}}" data-prop='height' bindinput="onInput" />
-                            <view style="padding-right: 15rpx;" class="input-text-unit">
-                                m
-                            </view>
+                            <input style="padding-right: 15rpx;" type="digit" maxlength='4' value="{{height}}" data-prop='height' bindinput="onInput" placeholder="请注意换算单位" />
                         </view>
                     </wux-col>
                 </wux-row>
@@ -86,15 +83,12 @@
                 <wux-row>
                     <wux-col span="3">
                         <view class="input-text">
-                            体重
+                            体重 (kg)
                         </view>
                     </wux-col>
                     <wux-col span="9">
                         <view class="input-text-value" style="text-align: right;">
-                            <input style="padding-right: 15rpx;" type="digit" maxlength='5' value="{{weight}}" data-prop='weight' bindinput="onInput" />
-                            <view style="padding-right: 15rpx;" class="input-text-unit">
-                                kg
-                            </view>
+                            <input style="padding-right: 15rpx;" type="digit" maxlength='5' value="{{weight}}" data-prop='weight' bindinput="onInput"  placeholder="请注意换算单位" />
                         </view>
                     </wux-col>
                 </wux-row>
@@ -103,15 +97,12 @@
                 <wux-row>
                     <wux-col span="3">
                         <view class="input-text">
-                            BMI
+                            BMI (kg/㎡)
                         </view>
                     </wux-col>
                     <wux-col span="9">
                         <view class="input-text-value" style="text-align: right;">
-                            <input style="padding-right: 15rpx;" type="digit" maxlength='6' value="{{bmi}}" data-prop='bmi' bindinput="onInput" />
-                            <view style="padding-right: 15rpx;" class="input-text-unit input-text-unit-bmi">
-                                kg/㎡
-                            </view>
+                            <input style="padding-right: 15rpx;" type="digit" maxlength='6' value="{{bmi}}" data-prop='bmi' bindinput="onInput" disabled />
                         </view>
                     </wux-col>
                 </wux-row>
@@ -128,7 +119,7 @@
                     <view style="width: 100%; margin-left: 30rpx; border-bottom: 1px solid #ddd;">
                         <view class="input-text-right">
                             <view style="float: left; color:black; margin-left:-25rpx; margin-top:10rpx;">病症出现时长</view>
-                            <input style="padding-right: 30rpx;" type="number" maxlength='4' value="{{duration_symptoms}}" data-prop='duration_symptoms' bindinput="onInput" />
+                            <input style="padding-right: 30rpx;" type="number" maxlength='4' value="{{duration_symptoms}}" data-prop='duration_symptoms' bindinput="onInput" placeholder="请输入时长并选择时长单位" />
                         </view>
                     </view>
                 </wux-row>
@@ -138,7 +129,7 @@
                 </wux-row>
                 <!-- 性质 -->
                 <wux-row>
-                    <wux-cell title="性质" style="border-bottom: 0rpx;" extra="{{ duration_symptoms_prop_value }}" bind:click="onClickUnrationProp"></wux-cell>
+                    <wux-cell title="性质" style="border-bottom: 0rpx;" extra="{{ duration_symptoms_prop_value }}" bind:click="onClickUnrationProp" disabled></wux-cell>
                 </wux-row>
             </wux-cell-group>
             <!-- 诊断 -->
@@ -149,7 +140,7 @@
                             诊断
                         </view>
                     </wux-col>
-                    <wux-col span="4" push="4">
+                    <wux-col span="8">
                         <view class="input-text-right">
                             <input type="text" value="{{diagnose}}" placeholder='输入诊断意见' data-prop='diagnose' bindinput="onInput" />
                         </view>
@@ -163,12 +154,12 @@
                 <wux-row>
                     <wux-col span="4">
                         <view class="input-text">
-                            其他伴随疾病
+                            伴随疾病
                         </view>
                     </wux-col>
-                    <wux-col span="4" push="4">
+                    <wux-col span="8">
                         <view class="input-text-right">
-                            <input type='text' value="{{other_concomitant_diseases}}" data-prop='other_concomitant_diseases' bindinput="onInput" />
+                            <input type='text' value="{{other_concomitant_diseases}}" data-prop='other_concomitant_diseases' bindinput="onInput" placeholder="请输入文字, 没有请输入\"无\"" />
                         </view>
                     </wux-col>
                 </wux-row>
@@ -183,7 +174,7 @@
                             联系电话1
                         </view>
                     </wux-col>
-                    <wux-col span="4" push="4">
+                    <wux-col span="8">
                         <view class="input-text-right">
                             <input type="number" maxlength='16' value="{{telphone1}}" data-prop='telphone1' bindinput="onInput" />
                         </view>
@@ -197,7 +188,7 @@
                             联系电话2
                         </view>
                     </wux-col>
-                    <wux-col span="4" push="4">
+                    <wux-col span="8">
                         <view class="input-text-right">
                             <input type="number" maxlength='16' value="{{telphone2}}" data-prop='telphone2' bindinput="onInput" />
                         </view>
@@ -209,7 +200,7 @@
                     特殊事项
                 </view>
                 <view class="textarea-view">
-                    <textarea focus="{{focusSpecialEvent}}" bindtap="onSpecialEventClick" value='{{special_matter}}' data-prop='special_matter' bindinput="onInput" />
+                    <textarea focus="{{focusSpecialEvent}}" bindtap="onSpecialEventClick" value='{{special_matter}}' data-prop='special_matter' bindinput="onInput" placeholder="请输入文字, 没有请输入\"无\"" />
                 </view>
             </wux-cell-group>
             <wux-cell-group title="">
@@ -217,7 +208,7 @@
                     简要病史
                 </view>
                 <view class="textarea-view">
-                    <textarea focus="{{focusBriefHistory}}" bindtap="onBriefHistoryClick" value='{{medical_history}}' data-prop='medical_history' bindinput="onInput" />
+                    <textarea focus="{{focusBriefHistory}}" bindtap="onBriefHistoryClick" value='{{medical_history}}' data-prop='medical_history' bindinput="onInput" placeholder="请输入文字, 没有请输入\"无\"" />
                 </view>
             </wux-cell-group>
         </view>

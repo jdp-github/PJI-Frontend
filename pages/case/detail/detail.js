@@ -157,6 +157,8 @@ Page({
     focusSpecialEvent: false,
     // 简要病史
     focusBriefHistory: false,
+    // 伴随病史
+    focusIllnessHistory: false,
     // 穿刺中关节液情况概述 & 是否稀释
     focusSynovialFluid: false,
   },
@@ -463,6 +465,11 @@ Page({
   onBriefHistoryClick: function() {
     this.setData({
       focusBriefHistory: true
+    })
+  },
+  onIllnessHistoryClick: function() {
+    this.setData({
+        focusIllnessHistory: true
     })
   },
   // 穿刺中关节液情况概述 & 是否稀释

@@ -18,6 +18,8 @@
             </block>
         </wux-checkbox-group>
     </scroll-view>
+    <view style="height: 15px; width: 100%; background-color: #f7f7f8;">
+    </view>
 </wux-popup>
 
 <wxs module="common">

@@ -110,3 +110,14 @@ text-align: right;
     margin-left: 30rpx;
     float: left;
 }
+button[disabled] {
+    color: #000;
+}
+button[disabled]:not([type]) {
+    background-color: #fff;
+    color: #000;
+}
+textarea {
+    height: 100px;
+}
+
