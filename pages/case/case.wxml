@@ -13,7 +13,7 @@
         <a class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active" wx:for="{{ caseList }}" wx:key="">
           <!-- item -->
           <view class="weui-media-box__bd weui-media-box__bd_in-appmsg" bindtap='onItemClick' data-selectedCase="{{item}}">
-            <view>
+            <view style="margin-bottom: 20rpx;">
                 <wux-progress bar-style="background-color: #5cb85c" percent="{{ item.progress*100 }}" shape="square" strokeWidth="2" />
             </view>
             <view style="margin-top: 5rpx;">
