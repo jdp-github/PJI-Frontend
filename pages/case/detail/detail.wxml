@@ -42,6 +42,21 @@
                     </wux-col>
                 </wux-row>
             </wux-cell-group>
+            <!-- 主诊医师 -->
+            <wux-cell-group title="">
+                <wux-row>
+                    <wux-col span="4">
+                        <view class="input-text">
+                            主诊医师
+                        </view>
+                    </wux-col>
+                    <wux-col span="8">
+                        <view class="input-text-right">
+                            <input data-prop='pro_doctor' bindinput="onInput" type="text" placeholder="请输入主诊医师姓名" value="{{pro_doctor}}"/>
+                        </view>
+                    </wux-col>
+                </wux-row>
+             </wux-cell-group>
             <!-- 建档日期 -->
             <wux-cell-group title="">
                 <wux-cell title="建档日期" extra="{{ create_time }}" bind:click="openCalendar"></wux-cell>
@@ -107,20 +122,6 @@
                     </wux-col>
                 </wux-row>
             </wux-cell-group>
-             <wux-cell-group title="">
-                <wux-row>
-                    <wux-col span="4">
-                        <view class="input-text">
-                            主诊医师
-                        </view>
-                    </wux-col>
-                    <wux-col span="8">
-                        <view class="input-text-right">
-                            <input type="text" placeholder="请输入主诊医师姓名" value="{{pro_doctor}}"/>
-                        </view>
-                    </wux-col>
-                </wux-row>
-             </wux-cell-group>
             <wux-cell-group title="">
                 <wux-cell title="类型" extra="{{ type }}" bind:click="onClickType"></wux-cell>
             </wux-cell-group>

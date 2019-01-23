@@ -174,18 +174,26 @@ Page({
             if (!this.isValueRight()) {
                 return
             }
-            wx.showModal({
-                title: '确定提交病历?',
-                success(res) {
-                    if (res.confirm) {
-                        if (that.data.caseId.length > 0) { // 更改
+
+            if (that.data.caseId.length > 0) { // 更改
+                wx.showModal({
+                    title: '确定更改病历?',
+                    success(res) {
+                        if (res.confirm) {
                             that.editCase()
-                        } else { // 新增
+                        }
+                    }
+                })
+            } else { // 新增
+                wx.showModal({
+                    title: '确定提交病历?',
+                    success(res) {
+                        if (res.confirm) {
                             that.addCase()
                         }
                     }
-                }
-            })
+                })
+            }
         }
     },
     onPrevStep: function() {
@@ -242,23 +250,28 @@ Page({
     onDurationSymptoms: function() {
         if (this.data.duration_symptoms > 28 && this.data.duration_symptoms_unit_value == "天") {
             this.setData({
-                duration_symptoms_prop_value: '急性',
+                duration_symptoms_prop_value: '慢性',
+                duration_symptoms_prop_index: 2,
+            })
+        } else if (this.data.duration_symptoms <= 28 && this.data.duration_symptoms > 0 && this.data.duration_symptoms_unit_value == "天") {
+            this.setData({
+                duration_symptoms_prop_value: '慢性',
                 duration_symptoms_prop_index: 1,
             })
-        } else if (this.data.duration_symptoms <= 28 && this.data.duration_symptoms_unit_value == "天") {
+        } else if (this.data.duration_symptoms > 1 && this.data.duration_symptoms_unit_value == "月") {
             this.setData({
                 duration_symptoms_prop_value: '慢性',
                 duration_symptoms_prop_index: 2,
             })
-        } else if (this.data.duration_symptoms > 1 && this.data.duration_symptoms_unit_value == "月") {
+        } else if (this.data.duration_symptoms <= 1 && this.data.duration_symptoms > 0 && this.data.duration_symptoms_unit_value == "月") {
             this.setData({
                 duration_symptoms_prop_value: '急性',
                 duration_symptoms_prop_index: 1,
             })
         } else {
             this.setData({
-                duration_symptoms_prop_value: '慢性',
-                duration_symptoms_prop_index: 2,
+                duration_symptoms_prop_value: '请选择',
+                duration_symptoms_prop_index: 0,
             })
         }
     },
@@ -275,23 +288,28 @@ Page({
                     });
                     if (this.data.duration_symptoms > 28 && this.data.duration_symptoms_unit_value == "天") {
                         this.setData({
-                            duration_symptoms_prop_value: '急性',
-                            duration_symptoms_prop_index: 1,
-                        })
-                    } else if (this.data.duration_symptoms <= 28 && this.data.duration_symptoms_unit_value == "天") {
-                        this.setData({
                             duration_symptoms_prop_value: '慢性',
                             duration_symptoms_prop_index: 2,
                         })
+                    } else if (this.data.duration_symptoms <= 28 && this.data.duration_symptoms > 0 && this.data.duration_symptoms_unit_value == "天") {
+                        this.setData({
+                            duration_symptoms_prop_value: '急性',
+                            duration_symptoms_prop_index: 1,
+                        })  
                     } else if (this.data.duration_symptoms > 1 && this.data.duration_symptoms_unit_value == "月") {
+                        this.setData({
+                            duration_symptoms_prop_value: '慢性',
+                            duration_symptoms_prop_index: 2,
+                        })  
+                    } else if (this.data.duration_symptoms <= 1 && this.data.duration_symptoms > 0 &&this.data.duration_symptoms_unit_value == "月") {
                         this.setData({
                             duration_symptoms_prop_value: '急性',
                             duration_symptoms_prop_index: 1,
                         })
                     } else {
                         this.setData({
-                            duration_symptoms_prop_value: '慢性',
-                            duration_symptoms_prop_index: 2,
+                            duration_symptoms_prop_value: '请选择',
+                            duration_symptoms_prop_index: 0,
                         })
                     }
                 }
@@ -770,7 +788,7 @@ Page({
         })
         // 第三页
         this.setData({
-            puncture_date: [util.formatTime(caseInfo.puncture_date, 'Y-M-D')],
+            puncture_date: caseInfo.puncture_date != 0 ? [util.formatTime(caseInfo.puncture_date, 'Y-M-D')] : [],
             middle_joint_fluid: caseInfo.middle_joint_fluid,
             is_rinse_value: this.data.is_rinse_list[caseInfo.is_rinse],
             is_rinse_index: caseInfo.is_rinse,
@@ -779,7 +797,7 @@ Page({
             germ_name: caseInfo.germ_name,
             ngs_volume: caseInfo.ngs_volume,
             ngs_result: caseInfo.ngs_result,
-            operation_date: [util.formatTime(caseInfo.operation_date, 'Y-M-D')],
+            operation_date: caseInfo.operation_date != 0 ? [util.formatTime(caseInfo.operation_date, 'Y-M-D')] : [],
             tissue_ngs_result: caseInfo.tissue_ngs_result,
             ultrasonic_degradation_result: caseInfo.ultrasonic_degradation_result,
             ultrasonic_degradation_ngs_result: caseInfo.ultrasonic_degradation_ngs_result,
@@ -884,13 +902,6 @@ Page({
     },
 
     isValueRight() {
-        if (this.data.center_name.length <= 0) {
-            wx.showToast({
-                icon: 'none',
-                title: '请选择所属中心',
-            })
-            return false
-        }
         if (this.data.patient_name.length <= 0) {
             wx.showToast({
                 icon: 'none',
@@ -902,6 +913,27 @@ Page({
             wx.showToast({
                 icon: 'none',
                 title: '请填写ID',
+            })
+            return false
+        }
+        if (this.data.pro_doctor.length <= 0) {
+            wx.showToast({
+                icon: 'none',
+                title: '请填写主诊医师',
+            })
+            return false
+        }
+        if (this.data.msisIndex == 0) {
+            wx.showToast({
+                icon: 'none',
+                title: '请选择MSIS最终判定',
+            })
+            return false
+        }
+        if (this.data.typeIndex == 0) {
+            wx.showToast({
+                icon: 'none',
+                title: '请选择类型',
             })
             return false
         }

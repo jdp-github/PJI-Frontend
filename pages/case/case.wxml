@@ -24,13 +24,13 @@
                             <i class="fa fa-lock" aria-hidden="true"></i>
                         </view>
                         <!-- MSIS最终判定。1：不能确定；2：非感染；3：感染 -->
-                        <wux-tag color="{{item.msis == 3 ? 'red' : 'green'}}">
-                            {{item.msis == 3 ? '感染' : '非感染'}}
+                        <wux-tag color="{{item.msis == 1 ? 'orange' :item.msis == 1?'green': 'red'}}">
+                            {{item.msis == 1 ? '不能确定' : item.msis == 2?'非感染':'感染'}}
                         </wux-tag>
                          <wux-tag color="cyan">
                             {{ item.type_name }}
                         </wux-tag>
-                        <wux-tag color="orange">
+                        <wux-tag color="geekblue">
                             主诊医师: {{item.pro_doctor}}
                         </wux-tag>
                     </wux-col>

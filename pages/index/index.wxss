@@ -27,7 +27,7 @@
     margin: 20rpx 0;
 }
 .progress-view {
-    margin-top: 10rpx;
+    margin-top: 25rpx;
 }
 .people-view {
     color: #515151;
