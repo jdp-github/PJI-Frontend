@@ -153,6 +153,7 @@ Page({
     focusSpecialEvent: false,
     // 简要病史
     focusBriefHistory: false,
+    focusOtherDisease : false,
     // 伴随病史
     focusIllnessHistory: false,
     // 穿刺中关节液情况概述 & 是否稀释
@@ -523,6 +524,11 @@ Page({
     this.setData({
       focusBriefHistory: true
     })
+  },
+  onOtherDiseaseClick: function() {
+      this.setData({
+          focusOtherDisease: true
+      })
   },
   onIllnessHistoryClick: function() {
     this.setData({

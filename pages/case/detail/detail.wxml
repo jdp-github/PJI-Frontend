@@ -107,6 +107,20 @@
                     </wux-col>
                 </wux-row>
             </wux-cell-group>
+             <wux-cell-group title="">
+                <wux-row>
+                    <wux-col span="4">
+                        <view class="input-text">
+                            主诊医师
+                        </view>
+                    </wux-col>
+                    <wux-col span="8">
+                        <view class="input-text-right">
+                            <input type="text" placeholder="请输入主诊医师姓名" />
+                        </view>
+                    </wux-col>
+                </wux-row>
+             </wux-cell-group>
             <wux-cell-group title="">
                 <wux-cell title="类型" extra="{{ type }}" bind:click="onClickType"></wux-cell>
             </wux-cell-group>
@@ -156,16 +170,12 @@
             </wux-cell-group>
             <wux-cell-group title="">
                 <wux-row>
-                    <wux-col span="4">
-                        <view class="input-text">
-                            伴随疾病
-                        </view>
-                    </wux-col>
-                    <wux-col span="8">
-                        <view class="input-text-right">
-                            <input type='text' value="{{other_concomitant_diseases}}" data-prop='other_concomitant_diseases' bindinput="onInput" placeholder="请输入文字, 没有请输入\"无\"" />
-                        </view>
-                    </wux-col>
+                    <view class="textarea-title">
+                        其他伴随疾病
+                    </view>
+                    <view class="textarea-view">
+                        <textarea focus="{{focusOtherDisease}}" bindtap="onOtherDiseaseClick" value='{{other_concomitant_diseases}}' data-prop='other_concomitant_diseases' bindinput="onInput" placeholder="请输入文字, 没有请输入\"无\"" />
+                    </view>
                 </wux-row>
             </wux-cell-group>
             <wux-cell-group title="">
