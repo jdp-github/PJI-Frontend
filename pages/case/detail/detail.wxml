@@ -119,17 +119,21 @@
                     <view style="width: 100%; margin-left: 30rpx; border-bottom: 1px solid #ddd;">
                         <view class="input-text-right">
                             <view style="float: left; color:black; margin-left:-25rpx; margin-top:10rpx;">病症出现时长</view>
-                            <input style="padding-right: 30rpx;" type="number" maxlength='4' value="{{duration_symptoms}}" data-prop='duration_symptoms' bindinput="onInput" bindblur="onDurationSymptoms" placeholder="请输入时长并选择时长单位" />
+                            <input style="padding-right: 30rpx;" type="number" maxlength='4' value="{{duration_symptoms}}" data-prop='duration_symptoms' bindinput="onInput" bindblur="onDurationSymptoms" placeholder="请注意选择时长单位" />
                         </view>
                     </view>
                 </wux-row>
                 <!-- 时间 -->
                 <wux-row>
-                    <wux-cell title="时间" extra="{{ duration_symptoms_unit_value }}" bind:click="onClickDurationUnit"></wux-cell>
+                    <view style="padding-left: 30rpx">
+                        <wux-cell title="  (选择时长单位)" extra="{{ duration_symptoms_unit_value }}" bind:click="onClickDurationUnit"></wux-cell>
+                    </view>
                 </wux-row>
                 <!-- 性质 -->
                 <wux-row>
-                    <wux-cell title="性质" style="border-bottom: 0rpx;" extra="{{ duration_symptoms_prop_value }}" bind:click="onClickUnrationProp" disabled></wux-cell>
+                    <view>
+                        <wux-cell style="border-bottom: 0px solid #ddd;" title="性质" style="border-bottom: 0rpx;" extra="{{ duration_symptoms_prop_value }}" bind:click="onClickUnrationProp" disabled></wux-cell>
+                    </view>
                 </wux-row>
             </wux-cell-group>
             <!-- 诊断 -->
