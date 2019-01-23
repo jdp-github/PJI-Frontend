@@ -174,7 +174,7 @@
                         其他伴随疾病
                     </view>
                     <view class="textarea-view">
-                        <textarea focus="{{focusOtherDisease}}" bindtap="onOtherDiseaseClick" value='{{other_concomitant_diseases}}' data-prop='other_concomitant_diseases' bindinput="onInput" placeholder="请输入文字, 没有请输入\"无\"" />
+                        <textarea style="height: 30px" focus="{{focusOtherDisease}}" bindtap="onOtherDiseaseClick" value='{{other_concomitant_diseases}}' data-prop='other_concomitant_diseases' bindinput="onInput" placeholder="请输入文字, 没有请输入\"无\"" />
                     </view>
                 </wux-row>
             </wux-cell-group>

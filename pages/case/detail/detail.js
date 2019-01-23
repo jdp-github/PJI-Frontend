@@ -52,7 +52,7 @@ Page({
     // 诊断
     diagnose: '',
     // 是否合并自身免疫性疾病 1是，2否
-    is_merge_disease_list: ['否', '类风湿', '强直性脊柱炎', '其他 (请在备注中标明)'],
+    is_merge_disease_list: ['否', '类风湿', '强直性脊柱炎', '其他自身免疫性疾病 (请在备注中标明)'],
     is_merge_disease_value: '否',
     is_merge_disease_index: 0,
     // 其他伴随疾病
