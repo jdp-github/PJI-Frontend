@@ -30,6 +30,9 @@
                          <wux-tag color="cyan">
                             {{ item.type_name }}
                         </wux-tag>
+                        <wux-tag color="orange">
+                            主诊医师: 赵老师
+                        </wux-tag>
                     </wux-col>
                 </wux-row>
             </view>
