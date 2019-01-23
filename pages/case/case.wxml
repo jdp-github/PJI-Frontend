@@ -16,7 +16,7 @@
             <view style="margin-bottom: 20rpx;">
                 <wux-progress bar-style="background-color: #5cb85c" percent="{{ item.progress*100 }}" shape="square" strokeWidth="2" />
             </view>
-            <view style="margin-top: 5rpx;">
+            <view style="margin-top: 20rpx;">
                 <wux-row>
                     <wux-col span="12">
                         <!-- 状态：0未完成，1已完成未审核，2已审核 -->
@@ -31,7 +31,7 @@
                             {{ item.type_name }}
                         </wux-tag>
                         <wux-tag color="orange">
-                            主诊医师: 赵老师
+                            主诊医师: {{item.pro_doctor}}
                         </wux-tag>
                     </wux-col>
                 </wux-row>
