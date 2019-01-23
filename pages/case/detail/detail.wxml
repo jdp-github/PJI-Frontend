@@ -116,7 +116,7 @@
                     </wux-col>
                     <wux-col span="8">
                         <view class="input-text-right">
-                            <input type="text" placeholder="请输入主诊医师姓名" />
+                            <input type="text" placeholder="请输入主诊医师姓名" value="{{pro_doctor}}"/>
                         </view>
                     </wux-col>
                 </wux-row>
