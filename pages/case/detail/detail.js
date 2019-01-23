@@ -31,10 +31,6 @@ Page({
     sexIndex: 0,
     // 年龄
     age: 0,
-    // 身高
-    height: 0,
-    // 体重
-    weight: 0,
     // BMI
     bmi: 0,
     // 类型 1置换术后，2占位器

@@ -74,7 +74,7 @@
                     </wux-col>
                     <wux-col span="9">
                         <view class="input-text-value" style="text-align: right;">
-                            <input style="padding-right: 15rpx;" type="digit" maxlength='4' value="{{height}}" data-prop='height' bindinput="onInput" placeholder="请注意换算单位" />
+                            <input style="padding-right: 15rpx;" type="digit" value="{{height}}" data-prop='height' bindinput="onInput" placeholder="请注意换算单位" />
                         </view>
                     </wux-col>
                 </wux-row>
@@ -88,7 +88,7 @@
                     </wux-col>
                     <wux-col span="9">
                         <view class="input-text-value" style="text-align: right;">
-                            <input style="padding-right: 15rpx;" type="digit" maxlength='5' value="{{weight}}" data-prop='weight' bindinput="onInput"  placeholder="请注意换算单位" />
+                            <input style="padding-right: 15rpx;" type="digit" value="{{weight}}" data-prop='weight' bindinput="onInput"  placeholder="请注意换算单位" />
                         </view>
                     </wux-col>
                 </wux-row>
