@@ -95,12 +95,12 @@
             </wux-cell-group>
             <wux-cell-group title="">
                 <wux-row>
-                    <wux-col span="3">
+                    <wux-col span="4">
                         <view class="input-text">
                             BMI (kg/㎡)
                         </view>
                     </wux-col>
-                    <wux-col span="9">
+                    <wux-col span="8">
                         <view class="input-text-value" style="text-align: right;">
                             <input style="padding-right: 15rpx;" type="digit" maxlength='6' value="{{bmi}}" data-prop='bmi' bindinput="onInput" disabled />
                         </view>
