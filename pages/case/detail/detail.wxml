@@ -169,7 +169,7 @@
             <wux-cell-group title="">
                 <wux-cell title="是否合并自身免疫性疾病" extra="{{ is_merge_disease_value }}" bind:click="onClickMerge"></wux-cell>
             </wux-cell-group>
-            <wux-cell-group title="">
+            <wux-cell-group title="" wx:if="{{ !showSelect }}">
                 <wux-row>
                     <view class="textarea-title">
                         其他伴随疾病
@@ -210,7 +210,7 @@
                     </wux-col>
                 </wux-row>
             </wux-cell-group>
-            <wux-cell-group title="">
+            <wux-cell-group title="" wx:if="{{ !showSelect }}">
                 <view class="textarea-title">
                     特殊事项
                 </view>
@@ -218,7 +218,7 @@
                     <textarea focus="{{focusSpecialEvent}}" bindtap="onSpecialEventClick" value='{{special_matter}}' data-prop='special_matter' bindinput="onInput" placeholder="请输入文字, 没有请输入\"无\"" />
                 </view>
             </wux-cell-group>
-            <wux-cell-group title="">
+            <wux-cell-group title="" wx:if="{{ !showSelect }}">
                 <view class="textarea-title">
                     简要病史
                 </view>
@@ -382,7 +382,7 @@
             <wux-cell-group title="">
                 <wux-cell title="穿刺日期" extra="{{ puncture_date }}" bind:click="openPuncture"></wux-cell>
             </wux-cell-group>
-            <wux-cell-group title="">
+            <wux-cell-group title="" wx:if="{{ !showSelect }}">
                 <view class="textarea-title">
                     穿刺中关节液情况概述 & 是否稀释
                 </view>

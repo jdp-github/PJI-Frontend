@@ -10,6 +10,7 @@ var util = require('../../../utils/util.js');
 
 Page({
     data: {
+        showSelect: false,
         currentStep: 0,
         isCreateCase: true,
         // 病例
@@ -204,10 +205,16 @@ Page({
 
     // 性别 1男，2女
     onClickSex: function() {
+        this.setData({
+            showSelect: true
+        });
         $wuxSelect('#selectSex').open({
             sex: this.data.sex,
             options: this.data.sexList,
             onConfirm: (value, index, options) => {
+                this.setData({
+                    showSelect: false
+                });
                 if (index !== -1) {
                     this.setData({
                         sex: value,
@@ -215,14 +222,25 @@ Page({
                     })
                 }
             },
+            onCancel: (value, index, options) => {
+                this.setData({
+                    showSelect: false
+                });
+            }
         });
     },
     // 类型 1置换术后，2占位器
     onClickType: function() {
+        this.setData({
+            showSelect: true
+        });
         $wuxSelect('#selectType').open({
             type: this.data.type,
             options: this.data.typeList,
             onConfirm: (value, index, options) => {
+                this.setData({
+                    showSelect: false
+                });
                 if (index !== -1) {
                     this.setData({
                         type: value,
@@ -230,14 +248,25 @@ Page({
                     })
                 }
             },
+            onCancel: (value, index, options) => {
+                this.setData({
+                    showSelect: false
+                });
+            }
         });
     },
     // 部位。1髋，2膝
     onClickPart: function() {
+        this.setData({
+            showSelect: true
+        });
         $wuxSelect('#selectPart').open({
             part: this.data.part,
             options: this.data.partList,
             onConfirm: (value, index, options) => {
+                this.setData({
+                    showSelect: false
+                });
                 if (index !== -1) {
                     this.setData({
                         part: value,
@@ -245,6 +274,11 @@ Page({
                     })
                 }
             },
+            onCancel: (value, index, options) => {
+                this.setData({
+                    showSelect: false
+                });
+            }
         });
     },
     onDurationSymptoms: function() {
@@ -277,10 +311,16 @@ Page({
     },
     // 症状出现时长单位。1：天，2：月
     onClickDurationUnit: function() {
+        this.setData({
+            showSelect: true
+        });
         $wuxSelect('#selectDurationUnit').open({
             duration_symptoms_unit_value: this.data.duration_symptoms_unit_value,
             options: this.data.duration_symptoms_unit_list,
             onConfirm: (value, index, options) => {
+                this.setData({
+                    showSelect: false
+                });
                 if (index !== -1) {
                     this.setData({
                         duration_symptoms_unit_value: value,
@@ -314,14 +354,25 @@ Page({
                     }
                 }
             },
+            onCancel: (value, index, options) => {
+                this.setData({
+                    showSelect: false
+                });
+            }
         });
     },
     // 症状出现时长性质。1急性，2慢性
     onClickUnrationProp: function() {
+        this.setData({
+            showSelect: true
+        });
         $wuxSelect('#selectDurationProp').open({
             duration_symptoms_prop_value: this.data.duration_symptoms_prop_value,
             options: this.data.duration_symptoms_prop_list,
             onConfirm: (value, index, options) => {
+                this.setData({
+                    showSelect: false
+                });
                 if (index !== -1) {
                     if (this.data.duration_symptoms > 28 && this.data.duration_symptoms_unit_value == "天") {
                         this.setData({
@@ -346,14 +397,25 @@ Page({
                     }
                 }
             },
+            onCancel: (value, index, options) => {
+                this.setData({
+                    showSelect: false
+                });
+            }
         });
     },
     // 是否合并自身免疫性疾病。1是，2否
     onClickMerge: function() {
+        this.setData({
+            showSelect: true
+        });
         $wuxSelect('#selectMerge').open({
             is_merge_disease_value: this.data.is_merge_disease_value,
             options: this.data.is_merge_disease_list,
             onConfirm: (value, index, options) => {
+                this.setData({
+                    showSelect: false
+                });
                 if (index !== -1) {
                     this.setData({
                         is_merge_disease_value: value,
@@ -361,14 +423,25 @@ Page({
                     })
                 }
             },
+            onCancel: (value, index, options) => {
+                this.setData({
+                    showSelect: false
+                });
+            }
         });
     },
     // 近期是否应用抗生素。1是，2否
     onClickAntibiotic: function() {
+        this.setData({
+            showSelect: true
+        });
         $wuxSelect('#selectAntibiotic').open({
             is_used_antibiotics_value: this.data.is_used_antibiotics_value,
             options: this.data.is_used_antibiotics_list,
             onConfirm: (value, index, options) => {
+                this.setData({
+                    showSelect: false
+                });
                 if (index !== -1) {
                     this.setData({
                         is_used_antibiotics_value: value,
@@ -376,14 +449,25 @@ Page({
                     })
                 }
             },
+            onCancel: (value, index, options) => {
+                this.setData({
+                    showSelect: false
+                });
+            }
         });
     },
     // 窦道。1有，2无
     onClickSinusTract: function() {
+        this.setData({
+            showSelect: true
+        });
         $wuxSelect('#selectSinusTract').open({
             sious_value: this.data.sious_value,
             options: this.data.sious_list,
             onConfirm: (value, index, options) => {
+                this.setData({
+                    showSelect: false
+                });
                 if (index !== -1) {
                     this.setData({
                         sious_value: value,
@@ -391,14 +475,25 @@ Page({
                     })
                 }
             },
+            onCancel: (value, index, options) => {
+                this.setData({
+                    showSelect: false
+                });
+            }
         });
     },
     // LE试纸原液。1：未测，2：neg；25；75；250；500
     onClickLePrev: function() {
+        this.setData({
+            showSelect: true
+        });
         $wuxSelect('#selectLePrev').open({
             le_testpaper_stoste_value: this.data.le_testpaper_stoste_value,
             options: this.data.le_testpaper_stoste_list,
             onConfirm: (value, index, options) => {
+                this.setData({
+                    showSelect: false
+                });
                 if (index !== -1) {
                     this.setData({
                         le_testpaper_stoste_value: value,
@@ -406,14 +501,25 @@ Page({
                     })
                 }
             },
+            onCancel: (value, index, options) => {
+                this.setData({
+                    showSelect: false
+                });
+            }
         });
     },
     // LE试纸离心。1：未测，2：neg；25；75；250；500
     onClickLeAfter: function() {
+        this.setData({
+            showSelect: true
+        });
         $wuxSelect('#selectLeAfter').open({
             le_testpaper_centrifugal_value: this.data.le_testpaper_centrifugal_value,
             options: this.data.le_testpaper_centrifugal_list,
             onConfirm: (value, index, options) => {
+                this.setData({
+                    showSelect: false
+                });
                 if (index !== -1) {
                     this.setData({
                         le_testpaper_centrifugal_value: value,
@@ -421,14 +527,25 @@ Page({
                     })
                 }
             },
+            onCancel: (value, index, options) => {
+                this.setData({
+                    showSelect: false
+                });
+            }
         });
     },
     // 病理。1：未测；2：小于5；3：5-10；4：大于10
     onClickPathology: function() {
+        this.setData({
+            showSelect: true
+        });
         $wuxSelect('#selectPathology').open({
             pathologyValue: this.data.pathologyValue,
             options: this.data.pathologyList,
             onConfirm: (value, index, options) => {
+                this.setData({
+                    showSelect: false
+                });
                 if (index !== -1) {
                     this.setData({
                         pathologyValue: value,
@@ -436,31 +553,53 @@ Page({
                     })
                 }
             },
+            onCancel: (value, index, options) => {
+                this.setData({
+                    showSelect: false
+                });
+            }
         });
     },
     // MSIS最终判定。1：不能确定；2：非感染；3：感染
     onClickMSIS: function() {
+        this.setData({
+            showSelect: true
+        });
         $wuxSelect('#selectMSIS').open({
             msisValue: this.data.msisValue,
             options: this.data.msisList,
             onConfirm: (value, index, options) => {
+                this.setData({
+                    showSelect: false
+                });
                 if (index !== -1) {
                     this.setData({
                         msisValue: value,
                         msisIndex: index,
-                    })
+                    });
                     console.log(this.data.msisIndex)
                 }
             },
+            onCancel: (value, index, options) => {
+                this.setData({
+                    showSelect: false
+                });
+            }
         });
 
     },
     // 最终处理。1：失访-不详；2未手术-门诊随访；3未手术-抗生素压制；4手术-清创换垫；5手术-假体植入；6手术-占位器植入
     onClickFinalHandle: function() {
+        this.setData({
+            showSelect: true
+        });
         $wuxSelect('#selectFinalHandle').open({
             final_disposal_value: this.data.final_disposal_value,
             options: this.data.final_disposal_list,
             onConfirm: (value, index, options) => {
+                this.setData({
+                    showSelect: false
+                });
                 if (index !== -1) {
                     this.setData({
                         final_disposal_value: value,
@@ -468,14 +607,25 @@ Page({
                     })
                 }
             },
+            onCancel: (value, index, options) => {
+                this.setData({
+                    showSelect: false
+                });
+            }
         });
     },
     // 是否冲洗。1是，2否
     onClickFlush: function() {
+        this.setData({
+            showSelect: true
+        });
         $wuxSelect('#selectFlush').open({
             is_rinse_value: this.data.is_rinse_value,
             options: this.data.is_rinse_list,
             onConfirm: (value, index, options) => {
+                this.setData({
+                    showSelect: false
+                });
                 if (index !== -1) {
                     this.setData({
                         is_rinse_value: value,
@@ -483,6 +633,11 @@ Page({
                     })
                 }
             },
+            onCancel: (value, index, options) => {
+                this.setData({
+                    showSelect: false
+                });
+            }
         });
     },
     // 建档日期
