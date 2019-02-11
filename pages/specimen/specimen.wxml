@@ -1,0 +1,92 @@
+<view class="page__hd">
+  <wux-search-bar clear controlled placeholder="请输标本盒名称" />
+</view>
+<view class="page">
+  <view class="page__bd">
+    <view class="case-block">
+      <wux-filterbar items="{{ filterItems }}" />
+      <view class="operation-view">
+        <wux-button block size="small" type="assertive" bindtap='addBox'>
+          <i class="fa fa-plus"></i> 新增标本盒</wux-button>
+      </view>
+      <view class="weui-panel weui-panel_access">
+        <a class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active" wx:for="{{ boxList }}" wx:key="">
+          <!-- item -->
+          <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+            <view style="margin-bottom: 20rpx;">
+                <wux-progress bar-style="background-color: #5cb85c" percent="30" shape="square" strokeWidth="2" />
+            </view>
+            <view style="margin-top: 20rpx;">
+                <wux-row>
+                    <wux-col span="12">
+                        <!-- 状态：0未完成，1已完成未审核，2已审核 -->
+                        <view class="lock-view">
+                            <i class="fa fa-lock" aria-hidden="true"></i>
+                        </view>
+                        <wux-tag color="geekblue">
+                            创建者: 马冬梅
+                        </wux-tag>
+                    </wux-col>
+                </wux-row>
+            </view>
+            <view style="margin-top: 15rpx;">
+                <i class="fa fa-code" aria-hidden="true"></i> 编号: 2019021102010101
+            </view>
+            <view style="margin-top: 15rpx;">
+                <i class="fa fa-external-link" aria-hidden="true"></i> 名称: 2019第一盒
+            </view>
+            <view style="margin-top: 15rpx;">
+                <i class="fa fa-map-marker" aria-hidden="true"></i> 存放地点: 骨四-80度冰箱
+            </view>
+             <view style="margin-top: 15rpx;">
+                <i class="fa fa-clock-o" aria-hidden="true"></i> 开始时间: 2019-02-11
+            </view>
+            <view style="margin-top: 15rpx;">
+                <i class="fa fa-clock-o" aria-hidden="true"></i> 修改时间: 2019-02-11
+            </view>
+            <wux-col span="12">
+             <!-- 删除 -->
+             <wux-button block size="small" type="assertive">
+               <i class="fa fa-cog"></i> 删除</wux-button>
+             <!-- 解锁/修改 -->
+             <wux-button block size="small" type="balanced">
+               <i class="fa fa-exchange"></i> 解锁/修改</wux-button>
+            </wux-col>
+          </view>
+        </a>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 弹窗 -->
+<wux-popup position="center" visible="{{ visibleBox }}" title="新增标本盒" noFoot="true" bind:closed="onBoxClose">
+    <view class="input-field">
+        <wux-cell-group title="基本信息">
+            <wux-cell hover-class="none">
+                <wux-col span="1" class="icon-col">
+                    <i class="fa fa-list-alt" style="margin-top: 4px;" />
+                </wux-col>
+                <wux-col span="11">
+                    <wux-input label="名称" class="input-size" clear="true" maxlength="20" controlled="true" placeholder="请输入" value='{{boxName}}' bind:change="onBoxNameChange" bind:clear="onBoxNameClear" />
+                </wux-col>
+            </wux-cell>
+            <wux-cell hover-class="none">
+                <wux-col span="1" class="icon-col">
+                    <i class="fa fa-map-marker" style="margin-top: 4px;" />
+                </wux-col>
+                <wux-col span="11">
+                    <wux-input label="存放地点" class="input-size" clear="true" maxlength="20" controlled="true" placeholder="请输入" />
+                </wux-col>
+            </wux-cell>
+        </wux-cell-group>
+    </view>
+    <wux-row>
+        <wux-col class="popup-btn-view" span="6">
+            <wux-button block type="assertive" bindtap="okAddBox" size="default">确定</wux-button>
+        </wux-col>
+        <wux-col class="popup-btn-view" span="6">
+            <wux-button block type="dark" bindtap="closeBox" size="default" class="popup-btn">取消</wux-button>
+        </wux-col>
+    </wux-row>
+</wux-popup>

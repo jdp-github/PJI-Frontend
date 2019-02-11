@@ -9,6 +9,7 @@
         "pages/index/people/people",
         "pages/register/registerItem/registerItem",
         "pages/person/person",
+        "pages/specimen/specimen",
         "pages/logs/logs"
     ],
     "window": {
@@ -27,6 +28,12 @@
                 "iconPath": "/img/center.png",
                 "pagePath": "pages/index/index",
                 "text": "中心"
+            },
+            {
+                "selectedIconPath": "/img/specimen-red.png",
+                "iconPath": "/img/specimen.png",
+                "pagePath": "pages/specimen/specimen",
+                "text": "标本"
             },
             {
                 "selectedIconPath": "/img/stats-red.png",
