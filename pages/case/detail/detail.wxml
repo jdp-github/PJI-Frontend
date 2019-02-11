@@ -169,16 +169,6 @@
             <wux-cell-group title="">
                 <wux-cell title="是否合并自身免疫性疾病" extra="{{ is_merge_disease_value }}" bind:click="onClickMerge"></wux-cell>
             </wux-cell-group>
-            <wux-cell-group title="" wx:if="{{ !showSelect }}">
-                <wux-row>
-                    <view class="textarea-title">
-                        其他伴随疾病
-                    </view>
-                    <view class="textarea-view">
-                        <textarea style="height: 30px" focus="{{focusOtherDisease}}" bindtap="onOtherDiseaseClick" value='{{other_concomitant_diseases}}' data-prop='other_concomitant_diseases' bindinput="onInput" placeholder="请输入文字, 没有请输入\"无\"" />
-                    </view>
-                </wux-row>
-            </wux-cell-group>
             <wux-cell-group title="">
                 <wux-cell title="近期（2周）应用抗生素" extra="{{ is_used_antibiotics_value }}" bind:click="onClickAntibiotic"></wux-cell>
             </wux-cell-group>
@@ -208,6 +198,16 @@
                             <input type="number" maxlength='16' value="{{telphone2}}" data-prop='telphone2' bindinput="onInput" />
                         </view>
                     </wux-col>
+                </wux-row>
+            </wux-cell-group>
+            <wux-cell-group title="" wx:if="{{ !showSelect }}">
+                <wux-row>
+                    <view class="textarea-title">
+                        其他伴随疾病
+                    </view>
+                    <view class="textarea-view">
+                        <textarea style="height: 30px" focus="{{focusOtherDisease}}" bindtap="onOtherDiseaseClick" value='{{other_concomitant_diseases}}' data-prop='other_concomitant_diseases' bindinput="onInput" placeholder="请输入文字, 没有请输入\"无\"" />
+                    </view>
                 </wux-row>
             </wux-cell-group>
             <wux-cell-group title="" wx:if="{{ !showSelect }}">
@@ -522,27 +522,23 @@
         </view>
     </scroll-view>
     <!-- 录入者 -->
-    <view class="information-view" hidden='{{!showWriter}}' style="padding: 5rpx 30rpx; margin: 0rpx 30rpx;">
-        <view style="margin-left: 30rpx; margin-right: 30rpx;">
-            <wux-alert theme="positive">
-                <view wx:for="{{write_staff_list}}" wx:key="">
-                    <view class="information-avatar-left">
-                        <wux-avatar shape="square" size="small">录</wux-avatar> {{item.staff_name}}
-                    </view>
-                </view>
-            </wux-alert>
-        </view>
-    </view>
-    <!-- 审核者 -->
-    <view class="information-view" hidden='{{!showAuditor}}' style="padding: 5rpx 30rpx; margin: 0rpx 30rpx;">
-        <view style="margin-left: 30rpx; margin-right: 30rpx;">
-            <wux-alert theme="assertive">
+     <wux-cell-group title="">
+        <wux-alert theme="positive" style="display: {{showWriter ? 'block' : 'none'}}; margin-top: 15rpx;">
+            <view wx:for="{{write_staff_list}}" wx:key="" style="float: left;">
                 <view class="information-avatar-left">
-                    <wux-avatar shape="square" size="small">审</wux-avatar> {{auditor_name}}
+                    <wux-avatar shape="square" size="small">录</wux-avatar> {{item.staff_name}}
                 </view>
-            </wux-alert>
-        </view>
-    </view>
+            </view>
+        </wux-alert>
+     </wux-cell-group>
+    <!-- 审核者 -->
+    <wux-cell-group title="" style="display: {{showAuditor ? 'block' : 'none'}}; margin-top: 15rpx;">
+        <wux-alert theme="assertive">
+            <view class="information-avatar-left">
+                <wux-avatar shape="square" size="small">审</wux-avatar> {{auditor_name}}
+            </view>
+        </wux-alert>
+    </wux-cell-group>
     <view class="btn-steps">
         <wux-col span="6">
             <wux-button type="dark" bindtap="onPrevStep">上一步</wux-button>

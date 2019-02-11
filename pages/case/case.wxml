@@ -24,7 +24,7 @@
                             <i class="fa fa-lock" aria-hidden="true"></i>
                         </view>
                         <!-- MSIS最终判定。1：不能确定；2：非感染；3：感染 -->
-                        <wux-tag color="{{item.msis == 1 ? 'orange' :item.msis == 1?'green': 'red'}}">
+                        <wux-tag color="{{item.msis == 1 ? 'orange' : item.msis == 2?'green': 'red'}}">
                             {{item.msis == 1 ? '不能确定' : item.msis == 2?'非感染':'感染'}}
                         </wux-tag>
                          <wux-tag color="cyan">
