@@ -181,7 +181,7 @@ Page({
                     title: '确定更改病历?',
                     success(res) {
                         if (res.confirm) {
-                            that.editCase()
+                            that.editCase(true)
                         }
                     }
                 })
@@ -335,13 +335,13 @@ Page({
                         this.setData({
                             duration_symptoms_prop_value: '急性',
                             duration_symptoms_prop_index: 1,
-                        })  
+                        })
                     } else if (this.data.duration_symptoms > 1 && this.data.duration_symptoms_unit_value == "月") {
                         this.setData({
                             duration_symptoms_prop_value: '慢性',
                             duration_symptoms_prop_index: 2,
-                        })  
-                    } else if (this.data.duration_symptoms <= 1 && this.data.duration_symptoms > 0 &&this.data.duration_symptoms_unit_value == "月") {
+                        })
+                    } else if (this.data.duration_symptoms <= 1 && this.data.duration_symptoms > 0 && this.data.duration_symptoms_unit_value == "月") {
                         this.setData({
                             duration_symptoms_prop_value: '急性',
                             duration_symptoms_prop_index: 1,
@@ -967,11 +967,13 @@ Page({
         })
     },
 
-    editCase() {
+    editCase(isEdit) {
         var that = this
-        wx.showLoading({
-            title: '更改病历中...',
-        })
+        if (isEdit) {
+            wx.showLoading({
+                title: '更改病历中...',
+            })
+        }
         console.log("editCase:" + that.makeJsonData())
         wx.request({
             url: constant.basePath,
@@ -987,6 +989,10 @@ Page({
             success(res) {
                 console.log("Case.EditCase:" + JSON.stringify(res))
                 wx.hideLoading()
+                // 没有编辑
+                if (!isEdit) {
+                    return
+                }
                 if (res.data.data.code == constant.response_success) {
                     that.reloadPrePage()
                     wx.navigateBack({
@@ -1168,5 +1174,9 @@ Page({
         }
 
         return JSON.stringify(caseObj)
+    },
+
+    onUnload() {
+        this.editCase(false)
     }
 });
