@@ -1,5 +1,6 @@
 {
     "pages": [
+        "pages/specimen/detail/detail",
         "pages/authorization/authorization",
         "pages/statement/statement",
         "pages/case/detail/detail",
@@ -14,9 +15,9 @@
     ],
     "window": {
         "backgroundTextStyle": "light",
-        "navigationBarBackgroundColor": "#fff",
+        "navigationBarBackgroundColor": "#23292D",
         "navigationBarTitleText": "PJI-登记系统",
-        "navigationBarTextStyle": "black",
+        "navigationBarTextStyle": "white",
         "backgroundColor": "#f8f8f8"
     },
     "tabBar": {

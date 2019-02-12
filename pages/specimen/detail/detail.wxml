@@ -1,0 +1,663 @@
+<view class="box-info">
+    <view class="box-title">
+        2018第一盒 (42/100)
+    </view>
+    <view class="box-description">
+        <span><i class="fa fa-clock-o"></i> 2018-02-12</span>
+        <span style="margin-left: 20rpx;"><i class="fa fa-map-marker"></i> 骨四-80度冰箱</span>
+        <span style="margin-left: 20rpx;"><i class="fa fa-user"></i> 马冬梅</span>
+    </view>
+</view>
+<view class="select-view">
+    <view class="top-ruler-view">
+        <wux-row>
+            <wux-col span="2">
+                <view style="text-align: center; font-size: 16px;">
+                    <i class="fa fa-arrows-h" aria-hidden="true"></i>
+                </view>
+            </wux-col>
+            <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    1
+                </view>
+            </wux-col>
+            <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    2
+                </view>
+            </wux-col>
+            <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    3
+                </view>
+            </wux-col>
+            <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    4
+                </view>
+            </wux-col>
+            <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    5
+                </view>
+            </wux-col>
+            <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    6
+                </view>
+            </wux-col>
+            <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    7
+                </view>
+            </wux-col>
+            <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    8
+                </view>
+            </wux-col>
+            <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    9
+                </view>
+            </wux-col>
+            <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    10
+                </view>
+            </wux-col>
+        </wux-row>
+    </view>
+    <view class="left-ruler-view">
+        <wux-row>
+            <wux-col span="2">
+                <view style="text-align: center; font-size: 16px; background-color: #e7e7e7;">
+                    A
+                </view>
+            </wux-col>
+            <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site-disable.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+            <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site-disable.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site-disable.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site-disable.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site-disable.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site-disable.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site-disable.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site-disable.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site-disable.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site-disable.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+        </wux-row>
+        <wux-row>
+            <wux-col span="2">
+                <view style="text-align: center; font-size: 16px; background-color: #e7e7e7;">
+                    B
+                </view>
+            </wux-col>
+            <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site-disable.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+            <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site-disable.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site-disable.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site-disable.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site-disable.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+        </wux-row>
+        <wux-row>
+            <wux-col span="2">
+                <view style="text-align: center; font-size: 16px; background-color: #e7e7e7;">
+                    C
+                </view>
+            </wux-col>
+            <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+            <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+        </wux-row>
+        <wux-row>
+            <wux-col span="2">
+                <view style="text-align: center; font-size: 16px; background-color: #e7e7e7;">
+                    D
+                </view>
+            </wux-col>
+            <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site-color1.png" mode="cover" style="width: 16px; height: 16px;" bindtap="showSpecimenInfo"></image>
+                </view>
+            </wux-col>
+            <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site-color1.png" mode="cover" style="width: 16px; height: 16px;" bindtap="showSpecimenInfo"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site-color2.png" mode="cover" style="width: 16px; height: 16px;" bindtap="showSpecimenInfo"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site-color3.png" mode="cover" style="width: 16px; height: 16px;" bindtap="showSpecimenInfo"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site-color4.png" mode="cover" style="width: 16px; height: 16px;" bindtap="showSpecimenInfo"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site-color4.png" mode="cover" style="width: 16px; height: 16px;" bindtap="showSpecimenInfo"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site-color5.png" mode="cover" style="width: 16px; height: 16px;" bindtap="showSpecimenInfo"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site-color6.png" mode="cover" style="width: 16px; height: 16px;" bindtap="showSpecimenInfo"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site-color6.png" mode="cover" style="width: 16px; height: 16px;" bindtap="showSpecimenInfo"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+        </wux-row>
+        <wux-row>
+            <wux-col span="2">
+                <view style="text-align: center; font-size: 16px; background-color: #e7e7e7;">
+                    E
+                </view>
+            </wux-col>
+            <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+            <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+        </wux-row>
+        <wux-row>
+            <wux-col span="2">
+                <view style="text-align: center; font-size: 16px; background-color: #e7e7e7;">
+                    F
+                </view>
+            </wux-col>
+            <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site-disable.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+            <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site-disable.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site-disable.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+        </wux-row>
+        <wux-row>
+            <wux-col span="2">
+                <view style="text-align: center; font-size: 16px; background-color: #e7e7e7;">
+                    G
+                </view>
+            </wux-col>
+            <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+            <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+        </wux-row>
+        <wux-row>
+            <wux-col span="2">
+                <view style="text-align: center; font-size: 16px; background-color: #e7e7e7;">
+                    H
+                </view>
+            </wux-col>
+            <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+            <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+        </wux-row>
+        <wux-row>
+            <wux-col span="2">
+                <view style="text-align: center; font-size: 16px; background-color: #e7e7e7;">
+                    I
+                </view>
+            </wux-col>
+            <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+            <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+        </wux-row>
+        <wux-row>
+            <wux-col span="2">
+                <view style="text-align: center; font-size: 16px; background-color: #e7e7e7;">
+                    J
+                </view>
+            </wux-col>
+            <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+            <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site-disable.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site-disable.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site-disable.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site-disable.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+             <wux-col span="1">
+                <view style="text-align: center; font-size: 16px;">
+                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                </view>
+            </wux-col>
+        </wux-row>
+    </view>
+</view>
+<wux-popup closable visible="{{ specimenInfoVisible }}" title="标本A10的信息" bind:close="onCloseSpecimenInfo" bind:closed="onClosedSpecimenInfo">
+    <view style="text-align: left; margin-bottom: 10rpx;">
+        ID: <span style="color: #000;">2019022298008918</span>
+    </view>
+    <view style="text-align: left; margin-bottom: 10rpx;">
+        姓名: <span style="color: #000;">马老六</span>
+    </view>
+    <view style="text-align: left; margin-bottom: 10rpx;">
+        是否感染: <span style="color: #000;">否</span>
+    </view>
+    <view style="text-align: left; margin-bottom: 10rpx;">
+        存放日期: <span style="color: #000;">2019-02-22</span>
+    </view>
+    <view style="text-align: left; margin-bottom: 10rpx;">
+        存放者: <span style="color: #000;">马冬梅</span>
+    </view>
+    <view style="text-align: left; margin-bottom: 10rpx;">
+        存放备注: <span style="color: #000;">马老六第一次存放的标本</span>
+    </view>
+</wux-popup>
