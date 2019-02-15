@@ -28,7 +28,7 @@
                             <view class="btn-row">
                                 <wux-row>
                                     <!-- 人员 -->
-                                    <wux-col span="6">
+                                    <wux-col span="3">
                                         <view>
                                             <wux-button block clear type="dark" size="small" data-centerId="{{item.center_id}}" bind:click="onStaffClick">
                                                 <i class="fa fa-cog"></i> 人员设置</wux-button>
@@ -39,6 +39,13 @@
                                         <view class="btn-padding">
                                             <wux-button block clear type="assertive" size="small" data-center="{{item}}" bind:click="onRecordClick">
                                                 <i class="fa fa-address-card-o"></i> 病例录入</wux-button>
+                                        </view>
+                                    </wux-col>
+                                    <!-- 标本 -->
+                                    <wux-col span="3">
+                                        <view class="btn-padding">
+                                            <wux-button block clear type="dark" size="small" data-center="{{item}}" bind:click="onSpecimenClilck">
+                                                <i class="fa fa-hospital-o"></i> 标本</wux-button>
                                         </view>
                                     </wux-col>
                                 </wux-row>

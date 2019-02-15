@@ -71,7 +71,7 @@ Page({
   onSearchChange(e) {
     this.setData({
       searchValue: e.detail.value,
-      sortType: SORT_BY_NAME_ASC
+    //   sortType: SORT_BY_NAME_ASC
     })
     this.requestCenterStaffList(e.detail.value, this.data.sortType)
   },
@@ -81,7 +81,7 @@ Page({
   onSearchClear(e) {
     this.setData({
       searchValue: '',
-      sortType: SORT_BY_NAME_ASC
+    //   sortType: SORT_BY_NAME_ASC
     });
     this.requestCenterStaffList(this.data.searchValue, this.data.sortType)
   },
