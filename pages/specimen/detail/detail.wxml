@@ -419,17 +419,17 @@
             </wux-col>
             <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <image src="../../../img/site-color1.png" mode="cover" style="width: 16px; height: 16px; opacity:0.4;"></image>
                 </view>
             </wux-col>
             <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <image src="../../../img/site-color1.png" mode="cover" style="width: 16px; height: 16px; opacity:0.4;"></image>
                 </view>
             </wux-col>
              <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <image src="../../../img/site-color1.png" mode="cover" style="width: 16px; height: 16px; opacity:0.4;"></image>
                 </view>
             </wux-col>
              <wux-col span="1">
