@@ -202,11 +202,14 @@ Page({
         this.initData()
     },
 
+    onPullDownRefresh() {
+        this.initData()
+    },
+
     initData() {
         this.requestBoxList(this.data.searchValue, this.data.sortType)
     },
 
-    // TODO 
     requestBoxList(searchValue, sortType) {
         wx.showLoading({
             title: '请求数据中...',
@@ -231,8 +234,12 @@ Page({
                 if (res.data.data.code == constant.response_success) {
                     for (var i = 0, len = res.data.data.list.length; i < len; i++) {
                         var box = res.data.data.list[i]
-                        box.ctime = util.formatTime(box.ctime, 'Y-M-D')
-                        box.utime = util.formatTime(box.utime, 'Y-M-D')
+                        if (box.ctime > 0) {
+                            box.ctime = util.formatTime(box.ctime, 'Y-M-D')
+                        }
+                        if (box.utime > 0) {
+                            box.utime = util.formatTime(box.utime, 'Y-M-D')
+                        }
                     }
                     that.setData({
                         boxList: res.data.data.list
@@ -250,17 +257,20 @@ Page({
         })
     },
 
+    onItemClick(e) {
+        console.log(e)
+    },
+
     // 删除
     onDele(e) {
         var that = this
         var selectedItem = e.target.dataset.selecteditem
         wx.showModal({
             title: '提示',
-            content: '确定删除' + selectedItem.name + "?",
+            content: '确定删除 [' + selectedItem.name + "] ?",
             success(res) {
                 if (res.confirm) {
-                    // TODO 
-                    that.deleBox(selectedItem.sample_box_no)
+                    that.deleBox(selectedItem.id)
                 } else if (res.cancel) {
 
                 }
@@ -285,6 +295,44 @@ Page({
             },
             success(res) {
                 console.log("Sample.DeleteSampleBox:" + JSON.stringify(res))
+                wx.hideLoading()
+                if (res.data.data.code == constant.response_success) {
+                    that.requestBoxList(that.data.searchValue, that.data.sortType)
+                } else {
+                    wx.showToast({
+                        icon: 'none',
+                        title: res.data.data.msg,
+                    })
+                }
+            },
+            fail(res) {
+                wx.hideLoading()
+            }
+        })
+    },
+
+    // 锁定
+    onLock(e) {
+        var box = e.target.dataset.selecteditem;
+        var title = box.is_lock == 0 ? "锁定中..." : "解锁中..."
+        wx.showLoading({
+            title: title,
+        })
+
+        var that = this
+        wx.request({
+            url: constant.basePath,
+            data: {
+                service: 'Sample.SetLock',
+                openid: app.globalData.openid,
+                box_id: box.id,
+                type: box.is_lock == 0 ? 1 : 0
+            },
+            header: {
+                'content-type': 'application/json'
+            },
+            success(res) {
+                console.log("Sample.SetLock:" + JSON.stringify(res))
                 wx.hideLoading()
                 if (res.data.data.code == constant.response_success) {
                     that.requestBoxList(that.data.searchValue, that.data.sortType)

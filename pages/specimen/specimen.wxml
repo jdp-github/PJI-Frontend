@@ -21,8 +21,8 @@
                             <wux-row>
                                 <wux-col span="12">
                                     <!-- 状态：0未完成，1已完成未审核，2已审核 -->
-                                    <view class="lock-view">
-                                        <i class="fa fa-lock" hidden="{{item.is_lock == 0}}"></i>
+                                    <view class="lock-view" wx:if="{{item.is_lock == 1}}">
+                                        <i class="fa fa-lock"></i>
                                     </view>
                                     <wux-tag color="geekblue">
                                         创建者: {{item.creator}}
@@ -43,15 +43,15 @@
                             <i class="fa fa-clock-o" aria-hidden="true"></i> 开始时间: {{item.ctime}}
                         </view>
                         <view style="margin-top: 15rpx;">
-                            <i class="fa fa-clock-o" aria-hidden="true"></i> 修改时间: {{item.utime}}
+                            <i class="fa fa-clock-o" aria-hidden="true"></i> 修改时间: {{item.utime>0?item.utime:'暂无'}}
                         </view>
                         <wux-col span="12">
                             <!-- 删除 -->
-                            <wux-button block size="small" type="assertive" catchtap='onDele' data-selecteditem="{{item}}">
+                            <wux-button block size="small" type="assertive" wx:if="{{item.is_display_lock == 1}}"  catchtap='onDele' data-selecteditem="{{item}}">
                                 <i class="fa fa-cog"></i> 删除</wux-button>
                             <!-- 解锁/修改 -->
-                            <wux-button block size="small" type="balanced">
-                                <i class="fa fa-exchange"></i> 解锁/修改</wux-button>
+                            <wux-button block size="small" type="balanced" wx:if="{{item.is_display_lock == 1}}" catchtap='onLock' data-selecteditem="{{item}}">
+                                <i class="fa fa-exchange"></i> {{item.is_lock == 0?'锁定':'解锁'}}</wux-button>
                         </wux-col>
                     </view>
                 </a>
@@ -70,7 +70,7 @@
                     <i class="fa fa-list-alt" style="margin-top: 4px;margin-right:5rpx;" />
                 </wux-col>
                 <wux-col span="11">
-                    <wux-input label="名称" class="input-size" clear="true" maxlength="20" controlled="true" placeholder="请输入" value='{{boxName}}' bind:change="onInput" bind:clear="onClear" data-prop='boxName'/>
+                    <wux-input label="名称" class="input-size" clear="true" maxlength="20" controlled="true" placeholder="请输入" value='{{boxName}}' bind:change="onInput" bind:clear="onClear" data-prop='boxName' />
                 </wux-col>
             </wux-cell>
             <!-- 存放地点 -->
@@ -79,7 +79,7 @@
                     <i class="fa fa-map-marker" style="margin-top: 4px;margin-right:5rpx;" />
                 </wux-col>
                 <wux-col span="11">
-                    <wux-input label="存放地点" class="input-size" clear="true" maxlength="20" controlled="true" placeholder="请输入" value='{{depositary}}' bind:change="onInput" bind:clear="onClear" data-prop='depositary'/>
+                    <wux-input label="存放地点" class="input-size" clear="true" maxlength="20" controlled="true" placeholder="请输入" value='{{depositary}}' bind:change="onInput" bind:clear="onClear" data-prop='depositary' />
                 </wux-col>
             </wux-cell>
         </wux-cell-group>

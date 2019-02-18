@@ -89,6 +89,7 @@ Page({
 
     // 点击标本
     onSpecimenClilck(e) {
+        console.log(e)
         wx.navigateTo({
             url: '../specimen/specimen?centerId=' + e.target.dataset.center.center_id + "&centerName=" + e.target.dataset.center.center_name
         })
