@@ -258,7 +258,9 @@ Page({
     },
 
     onItemClick(e) {
-        console.log(e)
+        wx.navigateTo({
+            url: '/detail/detail?boxId=' + e.target.dataset.selecteditem.id
+        })
     },
 
     // 删除

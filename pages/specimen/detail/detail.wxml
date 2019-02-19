@@ -1,11 +1,14 @@
 <view class="box-info">
     <view class="box-title">
-        2018第一盒 (42/100)
+        {{boxInfo.name}} ({{boxInfo.used_volume/boxInfo.volume}})
     </view>
     <view class="box-description">
-        <span><i class="fa fa-clock-o"></i> 2018-02-12</span>
-        <span style="margin-left: 20rpx;"><i class="fa fa-map-marker"></i> 骨四-80度冰箱</span>
-        <span style="margin-left: 20rpx;"><i class="fa fa-user"></i> 马冬梅</span>
+        <span>
+            <i class="fa fa-clock-o"></i> {{boxInfo.ctime}}</span>
+        <span style="margin-left: 20rpx;">
+            <i class="fa fa-map-marker"></i> {{boxInfo.depositary}}</span>
+        <span style="margin-left: 20rpx;">
+            <i class="fa fa-user"></i> {{boxInfo.creator}}</span>
     </view>
 </view>
 <view class="select-view">
@@ -77,52 +80,53 @@
             </wux-col>
             <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site-disable.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-times-o" aria-hidden="true" style="opacity:0.3"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site-disable.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-times-o" aria-hidden="true" style="opacity:0.3"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site-disable.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-times-o" aria-hidden="true" style="opacity:0.3"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site-disable.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-times-o" aria-hidden="true" style="opacity:0.3"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site-disable.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <!--  <i class="fa fa-calendar-times-o" aria-hidden="true" style="opacity:0.3"></i> -->
+                    <i class="fa fa-calendar-times-o" aria-hidden="true" style="opacity:0.3"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site-disable.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-times-o" aria-hidden="true" style="opacity:0.3"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site-disable.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-times-o" aria-hidden="true" style="opacity:0.3"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site-disable.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-times-o" aria-hidden="true" style="opacity:0.3"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site-disable.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-times-o" aria-hidden="true" style="opacity:0.3"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site-disable.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-times-o" aria-hidden="true" style="opacity:0.3"></i>
                 </view>
             </wux-col>
         </wux-row>
@@ -134,52 +138,52 @@
             </wux-col>
             <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site-disable.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-times-o" aria-hidden="true" style="opacity:0.3"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site-disable.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-times-o" aria-hidden="true" style="opacity:0.3"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site-disable.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-times-o" aria-hidden="true" style="opacity:0.3"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site-disable.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-times-o" aria-hidden="true" style="opacity:0.3"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site-disable.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-times-o" aria-hidden="true" style="opacity:0.3"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
         </wux-row>
@@ -191,52 +195,52 @@
             </wux-col>
             <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
         </wux-row>
@@ -248,52 +252,53 @@
             </wux-col>
             <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site-color1.png" mode="cover" style="width: 16px; height: 16px;" bindtap="showSpecimenInfo"></image>
+                    <!-- <image src="../../../img/site-color1.png" mode="cover" style="width: 16px; height: 16px;" bindtap="showSpecimenInfo"></image> -->
+                    <i class="fa fa-calendar" aria-hidden="true" style="color:red"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site-color1.png" mode="cover" style="width: 16px; height: 16px;" bindtap="showSpecimenInfo"></image>
+                    <i class="fa fa-calendar" aria-hidden="true" style="color:red"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site-color2.png" mode="cover" style="width: 16px; height: 16px;" bindtap="showSpecimenInfo"></image>
+                    <i class="fa fa-calendar" aria-hidden="true" style="color:blue"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site-color3.png" mode="cover" style="width: 16px; height: 16px;" bindtap="showSpecimenInfo"></image>
+                    <i class="fa fa-calendar" aria-hidden="true" style="color:blue"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site-color4.png" mode="cover" style="width: 16px; height: 16px;" bindtap="showSpecimenInfo"></image>
+                    <i class="fa fa-calendar" aria-hidden="true" style="color:purple"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site-color4.png" mode="cover" style="width: 16px; height: 16px;" bindtap="showSpecimenInfo"></image>
+                    <i class="fa fa-calendar" aria-hidden="true" style="color:purple"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site-color5.png" mode="cover" style="width: 16px; height: 16px;" bindtap="showSpecimenInfo"></image>
+                    <i class="fa fa-calendar" aria-hidden="true" style="color:purple"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site-color6.png" mode="cover" style="width: 16px; height: 16px;" bindtap="showSpecimenInfo"></image>
+                    <i class="fa fa-calendar" aria-hidden="true" style="color:green"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site-color6.png" mode="cover" style="width: 16px; height: 16px;" bindtap="showSpecimenInfo"></image>
+                    <i class="fa fa-calendar" aria-hidden="true" style="color:green"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
         </wux-row>
@@ -305,52 +310,52 @@
             </wux-col>
             <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
         </wux-row>
@@ -362,52 +367,52 @@
             </wux-col>
             <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site-disable.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-times-o" aria-hidden="true" style="opacity:0.3"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site-disable.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-times-o" aria-hidden="true" style="opacity:0.3"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site-disable.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-times-o" aria-hidden="true" style="opacity:0.3"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
         </wux-row>
@@ -419,52 +424,53 @@
             </wux-col>
             <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site-color1.png" mode="cover" style="width: 16px; height: 16px; opacity:0.4;"></image>
+                    <!-- <image src="../../../img/site-color1.png" mode="cover" style="width: 16px; height: 16px; opacity:0.4;"></image> -->
+                    <i class="fa fa-calendar" aria-hidden="true" style="color:red ; opacity:0.3"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site-color1.png" mode="cover" style="width: 16px; height: 16px; opacity:0.4;"></image>
+                    <i class="fa fa-calendar" aria-hidden="true" style="color:red ; opacity:0.3"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site-color1.png" mode="cover" style="width: 16px; height: 16px; opacity:0.4;"></image>
+                    <i class="fa fa-calendar" aria-hidden="true" style="color:red ; opacity:0.3"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
         </wux-row>
@@ -476,52 +482,52 @@
             </wux-col>
             <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
         </wux-row>
@@ -533,52 +539,52 @@
             </wux-col>
             <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
         </wux-row>
@@ -590,52 +596,52 @@
             </wux-col>
             <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site-disable.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-times-o" aria-hidden="true" style="opacity:0.3"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site-disable.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-times-o" aria-hidden="true" style="opacity:0.3"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site-disable.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-times-o" aria-hidden="true" style="opacity:0.3"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site-disable.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-times-o" aria-hidden="true" style="opacity:0.3"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
-             <wux-col span="1">
+            <wux-col span="1">
                 <view style="text-align: center; font-size: 16px;">
-                    <image src="../../../img/site.png" mode="cover" style="width: 16px; height: 16px;"></image>
+                    <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
         </wux-row>
@@ -663,22 +669,28 @@
 </view>
 <wux-popup closable visible="{{ specimenInfoVisible }}" title="标本A10的信息" bind:close="onCloseSpecimenInfo" bind:closed="onClosedSpecimenInfo">
     <view style="text-align: left; margin-bottom: 10rpx;">
-        ID: <span style="color: #000;">2019022298008918</span>
+        ID:
+        <span style="color: #000;">2019022298008918</span>
     </view>
     <view style="text-align: left; margin-bottom: 10rpx;">
-        姓名: <span style="color: #000;">马老六</span>
+        姓名:
+        <span style="color: #000;">马老六</span>
     </view>
     <view style="text-align: left; margin-bottom: 10rpx;">
-        是否感染: <span style="color: #000;">否</span>
+        是否感染:
+        <span style="color: #000;">否</span>
     </view>
     <view style="text-align: left; margin-bottom: 10rpx;">
-        存放日期: <span style="color: #000;">2019-02-22</span>
+        存放日期:
+        <span style="color: #000;">2019-02-22</span>
     </view>
     <view style="text-align: left; margin-bottom: 10rpx;">
-        存放者: <span style="color: #000;">马冬梅</span>
+        存放者:
+        <span style="color: #000;">马冬梅</span>
     </view>
     <view style="text-align: left; margin-bottom: 10rpx;">
-        存放备注: <span style="color: #000;">马老六第一次存放的标本</span>
+        存放备注:
+        <span style="color: #000;">马老六第一次存放的标本</span>
     </view>
 </wux-popup>
 <wux-select id="selectInfect" />
