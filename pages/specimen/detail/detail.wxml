@@ -640,6 +640,20 @@
             </wux-col>
         </wux-row>
     </view>
+    <wux-divider position="left" text="已选位置" />
+    <view style="margin: 0rpx 15rpx;">
+        <wux-alert theme="dark" title="暂无已选位置，请在上方选择合适标本存放位置" />
+    </view>
+    <view>
+        <wux-row>
+            <wux-col span="6">
+                <wux-button block size="small" type="balanced">存放</wux-button>
+            </wux-col>
+            <wux-col span="6">
+                <wux-button block size="small" type="assertive">取出</wux-button>
+            </wux-col>
+        </wux-row>
+    </view>
 </view>
 <wux-popup closable visible="{{ specimenInfoVisible }}" title="标本A10的信息" bind:close="onCloseSpecimenInfo" bind:closed="onClosedSpecimenInfo">
     <view style="text-align: left; margin-bottom: 10rpx;">
