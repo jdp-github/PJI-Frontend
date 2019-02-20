@@ -162,27 +162,27 @@
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
@@ -194,52 +194,52 @@
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
@@ -297,7 +297,7 @@
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
@@ -309,52 +309,52 @@
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
@@ -376,42 +376,42 @@
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;" >
                     <i class="fa fa-calendar-times-o" aria-hidden="true" style="opacity:0.3"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
@@ -439,37 +439,37 @@
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
@@ -481,52 +481,52 @@
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
@@ -538,52 +538,52 @@
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
@@ -595,12 +595,12 @@
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
@@ -625,22 +625,22 @@
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;"  >
                     <i class="fa fa-calendar-o" aria-hidden="true" style="opacity:0.8"></i>
                 </view>
             </wux-col>
@@ -656,15 +656,8 @@
     <view style="margin: 0rpx 15rpx;">
         <wux-alert theme="dark" title="暂无已选位置，请在上方选择合适标本存放位置" />
     </view>
-    <view>
-        <wux-row>
-            <wux-col span="6">
-                <wux-button block size="small" type="balanced">存放</wux-button>
-            </wux-col>
-            <wux-col span="6">
-                <wux-button block size="small" type="assertive">取出</wux-button>
-            </wux-col>
-        </wux-row>
+    <view style="margin: 0rpx 15rpx;">
+        <wux-button block type="assertive">批量取出</wux-button>
     </view>
 </view>
 <wux-popup closable visible="{{ specimenInfoVisible }}" title="标本A10的信息" bind:close="onCloseSpecimenInfo" bind:closed="onClosedSpecimenInfo">

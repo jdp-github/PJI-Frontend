@@ -1,0 +1,37 @@
+<view class="box-info">
+    <view class="box-title">
+        标本A1(骨四-冷藏A)
+    </view>
+    <view class="box-description">
+        <span>
+            <i class="fa fa-clock-o"></i> 2018-01-22</span>
+        <span style="margin-left: 20rpx;">
+            <i class="fa fa-map-marker"></i> 骨四-冷藏A</span>
+        <span style="margin-left: 20rpx;">
+            <i class="fa fa-user"></i> 马老六</span>
+    </view>
+</view>
+<view>
+    <wux-cell-group title="标本说明">
+        <wux-cell hover-class="none">
+            <wux-textarea hasCount rows="3" cursorSpacing="80" placeholder="请输入标本说明信息..." />
+        </wux-cell>
+    </wux-cell-group>
+    <wux-cell-group title="关联信息">
+        <wux-search-bar clear show-cancel value="{{ value }}" controlled placeholder="请输入患者姓名或ID" bind:change="onChange" bind:focus="onFocus" bind:blur="onBlur" bind:confirm="onConfirm" bind:clear="onClear" bind:cancel="onCancel" />
+        <wux-cell title="马老六 (2018-01-22)" is-link label="id-10230123213" extra="已选"></wux-cell>
+        <wux-cell title="马老六 (2018-01-22)" is-link label="id-10230123213" extra="请选择"></wux-cell>
+        <wux-cell title="马老六 (2018-01-22)" is-link label="id-10230123213" extra="请选择"></wux-cell>
+        <wux-cell title="马老六 (2018-01-22)" is-link label="id-10230123213" extra="请选择"></wux-cell>
+        <wux-cell title="马老六 (2018-01-22)" is-link label="id-10230123213" extra="请选择"></wux-cell>
+    </wux-cell-group>
+    <wux-row>
+        <wux-col span="6">
+            <wux-button block type="assertive"> 存放</wux-button>
+        </wux-col>
+        <wux-col span="6">
+            <wux-button block type="dark"> 返回</wux-button>
+        </wux-col>
+    </wux-row>
+
+</view>

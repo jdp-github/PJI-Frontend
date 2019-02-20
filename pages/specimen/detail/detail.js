@@ -25,6 +25,7 @@ Page({
         ownerValue: '',
         ownerIndex: -1,
         specimenInfoVisible: false,
+        specimenSaveVisible: false,
     },
     showSpecimenInfo: function() {
         this.setData({
@@ -34,6 +35,16 @@ Page({
     closeSpecimenInfo() {
         this.setData({
             specimenInfoVisible: false,
+        });
+    },
+    showSpecimenSave: function() {
+        this.setData({
+            specimenSaveVisible: true,
+        });
+    },
+    closeSpecimenSave: function() {
+        this.setData({
+            specimenSaveVisible: false,
         });
     },
     onClose(key) {
@@ -46,6 +57,12 @@ Page({
     },
     onClosedSpecimenInfo() {
         console.log('onClosedSpecimenInfo')
+    },
+    onCloseSpecimenSave() {
+        this.onClose('specimenSaveVisible')
+    },
+    onClosedSpecimenSave() {
+        console.log('onClosedSpecimenSave')
     },
 
     // ================== 筛选 begin ================== //

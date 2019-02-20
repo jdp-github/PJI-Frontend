@@ -1,0 +1,19 @@
+{
+  "usingComponents": {
+    "wux-icon": "../../../miniprogram_npm/wux-weapp/icon/index",
+    "wux-button": "../../../miniprogram_npm/wux-weapp/button/index",
+    "wux-row": "../../../miniprogram_npm/wux-weapp/row/index",
+    "wux-col": "../../../miniprogram_npm/wux-weapp/col/index",
+    "wux-popup": "../../../miniprogram_npm/wux-weapp/popup/index",
+    "wux-input": "../../../miniprogram_npm/wux-weapp/input/index",
+    "wux-cell-group": "../../../miniprogram_npm/wux-weapp/cell-group/index",
+    "wux-toptips": "../../../miniprogram_npm/wux-weapp/toptips/index",
+    "wux-divider": "../../../miniprogram_npm/wux-weapp/divider/index",
+    "wux-alert": "../../../miniprogram_npm/wux-weapp/alert/index",
+    "wux-cell": "../../../miniprogram_npm/wux-weapp/cell/index",
+    "wux-select": "../../../miniprogram_npm/wux-weapp/select/index",
+    "wux-textarea": "../../../miniprogram_npm/wux-weapp/textarea/index",
+    "wux-search-bar": "../../../miniprogram_npm/wux-weapp/search-bar/index"
+  },
+  "backgroundColor": "#f8f8f8"
+}
