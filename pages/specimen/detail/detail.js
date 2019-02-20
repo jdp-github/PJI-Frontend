@@ -108,11 +108,11 @@ Page({
     },
     // ================== 筛选 end ================== //
 
-    onLoad: function(e) {
-        this.setData({
-            boxId: options.boxId
-        })
-        this.requestSampleList()
+    onLoad: function (options) {
+        // this.setData({
+        //     boxId: options.boxId
+        // })
+        // this.requestSampleList()
     },
 
     requestSampleList() {
