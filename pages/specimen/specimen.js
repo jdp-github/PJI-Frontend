@@ -259,7 +259,7 @@ Page({
 
     onItemClick(e) {
         wx.navigateTo({
-            url: '/detail/detail?boxId=' + e.target.dataset.selecteditem.id
+            url: '../specimen/detail/detail?boxId=' + e.currentTarget.dataset.selecteditem.id
         })
     },
 

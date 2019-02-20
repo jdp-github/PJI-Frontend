@@ -9,6 +9,9 @@ var constant = require('../../../utils/constant.js');
 var util = require('../../../utils/util.js');
 
 Page({
+    // wx.navigateBack({
+    //     delta: -1
+    // });
     data: {
         value: '',
     },

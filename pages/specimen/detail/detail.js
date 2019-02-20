@@ -8,10 +8,21 @@ const app = getApp();
 var constant = require('../../../utils/constant.js');
 var util = require('../../../utils/util.js');
 
+// 空闲
+const SPECIMEN_TYPE_FREE = 0
+// 存放
+const SPECIMEN_TYPE_PUT = 1
+// 取出
+const SPECIMEN_TYPE_GET = 2
+// 无权限
+const SPECIMEN_TYPE_NO_RIGHT = 3
+
 Page({
     data: {
         boxId: '',
         boxInfo: {},
+        specimenGrid: [],
+        letterArr: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", ],
         // 是否感染
         infectTitle: '请选择是否感染',
         infectValue: '',
@@ -24,9 +35,12 @@ Page({
         ownerTitle: '请选择存放者',
         ownerValue: '',
         ownerIndex: -1,
+        // 弹出框
         specimenInfoVisible: false,
         specimenSaveVisible: false,
     },
+
+    // 查看标本信息
     showSpecimenInfo: function() {
         this.setData({
             specimenInfoVisible: true,
@@ -37,32 +51,11 @@ Page({
             specimenInfoVisible: false,
         });
     },
-    showSpecimenSave: function() {
-        this.setData({
-            specimenSaveVisible: true,
-        });
-    },
-    closeSpecimenSave: function() {
-        this.setData({
-            specimenSaveVisible: false,
-        });
-    },
-    onClose(key) {
-        this.setData({
-            [key]: false,
-        })
-    },
     onCloseSpecimenInfo() {
-        this.onClose('specimenInfoVisible')
+        this.closeSpecimenInfo('specimenInfoVisible')
     },
     onClosedSpecimenInfo() {
         console.log('onClosedSpecimenInfo')
-    },
-    onCloseSpecimenSave() {
-        this.onClose('specimenSaveVisible')
-    },
-    onClosedSpecimenSave() {
-        console.log('onClosedSpecimenSave')
     },
 
     // ================== 筛选 begin ================== //
@@ -71,8 +64,9 @@ Page({
             value: this.data.infectValue,
             options: [
                 "清空",
-                '是',
-                '否',
+                "不能确定",
+                '非感染',
+                '感染',
             ],
             onConfirm: (value, index, options) => {
                 if (index !== -1) {
@@ -81,6 +75,7 @@ Page({
                         infectTitle: options[index],
                         infectIndex: index
                     })
+                    this.requestSampleList(this.data.typeIndex, 0)
                 }
             },
         })
@@ -100,6 +95,7 @@ Page({
                         typeTitle: options[index],
                         typeIndex: index
                     })
+                    this.requestSampleList(0, this.data.typeIndex)
                 }
             },
         })
@@ -125,14 +121,14 @@ Page({
     },
     // ================== 筛选 end ================== //
 
-    onLoad: function (options) {
-        // this.setData({
-        //     boxId: options.boxId
-        // })
-        // this.requestSampleList()
+    onLoad: function(options) {
+        this.setData({
+            boxId: options.boxId
+        })
+        this.requestSampleList()
     },
 
-    requestSampleList() {
+    requestSampleList(msis, type) {
         wx.showLoading({
             title: '请求数据中...',
         });
@@ -143,25 +139,29 @@ Page({
             data: {
                 service: 'Sample.GetSampleList',
                 openid: app.globalData.openid,
-                box_id: that.data.boxId
+                box_id: that.data.boxId,
+                msis: msis,
+                type: type
             },
             header: {
                 'content-type': 'application/json'
             },
             success(res) {
-                console.log("Sample.GetSampleList:" + JSON.stringify(res))
+                // console.log("Sample.GetSampleList:" + JSON.stringify(res))
                 wx.hideLoading();
                 if (res.data.data.code == constant.response_success) {
                     var boxInfo = res.data.data.info;
-                    if (boxInfo.ctime > 0) {
-                        boxInfo.ctime = util.formatTime(boxInfo.ctime, 'Y-M-D')
-                    }
+
                     if (boxInfo.utime > 0) {
-                        boxInfo.utime = util.formatTime(boxInfo.utime, 'Y-M-D')
+                        boxInfo.showTime = util.formatTime(boxInfo.utime, 'Y-M-D')
+                    } else if (boxInfo.ctime > 0) {
+                        boxInfo.showTime = util.formatTime(boxInfo.ctime, 'Y-M-D')
                     }
 
+                    var specimenGrid = that.makeSpecimenGrid(res.data.data.list)
                     that.setData({
-                        boxInfo: boxInfo
+                        boxInfo: boxInfo,
+                        specimenGrid: specimenGrid
                     })
                 } else {
                     wx.showToast({
@@ -174,5 +174,45 @@ Page({
                 wx.hideLoading();
             }
         })
+    },
+
+    makeSpecimenGrid(specimenList) {
+        var specimenGrid = []
+        var row = []
+        for (var i = 0, column = 0, length = specimenList.length; i < length; i++) {
+            var specimen = specimenList[i]
+            specimen.index = (i % 10) + 1
+            row[i % 10] = specimen
+
+            if ((i + 1) % 10 == 0) {
+                var specimen = {
+                    index: 0,
+                    text: this.data.letterArr[column]
+                }
+                row.unshift(specimen)
+                specimenGrid[column] = row
+                column++
+                row = []
+            }
+        }
+
+        console.log(specimenGrid)
+        return specimenGrid
+    },
+
+    onItemClick(e) {
+        var specimen = e.target.dataset.selecteditem
+        if (specimen.color_type == SPECIMEN_TYPE_FREE) { // 空闲
+            wx.navigateTo({
+                url: '../save/save?boxId=' + e.currentTarget.dataset.selecteditem.id
+            })
+        } else if (specimen.color_type == SPECIMEN_TYPE_PUT || specimen.color_type == SPECIMEN_TYPE_GET) { // 已存放 or 已取出
+            this.showSpecimenInfo()
+        } else if (specimen.color_type == SPECIMEN_TYPE_NO_RIGHT) { // 无权限
+            wx.showToast({
+                icon: "none",
+                title: '您无权限查看',
+            })
+        }
     }
 });
