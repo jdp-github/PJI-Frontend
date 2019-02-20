@@ -109,7 +109,7 @@ Page({
     // ================== 筛选 end ================== //
 
     onLoad: function(e) {
-        this.setDta({
+        this.setData({
             boxId: options.boxId
         })
         this.requestSampleList()

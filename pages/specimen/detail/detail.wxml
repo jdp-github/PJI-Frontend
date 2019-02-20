@@ -251,48 +251,48 @@
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;" bindtap="showSpecimenInfo">
                     <!-- <image src="../../../img/site-color1.png" mode="cover" style="width: 16px; height: 16px;" bindtap="showSpecimenInfo"></image> -->
                     <i class="fa fa-calendar" aria-hidden="true" style="color:red"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;" bindtap="showSpecimenInfo">
                     <i class="fa fa-calendar" aria-hidden="true" style="color:red"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;" bindtap="showSpecimenInfo">
                     <i class="fa fa-calendar" aria-hidden="true" style="color:blue"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;" bindtap="showSpecimenInfo">
                     <i class="fa fa-calendar" aria-hidden="true" style="color:blue"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;" bindtap="showSpecimenInfo">
                     <i class="fa fa-calendar" aria-hidden="true" style="color:purple"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;" bindtap="showSpecimenInfo">
                     <i class="fa fa-calendar" aria-hidden="true" style="color:purple"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;" bindtap="showSpecimenInfo">
                     <i class="fa fa-calendar" aria-hidden="true" style="color:purple"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;" bindtap="showSpecimenInfo">
                     <i class="fa fa-calendar" aria-hidden="true" style="color:green"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;" bindtap="showSpecimenInfo">
                     <i class="fa fa-calendar" aria-hidden="true" style="color:green"></i>
                 </view>
             </wux-col>
@@ -423,18 +423,18 @@
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;" bindtap="showSpecimenInfo">
                     <!-- <image src="../../../img/site-color1.png" mode="cover" style="width: 16px; height: 16px; opacity:0.4;"></image> -->
                     <i class="fa fa-calendar" aria-hidden="true" style="color:red ; opacity:0.3"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;" bindtap="showSpecimenInfo">
                     <i class="fa fa-calendar" aria-hidden="true" style="color:red ; opacity:0.3"></i>
                 </view>
             </wux-col>
             <wux-col span="1">
-                <view style="text-align: center; font-size: 16px;">
+                <view style="text-align: center; font-size: 16px;" bindtap="showSpecimenInfo">
                     <i class="fa fa-calendar" aria-hidden="true" style="color:red ; opacity:0.3"></i>
                 </view>
             </wux-col>
