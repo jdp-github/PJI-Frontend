@@ -87,8 +87,8 @@
                 </view>
                 <!-- 标本 -->
                 <view wx:else>
-                    <wux-col span="1" data-selecteditem="{{item}}">
-                        <view style="text-align: center; font-size: 16px;" bindtap='onItemClick'>
+                    <wux-col span="1">
+                        <view style="text-align: center; font-size: 16px;" data-selecteditem="{{item}}" bindtap='onItemClick'>
                             <i class="fa {{item.icon}}" aria-hidden="true" style="{{item.color_hex}}"></i>
                         </view>
                     </wux-col>
@@ -109,36 +109,49 @@
         <wux-alert theme="dark" title="暂无已选位置，请在上方选择合适标本存放位置" />
     </view>
     <view style="margin: 0rpx 15rpx;">
-        <wux-button block type="assertive">批量取出</wux-button>
+        <wux-button block type="assertive" bindtap='onGetAll'>批量取出</wux-button>
     </view>
 </view>
 
 <!-- 标本基本信息 -->
-<wux-popup closable visible="{{ specimenInfoVisible }}" title="标本A10的信息" bind:close="onCloseSpecimenInfo" bind:closed="onClosedSpecimenInfo">
+<wux-popup closable visible="{{ specimenInfoVisible }}" title="标本{{selectedSpecimen.number}}的信息" bind:close="onCloseSpecimenInfo" bind:closed="onClosedSpecimenInfo">
     <view style="text-align: left; margin-bottom: 10rpx;">
         ID:
-        <span style="color: #000;">2019022298008918</span>
+        <span style="color: #000;">{{selectedSpecimen.sample_id}}</span>
     </view>
     <view style="text-align: left; margin-bottom: 10rpx;">
         姓名:
-        <span style="color: #000;">马老六</span>
+        <span style="color: #000;">{{selectedSpecimen.patient_name}}</span>
     </view>
     <view style="text-align: left; margin-bottom: 10rpx;">
         是否感染:
-        <span style="color: #000;">否</span>
+        <span style="color: #000;">{{selectedSpecimen.msis}}</span>
     </view>
     <view style="text-align: left; margin-bottom: 10rpx;">
         存放日期:
-        <span style="color: #000;">2019-02-22</span>
+        <span style="color: #000;">{{selectedSpecimen.put_time}}</span>
     </view>
     <view style="text-align: left; margin-bottom: 10rpx;">
         存放者:
-        <span style="color: #000;">马冬梅</span>
+        <span style="color: #000;">{{selectedSpecimen.put_staff}}</span>
     </view>
     <view style="text-align: left; margin-bottom: 10rpx;">
         存放备注:
-        <span style="color: #000;">马老六第一次存放的标本</span>
+        <span style="color: #000;">{{selectedSpecimen.remark}}</span>
     </view>
+    <view style="text-align: left; margin-bottom: 10rpx;" hidden='{{selectedSpecimen.isPutted}}'>
+        取出日期:
+        <span style="color: #000;">{{selectedSpecimen.get_time}}</span>
+    </view>
+    <view style="text-align: left; margin-bottom: 10rpx;" hidden='{{selectedSpecimen.isPutted}}'>
+        取出者:
+        <span style="color: #000;">{{selectedSpecimen.get_staff}}</span>
+    </view>
+    <wux-row hidden='{{selectedSpecimen.isPutted}}'>
+        <wux-col span="6" push="3">
+            <wux-button block type="assertive" bindtap='onGetClick'>取出</wux-button>
+        </wux-col>
+    </wux-row>
 </wux-popup>
 <wux-select id="selectInfect" />
 <wux-select id="selectType" />
