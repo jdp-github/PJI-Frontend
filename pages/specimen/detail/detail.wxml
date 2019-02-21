@@ -87,8 +87,8 @@
                 </view>
                 <!-- 标本 -->
                 <view wx:else>
-                    <wux-col span="1" data-selecteditem="{{item}}" bingtap='onItemClick'>
-                        <view style="text-align: center; font-size: 16px;">
+                    <wux-col span="1" data-selecteditem="{{item}}">
+                        <view style="text-align: center; font-size: 16px;" bindtap='onItemClick'>
                             <i class="fa {{item.icon}}" aria-hidden="true" style="{{item.color_hex}}"></i>
                         </view>
                     </wux-col>

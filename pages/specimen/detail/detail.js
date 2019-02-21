@@ -159,7 +159,7 @@ Page({
                 } else {
                     wx.showToast({
                         icon: 'none',
-                        title: res.data.data.msg,
+                        title: res.data.msg,
                     })
                 }
             },
@@ -205,7 +205,7 @@ Page({
                 } else {
                     wx.showToast({
                         icon: 'none',
-                        title: res.data.data.msg,
+                        title: res.data.msg,
                     })
                 }
             },
@@ -240,6 +240,7 @@ Page({
     },
 
     onItemClick(e) {
+        console.log(111)
         var specimen = e.target.dataset.selecteditem
         if (specimen.color_type == SPECIMEN_TYPE_FREE) { // 空闲
             wx.navigateTo({
