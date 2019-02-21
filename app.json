@@ -1,7 +1,7 @@
 {
     "pages": [
-        "pages/specimen/save/save",
         "pages/authorization/authorization",
+        "pages/specimen/save/save",
         "pages/specimen/detail/detail",
         "pages/specimen/specimen",
         "pages/statement/statement",

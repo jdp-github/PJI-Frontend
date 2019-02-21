@@ -35,6 +35,8 @@ Page({
         ownerTitle: '请选择存放者',
         ownerValue: '',
         ownerIndex: -1,
+        staffList: [],
+        staffNameList: [],
         // 弹出框
         specimenInfoVisible: false,
         specimenSaveVisible: false,
@@ -75,7 +77,7 @@ Page({
                         infectTitle: options[index],
                         infectIndex: index
                     })
-                    this.requestSampleList(this.data.typeIndex, 0)
+                    this.requestSampleList(this.data.typeIndex, this.data.infectIndex, this.data.staffList[this.data.ownerIndex]).staff_id
                 }
             },
         })
@@ -95,7 +97,7 @@ Page({
                         typeTitle: options[index],
                         typeIndex: index
                     })
-                    this.requestSampleList(0, this.data.typeIndex)
+                    this.requestSampleList(this.data.typeIndex, this.data.infectIndex, this.data.staffList[this.data.ownerIndex]).staff_id
                 }
             },
         })
@@ -103,11 +105,7 @@ Page({
     onClickOwner() {
         $wuxSelect('#selectOwner').open({
             value: this.data.ownerValue,
-            options: [
-                "清空",
-                '小王',
-                '小雷',
-            ],
+            options: staffNameList,
             onConfirm: (value, index, options) => {
                 if (index !== -1) {
                     this.setData({
@@ -115,6 +113,7 @@ Page({
                         ownerTitle: options[index],
                         ownerIndex: index
                     })
+                    this.requestSampleList(this.data.typeIndex, this.data.infectIndex, this.data.staffList[this.data.ownerIndex]).staff_id
                 }
             },
         })
@@ -125,10 +124,49 @@ Page({
         this.setData({
             boxId: options.boxId
         })
+        this.requestCenterStaffList(options.centerId)
         this.requestSampleList()
     },
 
-    requestSampleList(msis, type) {
+    // 中心人员
+    requestCenterStaffList(centerId) {
+        // debugger
+        var that = this
+        wx.request({
+            url: constant.basePath,
+            data: {
+                service: 'Center.SearchCenterMember',
+                center_id: centerId,
+                keyword: '',
+                sort: 1
+            },
+            header: {
+                'content-type': 'application/json'
+            },
+            success(res) {
+                console.log("Center.SearchCenterMember:" + JSON.stringify(res))
+                if (res.data.data.code == constant.response_success) {
+                    var staffNameList = []
+                    for (var i = 0, len = res.data.data.list.length; i < len; i++) {
+                        var staff = res.data.data.list[i]
+                        staff.auth_time = util.formatTime(staff.auth_time, 'Y-M-D')
+                        staffNameList[i] = staff.staff_name
+                    }
+                    that.setData({
+                        staffList: res.data.data.list,
+                        staffNameList: staffNameList
+                    })
+                } else {
+                    wx.showToast({
+                        icon: 'none',
+                        title: res.data.data.msg,
+                    })
+                }
+            },
+        })
+    },
+
+    requestSampleList(msis, type, staffId) {
         wx.showLoading({
             title: '请求数据中...',
         });
@@ -141,7 +179,8 @@ Page({
                 openid: app.globalData.openid,
                 box_id: that.data.boxId,
                 msis: msis,
-                type: type
+                type: type,
+                staff_id: staffId
             },
             header: {
                 'content-type': 'application/json'
