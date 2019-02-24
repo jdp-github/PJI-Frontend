@@ -22,9 +22,12 @@ Page({
         centerId: '',
         boxId: '',
         boxInfo: {},
+
+        letterArr: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", ],
         specimenGrid: [],
         selectedSpecimen: {},
-        letterArr: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", ],
+        isGetAll: false,
+        getAllList: [],
         // 是否感染
         infectTitle: '请选择',
         infectValue: '',
@@ -62,6 +65,9 @@ Page({
 
     // ================== 筛选 begin ================== //
     onClickInfect() {
+        if (this.data.isGetAll) {
+            return
+        }
         $wuxSelect('#selectInfect').open({
             value: this.data.infectValue,
             options: [
@@ -83,6 +89,9 @@ Page({
         })
     },
     onClickType() {
+        if (this.data.isGetAll) {
+            return
+        }
         $wuxSelect('#selectType').open({
             value: this.data.typeValue,
             options: [
@@ -103,6 +112,9 @@ Page({
         })
     },
     onClickOwner() {
+        if (this.data.isGetAll) {
+            return
+        }
         $wuxSelect('#selectOwner').open({
             value: this.data.ownerValue,
             options: this.data.staffNameList,
@@ -126,7 +138,28 @@ Page({
             centerId: options.centerId
         })
         this.requestCenterStaffList(this.data.centerId)
+        this.initData()
+
+    },
+
+    initData() {
+        this.clearFilter()
         this.requestSampleList()
+    },
+
+    // 清空筛选的状态
+    clearFilter() {
+        this.setData({
+            typeIndex: 0,
+            typeValue: '',
+            typeTitle: '请选择',
+            infectIndex: 0,
+            infectValue: '',
+            infectTitle: '请选择',
+            ownerIndex: 0,
+            ownerValue: '',
+            ownerTitle: '请选择'
+        })
     },
 
     // 中心人员
@@ -155,7 +188,6 @@ Page({
                     var staffNameList = []
                     for (var i = 0, len = staffList.length; i < len; i++) {
                         var staff = staffList[i]
-                        // staff.auth_time = util.formatTime(staff.auth_time, 'Y-M-D')
                         staffNameList[i] = staff.staff_name
                     }
 
@@ -199,9 +231,9 @@ Page({
                     var boxInfo = res.data.data.info;
 
                     if (boxInfo.utime > 0) {
-                        boxInfo.showTime = util.formatTime(boxInfo.utime, 'Y-M-D')
+                        boxInfo.showTime = util.formatTime(boxInfo.utime, 'Y-M-D h:m')
                     } else if (boxInfo.ctime > 0) {
-                        boxInfo.showTime = util.formatTime(boxInfo.ctime, 'Y-M-D')
+                        boxInfo.showTime = util.formatTime(boxInfo.ctime, 'Y-M-D h:m')
                     }
 
                     var specimenGrid = that.makeSpecimenGrid(res.data.data.list)
@@ -248,23 +280,48 @@ Page({
     onItemClick(e) {
         var specimen = e.currentTarget.dataset.selecteditem
 
-        if (specimen.color_type == SPECIMEN_TYPE_FREE) { // 空闲
-            wx.navigateTo({
-                url: '../save/save?specimenInfo=' + JSON.stringify(e.currentTarget.dataset.selecteditem) + "&boxInfo=" + JSON.stringify(this.data.boxInfo) + "&centerId=" + this.data.centerId
-            })
-        } else if (specimen.color_type == SPECIMEN_TYPE_PUT) { // 已存放 
-            this.showDetail(true, specimen.sample_id)
-        } else if (specimen.color_type == SPECIMEN_TYPE_GET) { // 已取出
-            this.showDetail(false, specimen.sample_id)
-        } else if (specimen.color_type == SPECIMEN_TYPE_NO_RIGHT) { // 无权限
+        if (specimen.color_type == SPECIMEN_TYPE_NO_RIGHT) { // 无权限
             wx.showToast({
                 icon: "none",
                 title: '您无权限查看',
             })
+            return
+        }
+
+        if (!this.data.isGetAll) { // 普通模式
+            if (specimen.color_type == SPECIMEN_TYPE_FREE) { // 空闲
+                wx.navigateTo({
+                    url: '../save/save?specimenInfo=' + JSON.stringify(e.currentTarget.dataset.selecteditem) + "&boxInfo=" + JSON.stringify(this.data.boxInfo) + "&centerId=" + this.data.centerId
+                })
+            } else if (specimen.color_type == SPECIMEN_TYPE_PUT || specimen.color_type == SPECIMEN_TYPE_GET) { // 已存放 or 已取出
+                this.showDetail(specimen.sample_id)
+            }
+        } else { // 批量取出
+            var number = specimen.number
+            var columnIndex = this.data.letterArr.indexOf(number.substring(0, 1))
+            var rowIndex = number.substring(1, number.length)
+            var selectedItem = this.data.specimenGrid[columnIndex][rowIndex]
+            if (selectedItem.isChecked) {
+                selectedItem.isChecked = false
+                selectedItem.icon = selectedItem.origiIcon
+                selectedItem.color_hex = selectedItem.origiColor
+                this.data.getAllList.splice(this.data.getAllList.indexOf(selectedItem.sample_id), 1)
+            } else {
+                selectedItem.isChecked = true
+                selectedItem.origiColor = selectedItem.color_hex
+                selectedItem.origiIcon = selectedItem.icon
+                selectedItem.icon = "fa-calendar-check-o"
+                selectedItem.color_hex = "green"
+                this.data.getAllList.push(selectedItem.sample_id)
+            }
+            this.setData({
+                specimenGrid: this.data.specimenGrid
+            })
+            // console.log(this.data.getAllList)
         }
     },
 
-    showDetail(isPutted, specimenId) {
+    showDetail(specimenId) {
         this.showSpecimenInfo()
         wx.showLoading({
             title: '请求数据中...',
@@ -287,12 +344,12 @@ Page({
                 if (res.data.data.code == constant.response_success) {
                     var specimenInfo = res.data.data.info
                     specimenInfo.msis = that.getMsisInfo(specimenInfo.msis)
-                    specimenInfo.put_time = util.formatTime(specimenInfo.put_time, 'Y-M-D')
-                    specimenInfo.get_time = util.formatTime(specimenInfo.get_time, 'Y-M-D')
-                    specimenInfo.isPutted = isPutted
+                    specimenInfo.put_time = util.formatTime(specimenInfo.put_time, 'Y-M-D h:m')
+                    specimenInfo.get_time = util.formatTime(specimenInfo.get_time, 'Y-M-D h:m')
                     that.setData({
                         selectedSpecimen: specimenInfo
                     })
+                    console.log(that.data.selectedSpecimen)
                 } else {
                     wx.showToast({
                         icon: 'none',
@@ -321,6 +378,11 @@ Page({
 
     onGetClick() {
         this.closeSpecimenInfo()
+        this.getSpecimen(this.data.selectedSpecimen.sample_id)
+    },
+
+    // 取出标本
+    getSpecimen(sample_ids) {
         wx.showLoading({
             title: '取出标本中...',
         });
@@ -331,7 +393,7 @@ Page({
             data: {
                 service: 'Sample.GetSample',
                 openid: app.globalData.openid,
-                sample_ids: that.data.selectedSpecimen.sample_id
+                sample_ids: sample_ids
             },
             header: {
                 'content-type': 'application/json'
@@ -340,14 +402,7 @@ Page({
                 console.log("Sample.GetSample:" + JSON.stringify(res))
                 wx.hideLoading();
                 if (res.data.data.code == constant.response_success) {
-                    that.setData({
-                        typeIndex: 0,
-                        typeTitle: '请选择',
-                        infectIndex: 0,
-                        infectTitle: '请选择',
-                        ownerIndex: 0,
-                        ownerTitle: '请选择'
-                    })
+                    that.clearFilter()
                     that.requestSampleList(that.data.typeIndex, that.data.infectIndex, that.data.staffList[that.data.ownerIndex].staff_id)
                 } else {
                     wx.showToast({
@@ -362,7 +417,55 @@ Page({
         })
     },
 
+    onGetAllMode() {
+        this.setData({
+            isGetAll: true
+        })
+        this.clearFilter()
+        this.requestSampleList(this.data.typeIndex, this.data.infectIndex, this.data.staffList[this.data.ownerIndex].staff_id)
+    },
+
+    onGetAllBack() {
+        this.setData({
+            isGetAll: false
+        })
+        this.clearSelectStatus()
+    },
+
     onGetAll() {
-        
+        if (this.data.getAllList.length == 0) {
+            wx.showToast({
+                icon: 'none',
+                title: '请选择要取出的标本',
+            })
+            return
+        }
+
+        var sample_ids = ""
+        var getAllList = this.data.getAllList
+        for (var i = 0, length = getAllList.length; i < length; i++) {
+            sample_ids += getAllList[i] + ","
+        }
+        sample_ids = sample_ids.substr(0, sample_ids.length - 1)
+        // console.log(sample_ids)
+        this.getSpecimen(sample_ids)
+    },
+
+    // 清空选中标本的状态
+    clearSelectStatus() {
+        var specimenGrid = this.data.specimenGrid
+        for (var i = 0, column = specimenGrid.length; i < column; i++) {
+            for (var j = 0, row = specimenGrid[i].length; j < row; j++) {
+                var specimenItem = specimenGrid[i][j]
+                if (specimenItem.isChecked) {
+                    specimenItem.isChecked = false
+                    specimenItem.icon = specimenItem.origiIcon
+                    specimenItem.color_hex = specimenItem.origiColor
+                }
+            }
+        }
+        this.setData({
+            specimenGrid: specimenGrid
+        })
     }
 });

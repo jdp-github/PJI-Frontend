@@ -89,7 +89,7 @@
                 <view wx:else>
                     <wux-col span="1">
                         <view style="text-align: center; font-size: 16px;" data-selecteditem="{{item}}" bindtap='onItemClick'>
-                            <i class="fa {{item.icon}}" aria-hidden="true" style="{{item.color_hex}}"></i>
+                            <i class="fa {{item.icon}}" aria-hidden="true" style="color:{{item.color_hex}}"></i>
                         </view>
                     </wux-col>
                 </view>
@@ -104,12 +104,20 @@
         <wux-cell title="手术类型" extra="{{ typeTitle }}" bind:click="onClickType"></wux-cell>
         <wux-cell title="存放者" extra="{{ ownerTitle }}" bind:click="onClickOwner"></wux-cell>
     </view>
-    <wux-divider position="left" text="已选位置" />
+    <!-- <wux-divider position="left" text="已选位置" />
     <view style="margin: 0rpx 15rpx;">
         <wux-alert theme="dark" title="暂无已选位置，请在上方选择合适标本存放位置" />
+    </view> -->
+    <view style="margin: 0rpx 15rpx;" hidden='{{isGetAll?true:false}}'>
+        <wux-button block type="assertive" bindtap='onGetAllMode'>批量取出</wux-button>
     </view>
-    <view style="margin: 0rpx 15rpx;">
-        <wux-button block type="assertive" bindtap='onGetAll'>批量取出</wux-button>
+    <!-- 取出按钮 -->
+    <view style="margin: 0rpx 15rpx;" hidden='{{isGetAll?false:true}}'>
+        <wux-button block type="assertive" bindtap='onGetAll'>取出</wux-button>
+    </view>
+    <!-- 返回按钮 -->
+    <view style="margin: 0rpx 15rpx;" hidden='{{isGetAll?false:true}}'>
+        <wux-button block type="balanced" bindtap='onGetAllBack'>返回</wux-button>
     </view>
 </view>
 
@@ -139,15 +147,15 @@
         存放备注:
         <span style="color: #000;">{{selectedSpecimen.remark}}</span>
     </view>
-    <view style="text-align: left; margin-bottom: 10rpx;" hidden='{{selectedSpecimen.isPutted}}'>
+    <view style="text-align: left; margin-bottom: 10rpx;" hidden='{{selectedSpecimen.status != 2}}'>
         取出日期:
         <span style="color: #000;">{{selectedSpecimen.get_time}}</span>
     </view>
-    <view style="text-align: left; margin-bottom: 10rpx;" hidden='{{selectedSpecimen.isPutted}}'>
+    <view style="text-align: left; margin-bottom: 10rpx;" hidden='{{selectedSpecimen.status != 2}}'>
         取出者:
         <span style="color: #000;">{{selectedSpecimen.get_staff}}</span>
     </view>
-    <wux-row hidden='{{selectedSpecimen.isPutted}}'>
+    <wux-row style="display:{{selectedSpecimen.status == 2?'none':''}}">
         <wux-col span="6" push="3">
             <wux-button block type="assertive" bindtap='onGetClick'>取出</wux-button>
         </wux-col>

@@ -153,7 +153,7 @@ Page({
             //上一个页面实例对象
             var prePage = pages[pages.length - 2];
             //关键在这里
-            prePage.requestSampleList()
+            prePage.initData()
         }
     },
 
