@@ -17,6 +17,7 @@ const SORT_BY_INFLECT_DESC = -5
 Page({
     data: {
         centerId: '',
+        centerName: '',
         isAdmin: false,
         searchValue: '',
         sortType: SORT_BY_NAME_ASC,
@@ -121,12 +122,10 @@ Page({
     onLoad: function(options) {
         this.setData({
             centerId: options.centerId,
+            centerName: options.centerName,
             isAdmin: app.globalData.is_admin
         })
-        app.globalData.centerId = options.centerId
-        app.globalData.centerName = options.centerName
         this.initData()
-        // this.getCases();
     },
 
     onPullDownRefresh() {
@@ -147,7 +146,7 @@ Page({
             data: {
                 service: 'Case.SearchCaseList',
                 openid: app.globalData.openid,
-                center_id: app.globalData.centerId,
+                center_id: that.data.centerId,
                 keyword: searchValue,
                 sort: sortType
             },
@@ -272,6 +271,7 @@ Page({
         wx.showLoading({
             title: '鉴权中...',
         })
+        let that = this
         var selectedCase = e.currentTarget.dataset.selectedcase
         wx.request({
             url: constant.basePath,
@@ -288,7 +288,7 @@ Page({
                 wx.hideLoading()
                 if (res.data.data.code == 0) {
                     wx.navigateTo({
-                        url: '../case/detail/detail?case_id=' + selectedCase.case_id
+                        url: '../case/detail/detail?case_id=' + selectedCase.case_id + "&centerId=" + that.data.centerId + "&centerName=" + that.data.centerName
                     })
                 } else {
                     wx.showModal({

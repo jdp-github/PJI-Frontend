@@ -16,6 +16,10 @@ Page({
     data: {
         // 中心相关
         centerId: '',
+        // 病历号
+        caseId: '',
+        // 患者姓名
+        patient_name: '',
         // 搜索关键词
         searchValue: '',
         // 排序
@@ -199,6 +203,13 @@ Page({
         this.setData({
             centerId: options.centerId
         })
+        // 从病历页进来
+        if (typeof (options.caseId) != "undefined") {
+            this.setData({
+                caseId: options.caseId,
+                patient_name: options.patient_name
+            })
+        }
         this.initData()
     },
 
@@ -222,6 +233,7 @@ Page({
                 service: 'Sample.GetSampleBoxList',
                 openid: app.globalData.openid,
                 center_id: that.data.centerId,
+                case_id: that.data.caseId,
                 keyword: searchValue,
                 sort: sortType
             },
@@ -259,7 +271,7 @@ Page({
 
     onItemClick(e) {
         wx.navigateTo({
-            url: '../specimen/detail/detail?boxId=' + e.currentTarget.dataset.selecteditem.id + '&centerId=' + this.data.centerId
+            url: '../specimen/detail/detail?boxId=' + e.currentTarget.dataset.selecteditem.id + '&centerId=' + this.data.centerId + "&caseId=" + this.data.caseId
         })
     },
 

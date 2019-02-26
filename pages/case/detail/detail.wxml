@@ -519,6 +519,10 @@
                     </wux-col>
                 </wux-row>
             </wux-cell-group>
+            <!-- 标本 -->
+            <wux-cell-group title="">
+                <wux-cell title="标本" bind:click="onSpecimenClick"></wux-cell>
+            </wux-cell-group>
         </view>
     </scroll-view>
     <!-- 录入者 -->

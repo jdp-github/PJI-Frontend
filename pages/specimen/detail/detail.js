@@ -22,7 +22,7 @@ Page({
         centerId: '',
         boxId: '',
         boxInfo: {},
-
+        caseId: '',
         letterArr: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", ],
         specimenGrid: [],
         selectedSpecimen: {},
@@ -135,7 +135,8 @@ Page({
     onLoad: function(options) {
         this.setData({
             boxId: options.boxId,
-            centerId: options.centerId
+            centerId: options.centerId,
+            caseId: options.caseId
         })
         this.requestCenterStaffList(this.data.centerId)
         this.initData()
@@ -219,7 +220,8 @@ Page({
                 box_id: that.data.boxId,
                 msis: msis,
                 type: type,
-                staff_id: staffId
+                staff_id: staffId,
+                case_id: that.data.caseId
             },
             header: {
                 'content-type': 'application/json'

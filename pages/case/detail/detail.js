@@ -18,6 +18,7 @@ Page({
         caseInfo: {},
         // ------------- 第一页 ------------- //
         // 中心
+        centerId: '',
         center_name: '',
         // centerIndex: 0,
         // 姓名
@@ -839,6 +840,13 @@ Page({
         }
     },
 
+    // 标本
+    onSpecimenClick() {
+        wx.navigateTo({
+            url: '../../specimen/specimen?caseId=' + this.data.caseId + "&patient_name=" + this.data.patient_name + "&centerId=" + this.data.centerId
+        })
+    },
+
     onLoad: function(options) {
         var caseId = options.case_id
         if (caseId.length > 0) {
@@ -847,7 +855,8 @@ Page({
         this.setData({
             isCreateCase: caseId.length <= 0,
             caseId: options.case_id,
-            center_name: app.globalData.centerName
+            centerId: options.centerId,
+            center_name: options.centerName
         })
     },
 
@@ -1115,7 +1124,7 @@ Page({
     makeJsonData() {
         var that = this
         var caseObj = {
-            "center_id": app.globalData.centerId,
+            "center_id": that.data.centerId,
             "patient_name": that.data.patient_name,
             "case_no": that.data.case_no,
             "create_time": new Date(that.data.create_time[0]).getTime() / 1000,

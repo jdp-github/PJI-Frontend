@@ -1,9 +1,12 @@
-<view class="page__hd">
+<view class="page__hd" hidden="{{caseId.length > 0?true:false}}">
     <wux-search-bar clear controlled placeholder="请输标本盒名称" bind:change="onSearchChange" bind:clear="onSearchClear" bind:cancel="onSearchCancel" />
 </view>
-<view class="page">
+<view class="page" style="{{caseId.length > 0?'padding-top:0rpx':''}}">
     <view class="page__bd">
         <view class="case-block">
+            <view style="background-color:#fff;padding:10rpx;text-align:center;font-size:35rpx" hidden='{{caseId.length > 0?false:true}}'>
+                {{patient_name}}的标本
+            </view>
             <wux-filterbar items="{{ filterItems }}" bind:change="onFilterChange" />
             <view class="operation-view">
                 <wux-button block size="small" type="assertive" bindtap='addBox'>
@@ -47,7 +50,7 @@
                         </view>
                         <wux-col span="12">
                             <!-- 删除 -->
-                            <wux-button block size="small" type="assertive" wx:if="{{item.is_display_lock == 1}}"  catchtap='onDele' data-selecteditem="{{item}}">
+                            <wux-button block size="small" type="assertive" wx:if="{{item.is_display_lock == 1}}" catchtap='onDele' data-selecteditem="{{item}}">
                                 <i class="fa fa-cog"></i> 删除</wux-button>
                             <!-- 解锁/修改 -->
                             <wux-button block size="small" type="balanced" wx:if="{{item.is_display_lock == 1}}" catchtap='onLock' data-selecteditem="{{item}}">
