@@ -1,9 +1,0 @@
-{
-  "usingComponents": {
-    "wux-button": "../../miniprogram_npm/wux-weapp/button/index",
-    "wux-wing-blank": "../../miniprogram_npm/wux-weapp/wing-blank/index",
-    "wux-avatar": "../../miniprogram_npm/wux-weapp/avatar/index",
-	"wux-toast": "../../miniprogram_npm/wux-weapp/toast/index"
-  },
-  "backgroundColor": "#f8f8f8"
-}

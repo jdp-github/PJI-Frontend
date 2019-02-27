@@ -1,6 +1,6 @@
 {
   "name": "PJI-Frontend",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Frontend site for PJI",
   "main": "app.js",
   "scripts": {
@@ -18,6 +18,5 @@
   },
   "homepage": "https://github.com/Jason-ZW/PJI-Frontend#readme",
   "dependencies": {
-    "wux-weapp": "^3.3.1"
   }
 }
