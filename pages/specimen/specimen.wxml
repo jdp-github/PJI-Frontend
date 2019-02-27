@@ -31,19 +31,19 @@
                                 <view>
                                     <wux-row>
                                         <wux-col span="12">
-                                            <view style="text-align: right; font-size: 35rpx;">
-                                                 <wux-tag color="geekblue">
+                                            <view style="font-size: 35rpx;">
+                                                 {{item.name}} <wux-tag color="geekblue">
                                                       {{item.is_lock == 0?'已锁定':'未锁定'}}
-                                                 </wux-tag> {{item.name}}
+                                                 </wux-tag>
                                             </view>
                                         </wux-col>
                                     </wux-row>
                                 </view>
-                                <view style="text-align: right; margin-top: 10rpx; font-size: 25rpx; color: #ef473a">
+                                <view style="margin-top: 10rpx; font-size: 25rpx; color: #ef473a">
                                    {{item.depositary}}
                                    {{item.ctime}}
                                 </view>
-                                <view style="text-align: right; width: 100%;">
+                                <view style="width: 100%;">
                                     <wux-row>
                                         <wux-col span="6">
                                             <!-- 删除 -->
@@ -53,7 +53,7 @@
                                         <wux-col span="6">
                                             <!-- 解锁/修改 -->
                                             <wux-button block size="small" type="dark" wx:if="{{item.is_display_lock == 1}}" catchtap='onLock' data-selecteditem="{{item}}">
-                                                <i class="fa fa-{{item.is_lock == 0?'unlock':'unlock'}}"></i> </wux-button>
+                                                <i class="fa fa-{{item.is_lock == 0?'unlock':'lock'}}"></i> </wux-button>
                                         </wux-col>
                                     </wux-row>
                                 </view>
