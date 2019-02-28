@@ -1,0 +1,14 @@
+.cu-list.menu>.cu-item .content {
+    line-height:1.1em;
+    flex:1;
+    font-size:30rpx;
+}
+.margin-tab-bottom {
+    margin-bottom: 80px;
+}
+.leader-text {
+    width: 100rpx;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}

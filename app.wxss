@@ -113,6 +113,14 @@
     left: 0;
 }
 
+.box-bottom {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+}
+
 image[class*="gif-"]{
     border-radius: 6rpx;
     display: block;

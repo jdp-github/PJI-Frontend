@@ -106,7 +106,7 @@ Page({
             this.setData({
                 loadModal: false
             });
-        }, 1500)
+        }, 1500);
     },
     multiChange: function (e) {
         this.setData({

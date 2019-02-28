@@ -1,0 +1,110 @@
+<view class="cu-custom" style="height:{{CustomBar}}px;">
+    <view class="cu-bar fixed bg-gradual-green" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+        <navigator class='action border-custom' open-type="navigateBack" delta="1" hover-class="none"
+                   style='width:{{Custom.width}}px;height:{{Custom.height}}px;margin-left:calc(750rpx - {{Custom.right}}px)'>
+            <text class='icon-back'></text>
+            <text class='icon-homefill'></text>
+        </navigator>
+        <view class='content' style='top:{{StatusBar}}px;'>中心列表</view>
+    </view>
+</view>
+<view class="cu-bar bg-white search fixed" style="top:{{CustomBar}}px;">
+    <view class='search-form round'>
+        <text class="icon-search"></text>
+        <input type="text" placeholder="搜索中心、名称、关键字" confirm-type="search" value="{{searchValue}}" bindinput="onSearchChange"></input>
+    </view>
+    <view class='action'>
+        <button class='cu-btn bg-green shadow-blur round' bindtap="onSearch">搜索</button>
+    </view>
+</view>
+<scroll-view scroll-y class="indexes" scroll-into-view="indexes-{{listCurID}}" style='padding-top:50px; height:calc(100vh - {{CustomBar}}px - 50px)' scroll-with-animation="true" enable-back-to-top="true">
+    <view class="cu-list menu menu-avatar">
+        <view view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}}" wx:for="{{centerList}}" wx:key="{{item.center_id}}" bindtouchstart='ListTouchStart' bindtouchmove='ListTouchMove' bindtouchend='ListTouchEnd' data-target="move-box-{{index}}">
+            <view class="cu-avatar radius  margin-left">
+                <text>{{item.center_name_prefix_letter}}</text>
+            </view>
+            <view class='content'>
+                <view class='text-grey'>{{item.center_name}}</view>
+                <view class="bg-white" style="padding-right: 20rpx;">
+                    <view class="cu-progress radius striped active">
+                        <view class='bg-olive' style="width:{{item.completed_percentage*100}}%;">{{item.completed_percentage==0?'':item.completed_percentage*100}}{{item.completed_percentage==0?'':'%'}}</view>
+                        <view class='bg-cyan' style="width:{{item.no_approve_percentage*100}}%;">{{item.no_approve_percentage==0?'':item.no_approve_percentage*100}}{{item.no_approve_percentage==0?'':'%'}}</view>
+                        <view class='bg-red' style="width:{{item.no_completed_percentage*100}}%;">{{item.no_completed_percentage==0?'':item.no_completed_percentage*100}}{{item.no_completed_percentage==0?'':'%'}}</view>
+                    </view>
+                </view>
+            </view>
+            <view class='action'>
+                <view class='text-grey text-xs'>{{item.center_ctime==null?'暂无':item.center_ctime}}</view>
+                <view class="cu-tag round bg-grey sm leader-text">{{item.center_leader}}</view>
+            </view>
+            <view class='move'>
+                <view class='bg-olive'>人员</view>
+                <view class="bg-cyan">标本</view>
+            </view>
+        </view>
+    </view>
+</scroll-view>
+<view class='box-bottom'>
+    <view class="cu-bar tabbar bg-white">
+        <view class="action text-green">
+            <view class='icon-homefill'></view> 中心
+        </view>
+        <view class="action text-gray">
+            <view class='icon-rankfill'></view> 统计
+        </view>
+        <view class="action text-gray add-action">
+            <button class='cu-btn icon-add bg-green shadow' bindtap="showModal" data-target="AddCenterModal"></button>
+            新增
+        </view>
+        <view class="action text-gray">
+            <view class='icon-service'>
+                <view class='cu-tag badge'>99</view>
+            </view>
+            客服
+        </view>
+        <view class="action text-gray">
+            <view class='icon-my'>
+                <view class='cu-tag badge'></view>
+            </view>
+            我的
+        </view>
+    </view>
+</view>
+<view class='load-progress {{loadProgress!=0?"show":"hide"}}' style="top:{{CustomBar}}px;">
+    <view class='load-progress-bar bg-green' style="transform: translate3d(-{{100-loadProgress}}%, 0px, 0px);"></view>
+    <view class='load-progress-spinner text-green'></view>
+</view>
+<view class='cu-load load-modal' wx:if="{{loadModal}}">
+    <view class='gray-text'>处理中...</view>
+</view>
+<view class="load-curtain" wx:if="{{loadProgress!=0}}"></view>
+<view class="cu-modal {{modalName=='AddCenterModal'?'show':''}}">
+    <view class="cu-dialog">
+        <view class="cu-bar bg-white justify-end">
+            <view class='content'>新增中心</view>
+            <view class='action' bindtap='hideModal'>
+                <text class='icon-close text-red'></text>
+            </view>
+        </view>
+        <view class='padding-xl' wx:if="{{isAdmin}}">
+            <view class="cu-form-group margin-top">
+                <view class='title'>中心名称</view>
+                <input placeholder="请输入中心名称" class='radius' name='input' value="{{centerName}}" bindinput="centerNameInput"></input>
+            </view>
+        </view>
+        <view class='solids-bottom padding-xs flex align-center' wx:if="{{!isAdmin}}">
+            <view class='flex-sub text-center'>
+                <view class='solid-bottom text-sl padding'>
+                    <text class='icon-warnfill text-red'></text>
+                </view>
+                <view class='padding'>当前用户暂无权限</view>
+            </view>
+        </view>
+        <view class="cu-bar bg-white justify-end">
+            <view class='action'>
+                <button class='cu-btn line-green text-green' bindtap='hideModal'>取消</button>
+                <button class='cu-btn bg-green margin-left' bindtap='hideModal' wx:if="{{isAdmin}}" bindtap="addCenter">确定</button>
+            </view>
+        </view>
+    </view>
+</view>

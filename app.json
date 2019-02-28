@@ -7,6 +7,7 @@
     "navigationStyle": "custom",
     "navigationBarTextStyle": "white",
     "navigationBarTitleText": "PJI-登记系统",
-    "navigationBarBackgroundColor": "#23292D"
+    "navigationBarBackgroundColor": "#23292D",
+    "enablePullDownRefresh": true
   }
 }
