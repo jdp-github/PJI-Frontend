@@ -1,6 +1,5 @@
 <view class='UCenter-bg'>
     <view class="cu-avatar round xl bg-gray margin-xs" style="background-image:url({{avatarUrl}});">
-        <text class='avatar-text'>加载中</text>
     </view>
     <view class='text-xl'>
         PJI-登记系统
@@ -27,3 +26,4 @@
 <view class='cu-load load-modal' wx:if="{{loadModal}}">
     <view class='gray-text'>加载中...</view>
 </view>
+<view class="load-curtain" wx:if="{{loadModal}}"></view>

@@ -1,6 +1,6 @@
 "use strict";
 App({
-    onLunch: function () {
+    onLaunch: function () {
         wx.getSystemInfo({
             success: e => {
                 this.globalData.StatusBar = e.statusBarHeight;
@@ -8,11 +8,14 @@ App({
                 this.globalData.Custom = custom;
                 this.globalData.CustomBar = custom.bottom + custom.top - e.statusBarHeight;
             }
-        })
+        });
     },
     globalData: {
         is_admin: '', // 管理员flag 0否，1是
         openid: '',
-        avatarUrl: ''
+        avatarUrl: '',
+        Custom: '',
+        CustomBar: '',
+        StatusBar: '',
     }
 });

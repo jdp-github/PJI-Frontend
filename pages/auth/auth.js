@@ -121,7 +121,7 @@ Page({
                 success(res) {
                     that.hideLoading();
                     if (res.data.data.code == constant.response_success) {
-                        wx.switchTab({
+                        wx.navigateTo({
                             url: '../center/center'
                         });
                     } else {
