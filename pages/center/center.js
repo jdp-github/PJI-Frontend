@@ -261,7 +261,27 @@ Page({
             url: '../center/member/member?centerId=' + e.target.dataset.centerid
         });
     },
-    onClickSpecimen: function(e) {
+    onClickSpecimen: function (e) {
         console.log("specimen");
+    },
+    navigateToCenter: function (e) {
+        wx.navigateTo({
+            url: '../center/center'
+        });
+    },
+    navigateToStats: function (e) {
+        wx.navigateTo({
+            url: '../stats/stats'
+        });
+    },
+    navigateToService: function (e) {
+        wx.navigateTo({
+            url: '../service/service'
+        });
+    },
+    navigateToPerson: function (e) {
+        wx.navigateTo({
+            url: '../person/person'
+        });
     }
 });

@@ -47,22 +47,22 @@
 <view class='box-bottom'>
     <view class="cu-bar tabbar bg-white">
         <view class="action text-green">
-            <view class='icon-homefill'></view> 中心
+            <view class='icon-homefill' bindtap="navigateToCenter"></view> 中心
         </view>
         <view class="action text-gray">
-            <view class='icon-rankfill'></view> 统计
+            <view class='icon-rankfill' bindtap="navigateToStats"></view> 统计
         </view>
         <view class="action text-gray add-action">
             <button class='cu-btn icon-add bg-green shadow' bindtap="showModal" data-target="AddCenterModal"></button>
             新增
         </view>
-        <view class="action text-gray">
+        <view class="action text-gray" bindtap="navigateToService">
             <view class='icon-service'>
                 <view class='cu-tag badge'>99</view>
             </view>
             客服
         </view>
-        <view class="action text-gray">
+        <view class="action text-gray" bindtap="navigateToPerson">
             <view class='icon-my'>
                 <view class='cu-tag badge'></view>
             </view>
