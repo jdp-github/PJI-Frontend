@@ -38,8 +38,8 @@
                 <view class="cu-tag round bg-grey sm leader-text">{{item.center_leader}}</view>
             </view>
             <view class='move'>
-                <view class='bg-olive'>人员</view>
-                <view class="bg-cyan">标本</view>
+                <view class='bg-olive' data-centerId="{{item.center_id}}" bindtap="onClickMember">人员</view>
+                <view class="bg-cyan" bindtap="onClickSpecimen">标本</view>
             </view>
         </view>
     </view>

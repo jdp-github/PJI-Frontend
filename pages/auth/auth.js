@@ -91,14 +91,13 @@ Page({
                         that.register(res);
                     }
                 } else {
-                    wx.showToast({
-                        icon: 'none',
+                    that.showToast({
                         title: res.data.data.msg,
                     });
                 }
             },
             fail(res) {
-                that.hideLoading()
+                that.hideLoading();
             }
         });
     },
@@ -130,7 +129,7 @@ Page({
                 },
                 fail(res) {
                     that.hideLoading();
-                    wx.showToast({
+                    that.showToast({
                         title: '登录出错',
                     });
                 }

@@ -147,7 +147,6 @@ Page({
                     });
                 } else {
                     that.showToast({
-                        icon: 'none',
                         title: res.data.data.msg
                     });
                 }
@@ -205,8 +204,7 @@ Page({
 
                 } else {
                     that.showToast({
-                        icon: 'none',
-                        title: res.data.data.msg,
+                        title: res.data.data.msg
                     });
                 }
             },
@@ -223,8 +221,7 @@ Page({
     addCenter: function () {
         let that = this;
         if (that.data.centerName.length == 0) {
-            wx.showToast({
-                icon: 'none',
+            that.showToast({
                 title: '请输入中心名',
             });
             return
@@ -247,7 +244,6 @@ Page({
                     that.initData();
                 } else {
                     that.showToast({
-                        icon: 'none',
                         title: res.data.data.msg,
                     });
                 }
@@ -259,5 +255,13 @@ Page({
                 that.hideLoading();
             }
         });
+    },
+    onClickMember: function (e) {
+        wx.navigateTo({
+            url: '../center/member/member?centerId=' + e.target.dataset.centerid
+        });
+    },
+    onClickSpecimen: function(e) {
+        console.log("specimen");
     }
 });
