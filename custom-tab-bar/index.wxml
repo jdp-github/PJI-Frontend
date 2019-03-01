@@ -1,0 +1,26 @@
+<view class='box-bottom'>
+    <view class="cu-bar tabbar bg-white">
+        <view class="action text-{{selected === 0 ? 'green':'gray'}}">
+            <view class='icon-homefill' bindtap="navigateToCenter"></view> 中心
+        </view>
+        <view class="action text-{{selected === 1 ? 'green':'gray'}}">
+            <view class='icon-rankfill' bindtap="navigateToStats"></view> 统计
+        </view>
+        <view class="action text-gray add-action">
+            <button class='cu-btn icon-add bg-green shadow' bindtap="triggerEvent"></button>
+            新增
+        </view>
+        <view class="action text-{{selected === 2 ? 'green':'gray'}}" bindtap="navigateToService">
+            <view class='icon-service'>
+                <view class='cu-tag badge'>99</view>
+            </view>
+            客服
+        </view>
+        <view class="action text-{{selected === 3 ? 'green':'gray'}}" bindtap="navigateToPerson">
+            <view class='icon-my'>
+                <view class='cu-tag badge'></view>
+            </view>
+            我的
+        </view>
+    </view>
+</view>

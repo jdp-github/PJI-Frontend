@@ -1,7 +1,7 @@
 <view class="cu-custom" style="height:{{CustomBar}}px;">
     <view class="cu-bar fixed bg-gradual-green" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
         <navigator class='action border-custom' open-type="navigateBack" delta="1" hover-class="none"
-                   style='width:{{Custom.width}}px;height:{{Custom.height}}px;margin-left:calc(750rpx - {{Custom.right}}px)'>
+                   style='width:{{Custom.width}}px;height:{{Custom.height}}px;margin-left:calc(750rpx - {{Custom.right}}px)' bindtap="backToAuth">
             <text class='icon-back'></text>
             <text class='icon-homefill'></text>
         </navigator>
@@ -17,7 +17,7 @@
         <button class='cu-btn bg-green shadow-blur round' bindtap="onSearch">搜索</button>
     </view>
 </view>
-<scroll-view scroll-y class="indexes" scroll-into-view="indexes-{{listCurID}}" style='padding-top:50px; height:calc(100vh - {{CustomBar}}px - 50px)' scroll-with-animation="true" enable-back-to-top="true">
+<scroll-view scroll-y class="indexes margin-tab-bottom" scroll-into-view="indexes-{{listCurID}}" style='padding-top:50px; height:calc(100vh - {{CustomBar}}px - 50px)' scroll-with-animation="true" enable-back-to-top="true">
     <view class="cu-list menu menu-avatar">
         <view view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}}" wx:for="{{centerList}}" wx:key="{{item.center_id}}" bindtouchstart='ListTouchStart' bindtouchmove='ListTouchMove' bindtouchend='ListTouchEnd' data-target="move-box-{{index}}">
             <view class="cu-avatar radius  margin-left">
@@ -25,16 +25,16 @@
             </view>
             <view class='content'>
                 <view class='text-grey'>{{item.center_name}}</view>
-                <view class="bg-white" style="padding-right: 20rpx;">
+                <view class="bg-white" style="padding-right: 20rpx; margin-top: 4rpx;">
                     <view class="cu-progress radius striped active">
-                        <view class='bg-olive' style="width:{{item.completed_percentage*100}}%;">{{item.completed_percentage==0?'':item.completed_percentage*100}}{{item.completed_percentage==0?'':'%'}}</view>
-                        <view class='bg-cyan' style="width:{{item.no_approve_percentage*100}}%;">{{item.no_approve_percentage==0?'':item.no_approve_percentage*100}}{{item.no_approve_percentage==0?'':'%'}}</view>
-                        <view class='bg-red' style="width:{{item.no_completed_percentage*100}}%;">{{item.no_completed_percentage==0?'':item.no_completed_percentage*100}}{{item.no_completed_percentage==0?'':'%'}}</view>
+                        <view class='bg-olive' style="width:{{item.completed_percentage*100}}%;">{{item.completed_cases==0?'.':item.completed_cases}}</view>
+                        <view class='bg-cyan' style="width:{{item.no_approve_percentage*100}}%;">{{item.no_approve_cases==0?'.':item.no_approve_cases}}</view>
+                        <view class='bg-red' style="width:{{item.no_completed_percentage*100}}%;">{{item.no_completed_cases==0?'.':item.no_completed_cases}}</view>
                     </view>
                 </view>
             </view>
             <view class='action'>
-                <view class='text-grey text-xs'>{{item.center_ctime==null?'暂无':item.center_ctime}}</view>
+                <view class='text-grey text-xs'>{{item.center_ctime==null?'0000-00-00':item.center_ctime}}</view>
                 <view class="cu-tag round bg-grey sm leader-text">{{item.center_leader}}</view>
             </view>
             <view class='move'>
@@ -44,32 +44,6 @@
         </view>
     </view>
 </scroll-view>
-<view class='box-bottom'>
-    <view class="cu-bar tabbar bg-white">
-        <view class="action text-green">
-            <view class='icon-homefill' bindtap="navigateToCenter"></view> 中心
-        </view>
-        <view class="action text-gray">
-            <view class='icon-rankfill' bindtap="navigateToStats"></view> 统计
-        </view>
-        <view class="action text-gray add-action">
-            <button class='cu-btn icon-add bg-green shadow' bindtap="showModal" data-target="AddCenterModal"></button>
-            新增
-        </view>
-        <view class="action text-gray" bindtap="navigateToService">
-            <view class='icon-service'>
-                <view class='cu-tag badge'>99</view>
-            </view>
-            客服
-        </view>
-        <view class="action text-gray" bindtap="navigateToPerson">
-            <view class='icon-my'>
-                <view class='cu-tag badge'></view>
-            </view>
-            我的
-        </view>
-    </view>
-</view>
 <view class='load-progress {{loadProgress!=0?"show":"hide"}}' style="top:{{CustomBar}}px;">
     <view class='load-progress-bar bg-green' style="transform: translate3d(-{{100-loadProgress}}%, 0px, 0px);"></view>
     <view class='load-progress-spinner text-green'></view>

@@ -120,7 +120,7 @@ Page({
                 success(res) {
                     that.hideLoading();
                     if (res.data.data.code == constant.response_success) {
-                        wx.navigateTo({
+                        wx.switchTab({
                             url: '../center/center'
                         });
                     } else {

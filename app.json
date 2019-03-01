@@ -1,6 +1,8 @@
 {
   "pages": [
-    "pages/auth/auth"
+    "pages/auth/auth",
+    "pages/center/center",
+    "pages/stats/stats"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -9,5 +11,18 @@
     "navigationBarTitleText": "PJI-登记系统",
     "navigationBarBackgroundColor": "#23292D",
     "enablePullDownRefresh": true
+  },
+  "tabBar": {
+    "custom": true,
+    "list": [
+      {
+        "pagePath": "pages/center/center",
+        "text": "中心"
+      },
+      {
+        "pagePath": "pages/stats/stats",
+        "text": "统计"
+      }
+    ]
   }
 }

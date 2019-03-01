@@ -5,6 +5,7 @@ let util = require('../../utils/util.js');
 
 const app = getApp();
 
+
 Page({
     data: {
         loadProgress: 0,
@@ -19,6 +20,25 @@ Page({
         visibleCenter: false,
         centerName: ''
     },
+    onHide: function () {
+        this.setData({
+            modalName: ''
+        });
+    },
+    onShow: function () {
+        if (typeof this.getTabBar === 'function' &&
+            this.getTabBar()) {
+            this.getTabBar().setData({
+                selected: 0,
+                emitter: app.globalData.emitter
+            });
+        }
+        app.globalData.emitter.on('addEmitter', () => {
+            this.setData({
+                modalName: 'AddCenterModal'
+            });
+        });
+    },
     onLoad: function () {
         let that = this;
         that.loadProgress();
@@ -28,6 +48,9 @@ Page({
         this.initData();
     },
     onPullDownRefresh: function () {
+        this.setData({
+            searchValue: ''
+        });
         this.loadProgress();
         this.initData();
     },
@@ -96,7 +119,7 @@ Page({
             ListTouchDirection: null
         });
     },
-    showModal: function (e) {
+    showModal: function (msg) {
         this.setData({
             modalName: e.currentTarget.dataset.target
         });
@@ -264,24 +287,9 @@ Page({
     onClickSpecimen: function (e) {
         console.log("specimen");
     },
-    navigateToCenter: function (e) {
+    backToAuth: function() {
         wx.navigateTo({
-            url: '../center/center'
-        });
-    },
-    navigateToStats: function (e) {
-        wx.navigateTo({
-            url: '../stats/stats'
-        });
-    },
-    navigateToService: function (e) {
-        wx.navigateTo({
-            url: '../service/service'
-        });
-    },
-    navigateToPerson: function (e) {
-        wx.navigateTo({
-            url: '../person/person'
+            url: '../auth/auth'
         });
     }
 });

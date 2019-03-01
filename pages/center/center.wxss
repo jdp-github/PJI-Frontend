@@ -4,7 +4,7 @@
     font-size:30rpx;
 }
 .margin-tab-bottom {
-    margin-bottom: 80px;
+    margin-bottom: 120rpx;
 }
 .leader-text {
     width: 100rpx;

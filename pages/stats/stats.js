@@ -11,6 +11,24 @@ Page({
         StatusBar: app.globalData.StatusBar,
         CustomBar: app.globalData.CustomBar,
         Custom: app.globalData.Custom,
+        emitter: null,
+    },
+    onHide: function () {
+        this.setData({
+            modalName: ''
+        });
+    },
+    onShow: function () {
+        if (typeof this.getTabBar === 'function' &&
+            this.getTabBar()) {
+            this.getTabBar().setData({
+                selected: 1,
+                emitter: app.globalData.emitter
+            });
+            app.globalData.emitter.on('addEmitter', () => {
+                console.log("stats modal");
+            });
+        }
     },
     loadProgress: function () {
         if (this.data.loadProgress < 96) {
@@ -59,24 +77,9 @@ Page({
     onClickSpecimen: function (e) {
         console.log("specimen");
     },
-    navigateToCenter: function (e) {
+    backToAuth: function() {
         wx.navigateTo({
-            url: '../center/center'
-        });
-    },
-    navigateToStats: function (e) {
-        wx.navigateTo({
-            url: '../stats/stats'
-        });
-    },
-    navigateToService: function (e) {
-        wx.navigateTo({
-            url: '../service/service'
-        });
-    },
-    navigateToPerson: function (e) {
-        wx.navigateTo({
-            url: '../person/person'
+            url: '../auth/auth'
         });
     }
 });

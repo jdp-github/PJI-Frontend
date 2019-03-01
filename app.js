@@ -1,4 +1,8 @@
 "use strict";
+
+let eventEmitter = require('events');
+let emitter = new eventEmitter();
+
 App({
     onLaunch: function () {
         wx.getSystemInfo({
@@ -17,5 +21,7 @@ App({
         Custom: '',
         CustomBar: '',
         StatusBar: '',
+        selected: 0,
+        emitter: emitter
     }
 });
