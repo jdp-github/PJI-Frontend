@@ -1,6 +1,10 @@
 @import "icon.wxss";
 @import "colorui.wxss";
 
+.text-decoration {
+    text-decoration: underline;
+}
+
 .nav-list {
     display: flex;
     flex-wrap: wrap;

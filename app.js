@@ -18,6 +18,7 @@ App({
         is_admin: '', // 管理员flag 0否，1是
         openid: '',
         avatarUrl: '',
+        nickName: '',
         Custom: '',
         CustomBar: '',
         StatusBar: '',

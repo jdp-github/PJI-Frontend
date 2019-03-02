@@ -10,12 +10,12 @@
             <button class='cu-btn icon-add bg-green shadow' bindtap="triggerEvent"></button>
             新增
         </view>
-        <view class="action text-{{selected === 2 ? 'green':'gray'}}" bindtap="navigateToService">
+        <button class="action text-{{selected === 2 ? 'green':'gray'}}" open-type="contact">
             <view class='icon-service'>
-                <view class='cu-tag badge'>99</view>
+                <view class='cu-tag badge'></view>
             </view>
             客服
-        </view>
+        </button>
         <view class="action text-{{selected === 3 ? 'green':'gray'}}" bindtap="navigateToPerson">
             <view class='icon-my'>
                 <view class='cu-tag badge'></view>

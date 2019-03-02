@@ -47,6 +47,7 @@ Page({
                 avatarUrl: e.detail.userInfo.avatarUrl
             });
             app.globalData.avatarUrl = e.detail.userInfo.avatarUrl;
+            app.globalData.nickName = e.detail.userInfo.nickName;
             // 微信登录
             wx.login({
                 timeout: 1000 * 10, // 超时时间(ms)

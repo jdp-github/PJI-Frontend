@@ -2,7 +2,9 @@
   "pages": [
     "pages/auth/auth",
     "pages/center/center",
-    "pages/stats/stats"
+    "pages/stats/stats",
+    "pages/person/person",
+    "pages/service/service"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -22,6 +24,14 @@
       {
         "pagePath": "pages/stats/stats",
         "text": "统计"
+      },
+      {
+        "pagePath": "pages/service/service",
+        "text": "客服"
+      },
+      {
+        "pagePath": "pages/person/person",
+        "text": "我的"
       }
     ]
   }
