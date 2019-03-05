@@ -19,6 +19,7 @@
   "homepage": "https://github.com/Jason-ZW/PJI-Frontend#readme",
   "dependencies": {
     "events": "^3.0.0",
-    "tiny-pinyin": "^1.3.0"
+    "tiny-pinyin": "^1.3.0",
+    "wux-weapp": "^3.5.0"
   }
 }

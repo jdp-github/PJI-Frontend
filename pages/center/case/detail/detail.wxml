@@ -1,0 +1,83 @@
+<view class="cu-custom" style="height:{{CustomBar}}px;">
+    <view class="cu-bar fixed bg-gradual-green" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+        <navigator class='action border-custom' open-type="navigateBack" delta="1" hover-class="none"
+                   style='width:{{Custom.width}}px;height:{{Custom.height}}px;margin-left:calc(750rpx - {{Custom.right}}px)'>
+            <text class='icon-back'></text>
+            <text class='icon-homefill'></text>
+        </navigator>
+        <view class='content' style='top:{{StatusBar}}px;'>病历录入</view>
+    </view>
+</view>
+<view class="cu-bar bg-white fixed" style="top:{{CustomBar}}px;">
+    <view class="flex">
+        <view class='avatar-group'>
+            <view class="cu-avatar-group">
+                <view class='cu-tag radius' style="margin-right: 45rpx;">录入者</view> <view class="cu-avatar round" wx:for="{{4}}" wx:key style="background-image:url(https://image.weilanwl.com/img/square-{{index+1}}.jpg);"></view>
+            </view>
+        </view>
+    </view>
+    <view class="flex">
+        <view class='avatar-group'>
+            <view class="cu-avatar-group">
+                <view class='cu-tag radius' style="margin-right: 45rpx;">审核者</view> <view class="cu-avatar round" wx:for="{{4}}" wx:key style="background-image:url(https://image.weilanwl.com/img/square-{{index+1}}.jpg);"></view>
+            </view>
+        </view>
+    </view>
+</view>
+<scroll-view scroll-y class="indexes margin-bottom" scroll-into-view="indexes-{{listCurID}}"
+             style='padding-top: 110rpx;height:calc(100vh - {{CustomBar}}px)' scroll-with-animation="true" enable-back-to-top="true">
+    <view class="VerticalBox">
+        <scroll-view class="VerticalNav nav" scroll-y scroll-with-animation scroll-top="{{VerticalNavTop}}" style="height:calc(100vh - 375rpx)">
+            <view class="cu-item {{index==TabCur?'text-green cur':''}}" style="font-size: 20rpx" wx:for="{{TabTitle}}" wx:key bindtap='tabSelect' data-id="{{index}}">
+                {{item}}
+            </view>
+        </scroll-view>
+        <scroll-view class="VerticalMain" scroll-y style="height:calc(100vh - 375rpx)" wx:if="{{ShowBasic}}">
+            <view class="padding-top padding-lr">
+                <view class='cu-bar solid-bottom bg-white'>
+                    <view class='action'>
+                        <text class='icon-title text-green'></text> 基本信息</view>
+                </view>
+                <view class="cu-list menu menu-avatar">
+                    <view class="cu-item">
+
+                    </view>
+                </view>
+            </view>
+        </scroll-view>
+        <scroll-view class="VerticalMain" scroll-y style="height:calc(100vh - 375rpx)" wx:if="{{ShowDiagnose}}">
+            <view class="padding-top padding-lr">
+                <view class='cu-bar solid-bottom bg-white'>
+                    <view class='action'>
+                        <text class='icon-title text-green'></text> 穿刺后信息</view>
+                </view>
+                <view class="cu-list menu menu-avatar">
+                    <view class="cu-item">
+
+                    </view>
+                </view>
+            </view>
+        </scroll-view>
+        <scroll-view class="VerticalMain" scroll-y style="height:calc(100vh - 375rpx)" wx:if="{{ShowAdmission}}">
+            <view class="padding-top padding-lr">
+                <view class='cu-bar solid-bottom bg-white'>
+                    <view class='action'>
+                        <text class='icon-title text-green'></text> 入院后信息</view>
+                </view>
+                <view class="cu-list menu menu-avatar">
+                    <view class="cu-item">
+
+                    </view>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+</scroll-view>
+<view class='load-progress {{loadProgress!=0?"show":"hide"}}' style="top:{{CustomBar}}px;">
+    <view class='load-progress-bar bg-green' style="transform: translate3d(-{{100-loadProgress}}%, 0px, 0px);"></view>
+    <view class='load-progress-spinner text-green'></view>
+</view>
+<view class='cu-load load-modal' wx:if="{{loadModal}}">
+    <view class='gray-text'>处理中...</view>
+</view>
+<view class="load-curtain" wx:if="{{loadProgress!=0}}"></view>

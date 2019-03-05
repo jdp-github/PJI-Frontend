@@ -4,7 +4,7 @@ var __DEFINE__ = function(modId, func, req) { var m = { exports: {} }; __MODS__[
 var __REQUIRE__ = function(modId, source) { if(!__MODS__[modId]) return require(source); if(!__MODS__[modId].status) { var m = { exports: {} }; __MODS__[modId].status = 1; __MODS__[modId].func(__MODS__[modId].req, m, m.exports); if(typeof m.exports === "object") { Object.keys(m.exports).forEach(function(k) { __MODS__[modId].m.exports[k] = m.exports[k]; }); if(m.exports.__esModule) Object.defineProperty(__MODS__[modId].m.exports, "__esModule", { value: true }); } else { __MODS__[modId].m.exports = m.exports; } } return __MODS__[modId].m.exports; };
 var __REQUIRE_WILDCARD__ = function(obj) { if(obj && obj.__esModule) { return obj; } else { var newObj = {}; if(obj != null) { for(var k in obj) { if (Object.prototype.hasOwnProperty.call(obj, k)) newObj[k] = obj[k]; } } newObj.default = obj; return newObj; } };
 var __REQUIRE_DEFAULT__ = function(obj) { return obj && obj.__esModule ? obj.default : obj; };
-__DEFINE__(1551448990609, function(require, module, exports) {
+__DEFINE__(1551774234830, function(require, module, exports) {
 'use strict';
 
 var pinyin = require('./core');
@@ -16,8 +16,8 @@ if (pinyin.isSupported() && patcher56L.shouldPatch(pinyin.genToken)) {
 }
 
 module.exports = pinyin;
-}, function(modId) {var map = {"./core":1551448990610,"./patchers/56l":1551448990612}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1551448990610, function(require, module, exports) {
+}, function(modId) {var map = {"./core":1551774234831,"./patchers/56l":1551774234833}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1551774234831, function(require, module, exports) {
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -164,8 +164,8 @@ module.exports = {
     }).join(separator || '');
   }
 };
-}, function(modId) { var map = {"./dict":1551448990611}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1551448990611, function(require, module, exports) {
+}, function(modId) { var map = {"./dict":1551774234832}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1551774234832, function(require, module, exports) {
 /**
  * Source: <https://android.googlesource.com/platform/packages/providers/ContactsProvider/+/0c49720fb3d58e346739c2ccd56ed2b739249e07/src/com/android/providers/contacts/HanziToPinyin.java>
  * Updated by creeper
@@ -212,7 +212,7 @@ module.exports = {
   EXCEPTIONS: EXCEPTIONS
 };
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1551448990612, function(require, module, exports) {
+__DEFINE__(1551774234833, function(require, module, exports) {
 'use strict';
 
 exports = module.exports = function patcher(DICT) {
@@ -262,6 +262,6 @@ exports.shouldPatch = function shouldPatch(toToken) {
   return false;
 };
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-return __REQUIRE__(1551448990609);
+return __REQUIRE__(1551774234830);
 })()
 //# sourceMappingURL=index.js.map

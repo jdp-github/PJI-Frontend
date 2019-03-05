@@ -279,6 +279,11 @@ Page({
             }
         });
     },
+    onClickCase: function(e) {
+        wx.navigateTo({
+            url: '../center/case/case?centerId=' + e.target.dataset.center.center_id + "&centerName=" + e.target.dataset.center.center_name
+        });
+    },
     onClickMember: function (e) {
         wx.navigateTo({
             url: '../center/member/member?centerId=' + e.target.dataset.centerid

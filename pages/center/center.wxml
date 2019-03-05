@@ -32,12 +32,14 @@
                         <view class='bg-red' style="width:{{item.no_completed_percentage*100}}%;">{{item.no_completed_cases==0?'.':item.no_completed_cases}}</view>
                     </view>
                 </view>
+                <input type="hidden" name="centerIdInput" id="centerIdInput" value="{{item.center_id}}" style="display:none;"/>
             </view>
             <view class='action'>
                 <view class='text-grey text-xs'>{{item.center_ctime==null?'0000-00-00':item.center_ctime}}</view>
                 <view class="cu-tag round bg-grey sm leader-text">{{item.center_leader}}</view>
             </view>
             <view class='move'>
+                <view class='bg-orange' data-center="{{item}}" bindtap="onClickCase">病例</view>
                 <view class='bg-olive' data-centerId="{{item.center_id}}" bindtap="onClickMember">人员</view>
                 <view class="bg-cyan" bindtap="onClickSpecimen">标本</view>
             </view>
