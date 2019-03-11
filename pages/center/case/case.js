@@ -251,5 +251,15 @@ Page({
                 that.hideLoading();
             }
         });
+    },
+    showModal: function (msg) {
+        this.setData({
+            modalName: e.currentTarget.dataset.target
+        });
+    },
+    hideModal: function (e) {
+        this.setData({
+            modalName: null
+        });
     }
 });
