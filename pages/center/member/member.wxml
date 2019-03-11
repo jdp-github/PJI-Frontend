@@ -1,7 +1,6 @@
 <view class="cu-custom" style="height:{{CustomBar}}px;">
     <view class="cu-bar fixed bg-gradual-green" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
-        <navigator class='action border-custom' open-type="navigateBack" delta="1" hover-class="none"
-                   style='width:{{Custom.width}}px;height:{{Custom.height}}px;margin-left:calc(750rpx - {{Custom.right}}px)'>
+        <navigator class='action border-custom' open-type="navigateBack" delta="1" hover-class="none" style='width:{{Custom.width}}px;height:{{Custom.height}}px;margin-left:calc(750rpx - {{Custom.right}}px)'>
             <text class='icon-back'></text>
             <text class='icon-homefill'></text>
         </navigator>
@@ -39,7 +38,7 @@
 </scroll-view>
 <view class='indexBar' style='height:calc(100vh - {{CustomBar}}px - 50px)' wx:if="{{indexBarDisplay}}">
     <view class='indexBar-box' bindtouchstart="tStart" bindtouchend="tEnd" catchtouchmove="tMove">
-        <view class="indexBar-item " wx:for="{{list}}" wx:key id='{{index}}' bindtouchstart="getCurrent" bindtouchend="setCurrent" >{{list[index]}}</view>
+        <view class="indexBar-item " wx:for="{{list}}" wx:key id='{{index}}' bindtouchstart="getCurrent" bindtouchend="setCurrent">{{list[index]}}</view>
     </view>
 </view>
 <view hidden="{{hidden}}" class="indexToast">
@@ -95,27 +94,27 @@
                 <text class='icon-close text-red'></text>
             </view>
         </view>
-    <view class='padding-xl'>
-        <view class='flex-sub text-center'>
-            <view class='solid-bottom text-sl padding'>
-                <text class='icon-warnfill text-red'></text>
+        <view class='padding-xl' hidden='{{!isAdmin}}'>
+            <view class='flex-sub text-center'>
+                <view class='solid-bottom text-sl padding'>
+                    <text class='icon-warnfill text-red'></text>
+                </view>
+                <view class='padding'>是否删除{{selectedStaff.staff_name}}</view>
             </view>
-            <view class='padding'>是否删除{{selectedStaff.staff_name}}</view>
         </view>
-    </view>
-    <view class='solids-bottom padding-xs flex align-center' wx:if="{{!isAdmin}}">
-        <view class='flex-sub text-center'>
-            <view class='solid-bottom text-sl padding'>
-                <text class='icon-warnfill text-red'></text>
+        <view class='solids-bottom padding-xs flex align-center'>
+            <view class='flex-sub text-center'>
+                <view class='solid-bottom text-sl padding'>
+                    <text class='icon-warnfill text-red'></text>
+                </view>
+                <view class='padding'>当前用户暂无权限</view>
             </view>
-            <view class='padding'>当前用户暂无权限</view>
         </view>
-    </view>
-    <view class="cu-bar bg-white justify-end">
-        <view class='action'>
-            <button class='cu-btn line-green text-green' bindtap='hideModal'>取消</button>
-            <button class='cu-btn bg-green margin-left' bindtap='hideModal' wx:if="{{isAdmin}}" bindtap="deleteMember">确定</button>
+        <view class="cu-bar bg-white justify-end">
+            <view class='action'>
+                <button class='cu-btn line-green text-green' bindtap='hideModal'>取消</button>
+                <button class='cu-btn bg-green margin-left' bindtap='hideModal' wx:if="{{isAdmin}}" bindtap="deleteMember">确定</button>
+            </view>
         </view>
-    </view>
     </view>
 </view>

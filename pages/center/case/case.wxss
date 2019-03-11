@@ -32,7 +32,6 @@
     font-variant: small-caps;
     margin: 0;
     padding: 0;
-    text-align: center;
     justify-content: center;
     align-items: center;
     background: #ccc;
