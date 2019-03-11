@@ -36,9 +36,27 @@
     bottom: 0;
     margin: auto;
 }
-.VerticalBox{
+.VerticalBox {
     display: flex;
 }
-.VerticalMain{
+.VerticalMain {
     background-color: #f1f1f1;
+}
+.cu-item-special, .cu-form-group .title, .cu-form-group input, .cu-form-group picker .picker {
+    font-size: 22rpx;
+    text-align: right;
+}
+.disabled {
+    background-color: #cccccc;
+}
+.cu-form-group textarea, .cu-form-group textarea textarea {
+    font-size: 22rpx;
+    text-align: right;
+}
+.btn-block {
+    position: fixed;
+    bottom: 15rpx;
+    left: 0;
+    height: 110rpx;
+    width: 100%;
 }
