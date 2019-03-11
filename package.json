@@ -18,8 +18,8 @@
   },
   "homepage": "https://github.com/Jason-ZW/PJI-Frontend#readme",
   "dependencies": {
+    "c2pin": "^1.0.2",
     "events": "^3.0.0",
-    "tiny-pinyin": "^1.3.0",
     "wux-weapp": "^3.5.0"
   }
 }
