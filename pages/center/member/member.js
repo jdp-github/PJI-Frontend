@@ -2,7 +2,7 @@
 
 let constant = require('../../../utils/constant.js');
 let util = require('../../../utils/util.js');
-let pinyin = require('tiny-pinyin');
+import C2Pin from 'c2pin';
 
 const app = getApp();
 
@@ -183,7 +183,7 @@ Page({
                     for (let i = 0, len = res.data.data.list.length; i < len; i++) {
                         let staff = res.data.data.list[i];
                         staff.auth_time = util.formatTime(staff.auth_time, 'Y-M-D');
-                        let prefixLetter = pinyin.convertToPinyin(res.data.data.list[i].staff_name).substr(0, 1);
+                        let prefixLetter = C2Pin.firstChar(res.data.data.list[i].staff_name).substr(0, 1).toUpperCase();
                         list[i] = prefixLetter;
                         // 重新组织相同首字母的人员
                         if (!realStaffList[prefixLetter]) {
