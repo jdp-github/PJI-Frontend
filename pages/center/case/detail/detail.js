@@ -13,13 +13,16 @@ Page({
         CustomBar: app.globalData.CustomBar,
         Custom: app.globalData.Custom,
         isAdmin: false,
+        // -------- tab切换 begin -------- //
         TabCur: 0,
         VerticalNavTop: 0,
-        TabTitle: ['基本信息', '诊断性穿刺', '入院后信息', '关联标本'],
+        TabTitle: ['基本信息', '诊断性穿刺', '入院后信息'],
         ShowBasic: true,
         ShowDiagnose: false,
         ShowAdmission: false,
-        ShowSpecimen: false,
+        // -------- tab切换 end -------- //
+
+        // -------- 基本信息 begin -------- //
         createDate: util.getNowFormatDate(new Date()),
         sex: 0,
         sexPicker: ['请选择', '男', '女'],
@@ -45,9 +48,47 @@ Page({
         ris: 0,
         risPicker: ['请选择', '否', '类风湿', '强制性脊柱炎', '其他 (请在备注中标明)'],
         antibiotic: 0,
-        antibioticPicker: ['请选择', '是', '否']
+        antibioticPicker: ['请选择', '是', '否'],
+        // -------- 基本信息 end -------- //
+
+        // -------- 诊断性穿刺 begin -------- //
+        chuangciDate: '未行诊断性穿刺',
+        ccDateDisabled: true,
+        ccDescribe: '',
+        ccDescribeDisabeld: true,
+        ccgjy: '',
+        ccgjyDisabled: true,
+        ccgxy: '',
+        ccgxyDisabled: true,
+        leIndex: 0,
+        lePicker: ["请选择", "无法判定", "neg.", "25", "75", "250 (+)", "500 (++)", ],
+        leDisabled: true,
+        leAfterIndex: 0,
+        leAfterPicker: ["请选择", "无法判定", "neg.", "25", "75", "250 (+)", "500 (++)"],
+        leAfterDisabled: true,
+        gjybxb: '',
+        gjybxbDisabled: true,
+        gjyzx: '',
+        gjyzxDisabled: true,
+        bcpysjIndex: 0,
+        bcpysjPicker: ["请选择", "关节液", "灌洗液", "混合液"],
+        bcpysjDisabled: true,
+        drgpyp: '',
+        drgpypDisabled: true,
+        bcxyResult: '',
+        bcxyResultDisabled: true,
+        bcxyLast: '',
+        bcxyLastDisabled: true,
+        bcyyResult: '',
+        bcyyDisabled: true,
+        bcyyLast: '',
+        bcyyLastDisabled: true,
+        mNGSResult: '',
+        mNGSResultDisabled: true,
+        // -------- 诊断性穿刺 end -------- //
     },
-    onLoad: function (options) {
+
+    onLoad: function(options) {
         this.loadProgress();
         this.setData({
             centerId: options.centerId ? options.centerId : '',
@@ -56,46 +97,8 @@ Page({
         });
         this.completeProgress();
     },
-    loadProgress: function () {
-        if (this.data.loadProgress < 96) {
-            this.setData({
-                loadProgress: this.data.loadProgress + 3
-            });
-        }
-        if (this.data.loadProgress < 100) {
-            setTimeout(() => {
-                this.loadProgress();
-            }, 100);
-        } else {
-            this.setData({
-                loadProgress: 0
-            });
-        }
-    },
-    completeProgress: function () {
-        this.setData({
-            loadProgress: 100
-        });
-    },
-    showToast: function (msg) {
-        wx.showToast({
-            icon: 'none',
-            title: msg,
-        });
-    },
-    showLoading: function () {
-        this.setData({
-            loadModal: true
-        });
-    },
-    hideLoading: function () {
-        setTimeout(() => {
-            this.setData({
-                loadModal: false
-            });
-        }, 1500);
-    },
-    tabSelect: function (e) {
+
+    tabSelect: function(e) {
         let tabId = e.currentTarget.dataset.id;
         switch (tabId) {
             case 0:
@@ -105,7 +108,6 @@ Page({
                     ShowBasic: true,
                     ShowDiagnose: false,
                     ShowAdmission: false,
-                    ShowSpecimen: false
                 });
                 break;
             case 1:
@@ -115,7 +117,6 @@ Page({
                     ShowBasic: false,
                     ShowDiagnose: true,
                     ShowAdmission: false,
-                    ShowSpecimen: false
                 });
                 break;
             case 2:
@@ -125,7 +126,6 @@ Page({
                     ShowBasic: false,
                     ShowDiagnose: false,
                     ShowAdmission: true,
-                    ShowSpecimen: false
                 });
                 break;
             case 3:
@@ -135,42 +135,43 @@ Page({
                     ShowBasic: false,
                     ShowDiagnose: false,
                     ShowAdmission: false,
-                    ShowSpecimen: true
                 });
                 break;
         }
     },
-    onCreateDateChange: function (e) {
+
+    // -------- 基本信息事件 begin -------- //
+    onCreateDateChange: function(e) {
         this.setData({
             createDate: e.detail.value
         });
     },
-    onSexChange: function (e) {
+    onSexChange: function(e) {
         this.setData({
             sex: e.detail.value,
         });
     },
-    onTel2SwitchChange: function (e) {
+    onTel2SwitchChange: function(e) {
         this.setData({
             tel2Disabled: !e.detail.value
         });
     },
-    onPartChange: function (e) {
+    onPartChange: function(e) {
         this.setData({
             part: e.detail.value,
         });
     },
-    onTypeChange: function (e) {
+    onTypeChange: function(e) {
         this.setData({
             type: e.detail.value,
         });
     },
-    operationDateChange: function (e) {
+    operationDateChange: function(e) {
         this.setData({
             operationDateMultiIndex: e.detail.value
         })
     },
-    operationDateColumnChange: function (e) {
+    operationDateColumnChange: function(e) {
         let data = {
             operationDateMultiArray: this.data.operationDateMultiArray,
             operationDateMultiIndex: this.data.operationDateMultiIndex
@@ -211,17 +212,17 @@ Page({
         }
         this.setData(data);
     },
-    onOperationcSwitchChange: function (e) {
+    onOperationcSwitchChange: function(e) {
         this.setData({
             operationDisabled: !e.detail.value
         });
     },
-    symptomDateChange: function (e) {
+    symptomDateChange: function(e) {
         this.setData({
             symptomDateMultiIndex: e.detail.value
         })
     },
-    symptomDateColumnChange: function (e) {
+    symptomDateColumnChange: function(e) {
         let data = {
             symptomDateMultiArray: this.data.symptomDateMultiArray,
             symptomDateMultiIndex: this.data.symptomDateMultiIndex
@@ -262,19 +263,165 @@ Page({
         }
         this.setData(data);
     },
-    onSymptomSwitchChange: function (e) {
+    onSymptomSwitchChange: function(e) {
         this.setData({
             symptomDisabled: !e.detail.value
         });
     },
-    onRisChange: function (e) {
+    onRisChange: function(e) {
         this.setData({
             ris: e.detail.value,
         });
     },
-    onAntibioticChange: function (e) {
+    onAntibioticChange: function(e) {
         this.setData({
             antibiotic: e.detail.value,
         });
     },
+    // -------- 基本信息事件 end -------- //
+
+    // -------- 诊断性穿刺 begin -------- //
+    onChuanciDateChange: function(e) {
+        this.setData({
+            chuangciDate: e.detail.value
+        });
+    },
+    onCCDateSwitchChange: function(e) {
+        if (this.data.ccDateDisabled) {
+            this.setData({
+                chuangciDate: "",
+                ccDateDisabled: false
+            });
+        } else {
+            this.setData({
+                chuangciDate: "未行诊断性穿刺",
+                ccDateDisabled: true
+            });
+        }
+    },
+    onCCDescribeInput: function(e) {
+        this.setData({
+            ccDescribe: e.detail.value
+        });
+    },
+    onCCDescribeSwitchChange: function(e) {
+        this.setData({
+            ccDescribeDisabeld: !e.detail.value
+        });
+    },
+    onCcgjyInput: function(e) {
+        this.setData({
+            ccgjy: e.detail.value
+        });
+    },
+    onCcgjySwitchChange: function(e) {
+        this.setData({
+            ccgjyDisabled: !e.detail.value
+        });
+    },
+    onCcgxyInput: function(e) {
+        this.setData({
+            ccgxy: e.detail.value
+        });
+    },
+    onCcgxySwitchChange: function(e) {
+        this.setData({
+            ccgxyDisabled: !e.detail.value
+        });
+    },
+    onLeChange: function(e) {
+        this.setData({
+            leIndex: e.detail.value,
+        });
+    },
+    onLeSwitchChange: function(e) {
+        this.setData({
+            leDisabled: !e.detail.value
+        });
+    },
+    onLeAfterChange: function(e) {
+        this.setData({
+            leAfterIndex: e.detail.value,
+        });
+    },
+    onLeAfterSwitchChange: function(e) {
+        this.setData({
+            leAfterDisabled: !e.detail.value
+        });
+    },
+    onGjybxbInput: function(e) {
+        this.setData({
+            gjybxb: e.detail.value
+        });
+    },
+    onGjybxbSwitchChange: function(e) {
+        this.setData({
+            gjybxbDisabled: !e.detail.value
+        });
+    },
+    onGjyzxInput: function(e) {
+        this.setData({
+            gjyzx: e.detail.value
+        });
+    },
+    onGjyzxSwitchChange: function(e) {
+        this.setData({
+            gjyzxDisabled: !e.detail.value
+        });
+    },
+    onBcpysjChange: function(e) {
+        this.setData({
+            bcpysjIndex: e.detail.value,
+        });
+    },
+    onBcpysjSwitchChange: function(e) {
+        this.setData({
+            bcpysjDisabled: !e.detail.value
+        });
+    },
+
+    // -------- 诊断性穿刺 end -------- //
+
+    // -------- 提示框 begin -------- //
+    loadProgress: function() {
+        if (this.data.loadProgress < 96) {
+            this.setData({
+                loadProgress: this.data.loadProgress + 3
+            });
+        }
+        if (this.data.loadProgress < 100) {
+            setTimeout(() => {
+                this.loadProgress();
+            }, 100);
+        } else {
+            this.setData({
+                loadProgress: 0
+            });
+        }
+    },
+    completeProgress: function() {
+        this.setData({
+            loadProgress: 100
+        });
+    },
+    showToast: function(msg) {
+        wx.showToast({
+            icon: 'none',
+            title: msg,
+        });
+    },
+    showLoading: function() {
+        this.setData({
+            loadModal: true
+        });
+    },
+    hideLoading: function() {
+        setTimeout(() => {
+            this.setData({
+                loadModal: false
+            });
+        }, 1500);
+    },
+    // -------- 提示框 end -------- //
+
 });

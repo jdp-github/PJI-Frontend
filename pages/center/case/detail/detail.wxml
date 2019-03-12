@@ -1,7 +1,6 @@
 <view class="cu-custom" style="height:{{CustomBar}}px;">
     <view class="cu-bar fixed bg-gradual-green" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
-        <navigator class='action border-custom' open-type="navigateBack" delta="1" hover-class="none"
-                   style='width:{{Custom.width}}px;height:{{Custom.height}}px;margin-left:calc(750rpx - {{Custom.right}}px)'>
+        <navigator class='action border-custom' open-type="navigateBack" delta="1" hover-class="none" style='width:{{Custom.width}}px;height:{{Custom.height}}px;margin-left:calc(750rpx - {{Custom.right}}px)'>
             <text class='icon-back'></text>
             <text class='icon-homefill'></text>
         </navigator>
@@ -12,33 +11,36 @@
     <view class="flex">
         <view class='avatar-group'>
             <view class="cu-avatar-group">
-                <view class='cu-tag radius' style="margin-right: 40rpx;">填</view> <view class="cu-avatar round" wx:for="{{1}}" wx:key style="background-image:url(https://image.weilanwl.com/img/square-{{index+1}}.jpg);"></view>
+                <view class='cu-tag radius' style="margin-right: 40rpx;">填</view>
+                <view class="cu-avatar round" wx:for="{{1}}" wx:key style="background-image:url(https://image.weilanwl.com/img/square-{{index+1}}.jpg);"></view>
             </view>
         </view>
     </view>
     <view class="flex">
         <view class='avatar-group'>
             <view class="cu-avatar-group">
-                <view class='cu-tag radius' style="margin-right: 40rpx;">修</view> <view class="cu-avatar round" wx:for="{{4}}" wx:key style="background-image:url(https://image.weilanwl.com/img/square-{{index+1}}.jpg);"></view>
+                <view class='cu-tag radius' style="margin-right: 40rpx;">修</view>
+                <view class="cu-avatar round" wx:for="{{4}}" wx:key style="background-image:url(https://image.weilanwl.com/img/square-{{index+1}}.jpg);"></view>
             </view>
         </view>
     </view>
     <view class="flex">
         <view class='avatar-group'>
             <view class="cu-avatar-group">
-                <view class='cu-tag radius' style="margin-right: 40rpx;">审</view> <view class="cu-avatar round" wx:for="{{1}}" wx:key style="background-image:url(https://image.weilanwl.com/img/square-{{index+1}}.jpg);"></view>
+                <view class='cu-tag radius' style="margin-right: 40rpx;">审</view>
+                <view class="cu-avatar round" wx:for="{{1}}" wx:key style="background-image:url(https://image.weilanwl.com/img/square-{{index+1}}.jpg);"></view>
             </view>
         </view>
     </view>
 </view>
-<scroll-view scroll-y class="indexes margin-bottom" scroll-into-view="indexes-{{listCurID}}"
-             style='padding-top: 100rpx;height:calc(100vh - {{CustomBar}}px)' scroll-with-animation="true" enable-back-to-top="true">
+<scroll-view scroll-y class="indexes margin-bottom" scroll-into-view="indexes-{{listCurID}}" style='padding-top: 100rpx;height:calc(100vh - {{CustomBar}}px)' scroll-with-animation="true" enable-back-to-top="true">
     <view class="VerticalBox">
         <scroll-view class="VerticalNav nav" scroll-y scroll-with-animation scroll-top="{{VerticalNavTop}}" style="height:calc(100vh - 330rpx)">
             <view class="cu-item {{index==TabCur?'text-green cur':''}}" style="font-size: 22rpx" wx:for="{{TabTitle}}" wx:key bindtap='tabSelect' data-id="{{index}}">
                 {{item}}
             </view>
         </scroll-view>
+        <!-- 基本信息 -->
         <scroll-view class="VerticalMain" scroll-y style="height:calc(100vh - 330rpx)" wx:if="{{ShowBasic}}">
             <view class="padding-left-special">
                 <view class='cu-bar solid-bottom bg-white'>
@@ -101,7 +103,7 @@
                         </view>
                         <view class="cu-form-group {{tel2Disabled?'disabled':''}}">
                             <view class='title'>联系电话2</view>
-                            <input placeholder="请输入联系方式" class='radius' name='input' value='' disabled='{{tel2Disabled}}' ></input>
+                            <input placeholder="请输入联系方式" class='radius' name='input' value='' disabled='{{tel2Disabled}}'></input>
                             <switch class='green sm' bindchange="onTel2SwitchChange"></switch>
                         </view>
                         <view class="cu-form-group">
@@ -178,19 +180,183 @@
                 </view>
             </view>
         </scroll-view>
+        <!-- 诊断性穿刺 -->
         <scroll-view class="VerticalMain" scroll-y style="height:calc(100vh - 330rpx)" wx:if="{{ShowDiagnose}}">
             <view class="padding-left-special">
                 <view class='cu-bar solid-bottom bg-white'>
                     <view class='action'>
                         <text class='icon-title text-green'></text> 穿刺后信息</view>
                 </view>
+                <!-- item -->
                 <view class="cu-list menu menu-avatar">
-                    <view class="cu-item">
+                    <view class="cu-item-special">
+                        <!-- 穿刺日期 -->
+                        <view class="cu-form-group  {{ccDateDisabled?'disabled':''}}">
+                            <view class='title'>穿刺日期</view>
+                            <picker mode="date" value="{{chuangciDate}}" start="2015-01-01" end="2025-01-01" bindchange="onChuanciDateChange" disabled='{{ccDateDisabled}}'>
+                                <view class="picker">
+                                    {{chuangciDate}}
+                                </view>
+                            </picker>
+                            <switch class='green sm' bindchange="onCCDateSwitchChange" style='margin-left: 15rpx;'></switch>
+                        </view>
+                        <!-- 穿刺描述 -->
+                        <view class="cu-form-group {{ccDescribeDisabeld?'disabled':''}}">
+                            <view class='title'>穿刺描述</view>
+                            <textarea placeholder='请简述穿刺时一般情况' maxlength="-1" bindinput="onCCDescribeInput" disabled='{{ccDescribeDisabeld}}'></textarea>
+                            <switch class='green sm' bindchange="onCCDescribeSwitchChange" style='margin-left: 15rpx;'></switch>
+                        </view>
+                        <!-- 抽出关节液总量 -->
+                        <view class="cu-form-group {{ccgjyDisabled?'disabled':''}}">
+                            <view style='display:flex;flex-direction: column; '>
+                                <view class='title' style='margin-left:-130rpx'>抽出关节液总量(ml)</view>
+                                <input placeholder="请输入数字，不适用请点击右侧" class='radius' type='number' bindinput="onCcgjyInput" disabled='{{ccgjyDisabled}}'></input>
+                            </view>
+                            <switch class='green sm' bindchange="onCcgjySwitchChange" style='margin-left: 15rpx;'></switch>
+                        </view>
+                        <!-- 抽出灌洗液总量 -->
+                        <view class="cu-form-group {{ccgxyDisabled?'disabled':''}}">
+                            <view class='title'>抽出灌洗液总量(ml)</view>
+                            <input placeholder="请输入数字，不适用请点击左侧" class='radius' type='number' bindinput="onCcgxyInput" disabled='{{ccgxyDisabled}}'></input>
+                            <switch class='green sm' bindchange="onCcgxySwitchChange" style='margin-left: 15rpx;'></switch>
+                        </view>
+                        <!-- LE试纸（原液） -->
+                        <view class="cu-form-group {{leDisabled?'disabled':''}}">
+                            <view class='title'>LE试纸（原液</view>
+                            <picker bindchange="onLeChange" value="{{leIndex}}" range="{{lePicker}}" disabled='{{leDisabled}}'>
+                                <view class="picker">
+                                    {{lePicker[leIndex]}}
+                                </view>
+                            </picker>
+                            <switch class='green sm' bindchange="onLeSwitchChange" style='margin-left: 15rpx;'></switch>
+                        </view>
+                        <!-- LE试纸（离心后） -->
+                        <view class="cu-form-group {{leAfterDisabled?'disabled':''}}">
+                            <view class='title'>LE试纸（离心后）</view>
+                            <picker bindchange="onLeAfterChange" value="{{leAfterIndex}}" range="{{leAfterPicker}}" disabled='{{leAfterDisabled}}'>
+                                <view class="picker">
+                                    {{leAfterPicker[leAfterIndex]}}
+                                </view>
+                            </picker>
+                            <switch class='green sm' bindchange="onLeAfterSwitchChange" style='margin-left: 15rpx;'></switch>
+                        </view>
+                        <!-- 关节液白细胞计数（cells/μL） -->
+                        <view class="cu-form-group {{gjybxbDisabled?'disabled':''}}">
+                            <view class='title'>关节液白细胞计数(cells/μL)</view>
+                            <input placeholder="请输入数字，请注意单位换算" class='radius' type='number' bindinput="onGjybxbInput" disabled='{{gjybxbDisabled}}'></input>
+                            <switch class='green sm' bindchange="onGjybxbSwitchChange" style='margin-left: 15rpx;'></switch>
+                        </view>
+                        <!-- 关节液中性粒细胞百分比（0.01） -->
+                        <view class="cu-form-group {{gjyzxDisabled?'disabled':''}}">
+                            <view class='title'>关节液中性粒细胞百分比(0.01)</view>
+                            <input placeholder="关请输入数字，请注意格式，保留小数点2位" class='radius' type='digit' bindinput="onGjyzxInput" disabled='{{gjyzxDisabled}}'></input>
+                            <switch class='green sm' bindchange="onGjyzxSwitchChange" style='margin-left: 15rpx;'></switch>
+                        </view>
+                        <!-- 本次培养送检类型 -->
+                        <view class="cu-form-group {{bcpysjDisabled?'disabled':''}}">
+                            <view class='title'>本次培养送检类型</view>
+                            <picker bindchange="onBcpysjChange" value="{{bcpysjIndex}}" range="{{bcpysjPicker}}" disabled='{{bcpysjDisabled}}'>
+                                <view class="picker">
+                                    {{bcpysjPicker[bcpysjIndex]}}
+                                </view>
+                            </picker>
+                            <switch class='green sm' bindchange="onBcpysjSwitchChange" style='margin-left: 15rpx;'></switch>
+                        </view>
+
+
+
+                        <view class="cu-form-group">
+                            <view class='title'>身高(m)</view>
+                            <input placeholder="请注意单位换算" class='radius' name='input' value=""></input>
+                        </view>
+                        <view class="cu-form-group">
+                            <view class='title'>体重(Kg)</view>
+                            <input placeholder="请注意单位换算" class='radius' name='input' value=""></input>
+                        </view>
+                        <view class="cu-form-group disabled">
+                            <view class='title'>BMI(Kg/m2)</view>
+                            <input class='radius' name='input' value="" placeholder="自动生成" disabled></input>
+                        </view>
+                        <view class="cu-form-group">
+                            <view class='title'>主诊医师</view>
+                            <input placeholder="请输入主诊医师姓名" class='radius' name='input' value=""></input>
+                        </view>
+                        <view class="cu-form-group">
+                            <view class='title'>联系电话1</view>
+                            <input placeholder="请输入联系方式" class='radius' name='input' value=""></input>
+                        </view>
+                        <view class="cu-form-group">
+                            <view class='title'>部位</view>
+                            <picker bindchange="onPartChange" value="{{part}}" range="{{partPicker}}">
+                                <view class="picker">
+                                    {{partPicker[part]}}
+                                </view>
+                            </picker>
+                        </view>
+                        <view class="cu-form-group">
+                            <view class='title'>类型</view>
+                            <picker bindchange="onTypeChange" value="{{type}}" range="{{typePicker}}">
+                                <view class="picker">
+                                    {{typePicker[type]}}
+                                </view>
+                            </picker>
+                        </view>
+                        <view class="cu-form-group {{operationDisabled?'disabled':''}}">
+                            <view class='title'>末次手术至今时长</view>
+                            <picker mode="multiSelector" disabled='{{operationDisabled}}' bindchange="operationDateChange" bindcolumnchange="operationDateColumnChange" value="{{operationDateMultiIndex}}" range="{{operationDateMultiArray}}">
+                                <view class="picker">
+                                    {{operationDateMultiArray[2][operationDateMultiIndex[2]]?operationDateMultiArray[2][operationDateMultiIndex[2]]:'请选择'}}
+                                </view>
+                            </picker>
+                            <switch class='green sm' style="margin-left: 15rpx;" bindchange="onOperationcSwitchChange"></switch>
+                        </view>
+                        <view class="cu-form-group {{symptomDisabled?'disabled':''}}">
+                            <view class='title'>症状出现时长</view>
+                            <picker mode="multiSelector" disabled='{{symptomDisabled}}' bindchange="symptomDateChange" bindcolumnchange="symptomDateColumnChange" value="{{symptomDateMultiIndex}}" range="{{symptomDateMultiArray}}">
+                                <view class="picker">
+                                    {{symptomDateMultiArray[2][symptomDateMultiIndex[2]]?symptomDateMultiArray[2][symptomDateMultiIndex[2]]:'请选择'}}
+                                </view>
+                            </picker>
+                            <switch class='green sm' style="margin-left: 15rpx;" bindchange="onSymptomSwitchChange"></switch>
+                        </view>
+                        <view class="cu-form-group disabled">
+                            <view class='title'>性质</view>
+                            <input class='radius' name='input' value="" placeholder="自动生成" disabled></input>
+                        </view>
+                        <view class="cu-form-group">
+                            <view class='title'>普通选择</view>
+                            <picker bindchange="onRisChange" value="{{ris}}" range="{{risPicker}}">
+                                <view class="picker">
+                                    {{risPicker[ris]}}
+                                </view>
+                            </picker>
+                        </view>
+                        <view class="cu-form-group" wx:hide="{{modalName==null}}">
+                            <view class='title'>其他伴随疾病</view>
+                            <textarea placeholder='请输入文字, 没有请填"无"' maxlength="-1" disabled="{{modalName!=null}}"></textarea>
+                        </view>
+                        <view class="cu-form-group">
+                            <view class='title'>近期(2周)应用抗生素</view>
+                            <picker bindchange="onAntibioticChange" value="{{antibiotic}}" range="{{antibioticPicker}}">
+                                <view class="picker">
+                                    {{antibioticPicker[antibiotic]}}
+                                </view>
+                            </picker>
+                        </view>
+                        <view class="cu-form-group" wx:hide="{{modalName==null}}">
+                            <view class='title'>简要病史</view>
+                            <textarea placeholder='请输入文字, 没有请填"无"' maxlength="-1" disabled="{{modalName!=null}}"></textarea>
+                        </view>
+                        <view class="cu-form-group" wx:hide="{{modalName==null}}">
+                            <view class='title'>初步诊断</view>
+                            <textarea placeholder='请输入文字, 没有请填"无"' maxlength="-1" disabled="{{modalName!=null}}"></textarea>
+                        </view>
 
                     </view>
                 </view>
             </view>
         </scroll-view>
+        <!-- 入院后信息 -->
         <scroll-view class="VerticalMain" scroll-y style="height:calc(100vh - 330rpx)" wx:if="{{ShowAdmission}}">
             <view class="padding-left-special">
                 <view class='cu-bar solid-bottom bg-white'>
@@ -204,21 +370,10 @@
                 </view>
             </view>
         </scroll-view>
-        <scroll-view class="VerticalMain" scroll-y style="height:calc(100vh - 330rpx)" wx:if="{{ShowSpecimen}}">
-            <view class="padding-left-special">
-                <view class='cu-bar solid-bottom bg-white'>
-                    <view class='action'>
-                        <text class='icon-title text-green'></text> 关联标本信息</view>
-                </view>
-                <view class="cu-list menu menu-avatar">
-                    <view class="cu-item">
-
-                    </view>
-                </view>
-            </view>
-        </scroll-view>
     </view>
 </scroll-view>
+
+<!-- 底部按钮 -->
 <view class="btn-block bg-white shadow">
     <view class="flex">
         <view class='flex-sub padding-sm margin-xs radius'>

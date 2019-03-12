@@ -49,6 +49,7 @@
     font-size: 22rpx;
     text-align: right;
 }
+
 .disabled {
     background-color: #cccccc;
 }
