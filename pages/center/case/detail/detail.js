@@ -15,10 +15,11 @@ Page({
         isAdmin: false,
         TabCur: 0,
         VerticalNavTop: 0,
-        TabTitle: ['基本信息', '诊断性穿刺', '入院后信息'],
+        TabTitle: ['基本信息', '诊断性穿刺', '入院后信息', '关联标本'],
         ShowBasic: true,
         ShowDiagnose: false,
         ShowAdmission: false,
+        ShowSpecimen: false,
         createDate: util.getNowFormatDate(new Date()),
         sex: 0,
         sexPicker: ['请选择', '男', '女'],
@@ -103,7 +104,8 @@ Page({
                     VerticalNavTop: (tabId - 1) * 50,
                     ShowBasic: true,
                     ShowDiagnose: false,
-                    ShowAdmission: false
+                    ShowAdmission: false,
+                    ShowSpecimen: false
                 });
                 break;
             case 1:
@@ -112,7 +114,8 @@ Page({
                     VerticalNavTop: (tabId - 1) * 50,
                     ShowBasic: false,
                     ShowDiagnose: true,
-                    ShowAdmission: false
+                    ShowAdmission: false,
+                    ShowSpecimen: false
                 });
                 break;
             case 2:
@@ -121,7 +124,18 @@ Page({
                     VerticalNavTop: (tabId - 1) * 50,
                     ShowBasic: false,
                     ShowDiagnose: false,
-                    ShowAdmission: true
+                    ShowAdmission: true,
+                    ShowSpecimen: false
+                });
+                break;
+            case 3:
+                this.setData({
+                    TabCur: tabId,
+                    VerticalNavTop: (tabId - 1) * 50,
+                    ShowBasic: false,
+                    ShowDiagnose: false,
+                    ShowAdmission: false,
+                    ShowSpecimen: true
                 });
                 break;
         }
