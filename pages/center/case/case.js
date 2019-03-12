@@ -328,5 +328,8 @@ Page({
         this.setData({
             modalName: null
         });
+    },
+    onPageScroll: function (e) {
+
     }
 });

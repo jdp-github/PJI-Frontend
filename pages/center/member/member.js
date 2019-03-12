@@ -330,5 +330,7 @@ Page({
                 that.completeProgress();
             }
         });
+    },
+    onPageScroll: function (e) {
     }
 });
