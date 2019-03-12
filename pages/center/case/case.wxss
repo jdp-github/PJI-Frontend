@@ -62,3 +62,6 @@
 .padding-left-special {
     padding-left: 15rpx;
 }
+.margin-left-15 {
+    margin-left: 15rpx;
+}

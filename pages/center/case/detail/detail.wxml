@@ -40,7 +40,7 @@
             </view>
         </scroll-view>
         <scroll-view class="VerticalMain" scroll-y style="height:calc(100vh - 375rpx)" wx:if="{{ShowBasic}}">
-            <view class="padding-lr">
+            <view class="padding-left">
                 <view class='cu-bar solid-bottom bg-white'>
                     <view class='action'>
                         <text class='icon-title text-green'></text> 基本信息</view>
@@ -179,7 +179,7 @@
             </view>
         </scroll-view>
         <scroll-view class="VerticalMain" scroll-y style="height:calc(100vh - 375rpx)" wx:if="{{ShowDiagnose}}">
-            <view class="padding-lr">
+            <view class="padding-left">
                 <view class='cu-bar solid-bottom bg-white'>
                     <view class='action'>
                         <text class='icon-title text-green'></text> 穿刺后信息</view>
@@ -192,7 +192,7 @@
             </view>
         </scroll-view>
         <scroll-view class="VerticalMain" scroll-y style="height:calc(100vh - 375rpx)" wx:if="{{ShowAdmission}}">
-            <view class="padding-lr">
+            <view class="padding-left">
                 <view class='cu-bar solid-bottom bg-white'>
                     <view class='action'>
                         <text class='icon-title text-green'></text> 入院后信息</view>

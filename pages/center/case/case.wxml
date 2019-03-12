@@ -79,7 +79,7 @@
             </view>
             <view class='move'>
                 <view class='bg-olive' data-case="{{item}}" bindtap="onEditCase">编辑</view>
-                <view class='bg-orange' data-case="{{item}}" bindtap='onLockCase'>锁定</view>
+                <view class='bg-orange' data-case="{{item}}" bindtap='onLockCase'>审核</view>
                 <view class='bg-red' data-case="{{item}}" bindtap='onDeleCase'>删除</view>
             </view>
         </view>
@@ -97,19 +97,19 @@
 <view class="cu-modal {{modalName=='ErrModal'?'show':''}}">
     <view class="cu-dialog">
         <view class="cu-bar bg-white justify-end">
-            <view style='text-align:center'>{{errMsg}}</view>
+            <view class='content'>审核病历</view>
             <view class='action' bindtap='hideModal'>
                 <text class='icon-close text-red'></text>
             </view>
         </view>
-        <!-- <view class='padding-xl'>
+        <view class='padding-xl'>
             <view class='flex-sub text-center'>
                 <view class='solid-bottom text-sl padding'>
                     <text class='icon-warnfill text-red'></text>
                 </view>
-                <view class='padding'>是否删除{{selectedStaff.staff_name}}</view>
+                <view class='padding'>{{errMsg}}</view>
             </view>
-        </view> -->
+        </view>
     </view>
 </view>
 <view class="cu-modal {{modalName=='DeleteCaseModal'?'show':''}}">
@@ -131,7 +131,7 @@
         <view class="cu-bar bg-white justify-end">
             <view class='action'>
                 <button class='cu-btn line-green text-green' bindtap='hideModal'>取消</button>
-                <button class='cu-btn bg-green margin-left' bindtap='hideModal' bindtap="deleCase">确定</button>
+                <button class='cu-btn bg-green margin-left-15' bindtap='hideModal' bindtap="deleCase">确定</button>
             </view>
         </view>
     </view>

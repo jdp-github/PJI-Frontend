@@ -29,11 +29,11 @@ Page({
         selectedCase: {},
         sortType: SORT_BY_NAME_ASC,
         filterItems: [{
-                type: 'sort',
-                label: '完成度',
-                value: 'completeness',
-                groups: ['001'],
-            },
+            type: 'sort',
+            label: '完成度',
+            value: 'completeness',
+            groups: ['001'],
+        },
             {
                 type: 'sort',
                 label: '录入者',
@@ -55,7 +55,7 @@ Page({
         ],
         errMsg: ''
     },
-    onLoad: function(options) {
+    onLoad: function (options) {
         this.loadProgress();
         this.setData({
             centerId: options.centerId,
@@ -64,7 +64,7 @@ Page({
         });
         this.requestCaseList(this.data.searchValue, this.data.sortType);
     },
-    loadProgress: function() {
+    loadProgress: function () {
         if (this.data.loadProgress < 96) {
             this.setData({
                 loadProgress: this.data.loadProgress + 3
@@ -80,35 +80,35 @@ Page({
             });
         }
     },
-    completeProgress: function() {
+    completeProgress: function () {
         this.setData({
             loadProgress: 100
         });
     },
-    showToast: function(msg) {
+    showToast: function (msg) {
         wx.showToast({
             icon: 'none',
             title: msg,
         });
     },
-    showLoading: function() {
+    showLoading: function () {
         this.setData({
             loadModal: true
         });
     },
-    hideLoading: function() {
+    hideLoading: function () {
         setTimeout(() => {
             this.setData({
                 loadModal: false
             });
         }, 1500);
     },
-    onSearchChange: function(e) {
+    onSearchChange: function (e) {
         this.setData({
             searchValue: e.detail.value
         });
     },
-    onSearch: function() {
+    onSearch: function () {
         this.loadProgress();
         this.requestCaseList(this.data.searchValue, this.data.sortType);
     },
@@ -143,29 +143,29 @@ Page({
             }
         });
     },
-    onFilterOpen: function(e) {
+    onFilterOpen: function (e) {
         this.setData({
             pageStyle: 'height: 100%; overflow: hidden',
         });
     },
-    onFilterClose: function(e) {
+    onFilterClose: function (e) {
         this.setData({
             pageStyle: '',
         });
     },
-    ListTouchStart: function(e) {
+    ListTouchStart: function (e) {
         this.setData({
             ListTouchStart: e.touches[0].pageX
         });
     },
 
-    ListTouchMove: function(e) {
+    ListTouchMove: function (e) {
         this.setData({
             ListTouchDirection: e.touches[0].pageX - this.data.ListTouchStart > 0 ? 'right' : 'left'
         });
     },
 
-    ListTouchEnd: function(e) {
+    ListTouchEnd: function (e) {
         if (this.data.ListTouchDirection == 'left') {
             this.setData({
                 modalName: e.currentTarget.dataset.target
@@ -179,7 +179,7 @@ Page({
             ListTouchDirection: null
         });
     },
-    requestCaseList: function(searchValue, sortType) {
+    requestCaseList: function (searchValue, sortType) {
         let that = this;
         wx.request({
             url: constant.basePath,
@@ -218,12 +218,12 @@ Page({
             }
         });
     },
-    onAddCase: function(e) {
+    onAddCase: function (e) {
         wx.navigateTo({
             url: '../../center/case/detail/detail?case_id='
         });
     },
-    onEditCase: function(e) {
+    onEditCase: function (e) {
         let that = this;
         that.showLoading();
         let caseInfo = e.currentTarget.dataset.case;
@@ -252,14 +252,13 @@ Page({
             }
         });
     },
-
-    onLockCase(e) {
-        let that = this
-        var selectedCase = e.currentTarget.dataset.case
-        var isApprove = selectedCase.state == 2
-        var title = isApprove ? '解锁中...' : '锁定病历中...'
+    onLockCase: function (e) {
+        let that = this;
+        let selectedCase = e.currentTarget.dataset.case;
+        let isApprove = selectedCase.state == 2
+        let title = isApprove ? '解锁中...' : '锁定病历中...';
         // 1审批，2解锁
-        var type = isApprove ? 2 : 1
+        let type = isApprove ? 2 : 1;
         that.showLoading();
         wx.request({
             url: constant.basePath,
@@ -275,7 +274,7 @@ Page({
             success(res) {
                 that.hideLoading();
                 if (res.data.data.code == constant.response_success) {
-                    that.requestCaseList(that.data.searchValue, that.data.sortType)
+                    that.requestCaseList(that.data.searchValue, that.data.sortType);
                 } else {
                     that.showModal("ErrModal", res.data.data.msg);
                 }
@@ -285,18 +284,16 @@ Page({
             }
         })
     },
-
-    onDeleCase(e) {
-        var selectedCase = e.currentTarget.dataset.case
+    onDeleCase: function (e) {
+        let selectedCase = e.currentTarget.dataset.case;
         this.setData({
             selectedCase: selectedCase
-        })
-        this.showModal("DeleteCaseModal")
+        });
+        this.showModal("DeleteCaseModal");
     },
-
-    deleCase() {
-        let that = this
-        that.showLoading()
+    deleCase: function () {
+        let that = this;
+        that.showLoading();
         wx.request({
             url: constant.basePath,
             data: {
@@ -308,27 +305,26 @@ Page({
                 'content-type': 'application/json'
             },
             success(res) {
-                console.log("Case.DeleteCase:" + JSON.stringify(res))
+                console.log("Case.DeleteCase:" + JSON.stringify(res));
                 that.hideLoading()
                 if (res.data.data.code == constant.response_success) {
-                    that.requestCaseList(that.data.searchValue, that.data.sortType)
+                    that.requestCaseList(that.data.searchValue, that.data.sortType);
                 } else {
                     that.showModal("ErrModal", res.data.data.msg);
                 }
             },
             fail(res) {
-                that.hideLoading()
+                that.hideLoading();
             }
-        })
+        });
     },
-
-    showModal: function(modalName, msg='') {
+    showModal: function (modalName, msg = '') {
         this.setData({
             modalName: modalName,
             errMsg: msg
         });
     },
-    hideModal: function(e) {
+    hideModal: function (e) {
         this.setData({
             modalName: null
         });
