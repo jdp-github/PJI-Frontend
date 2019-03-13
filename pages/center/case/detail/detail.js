@@ -13,6 +13,9 @@ Page({
         CustomBar: app.globalData.CustomBar,
         Custom: app.globalData.Custom,
         isAdmin: false,
+        // -------- modal begin ----------- //
+        modalName: '',
+        // -------- modal end ------------- //
         // -------- tab切换 begin -------- //
         TabCur: 0,
         VerticalNavTop: 0,
@@ -61,7 +64,7 @@ Page({
         ccgxy: '',
         ccgxyDisabled: true,
         leIndex: 0,
-        lePicker: ["请选择", "无法判定", "neg.", "25", "75", "250 (+)", "500 (++)", ],
+        lePicker: ["请选择", "无法判定", "neg.", "25", "75", "250 (+)", "500 (++)",],
         leDisabled: true,
         leAfterIndex: 0,
         leAfterPicker: ["请选择", "无法判定", "neg.", "25", "75", "250 (+)", "500 (++)"],
@@ -132,9 +135,24 @@ Page({
         zzclPicker: ["请选择", "手术-占位器植入", "手术-假体植入", "手术-清创换垫", "未手术-抗生素压制", "未手术-门诊随访", "失访-不详"],
         zzclDisabled: true,
         // -------- 入院后信息 end -------- //
+
+        // ------- 图片上传 start --------- //
+        pic1: '',
+        pic2: '',
+        pic3: '',
+        pic4: '',
+        pic5: '',
+        pic6: '',
+        pic7: '',
+        pic8: '',
+        pic9: '',
+        pic10: '',
+        pic11: '',
+        pic12: ''
+        // ------- 图片上传 end  ---------- //
     },
 
-    onLoad: function(options) {
+    onLoad: function (options) {
         this.loadProgress();
         this.setData({
             centerId: options.centerId ? options.centerId : '',
@@ -144,7 +162,7 @@ Page({
         this.completeProgress();
     },
 
-    tabSelect: function(e) {
+    tabSelect: function (e) {
         let tabId = e.currentTarget.dataset.id;
         switch (tabId) {
             case 0:
@@ -187,37 +205,37 @@ Page({
     },
 
     // -------- 基本信息事件 begin -------- //
-    onCreateDateChange: function(e) {
+    onCreateDateChange: function (e) {
         this.setData({
             createDate: e.detail.value
         });
     },
-    onSexChange: function(e) {
+    onSexChange: function (e) {
         this.setData({
             sex: e.detail.value,
         });
     },
-    onTel2SwitchChange: function(e) {
+    onTel2SwitchChange: function (e) {
         this.setData({
             tel2Disabled: !e.detail.value
         });
     },
-    onPartChange: function(e) {
+    onPartChange: function (e) {
         this.setData({
             part: e.detail.value,
         });
     },
-    onTypeChange: function(e) {
+    onTypeChange: function (e) {
         this.setData({
             type: e.detail.value,
         });
     },
-    operationDateChange: function(e) {
+    operationDateChange: function (e) {
         this.setData({
             operationDateMultiIndex: e.detail.value
         })
     },
-    operationDateColumnChange: function(e) {
+    operationDateColumnChange: function (e) {
         let data = {
             operationDateMultiArray: this.data.operationDateMultiArray,
             operationDateMultiIndex: this.data.operationDateMultiIndex
@@ -258,17 +276,17 @@ Page({
         }
         this.setData(data);
     },
-    onOperationcSwitchChange: function(e) {
+    onOperationcSwitchChange: function (e) {
         this.setData({
             operationDisabled: !e.detail.value
         });
     },
-    symptomDateChange: function(e) {
+    symptomDateChange: function (e) {
         this.setData({
             symptomDateMultiIndex: e.detail.value
         })
     },
-    symptomDateColumnChange: function(e) {
+    symptomDateColumnChange: function (e) {
         let data = {
             symptomDateMultiArray: this.data.symptomDateMultiArray,
             symptomDateMultiIndex: this.data.symptomDateMultiIndex
@@ -309,17 +327,17 @@ Page({
         }
         this.setData(data);
     },
-    onSymptomSwitchChange: function(e) {
+    onSymptomSwitchChange: function (e) {
         this.setData({
             symptomDisabled: !e.detail.value
         });
     },
-    onRisChange: function(e) {
+    onRisChange: function (e) {
         this.setData({
             ris: e.detail.value,
         });
     },
-    onAntibioticChange: function(e) {
+    onAntibioticChange: function (e) {
         this.setData({
             antibiotic: e.detail.value,
         });
@@ -327,12 +345,12 @@ Page({
     // -------- 基本信息事件 end -------- //
 
     // -------- 诊断性穿刺 begin -------- //
-    onChuanciDateChange: function(e) {
+    onChuanciDateChange: function (e) {
         this.setData({
             chuangciDate: e.detail.value
         });
     },
-    onCCDateSwitchChange: function(e) {
+    onCCDateSwitchChange: function (e) {
         if (this.data.ccDateDisabled) {
             this.setData({
                 chuangciDate: "",
@@ -345,143 +363,143 @@ Page({
             });
         }
     },
-    onCCDescribeInput: function(e) {
+    onCCDescribeInput: function (e) {
         this.setData({
             ccDescribe: e.detail.value
         });
     },
-    onCCDescribeSwitchChange: function(e) {
+    onCCDescribeSwitchChange: function (e) {
         this.setData({
             ccDescribeDisabeld: !e.detail.value
         });
     },
-    onCcgjyInput: function(e) {
+    onCcgjyInput: function (e) {
         this.setData({
             ccgjy: e.detail.value
         });
     },
-    onCcgjySwitchChange: function(e) {
+    onCcgjySwitchChange: function (e) {
         this.setData({
             ccgjyDisabled: !e.detail.value
         });
     },
-    onCcgxyInput: function(e) {
+    onCcgxyInput: function (e) {
         this.setData({
             ccgxy: e.detail.value
         });
     },
-    onCcgxySwitchChange: function(e) {
+    onCcgxySwitchChange: function (e) {
         this.setData({
             ccgxyDisabled: !e.detail.value
         });
     },
-    onLeChange: function(e) {
+    onLeChange: function (e) {
         this.setData({
             leIndex: e.detail.value,
         });
     },
-    onLeSwitchChange: function(e) {
+    onLeSwitchChange: function (e) {
         this.setData({
             leDisabled: !e.detail.value
         });
     },
-    onLeAfterChange: function(e) {
+    onLeAfterChange: function (e) {
         this.setData({
             leAfterIndex: e.detail.value,
         });
     },
-    onLeAfterSwitchChange: function(e) {
+    onLeAfterSwitchChange: function (e) {
         this.setData({
             leAfterDisabled: !e.detail.value
         });
     },
-    onGjybxbInput: function(e) {
+    onGjybxbInput: function (e) {
         this.setData({
             gjybxb: e.detail.value
         });
     },
-    onGjybxbSwitchChange: function(e) {
+    onGjybxbSwitchChange: function (e) {
         this.setData({
             gjybxbDisabled: !e.detail.value
         });
     },
-    onGjyzxInput: function(e) {
+    onGjyzxInput: function (e) {
         this.setData({
             gjyzx: e.detail.value
         });
     },
-    onGjyzxSwitchChange: function(e) {
+    onGjyzxSwitchChange: function (e) {
         this.setData({
             gjyzxDisabled: !e.detail.value
         });
     },
-    onBcpysjChange: function(e) {
+    onBcpysjChange: function (e) {
         this.setData({
             bcpysjIndex: e.detail.value,
         });
     },
-    onBcpysjSwitchChange: function(e) {
+    onBcpysjSwitchChange: function (e) {
         this.setData({
             bcpysjDisabled: !e.detail.value
         });
     },
-    onDrgpypjChange: function(e) {
+    onDrgpypjChange: function (e) {
         this.setData({
             drgpyp: e.detail.value,
         });
     },
-    onDrgpypSwitchChange: function(e) {
+    onDrgpypSwitchChange: function (e) {
         this.setData({
             drgpypDisabled: !e.detail.value
         });
     },
     // 
-    onBcxyChange: function(e) {
+    onBcxyChange: function (e) {
         this.setData({
             bcxyResult: e.detail.value,
         });
     },
-    onBcxySwitchChange: function(e) {
+    onBcxySwitchChange: function (e) {
         this.setData({
             bcxyResultDisabled: !e.detail.value
         });
     },
-    onBcxyLastChange: function(e) {
+    onBcxyLastChange: function (e) {
         this.setData({
             bcxyLast: e.detail.value,
         });
     },
-    onBcxyLastSwitchChange: function(e) {
+    onBcxyLastSwitchChange: function (e) {
         this.setData({
             bcxyLastDisabled: !e.detail.value
         });
     },
-    onBcyyChange: function(e) {
+    onBcyyChange: function (e) {
         this.setData({
             bcyyResult: e.detail.value,
         });
     },
-    onBcyySwitchChange: function(e) {
+    onBcyySwitchChange: function (e) {
         this.setData({
             bcyyResultDisabled: !e.detail.value
         });
     },
-    onBcyyLastChange: function(e) {
+    onBcyyLastChange: function (e) {
         this.setData({
             bcxyLast: e.detail.value,
         });
     },
-    onBcyyLastSwitchChange: function(e) {
+    onBcyyLastSwitchChange: function (e) {
         this.setData({
             bcyyLastDisabled: !e.detail.value
         });
     },
-    onMNGsChange: function(e) {
+    onMNGsChange: function (e) {
         this.setData({
             mNGSResult: e.detail.value,
         });
     },
-    onMNGSSwitchChange: function(e) {
+    onMNGSSwitchChange: function (e) {
         this.setData({
             mNGSResultDisabled: !e.detail.value
         });
@@ -489,18 +507,18 @@ Page({
     // -------- 诊断性穿刺 end -------- //
 
     // -------- 入院后信息 begin -------- //
-    onDoudaoChange: function(e) {
+    onDoudaoChange: function (e) {
         this.setData({
             doudaoIndex: e.detail.value,
         });
     },
-    onSqesrChange: function(e) {
+    onSqesrChange: function (e) {
         this.setData({
             sqesr: e.detail.value,
             bzhcrp: e.detail.value * 10
         });
     },
-    onSqcprChange: function(e) {
+    onSqcprChange: function (e) {
         this.setData({
             sqcpr: e.detail.value,
         });
@@ -658,7 +676,7 @@ Page({
     // -------- 入院后信息 end -------- //
 
     // -------- 提示框 begin -------- //
-    loadProgress: function() {
+    loadProgress: function () {
         if (this.data.loadProgress < 96) {
             this.setData({
                 loadProgress: this.data.loadProgress + 3
@@ -674,23 +692,23 @@ Page({
             });
         }
     },
-    completeProgress: function() {
+    completeProgress: function () {
         this.setData({
             loadProgress: 100
         });
     },
-    showToast: function(msg) {
+    showToast: function (msg) {
         wx.showToast({
             icon: 'none',
             title: msg,
         });
     },
-    showLoading: function() {
+    showLoading: function () {
         this.setData({
             loadModal: true
         });
     },
-    hideLoading: function() {
+    hideLoading: function () {
         setTimeout(() => {
             this.setData({
                 loadModal: false
@@ -699,4 +717,157 @@ Page({
     },
     // -------- 提示框 end -------- //
 
+    // -------- 模态对话框 start -------- //
+    showModal: function (e) {
+        this.setData({
+            modalName: e.currentTarget.dataset.target
+        });
+    },
+    hideModal: function (e) {
+        this.setData({
+            modalName: null
+        });
+    },
+    // -------- 模态对话框 end  -------- //
+
+    // -------- 上传图片 start --------- //
+    onChooseImage: function (e) {
+        let that = this;
+        wx.chooseImage({
+            count: 1,
+            sizeType: ['original', 'compressed'],
+            sourceType: ['album', 'camera'],
+            success(res) {
+                const tempFilePaths = res.tempFilePaths;
+                switch (e.target.dataset.le) {
+                    case "11":
+                        that.setData({
+                            pic1: tempFilePaths
+                        });
+                        break;
+                    case "12":
+                        that.data.setData({
+                            pic2: tempFilePaths
+                        });
+                        break;
+                    case "13":
+                        that.setData({
+                            pic3: tempFilePaths
+                        });
+                        break;
+                    case "21":
+                        that.setData({
+                            pic4: tempFilePaths
+                        });
+                        break;
+                    case "22":
+                        that.setData({
+                            pic5: tempFilePaths
+                        });
+                        break;
+                    case "23":
+                        that.setData({
+                            pic6: tempFilePaths
+                        });
+                        break;
+                    case "31":
+                        that.setData({
+                            pic7: tempFilePaths
+                        });
+                        break;
+                    case "32":
+                        that.setData({
+                            pic8: tempFilePaths
+                        });
+                        break;
+                    case "33":
+                        that.setData({
+                            pic9: tempFilePaths
+                        });
+                        break;
+                    case "41":
+                        that.setData({
+                            pic10: tempFilePaths
+                        });
+                        break;
+                    case "42":
+                        that.setData({
+                            pic11: tempFilePaths
+                        });
+                        break;
+                    case "43":
+                        that.setData({
+                            pic12: tempFilePaths
+                        });
+                        break;
+                }
+            }
+        });
+    },
+    onRemovePic: function (e) {
+        let that = this;
+        switch (e.target.dataset.le) {
+            case "11":
+                that.setData({
+                    pic1: ''
+                });
+                break;
+            case "12":
+                that.data.setData({
+                    pic2: ''
+                });
+                break;
+            case "13":
+                that.setData({
+                    pic3: ''
+                });
+                break;
+            case "21":
+                that.setData({
+                    pic4: ''
+                });
+                break;
+            case "22":
+                that.setData({
+                    pic5: ''
+                });
+                break;
+            case "23":
+                that.setData({
+                    pic6: ''
+                });
+                break;
+            case "31":
+                that.setData({
+                    pic7: ''
+                });
+                break;
+            case "32":
+                that.setData({
+                    pic8: ''
+                });
+                break;
+            case "33":
+                that.setData({
+                    pic9: ''
+                });
+                break;
+            case "41":
+                that.setData({
+                    pic10: ''
+                });
+                break;
+            case "42":
+                that.setData({
+                    pic11: ''
+                });
+                break;
+            case "43":
+                that.setData({
+                    pic12: ''
+                });
+                break;
+        }
+    }
+    // -------- 上传图片 end  ---------- //
 });

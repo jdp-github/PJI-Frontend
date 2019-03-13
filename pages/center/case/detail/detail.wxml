@@ -232,6 +232,7 @@
                                     {{lePicker[leIndex]}}
                                 </view>
                             </picker>
+                            <button class='cu-btn round sm' style='margin-left: 15rpx;' disabled='{{leDisabled}}' bindtap="showModal" data-target="LEDrawerModalR">上传图片</button>
                             <switch class='green sm' bindchange="onLeSwitchChange" style='margin-left: 15rpx;'></switch>
                         </view>
                         <!-- LE试纸（离心后） -->
@@ -242,6 +243,7 @@
                                     {{leAfterPicker[leAfterIndex]}}
                                 </view>
                             </picker>
+                            <button class='cu-btn round sm' style='margin-left: 15rpx;' disabled='{{leAfterDisabled}}' bindtap="showModal" data-target="LEAfterDrawerModalR">上传图片</button>
                             <switch class='green sm' bindchange="onLeAfterSwitchChange" style='margin-left: 15rpx;'></switch>
                         </view>
                         <!-- 关节液白细胞计数（cells/μL） -->
@@ -412,6 +414,7 @@
                                     {{szLEPicker[szLEIndex]}}
                                 </view>
                             </picker>
+                            <button class='cu-btn round sm' style='margin-left: 15rpx;' disabled='{{szLEDisabled}}' bindtap="showModal" data-target="LESecondDrawerModalR">上传图片</button>
                             <switch class='green sm' bindchange="onSZLESwitchChange" style='margin-left: 15rpx;'></switch>
                         </view>
                         <!--术中LE试纸（离心后） -->
@@ -422,6 +425,7 @@
                                     {{szLEAfterPicker[szLEAfterIndex]}}
                                 </view>
                             </picker>
+                            <button class='cu-btn round sm' style='margin-left: 15rpx;' disabled='{{szLEAfterDisabled}}' bindtap="showModal" data-target="LESecondAfterDrawerModalR">上传图片</button>
                             <switch class='green sm' bindchange="onSZLEAfterSwitchChange" style='margin-left: 15rpx;'></switch>
                         </view>
                         <!-- 术中关节液白细胞计数（cells/μL） -->
@@ -498,7 +502,155 @@
         </scroll-view>
     </view>
 </scroll-view>
-
+<!-- 模态对话框 -->
+<view class="cu-modal drawer-modal justify-end {{modalName=='LEDrawerModalR'?'show':''}}" bindtap='hideModal'>
+    <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;">
+        <view class="cu-bar bg-white solid-bottom">
+            <view class='action' style="font-size: 24rpx;">
+                <text class='icon-title text-green'></text>诊断性穿刺-术中LE试纸(原液)
+            </view>
+        </view>
+        <view class="cu-form-group margin-top">
+            <view class="grid col-3 grid-square flex-sub">
+                <view class="padding-xs bg-img" style="background-image:url({{pic1}});" wx:if="{{pic1 !== ''}}">
+                    <view class="cu-tag bg-red">
+                        <text class='icon-close' bindtap="onRemovePic" data-le="11"></text>
+                    </view>
+                </view>
+                <view class="padding-xs solids" wx:if="{{pic1 == ''}}">
+                    <text class='icon-cameraadd' bindtap="onChooseImage" data-le="11"></text>
+                </view>
+                <view class="padding-xs bg-img" style="background-image:url({{pic2}});" wx:if="{{pic2 !== ''}}">
+                    <view class="cu-tag bg-red">
+                        <text class='icon-close' bindtap="onRemovePic" data-le="12"></text>
+                    </view>
+                </view>
+                <view class="padding-xs solids" wx:if="{{pic2 == ''}}">
+                    <text class='icon-cameraadd' bindtap="onChooseImage" data-le="12"></text>
+                </view>
+                <view class="padding-xs bg-img" style="background-image:url({{pic3}});" wx:if="{{pic3 !== ''}}">
+                    <view class="cu-tag bg-red">
+                        <text class='icon-close' bindtap="onRemovePic" data-le="13"></text>
+                    </view>
+                </view>
+                <view class="padding-xs solids" wx:if="{{pic3 == ''}}">
+                    <text class='icon-cameraadd' bindtap="onChooseImage" data-le="13"></text>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="cu-modal drawer-modal justify-end {{modalName=='LEAfterDrawerModalR'?'show':''}}" bindtap='hideModal'>
+    <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;">
+        <view class="cu-bar bg-white solid-bottom">
+            <view class='action' style="font-size: 24rpx;">
+                <text class='icon-title text-green'></text>诊断性穿刺-术中LE试纸(离心后)
+            </view>
+        </view>
+        <view class="cu-form-group margin-top">
+            <view class="grid col-3 grid-square flex-sub">
+                <view class="padding-xs bg-img" style="background-image:url({{pic4}});" wx:if="{{pic4 !== ''}}">
+                    <view class="cu-tag bg-red">
+                        <text class='icon-close' bindtap="onRemovePic" data-le="21"></text>
+                    </view>
+                </view>
+                <view class="padding-xs solids" wx:if="{{pic4 == ''}}">
+                    <text class='icon-cameraadd' bindtap="onChooseImage" data-le="21"></text>
+                </view>
+                <view class="padding-xs bg-img" style="background-image:url({{pic5}});" wx:if="{{pic5 !== ''}}">
+                    <view class="cu-tag bg-red">
+                        <text class='icon-close' bindtap="onRemovePic" data-le="22"></text>
+                    </view>
+                </view>
+                <view class="padding-xs solids" wx:if="{{pic5 == ''}}">
+                    <text class='icon-cameraadd' bindtap="onChooseImage" data-le="22"></text>
+                </view>
+                <view class="padding-xs bg-img" style="background-image:url({{pic6}});" wx:if="{{pic6 !== ''}}">
+                    <view class="cu-tag bg-red">
+                        <text class='icon-close' bindtap="onRemovePic" data-le="23"></text>
+                    </view>
+                </view>
+                <view class="padding-xs solids" wx:if="{{pic6 == ''}}">
+                    <text class='icon-cameraadd' bindtap="onChooseImage" data-le="23"></text>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="cu-modal drawer-modal justify-end {{modalName=='LESecondDrawerModalR'?'show':''}}" bindtap='hideModal'>
+    <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;">
+        <view class="cu-bar bg-white solid-bottom">
+            <view class='action' style="font-size: 24rpx;">
+                <text class='icon-title text-green'></text>入院后-术中LE试纸(原液)
+            </view>
+        </view>
+        <view class="cu-form-group margin-top">
+            <view class="grid col-3 grid-square flex-sub">
+                <view class="padding-xs bg-img" style="background-image:url({{pic7}});" wx:if="{{pic7 !== ''}}">
+                    <view class="cu-tag bg-red">
+                        <text class='icon-close' bindtap="onRemovePic" data-le="31"></text>
+                    </view>
+                </view>
+                <view class="padding-xs solids" wx:if="{{pic7 == ''}}">
+                    <text class='icon-cameraadd' bindtap="onChooseImage" data-le="31"></text>
+                </view>
+                <view class="padding-xs bg-img" style="background-image:url({{pic8}});" wx:if="{{pic8 !== ''}}">
+                    <view class="cu-tag bg-red">
+                        <text class='icon-close' bindtap="onRemovePic" data-le="32"></text>
+                    </view>
+                </view>
+                <view class="padding-xs solids" wx:if="{{pic8 == ''}}">
+                    <text class='icon-cameraadd' bindtap="onChooseImage" data-le="32"></text>
+                </view>
+                <view class="padding-xs bg-img" style="background-image:url({{pic9}});" wx:if="{{pic9 !== ''}}">
+                    <view class="cu-tag bg-red">
+                        <text class='icon-close' bindtap="onRemovePic" data-le="33"></text>
+                    </view>
+                </view>
+                <view class="padding-xs solids" wx:if="{{pic9 == ''}}">
+                    <text class='icon-cameraadd' bindtap="onChooseImage" data-le="33"></text>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="cu-modal drawer-modal justify-end {{modalName=='LESecondAfterDrawerModalR'?'show':''}}" bindtap='hideModal'>
+    <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;">
+        <view class="cu-bar bg-white solid-bottom">
+            <view class='action' style="font-size: 24rpx;">
+                <text class='icon-title text-green'></text>入院后-术中LE试纸(离心后)
+            </view>
+        </view>
+        <view class="cu-form-group margin-top">
+            <view class="grid col-3 grid-square flex-sub">
+                <view class="padding-xs bg-img" style="background-image:url({{pic10}});" wx:if="{{pic10 !== ''}}">
+                    <view class="cu-tag bg-red">
+                        <text class='icon-close' bindtap="onRemovePic" data-le="41"></text>
+                    </view>
+                </view>
+                <view class="padding-xs solids" wx:if="{{pic10 == ''}}">
+                    <text class='icon-cameraadd' bindtap="onChooseImage" data-le="41"></text>
+                </view>
+                <view class="padding-xs bg-img" style="background-image:url({{pic11}});" wx:if="{{pic11 !== ''}}">
+                    <view class="cu-tag bg-red">
+                        <text class='icon-close' bindtap="onRemovePic" data-le="42"></text>
+                    </view>
+                </view>
+                <view class="padding-xs solids" wx:if="{{pic11 == ''}}">
+                    <text class='icon-cameraadd' bindtap="onChooseImage" data-le="42"></text>
+                </view>
+                <view class="padding-xs bg-img" style="background-image:url({{pic12}});" wx:if="{{pic12 !== ''}}">
+                    <view class="cu-tag bg-red">
+                        <text class='icon-close' bindtap="onRemovePic" data-le="43"></text>
+                    </view>
+                </view>
+                <view class="padding-xs solids" wx:if="{{pic12 == ''}}">
+                    <text class='icon-cameraadd' bindtap="onChooseImage" data-le="43"></text>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
 <!-- 底部按钮 -->
 <view class="btn-block bg-white shadow">
     <view class="flex">
