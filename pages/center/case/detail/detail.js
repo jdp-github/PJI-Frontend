@@ -80,12 +80,58 @@ Page({
         bcxyLast: '',
         bcxyLastDisabled: true,
         bcyyResult: '',
-        bcyyDisabled: true,
+        bcyyResultDisabled: true,
         bcyyLast: '',
         bcyyLastDisabled: true,
         mNGSResult: '',
         mNGSResultDisabled: true,
         // -------- 诊断性穿刺 end -------- //
+
+        // -------- 入院后信息 begin -------- //
+        doudaoIndex: 0,
+        doudaoPicker: ["请选择", "有", "无"],
+        sqesr: '',
+        sqcpr: '',
+        bzhcrp: '',
+        il6: '',
+        il6Disabled: true,
+        xwdby: '',
+        xwdbyDisabled: true,
+        ddimer: '',
+        ddimerDisabled: true,
+        shoushuDate: '',
+        ssDateDisabled: true,
+        szjnIndex: 0,
+        szjnPicker: ["请选择", "脓性液体", "未见脓液"],
+        szjnDisabled: true,
+        blIndex: 0,
+        blPicker: ["请选择", "<5", "5-10", ">10"],
+        blDisabled: true,
+        szLEIndex: 0,
+        szLEPicker: ["请选择", "/无法判定", "neg.", "25", "75", "250(+)", "500(+)"],
+        szLEDisabled: true,
+        szLEAfterIndex: 0,
+        szLEAfterPicker: ["请选择", "/无法判定", "neg.", "25", "75", "250(+)", "500(+)"],
+        szLEAfterDisabled: true,
+        szgjybxb: '',
+        szgjybxbDisabled: true,
+        szgjyzxl: '',
+        szgjyzxlDisabled: true,
+        qbgjy: '',
+        qbgjyDisabled: true,
+        szzzpy: '',
+        szzzpyDisabled: true,
+        zznMGSResult: '',
+        zznMGSResultDisabled: true,
+        csljy: '',
+        csljyDisabled: true,
+        msisIndex: 0,
+        msisPicker: ["请选择", "暂不能确定", "感染", "非感染"],
+        msisDisabled: true,
+        zzclIndex: 0,
+        zzclPicker: ["请选择", "手术-占位器植入", "手术-假体植入", "手术-清创换垫", "未手术-抗生素压制", "未手术-门诊随访", "失访-不详"],
+        zzclDisabled: true,
+        // -------- 入院后信息 end -------- //
     },
 
     onLoad: function(options) {
@@ -379,8 +425,237 @@ Page({
             bcpysjDisabled: !e.detail.value
         });
     },
-
+    onDrgpypjChange: function(e) {
+        this.setData({
+            drgpyp: e.detail.value,
+        });
+    },
+    onDrgpypSwitchChange: function(e) {
+        this.setData({
+            drgpypDisabled: !e.detail.value
+        });
+    },
+    // 
+    onBcxyChange: function(e) {
+        this.setData({
+            bcxyResult: e.detail.value,
+        });
+    },
+    onBcxySwitchChange: function(e) {
+        this.setData({
+            bcxyResultDisabled: !e.detail.value
+        });
+    },
+    onBcxyLastChange: function(e) {
+        this.setData({
+            bcxyLast: e.detail.value,
+        });
+    },
+    onBcxyLastSwitchChange: function(e) {
+        this.setData({
+            bcxyLastDisabled: !e.detail.value
+        });
+    },
+    onBcyyChange: function(e) {
+        this.setData({
+            bcyyResult: e.detail.value,
+        });
+    },
+    onBcyySwitchChange: function(e) {
+        this.setData({
+            bcyyResultDisabled: !e.detail.value
+        });
+    },
+    onBcyyLastChange: function(e) {
+        this.setData({
+            bcxyLast: e.detail.value,
+        });
+    },
+    onBcyyLastSwitchChange: function(e) {
+        this.setData({
+            bcyyLastDisabled: !e.detail.value
+        });
+    },
+    onMNGsChange: function(e) {
+        this.setData({
+            mNGSResult: e.detail.value,
+        });
+    },
+    onMNGSSwitchChange: function(e) {
+        this.setData({
+            mNGSResultDisabled: !e.detail.value
+        });
+    },
     // -------- 诊断性穿刺 end -------- //
+
+    // -------- 入院后信息 begin -------- //
+    onDoudaoChange: function(e) {
+        this.setData({
+            doudaoIndex: e.detail.value,
+        });
+    },
+    onSqesrChange: function(e) {
+        this.setData({
+            sqesr: e.detail.value,
+            bzhcrp: e.detail.value * 10
+        });
+    },
+    onSqcprChange: function(e) {
+        this.setData({
+            sqcpr: e.detail.value,
+        });
+    },
+    onXwdbyChange: function (e) {
+        this.setData({
+            xwdby: e.detail.value
+        });
+    },
+    onXwdbySwitchChange: function (e) {
+        this.setData({
+            xwdbyDisabled: !e.detail.value
+        });
+    },
+    onDdimerChange: function (e) {
+        this.setData({
+            ddimer: e.detail.value
+        });
+    },
+    onDdimerSwitchChange: function (e) {
+        this.setData({
+            ddimerDisabled: !e.detail.value
+        });
+    },
+    onShoushuDateChange: function (e) {
+        this.setData({
+            shoushuDate: e.detail.value
+        });
+    },
+    onShoushuSwitchChange: function (e) {
+        this.setData({
+            ssDateDisabled: !e.detail.value
+        });
+    },
+    onSzjnChange: function (e) {
+        this.setData({
+            szjnIndex: e.detail.value,
+        });
+    },
+    onSzjnSwitchChange: function (e) {
+        this.setData({
+            szjnDisabled: !e.detail.value
+        });
+    },
+    onBlChange: function (e) {
+        this.setData({
+            blIndex: e.detail.value,
+        });
+    },
+    onBlSwitchChange: function (e) {
+        this.setData({
+            blDisabled: !e.detail.value
+        });
+    },
+    onSZLEChange: function (e) {
+        this.setData({
+            szLEIndex: e.detail.value,
+        });
+    },
+    onSZLESwitchChange: function (e) {
+        this.setData({
+            szLEDisabled: !e.detail.value
+        });
+    },
+    onSZLEAfterChange: function (e) {
+        this.setData({
+            szLEAfterIndex: e.detail.value,
+        });
+    },
+    onSZLEAfterSwitchChange: function (e) {
+        this.setData({
+            szLEAfterDisabled: !e.detail.value
+        });
+    },
+    onSzgjybxbInput: function (e) {
+        this.setData({
+            szgjybxb: e.detail.value
+        });
+    },
+    onSzgjybxbSwitchChange: function (e) {
+        this.setData({
+            szgjybxbDisabled: !e.detail.value
+        });
+    },
+    onSzgjyzxlInput: function (e) {
+        this.setData({
+            szgjyzxl: e.detail.value
+        });
+    },
+    onSzgjyzxlSwitchChange: function (e) {
+        this.setData({
+            szgjyzxlDisabled: !e.detail.value
+        });
+    },
+    onQbgjyInput: function (e) {
+        this.setData({
+            qbgjy: e.detail.value
+        });
+    },
+    onQbgjySwitchChange: function (e) {
+        this.setData({
+            qbgjyDisabled: !e.detail.value
+        });
+    },
+    onSzzzpyInput: function (e) {
+        this.setData({
+            szzzpy: e.detail.value
+        });
+    },
+    onSzzzpySwitchChange: function (e) {
+        this.setData({
+            szzzpyDisabled: !e.detail.value
+        });
+    },
+    onZznMGSResultInput: function (e) {
+        this.setData({
+            zznMGSResult: e.detail.value
+        });
+    },
+    onZznMGSResultSwitchChange: function (e) {
+        this.setData({
+            zznMGSResultDisabled: !e.detail.value
+        });
+    },
+    onCsljyInput: function (e) {
+        this.setData({
+            csljy: e.detail.value
+        });
+    },
+    onCsljySwitchChange: function (e) {
+        this.setData({
+            csljyDisabled: !e.detail.value
+        });
+    },
+    onMsisChange: function (e) {
+        this.setData({
+            msisIndex: e.detail.value,
+        });
+    },
+    onMsisSwitchChange: function (e) {
+        this.setData({
+            msisDisabled: !e.detail.value
+        });
+    },
+    onZzclChange: function (e) {
+        this.setData({
+            zzclIndex: e.detail.value,
+        });
+    },
+    onZzclSwitchChange: function (e) {
+        this.setData({
+            zzclDisabled: !e.detail.value
+        });
+    },
+    // -------- 入院后信息 end -------- //
 
     // -------- 提示框 begin -------- //
     loadProgress: function() {

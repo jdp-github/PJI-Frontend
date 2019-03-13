@@ -2,19 +2,23 @@
     overflow: hidden;
     width: 100%;
 }
+
 .cu-avatar-group {
     direction: unset;
     unicode-bidi: bidi-override;
     padding: 0 40rpx 0 40rpx;
     display: block;
 }
+
 .VerticalNav {
-    background-color: #ffffff;
+    background-color: #fff;
 }
+
 .VerticalNav.nav {
     width: 200rpx;
     white-space: initial;
 }
+
 .VerticalNav.nav .cu-item {
     width: 100%;
     text-align: center;
@@ -24,9 +28,11 @@
     height: 50px;
     position: relative;
 }
+
 .VerticalNav.nav .cu-item.cur {
     background-color: #f1f1f1;
 }
+
 .VerticalNav.nav .cu-item.cur::after {
     content: "";
     width: 8rpx;
@@ -39,24 +45,30 @@
     bottom: 0;
     margin: auto;
 }
+
 .VerticalBox {
     display: flex;
 }
+
 .VerticalMain {
     background-color: #f1f1f1;
 }
-.cu-item-special, .cu-form-group .title, .cu-form-group input, .cu-form-group picker .picker {
+
+.cu-item-special, .cu-form-group .title, .cu-form-group input,
+.cu-form-group picker .picker {
     font-size: 22rpx;
     text-align: right;
 }
 
 .disabled {
-    background-color: #cccccc;
+    background-color: #ccc;
 }
+
 .cu-form-group textarea, .cu-form-group textarea textarea {
     font-size: 22rpx;
     text-align: right;
 }
+
 .btn-block {
     position: fixed;
     bottom: 0rpx;
@@ -64,6 +76,7 @@
     height: 110rpx;
     width: 100%;
 }
+
 .padding-left-special {
     padding-left: 5rpx;
 }
