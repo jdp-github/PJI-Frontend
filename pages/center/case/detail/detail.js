@@ -746,7 +746,7 @@ Page({
                         });
                         break;
                     case "12":
-                        that.data.setData({
+                        that.setData({
                             pic2: tempFilePaths
                         });
                         break;
@@ -813,7 +813,7 @@ Page({
                 });
                 break;
             case "12":
-                that.data.setData({
+                that.setData({
                     pic2: ''
                 });
                 break;

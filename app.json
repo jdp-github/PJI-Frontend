@@ -4,7 +4,11 @@
     "pages/center/center",
     "pages/stats/stats",
     "pages/person/person",
-    "pages/service/service"
+    "pages/service/service",
+    "pages/register/register",
+    "pages/center/member/member",
+    "pages/center/case/case",
+    "pages/center/case/detail/detail"
   ],
   "window": {
     "backgroundTextStyle": "light",
