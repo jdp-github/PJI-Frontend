@@ -653,17 +653,13 @@
 </view>
 <!-- 底部按钮 -->
 <view class="btn-block bg-white shadow">
-    <view class="flex">
-        <view class='flex-sub padding-sm margin-xs radius'>
-            <button class='cu-btn line-green shadow block' form-type="submit">
-                提交录入
-            </button>
-        </view>
-        <view class='flex-sub padding-sm margin-xs radius'>
-            <button class='cu-btn bg-green shadow block' form-type="submit">
-                确认审核
-            </button>
-        </view>
+    <view class="flex margin-special">
+        <button class='cu-btn line-green shadow' style="margin-right: 15rpx;" form-type="submit">
+            提交录入
+        </button>
+        <button class='cu-btn bg-green shadow' style="margin-left: 15rpx;" form-type="submit">
+            确认审核
+        </button>
     </view>
 </view>
 <view class='load-progress {{loadProgress!=0?"show":"hide"}}' style="top:{{CustomBar}}px;">

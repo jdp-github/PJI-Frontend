@@ -73,10 +73,16 @@
     position: fixed;
     bottom: 0rpx;
     left: 0;
-    height: 110rpx;
+    height: 80rpx;
     width: 100%;
 }
 
 .padding-left-special {
     padding-left: 5rpx;
+}
+.margin-special {
+    margin-top: 10rpx;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
 }
