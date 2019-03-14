@@ -64,7 +64,7 @@ Page({
         ccgxy: '',
         ccgxyDisabled: true,
         leIndex: 0,
-        lePicker: ["请选择", "无法判定", "neg.", "25", "75", "250 (+)", "500 (++)",],
+        lePicker: ["请选择", "无法判定", "neg.", "25", "75", "250 (+)", "500 (++)", ],
         leDisabled: true,
         leAfterIndex: 0,
         leAfterPicker: ["请选择", "无法判定", "neg.", "25", "75", "250 (+)", "500 (++)"],
@@ -152,17 +152,7 @@ Page({
         // ------- 图片上传 end  ---------- //
     },
 
-    onLoad: function (options) {
-        this.loadProgress();
-        this.setData({
-            centerId: options.centerId ? options.centerId : '',
-            centerName: options.centerName ? options.centerName : '',
-            isAdmin: app.globalData.is_admin == '1'
-        });
-        this.completeProgress();
-    },
-
-    tabSelect: function (e) {
+    tabSelect: function(e) {
         let tabId = e.currentTarget.dataset.id;
         switch (tabId) {
             case 0:
@@ -205,37 +195,37 @@ Page({
     },
 
     // -------- 基本信息事件 begin -------- //
-    onCreateDateChange: function (e) {
+    onCreateDateChange: function(e) {
         this.setData({
             createDate: e.detail.value
         });
     },
-    onSexChange: function (e) {
+    onSexChange: function(e) {
         this.setData({
             sex: e.detail.value,
         });
     },
-    onTel2SwitchChange: function (e) {
+    onTel2SwitchChange: function(e) {
         this.setData({
             tel2Disabled: !e.detail.value
         });
     },
-    onPartChange: function (e) {
+    onPartChange: function(e) {
         this.setData({
             part: e.detail.value,
         });
     },
-    onTypeChange: function (e) {
+    onTypeChange: function(e) {
         this.setData({
             type: e.detail.value,
         });
     },
-    operationDateChange: function (e) {
+    operationDateChange: function(e) {
         this.setData({
             operationDateMultiIndex: e.detail.value
         })
     },
-    operationDateColumnChange: function (e) {
+    operationDateColumnChange: function(e) {
         let data = {
             operationDateMultiArray: this.data.operationDateMultiArray,
             operationDateMultiIndex: this.data.operationDateMultiIndex
@@ -276,17 +266,17 @@ Page({
         }
         this.setData(data);
     },
-    onOperationcSwitchChange: function (e) {
+    onOperationcSwitchChange: function(e) {
         this.setData({
             operationDisabled: !e.detail.value
         });
     },
-    symptomDateChange: function (e) {
+    symptomDateChange: function(e) {
         this.setData({
             symptomDateMultiIndex: e.detail.value
         })
     },
-    symptomDateColumnChange: function (e) {
+    symptomDateColumnChange: function(e) {
         let data = {
             symptomDateMultiArray: this.data.symptomDateMultiArray,
             symptomDateMultiIndex: this.data.symptomDateMultiIndex
@@ -327,17 +317,17 @@ Page({
         }
         this.setData(data);
     },
-    onSymptomSwitchChange: function (e) {
+    onSymptomSwitchChange: function(e) {
         this.setData({
             symptomDisabled: !e.detail.value
         });
     },
-    onRisChange: function (e) {
+    onRisChange: function(e) {
         this.setData({
             ris: e.detail.value,
         });
     },
-    onAntibioticChange: function (e) {
+    onAntibioticChange: function(e) {
         this.setData({
             antibiotic: e.detail.value,
         });
@@ -345,12 +335,12 @@ Page({
     // -------- 基本信息事件 end -------- //
 
     // -------- 诊断性穿刺 begin -------- //
-    onChuanciDateChange: function (e) {
+    onChuanciDateChange: function(e) {
         this.setData({
             chuangciDate: e.detail.value
         });
     },
-    onCCDateSwitchChange: function (e) {
+    onCCDateSwitchChange: function(e) {
         if (this.data.ccDateDisabled) {
             this.setData({
                 chuangciDate: "",
@@ -363,143 +353,143 @@ Page({
             });
         }
     },
-    onCCDescribeInput: function (e) {
+    onCCDescribeInput: function(e) {
         this.setData({
             ccDescribe: e.detail.value
         });
     },
-    onCCDescribeSwitchChange: function (e) {
+    onCCDescribeSwitchChange: function(e) {
         this.setData({
             ccDescribeDisabeld: !e.detail.value
         });
     },
-    onCcgjyInput: function (e) {
+    onCcgjyInput: function(e) {
         this.setData({
             ccgjy: e.detail.value
         });
     },
-    onCcgjySwitchChange: function (e) {
+    onCcgjySwitchChange: function(e) {
         this.setData({
             ccgjyDisabled: !e.detail.value
         });
     },
-    onCcgxyInput: function (e) {
+    onCcgxyInput: function(e) {
         this.setData({
             ccgxy: e.detail.value
         });
     },
-    onCcgxySwitchChange: function (e) {
+    onCcgxySwitchChange: function(e) {
         this.setData({
             ccgxyDisabled: !e.detail.value
         });
     },
-    onLeChange: function (e) {
+    onLeChange: function(e) {
         this.setData({
             leIndex: e.detail.value,
         });
     },
-    onLeSwitchChange: function (e) {
+    onLeSwitchChange: function(e) {
         this.setData({
             leDisabled: !e.detail.value
         });
     },
-    onLeAfterChange: function (e) {
+    onLeAfterChange: function(e) {
         this.setData({
             leAfterIndex: e.detail.value,
         });
     },
-    onLeAfterSwitchChange: function (e) {
+    onLeAfterSwitchChange: function(e) {
         this.setData({
             leAfterDisabled: !e.detail.value
         });
     },
-    onGjybxbInput: function (e) {
+    onGjybxbInput: function(e) {
         this.setData({
             gjybxb: e.detail.value
         });
     },
-    onGjybxbSwitchChange: function (e) {
+    onGjybxbSwitchChange: function(e) {
         this.setData({
             gjybxbDisabled: !e.detail.value
         });
     },
-    onGjyzxInput: function (e) {
+    onGjyzxInput: function(e) {
         this.setData({
             gjyzx: e.detail.value
         });
     },
-    onGjyzxSwitchChange: function (e) {
+    onGjyzxSwitchChange: function(e) {
         this.setData({
             gjyzxDisabled: !e.detail.value
         });
     },
-    onBcpysjChange: function (e) {
+    onBcpysjChange: function(e) {
         this.setData({
             bcpysjIndex: e.detail.value,
         });
     },
-    onBcpysjSwitchChange: function (e) {
+    onBcpysjSwitchChange: function(e) {
         this.setData({
             bcpysjDisabled: !e.detail.value
         });
     },
-    onDrgpypjChange: function (e) {
+    onDrgpypjChange: function(e) {
         this.setData({
             drgpyp: e.detail.value,
         });
     },
-    onDrgpypSwitchChange: function (e) {
+    onDrgpypSwitchChange: function(e) {
         this.setData({
             drgpypDisabled: !e.detail.value
         });
     },
     // 
-    onBcxyChange: function (e) {
+    onBcxyChange: function(e) {
         this.setData({
             bcxyResult: e.detail.value,
         });
     },
-    onBcxySwitchChange: function (e) {
+    onBcxySwitchChange: function(e) {
         this.setData({
             bcxyResultDisabled: !e.detail.value
         });
     },
-    onBcxyLastChange: function (e) {
+    onBcxyLastChange: function(e) {
         this.setData({
             bcxyLast: e.detail.value,
         });
     },
-    onBcxyLastSwitchChange: function (e) {
+    onBcxyLastSwitchChange: function(e) {
         this.setData({
             bcxyLastDisabled: !e.detail.value
         });
     },
-    onBcyyChange: function (e) {
+    onBcyyChange: function(e) {
         this.setData({
             bcyyResult: e.detail.value,
         });
     },
-    onBcyySwitchChange: function (e) {
+    onBcyySwitchChange: function(e) {
         this.setData({
             bcyyResultDisabled: !e.detail.value
         });
     },
-    onBcyyLastChange: function (e) {
+    onBcyyLastChange: function(e) {
         this.setData({
             bcxyLast: e.detail.value,
         });
     },
-    onBcyyLastSwitchChange: function (e) {
+    onBcyyLastSwitchChange: function(e) {
         this.setData({
             bcyyLastDisabled: !e.detail.value
         });
     },
-    onMNGsChange: function (e) {
+    onMNGsChange: function(e) {
         this.setData({
             mNGSResult: e.detail.value,
         });
     },
-    onMNGSSwitchChange: function (e) {
+    onMNGSSwitchChange: function(e) {
         this.setData({
             mNGSResultDisabled: !e.detail.value
         });
@@ -507,168 +497,168 @@ Page({
     // -------- 诊断性穿刺 end -------- //
 
     // -------- 入院后信息 begin -------- //
-    onDoudaoChange: function (e) {
+    onDoudaoChange: function(e) {
         this.setData({
             doudaoIndex: e.detail.value,
         });
     },
-    onSqesrChange: function (e) {
+    onSqesrChange: function(e) {
         this.setData({
             sqesr: e.detail.value,
             bzhcrp: e.detail.value * 10
         });
     },
-    onSqcprChange: function (e) {
+    onSqcprChange: function(e) {
         this.setData({
             sqcpr: e.detail.value,
         });
     },
-    onXwdbyChange: function (e) {
+    onXwdbyChange: function(e) {
         this.setData({
             xwdby: e.detail.value
         });
     },
-    onXwdbySwitchChange: function (e) {
+    onXwdbySwitchChange: function(e) {
         this.setData({
             xwdbyDisabled: !e.detail.value
         });
     },
-    onDdimerChange: function (e) {
+    onDdimerChange: function(e) {
         this.setData({
             ddimer: e.detail.value
         });
     },
-    onDdimerSwitchChange: function (e) {
+    onDdimerSwitchChange: function(e) {
         this.setData({
             ddimerDisabled: !e.detail.value
         });
     },
-    onShoushuDateChange: function (e) {
+    onShoushuDateChange: function(e) {
         this.setData({
             shoushuDate: e.detail.value
         });
     },
-    onShoushuSwitchChange: function (e) {
+    onShoushuSwitchChange: function(e) {
         this.setData({
             ssDateDisabled: !e.detail.value
         });
     },
-    onSzjnChange: function (e) {
+    onSzjnChange: function(e) {
         this.setData({
             szjnIndex: e.detail.value,
         });
     },
-    onSzjnSwitchChange: function (e) {
+    onSzjnSwitchChange: function(e) {
         this.setData({
             szjnDisabled: !e.detail.value
         });
     },
-    onBlChange: function (e) {
+    onBlChange: function(e) {
         this.setData({
             blIndex: e.detail.value,
         });
     },
-    onBlSwitchChange: function (e) {
+    onBlSwitchChange: function(e) {
         this.setData({
             blDisabled: !e.detail.value
         });
     },
-    onSZLEChange: function (e) {
+    onSZLEChange: function(e) {
         this.setData({
             szLEIndex: e.detail.value,
         });
     },
-    onSZLESwitchChange: function (e) {
+    onSZLESwitchChange: function(e) {
         this.setData({
             szLEDisabled: !e.detail.value
         });
     },
-    onSZLEAfterChange: function (e) {
+    onSZLEAfterChange: function(e) {
         this.setData({
             szLEAfterIndex: e.detail.value,
         });
     },
-    onSZLEAfterSwitchChange: function (e) {
+    onSZLEAfterSwitchChange: function(e) {
         this.setData({
             szLEAfterDisabled: !e.detail.value
         });
     },
-    onSzgjybxbInput: function (e) {
+    onSzgjybxbInput: function(e) {
         this.setData({
             szgjybxb: e.detail.value
         });
     },
-    onSzgjybxbSwitchChange: function (e) {
+    onSzgjybxbSwitchChange: function(e) {
         this.setData({
             szgjybxbDisabled: !e.detail.value
         });
     },
-    onSzgjyzxlInput: function (e) {
+    onSzgjyzxlInput: function(e) {
         this.setData({
             szgjyzxl: e.detail.value
         });
     },
-    onSzgjyzxlSwitchChange: function (e) {
+    onSzgjyzxlSwitchChange: function(e) {
         this.setData({
             szgjyzxlDisabled: !e.detail.value
         });
     },
-    onQbgjyInput: function (e) {
+    onQbgjyInput: function(e) {
         this.setData({
             qbgjy: e.detail.value
         });
     },
-    onQbgjySwitchChange: function (e) {
+    onQbgjySwitchChange: function(e) {
         this.setData({
             qbgjyDisabled: !e.detail.value
         });
     },
-    onSzzzpyInput: function (e) {
+    onSzzzpyInput: function(e) {
         this.setData({
             szzzpy: e.detail.value
         });
     },
-    onSzzzpySwitchChange: function (e) {
+    onSzzzpySwitchChange: function(e) {
         this.setData({
             szzzpyDisabled: !e.detail.value
         });
     },
-    onZznMGSResultInput: function (e) {
+    onZznMGSResultInput: function(e) {
         this.setData({
             zznMGSResult: e.detail.value
         });
     },
-    onZznMGSResultSwitchChange: function (e) {
+    onZznMGSResultSwitchChange: function(e) {
         this.setData({
             zznMGSResultDisabled: !e.detail.value
         });
     },
-    onCsljyInput: function (e) {
+    onCsljyInput: function(e) {
         this.setData({
             csljy: e.detail.value
         });
     },
-    onCsljySwitchChange: function (e) {
+    onCsljySwitchChange: function(e) {
         this.setData({
             csljyDisabled: !e.detail.value
         });
     },
-    onMsisChange: function (e) {
+    onMsisChange: function(e) {
         this.setData({
             msisIndex: e.detail.value,
         });
     },
-    onMsisSwitchChange: function (e) {
+    onMsisSwitchChange: function(e) {
         this.setData({
             msisDisabled: !e.detail.value
         });
     },
-    onZzclChange: function (e) {
+    onZzclChange: function(e) {
         this.setData({
             zzclIndex: e.detail.value,
         });
     },
-    onZzclSwitchChange: function (e) {
+    onZzclSwitchChange: function(e) {
         this.setData({
             zzclDisabled: !e.detail.value
         });
@@ -676,7 +666,7 @@ Page({
     // -------- 入院后信息 end -------- //
 
     // -------- 提示框 begin -------- //
-    loadProgress: function () {
+    loadProgress: function() {
         if (this.data.loadProgress < 96) {
             this.setData({
                 loadProgress: this.data.loadProgress + 3
@@ -692,23 +682,23 @@ Page({
             });
         }
     },
-    completeProgress: function () {
+    completeProgress: function() {
         this.setData({
             loadProgress: 100
         });
     },
-    showToast: function (msg) {
+    showToast: function(msg) {
         wx.showToast({
             icon: 'none',
             title: msg,
         });
     },
-    showLoading: function () {
+    showLoading: function() {
         this.setData({
             loadModal: true
         });
     },
-    hideLoading: function () {
+    hideLoading: function() {
         setTimeout(() => {
             this.setData({
                 loadModal: false
@@ -718,12 +708,12 @@ Page({
     // -------- 提示框 end -------- //
 
     // -------- 模态对话框 start -------- //
-    showModal: function (e) {
+    showModal: function(e) {
         this.setData({
             modalName: e.currentTarget.dataset.target
         });
     },
-    hideModal: function (e) {
+    hideModal: function(e) {
         this.setData({
             modalName: null
         });
@@ -731,7 +721,7 @@ Page({
     // -------- 模态对话框 end  -------- //
 
     // -------- 上传图片 start --------- //
-    onChooseImage: function (e) {
+    onChooseImage: function(e) {
         let that = this;
         wx.chooseImage({
             count: 1,
@@ -804,7 +794,7 @@ Page({
             }
         });
     },
-    onRemovePic: function (e) {
+    onRemovePic: function(e) {
         let that = this;
         switch (e.target.dataset.le) {
             case "11":
@@ -868,6 +858,16 @@ Page({
                 });
                 break;
         }
-    }
+    },
     // -------- 上传图片 end  ---------- //
+
+    onLoad: function(options) {
+        this.loadProgress();
+        this.setData({
+            centerId: options.centerId ? options.centerId : '',
+            centerName: options.centerName ? options.centerName : '',
+            isAdmin: app.globalData.is_admin == '1'
+        });
+        this.completeProgress();
+    },
 });

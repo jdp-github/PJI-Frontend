@@ -4,16 +4,10 @@ let constant = require('../../../utils/constant.js');
 let util = require('../../../utils/util.js');
 
 const app = getApp();
-const SORT_BY_NAME_ASC = 1;
-const SORT_BY_NAME_DESC = -1;
-const SORT_BY_ID_ASC = 2;
-const SORT_BY_ID_DESC = -2;
-const SORT_BY_CREATE_DATE_ASC = 3;
-const SORT_BY_CREATE_DATE_DESC = -3;
-const SORT_BY_COMPLETE_ASC = 4;
-const SORT_BY_COMPLETE_DESC = -4;
-const SORT_BY_INFLECT_ASC = 5;
-const SORT_BY_INFLECT_DESC = -5;
+const SORT_BY_DOCTOR_ASC = 1;
+const SORT_BY_DOCTOR_DESC = -1;
+const SORT_BY_INFLECT_ASC = 2;
+const SORT_BY_INFLECT_DESC = -2;
 
 Page({
     data: {
@@ -27,35 +21,23 @@ Page({
         searchValue: '',
         caseList: [],
         selectedCase: {},
-        sortType: SORT_BY_NAME_ASC,
+        sortType: SORT_BY_DOCTOR_ASC,
         filterItems: [{
-            type: 'sort',
-            label: '完成度',
-            value: 'completeness',
-            groups: ['001'],
-        },
-            {
-                type: 'sort',
-                label: '录入者',
-                value: '',
-                groups: ['002'],
-            },
-            {
                 type: 'sort',
                 label: '主诊医师',
-                value: '',
-                groups: ['003'],
+                value: 'doctor',
+                groups: ['001'],
             },
             {
                 type: 'sort',
-                label: '穿刺信息',
-                value: '',
-                groups: ['004'],
-            }
+                label: '感染',
+                value: 'inflect',
+                groups: ['002'],
+            },
         ],
         errMsg: ''
     },
-    onLoad: function (options) {
+    onLoad: function(options) {
         this.loadProgress();
         this.setData({
             centerId: options.centerId,
@@ -64,7 +46,7 @@ Page({
         });
         this.requestCaseList(this.data.searchValue, this.data.sortType);
     },
-    loadProgress: function () {
+    loadProgress: function() {
         if (this.data.loadProgress < 96) {
             this.setData({
                 loadProgress: this.data.loadProgress + 3
@@ -80,35 +62,35 @@ Page({
             });
         }
     },
-    completeProgress: function () {
+    completeProgress: function() {
         this.setData({
             loadProgress: 100
         });
     },
-    showToast: function (msg) {
+    showToast: function(msg) {
         wx.showToast({
             icon: 'none',
             title: msg,
         });
     },
-    showLoading: function () {
+    showLoading: function() {
         this.setData({
             loadModal: true
         });
     },
-    hideLoading: function () {
+    hideLoading: function() {
         setTimeout(() => {
             this.setData({
                 loadModal: false
             });
         }, 1500);
     },
-    onSearchChange: function (e) {
+    onSearchChange: function(e) {
         this.setData({
             searchValue: e.detail.value
         });
     },
-    onSearch: function () {
+    onSearch: function() {
         this.loadProgress();
         this.requestCaseList(this.data.searchValue, this.data.sortType);
     },
@@ -118,54 +100,45 @@ Page({
 
         checkedItems.forEach((n) => {
             if (n.checked) {
-                // if (n.value === 'name') {
-                //     params.sort = n.value;
-                //     params.order = n.sort === 1 ? SORT_BY_NAME_ASC : SORT_BY_NAME_DESC;
-                // } else if (n.value === 'id') {
-                //     params.sort = n.value;
-                //     params.order = n.sort === 1 ? SORT_BY_ID_ASC : SORT_BY_ID_DESC;
-                // } else if (n.value === 'create_date') {
-                //     params.sort = n.value;
-                //     params.order = n.sort === 1 ? SORT_BY_CREATE_DATE_ASC : SORT_BY_CREATE_DATE_DESC;
-                // } else if (n.value === 'completeness') {
-                //     params.sort = n.value;
-                //     params.order = n.sort === 1 ? SORT_BY_COMPLETE_ASC : SORT_BY_COMPLETE_DESC;
-                // } else if (n.value === 'infect') {
-                //     params.sort = n.value;
-                //     params.order = n.sort === 1 ? SORT_BY_INFLECT_ASC : SORT_BY_INFLECT_DESC;
-                // }
+                if (n.value === 'doctor') {
+                    params.sort = n.value;
+                    params.order = n.sort === 1 ? SORT_BY_DOCTOR_ASC : SORT_BY_DOCTOR_DESC;
+                } else if (n.value === 'inflect') {
+                    params.sort = n.value;
+                    params.order = n.sort === 1 ? SORT_BY_INFLECT_ASC : SORT_BY_INFLECT_DESC;
+                }
 
-                // this.setData({
-                //     sortType: params.order
-                // });
-                // this.loadProgress();
-                // this.requestCaseList(this.data.searchValue, this.data.sortType);
+                this.setData({
+                    sortType: params.order
+                });
+                this.loadProgress();
+                this.requestCaseList(this.data.searchValue, this.data.sortType);
             }
         });
     },
-    onFilterOpen: function (e) {
+    onFilterOpen: function(e) {
         this.setData({
             pageStyle: 'height: 100%; overflow: hidden',
         });
     },
-    onFilterClose: function (e) {
+    onFilterClose: function(e) {
         this.setData({
             pageStyle: '',
         });
     },
-    ListTouchStart: function (e) {
+    ListTouchStart: function(e) {
         this.setData({
             ListTouchStart: e.touches[0].pageX
         });
     },
 
-    ListTouchMove: function (e) {
+    ListTouchMove: function(e) {
         this.setData({
             ListTouchDirection: e.touches[0].pageX - this.data.ListTouchStart > 0 ? 'right' : 'left'
         });
     },
 
-    ListTouchEnd: function (e) {
+    ListTouchEnd: function(e) {
         if (this.data.ListTouchDirection == 'left') {
             this.setData({
                 modalName: e.currentTarget.dataset.target
@@ -179,7 +152,7 @@ Page({
             ListTouchDirection: null
         });
     },
-    requestCaseList: function (searchValue, sortType) {
+    requestCaseList: function(searchValue, sortType) {
         let that = this;
         wx.request({
             url: constant.basePath,
@@ -218,12 +191,12 @@ Page({
             }
         });
     },
-    onAddCase: function (e) {
+    onAddCase: function(e) {
         wx.navigateTo({
             url: '../../center/case/detail/detail?case_id='
         });
     },
-    onEditCase: function (e) {
+    onEditCase: function(e) {
         let that = this;
         that.showLoading();
         let caseInfo = e.currentTarget.dataset.case;
@@ -252,7 +225,7 @@ Page({
             }
         });
     },
-    onLockCase: function (e) {
+    onLockCase: function(e) {
         let that = this;
         let selectedCase = e.currentTarget.dataset.case;
         let isApprove = selectedCase.state == 2
@@ -284,14 +257,14 @@ Page({
             }
         })
     },
-    onDeleCase: function (e) {
+    onDeleCase: function(e) {
         let selectedCase = e.currentTarget.dataset.case;
         this.setData({
             selectedCase: selectedCase
         });
         this.showModal("DeleteCaseModal");
     },
-    deleCase: function () {
+    deleCase: function() {
         let that = this;
         that.showLoading();
         wx.request({
@@ -318,18 +291,18 @@ Page({
             }
         });
     },
-    showModal: function (modalName, msg = '') {
+    showModal: function(modalName, msg = '') {
         this.setData({
             modalName: modalName,
             errMsg: msg
         });
     },
-    hideModal: function (e) {
+    hideModal: function(e) {
         this.setData({
             modalName: null
         });
     },
-    onPageScroll: function (e) {
+    onPageScroll: function(e) {
 
     }
 });

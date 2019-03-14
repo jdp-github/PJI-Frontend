@@ -1,7 +1,6 @@
 <view class="cu-custom" style="height:{{CustomBar}}px;">
     <view class="cu-bar fixed bg-gradual-green" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
-        <navigator class='action border-custom' open-type="navigateBack" delta="1" hover-class="none"
-                   style='width:{{Custom.width}}px;height:{{Custom.height}}px;margin-left:calc(750rpx - {{Custom.right}}px)' bindtap="backToAuth">
+        <navigator class='action border-custom' open-type="navigateBack" delta="1" hover-class="none" style='width:{{Custom.width}}px;height:{{Custom.height}}px;margin-left:calc(750rpx - {{Custom.right}}px)' bindtap="backToAuth">
             <text class='icon-back'></text>
             <text class='icon-homefill'></text>
         </navigator>
@@ -32,7 +31,7 @@
                         <view class='bg-red' style="width:{{item.no_completed_percentage*100}}%;">{{item.no_completed_cases==0?'.':item.no_completed_cases}}</view>
                     </view>
                 </view>
-                <input type="hidden" name="centerIdInput" id="centerIdInput" value="{{item.center_id}}" style="display:none;"/>
+                <input type="hidden" name="centerIdInput" id="centerIdInput" value="{{item.center_id}}" style="display:none;" />
             </view>
             <view class='action'>
                 <view class='text-grey text-xs'>{{item.center_ctime==null?'0000-00-00':item.center_ctime}}</view>
@@ -41,7 +40,7 @@
             <view class='move'>
                 <view class='bg-orange' data-center="{{item}}" bindtap="onClickCase">病例</view>
                 <view class='bg-olive' data-centerId="{{item.center_id}}" bindtap="onClickMember">人员</view>
-                <view class="bg-cyan" bindtap="onClickSpecimen">标本</view>
+                <view class="bg-cyan" data-center="{{item}}" bindtap="onClickSpecimen">标本</view>
             </view>
         </view>
     </view>

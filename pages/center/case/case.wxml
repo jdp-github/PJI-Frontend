@@ -79,8 +79,7 @@
             </view>
             <view class='move'>
                 <view class='bg-olive' data-case="{{item}}" bindtap="onEditCase">编辑</view>
-                <view class='bg-orange' data-case="{{item}}" bindtap='onLockCase'>审核</view>
-                <view class='bg-red' data-case="{{item}}" bindtap='onDeleCase'>删除</view>
+                <view class='bg-red' data-case="{{item}}" bindtap='onDeleCase' hidden='true'>删除</view>
             </view>
         </view>
     </view>

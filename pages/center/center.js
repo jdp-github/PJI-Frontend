@@ -20,12 +20,12 @@ Page({
         visibleCenter: false,
         centerName: ''
     },
-    onHide: function () {
+    onHide: function() {
         this.setData({
             modalName: ''
         });
     },
-    onShow: function () {
+    onShow: function() {
         if (typeof this.getTabBar === 'function' &&
             this.getTabBar()) {
             this.getTabBar().setData({
@@ -39,7 +39,7 @@ Page({
             });
         });
     },
-    onLoad: function () {
+    onLoad: function() {
         let that = this;
         that.loadProgress();
         this.setData({
@@ -47,14 +47,14 @@ Page({
         });
         this.initData();
     },
-    onPullDownRefresh: function () {
+    onPullDownRefresh: function() {
         this.setData({
             searchValue: ''
         });
         this.loadProgress();
         this.initData();
     },
-    loadProgress: function () {
+    loadProgress: function() {
         if (this.data.loadProgress < 96) {
             this.setData({
                 loadProgress: this.data.loadProgress + 3
@@ -70,42 +70,42 @@ Page({
             });
         }
     },
-    completeProgress: function () {
+    completeProgress: function() {
         this.setData({
             loadProgress: 100
         });
     },
-    showToast: function (msg) {
+    showToast: function(msg) {
         wx.showToast({
             icon: 'none',
             title: msg,
         });
     },
-    showLoading: function () {
+    showLoading: function() {
         this.setData({
             loadModal: true
         });
     },
-    hideLoading: function () {
+    hideLoading: function() {
         setTimeout(() => {
             this.setData({
                 loadModal: false
             });
         }, 1500);
     },
-    ListTouchStart: function (e) {
+    ListTouchStart: function(e) {
         this.setData({
             ListTouchStart: e.touches[0].pageX
         });
     },
 
-    ListTouchMove: function (e) {
+    ListTouchMove: function(e) {
         this.setData({
             ListTouchDirection: e.touches[0].pageX - this.data.ListTouchStart > 0 ? 'right' : 'left'
         });
     },
 
-    ListTouchEnd: function (e) {
+    ListTouchEnd: function(e) {
         if (this.data.ListTouchDirection == 'left') {
             this.setData({
                 modalName: e.currentTarget.dataset.target
@@ -119,17 +119,17 @@ Page({
             ListTouchDirection: null
         });
     },
-    showModal: function (msg) {
+    showModal: function(msg) {
         this.setData({
             modalName: e.currentTarget.dataset.target
         });
     },
-    hideModal: function (e) {
+    hideModal: function(e) {
         this.setData({
             modalName: null
         });
     },
-    initData: function () {
+    initData: function() {
         let that = this;
         wx.request({
             url: constant.basePath,
@@ -180,12 +180,12 @@ Page({
             }
         });
     },
-    onSearchChange: function (e) {
+    onSearchChange: function(e) {
         this.setData({
             searchValue: e.detail.value
         });
     },
-    onSearch: function (e) {
+    onSearch: function(e) {
         let that = this;
         that.showLoading();
         wx.request({
@@ -236,12 +236,12 @@ Page({
             }
         });
     },
-    centerNameInput: function (e) {
+    centerNameInput: function(e) {
         this.setData({
             centerName: e.detail.value
         });
     },
-    addCenter: function () {
+    addCenter: function() {
         let that = this;
         if (that.data.centerName.length == 0) {
             that.showToast({
@@ -284,13 +284,15 @@ Page({
             url: '../center/case/case?centerId=' + e.target.dataset.center.center_id + "&centerName=" + e.target.dataset.center.center_name
         });
     },
-    onClickMember: function (e) {
+    onClickMember: function(e) {
         wx.navigateTo({
             url: '../center/member/member?centerId=' + e.target.dataset.centerid
         });
     },
-    onClickSpecimen: function (e) {
-        console.log("specimen");
+    onClickSpecimen: function(e) {
+        wx.navigateTo({
+            url: '../center/specimen/specimen?centerId=' + e.target.dataset.center.center_id + "&centerName=" + e.target.dataset.center.center_name
+        })
     },
     backToAuth: function() {
         wx.navigateTo({
