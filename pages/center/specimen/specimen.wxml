@@ -1,0 +1,62 @@
+<view class="cu-custom" style="height:{{CustomBar}}px;">
+    <view class="cu-bar fixed bg-gradual-green" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+        <navigator class='action border-custom' open-type="navigateBack" delta="1" hover-class="none" style='width:{{Custom.width}}px;height:{{Custom.height}}px;margin-left:calc(750rpx - {{Custom.right}}px)'>
+            <text class='icon-back'></text>
+            <text class='icon-homefill'></text>
+        </navigator>
+        <view class='content' style='top:{{StatusBar}}px;'>{{caseId.length > 0? patient_name+"的标本":"标本盒"}}</view>
+    </view>
+</view>
+<view class="cu-bar bg-white search fixed" style="top:{{CustomBar}}px;">
+    <view class='search-form round'>
+        <text class="icon-search"></text>
+        <input type="text" placeholder="搜索标本盒、名称、关键字" confirm-type="search" value="{{searchValue}}" bindinput="onSearchChange"></input>
+    </view>
+    <view class='action'>
+        <button class='cu-btn bg-green shadow-blur round' bindtap="onSearch">搜索</button>
+    </view>
+</view>
+<view class="cu-bar bg-white fixed" style="top:{{CustomBar}}px; margin-top: 110rpx; width: 100%; border-bottom: 0;">
+    <wux-filterbar style="width: 100%;font-size: 24rpx;" items="{{ filterItems }}" bind:change="onFilterChange" bind:open="onFilterOpen" bind:close="onFilterClose" />
+</view>
+<scroll-view scroll-y class="indexes margin-bottom" scroll-into-view="indexes-{{listCurID}}" style='padding-top:220rpx;height:calc(100vh - {{CustomBar}}px)' scroll-with-animation="true" enable-back-to-top="true">
+    <view class="cu-list menu menu-avatar">
+        <button class='cu-btn bg-green shadow block margin-btn' bindtap="onAddBox">
+            添加标本盒
+        </button>
+        <view view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}}" wx:for="{{boxList}}" wx:key="" bindtouchstart='ListTouchStart' bindtouchmove='ListTouchMove' bindtouchend='ListTouchEnd' data-target="move-box-{{index}}">
+            <view class='content'>
+                <view class="flex">
+                    <view class='flex-sub radius' style="padding-right: 30rpx;">
+                        <view class="solids" style="width: 120rpx; height: 120rpx;">
+                            <image src="https://image.weilanwl.com/img/square-1.jpg" style="width: 120rpx; height: 120rpx;"></image>
+                        </view>
+                    </view>
+                    <view class='radius' style="flex:4;padding-right: 30rpx;">
+                        <view class="flex-sub sub-title">
+                            <i class="icon-unlock text-green" wx:if="{{item.state != 2}}"></i>
+                            <i class="icon-lock text-red" wx:if="{{item.state == 2}}"></i> {{item.name}}
+                        </view>
+                        <view class="flex-sub text-small text-gray">
+                            {{item.depositary}}
+                            {{item.ctime}}
+                        </view>
+                        <view class="flex-sub">
+                            <view class="cu-progress radius striped active margin-top-special">
+                                <view class='bg-olive' style="width:{{item.used_volume}}%;">{{item.used_volume==0?'.':item.used_volume}}%</view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</scroll-view>
+<view class='load-progress {{loadProgress!=0?"show":"hide"}}' style="top:{{CustomBar}}px;">
+    <view class='load-progress-bar bg-green' style="transform: translate3d(-{{100-loadProgress}}%, 0px, 0px);"></view>
+    <view class='load-progress-spinner text-green'></view>
+</view>
+<view class='cu-load load-modal' wx:if="{{loadModal}}">
+    <view class='gray-text'>处理中...</view>
+</view>
+<view class="load-curtain" wx:if="{{loadProgress!=0}}"></view>

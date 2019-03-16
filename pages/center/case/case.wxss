@@ -9,14 +9,14 @@
 }
 .cu-list>.cu-item .move {
     display: flex;
-    width: 400rpx;
+    width: 280rpx;
     height: 100%;
     position: absolute;
     right: 0;
     transform: translateX(100%);
 }
 .cu-list>.cu-item.move-cur {
-    transform: translateX(-400rpx);
+    transform: translateX(-280rpx);
 }
 .margin-btn {
     margin: 0rpx 30rpx 15rpx 30rpx;

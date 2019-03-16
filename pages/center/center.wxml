@@ -19,7 +19,7 @@
 <scroll-view scroll-y class="indexes margin-tab-bottom" scroll-into-view="indexes-{{listCurID}}" style='padding-top:50px; height:calc(100vh - {{CustomBar}}px - 50px)' scroll-with-animation="true" enable-back-to-top="true">
     <view class="cu-list menu menu-avatar">
         <view view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}}" wx:for="{{centerList}}" wx:key="{{item.center_id}}" bindtouchstart='ListTouchStart' bindtouchmove='ListTouchMove' bindtouchend='ListTouchEnd' data-target="move-box-{{index}}">
-            <view class="cu-avatar radius  margin-left">
+            <view class="cu-avatar radius margin-left">
                 <text>{{item.center_name_prefix_letter}}</text>
             </view>
             <view class='content'>

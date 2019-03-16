@@ -8,7 +8,8 @@
     "pages/register/register",
     "pages/center/member/member",
     "pages/center/case/case",
-    "pages/center/case/detail/detail"
+    "pages/center/case/detail/detail",
+    "pages/center/specimen/specimen"
   ],
   "window": {
     "backgroundTextStyle": "light",
