@@ -26,9 +26,18 @@ Page({
         // -------- tab切换 end -------- //
 
         // -------- 基本信息 begin -------- //
+        name: '',
+        caseNO: "",
         createDate: util.getNowFormatDate(new Date()),
         sex: 0,
         sexPicker: ['请选择', '男', '女'],
+        age: '',
+        height: '',
+        weight: '',
+        bmi: '',
+        chiefDoc: '',
+        tel1: '',
+        tel2: '',
         tel2Disabled: true,
         part: 0,
         partPicker: ['请选择', '髋', '膝'],
@@ -50,8 +59,12 @@ Page({
         symptomDisabled: true,
         ris: 0,
         risPicker: ['请选择', '否', '类风湿', '强制性脊柱炎', '其他 (请在备注中标明)'],
+        qtbsjb: '',
         antibiotic: 0,
         antibioticPicker: ['请选择', '是', '否'],
+        jybs: '',
+        cbzd: '',
+        tssxbz: '',
         // -------- 基本信息 end -------- //
 
         // -------- 诊断性穿刺 begin -------- //
@@ -195,14 +208,61 @@ Page({
     },
 
     // -------- 基本信息事件 begin -------- //
+    onNameInput: function(e) {
+        this.setData({
+            name: e.detail.value
+        });
+    },
+    onCaseNOInput: function(e) {
+        this.setData({
+            caseNO: e.detail.value
+        });
+    },
     onCreateDateChange: function(e) {
         this.setData({
             createDate: e.detail.value
         });
     },
-    onSexChange: function(e) {
+    onAgeInput: function(e) {
         this.setData({
             sex: e.detail.value,
+        });
+    },
+    onHeightInput: function(e) {
+        this.setData({
+            height: e.detail.value
+        });
+        if (this.data.weight != 0 && this.data.height != 0) {
+            var calcBMI = this.data.weight / (this.data.height * this.data.height)
+            this.setData({
+                bmi: calcBMI.toFixed(2)
+            })
+        }
+    },
+    onWeightInput: function(e) {
+        this.setData({
+            weight: e.detail.value
+        });
+        if (this.data.weight != 0 && this.data.height != 0) {
+            var calcBMI = this.data.weight / (this.data.height * this.data.height)
+            this.setData({
+                bmi: calcBMI.toFixed(2)
+            })
+        }
+    },
+    onChiefDocInput: function(e) {
+        this.setData({
+            chiefDoc: e.detail.value
+        });
+    },
+    onTel1Input: function(e) {
+        this.setData({
+            tel1: e.detail.value
+        });
+    },
+    onTel2Input: function(e) {
+        this.setData({
+            tel2: e.detail.value
         });
     },
     onTel2SwitchChange: function(e) {
@@ -327,9 +387,29 @@ Page({
             ris: e.detail.value,
         });
     },
+    onQtbsjbInput: function(e) {
+        this.setData({
+            qtbsjb: e.detail.value
+        });
+    },
     onAntibioticChange: function(e) {
         this.setData({
             antibiotic: e.detail.value,
+        });
+    },
+    onJybsInput: function(e) {
+        this.setData({
+            jybs: e.detail.value
+        });
+    },
+    onCbzdInput: function(e) {
+        this.setData({
+            cbzd: e.detail.value
+        });
+    },
+    onTsssbzInput: function(e) {
+        this.setData({
+            tssxbz: e.detail.value
         });
     },
     // -------- 基本信息事件 end -------- //
@@ -870,4 +950,32 @@ Page({
         });
         this.completeProgress();
     },
+
+    submit: function(e) {
+        if (this.data.ShowBasic) { // 基本信息
+            this.submitBasic()
+        } else if (this.data.ShowDiagnose) { // 诊断性穿刺
+            this.submitDiagnose()
+        } else if (this.data.ShowAdmission) { // 入院后信息
+            this.submitAdmission()
+        }
+    },
+
+    submitBasic() {},
+    submitDiagnose() {},
+    submitAdmission() {},
+
+    verify: function(e) {
+        if (this.data.ShowBasic) { // 基本信息
+            this.verifyBasic()
+        } else if (this.data.ShowDiagnose) { // 诊断性穿刺
+            this.verifyDiagnose()
+        } else if (this.data.ShowAdmission) { // 入院后信息
+            this.verifyAdmission()
+        }
+    },
+
+    verifyBasic(){},
+    verifyDiagnose() { },
+    verifyAdmission() { },
 });

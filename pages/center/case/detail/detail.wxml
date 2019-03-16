@@ -55,11 +55,11 @@
                         </view>
                         <view class="cu-form-group">
                             <view class='title'>姓名</view>
-                            <input placeholder="请输入姓名" class='radius' name='input' value=""></input>
+                            <input placeholder="请输入姓名" class='radius' bindinput="onNameInput" value=""></input>
                         </view>
                         <view class="cu-form-group">
                             <view class='title'>ID</view>
-                            <input placeholder="请输入病历号" class='radius' name='input' value=""></input>
+                            <input placeholder="请输入病历号" class='radius' bindinput="onCaseNOInput" value=""></input>
                         </view>
                         <view class="cu-form-group">
                             <view class='title'>建档日期</view>
@@ -79,31 +79,31 @@
                         </view>
                         <view class="cu-form-group">
                             <view class='title'>年龄</view>
-                            <input placeholder="请输入年龄" class='radius' name='input' value=""></input>
+                            <input placeholder="请输入年龄" class='radius' bindinput="onAgeInput"' value=""></input>
                         </view>
                         <view class="cu-form-group">
                             <view class='title'>身高(m)</view>
-                            <input placeholder="请注意单位换算" class='radius' name='input' value=""></input>
+                            <input placeholder="请注意单位换算" class='radius' bindinput="onHeightInput" value=""></input>
                         </view>
                         <view class="cu-form-group">
                             <view class='title'>体重(Kg)</view>
-                            <input placeholder="请注意单位换算" class='radius' name='input' value=""></input>
+                            <input placeholder="请注意单位换算" class='radius' bindinput="onWeightInput" value=""></input>
                         </view>
                         <view class="cu-form-group disabled">
                             <view class='title'>BMI(Kg/m2)</view>
-                            <input class='radius' name='input' value="" placeholder="自动生成" disabled></input>
+                            <input class='radius' name='input' value="{{}bmi}" placeholder="自动生成" disabled></input>
                         </view>
                         <view class="cu-form-group">
                             <view class='title'>主诊医师</view>
-                            <input placeholder="请输入主诊医师姓名" class='radius' name='input' value=""></input>
+                            <input placeholder="请输入主诊医师姓名" class='radius' bindinput="onChiefDocInput" value=""></input>
                         </view>
                         <view class="cu-form-group">
                             <view class='title'>联系电话1</view>
-                            <input placeholder="请输入联系方式" class='radius' name='input' value=""></input>
+                            <input placeholder="请输入联系方式" class='radius' bindinput="onTel1Input" value=""></input>
                         </view>
                         <view class="cu-form-group {{tel2Disabled?'disabled':''}}">
                             <view class='title'>联系电话2</view>
-                            <input placeholder="请输入联系方式" class='radius' name='input' value='' disabled='{{tel2Disabled}}'></input>
+                            <input placeholder="请输入联系方式" class='radius' bindinput="onTel2Input" value='' disabled='{{tel2Disabled}}'></input>
                             <switch class='green sm' bindchange="onTel2SwitchChange"></switch>
                         </view>
                         <view class="cu-form-group">
@@ -154,7 +154,7 @@
                         </view>
                         <view class="cu-form-group">
                             <view class='title'>其他伴随疾病</view>
-                            <input placeholder='请输入文字, 没有请填"无"' class='radius' name='input' value=""></input>
+                            <input placeholder='请输入文字, 没有请填"无"' class='radius' bindinput="onQtbsjbInput" value=""></input>
                         </view>
                         <view class="cu-form-group">
                             <view class='title'>近期(2周)应用抗生素</view>
@@ -166,15 +166,15 @@
                         </view>
                         <view class="cu-form-group">
                             <view class='title'>简要病史</view>
-                            <input placeholder='请输入文字, 没有请填"无"' class='radius' name='input' value=""></input>
+                            <input placeholder='请输入文字, 没有请填"无"' class='radius' bindinput="onJybsInput" value=""></input>
                         </view>
                         <view class="cu-form-group">
                             <view class='title'>初步诊断</view>
-                            <input placeholder='请输入文字, 没有请填"无"' class='radius' name='input' value=""></input>
+                            <input placeholder='请输入文字, 没有请填"无"' class='radius' bindinput="onCbzdInput" value=""></input>
                         </view>
                         <view class="cu-form-group">
                             <view class='title'>特殊事项备注</view>
-                            <input placeholder='请输入文字, 没有请填"无"' class='radius' name='input' value=""></input>
+                            <input placeholder='请输入文字, 没有请填"无"' class='radius' bindinput="onTsssbzInput" value=""></input>
                         </view>
                     </view>
                 </view>
@@ -654,10 +654,10 @@
 <!-- 底部按钮 -->
 <view class="btn-block bg-white shadow">
     <view class="flex margin-special">
-        <button class='cu-btn line-green shadow' style="margin-right: 15rpx;" form-type="submit">
+        <button class='cu-btn line-green shadow' style="margin-right: 15rpx;" form-type="submit" bindtap='submit'>
             提交录入
         </button>
-        <button class='cu-btn bg-green shadow' style="margin-left: 15rpx;" form-type="submit">
+        <button class='cu-btn bg-green shadow' style="margin-left: 15rpx;" form-type="submit" bindtap='verify'>
             确认审核
         </button>
     </view>
