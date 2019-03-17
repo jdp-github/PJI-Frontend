@@ -38,7 +38,7 @@
                 <view class="cu-tag round bg-grey sm leader-text">{{item.center_leader}}</view>
             </view>
             <view class='move'>
-                <view class='bg-orange' data-center="{{item}}" bindtap="onClickCase">病例</view>
+                <view class='bg-orange' data-center="{{item}}" bindtap="onClickCase">病历</view>
                 <view class='bg-olive' data-centerId="{{item.center_id}}" bindtap="onClickMember">人员</view>
                 <view class="bg-cyan" data-center="{{item}}" bindtap="onClickSpecimen">标本</view>
             </view>

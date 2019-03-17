@@ -39,8 +39,10 @@ Page({
         tel1: '',
         tel2: '',
         tel2Disabled: true,
+        // 部位
         part: 0,
         partPicker: ['请选择', '髋', '膝'],
+        // 类型
         type: 0,
         typePicker: ['请选择', '置换术后', '占位器'],
         operationDateMultiArray: [
@@ -57,6 +59,7 @@ Page({
         ],
         symptomDateMultiIndex: [0, 0],
         symptomDisabled: true,
+        // 普通选择
         ris: 0,
         risPicker: ['请选择', '否', '类风湿', '强制性脊柱炎', '其他 (请在备注中标明)'],
         qtbsjb: '',
@@ -107,7 +110,7 @@ Page({
         doudaoIndex: 0,
         doudaoPicker: ["请选择", "有", "无"],
         sqesr: '',
-        sqcpr: '',
+        sqcrp: '',
         bzhcrp: '',
         il6: '',
         il6Disabled: true,
@@ -585,12 +588,12 @@ Page({
     onSqesrChange: function(e) {
         this.setData({
             sqesr: e.detail.value,
-            bzhcrp: e.detail.value * 10
         });
     },
-    onSqcprChange: function(e) {
+    onSqcrpChange: function(e) {
         this.setData({
-            sqcpr: e.detail.value,
+            sqcrp: e.detail.value,
+            bzhcrp: e.detail.value * 10
         });
     },
     onXwdbyChange: function(e) {
@@ -961,9 +964,102 @@ Page({
         }
     },
 
-    submitBasic() {},
+    submitBasic() {
+        if (!this.isBasicValueRight()) {
+            return;
+        }
+    },
     submitDiagnose() {},
-    submitAdmission() {},
+    submitAdmission() {
+        if (!this.isAdmissionValueRight()) {
+            return;
+        }
+    },
+
+    isBasicValueRight() {
+        if (this.data.name.length <= 0) {
+            this.showToast("请填写姓名")
+            return false;
+        }
+        if (this.data.caseNO.length <= 0) {
+            this.showToast("请填写病历号")
+            return false;
+        }
+        if (this.data.sex == 0) {
+            this.showToast("请选择性别")
+            return false;
+        }
+        if (this.data.age.length <= 0) {
+            this.showToast("请填写年龄")
+            return false;
+        }
+        if (this.data.height.length <= 0) {
+            this.showToast("请填写身高")
+            return false;
+        }
+        if (this.data.weight.length <= 0) {
+            this.showToast("请填写体重")
+            return false;
+        }
+        if (this.data.chiefDoc.length <= 0) {
+            this.showToast("请填写主诊医师")
+            return false;
+        }
+        if (this.data.tel1.length <= 0) {
+            this.showToast("请填写联系电话1")
+            return false;
+        }
+        if (this.data.part == 0) {
+            this.showToast("请选择部位")
+            return false;
+        }
+        if (this.data.type == 0) {
+            this.showToast("请选择类型")
+            return false;
+        }
+        if (this.data.ris == 0) {
+            this.showToast("请选择是否合并风湿免疫性疾病")
+            return false;
+        }
+        if (this.data.qtbsjb.length <= 0) {
+            this.showToast("请填写其他伴随疾病")
+            return false;
+        }
+        if (this.data.antibiotic == 0) {
+            this.showToast("请选择近期(2周)应用抗生素")
+            return false;
+        }
+        if (this.data.jybs.length <= 0) {
+            this.showToast("请填写简要病史")
+            return false;
+        }
+        if (this.data.cbzd.length <= 0) {
+            this.showToast("请填写初步诊断")
+            return false;
+        }
+        if (this.data.tssxbz.length <= 0) {
+            this.showToast("请填写特殊事项备注")
+            return false;
+        }
+
+        return true;
+    },
+    isAdmissionValueRight() {
+        if (this.data.doudaoIndex == 0) {
+            this.showToast("请选择窦道")
+            return false;
+        }
+        if (this.data.sqesr.length <= 0) {
+            this.showToast("请填写术前ESR")
+            return false;
+        }
+        if (this.data.sqcrp.length <= 0) {
+            this.showToast("请填写术前CRP")
+            return false;
+        }
+
+        return true;
+    },
 
     verify: function(e) {
         if (this.data.ShowBasic) { // 基本信息
@@ -975,7 +1071,9 @@ Page({
         }
     },
 
-    verifyBasic(){},
-    verifyDiagnose() { },
-    verifyAdmission() { },
+    verifyBasic() {
+
+    },
+    verifyDiagnose() {},
+    verifyAdmission() {},
 });
