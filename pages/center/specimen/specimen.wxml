@@ -21,7 +21,7 @@
 </view>
 <scroll-view scroll-y class="indexes margin-bottom" scroll-into-view="indexes-{{listCurID}}" style='padding-top:220rpx;height:calc(100vh - {{CustomBar}}px)' scroll-with-animation="true" enable-back-to-top="true">
     <view class="cu-list menu menu-avatar">
-        <button class='cu-btn bg-green shadow block margin-btn' bindtap="onAddBox">
+        <button class='cu-btn bg-green shadow block margin-btn' bindtap="showModal" data-target="DrawerModalR">
             添加标本盒
         </button>
         <view view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}}" wx:for="{{boxList}}" wx:key="" bindtouchstart='ListTouchStart' bindtouchmove='ListTouchMove' bindtouchend='ListTouchEnd' data-target="move-box-{{index}}">
@@ -34,8 +34,8 @@
                     </view>
                     <view class='radius' style="flex:4;padding-right: 30rpx;">
                         <view class="flex-sub sub-title">
-                            <i class="icon-unlock text-green" wx:if="{{item.state != 2}}"></i>
-                            <i class="icon-lock text-red" wx:if="{{item.state == 2}}"></i> {{item.name}}
+                            <i class="icon-unlock text-green" wx:if="{{item.is_lock != 0}}"></i>
+                            <i class="icon-lock text-red" wx:if="{{item.is_lock == 0}}"></i> {{item.name}} <view class="cu-tag sm radius" style="font-size: 22rpx;background-color:#ccc;color:#fff;font-weight:bold;margin-left:8rpx;">送检用</view>
                         </view>
                         <view class="flex-sub text-small text-gray">
                             {{item.depositary}}
@@ -49,6 +49,11 @@
                     </view>
                 </view>
             </view>
+            <view class='move'>
+                <view class='bg-cyan' data-selecteditem="{{item}}" bindtap="onItemClick">详情</view>
+                <view class='bg-olive' data-selecteditem="{{item}}" bindtap="onItemLockOrUnlock" disable="{{item.is_display_lock != 1?'disable':''}}">{{item.is_lock == 0?'解锁':'锁定'}}</view>
+                <view class='bg-red' data-selecteditem="{{item}}" bindtap='onItemDelete' hidden='true' disable="{{item.is_display_lock != 1?'disable':''}}">删除</view>
+            </view>
         </view>
     </view>
 </scroll-view>
@@ -60,3 +65,41 @@
     <view class='gray-text'>处理中...</view>
 </view>
 <view class="load-curtain" wx:if="{{loadProgress!=0}}"></view>
+<view class="cu-modal drawer-modal justify-end {{modalName=='DrawerModalR'?'show':''}}" bindtap='hideModal'>
+    <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;">
+        <view class="cu-bar bg-white solid-bottom">
+            <view class='action' style="font-size: 24rpx;">
+                <text class='icon-title text-green'></text>新增标本盒
+            </view>
+        </view>
+        <view class="cu-form-group">
+            <view class='title text-small'>标本盒名称</view>
+            <input placeholder='请输入标本盒名称' class='radius text-small' value='{{boxName}}' data-prop='boxName'  bindinput="onInput"></input>
+        </view>
+        <view class="cu-form-group">
+            <view class='title text-small'>存放地点</view>
+            <input placeholder='请输入存放地点' class='radius text-small' value='{{depositary}}' data-prop='depositary' bindinput="onInput"></input>
+        </view>
+        <view class="cu-form-group padding-bottom">
+            <radio-group class="block">
+                <view class='title text-small'>标本盒用途</view>
+                <view class="text-small">
+                    <radio class='blue radio text-small'></radio> 常规存储
+                    <radio class='blue margin-left-sm text-small'></radio> 送检用
+                </view>
+            </radio-group>
+        </view>
+        <view class='padding-sm flex'>
+            <view class="flex-sub">
+                <button class='cu-btn  bg-green shadow sm block' bindtap="okAddBox">
+                    确定
+                </button>
+            </view>
+            <view class="flex-sub" style="margin-left: 15rpx">
+                <button class='cu-btn line-green shadow sm block' bindtap="cancelAddBox" bindinput="onInput" data-prop='depositary'>
+                    取消
+                </button>
+            </view>
+        </view>
+    </view>
+</view>

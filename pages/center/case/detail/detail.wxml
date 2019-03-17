@@ -79,7 +79,7 @@
                         </view>
                         <view class="cu-form-group">
                             <view class='title'>年龄</view>
-                            <input placeholder="请输入年龄" class='radius' bindinput="onAgeInput"' value=""></input>
+                            <input placeholder="请输入年龄" class='radius' bindinput="onAgeInput" value=""></input>
                         </view>
                         <view class="cu-form-group">
                             <view class='title'>身高(m)</view>
@@ -91,7 +91,7 @@
                         </view>
                         <view class="cu-form-group disabled">
                             <view class='title'>BMI(Kg/m2)</view>
-                            <input class='radius' name='input' value="{{}bmi}" placeholder="自动生成" disabled></input>
+                            <input class='radius' name='input' value="{{bmi}}" placeholder="自动生成" disabled></input>
                         </view>
                         <view class="cu-form-group">
                             <view class='title'>主诊医师</view>

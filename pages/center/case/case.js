@@ -131,13 +131,11 @@ Page({
             ListTouchStart: e.touches[0].pageX
         });
     },
-
     ListTouchMove: function(e) {
         this.setData({
             ListTouchDirection: e.touches[0].pageX - this.data.ListTouchStart > 0 ? 'right' : 'left'
         });
     },
-
     ListTouchEnd: function(e) {
         if (this.data.ListTouchDirection == 'left') {
             this.setData({
