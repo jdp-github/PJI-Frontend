@@ -29,6 +29,9 @@
     font-size: 30rpx;
 }
 .text-small {
-    font-size: 22rpx;
+    font-size: 22rpx!important;
     line-height: 1.5em;
+}
+.padding-bottom {
+    padding-bottom: 15rpx;
 }

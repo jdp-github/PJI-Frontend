@@ -117,16 +117,15 @@ Page({
             });
         }, 1500);
     },
-    showModal: function (modalName, msg = '') {
+    showModal(e) {
         this.setData({
-            modalName: modalName,
-            errMsg: msg
-        });
+            modalName: e.currentTarget.dataset.target
+        })
     },
-    hideModal: function (e) {
+    hideModal(e) {
         this.setData({
             modalName: null
-        });
+        })
     },
     onFilterChange: function (e) {
         const checkedItems = e.detail.checkedItems;
@@ -174,6 +173,30 @@ Page({
         this.loadProgress();
         this.requestBoxList(this.data.searchValue, this.data.sortType);
     },
+    ListTouchStart: function (e) {
+        this.setData({
+            ListTouchStart: e.touches[0].pageX
+        });
+    },
+    ListTouchMove: function (e) {
+        this.setData({
+            ListTouchDirection: e.touches[0].pageX - this.data.ListTouchStart > 0 ? 'right' : 'left'
+        });
+    },
+    ListTouchEnd: function (e) {
+        if (this.data.ListTouchDirection == 'left') {
+            this.setData({
+                modalName: e.currentTarget.dataset.target
+            });
+        } else {
+            this.setData({
+                modalName: null
+            });
+        }
+        this.setData({
+            ListTouchDirection: null
+        });
+    },
     requestBoxList: function (searchValue, sortType) {
         let that = this;
         wx.request({
@@ -212,6 +235,159 @@ Page({
             },
             fail(res) {
                 that.completeProgress();
+            }
+        });
+    },
+    cancelAddBox: function (e) {
+        this.setData({
+            modalName: '',
+            depositary: ''
+        });
+    },
+    onItemClick: function (e) {
+        wx.navigateTo({
+            url: '../../../center/specimen/detail/detail?boxId=' + e.currentTarget.dataset.selecteditem.id + '&centerId=' + this.data.centerId + "&caseId=" + this.data.caseId
+        });
+    },
+    onInput: function (e) {
+        if (e.target.dataset.prop == "boxName") {
+            this.setData({
+                boxName: e.detail.value
+            });
+        } else if (e.target.dataset.prop == "depositary") {
+            this.setData({
+                depositary: e.detail.value
+            });
+        }
+    },
+    onItemDelete: function (e) {
+        let that = this;
+        let selectedItem = e.target.dataset.selecteditem;
+        wx.showModal({
+            title: '提示',
+            content: '确定删除 [' + selectedItem.name + "] ?",
+            success(res) {
+                if (res.confirm) {
+                    that.deleteBox(selectedItem.id)
+                } else if (res.cancel) {
+                }
+            }
+        });
+    },
+    deleteBox: function (boxId) {
+        let that = this;
+        that.showLoading();
+        wx.request({
+            url: constant.basePath,
+            data: {
+                service: 'Sample.DeleteSampleBox',
+                openid: app.globalData.openid,
+                box_id: boxId
+            },
+            header: {
+                'content-type': 'application/json'
+            },
+            success(res) {
+                that.hideLoading();
+                if (res.data.data.code == constant.response_success) {
+                    that.loadProgress();
+                    that.requestBoxList(that.data.searchValue, that.data.sortType);
+                } else {
+                    that.showToast({
+                        msg: res.data.data.msg,
+                    });
+                }
+            },
+            fail(res) {
+                that.hideLoading();
+            }
+        });
+    },
+    onItemLockOrUnlock: function (e) {
+        let box = e.target.dataset.selecteditem;
+        let that = this;
+        that.showLoading();
+        wx.request({
+            url: constant.basePath,
+            data: {
+                service: 'Sample.SetLock',
+                openid: app.globalData.openid,
+                box_id: box.id,
+                type: box.is_lock == 0 ? 1 : 0
+            },
+            header: {
+                'content-type': 'application/json'
+            },
+            success(res) {
+                that.hideLoading();
+                if (res.data.data.code == constant.response_success) {
+                    that.loadProgress();
+                    that.requestBoxList(that.data.searchValue, that.data.sortType);
+                } else {
+                    that.showToast({
+                        msg: res.data.data.msg,
+                    });
+                }
+            },
+            fail(res) {
+                that.hideLoading();
+            }
+        });
+    },
+    okAddBox: function () {
+        let that = this;
+        if (that.data.boxName.length == 0) {
+            that.showToast({
+                msg: '请输入标本盒名称',
+            });
+            return
+        }
+        if (that.data.depositary.length == 0) {
+            that.showToast({
+                title: '请输入标本盒存放地点',
+            });
+            return
+        }
+        that.showLoading();
+        that.setData({
+            modalName: ''
+        });
+        wx.request({
+            url: constant.basePath,
+            data: {
+                service: 'Sample.CreateSampleBox',
+                openid: app.globalData.openid,
+                center_id: that.data.centerId,
+                name: that.data.boxName,
+                depositary: that.data.depositary
+            },
+            header: {
+                'content-type': 'application/json'
+            },
+            success(res) {
+                that.hideLoading();
+                if (res.data.data.code == constant.response_success) {
+                    that.loadProgress();
+                    that.requestBoxList(that.data.searchValue, that.data.sortType);
+                } else {
+                    that.showToast({
+                        msg: res.data.data.msg,
+                    });
+                }
+            },
+            fail(res) {
+                that.hideLoading();
+            }
+        });
+    },
+    onChooseImage: function(e) {
+        let that = this;
+        wx.chooseImage({
+            count: 1,
+            sizeType: ['original', 'compressed'],
+            sourceType: ['album', 'camera'],
+            success(res) {
+                const tempFilePaths = res.tempFilePaths;
             }
         });
     }
