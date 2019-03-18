@@ -228,9 +228,7 @@ Page({
                     });
                     that.completeProgress();
                 } else {
-                    that.showToast({
-                        msg: res.data.data.msg,
-                    });
+                    that.showToast(res.data.data.msg);
                 }
             },
             fail(res) {
@@ -293,9 +291,7 @@ Page({
                     that.loadProgress();
                     that.requestBoxList(that.data.searchValue, that.data.sortType);
                 } else {
-                    that.showToast({
-                        msg: res.data.data.msg,
-                    });
+                    that.showToast(res.data.data.msg);
                 }
             },
             fail(res) {
@@ -324,9 +320,7 @@ Page({
                     that.loadProgress();
                     that.requestBoxList(that.data.searchValue, that.data.sortType);
                 } else {
-                    that.showToast({
-                        msg: res.data.data.msg,
-                    });
+                    that.showToast(res.data.data.msg);
                 }
             },
             fail(res) {
@@ -337,15 +331,11 @@ Page({
     okAddBox: function () {
         let that = this;
         if (that.data.boxName.length == 0) {
-            that.showToast({
-                msg: '请输入标本盒名称',
-            });
+            that.showToast('请输入标本盒名称');
             return
         }
         if (that.data.depositary.length == 0) {
-            that.showToast({
-                title: '请输入标本盒存放地点',
-            });
+            that.showToast('请输入标本盒存放地点');
             return
         }
         that.showLoading();
@@ -370,9 +360,7 @@ Page({
                     that.loadProgress();
                     that.requestBoxList(that.data.searchValue, that.data.sortType);
                 } else {
-                    that.showToast({
-                        msg: res.data.data.msg,
-                    });
+                    that.showToast(res.data.data.msg);
                 }
             },
             fail(res) {

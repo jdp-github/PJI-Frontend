@@ -92,9 +92,7 @@ Page({
                         that.register(res);
                     }
                 } else {
-                    that.showToast({
-                        title: res.data.data.msg,
-                    });
+                    that.showToast(res.data.data.msg);
                 }
             },
             fail(res) {
@@ -130,9 +128,7 @@ Page({
                 },
                 fail(res) {
                     that.hideLoading();
-                    that.showToast({
-                        title: '登录出错',
-                    });
+                    that.showToast('登录出错');
                 }
             });
         } else {

@@ -175,17 +175,13 @@ Page({
                         caseList: res.data.data.list
                     });
                 } else {
-                    that.showToast({
-                        msg: res.data.data.msg,
-                    });
+                    that.showToast(res.data.data.msg);
                 }
                 that.completeProgress();
             },
             fail(res) {
                 that.completeProgress();
-                that.showToast({
-                    msg: res.data.msg
-                });
+                that.showToast(res.data.msg);
             }
         });
     },

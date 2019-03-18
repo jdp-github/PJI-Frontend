@@ -140,9 +140,7 @@ Page({
                 },
                 fail(res) {
                     that.completeProgress();
-                    that.showToast({
-                        msg: res.data.msg
-                    });
+                    that.showToast(res.data.msg);
                     reject(res);
                 }
             });
@@ -179,16 +177,12 @@ Page({
                             notApprovePercentage: Math.round((notApprove / (parseInt(approve) + parseInt(notApprove) + parseInt(notCompleted))) * 100)
                         });
                     } else {
-                        that.showToast({
-                            msg: res.data.data.msg,
-                        });
+                        that.showToast(res.data.data.msg);
                     }
                     resolve(res);
                 },
                 fail(res) {
-                    that.showToast({
-                        msg: res.data.msg
-                    });
+                    that.showToast(res.data.msg);
                     reject(res);
                 }
             });

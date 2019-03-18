@@ -159,16 +159,12 @@ Page({
                             staffNameList: staffNameList
                         });
                     } else {
-                        that.showToast({
-                            msg: res.data.data.msg,
-                        });
+                        that.showToast(res.data.data.msg);
                     }
                     resolve(res);
                 },
                 fail(res) {
-                    that.showToast({
-                        msg: res.data.data.msg,
-                    });
+                    that.showToast(res.data.data.msg);
                     that.completeProgress();
                     reject(res);
                 }
@@ -207,9 +203,7 @@ Page({
                             specimenGrid: specimenGrid
                         });
                     } else {
-                        that.showToast({
-                            msg: res.data.data.msg,
-                        });
+                        that.showToast(res.data.data.msg);
                     }
                     resolve(res);
                 },
@@ -308,9 +302,7 @@ Page({
                         selectedSpecimen: specimenInfo
                     });
                 } else {
-                    that.showToast({
-                        msg: res.data.data.msg,
-                    });
+                    that.showToast( res.data.data.msg);
                 }
             },
             fail(res) {
@@ -328,5 +320,39 @@ Page({
             msisValue = "感染"
         }
         return msisValue
+    },
+    onGetClick: function () {
+        this.setData({
+            modalName: ''
+        });
+        this.getSpecimen(this.data.selectedSpecimen.sample_id)
+    },
+    // 取出标本
+    getSpecimen: function (sample_ids) {
+        this.showLoading();
+        let that = this;
+        wx.request({
+            url: constant.basePath,
+            data: {
+                service: 'Sample.GetSample',
+                openid: app.globalData.openid,
+                sample_ids: sample_ids
+            },
+            header: {
+                'content-type': 'application/json'
+            },
+            success(res) {
+                that.hideLoading();
+                if (res.data.data.code == constant.response_success) {
+                    that.clearFilter();
+                    that.requestSampleList(that.data.typeIndex, that.data.infectIndex, that.data.staffList[that.data.ownerIndex].staff_id);
+                } else {
+                    that.showToast(res.data.data.msg);
+                }
+            },
+            fail(res) {
+                that.hideLoading();
+            }
+        });
     },
 });

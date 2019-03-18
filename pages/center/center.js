@@ -169,9 +169,7 @@ Page({
                         centerTempList: res.data.data.list
                     });
                 } else {
-                    that.showToast({
-                        title: res.data.data.msg
-                    });
+                    that.showToast(res.data.data.msg);
                 }
             },
             fail(res) {
@@ -226,9 +224,7 @@ Page({
                     });
 
                 } else {
-                    that.showToast({
-                        title: res.data.data.msg
-                    });
+                    that.showToast(res.data.data.msg);
                 }
             },
             fail(res) {
@@ -244,9 +240,7 @@ Page({
     addCenter: function() {
         let that = this;
         if (that.data.centerName.length == 0) {
-            that.showToast({
-                title: '请输入中心名',
-            });
+            that.showToast('请输入中心名');
             return
         }
         that.showLoading();
@@ -266,9 +260,7 @@ Page({
                     that.loadProgress();
                     that.initData();
                 } else {
-                    that.showToast({
-                        title: res.data.data.msg,
-                    });
+                    that.showToast(res.data.data.msg);
                 }
                 that.setData({
                     modalName: ''

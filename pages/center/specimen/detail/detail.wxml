@@ -162,7 +162,7 @@
             </view>
         </view>
         <view class='padding-sm flex' disabled="{{selectedSpecimen.status == 2?'true':'false'}}">
-            <button class='cu-btn bg-green shadow' bindtap="onGetClick" style="width:100%;" >
+            <button class='cu-btn bg-green shadow' bindtap="onGetClick" style="width:100%;">
                 取出
             </button>
         </view>

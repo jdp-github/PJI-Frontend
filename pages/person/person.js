@@ -137,9 +137,7 @@ Page({
                             centerCount: res.data.data.info.center_list.length
                         });
                     } else {
-                        that.showToast({
-                            title: res.data.msg,
-                        });
+                        that.showToast(res.data.msg);
                     }
                     resolve(res);
                 },
@@ -172,9 +170,7 @@ Page({
                             registerCount: res.data.data.list.length
                         });
                     } else {
-                        that.showToast({
-                            title: res.data.data.msg,
-                        });
+                        that.showToast(res.data.data.msg);
                     }
                     resolve(res);
                 },
@@ -207,9 +203,7 @@ Page({
                             approveCount: res.data.data.list.length
                         });
                     } else {
-                        that.showToast({
-                            title: res.data.data.msg,
-                        });
+                        that.showToast(res.data.data.msg);
                     }
                     that.completeProgress();
                     resolve(res);
@@ -240,17 +234,13 @@ Page({
                     that.requestRegister();
                     that.requestApprove();
                 } else {
-                    that.showToast({
-                        title: res.data.data.msg,
-                    });
+                    that.showToast(res.data.data.msg);
                 }
                 that.hideLoading();
             },
             fail(res) {
                 that.hideLoading();
-                that.showToast({
-                    msg: res.data.msg
-                });
+                that.showToast(res.data.msg);
             }
         });
     },
@@ -273,17 +263,13 @@ Page({
                     that.requestRegister();
                     that.requestApprove();
                 } else {
-                    that.showToast({
-                        title: res.data.data.msg,
-                    });
+                    that.showToast(res.data.data.msg);
                 }
                 that.hideLoading();
             },
             fail(res) {
                 that.hideLoading();
-                that.showToast({
-                    msg: res.data.msg
-                });
+                that.showToast(res.data.msg);
             }
         });
     }
