@@ -48,7 +48,8 @@ Page({
         staffNameList: [],
         // 弹出框
         specimenInfoVisible: false,
-        specimenSaveVisible: false
+        specimenSaveVisible: false,
+        modalName: ''
     },
     loadProgress: function () {
         if (this.data.loadProgress < 96) {
@@ -238,5 +239,94 @@ Page({
             }
         }
         return specimenGrid;
+    },
+    onItemClick: function (e) {
+        let specimen = e.currentTarget.dataset.selecteditem;
+        if (specimen.color_type == SPECIMEN_TYPE_NO_RIGHT) { // 无权限
+            this.showToast({
+                msg: '您无权限查看',
+            });
+            return
+        }
+
+        if (!this.data.isGetAll) { // 普通模式
+            if (specimen.color_type == SPECIMEN_TYPE_FREE) { // 空闲
+                wx.navigateTo({
+                    url: '../save/save?specimenInfo=' + JSON.stringify(e.currentTarget.dataset.selecteditem) + "&boxInfo=" + JSON.stringify(this.data.boxInfo) + "&centerId=" + this.data.centerId
+                });
+            } else if (specimen.color_type == SPECIMEN_TYPE_PUT || specimen.color_type == SPECIMEN_TYPE_GET) { // 已存放 or 已取出
+                this.showDetail(specimen.sample_id);
+            }
+        } else { // 批量取出
+            let number = specimen.number;
+            let columnIndex = this.data.letterArr.indexOf(number.substring(0, 1));
+            let rowIndex = number.substring(1, number.length);
+            let selectedItem = this.data.specimenGrid[columnIndex][rowIndex];
+            if (selectedItem.isChecked) {
+                selectedItem.isChecked = false;
+                selectedItem.icon = selectedItem.origiIcon;
+                selectedItem.color_hex = selectedItem.origiColor;
+                this.data.getAllList.splice(this.data.getAllList.indexOf(selectedItem.sample_id), 1);
+            } else {
+                selectedItem.isChecked = true;
+                selectedItem.origiColor = selectedItem.color_hex;
+                selectedItem.origiIcon = selectedItem.icon;
+                selectedItem.icon = "fa-calendar-check-o";
+                selectedItem.color_hex = "green";
+                this.data.getAllList.push(selectedItem.sample_id);
+            }
+            this.setData({
+                specimenGrid: this.data.specimenGrid
+            });
+            // console.log(this.data.getAllList)
+        }
+    },
+    showDetail: function (specimenId) {
+        this.setData({
+            modalName: 'specimenInfo'
+        });
+        this.showLoading();
+        let that = this;
+        wx.request({
+            url: constant.basePath,
+            data: {
+                service: 'Sample.CheckSample',
+                openid: app.globalData.openid,
+                sample_id: specimenId
+            },
+            header: {
+                'content-type': 'application/json'
+            },
+            success(res) {
+                that.hideLoading();
+                if (res.data.data.code == constant.response_success) {
+                    let specimenInfo = res.data.data.info;
+                    specimenInfo.msis = that.getMsisInfo(specimenInfo.msis);
+                    specimenInfo.put_time = util.formatTime(specimenInfo.put_time, 'Y-M-D h:m');
+                    specimenInfo.get_time = util.formatTime(specimenInfo.get_time, 'Y-M-D h:m');
+                    that.setData({
+                        selectedSpecimen: specimenInfo
+                    });
+                } else {
+                    that.showToast({
+                        msg: res.data.data.msg,
+                    });
+                }
+            },
+            fail(res) {
+                that.hideLoading();
+            }
+        });
+    },
+    getMsisInfo: function (msisFlag) {
+        let msisValue;
+        if (msisFlag == 1) {
+            msisValue = "不能确定"
+        } else if (msisFlag == 2) {
+            msisValue = "非感染"
+        } else if (msisFlag == 3) {
+            msisValue = "感染"
+        }
+        return msisValue
     },
 });

@@ -1,4 +1,7 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "wux-row": "../../../miniprogram_npm/wux-weapp/row/index",
+    "wux-col": "../../../miniprogram_npm/wux-weapp/col/index"
+  },
   "enablePullDownRefresh": false
 }
