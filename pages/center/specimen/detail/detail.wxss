@@ -56,3 +56,6 @@
     height:30rpx;
     line-height:30rpx;
 }
+.text-special {
+    font-size: 28rpx!important;
+}

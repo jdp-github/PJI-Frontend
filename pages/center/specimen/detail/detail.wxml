@@ -106,6 +106,63 @@
                 </view>
             </wux-row>
         </view>
+        <view class="cu-bar bg-white solid-bottom margin-top">
+            <view class='action' style="font-size: 24rpx;">
+                <text class='icon-title text-green'></text>标本筛选
+            </view>
+        </view>
+        <view class="cu-form-group">
+            <view class='title text-special'>是否感染</view>
+            <picker bindchange="onClickInfect" value="{{infectValue}}" range="{{infectList}}">
+                <view class="picker">
+                    {{infectList[infectIndex]}}
+                </view>
+            </picker>
+        </view>
+        <view class="cu-form-group">
+            <view class='title text-special'>手术类型</view>
+            <picker bindchange="onClickType" value="{{typeValue}}" range="{{typeList}}">
+                <view class="picker">
+                    {{typeList[typeIndex]}}
+                </view>
+            </picker>
+        </view>
+        <view class="cu-form-group">
+            <view class='title text-special'>存放者</view>
+            <picker bindchange="onClickOwner" value="{{ownerValue}}" range="{{staffNameList}}">
+                <view class="picker">
+                    {{staffNameList[ownerIndex]}}
+                </view>
+            </picker>
+        </view>
+        <view class="cu-bar bg-white solid-bottom margin-top">
+            <view class='action' style="font-size: 24rpx;">
+                <text class='icon-title text-green'></text>操作区域
+            </view>
+        </view>
+        <view class='padding-sm flex' wx:if='{{!isGetAll}}'>
+            <button class='cu-btn bg-green shadow' bindtap='onGetAllMode' style="width:100%;">
+                批量取出
+            </button>
+        </view>
+        <view class="padding-sm flex">
+            <view class="flex-sub" style="padding-right:10rpx;">
+                <!-- 取出按钮 -->
+                <view wx:if='{{isGetAll}}'>
+                    <button class='cu-btn bg-green shadow' bindtap='onGetAll' style="width:100%;">
+                        取出
+                    </button>
+                </view>
+            </view>
+            <view class="flex-sub">
+                <!-- 返回按钮 -->
+                <view wx:if='{{isGetAll}}'>
+                    <button class='cu-btn line-green shadow' bindtap='onGetAllBack' style="width:100%;">
+                        返回
+                    </button>
+                </view>
+            </view>
+        </view>
     </view>
 </scroll-view>
 <view class="cu-modal drawer-modal justify-end {{modalName=='specimenInfo'?'show':''}}" bindtap='hideModal'>
@@ -161,7 +218,7 @@
                 <input class='radius text-small special' name='input' value="{{selectedSpecimen.get_staff?selectedSpecimen.get_staff:'-'}}" disabled></input>
             </view>
         </view>
-        <view class='padding-sm flex' disabled="{{selectedSpecimen.status == 2?'true':'false'}}">
+        <view class='padding-sm flex' style="display:{{selectedSpecimen.status == 2?'none':''}}">
             <button class='cu-btn bg-green shadow' bindtap="onGetClick" style="width:100%;">
                 取出
             </button>

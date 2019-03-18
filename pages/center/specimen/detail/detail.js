@@ -6,13 +6,13 @@ let util = require('../../../../utils/util.js');
 let regeneratorRuntime = require('../../../../lib/regenerator-runtime/runtime');
 
 // 空闲
-const SPECIMEN_TYPE_FREE = 0
+const SPECIMEN_TYPE_FREE = 0;
 // 存放
-const SPECIMEN_TYPE_PUT = 1
+const SPECIMEN_TYPE_PUT = 1;
 // 取出
-const SPECIMEN_TYPE_GET = 2
+const SPECIMEN_TYPE_GET = 2;
 // 无权限
-const SPECIMEN_TYPE_NO_RIGHT = 3
+const SPECIMEN_TYPE_NO_RIGHT = 3;
 
 Page({
     data: {
@@ -47,9 +47,10 @@ Page({
         staffList: [],
         staffNameList: [],
         // 弹出框
-        specimenInfoVisible: false,
-        specimenSaveVisible: false,
-        modalName: ''
+        modalName: '',
+        infectList: ['请选择', '不能确定', '非感染', '感染'],
+        typeList: ['请选择', '置换术后', '占位器'],
+        ownerList: ['请选择']
     },
     loadProgress: function () {
         if (this.data.loadProgress < 96) {
@@ -237,9 +238,7 @@ Page({
     onItemClick: function (e) {
         let specimen = e.currentTarget.dataset.selecteditem;
         if (specimen.color_type == SPECIMEN_TYPE_NO_RIGHT) { // 无权限
-            this.showToast({
-                msg: '您无权限查看',
-            });
+            this.showToast('您无权限查看');
             return
         }
 
@@ -302,7 +301,7 @@ Page({
                         selectedSpecimen: specimenInfo
                     });
                 } else {
-                    that.showToast( res.data.data.msg);
+                    that.showToast(res.data.data.msg);
                 }
             },
             fail(res) {
@@ -345,6 +344,7 @@ Page({
                 that.hideLoading();
                 if (res.data.data.code == constant.response_success) {
                     that.clearFilter();
+                    that.loadProgress();
                     that.requestSampleList(that.data.typeIndex, that.data.infectIndex, that.data.staffList[that.data.ownerIndex].staff_id);
                 } else {
                     that.showToast(res.data.data.msg);
@@ -355,4 +355,95 @@ Page({
             }
         });
     },
+    onClickInfect: function (e) {
+        if (this.data.isGetAll) {
+            return
+        }
+        let tmp = parseInt(e.detail.value);
+        if (parseInt(e.detail.value) >= 0) {
+            this.setData({
+                infectValue: tmp,
+                infectTitle: this.data.infectList[tmp],
+                infectIndex: tmp
+            });
+            this.loadProgress();
+            this.requestSampleList(this.data.typeIndex, this.data.infectIndex, this.data.staffList[this.data.ownerIndex].staff_id);
+        }
+    },
+    onClickType: function (e) {
+        if (this.data.isGetAll) {
+            return
+        }
+        let tmp = parseInt(e.detail.value);
+        if (parseInt(e.detail.value) >= 0) {
+            this.setData({
+                typeValue: tmp,
+                typeTitle: this.data.typeList[tmp],
+                typeIndex: tmp
+            });
+            this.loadProgress();
+            this.requestSampleList(this.data.typeIndex, this.data.infectIndex, this.data.staffList[this.data.ownerIndex].staff_id);
+        }
+    },
+    onClickOwner: function (e) {
+        if (this.data.isGetAll) {
+            return
+        }
+        let tmp = parseInt(e.detail.value);
+        if (parseInt(e.detail.value) >= 0) {
+            this.setData({
+                ownerValue: tmp,
+                ownerTitle: this.data.staffNameList[tmp],
+                ownerIndex: tmp
+            });
+            this.loadProgress();
+            this.requestSampleList(this.data.typeIndex, this.data.infectIndex, this.data.staffList[this.data.ownerIndex].staff_id);
+        }
+    },
+    onGetAllMode: function () {
+        this.setData({
+            isGetAll: true
+        });
+        this.clearFilter();
+        this.loadProgress();
+        this.requestSampleList(this.data.typeIndex, this.data.infectIndex, this.data.staffList[this.data.ownerIndex].staff_id);
+    },
+    onGetAllBack: function () {
+        this.setData({
+            isGetAll: false
+        });
+        this.clearSelectStatus();
+    },
+
+    onGetAll: function () {
+        if (this.data.getAllList.length == 0) {
+            this.showToast('请选择要取出的标本');
+            return
+        }
+        let sample_ids = "";
+        let getAllList = this.data.getAllList;
+        for (let i = 0, length = getAllList.length; i < length; i++) {
+            sample_ids += getAllList[i] + ",";
+        }
+        sample_ids = sample_ids.substr(0, sample_ids.length - 1);
+        // console.log(sample_ids)
+        this.getSpecimen(sample_ids);
+    },
+    // 清空选中标本的状态
+    clearSelectStatus: function () {
+        let specimenGrid = this.data.specimenGrid;
+        for (let i = 0, column = specimenGrid.length; i < column; i++) {
+            for (let j = 0, row = specimenGrid[i].length; j < row; j++) {
+                let specimenItem = specimenGrid[i][j];
+                if (specimenItem.isChecked) {
+                    specimenItem.isChecked = false;
+                    specimenItem.icon = specimenItem.origiIcon;
+                    specimenItem.color_hex = specimenItem.origiColor;
+                }
+            }
+        }
+        this.setData({
+            specimenGrid: specimenGrid
+        });
+    }
 });
