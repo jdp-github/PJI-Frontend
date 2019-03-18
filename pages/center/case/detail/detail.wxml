@@ -145,7 +145,7 @@
                             <input class='radius' name='input' value="" placeholder="自动生成" disabled></input>
                         </view>
                         <view class="cu-form-group">
-                            <view class='title'>普通选择</view>
+                            <view class='title'>是否合并风湿免疫性疾病</view>
                             <picker bindchange="onRisChange" value="{{ris}}" range="{{risPicker}}">
                                 <view class="picker">
                                     {{risPicker[ris]}}
@@ -346,6 +346,11 @@
                         <view class="cu-form-group">
                             <view class='title'>术前ESR(mm/h)</view>
                             <input placeholder="请输入数字" class='radius' name='input' type="number" value="" bindinput="onSqesrChange"></input>
+                        </view>
+                        <!-- 术前CRP (mg/dl)-->
+                        <view class="cu-form-group">
+                            <view class='title'>术前CRP(mg/dl)</view>
+                            <input placeholder="请输入数字，注意单位换算" class='radius' name='input' type="number" value="" bindinput="onSqcrpChange"></input>
                         </view>
                         <!-- 标准化的CRP (mg/L) -->
                         <view class="cu-form-group disabled">
