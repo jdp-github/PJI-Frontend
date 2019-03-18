@@ -1,0 +1,37 @@
+<view class="cu-custom" style="height:{{CustomBar}}px;">
+    <view class="cu-bar fixed bg-gradual-green" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+        <navigator class='action border-custom' open-type="navigateBack" delta="1" hover-class="none"
+                   style='width:{{Custom.width}}px;height:{{Custom.height}}px;margin-left:calc(750rpx - {{Custom.right}}px)'>
+            <text class='icon-back'></text>
+            <text class='icon-homefill'></text>
+        </navigator>
+        <view class='content' style='top:{{StatusBar}}px;'>标本列表</view>
+    </view>
+</view>
+<scroll-view scroll-y class="indexes margin-bottom" scroll-into-view="indexes-{{listCurID}}"
+             style='height:calc(100vh - {{CustomBar}}px)' scroll-with-animation="true" enable-back-to-top="true">
+    <view class="title-section shadow">
+        <view class="box-title">
+            {{boxInfo.name?boxInfo.name:'-'}} ({{boxInfo.used_volume?boxInfo.used_volume:'-'}} / {{boxInfo.volume?boxInfo.volume:'-'}})
+        </view>
+        <view class="box-description text-gray">
+            <span>
+                <text class='icon-timefill lg text-gray'></text> {{boxInfo.showTime}}
+            </span>
+            <span style="margin-left: 20rpx;">
+                <text class='icon-locationfill lg text-gray'></text> {{boxInfo.depositary}}
+            </span>
+            <span style="margin-left: 20rpx;">
+                <text class='icon-myfill lg text-gray'></text> {{boxInfo.creator}}
+            </span>
+        </view>
+    </view>
+</scroll-view>
+<view class='load-progress {{loadProgress!=0?"show":"hide"}}' style="top:{{CustomBar}}px;">
+    <view class='load-progress-bar bg-green' style="transform: translate3d(-{{100-loadProgress}}%, 0px, 0px);"></view>
+    <view class='load-progress-spinner text-green'></view>
+</view>
+<view class='cu-load load-modal' wx:if="{{loadModal}}">
+    <view class='gray-text'>处理中...</view>
+</view>
+<view class="load-curtain" wx:if="{{loadProgress!=0}}"></view>

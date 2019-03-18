@@ -246,7 +246,7 @@ Page({
     },
     onItemClick: function (e) {
         wx.navigateTo({
-            url: '../../../center/specimen/detail/detail?boxId=' + e.currentTarget.dataset.selecteditem.id + '&centerId=' + this.data.centerId + "&caseId=" + this.data.caseId
+            url: '../../center/specimen/detail/detail?boxId=' + e.currentTarget.dataset.selecteditem.id + '&centerId=' + this.data.centerId + "&caseId=" + this.data.caseId
         });
     },
     onInput: function (e) {

@@ -43,7 +43,7 @@
                         </view>
                         <view class="flex-sub">
                             <view class="cu-progress radius striped active margin-top-special">
-                                <view class='bg-olive' style="width:{{item.used_volume}}%;">{{item.used_volume==0?'.':item.used_volume}}%</view>
+                                <view class='bg-olive' style="width:{{item.used_volume}}%;">{{item.used_volume==0?'.':item.used_volume}}</view>
                             </view>
                         </view>
                     </view>

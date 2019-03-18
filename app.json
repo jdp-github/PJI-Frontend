@@ -9,7 +9,8 @@
     "pages/center/member/member",
     "pages/center/case/case",
     "pages/center/case/detail/detail",
-    "pages/center/specimen/specimen"
+    "pages/center/specimen/specimen",
+    "pages/center/specimen/detail/detail"
   ],
   "window": {
     "backgroundTextStyle": "light",
