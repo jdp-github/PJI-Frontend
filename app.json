@@ -10,7 +10,8 @@
     "pages/center/case/case",
     "pages/center/case/detail/detail",
     "pages/center/specimen/specimen",
-    "pages/center/specimen/detail/detail"
+    "pages/center/specimen/detail/detail",
+    "pages/center/specimen/save/save"
   ],
   "window": {
     "backgroundTextStyle": "light",
