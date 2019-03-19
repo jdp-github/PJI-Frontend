@@ -1,5 +1,9 @@
 @import '../../../../font-awesome.wxss';
 
+page, .page {
+    background-color: #ffffff;
+}
+
 .avatar-group {
     overflow: hidden;
     width: 100%;
@@ -72,18 +76,14 @@
 }
 
 .btn-block {
-    position: fixed;
-    bottom: 0rpx;
-    left: 0;
-    height: 80rpx;
     width: 100%;
 }
 
 .padding-left-special {
-    padding-left: 5rpx;
+    padding-left: 2rpx;
 }
 .margin-special {
-    margin-top: 10rpx;
+    padding: 15rpx 0rpx;
     text-align: center;
     align-items: center;
     justify-content: center;
@@ -107,4 +107,7 @@
 }
 .grid.grid-square > view {
     margin-right: 0rpx!important;
+}
+.VerticalMain {
+    backgroun-color: #fff!important;
 }

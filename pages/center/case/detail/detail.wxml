@@ -33,15 +33,15 @@
         </view>
     </view>
 </view>
-<scroll-view scroll-y class="indexes margin-bottom" scroll-into-view="indexes-{{listCurID}}" style='padding-top: 100rpx;height:calc(100vh - {{CustomBar}}px)' scroll-with-animation="true" enable-back-to-top="true">
-    <view class="VerticalBox">
-        <scroll-view class="VerticalNav nav" scroll-y scroll-with-animation scroll-top="{{VerticalNavTop}}" style="height:calc(100vh - 330rpx)">
+<scroll-view scroll-y class="indexes" scroll-into-view="indexes-{{listCurID}}" style='padding-top: 100rpx;height:100%' scroll-with-animation="true" enable-back-to-top="true">
+    <view class="VerticalBox" style="height: 100%;">
+        <scroll-view class="VerticalNav nav" scroll-y scroll-with-animation scroll-top="{{VerticalNavTop}}" style="height:100%">
             <view class="cu-item {{index==TabCur?'text-green cur':''}}" style="font-size: 22rpx" wx:for="{{TabTitle}}" wx:key bindtap='tabSelect' data-id="{{index}}">
                 {{item}}
             </view>
         </scroll-view>
         <!-- 基本信息 -->
-        <scroll-view class="VerticalMain" scroll-y style="height:calc(100vh - 330rpx)" wx:if="{{ShowBasic}}">
+        <scroll-view class="VerticalMain" scroll-y style="height:100%" wx:if="{{ShowBasic}}">
             <view class="padding-left-special">
                 <view class='cu-bar solid-bottom bg-white'>
                     <view class='action'>
@@ -179,9 +179,20 @@
                     </view>
                 </view>
             </view>
+            <!-- 底部按钮 -->
+            <view class="btn-block bg-white shadow">
+                <view class="flex margin-special">
+                    <button class='cu-btn line-green shadow' style="margin-right: 15rpx;" form-type="submit" bindtap='submit'>
+                        提交录入
+                    </button>
+                    <button class='cu-btn bg-green shadow' style="margin-left: 15rpx;" form-type="submit" bindtap='verify'>
+                        确认审核
+                    </button>
+                </view>
+            </view>
         </scroll-view>
         <!-- 诊断性穿刺 -->
-        <scroll-view class="VerticalMain" scroll-y style="height:calc(100vh - 330rpx)" wx:if="{{ShowDiagnose}}">
+        <scroll-view class="VerticalMain" scroll-y style="height:100%" wx:if="{{ShowDiagnose}}">
             <view class="padding-left-special">
                 <view class='cu-bar solid-bottom bg-white'>
                     <view class='action'>
@@ -323,9 +334,20 @@
                     </view>
                 </view>
             </view>
+            <!-- 底部按钮 -->
+            <view class="btn-block bg-white shadow">
+                <view class="flex margin-special">
+                    <button class='cu-btn line-green shadow' style="margin-right: 15rpx;" form-type="submit" bindtap='submit'>
+                        提交录入
+                    </button>
+                    <button class='cu-btn bg-green shadow' style="margin-left: 15rpx;" form-type="submit" bindtap='verify'>
+                        确认审核
+                    </button>
+                </view>
+            </view>
         </scroll-view>
         <!-- 入院后信息 -->
-        <scroll-view class="VerticalMain" scroll-y style="height:calc(100vh - 330rpx)" wx:if="{{ShowAdmission}}">
+        <scroll-view class="VerticalMain" scroll-y style="height:100%" wx:if="{{ShowAdmission}}">
             <view class="padding-left-special">
                 <view class='cu-bar solid-bottom bg-white'>
                     <view class='action'>
@@ -504,6 +526,17 @@
                     </view>
                 </view>
             </view>
+            <!-- 底部按钮 -->
+            <view class="btn-block bg-white shadow">
+                <view class="flex margin-special">
+                    <button class='cu-btn line-green shadow' style="margin-right: 15rpx;" form-type="submit" bindtap='submit'>
+                        提交录入
+                    </button>
+                    <button class='cu-btn bg-green shadow' style="margin-left: 15rpx;" form-type="submit" bindtap='verify'>
+                        确认审核
+                    </button>
+                </view>
+            </view>
         </scroll-view>
     </view>
 </scroll-view>
@@ -666,17 +699,6 @@
                 </view>
             </view>
         </view>
-    </view>
-</view>
-<!-- 底部按钮 -->
-<view class="btn-block bg-white shadow">
-    <view class="flex margin-special">
-        <button class='cu-btn line-green shadow' style="margin-right: 15rpx;" form-type="submit" bindtap='submit'>
-            提交录入
-        </button>
-        <button class='cu-btn bg-green shadow' style="margin-left: 15rpx;" form-type="submit" bindtap='verify'>
-            确认审核
-        </button>
     </view>
 </view>
 <view class='load-progress {{loadProgress!=0?"show":"hide"}}' style="top:{{CustomBar}}px;">
