@@ -27,7 +27,7 @@ Page({
         boxId: '',
         boxInfo: {},
         caseId: '',
-        letterArr: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J",],
+        letterArr: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", ],
         specimenGrid: [],
         selectedSpecimen: {},
         isGetAll: false,
@@ -52,7 +52,7 @@ Page({
         typeList: ['请选择', '置换术后', '占位器'],
         ownerList: ['请选择']
     },
-    loadProgress: function () {
+    loadProgress: function() {
         if (this.data.loadProgress < 96) {
             this.setData({
                 loadProgress: this.data.loadProgress + 3
@@ -68,23 +68,23 @@ Page({
             });
         }
     },
-    completeProgress: function () {
+    completeProgress: function() {
         this.setData({
             loadProgress: 100
         });
     },
-    showToast: function (msg) {
+    showToast: function(msg) {
         wx.showToast({
             icon: 'none',
             title: msg,
         });
     },
-    showLoading: function () {
+    showLoading: function() {
         this.setData({
             loadModal: true
         });
     },
-    hideLoading: function () {
+    hideLoading: function() {
         setTimeout(() => {
             this.setData({
                 loadModal: false
@@ -101,7 +101,7 @@ Page({
             modalName: null
         });
     },
-    onLoad: function (options) {
+    onLoad: function(options) {
         this.setData({
             boxId: options.boxId,
             centerId: options.centerId,
@@ -111,11 +111,11 @@ Page({
         this.clearFilter();
         this.init();
     },
-    init: async function () {
+    init: async function() {
         await this.requestCenterStaffList(this.data.centerId);
         await this.requestSampleList();
     },
-    clearFilter: function () {
+    clearFilter: function() {
         this.setData({
             typeIndex: 0,
             typeValue: '',
@@ -128,7 +128,7 @@ Page({
             ownerTitle: '请选择'
         });
     },
-    requestCenterStaffList: function (centerId) {
+    requestCenterStaffList: function(centerId) {
         let that = this;
         return new Promise((resolve, reject) => {
             wx.request({
@@ -172,7 +172,7 @@ Page({
             });
         });
     },
-    requestSampleList: function (msis, type, staffId) {
+    requestSampleList: function(msis, type, staffId) {
         let that = this;
         return new Promise((resolve, reject) => {
             wx.request({
@@ -215,7 +215,7 @@ Page({
             });
         });
     },
-    makeSpecimenGrid: function (specimenList) {
+    makeSpecimenGrid: function(specimenList) {
         let specimenGrid = [];
         let row = [];
         for (let i = 0, column = 0, length = specimenList.length; i < length; i++) {
@@ -235,7 +235,7 @@ Page({
         }
         return specimenGrid;
     },
-    onItemClick: function (e) {
+    onItemClick: function(e) {
         let specimen = e.currentTarget.dataset.selecteditem;
         if (specimen.color_type == SPECIMEN_TYPE_NO_RIGHT) { // 无权限
             this.showToast('您无权限查看');
@@ -274,7 +274,7 @@ Page({
             // console.log(this.data.getAllList)
         }
     },
-    showDetail: function (specimenId) {
+    showDetail: function(specimenId) {
         this.setData({
             modalName: 'specimenInfo'
         });
@@ -309,7 +309,7 @@ Page({
             }
         });
     },
-    getMsisInfo: function (msisFlag) {
+    getMsisInfo: function(msisFlag) {
         let msisValue;
         if (msisFlag == 1) {
             msisValue = "不能确定"
@@ -320,14 +320,14 @@ Page({
         }
         return msisValue
     },
-    onGetClick: function () {
+    onGetClick: function() {
         this.setData({
             modalName: ''
         });
         this.getSpecimen(this.data.selectedSpecimen.sample_id)
     },
     // 取出标本
-    getSpecimen: function (sample_ids) {
+    getSpecimen: function(sample_ids) {
         this.showLoading();
         let that = this;
         wx.request({
@@ -345,7 +345,7 @@ Page({
                 if (res.data.data.code == constant.response_success) {
                     that.clearFilter();
                     that.loadProgress();
-                    that.requestSampleList(that.data.typeIndex, that.data.infectIndex, that.data.staffList[that.data.ownerIndex].staff_id);
+                    that.requestSampleList(that.data.infectIndex, that.data.typeIndex, that.data.staffList[that.data.ownerIndex].staff_id);
                 } else {
                     that.showToast(res.data.data.msg);
                 }
@@ -355,7 +355,7 @@ Page({
             }
         });
     },
-    onClickInfect: function (e) {
+    onClickInfect: function(e) {
         if (this.data.isGetAll) {
             return
         }
@@ -367,10 +367,10 @@ Page({
                 infectIndex: tmp
             });
             this.loadProgress();
-            this.requestSampleList(this.data.typeIndex, this.data.infectIndex, this.data.staffList[this.data.ownerIndex].staff_id);
+            this.requestSampleList(this.data.infectIndex, this.data.typeIndex, this.data.staffList[this.data.ownerIndex].staff_id);
         }
     },
-    onClickType: function (e) {
+    onClickType: function(e) {
         if (this.data.isGetAll) {
             return
         }
@@ -382,10 +382,10 @@ Page({
                 typeIndex: tmp
             });
             this.loadProgress();
-            this.requestSampleList(this.data.typeIndex, this.data.infectIndex, this.data.staffList[this.data.ownerIndex].staff_id);
+            this.requestSampleList(this.data.infectIndex, this.data.typeIndex, this.data.staffList[this.data.ownerIndex].staff_id);
         }
     },
-    onClickOwner: function (e) {
+    onClickOwner: function(e) {
         if (this.data.isGetAll) {
             return
         }
@@ -397,25 +397,25 @@ Page({
                 ownerIndex: tmp
             });
             this.loadProgress();
-            this.requestSampleList(this.data.typeIndex, this.data.infectIndex, this.data.staffList[this.data.ownerIndex].staff_id);
+            this.requestSampleList(this.data.infectIndex, this.data.typeIndex, this.data.staffList[this.data.ownerIndex].staff_id);
         }
     },
-    onGetAllMode: function () {
+    onGetAllMode: function() {
         this.setData({
             isGetAll: true
         });
         this.clearFilter();
         this.loadProgress();
-        this.requestSampleList(this.data.typeIndex, this.data.infectIndex, this.data.staffList[this.data.ownerIndex].staff_id);
+        this.requestSampleList(this.data.infectIndex, this.data.typeIndex, this.data.staffList[this.data.ownerIndex].staff_id);
     },
-    onGetAllBack: function () {
+    onGetAllBack: function() {
         this.setData({
             isGetAll: false
         });
         this.clearSelectStatus();
     },
 
-    onGetAll: function () {
+    onGetAll: function() {
         if (this.data.getAllList.length == 0) {
             this.showToast('请选择要取出的标本');
             return
@@ -430,7 +430,7 @@ Page({
         this.getSpecimen(sample_ids);
     },
     // 清空选中标本的状态
-    clearSelectStatus: function () {
+    clearSelectStatus: function() {
         let specimenGrid = this.data.specimenGrid;
         for (let i = 0, column = specimenGrid.length; i < column; i++) {
             for (let j = 0, row = specimenGrid[i].length; j < row; j++) {
