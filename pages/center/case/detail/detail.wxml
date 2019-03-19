@@ -515,30 +515,33 @@
                 <text class='icon-title text-green'></text>诊断性穿刺-术中LE试纸(原液)
             </view>
         </view>
-        <view class="cu-form-group margin-top">
-            <view class="grid col-3 grid-square flex-sub">
-                <view class="padding-xs bg-img" style="background-image:url({{pic1}});" wx:if="{{pic1 !== ''}}">
-                    <view class="cu-tag bg-red">
-                        <text class='icon-close' bindtap="onRemovePic" data-le="11"></text>
-                    </view>
+        <view class="cu-form-group margin-top centerPlace">
+            <view class="grid col-3 grid-square flex-sub centerPlace">
+                <view class="imageShow solids padding-xs" wx:if="{{pic1 !== ''}}">
+                    <image src="{{pic1}}" mode='aspectFit' />
+                    <button class='cu-btn bg-red shadow sm' bindtap="onRemovePic" data-le="11">
+                    删除
+                    </button>
                 </view>
-                <view class="padding-xs solids" wx:if="{{pic1 == ''}}">
+                <view class="padding-xs solids imageAdd" wx:if="{{pic1 == ''}}">
                     <text class='icon-cameraadd' bindtap="onChooseImage" data-le="11"></text>
                 </view>
-                <view class="padding-xs bg-img" style="background-image:url({{pic2}});" wx:if="{{pic2 !== ''}}">
-                    <view class="cu-tag bg-red">
-                        <text class='icon-close' bindtap="onRemovePic" data-le="12"></text>
-                    </view>
+                <view class="imageShow solids padding-xs" wx:if="{{pic2 !== ''}}">
+                    <image src="{{pic2}}" mode='aspectFit' />
+                    <button class='cu-btn bg-red shadow sm' bindtap="onRemovePic" data-le="12">
+                    删除
+                    </button>
                 </view>
-                <view class="padding-xs solids" wx:if="{{pic2 == ''}}">
+                <view class="padding-xs solids imageAdd" wx:if="{{pic2 == ''}}">
                     <text class='icon-cameraadd' bindtap="onChooseImage" data-le="12"></text>
                 </view>
-                <view class="padding-xs bg-img" style="background-image:url({{pic3}});" wx:if="{{pic3 !== ''}}">
-                    <view class="cu-tag bg-red">
-                        <text class='icon-close' bindtap="onRemovePic" data-le="13"></text>
-                    </view>
+                <view class="imageShow solids padding-xs" wx:if="{{pic3 !== ''}}">
+                <image src="{{pic3}}" mode='aspectFit' />
+                    <button class='cu-btn bg-red shadow sm' bindtap="onRemovePic" data-le="13">
+                    删除
+                    </button>
                 </view>
-                <view class="padding-xs solids" wx:if="{{pic3 == ''}}">
+                <view class="padding-xs solids imageAdd" wx:if="{{pic3 == ''}}">
                     <text class='icon-cameraadd' bindtap="onChooseImage" data-le="13"></text>
                 </view>
             </view>
@@ -552,30 +555,33 @@
                 <text class='icon-title text-green'></text>诊断性穿刺-术中LE试纸(离心后)
             </view>
         </view>
-        <view class="cu-form-group margin-top">
-            <view class="grid col-3 grid-square flex-sub">
-                <view class="padding-xs bg-img" style="background-image:url({{pic4}});" wx:if="{{pic4 !== ''}}">
-                    <view class="cu-tag bg-red">
-                        <text class='icon-close' bindtap="onRemovePic" data-le="21"></text>
-                    </view>
+        <view class="cu-form-group margin-top centerPlace">
+            <view class="grid col-3 grid-square flex-sub centerPlace">
+                <view class="imageShow solids padding-xs" wx:if="{{pic4 !== ''}}">
+                    <image src="{{pic4}}" mode='aspectFit' />
+                    <button class='cu-btn bg-red shadow sm' bindtap="onRemovePic" data-le="21">
+                    删除
+                    </button>
                 </view>
-                <view class="padding-xs solids" wx:if="{{pic4 == ''}}">
+                <view class="padding-xs solids imageAdd" wx:if="{{pic4 == ''}}">
                     <text class='icon-cameraadd' bindtap="onChooseImage" data-le="21"></text>
                 </view>
-                <view class="padding-xs bg-img" style="background-image:url({{pic5}});" wx:if="{{pic5 !== ''}}">
-                    <view class="cu-tag bg-red">
-                        <text class='icon-close' bindtap="onRemovePic" data-le="22"></text>
-                    </view>
+                <view class="imageShow solids padding-xs" wx:if="{{pic5 !== ''}}">
+                    <image src="{{pic5}}" mode='aspectFit' />
+                    <button class='cu-btn bg-red shadow sm' bindtap="onRemovePic" data-le="22">
+                    删除
+                    </button>
                 </view>
-                <view class="padding-xs solids" wx:if="{{pic5 == ''}}">
+                <view class="padding-xs solids imageAdd" wx:if="{{pic5 == ''}}">
                     <text class='icon-cameraadd' bindtap="onChooseImage" data-le="22"></text>
                 </view>
-                <view class="padding-xs bg-img" style="background-image:url({{pic6}});" wx:if="{{pic6 !== ''}}">
-                    <view class="cu-tag bg-red">
-                        <text class='icon-close' bindtap="onRemovePic" data-le="23"></text>
-                    </view>
+                <view class="imageShow solids padding-xs" wx:if="{{pic6 !== ''}}">
+                    <image src="{{pic6}}" mode='aspectFit' />
+                    <button class='cu-btn bg-red shadow sm' bindtap="onRemovePic" data-le="23">
+                    删除
+                    </button>
                 </view>
-                <view class="padding-xs solids" wx:if="{{pic6 == ''}}">
+                <view class="padding-xs solids imageAdd" wx:if="{{pic6 == ''}}">
                     <text class='icon-cameraadd' bindtap="onChooseImage" data-le="23"></text>
                 </view>
             </view>
@@ -589,30 +595,33 @@
                 <text class='icon-title text-green'></text>入院后-术中LE试纸(原液)
             </view>
         </view>
-        <view class="cu-form-group margin-top">
-            <view class="grid col-3 grid-square flex-sub">
-                <view class="padding-xs bg-img" style="background-image:url({{pic7}});" wx:if="{{pic7 !== ''}}">
-                    <view class="cu-tag bg-red">
-                        <text class='icon-close' bindtap="onRemovePic" data-le="31"></text>
-                    </view>
+        <view class="cu-form-group margin-top centerPlace">
+            <view class="grid col-3 grid-square flex-sub centerPlace">
+                <view class="imageShow solids padding-xs" wx:if="{{pic7 !== ''}}">
+                    <image src="{{pic7}}" mode='aspectFit' />
+                    <button class='cu-btn bg-red shadow sm' bindtap="onRemovePic" data-le="31">
+                    删除
+                    </button>
                 </view>
-                <view class="padding-xs solids" wx:if="{{pic7 == ''}}">
+                <view class="padding-xs solids imageAdd" wx:if="{{pic7 == ''}}">
                     <text class='icon-cameraadd' bindtap="onChooseImage" data-le="31"></text>
                 </view>
-                <view class="padding-xs bg-img" style="background-image:url({{pic8}});" wx:if="{{pic8 !== ''}}">
-                    <view class="cu-tag bg-red">
-                        <text class='icon-close' bindtap="onRemovePic" data-le="32"></text>
-                    </view>
+                <view class="imageShow solids padding-xs" wx:if="{{pic8 !== ''}}">
+                    <image src="{{pic8}}" mode='aspectFit' />
+                    <button class='cu-btn bg-red shadow sm' bindtap="onRemovePic" data-le="32">
+                    删除
+                    </button>
                 </view>
-                <view class="padding-xs solids" wx:if="{{pic8 == ''}}">
+                <view class="padding-xs solids imageAdd" wx:if="{{pic8 == ''}}">
                     <text class='icon-cameraadd' bindtap="onChooseImage" data-le="32"></text>
                 </view>
-                <view class="padding-xs bg-img" style="background-image:url({{pic9}});" wx:if="{{pic9 !== ''}}">
-                    <view class="cu-tag bg-red">
-                        <text class='icon-close' bindtap="onRemovePic" data-le="33"></text>
-                    </view>
+                <view class="imageShow solids padding-xs" wx:if="{{pic9 !== ''}}">
+                    <image src="{{pic9}}" mode='aspectFit' />
+                    <button class='cu-btn bg-red shadow sm' bindtap="onRemovePic" data-le="33">
+                    删除
+                    </button>
                 </view>
-                <view class="padding-xs solids" wx:if="{{pic9 == ''}}">
+                <view class="padding-xs solids imageAdd" wx:if="{{pic9 == ''}}">
                     <text class='icon-cameraadd' bindtap="onChooseImage" data-le="33"></text>
                 </view>
             </view>
@@ -626,30 +635,33 @@
                 <text class='icon-title text-green'></text>入院后-术中LE试纸(离心后)
             </view>
         </view>
-        <view class="cu-form-group margin-top">
-            <view class="grid col-3 grid-square flex-sub">
-                <view class="padding-xs bg-img" style="background-image:url({{pic10}});" wx:if="{{pic10 !== ''}}">
-                    <view class="cu-tag bg-red">
-                        <text class='icon-close' bindtap="onRemovePic" data-le="41"></text>
-                    </view>
+        <view class="cu-form-group margin-top centerPlace">
+            <view class="grid col-3 grid-square flex-sub centerPlace">
+                <view class="imageShow solids padding-xs" wx:if="{{pic10 !== ''}}">
+                    <image src="{{pic10}}" mode='aspectFit' />
+                    <button class='cu-btn bg-red shadow sm' bindtap="onRemovePic" data-le="41">
+                    删除
+                    </button>
                 </view>
-                <view class="padding-xs solids" wx:if="{{pic10 == ''}}">
+                <view class="padding-xs solids imageAdd" wx:if="{{pic10 == ''}}">
                     <text class='icon-cameraadd' bindtap="onChooseImage" data-le="41"></text>
                 </view>
-                <view class="padding-xs bg-img" style="background-image:url({{pic11}});" wx:if="{{pic11 !== ''}}">
-                    <view class="cu-tag bg-red">
-                        <text class='icon-close' bindtap="onRemovePic" data-le="42"></text>
-                    </view>
+                <view class="imageShow solids padding-xs" wx:if="{{pic11 !== ''}}">
+                    <image src="{{pic11}}" mode='aspectFit' />
+                    <button class='cu-btn bg-red shadow sm' bindtap="onRemovePic" data-le="42">
+                    删除
+                    </button>
                 </view>
-                <view class="padding-xs solids" wx:if="{{pic11 == ''}}">
+                <view class="padding-xs solids imageAdd" wx:if="{{pic11 == ''}}">
                     <text class='icon-cameraadd' bindtap="onChooseImage" data-le="42"></text>
                 </view>
-                <view class="padding-xs bg-img" style="background-image:url({{pic12}});" wx:if="{{pic12 !== ''}}">
-                    <view class="cu-tag bg-red">
-                        <text class='icon-close' bindtap="onRemovePic" data-le="43"></text>
-                    </view>
+                <view class="imageShow solids padding-xs" wx:if="{{pic12 !== ''}}">
+                    <image src="{{pic12}}" mode='aspectFit' />
+                    <button class='cu-btn bg-red shadow sm' bindtap="onRemovePic" data-le="43">
+                    删除
+                    </button>
                 </view>
-                <view class="padding-xs solids" wx:if="{{pic12 == ''}}">
+                <view class="padding-xs solids imageAdd" wx:if="{{pic12 == ''}}">
                     <text class='icon-cameraadd' bindtap="onChooseImage" data-le="43"></text>
                 </view>
             </view>
