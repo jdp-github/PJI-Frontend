@@ -216,7 +216,7 @@ Page({
                         url: '../../center/case/detail/detail?case_id=' + caseInfo.case_id + "&centerId=" + that.data.centerId + "&centerName=" + that.data.centerName
                     });
                 } else {
-                    that.showModal("ErrModal", res.data.data.msg);
+                    that.showModal("ErrModal", res.data.msg);
                 }
                 that.hideLoading();
             },
@@ -249,7 +249,7 @@ Page({
                 if (res.data.data.code == constant.response_success) {
                     that.requestCaseList(that.data.searchValue, that.data.sortType);
                 } else {
-                    that.showModal("ErrModal", res.data.data.msg);
+                    that.showModal("ErrModal", res.data.msg);
                 }
             },
             fail(res) {
@@ -283,7 +283,7 @@ Page({
                 if (res.data.data.code == constant.response_success) {
                     that.requestCaseList(that.data.searchValue, that.data.sortType);
                 } else {
-                    that.showModal("ErrModal", res.data.data.msg);
+                    that.showModal("ErrModal", res.data.msg);
                 }
             },
             fail(res) {

@@ -56,13 +56,15 @@ Page({
         ],
         operationDateMultiIndex: [0, 0],
         operationDisabled: true,
+        // 症状出现时长
         symptomDateMultiArray: [
             ['单位'],
             ['天', '周', '月', '年'],
             ['1天', '2天', '3天', '4天', '5天', '6天', '7天', '8天', '9天', '10天', '11天', '12天', '13天', '14天', '15天', '16天', '17天', '18天', '19天', '20天', '21天', '22天', '23天', '24天', '25天', '26天', '27天', '28天', '29天', '30天', '31天']
         ],
         symptomDateMultiIndex: [0, 0],
-        symptomDisabled: true,
+        xingzhiIndex: 0,
+        xingzhiValue: '',
         // 普通选择
         ris: 0,
         risPicker: ['请选择', '否', '类风湿', '强制性脊柱炎', '其他 (请在备注中标明)'],
@@ -75,7 +77,7 @@ Page({
         // -------- 基本信息 end -------- //
 
         // -------- 诊断性穿刺 begin -------- //
-        chuangciDate: '',
+        chuangciDate: '请选择日期',
         ccDateDisabled: true,
         ccDescribe: '',
         ccDescribeDisabeld: true,
@@ -122,7 +124,7 @@ Page({
         xwdbyDisabled: true,
         ddimer: '',
         ddimerDisabled: true,
-        shoushuDate: '',
+        shoushuDate: '请选择日期',
         ssDateDisabled: true,
         szjnIndex: 0,
         szjnPicker: ["请选择", "脓性液体", "未见脓液"],
@@ -131,7 +133,7 @@ Page({
         blPicker: ["请选择", "<5", "5-10", ">10"],
         blDisabled: true,
         szLEIndex: 0,
-        szLEPicker: ["请选择", "/无法判定", "neg.", "25", "75", "250(+)", "500(+)"],
+        szLEPicker: ["请选择", "无法判定", "neg.", "25", "75", "250(+)", "500(+)"],
         szLEDisabled: true,
         szLEAfterIndex: 0,
         szLEAfterPicker: ["请选择", "/无法判定", "neg.", "25", "75", "250(+)", "500(+)"],
@@ -158,17 +160,29 @@ Page({
 
         // ------- 图片上传 start --------- //
         pic1: '',
+        pic1Upload: '',
         pic2: '',
+        pic2Upload: '',
         pic3: '',
+        pic3Upload: '',
         pic4: '',
+        pic4Upload: '',
         pic5: '',
+        pic5Upload: '',
         pic6: '',
+        pic6Upload: '',
         pic7: '',
+        pic7Upload: '',
         pic8: '',
+        pic8Upload: '',
         pic9: '',
+        pic9Upload: '',
         pic10: '',
+        pic10Upload: '',
         pic11: '',
-        pic12: ''
+        pic11Upload: '',
+        pic12: '',
+        pic12Upload: '',
         // ------- 图片上传 end  ---------- //
     },
 
@@ -276,7 +290,7 @@ Page({
         this.setData({
             tel2Disabled: !e.detail.value
         });
-        if (tel2Disabled) {
+        if (this.data.tel2Disabled) {
             this.setData({
                 tel2: ''
             });
@@ -342,6 +356,11 @@ Page({
         this.setData({
             operationDisabled: !e.detail.value
         });
+        if (this.data.operationDisabled) {
+            this.setData({
+                operationDateMultiIndex: [0, 0]
+            })
+        }
     },
     symptomDateChange: function(e) {
         this.setData({
@@ -387,12 +406,18 @@ Page({
                 data.symptomDateMultiIndex[2] = 0;
                 break;
         }
+        if (data.symptomDateMultiIndex[1] == 0 || data.symptomDateMultiIndex[1] == 1) {
+            this.setData({
+                xingzhiIndex: 1,
+                xingzhiValue: '急性'
+            })
+        } else {
+            this.setData({
+                xingzhiIndex: 2,
+                xingzhiValue: '慢性'
+            })
+        }
         this.setData(data);
-    },
-    onSymptomSwitchChange: function(e) {
-        this.setData({
-            symptomDisabled: !e.detail.value
-        });
     },
     onRisChange: function(e) {
         this.setData({
@@ -433,16 +458,13 @@ Page({
         });
     },
     onCCDateSwitchChange: function(e) {
+        this.setData({
+            ccDateDisabled: !e.detail.value
+        });
         if (this.data.ccDateDisabled) {
             this.setData({
-                chuangciDate: "",
-                ccDateDisabled: false
-            });
-        } else {
-            this.setData({
-                chuangciDate: "未行诊断性穿刺",
-                ccDateDisabled: true
-            });
+                chuangciDate: "请选择日期"
+            })
         }
     },
     onCCDescribeInput: function(e) {
@@ -454,6 +476,11 @@ Page({
         this.setData({
             ccDescribeDisabeld: !e.detail.value
         });
+        if (this.data.ccDescribeDisabeld) {
+            this.setData({
+                ccDescribe: ''
+            })
+        }
     },
     onCcgjyInput: function(e) {
         this.setData({
@@ -464,6 +491,11 @@ Page({
         this.setData({
             ccgjyDisabled: !e.detail.value
         });
+        if (this.data.ccgjyDisabled) {
+            this.setData({
+                ccgjy: ''
+            })
+        }
     },
     onCcgxyInput: function(e) {
         this.setData({
@@ -474,6 +506,11 @@ Page({
         this.setData({
             ccgxyDisabled: !e.detail.value
         });
+        if (this.data.ccgxyDisabled) {
+            this.setData({
+                ccgxy: ''
+            })
+        }
     },
     onLeChange: function(e) {
         this.setData({
@@ -484,6 +521,14 @@ Page({
         this.setData({
             leDisabled: !e.detail.value
         });
+        if (this.data.leDisabled) {
+            this.setData({
+                leIndex: 0,
+                pic1: '',
+                pic2: '',
+                pic3: '',
+            })
+        }
     },
     onLeAfterChange: function(e) {
         this.setData({
@@ -494,6 +539,14 @@ Page({
         this.setData({
             leAfterDisabled: !e.detail.value
         });
+        if (this.data.leAfterDisabled) {
+            this.setData({
+                leAfterIndex: 0,
+                pic4: '',
+                pic5: '',
+                pic6: '',
+            })
+        }
     },
     onGjybxbInput: function(e) {
         this.setData({
@@ -504,6 +557,11 @@ Page({
         this.setData({
             gjybxbDisabled: !e.detail.value
         });
+        if (this.data.gjybxbDisabled) {
+            this.setData({
+                gjybxb: ''
+            })
+        }
     },
     onGjyzxInput: function(e) {
         this.setData({
@@ -514,6 +572,11 @@ Page({
         this.setData({
             gjyzxDisabled: !e.detail.value
         });
+        if (this.data.gjyzxDisabled) {
+            this.setData({
+                gjyzx: ''
+            })
+        }
     },
     onBcpysjChange: function(e) {
         this.setData({
@@ -524,6 +587,11 @@ Page({
         this.setData({
             bcpysjDisabled: !e.detail.value
         });
+        if (this.data.bcpysjDisabled) {
+            this.setData({
+                bcpysjIndex: 0
+            })
+        }
     },
     onDrgpypjChange: function(e) {
         this.setData({
@@ -534,8 +602,12 @@ Page({
         this.setData({
             drgpypDisabled: !e.detail.value
         });
+        if (this.data.drgpypDisabled) {
+            this.setData({
+                drgpyp: ''
+            })
+        }
     },
-    // 
     onBcxyChange: function(e) {
         this.setData({
             bcxyResult: e.detail.value,
@@ -545,6 +617,11 @@ Page({
         this.setData({
             bcxyResultDisabled: !e.detail.value
         });
+        if (this.data.bcxyResultDisabled) {
+            this.setData({
+                bcxyResult: ''
+            })
+        }
     },
     onBcxyLastChange: function(e) {
         this.setData({
@@ -555,6 +632,11 @@ Page({
         this.setData({
             bcxyLastDisabled: !e.detail.value
         });
+        if (this.data.bcxyLastDisabled) {
+            this.setData({
+                bcxyLast: ''
+            })
+        }
     },
     onBcyyChange: function(e) {
         this.setData({
@@ -565,16 +647,26 @@ Page({
         this.setData({
             bcyyResultDisabled: !e.detail.value
         });
+        if (this.data.bcyyResultDisabled) {
+            this.setData({
+                bcyyResult: ""
+            })
+        }
     },
     onBcyyLastChange: function(e) {
         this.setData({
-            bcxyLast: e.detail.value,
+            bcyyLast: e.detail.value,
         });
     },
     onBcyyLastSwitchChange: function(e) {
         this.setData({
             bcyyLastDisabled: !e.detail.value
         });
+        if (this.data.bcyyLastDisabled) {
+            this.setData({
+                bcyyLast: ''
+            })
+        }
     },
     onMNGsChange: function(e) {
         this.setData({
@@ -585,6 +677,11 @@ Page({
         this.setData({
             mNGSResultDisabled: !e.detail.value
         });
+        if (this.data.mNGSResultDisabled) {
+            this.setData({
+                mNGSResult: ''
+            })
+        }
     },
     // -------- 诊断性穿刺 end -------- //
 
@@ -605,6 +702,21 @@ Page({
             bzhcrp: e.detail.value * 10
         });
     },
+    onIl6Change: function(e) {
+        this.setData({
+            il6: e.detail.value
+        });
+    },
+    onIl6SwitchChange: function(e) {
+        this.setData({
+            il6Disabled: !e.detail.value
+        });
+        if (this.data.il6Disabled) {
+            this.setData({
+                il6: ''
+            })
+        }
+    },
     onXwdbyChange: function(e) {
         this.setData({
             xwdby: e.detail.value
@@ -614,6 +726,11 @@ Page({
         this.setData({
             xwdbyDisabled: !e.detail.value
         });
+        if (this.data.xwdbyDisabled) {
+            this.setData({
+                xwdby: ''
+            })
+        }
     },
     onDdimerChange: function(e) {
         this.setData({
@@ -624,6 +741,11 @@ Page({
         this.setData({
             ddimerDisabled: !e.detail.value
         });
+        if (this.data.ddimerDisabled) {
+            this.setData({
+                ddimer: ''
+            })
+        }
     },
     onShoushuDateChange: function(e) {
         this.setData({
@@ -634,6 +756,11 @@ Page({
         this.setData({
             ssDateDisabled: !e.detail.value
         });
+        if (this.data.ssDateDisabled) {
+            this.setData({
+                shoushuDate: '请选择日期'
+            })
+        }
     },
     onSzjnChange: function(e) {
         this.setData({
@@ -644,6 +771,11 @@ Page({
         this.setData({
             szjnDisabled: !e.detail.value
         });
+        if (this.data.szjnDisabled) {
+            this.setData({
+                szjnIndex: 0
+            })
+        }
     },
     onBlChange: function(e) {
         this.setData({
@@ -654,6 +786,11 @@ Page({
         this.setData({
             blDisabled: !e.detail.value
         });
+        if (this.data.blDisabled) {
+            this.setData({
+                blIndex: 0
+            })
+        }
     },
     onSZLEChange: function(e) {
         this.setData({
@@ -664,6 +801,11 @@ Page({
         this.setData({
             szLEDisabled: !e.detail.value
         });
+        if (this.data.szLEDisabled) {
+            this.setData({
+                szLEIndex: 0
+            })
+        }
     },
     onSZLEAfterChange: function(e) {
         this.setData({
@@ -674,6 +816,11 @@ Page({
         this.setData({
             szLEAfterDisabled: !e.detail.value
         });
+        if (this.data.szLEAfterDisabled) {
+            this.setData({
+                szLEAfterIndex: 0
+            })
+        }
     },
     onSzgjybxbInput: function(e) {
         this.setData({
@@ -684,16 +831,27 @@ Page({
         this.setData({
             szgjybxbDisabled: !e.detail.value
         });
+        if (this.data.szgjybxbDisabled) {
+            this.setData({
+                szgjybxb: ""
+            })
+        }
     },
     onSzgjyzxlInput: function(e) {
         this.setData({
             szgjyzxl: e.detail.value
         });
+
     },
     onSzgjyzxlSwitchChange: function(e) {
         this.setData({
             szgjyzxlDisabled: !e.detail.value
         });
+        if (this.data.szgjyzxlDisabled) {
+            this.setData({
+                szgjyzxl: ""
+            })
+        }
     },
     onQbgjyInput: function(e) {
         this.setData({
@@ -704,6 +862,11 @@ Page({
         this.setData({
             qbgjyDisabled: !e.detail.value
         });
+        if (this.data.qbgjyDisabled) {
+            this.setData({
+                qbgjy: ""
+            })
+        }
     },
     onSzzzpyInput: function(e) {
         this.setData({
@@ -714,6 +877,11 @@ Page({
         this.setData({
             szzzpyDisabled: !e.detail.value
         });
+        if (this.data.szzzpyDisabled) {
+            this.setData({
+                szzzpy: ""
+            })
+        }
     },
     onZznMGSResultInput: function(e) {
         this.setData({
@@ -724,6 +892,11 @@ Page({
         this.setData({
             zznMGSResultDisabled: !e.detail.value
         });
+        if (this.data.zznMGSResultDisabled) {
+            this.setData({
+                zznMGSResult: ""
+            })
+        }
     },
     onCsljyInput: function(e) {
         this.setData({
@@ -734,6 +907,11 @@ Page({
         this.setData({
             csljyDisabled: !e.detail.value
         });
+        if (this.data.csljyDisabled) {
+            this.setData({
+                csljy: ""
+            })
+        }
     },
     onMsisChange: function(e) {
         this.setData({
@@ -744,6 +922,11 @@ Page({
         this.setData({
             msisDisabled: !e.detail.value
         });
+        if (this.data.msisDisabled) {
+            this.setData({
+                msisIndex: 0
+            })
+        }
     },
     onZzclChange: function(e) {
         this.setData({
@@ -754,6 +937,11 @@ Page({
         this.setData({
             zzclDisabled: !e.detail.value
         });
+        if (this.data.zzclDisabled) {
+            this.setData({
+                zzclIndex: 0
+            })
+        }
     },
     // -------- 入院后信息 end -------- //
 
@@ -801,9 +989,15 @@ Page({
 
     // -------- 模态对话框 start -------- //
     showModal: function(e) {
-        this.setData({
-            modalName: e.currentTarget.dataset.target
-        });
+        if (e.currentTarget) {
+            this.setData({
+                modalName: e.currentTarget.dataset.target
+            });
+        } else {
+            this.setData({
+                modalName: e
+            });
+        }
     },
     hideModal: function(e) {
         this.setData({
@@ -821,68 +1015,107 @@ Page({
             sourceType: ['album', 'camera'],
             success(res) {
                 const tempFilePaths = res.tempFilePaths;
-                switch (e.target.dataset.le) {
-                    case "11":
-                        that.setData({
-                            pic1: tempFilePaths
-                        });
-                        break;
-                    case "12":
-                        that.setData({
-                            pic2: tempFilePaths
-                        });
-                        break;
-                    case "13":
-                        that.setData({
-                            pic3: tempFilePaths
-                        });
-                        break;
-                    case "21":
-                        that.setData({
-                            pic4: tempFilePaths
-                        });
-                        break;
-                    case "22":
-                        that.setData({
-                            pic5: tempFilePaths
-                        });
-                        break;
-                    case "23":
-                        that.setData({
-                            pic6: tempFilePaths
-                        });
-                        break;
-                    case "31":
-                        that.setData({
-                            pic7: tempFilePaths
-                        });
-                        break;
-                    case "32":
-                        that.setData({
-                            pic8: tempFilePaths
-                        });
-                        break;
-                    case "33":
-                        that.setData({
-                            pic9: tempFilePaths
-                        });
-                        break;
-                    case "41":
-                        that.setData({
-                            pic10: tempFilePaths
-                        });
-                        break;
-                    case "42":
-                        that.setData({
-                            pic11: tempFilePaths
-                        });
-                        break;
-                    case "43":
-                        that.setData({
-                            pic12: tempFilePaths
-                        });
-                        break;
+                that.uploadImg(e.target.dataset.le, tempFilePaths[0])
+            }
+        });
+    },
+    uploadImg(le, filePath) {
+        let that = this
+        that.showLoading()
+        wx.uploadFile({
+            url: constant.basePath + "",
+            filePath: filePath,
+            name: "file",
+            formData: {
+                service: 'Common.Upload'
+            },
+            header: {
+                "Content-Type": "multipart/form-data"
+            },
+            success(res) {
+                console.log(res)
+                if (res.data.data.code == 0) {
+                    switch (e.target.dataset.le) {
+                        case "11":
+                            that.setData({
+                                pic1: res.data.data.info.url,
+                                pic1Upload: res.data.data.info.file,
+                            });
+                            break;
+                        case "12":
+                            that.setData({
+                                pic2: res.data.data.info.url,
+                                pic2Upload: res.data.data.info.file,
+                            });
+                            break;
+                        case "13":
+                            that.setData({
+                                pic3: res.data.data.info.url,
+                                pic3Upload: res.data.data.info.file,
+                            });
+                            break;
+                        case "21":
+                            that.setData({
+                                pic4: res.data.data.info.url,
+                                pic4Upload: res.data.data.info.file,
+                            });
+                            break;
+                        case "22":
+                            that.setData({
+                                pic5: res.data.data.info.url,
+                                pic5Upload: res.data.data.info.file,
+                            });
+                            break;
+                        case "23":
+                            that.setData({
+                                pic6: res.data.data.info.url,
+                                pic6Upload: res.data.data.info.file,
+                            });
+                            break;
+                        case "31":
+                            that.setData({
+                                pic7: res.data.vinfo.url,
+                                pic7Upload: res.data.data.info.file,
+                            });
+                            break;
+                        case "32":
+                            that.setData({
+                                pic8: res.data.data.info.url,
+                                pic8Upload: res.data.data.info.file,
+                            });
+                            break;
+                        case "33":
+                            that.setData({
+                                pic9: res.data.data.info.url,
+                                pic9Upload: res.data.data.info.file,
+                            });
+                            break;
+                        case "41":
+                            that.setData({
+                                pic10: res.data.data.info.url,
+                                pic10Upload: res.data.data.info.file,
+                            });
+                            break;
+                        case "42":
+                            that.setData({
+                                pic11: res.data.data.info.url,
+                                pic11Upload: res.data.data.info.file,
+                            });
+                            break;
+                        case "43":
+                            that.setData({
+                                pic12: res.data.data.info.url,
+                                pic12Upload: res.data.data.info.file,
+                            });
+                            break;
+                    }
+                } else {
+                    that.showModal("ErrModal", res.data.msg);
                 }
+                that.hideLoading();
+            },
+            fail(res) {
+                that.hideLoading();
             }
         });
     },
@@ -891,62 +1124,74 @@ Page({
         switch (e.target.dataset.le) {
             case "11":
                 that.setData({
-                    pic1: ''
+                    pic1: '',
+                    pic1Upload: ''
                 });
                 break;
             case "12":
                 that.setData({
-                    pic2: ''
+                    pic2: '',
+                    pic2Upload: ''
                 });
                 break;
             case "13":
                 that.setData({
-                    pic3: ''
+                    pic3: '',
+                    pic3Upload: ''
                 });
                 break;
             case "21":
                 that.setData({
-                    pic4: ''
+                    pic4: '',
+                    pic4Upload: ''
                 });
                 break;
             case "22":
                 that.setData({
-                    pic5: ''
+                    pic5: '',
+                    pic5Upload: ''
                 });
                 break;
             case "23":
                 that.setData({
-                    pic6: ''
+                    pic6: '',
+                    pic6Upload: ''
                 });
                 break;
             case "31":
                 that.setData({
-                    pic7: ''
+                    pic7: '',
+                    pic7Upload: ''
                 });
                 break;
             case "32":
                 that.setData({
-                    pic8: ''
+                    pic8: '',
+                    pic8Upload: ''
                 });
                 break;
             case "33":
                 that.setData({
-                    pic9: ''
+                    pic9: '',
+                    pic9Upload: ''
                 });
                 break;
             case "41":
                 that.setData({
-                    pic10: ''
+                    pic10: '',
+                    pic10Upload: ''
                 });
                 break;
             case "42":
                 that.setData({
-                    pic11: ''
+                    pic11: '',
+                    pic11Upload: ''
                 });
                 break;
             case "43":
                 that.setData({
-                    pic12: ''
+                    pic12: '',
+                    pic12Upload: ''
                 });
                 break;
         }
@@ -962,7 +1207,6 @@ Page({
             isAdmin: app.globalData.is_admin == '1',
             isCreateCase: caseId.length <= 0,
         });
-        console.log(caseId)
         this.completeProgress();
     },
 
@@ -1038,7 +1282,7 @@ Page({
             // 症状出现时长单位。1天，2月(必填项)
             duration_symptoms_unit: that.data.symptomDateMultiArray[1],
             // 症状出现时长性质。1急性，2慢性(必填项)
-            duration_symptoms_prop: that.data.name,
+            duration_symptoms_prop: that.data.xingzhiIndex,
 
             is_merge_disease: that.data.ris,
             other_concomitant_diseases: that.data.qtbsjb,
@@ -1052,6 +1296,7 @@ Page({
     submitDiagnose() {
         let that = this;
         that.showLoading();
+
         wx.request({
             url: constant.basePath,
             data: {
@@ -1081,15 +1326,25 @@ Page({
     },
     makeDiagnoseData() {
         let that = this
+        var lePic = {
+            pic1Upload: that.data.pic1Upload,
+            pic2Upload: that.data.pic2Upload,
+            pic3Upload: that.data.pic3Upload,
+        }
+        var leCentrPic = {
+            pic4Upload: that.data.pic4Upload,
+            pic5Upload: that.data.pic5Upload,
+            pic6Upload: that.data.pic6Upload,
+        }
         var jsonData = {
             puncture_date: that.data.chuangciDate,
             puncture_desc: that.data.ccDescribe,
             rinse_fluid_volume: that.data.ccgjy,
             rinse_lavage_volume: that.data.ccgxy,
             le_testpaper_stoste: that.data.leIndex,
-            le_testpaper_pic: that.data.chuangciDate, // TODO
+            le_testpaper_pic: JSON.stringify(lePic),
             le_testpaper_centrifugal: that.data.leAfterIndex,
-            le_testpaper_centr_pic: that.data.chuangciDate, // TODO
+            le_testpaper_centr_pic: JSON.stringify(leCentrPic),
             joint_fluid_leukocyte: that.data.gjybxb,
             neutrophils_percent: that.data.gjyzx,
             culture_type: that.data.bcpysjIndex,
@@ -1140,6 +1395,16 @@ Page({
     },
     makePunctureData() {
         let that = this
+        var lePic = {
+            pic7Upload: that.data.pic7Upload,
+            pic8Upload: that.data.pic8Upload,
+            pic9Upload: that.data.pic9Upload,
+        }
+        var leCentrPic = {
+            pic10Upload: that.data.pic10Upload,
+            pic11Upload: that.data.pic11Upload,
+            pic12Upload: that.data.pic12Upload,
+        }
         var jsonData = {
             sious: that.data.doudaoIndex,
             preoperative_esr: that.data.sqesr,
@@ -1152,9 +1417,9 @@ Page({
             culture_pus: that.data.szjnIndex,
             pathology: that.data.blIndex,
             intrao_le_testpaper_stoste: that.data.szLEIndex,
-            intrao_le_testpaper_pic: that.data.doudaoIndex,
+            intrao_le_testpaper_pic: JSON.stringify(lePic),
             intrao_le_testpaper_centrifugal: that.data.szLEAfterIndex,
-            intrao_le_testpaper_centr_pic: that.data.doudaoIndex,
+            intrao_le_testpaper_centr_pic: JSON.stringify(leCentrPic),
             intrao_joint_fluid_leukocyte: that.data.szgjybxb,
             intrao_neutrophils_percent: that.data.szgjyzxl,
             all_culture_result: that.data.qbgjy,
@@ -1206,6 +1471,10 @@ Page({
         }
         if (this.data.type == 0) {
             this.showToast("请选择类型")
+            return false;
+        }
+        if (this.data.xingzhiIndex == 0) {
+            this.showToast("请选择症状出现时长")
             return false;
         }
         if (this.data.ris == 0) {
