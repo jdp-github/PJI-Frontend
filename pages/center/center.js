@@ -41,7 +41,6 @@ Page({
     },
     onLoad: function() {
         let that = this;
-        that.loadProgress();
         this.setData({
             isAdmin: app.globalData.is_admin == '1'
         });
@@ -51,7 +50,6 @@ Page({
         this.setData({
             searchValue: ''
         });
-        this.loadProgress();
         this.initData();
     },
     loadProgress: function() {
@@ -131,6 +129,7 @@ Page({
     },
     initData: function() {
         let that = this;
+        this.loadProgress();
         wx.request({
             url: constant.basePath,
             data: {
@@ -257,7 +256,6 @@ Page({
             success(res) {
                 that.hideLoading();
                 if (res.data.data.code == constant.response_success) {
-                    that.loadProgress();
                     that.initData();
                 } else {
                     that.showToast(res.data.data.msg);

@@ -38,14 +38,20 @@ Page({
         errMsg: ''
     },
     onLoad: function(options) {
-        this.loadProgress();
+
         this.setData({
             centerId: options.centerId,
             centerName: options.centerName,
             isAdmin: app.globalData.is_admin == '1'
         });
+        this.initData()
+    },
+
+    initData() {
+        this.loadProgress();
         this.requestCaseList(this.data.searchValue, this.data.sortType);
     },
+
     loadProgress: function() {
         if (this.data.loadProgress < 96) {
             this.setData({
@@ -187,7 +193,7 @@ Page({
     },
     onAddCase: function(e) {
         wx.navigateTo({
-            url: '../../center/case/detail/detail?case_id='
+            url: '../../center/case/detail/detail?centerId=' + this.data.centerId + "&centerName=" + this.data.centerName +"&case_id="
         });
     },
     onEditCase: function(e) {

@@ -45,7 +45,7 @@
             <view class="padding-left-special">
                 <view class='cu-bar solid-bottom bg-white'>
                     <view class='action'>
-                        <text class='icon-title text-green'></text> 基本信息</view>
+                        <text class='icon-title text-green'></text>基本信息</view>
                 </view>
                 <view class="cu-list menu menu-avatar">
                     <view class="cu-item-special">
@@ -103,7 +103,7 @@
                         </view>
                         <view class="cu-form-group {{tel2Disabled?'disabled':''}}">
                             <view class='title'>联系电话2</view>
-                            <input placeholder="请输入联系方式" class='radius' bindinput="onTel2Input" value='' disabled='{{tel2Disabled}}'></input>
+                            <input placeholder="请输入联系方式" class='radius' bindinput="onTel2Input" value='{{tel2}}' disabled='{{tel2Disabled}}'></input>
                             <switch class='green sm' bindchange="onTel2SwitchChange"></switch>
                         </view>
                         <view class="cu-form-group">
@@ -185,7 +185,7 @@
                     <button class='cu-btn line-green shadow' style="margin-right: 15rpx;" form-type="submit" bindtap='submit'>
                         提交录入
                     </button>
-                    <button class='cu-btn bg-green shadow' style="margin-left: 15rpx;" form-type="submit" bindtap='verify'>
+                    <button class='cu-btn bg-green shadow' style="margin-left: 15rpx;" form-type="submit" bindtap='verify' disabled='{{isCreateCase}}'>
                         确认审核
                     </button>
                 </view>
@@ -340,7 +340,7 @@
                     <button class='cu-btn line-green shadow' style="margin-right: 15rpx;" form-type="submit" bindtap='submit'>
                         提交录入
                     </button>
-                    <button class='cu-btn bg-green shadow' style="margin-left: 15rpx;" form-type="submit" bindtap='verify'>
+                    <button class='cu-btn bg-green shadow' style="margin-left: 15rpx;" form-type="submit" bindtap='verify' disabled='{{isCreateCase}}'>
                         确认审核
                     </button>
                 </view>
@@ -532,7 +532,7 @@
                     <button class='cu-btn line-green shadow' style="margin-right: 15rpx;" form-type="submit" bindtap='submit'>
                         提交录入
                     </button>
-                    <button class='cu-btn bg-green shadow' style="margin-left: 15rpx;" form-type="submit" bindtap='verify'>
+                    <button class='cu-btn bg-green shadow' style="margin-left: 15rpx;" form-type="submit" bindtap='verify' disabled='{{isCreateCase}}'>
                         确认审核
                     </button>
                 </view>
@@ -553,7 +553,7 @@
                 <view class="imageShow solids padding-xs" wx:if="{{pic1 !== ''}}">
                     <image src="{{pic1}}" mode='aspectFit' />
                     <button class='cu-btn bg-red shadow sm' bindtap="onRemovePic" data-le="11">
-                    删除
+                        删除
                     </button>
                 </view>
                 <view class="padding-xs solids imageAdd" wx:if="{{pic1 == ''}}">
@@ -562,16 +562,16 @@
                 <view class="imageShow solids padding-xs" wx:if="{{pic2 !== ''}}">
                     <image src="{{pic2}}" mode='aspectFit' />
                     <button class='cu-btn bg-red shadow sm' bindtap="onRemovePic" data-le="12">
-                    删除
+                        删除
                     </button>
                 </view>
                 <view class="padding-xs solids imageAdd" wx:if="{{pic2 == ''}}">
                     <text class='icon-cameraadd' bindtap="onChooseImage" data-le="12"></text>
                 </view>
                 <view class="imageShow solids padding-xs" wx:if="{{pic3 !== ''}}">
-                <image src="{{pic3}}" mode='aspectFit' />
+                    <image src="{{pic3}}" mode='aspectFit' />
                     <button class='cu-btn bg-red shadow sm' bindtap="onRemovePic" data-le="13">
-                    删除
+                        删除
                     </button>
                 </view>
                 <view class="padding-xs solids imageAdd" wx:if="{{pic3 == ''}}">
@@ -593,7 +593,7 @@
                 <view class="imageShow solids padding-xs" wx:if="{{pic4 !== ''}}">
                     <image src="{{pic4}}" mode='aspectFit' />
                     <button class='cu-btn bg-red shadow sm' bindtap="onRemovePic" data-le="21">
-                    删除
+                        删除
                     </button>
                 </view>
                 <view class="padding-xs solids imageAdd" wx:if="{{pic4 == ''}}">
@@ -602,7 +602,7 @@
                 <view class="imageShow solids padding-xs" wx:if="{{pic5 !== ''}}">
                     <image src="{{pic5}}" mode='aspectFit' />
                     <button class='cu-btn bg-red shadow sm' bindtap="onRemovePic" data-le="22">
-                    删除
+                        删除
                     </button>
                 </view>
                 <view class="padding-xs solids imageAdd" wx:if="{{pic5 == ''}}">
@@ -611,7 +611,7 @@
                 <view class="imageShow solids padding-xs" wx:if="{{pic6 !== ''}}">
                     <image src="{{pic6}}" mode='aspectFit' />
                     <button class='cu-btn bg-red shadow sm' bindtap="onRemovePic" data-le="23">
-                    删除
+                        删除
                     </button>
                 </view>
                 <view class="padding-xs solids imageAdd" wx:if="{{pic6 == ''}}">
@@ -633,7 +633,7 @@
                 <view class="imageShow solids padding-xs" wx:if="{{pic7 !== ''}}">
                     <image src="{{pic7}}" mode='aspectFit' />
                     <button class='cu-btn bg-red shadow sm' bindtap="onRemovePic" data-le="31">
-                    删除
+                        删除
                     </button>
                 </view>
                 <view class="padding-xs solids imageAdd" wx:if="{{pic7 == ''}}">
@@ -642,7 +642,7 @@
                 <view class="imageShow solids padding-xs" wx:if="{{pic8 !== ''}}">
                     <image src="{{pic8}}" mode='aspectFit' />
                     <button class='cu-btn bg-red shadow sm' bindtap="onRemovePic" data-le="32">
-                    删除
+                        删除
                     </button>
                 </view>
                 <view class="padding-xs solids imageAdd" wx:if="{{pic8 == ''}}">
@@ -651,7 +651,7 @@
                 <view class="imageShow solids padding-xs" wx:if="{{pic9 !== ''}}">
                     <image src="{{pic9}}" mode='aspectFit' />
                     <button class='cu-btn bg-red shadow sm' bindtap="onRemovePic" data-le="33">
-                    删除
+                        删除
                     </button>
                 </view>
                 <view class="padding-xs solids imageAdd" wx:if="{{pic9 == ''}}">
@@ -673,7 +673,7 @@
                 <view class="imageShow solids padding-xs" wx:if="{{pic10 !== ''}}">
                     <image src="{{pic10}}" mode='aspectFit' />
                     <button class='cu-btn bg-red shadow sm' bindtap="onRemovePic" data-le="41">
-                    删除
+                        删除
                     </button>
                 </view>
                 <view class="padding-xs solids imageAdd" wx:if="{{pic10 == ''}}">
@@ -682,7 +682,7 @@
                 <view class="imageShow solids padding-xs" wx:if="{{pic11 !== ''}}">
                     <image src="{{pic11}}" mode='aspectFit' />
                     <button class='cu-btn bg-red shadow sm' bindtap="onRemovePic" data-le="42">
-                    删除
+                        删除
                     </button>
                 </view>
                 <view class="padding-xs solids imageAdd" wx:if="{{pic11 == ''}}">
@@ -691,7 +691,7 @@
                 <view class="imageShow solids padding-xs" wx:if="{{pic12 !== ''}}">
                     <image src="{{pic12}}" mode='aspectFit' />
                     <button class='cu-btn bg-red shadow sm' bindtap="onRemovePic" data-le="43">
-                    删除
+                        删除
                     </button>
                 </view>
                 <view class="padding-xs solids imageAdd" wx:if="{{pic12 == ''}}">

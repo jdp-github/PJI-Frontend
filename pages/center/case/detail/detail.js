@@ -25,6 +25,10 @@ Page({
         ShowAdmission: false,
         // -------- tab切换 end -------- //
 
+        centerId: '',
+        centerName: '',
+        isCreateCase: '',
+
         // -------- 基本信息 begin -------- //
         name: '',
         caseNO: "",
@@ -71,7 +75,7 @@ Page({
         // -------- 基本信息 end -------- //
 
         // -------- 诊断性穿刺 begin -------- //
-        chuangciDate: '未行诊断性穿刺',
+        chuangciDate: '',
         ccDateDisabled: true,
         ccDescribe: '',
         ccDescribeDisabeld: true,
@@ -272,6 +276,11 @@ Page({
         this.setData({
             tel2Disabled: !e.detail.value
         });
+        if (tel2Disabled) {
+            this.setData({
+                tel2: ''
+            });
+        }
     },
     onPartChange: function(e) {
         this.setData({
@@ -946,11 +955,14 @@ Page({
 
     onLoad: function(options) {
         this.loadProgress();
+        var caseId = options.case_id
         this.setData({
             centerId: options.centerId ? options.centerId : '',
             centerName: options.centerName ? options.centerName : '',
-            isAdmin: app.globalData.is_admin == '1'
+            isAdmin: app.globalData.is_admin == '1',
+            isCreateCase: caseId.length <= 0,
         });
+        console.log(caseId)
         this.completeProgress();
     },
 
@@ -968,12 +980,191 @@ Page({
         if (!this.isBasicValueRight()) {
             return;
         }
+
+        let that = this;
+        that.showLoading();
+        wx.request({
+            url: constant.basePath,
+            data: {
+                service: 'Case.CreateEditCaseBase',
+                case_id: that.data.centerId,
+                openid: app.globalData.openid,
+                json_data: that.makeBasicData()
+            },
+            header: {
+                'content-type': 'application/json'
+            },
+            success(res) {
+                if (res.data.data.code == 0) {
+                    that.reloadPrePage()
+                    wx.navigateBack({
+                        delta: 1
+                    })
+                } else {
+                    that.showModal("ErrModal", res.data.data.msg);
+                }
+                that.hideLoading();
+            },
+            fail(res) {
+                that.hideLoading();
+            }
+        });
     },
-    submitDiagnose() {},
+
+    makeBasicData() {
+        let that = this
+        var jsonData = {
+            center_id: that.data.centerId,
+            patient_name: that.data.name,
+            case_no: that.data.caseNO,
+            create_time: that.data.createDate,
+            sex: that.data.sex,
+            age: that.data.age,
+            height: that.data.height,
+            weight: that.data.weight,
+            bmi: that.data.bmi,
+            pro_doctor: that.data.chiefDoc,
+            telphone1: that.data.tel1,
+            telphone2: that.data.tel2,
+            part: that.data.part,
+            type: that.data.type,
+
+            // 末次手术至今时长
+            last_to_now: that.data.operationDateMultiIndex[2],
+            // 末次手术至今时长单位。1天，2月
+            last_to_now_unit: that.data.operationDateMultiIndex[1],
+            // 症状出现时长
+            duration_symptoms: that.data.symptomDateMultiArray[2],
+            // 症状出现时长单位。1天，2月(必填项)
+            duration_symptoms_unit: that.data.symptomDateMultiArray[1],
+            // 症状出现时长性质。1急性，2慢性(必填项)
+            duration_symptoms_prop: that.data.name,
+
+            is_merge_disease: that.data.ris,
+            other_concomitant_diseases: that.data.qtbsjb,
+            is_used_antibiotics: that.data.antibiotic,
+            medical_history: that.data.jybs,
+            diagnose: that.data.cbzd,
+            special_matter: that.data.tssxbz,
+        }
+        return JSON.stringify(jsonData)
+    },
+    submitDiagnose() {
+        let that = this;
+        that.showLoading();
+        wx.request({
+            url: constant.basePath,
+            data: {
+                service: 'Case.CreateEditCasePuncture',
+                case_id: that.data.centerId,
+                openid: app.globalData.openid,
+                json_data: that.makeDiagnoseData()
+            },
+            header: {
+                'content-type': 'application/json'
+            },
+            success(res) {
+                if (res.data.data.code == 0) {
+                    that.reloadPrePage()
+                    wx.navigateBack({
+                        delta: 1
+                    })
+                } else {
+                    that.showModal("ErrModal", res.data.data.msg);
+                }
+                that.hideLoading();
+            },
+            fail(res) {
+                that.hideLoading();
+            }
+        });
+    },
+    makeDiagnoseData() {
+        let that = this
+        var jsonData = {
+            puncture_date: that.data.chuangciDate,
+            puncture_desc: that.data.ccDescribe,
+            rinse_fluid_volume: that.data.ccgjy,
+            rinse_lavage_volume: that.data.ccgxy,
+            le_testpaper_stoste: that.data.leIndex,
+            le_testpaper_pic: that.data.chuangciDate, // TODO
+            le_testpaper_centrifugal: that.data.leAfterIndex,
+            le_testpaper_centr_pic: that.data.chuangciDate, // TODO
+            joint_fluid_leukocyte: that.data.gjybxb,
+            neutrophils_percent: that.data.gjyzx,
+            culture_type: that.data.bcpysjIndex,
+            culture_bottle_fluid_volume: that.data.drgpyp,
+            aerobic_culture_result: that.data.bcxyResult,
+            aerobic_culture_time: that.data.bcxyLast,
+            anaerobic_culture_result: that.data.bcyyResult,
+            anaerobic_culture_time: that.data.bcyyLast,
+            joint_fluid_mngs_result: that.data.mNGSResult,
+            sample_deposit_status: that.data.chuangciDate, // TODO
+            sample_deposit_desc: that.data.chuangciDate, // TODO
+            sample_used: that.data.chuangciDate, // TODO
+        }
+        return JSON.stringify(jsonData)
+    },
     submitAdmission() {
         if (!this.isAdmissionValueRight()) {
             return;
         }
+        let that = this;
+        that.showLoading();
+        wx.request({
+            url: constant.basePath,
+            data: {
+                service: 'Case.CreateEditCasePuncture',
+                case_id: that.data.centerId,
+                openid: app.globalData.openid,
+                json_data: that.makePunctureData()
+            },
+            header: {
+                'content-type': 'application/json'
+            },
+            success(res) {
+                if (res.data.data.code == 0) {
+                    that.reloadPrePage()
+                    wx.navigateBack({
+                        delta: 1
+                    })
+                } else {
+                    that.showModal("ErrModal", res.data.data.msg);
+                }
+                that.hideLoading();
+            },
+            fail(res) {
+                that.hideLoading();
+            }
+        });
+    },
+    makePunctureData() {
+        let that = this
+        var jsonData = {
+            sious: that.data.doudaoIndex,
+            preoperative_esr: that.data.sqesr,
+            preoperative_crp: that.data.sqcrp,
+            normal_crp: that.data.bzhcrp,
+            il6: that.data.il6,
+            fibrinogen: that.data.xwdby,
+            dimer: that.data.ddimer,
+            operation_date: that.data.shoushuDate,
+            culture_pus: that.data.szjnIndex,
+            pathology: that.data.blIndex,
+            intrao_le_testpaper_stoste: that.data.szLEIndex,
+            intrao_le_testpaper_pic: that.data.doudaoIndex,
+            intrao_le_testpaper_centrifugal: that.data.szLEAfterIndex,
+            intrao_le_testpaper_centr_pic: that.data.doudaoIndex,
+            intrao_joint_fluid_leukocyte: that.data.szgjybxb,
+            intrao_neutrophils_percent: that.data.szgjyzxl,
+            all_culture_result: that.data.qbgjy,
+            intrao_culture_result: that.data.szzzpy,
+            tissue_ngs_result: that.data.zznMGSResult,
+            ultrasonic_degradation_ngs_result: that.data.csljy,
+            msis: that.data.msisIndex,
+            final_disposal: that.data.zzclIndex,
+        }
+        return JSON.stringify(jsonData)
     },
 
     isBasicValueRight() {
@@ -1062,6 +1253,7 @@ Page({
     },
 
     verify: function(e) {
+        this.showToast("ss")
         if (this.data.ShowBasic) { // 基本信息
             this.verifyBasic()
         } else if (this.data.ShowDiagnose) { // 诊断性穿刺
@@ -1076,4 +1268,14 @@ Page({
     },
     verifyDiagnose() {},
     verifyAdmission() {},
+
+    reloadPrePage() {
+        var pages = getCurrentPages();
+        if (pages.length > 1) {
+            //上一个页面实例对象
+            var prePage = pages[pages.length - 2];
+            //关键在这里
+            prePage.initData()
+        }
+    },
 });
