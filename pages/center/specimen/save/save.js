@@ -114,7 +114,7 @@ Page({
                         caseList: res.data.data.list
                     });
                 } else {
-                    that.showToast(res.data.data.msg);
+                    that.showToast(res.data.msg);
                 }
             },
             fail(res) {
@@ -194,7 +194,7 @@ Page({
                         delta: -1
                     });
                 } else {
-                    that.showToast(res.data.data.msg);
+                    that.showToast(res.data.msg);
                 }
             },
             fail(res) {

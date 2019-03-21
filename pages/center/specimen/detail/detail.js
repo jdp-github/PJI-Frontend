@@ -160,12 +160,12 @@ Page({
                             staffNameList: staffNameList
                         });
                     } else {
-                        that.showToast(res.data.data.msg);
+                        that.showToast(res.data.msg);
                     }
                     resolve(res);
                 },
                 fail(res) {
-                    that.showToast(res.data.data.msg);
+                    that.showToast(res.data.msg);
                     that.completeProgress();
                     reject(res);
                 }
@@ -204,7 +204,7 @@ Page({
                             specimenGrid: specimenGrid
                         });
                     } else {
-                        that.showToast(res.data.data.msg);
+                        that.showToast(res.data.msg);
                     }
                     resolve(res);
                 },
@@ -301,7 +301,7 @@ Page({
                         selectedSpecimen: specimenInfo
                     });
                 } else {
-                    that.showToast(res.data.data.msg);
+                    that.showToast(res.data.msg);
                 }
             },
             fail(res) {
@@ -347,7 +347,7 @@ Page({
                     that.loadProgress();
                     that.requestSampleList(that.data.infectIndex, that.data.typeIndex, that.data.staffList[that.data.ownerIndex].staff_id);
                 } else {
-                    that.showToast(res.data.data.msg);
+                    that.showToast(res.data.msg);
                 }
             },
             fail(res) {

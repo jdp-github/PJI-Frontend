@@ -181,7 +181,7 @@ Page({
                         caseList: res.data.data.list
                     });
                 } else {
-                    that.showToast(res.data.data.msg);
+                    that.showToast(res.data.msg);
                 }
                 that.completeProgress();
             },

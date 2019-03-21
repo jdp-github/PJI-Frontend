@@ -1245,7 +1245,7 @@ Page({
                         delta: 1
                     })
                 } else {
-                    that.showModal("ErrModal", res.data.data.msg);
+                    that.showModal("ErrModal", res.data.msg);
                 }
                 that.hideLoading();
             },
@@ -1315,7 +1315,7 @@ Page({
                         delta: 1
                     })
                 } else {
-                    that.showModal("ErrModal", res.data.data.msg);
+                    that.showModal("ErrModal", res.data.msg);
                 }
                 that.hideLoading();
             },
@@ -1384,7 +1384,7 @@ Page({
                         delta: 1
                     })
                 } else {
-                    that.showModal("ErrModal", res.data.data.msg);
+                    that.showModal("ErrModal", res.data.msg);
                 }
                 that.hideLoading();
             },

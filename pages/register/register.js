@@ -207,7 +207,7 @@ Page({
                         delta: 2
                     });
                 } else {
-                    that.showToast(res.data.data.msg);
+                    that.showToast(res.data.msg);
                 }
             },
             fail(res) {

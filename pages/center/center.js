@@ -168,7 +168,7 @@ Page({
                         centerTempList: res.data.data.list
                     });
                 } else {
-                    that.showToast(res.data.data.msg);
+                    that.showToast(res.data.msg);
                 }
             },
             fail(res) {
@@ -223,7 +223,7 @@ Page({
                     });
 
                 } else {
-                    that.showToast(res.data.data.msg);
+                    that.showToast(res.data.msg);
                 }
             },
             fail(res) {
@@ -258,7 +258,7 @@ Page({
                 if (res.data.data.code == constant.response_success) {
                     that.initData();
                 } else {
-                    that.showToast(res.data.data.msg);
+                    that.showToast(res.data.msg);
                 }
                 that.setData({
                     modalName: ''

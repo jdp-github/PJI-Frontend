@@ -282,7 +282,7 @@ Page({
                 if (res.data.data.code == constant.response_success) {
                     that.requestCenterStaffList(that.data.searchValue);
                 } else {
-                    that.showToast(res.data.data.msg);
+                    that.showToast(res.data.msg);
                     that.completeProgress();
                 }
                 that.setData({
@@ -311,7 +311,7 @@ Page({
                 if (res.data.data.code == constant.response_success) {
                     that.requestCenterStaffList(that.data.searchValue)
                 } else {
-                    that.showToast(res.data.data.msg);
+                    that.showToast(res.data.msg);
                     that.completeProgress();
                 }
                 that.setData({
