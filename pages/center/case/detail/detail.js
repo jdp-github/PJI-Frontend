@@ -1025,8 +1025,8 @@ Page({
         });
     },
     uploadImg(le, filePath) {
-        let that = this
-        that.showLoading()
+        let that = this;
+        that.showLoading();
         wx.uploadFile({
             url: constant.basePath + "",
             filePath: filePath,
@@ -1038,86 +1038,86 @@ Page({
                 "Content-Type": "multipart/form-data"
             },
             success(res) {
-                console.log(res)
-                if (res.data.data.code == 0) {
-                    switch (e.target.dataset.le) {
+                that.hideLoading();
+                let data = JSON.parse(res.data)
+                if (data.data.code == 0) {
+                    switch (le) {
                         case "11":
                             that.setData({
-                                pic1: res.data.data.info.url,
-                                pic1Upload: res.data.data.info.file,
+                                pic1: data.data.info.url,
+                                pic1Upload: data.data.info.file,
                             });
                             break;
                         case "12":
                             that.setData({
-                                pic2: res.data.data.info.url,
-                                pic2Upload: res.data.data.info.file,
+                                pic2: data.data.info.url,
+                                pic2Upload: data.data.info.file,
                             });
                             break;
                         case "13":
                             that.setData({
-                                pic3: res.data.data.info.url,
-                                pic3Upload: res.data.data.info.file,
+                                pic3: data.data.info.url,
+                                pic3Upload: data.data.info.file,
                             });
                             break;
                         case "21":
                             that.setData({
-                                pic4: res.data.data.info.url,
-                                pic4Upload: res.data.data.info.file,
+                                pic4: data.data.info.url,
+                                pic4Upload: data.data.info.file,
                             });
                             break;
                         case "22":
                             that.setData({
-                                pic5: res.data.data.info.url,
-                                pic5Upload: res.data.data.info.file,
+                                pic5: data.data.info.url,
+                                pic5Upload: data.data.info.file,
                             });
                             break;
                         case "23":
                             that.setData({
-                                pic6: res.data.data.info.url,
-                                pic6Upload: res.data.data.info.file,
+                                pic6: data.data.info.url,
+                                pic6Upload: data.data.info.file,
                             });
                             break;
                         case "31":
                             that.setData({
-                                pic7: res.data.vinfo.url,
-                                pic7Upload: res.data.data.info.file,
+                                pic7: data.data.url,
+                                pic7Upload: data.data.info.file,
                             });
                             break;
                         case "32":
                             that.setData({
-                                pic8: res.data.data.info.url,
-                                pic8Upload: res.data.data.info.file,
+                                pic8: data.data.info.url,
+                                pic8Upload: data.data.info.file,
                             });
                             break;
                         case "33":
                             that.setData({
-                                pic9: res.data.data.info.url,
-                                pic9Upload: res.data.data.info.file,
+                                pic9: data.data.info.url,
+                                pic9Upload: data.data.info.file,
                             });
                             break;
                         case "41":
                             that.setData({
-                                pic10: res.data.data.info.url,
-                                pic10Upload: res.data.data.info.file,
+                                pic10: data.data.info.url,
+                                pic10Upload: data.data.info.file,
                             });
                             break;
                         case "42":
                             that.setData({
-                                pic11: res.data.data.info.url,
-                                pic11Upload: res.data.data.info.file,
+                                pic11: data.data.info.url,
+                                pic11Upload: data.data.info.file,
                             });
                             break;
                         case "43":
                             that.setData({
-                                pic12: res.data.data.info.url,
-                                pic12Upload: res.data.data.info.file,
+                                pic12: data.data.info.url,
+                                pic12Upload: data.data.info.file
                             });
                             break;
                     }
                 } else {
-                    that.showModal("ErrModal", res.data.msg);
+                    that.showModal("ErrModal", data.msg);
                 }
-                that.hideLoading();
             },
             fail(res) {
                 that.hideLoading();
