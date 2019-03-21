@@ -177,7 +177,7 @@ Page({
                             notApprovePercentage: Math.round((notApprove / (parseInt(approve) + parseInt(notApprove) + parseInt(notCompleted))) * 100)
                         });
                     } else {
-                        that.showToast(res.data.data.msg);
+                        that.showToast(res.data.msg);
                     }
                     resolve(res);
                 },

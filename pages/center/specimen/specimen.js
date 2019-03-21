@@ -228,7 +228,7 @@ Page({
                     });
                     that.completeProgress();
                 } else {
-                    that.showToast(res.data.data.msg);
+                    that.showToast(res.data.msg);
                 }
             },
             fail(res) {
@@ -291,7 +291,7 @@ Page({
                     that.loadProgress();
                     that.requestBoxList(that.data.searchValue, that.data.sortType);
                 } else {
-                    that.showToast(res.data.data.msg);
+                    that.showToast(res.data.msg);
                 }
             },
             fail(res) {
@@ -320,7 +320,7 @@ Page({
                     that.loadProgress();
                     that.requestBoxList(that.data.searchValue, that.data.sortType);
                 } else {
-                    that.showToast(res.data.data.msg);
+                    that.showToast(res.data.msg);
                 }
             },
             fail(res) {
@@ -360,7 +360,7 @@ Page({
                     that.loadProgress();
                     that.requestBoxList(that.data.searchValue, that.data.sortType);
                 } else {
-                    that.showToast(res.data.data.msg);
+                    that.showToast(res.data.msg);
                 }
             },
             fail(res) {

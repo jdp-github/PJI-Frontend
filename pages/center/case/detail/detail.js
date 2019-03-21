@@ -244,9 +244,14 @@ Page({
             createDate: e.detail.value
         });
     },
+    onSexChange: function(e) {
+        this.setData({
+           sex: parseInt(e.detail.value)
+        });
+    },
     onAgeInput: function(e) {
         this.setData({
-            sex: e.detail.value,
+            age: e.detail.value,
         });
     },
     onHeightInput: function(e) {
@@ -1239,15 +1244,15 @@ Page({
                 'content-type': 'application/json'
             },
             success(res) {
+                that.hideLoading();
                 if (res.data.data.code == 0) {
                     that.reloadPrePage()
                     wx.navigateBack({
                         delta: 1
                     })
                 } else {
-                    that.showModal("ErrModal", res.data.data.msg);
+                    that.showModal("ErrModal", res.data.msg);
                 }
-                that.hideLoading();
             },
             fail(res) {
                 that.hideLoading();
@@ -1309,15 +1314,15 @@ Page({
                 'content-type': 'application/json'
             },
             success(res) {
+                that.hideLoading();
                 if (res.data.data.code == 0) {
                     that.reloadPrePage()
                     wx.navigateBack({
                         delta: 1
                     })
                 } else {
-                    that.showModal("ErrModal", res.data.data.msg);
+                    that.showModal("ErrModal", res.data.msg);
                 }
-                that.hideLoading();
             },
             fail(res) {
                 that.hideLoading();
@@ -1378,15 +1383,15 @@ Page({
                 'content-type': 'application/json'
             },
             success(res) {
+                that.hideLoading();
                 if (res.data.data.code == 0) {
                     that.reloadPrePage()
                     wx.navigateBack({
                         delta: 1
                     })
                 } else {
-                    that.showModal("ErrModal", res.data.data.msg);
+                    that.showModal("ErrModal", res.data.msg);
                 }
-                that.hideLoading();
             },
             fail(res) {
                 that.hideLoading();

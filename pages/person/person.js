@@ -170,7 +170,7 @@ Page({
                             registerCount: res.data.data.list.length
                         });
                     } else {
-                        that.showToast(res.data.data.msg);
+                        that.showToast(res.data.msg);
                     }
                     resolve(res);
                 },
@@ -203,7 +203,7 @@ Page({
                             approveCount: res.data.data.list.length
                         });
                     } else {
-                        that.showToast(res.data.data.msg);
+                        that.showToast(res.data.msg);
                     }
                     that.completeProgress();
                     resolve(res);
@@ -234,7 +234,7 @@ Page({
                     that.requestRegister();
                     that.requestApprove();
                 } else {
-                    that.showToast(res.data.data.msg);
+                    that.showToast(res.data.msg);
                 }
                 that.hideLoading();
             },
@@ -263,7 +263,7 @@ Page({
                     that.requestRegister();
                     that.requestApprove();
                 } else {
-                    that.showToast(res.data.data.msg);
+                    that.showToast(res.data.msg);
                 }
                 that.hideLoading();
             },
