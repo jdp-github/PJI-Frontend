@@ -96,7 +96,7 @@
 <view class="cu-modal {{modalName=='ErrModal'?'show':''}}">
     <view class="cu-dialog">
         <view class="cu-bar bg-white justify-end">
-            <view class='content'>审核病历</view>
+            <view class='content'>无法操作</view>
             <view class='action' bindtap='hideModal'>
                 <text class='icon-close text-red'></text>
             </view>
