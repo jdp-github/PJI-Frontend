@@ -12,23 +12,35 @@
         <view class='avatar-group'>
             <view class="cu-avatar-group">
                 <view class='cu-tag radius' style="margin-right: 40rpx;">填</view>
-                <view class="cu-avatar round" wx:for="{{1}}" wx:key style="background-image:url(https://image.weilanwl.com/img/square-{{index+1}}.jpg);"></view>
+                <view class="cu-avatar round" style="background-image:url({{addAvatar}});"></view>
             </view>
         </view>
     </view>
     <view class="flex">
         <view class='avatar-group'>
             <view class="cu-avatar-group">
-                <view class='cu-tag radius' style="margin-right: 40rpx;">修</view>
-                <view class="cu-avatar round" wx:for="{{4}}" wx:key style="background-image:url(https://image.weilanwl.com/img/square-{{index+1}}.jpg);"></view>
+                <view wx:if="{{updateAvatarArr.length > 0}}">
+                    <view class='cu-tag radius' style="margin-right: 40rpx;">修</view>
+                    <view class="cu-avatar round" wx:for="{{updateAvatarArr}}" wx:key style="background-image:url(item);"></view>
+                </view>
+                <view wx:else>
+                    <view class='cu-tag radius' style="margin-right: 10rpx;">修</view>
+                    <view class='cu-tag radius'>暂无</view>
+                </view>
             </view>
         </view>
     </view>
     <view class="flex">
         <view class='avatar-group'>
             <view class="cu-avatar-group">
-                <view class='cu-tag radius' style="margin-right: 40rpx;">审</view>
-                <view class="cu-avatar round" wx:for="{{1}}" wx:key style="background-image:url(https://image.weilanwl.com/img/square-{{index+1}}.jpg);"></view>
+                <view wx:if="{{approveAvatar.length > 0}}">
+                    <view class='cu-tag radius' style="margin-right: 40rpx;">审</view>
+                    <view class="cu-avatar round" style="background-image:url(approveAvatar);"></view>
+                </view>
+                <view wx:else>
+                    <view class='cu-tag radius' style="margin-right: 10rpx;">审</view>
+                    <view class='cu-tag radius'>暂无</view>
+                </view>
             </view>
         </view>
     </view>
@@ -708,3 +720,21 @@
     <view class='gray-text'>处理中...</view>
 </view>
 <view class="load-curtain" wx:if="{{loadProgress!=0}}"></view>
+<view class="cu-modal {{modalName=='ErrModal'?'show':''}}">
+    <view class="cu-dialog">
+        <view class="cu-bar bg-white justify-end">
+            <view class='content'>无法操作</view>
+            <view class='action' bindtap='hideModal'>
+                <text class='icon-close text-red'></text>
+            </view>
+        </view>
+        <view class='padding-xl'>
+            <view class='flex-sub text-center'>
+                <view class='solid-bottom text-sl padding'>
+                    <text class='icon-warnfill text-red'></text>
+                </view>
+                <view class='padding'>{{errMsg}}</view>
+            </view>
+        </view>
+    </view>
+</view>

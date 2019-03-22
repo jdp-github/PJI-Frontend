@@ -25,9 +25,16 @@ Page({
         ShowAdmission: false,
         // -------- tab切换 end -------- //
 
+        // -------- 公用信息 begin -------- //
         centerId: '',
         centerName: '',
+        caseId: '',
         isCreateCase: '',
+        caseInfo: {},
+        addAvatar: '',
+        updateAvatarArr: [],
+        approveAvatar: '',
+        // -------- 公用信息 end -------- //
 
         // -------- 基本信息 begin -------- //
         name: '',
@@ -49,6 +56,7 @@ Page({
         // 类型
         type: 0,
         typePicker: ['请选择', '置换术后', '占位器'],
+        // 末次手术至今时长
         operationDateMultiArray: [
             ['单位'],
             ['天', '周', '月', '年'],
@@ -65,7 +73,7 @@ Page({
         symptomDateMultiIndex: [0, 0],
         xingzhiIndex: 0,
         xingzhiValue: '',
-        // 普通选择
+        // 是否合并风湿免疫性疾病
         ris: 0,
         risPicker: ['请选择', '否', '类风湿', '强制性脊柱炎', '其他 (请在备注中标明)'],
         qtbsjb: '',
@@ -196,6 +204,9 @@ Page({
                     ShowBasic: true,
                     ShowDiagnose: false,
                     ShowAdmission: false,
+                    addAvatar: this.data.casesInfo.base.base_creator.base_creator_avatar,
+                    updateAvatarArr: this.makeUpdateAvatar(this.data.casesInfo.base.base_editor_list),
+                    approveAvatar: this.data.casesInfo.base.base_auditor.base_auditor_avatar,
                 });
                 break;
             case 1:
@@ -205,6 +216,9 @@ Page({
                     ShowBasic: false,
                     ShowDiagnose: true,
                     ShowAdmission: false,
+                    addAvatar: this.data.casesInfo.puncture.puncture_creator.puncture_creator_avatar,
+                    updateAvatarArr: this.makeUpdateAvatar(this.data.casesInfo.puncture.puncture_auditor),
+                    approveAvatar: this.data.casesInfo.puncture.puncture_auditor.puncture_auditor_avatar,
                 });
                 break;
             case 2:
@@ -214,15 +228,9 @@ Page({
                     ShowBasic: false,
                     ShowDiagnose: false,
                     ShowAdmission: true,
-                });
-                break;
-            case 3:
-                this.setData({
-                    TabCur: tabId,
-                    VerticalNavTop: (tabId - 1) * 50,
-                    ShowBasic: false,
-                    ShowDiagnose: false,
-                    ShowAdmission: false,
+                    addAvatar: this.data.casesInfo.bein.bein_creator.bein_creator_avatar,
+                    updateAvatarArr: this.makeUpdateAvatar(this.data.casesInfo.bein.bein_editor_list),
+                    approveAvatar: this.data.casesInfo.bein.bein_auditor.bein_auditor_avatar,
                 });
                 break;
         }
@@ -246,7 +254,7 @@ Page({
     },
     onSexChange: function(e) {
         this.setData({
-           sex: parseInt(e.detail.value)
+            sex: parseInt(e.detail.value)
         });
     },
     onAgeInput: function(e) {
@@ -993,14 +1001,15 @@ Page({
     // -------- 提示框 end -------- //
 
     // -------- 模态对话框 start -------- //
-    showModal: function(e) {
+    showModal: function(e, errMsg) {
         if (e.currentTarget) {
             this.setData({
                 modalName: e.currentTarget.dataset.target
             });
         } else {
             this.setData({
-                modalName: e
+                modalName: e,
+                errMsg: errMsg
             });
         }
     },
@@ -1210,9 +1219,182 @@ Page({
             centerId: options.centerId ? options.centerId : '',
             centerName: options.centerName ? options.centerName : '',
             isAdmin: app.globalData.is_admin == '1',
+            caseId: caseId,
             isCreateCase: caseId.length <= 0,
         });
+        if (!this.data.isCreateCase) {
+            this.requestCaseInfo(caseId)
+        } else {
+            this.setData({
+                addAvatar: app.globalData.avatarUrl
+            })
+        }
         this.completeProgress();
+    },
+
+    requestCaseInfo(caseId) {
+        let that = this;
+        wx.request({
+            url: constant.basePath,
+            data: {
+                service: 'Case.GetCaseInfo',
+                case_id: case_id
+            },
+            header: {
+                'content-type': 'application/json'
+            },
+            success(res) {
+                console.log(res)
+                that.hideLoading();
+                if (res.data.data.code == 0) {
+                    that.initViewByData(res.data.data.info)
+                } else {
+                    that.showModal("ErrModal", res.data.msg);
+                }
+            },
+            fail(res) {
+                that.hideLoading();
+            }
+        });
+    },
+
+    initViewByData(info) {
+        this.setData({
+            caseInfo: info
+        })
+        // 基本信息
+        this.setData({
+            name: info.base.patient_name,
+            caseNO: info.base.case_no,
+            createDate: util.formatTime(info.base.create_time, 'Y-M-D'),
+            sex: info.base.sex,
+            age: info.base.age,
+            height: info.base.height,
+            weight: info.base.weight,
+            bmi: info.base.bmi,
+            chiefDoc: info.base.pro_doctor,
+            tel1: info.base.telphone1,
+            tel2: info.base.telphone2,
+            tel2Disabled: this.getValueDisable(info.base.telphone2),
+            part: info.base.part,
+            type: info.base.type,
+            'operationDateMultiIndex[2]': info.base.last_to_now,
+            'operationDateMultiIndex[1]': info.base.last_to_now_unit,
+            // operationDisabled:this.getDoubleSelectDisable(),// TODO
+            'symptomDateMultiIndex[2]': info.base.duration_symptoms,
+            'symptomDateMultiIndex[1]': info.base.duration_symptoms_unit,
+            xingzhiIndex: info.base.duration_symptoms_prop,
+            xingzhiValue: info.base.duration_symptoms_prop == 1 ? "急性" : "慢性",
+            ris: info.base.is_merge_disease,
+            qtbsjb: info.base.other_concomitant_diseases,
+            antibiotic: info.base.is_used_antibiotics,
+            jybs: info.base.medical_history,
+            cbzd: info.base.diagnose,
+            tssxbz: info.base.special_matter,
+            addAvatar: info.base.special_matter.base_creator_avatar,
+            updateAvatarArr: this.makeUpdateAvatar(info.base.base_editor_list),
+            approveAvatar: info.base.base_auditor.base_auditor_avatar,
+        })
+        // 诊断性穿刺
+        this.setData({
+            chuangciDate: util.formatTime(info.puncture.puncture_date, 'Y-M-D'),
+            ccDateDisabled: this.getNumDisable(info.puncture.puncture_date),
+            ccDescribe: info.puncture.puncture_desc,
+            ccDescribeDisabeld: this.getValueDisable(info.puncture.puncture_desc),
+            ccgjy: info.puncture.rinse_fluid_volume,
+            ccgjyDisabled: this.getNumDisable(info.puncture.rinse_fluid_volume),
+            ccgxy: info.puncture.rinse_lavage_volume,
+            ccgxyDisabled: this.getNumDisable(info.puncture.rinse_lavage_volume),
+            leIndex: info.puncture.le_testpaper_stoste,
+            leDisabled: this.getNumDisable(info.puncture.le_testpaper_stoste),
+            chuangciDate: info.puncture.le_testpaper_pic, // TODO 图片
+            leAfterIndex: info.puncture.le_testpaper_centrifugal,
+            leAfterDisabled: this.getNumDisable(info.puncture.le_testpaper_centrifugal),
+            chuangciDate: info.puncture.le_testpaper_centr_pic, // TODO 图片
+            gjybxb: info.puncture.joint_fluid_leukocyte,
+            gjybxbDisabled: this.getNumDisable(info.puncture.joint_fluid_leukocyte),
+            gjyzx: info.puncture.neutrophils_percent,
+            gjyzxDisabled: this.getNumDisable(info.puncture.neutrophils_percent),
+            bcpysjIndex: info.puncture.culture_type,
+            bcpysjDisabled: this.getNumDisable(info.puncture.culture_type),
+            drgpyp: info.puncture.culture_bottle_fluid_volume,
+            drgpypDisabled: this.getNumDisable(info.puncture.drgpyp),
+            bcxyResult: info.puncture.aerobic_culture_result,
+            bcxyResultDisabled: this.getValueDisable(info.puncture.aerobic_culture_result),
+            bcxyLast: info.puncture.aerobic_culture_time,
+            bcxyLastDisabled: this.getNumDisable(info.puncture.aerobic_culture_time),
+            bcyyResult: info.puncture.anaerobic_culture_result,
+            bcyyResultDisabled: this.getValueDisable(info.puncture.anaerobic_culture_result),
+            bcyyLast: info.puncture.anaerobic_culture_time,
+            bcyyLastDisabled: this.getNumDisable(info.puncture.anaerobic_culture_time),
+            mNGSResult: info.puncture.joint_fluid_mngs_result,
+            mNGSResultDisabled: this.getValueDisable(info.puncture.joint_fluid_mngs_result),
+            // TOOD 标本
+        })
+        // 入院后信息
+        this.setData({
+            doudaoIndex: info.bein.sious,
+            sqesr: info.bein.preoperative_esr,
+            sqcrp: info.bein.preoperative_crp,
+            bzhcrp: info.bein.normal_crp,
+            il6: info.bein.il6,
+            il6Disabled: this.getNumDisable(info.bein.il6),
+            xwdby: info.bein.fibrinogen,
+            xwdbyDisabled: this.getNumDisable(info.bein.fibrinogen),
+            ddimer: info.bein.dimer,
+            ddimerDisabled: this.getNumDisable(nfo.bein.dimer),
+            shoushuDate: util.formatTime(info.bein.operation_date, 'Y-M-D'),
+            ssDateDisabled: this.getNumDisable(info.bein.operation_date),
+            szjnIndex: info.bein.culture_pus,
+            szjnDisabled: this.getNumDisable(info.bein.culture_pus),
+            blIndex: info.bein.pathology,
+            blDisabled: this.getNumDisable(info.bein.pathology),
+            szLEIndex: info.bein.intrao_le_testpaper_stoste,
+            szLEDisabled: this.getNumDisable(info.bein.intrao_le_testpaper_stoste),
+            doudaoIndex: info.bein.intrao_le_testpaper_pic, // TODO pic
+            szLEAfterIndex: info.bein.intrao_le_testpaper_centrifugal,
+            szLEAfterDisabled: this.getNumDisable(info.bein.intrao_le_testpaper_centrifugal),
+            doudaoIndex: info.bein.intrao_le_testpaper_centr_pic, // TODO pic
+            szgjybxb: info.bein.intrao_joint_fluid_leukocyte,
+            szgjybxbDisabled: this.getNumDisable(info.bein.intrao_joint_fluid_leukocyte),
+            szgjyzxl: info.bein.intrao_neutrophils_percent,
+            szgjyzxlDisabled: this.getNumDisable(info.bein.intrao_neutrophils_percent),
+            qbgjy: info.bein.all_culture_result,
+            qbgjyDisabled: this.getValueDisable(info.bein.all_culture_result),
+            szzzpy: info.bein.intrao_culture_result,
+            szzzpyDisabled: this.getValueDisable(info.bein.intrao_culture_result),
+            zznMGSResult: info.bein.tissue_ngs_result,
+            zznMGSResultDisabled: this.getNumDisable(info.bein.tissue_ngs_result),
+            csljy: info.bein.ultrasonic_degradation_ngs_result,
+            csljyDisabled: this.getNumDisable(info.bein.ultrasonic_degradation_ngs_result),
+            msisIndex: info.bein.msis,
+            msisDisabled: this.getNumDisable(info.bein.msis),
+            zzclIndex: info.bein.final_disposal,
+            zzclDisabled: this.getNumDisable(info.bein.final_disposal)
+        })
+    },
+
+    getValueDisable(value) {
+        return !value.length > 0
+    },
+
+    getNumDisable(value) {
+        return !value > 0
+    },
+
+    makeUpdateAvatar(avatarObjList) {
+        var avatarList = []
+        for (var i = 0, length = avatarObjList.length; i < length; i++) {
+            if (avatarObjList[i].base_editor_avatar) {
+                avatarList[i] = avatarObjList[i].base_editor_avatar
+            } else if (avatarObjList[i].puncture_editor_avatar) {
+                avatarList[i] = avatarObjList[i].puncture_editor_avatar
+            } else if (avatarObjList[i].bein_editor_avatar) {
+                avatarList[i] = avatarObjList[i].bein_editor_avatar
+            }
+
+        }
+        return avatarList
     },
 
     submit: function(e) {
@@ -1266,7 +1448,7 @@ Page({
             center_id: that.data.centerId,
             patient_name: that.data.name,
             case_no: that.data.caseNO,
-            create_time: that.data.createDate,
+            create_time: new Date(that.data.createDate).getTime() / 1000,
             sex: that.data.sex,
             age: that.data.age,
             height: that.data.height,
@@ -1321,7 +1503,7 @@ Page({
                         delta: 1
                     })
                 } else {
-                    that.showModal("ErrModal", res.data.msg);
+                    that.showModal("ErrModal", res.data.data.msg);
                 }
             },
             fail(res) {
@@ -1342,7 +1524,7 @@ Page({
             pic6Upload: that.data.pic6Upload,
         }
         var jsonData = {
-            puncture_date: that.data.chuangciDate,
+            puncture_date: new Date(that.data.chuangciDate).getTime() / 1000,
             puncture_desc: that.data.ccDescribe,
             rinse_fluid_volume: that.data.ccgjy,
             rinse_lavage_volume: that.data.ccgxy,
@@ -1418,7 +1600,7 @@ Page({
             il6: that.data.il6,
             fibrinogen: that.data.xwdby,
             dimer: that.data.ddimer,
-            operation_date: that.data.shoushuDate,
+            operation_date: new Date(that.data.shoushuDate).getTime() / 1000,
             culture_pus: that.data.szjnIndex,
             pathology: that.data.blIndex,
             intrao_le_testpaper_stoste: that.data.szLEIndex,

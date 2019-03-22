@@ -174,7 +174,8 @@ Page({
                 if (res.data.data.code == constant.response_success) {
                     for (let i = 0, len = res.data.data.list.length; i < len; i++) {
                         let caseInfo = res.data.data.list[i];
-                        caseInfo.create_time = util.formatTime(caseInfo.create_time, 'Y-M-D');
+                        caseInfo.puncture_date = util.formatTime(caseInfo.puncture_date, 'Y-M-D');
+                        caseInfo.operation_date = util.formatTime(caseInfo.operation_date, 'Y-M-D')
                         caseInfo.patient_name_prefix_letter = caseInfo.patient_name.substr(0, 1);
                     }
                     that.setData({
@@ -193,7 +194,7 @@ Page({
     },
     onAddCase: function(e) {
         wx.navigateTo({
-            url: '../../center/case/detail/detail?centerId=' + this.data.centerId + "&centerName=" + this.data.centerName +"&case_id="
+            url: '../../center/case/detail/detail?centerId=' + this.data.centerId + "&centerName=" + this.data.centerName + "&case_id="
         });
     },
     onEditCase: function(e) {
@@ -205,7 +206,8 @@ Page({
             data: {
                 service: 'Case.SetCaseWritingStaff',
                 openid: app.globalData.openid,
-                case_id: caseInfo.case_id
+                case_id: caseInfo.case_id,
+                type: 1
             },
             header: {
                 'content-type': 'application/json'
@@ -216,7 +218,7 @@ Page({
                         url: '../../center/case/detail/detail?case_id=' + caseInfo.case_id + "&centerId=" + that.data.centerId + "&centerName=" + that.data.centerName
                     });
                 } else {
-                    that.showModal("ErrModal", res.data.msg);
+                    that.showModal("ErrModal", res.data.data.msg);
                 }
                 that.hideLoading();
             },
@@ -225,38 +227,40 @@ Page({
             }
         });
     },
-    onLockCase: function(e) {
-        let that = this;
-        let selectedCase = e.currentTarget.dataset.case;
-        let isApprove = selectedCase.state == 2
-        let title = isApprove ? '解锁中...' : '锁定病历中...';
-        // 1审批，2解锁
-        let type = isApprove ? 2 : 1;
-        that.showLoading();
-        wx.request({
-            url: constant.basePath,
-            data: {
-                service: 'Case.Approve',
-                openid: app.globalData.openid,
-                case_id: selectedCase.case_id,
-                type: type
-            },
-            header: {
-                'content-type': 'application/json'
-            },
-            success(res) {
-                that.hideLoading();
-                if (res.data.data.code == constant.response_success) {
-                    that.requestCaseList(that.data.searchValue, that.data.sortType);
-                } else {
-                    that.showModal("ErrModal", res.data.msg);
-                }
-            },
-            fail(res) {
-                that.hideLoading();
-            }
-        })
-    },
+
+    // onLockCase: function(e) {
+    //     let that = this;
+    //     let selectedCase = e.currentTarget.dataset.case;
+    //     let isApprove = selectedCase.state == 2
+    //     let title = isApprove ? '解锁中...' : '锁定病历中...';
+    //     // 1审批，2解锁
+    //     let type = isApprove ? 2 : 1;
+    //     that.showLoading();
+    //     wx.request({
+    //         url: constant.basePath,
+    //         data: {
+    //             service: 'Case.Approve',
+    //             openid: app.globalData.openid,
+    //             case_id: selectedCase.case_id,
+    //             type: type
+    //         },
+    //         header: {
+    //             'content-type': 'application/json'
+    //         },
+    //         success(res) {
+    //             that.hideLoading();
+    //             if (res.data.data.code == constant.response_success) {
+    //                 that.requestCaseList(that.data.searchValue, that.data.sortType);
+    //             } else {
+    //                 that.showModal("ErrModal", res.data.msg);
+    //             }
+    //         },
+    //         fail(res) {
+    //             that.hideLoading();
+    //         }
+    //     })
+    // },
+
     onDeleCase: function(e) {
         let selectedCase = e.currentTarget.dataset.case;
         this.setData({

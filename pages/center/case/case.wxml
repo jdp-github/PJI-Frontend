@@ -38,24 +38,24 @@
                             <view class="flex-sub text-small">
                                 <div class="flex">
                                     <view class="flex-sub">
-                                        <i class="icon-unlock text-green" wx:if="{{item.state != 2}}"></i>
-                                        <i class="icon-lock text-red" wx:if="{{item.state == 2}}"></i>
-                                        <view class="cu-tag sm radius" style="font-size: 22rpx;background-color:#ccc;color:#fff;font-weight:bold;margin-left:8rpx;">置换术后</view>
-                                        <view class="cu-tag sm radius" style="font-size: 22rpx;background-color:#ccc;color:#fff;font-weight:bold;">非感染</view>
-                                        <view class="cu-tag sm radius" style="font-size: 22rpx;background-color:#ccc;color:#fff;font-weight:bold;">样本: 可用</view>
+                                        <i class="icon-lock text-red" wx:if="{{item.base_state == 2 &&item.puncture_state == 2 && item.bein_state == 2  }}"></i>
+                                        <i class="icon-unlock text-green" wx:else></i>
+                                        <view class="cu-tag sm radius" style="font-size: 22rpx;background-color:#ccc;color:#fff;font-weight:bold;margin-left:8rpx;">{{item.type_name"}}</view>
+                                        <view class="cu-tag sm radius" style="font-size: 22rpx;background-color:#ccc;color:#fff;font-weight:bold;">{{item.msis_name}}</view>
+                                        <view class="cu-tag sm radius" style="font-size: 22rpx;background-color:#ccc;color:#fff;font-weight:bold;">{{item.sample_enable == 0?"不可用":"可用"}}</view>
                                     </view>
                                 </div>
                             </view>
                             <view class="flex-sub text-small">
                                 <div class="flex">
-                                    <view class="flex-sub">穿刺: 2019-02-02</view>
-                                    <view class="flex-sub">手术: 2019-03-03</view>
+                                    <view class="flex-sub">穿刺: {{item.puncture_date}}</view>
+                                    <view class="flex-sub">手术: {{item.operation_date}}</view>
                                 </div>
                             </view>
                             <view class="flex-sub text-small">
                                 <div class="flex">
-                                    <view class="flex-sub">录入: 王二小</view>
-                                    <view class="flex-sub">主诊: 李莫愁</view>
+                                    <view class="flex-sub">录入: {{item.editor_name}}</view>
+                                    <view class="flex-sub">主诊: {{item.pro_doctor}}</view>
                                 </div>
                             </view>
                         </view>
@@ -64,13 +64,13 @@
                 <view class="flex-sub">
                     <view class="flex">
                         <view class="cu-progress radius striped active margin-top-special">
-                            <view class='bg-olive' style="width:100%;">基本信息:已审核</view>
+                            <view class='bg-olive' style="width:{{item.base_progress}}%;">基本信息:{{item.base_state == 0?"未完成":item.base_state == 1?"已完成未审核":"已审核"}}</view>
                         </view>
                         <view class="cu-progress radius striped active margin-top-special" style="margin-left: 6rpx;">
-                            <view class='bg-cyan' style="width:100%;">诊断穿刺:已录待审</view>
+                            <view class='bg-cyan' style="width:{{item.puncture_progress}}%;">诊断穿刺:{{item.puncture_state == 0?"未完成":item.puncture_state == 1?"已完成未审核":"已审核"}}</view>
                         </view>
                         <view class="cu-progress radius striped active margin-top-special" style="margin-left: 6rpx;">
-                            <view class='bg-red' style="width:100%;">入院信息:待审核</view>
+                            <view class='bg-red' style="width:{{item.bein_progress}}%;">入院信息:{{item.bein_state == 0?"未完成":item.bein_state == 1?"已完成未审核":"已审核"}}</view>
                         </view>
                     </view>
                 </view>
@@ -79,7 +79,7 @@
             </view>
             <view class='move'>
                 <view class='bg-olive' data-case="{{item}}" bindtap="onEditCase">编辑</view>
-                <view class='bg-red' data-case="{{item}}" bindtap='onDeleCase' hidden='true'>删除</view>
+                <view class='bg-red' data-case="{{item}}" bindtap='onDeleCase' hidden='true' disabled="{{item.delete_button == 0}}">删除</view>
             </view>
         </view>
     </view>
