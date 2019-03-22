@@ -204,9 +204,9 @@ Page({
                     ShowBasic: true,
                     ShowDiagnose: false,
                     ShowAdmission: false,
-                    addAvatar: this.data.casesInfo.base.base_creator.base_creator_avatar,
-                    updateAvatarArr: this.makeUpdateAvatar(this.data.casesInfo.base.base_editor_list),
-                    approveAvatar: this.data.casesInfo.base.base_auditor.base_auditor_avatar,
+                    addAvatar: this.data.caseInfo.base.base_creator_avatar,
+                    updateAvatarArr: this.makeUpdateAvatar(this.data.caseInfo.base.base_editor_list),
+                    approveAvatar: this.data.caseInfo.base.base_auditor_avatar,
                 });
                 break;
             case 1:
@@ -216,9 +216,9 @@ Page({
                     ShowBasic: false,
                     ShowDiagnose: true,
                     ShowAdmission: false,
-                    addAvatar: this.data.casesInfo.puncture.puncture_creator.puncture_creator_avatar,
-                    updateAvatarArr: this.makeUpdateAvatar(this.data.casesInfo.puncture.puncture_auditor),
-                    approveAvatar: this.data.casesInfo.puncture.puncture_auditor.puncture_auditor_avatar,
+                    addAvatar: this.data.caseInfo.puncture.puncture_creator_avatar,
+                    updateAvatarArr: this.makeUpdateAvatar(this.data.caseInfo.puncture.puncture_editor_list),
+                    approveAvatar: this.data.caseInfo.puncture.puncture_auditor_avatar,
                 });
                 break;
             case 2:
@@ -228,9 +228,9 @@ Page({
                     ShowBasic: false,
                     ShowDiagnose: false,
                     ShowAdmission: true,
-                    addAvatar: this.data.casesInfo.bein.bein_creator.bein_creator_avatar,
-                    updateAvatarArr: this.makeUpdateAvatar(this.data.casesInfo.bein.bein_editor_list),
-                    approveAvatar: this.data.casesInfo.bein.bein_auditor.bein_auditor_avatar,
+                    addAvatar: this.data.caseInfo.bein.bein_creator_avatar,
+                    updateAvatarArr: this.makeUpdateAvatar(this.data.caseInfo.bein.bein_editor_list),
+                    approveAvatar: this.data.caseInfo.bein.bein_auditor_avatar,
                 });
                 break;
         }
@@ -1238,16 +1238,15 @@ Page({
             url: constant.basePath,
             data: {
                 service: 'Case.GetCaseInfo',
-                case_id: case_id
+                case_id: caseId
             },
             header: {
                 'content-type': 'application/json'
             },
             success(res) {
-                console.log(res)
                 that.hideLoading();
                 if (res.data.data.code == 0) {
-                    that.initViewByData(res.data.data.info)
+                    that.initViewByData(res.data.data)
                 } else {
                     that.showModal("ErrModal", res.data.msg);
                 }
@@ -1261,7 +1260,7 @@ Page({
     initViewByData(info) {
         this.setData({
             caseInfo: info
-        })
+        });
         // 基本信息
         this.setData({
             name: info.base.patient_name,
@@ -1291,9 +1290,9 @@ Page({
             jybs: info.base.medical_history,
             cbzd: info.base.diagnose,
             tssxbz: info.base.special_matter,
-            addAvatar: info.base.special_matter.base_creator_avatar,
+            addAvatar: info.base.base_creator_avatar,
             updateAvatarArr: this.makeUpdateAvatar(info.base.base_editor_list),
-            approveAvatar: info.base.base_auditor.base_auditor_avatar,
+            approveAvatar: info.base.base_auditor_avatar,
         })
         // 诊断性穿刺
         this.setData({
@@ -1342,7 +1341,7 @@ Page({
             xwdby: info.bein.fibrinogen,
             xwdbyDisabled: this.getNumDisable(info.bein.fibrinogen),
             ddimer: info.bein.dimer,
-            ddimerDisabled: this.getNumDisable(nfo.bein.dimer),
+            ddimerDisabled: this.getNumDisable(info.bein.dimer),
             shoushuDate: util.formatTime(info.bein.operation_date, 'Y-M-D'),
             ssDateDisabled: this.getNumDisable(info.bein.operation_date),
             szjnIndex: info.bein.culture_pus,
@@ -1383,8 +1382,9 @@ Page({
     },
 
     makeUpdateAvatar(avatarObjList) {
-        var avatarList = []
-        for (var i = 0, length = avatarObjList.length; i < length; i++) {
+        var avatarList = [];
+        var avatarLen = avatarObjList.length;
+        for (var i = 0; i < avatarLen; i++) {
             if (avatarObjList[i].base_editor_avatar) {
                 avatarList[i] = avatarObjList[i].base_editor_avatar
             } else if (avatarObjList[i].puncture_editor_avatar) {
