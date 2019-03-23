@@ -287,7 +287,7 @@ Page({
                 if (res.data.data.code == constant.response_success) {
                     that.requestCaseList(that.data.searchValue, that.data.sortType);
                 } else {
-                    that.showModal("ErrModal", res.data.msg);
+                    that.showModal("ErrModal", res.data.data.msg);
                 }
             },
             fail(res) {
