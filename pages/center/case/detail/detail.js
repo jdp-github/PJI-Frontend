@@ -205,7 +205,6 @@ Page({
                     ShowBasic: true,
                     ShowDiagnose: false,
                     ShowAdmission: false,
-
                 });
                 if (!this.data.isCreateCase) {
                     this.setData({
@@ -213,6 +212,8 @@ Page({
                         updateAvatarArr: this.makeUpdateAvatar(this.data.caseInfo.base.base_editor_list),
                         approveAvatar: this.data.caseInfo.base.base_auditor_avatar,
                     })
+                    console.log("addAvatar1:"+this.data.addAvatar)
+                    console.log("updateAvatarArr1:" + this.data.updateAvatarArr)
                 }
                 break;
             case 1:
@@ -229,6 +230,8 @@ Page({
                         updateAvatarArr: this.makeUpdateAvatar(this.data.caseInfo.puncture.puncture_editor_list),
                         approveAvatar: this.data.caseInfo.puncture.puncture_auditor_avatar,
                     })
+                    console.log("addAvatar2:" + this.data.addAvatar)
+                    console.log("updateAvatarArr2:" + this.data.updateAvatarArr)
                 }
                 break;
             case 2:
@@ -246,6 +249,8 @@ Page({
                         approveAvatar: this.data.caseInfo.bein.bein_auditor_avatar,
 
                     })
+                    console.log("addAvatar3:" + this.data.addAvatar)
+                    console.log("updateAvatarArr3:" + this.data.updateAvatarArr)
                 }
                 break;
         }
@@ -1409,6 +1414,7 @@ Page({
     },
 
     makeUpdateAvatar(avatarObjList) {
+        debugger
         var avatarList = [];
         var avatarLen = avatarObjList.length;
         for (var i = 0; i < avatarLen; i++) {
@@ -1753,10 +1759,95 @@ Page({
     },
 
     verifyBasic() {
-
+        let that = this;
+        that.showLoading();
+        wx.request({
+            url: constant.basePath,
+            data: {
+                service: 'Case.Approve',
+                case_id: that.data.caseId,
+                openid: app.globalData.openid,
+                type: 1
+            },
+            header: {
+                'content-type': 'application/json'
+            },
+            success(res) {
+                that.hideLoading();
+                if (res.data.data.code == 0) {
+                    that.reloadPrePage()
+                    wx.navigateBack({
+                        delta: 1
+                    })
+                } else {
+                    that.showModal("ErrModal", res.data.data.msg);
+                }
+            },
+            fail(res) {
+                that.hideLoading();
+            }
+        });
     },
-    verifyDiagnose() {},
-    verifyAdmission() {},
+    verifyDiagnose() {
+        let that = this;
+        that.showLoading();
+        wx.request({
+            url: constant.basePath,
+            data: {
+                service: 'Case.Approve',
+                case_id: that.data.caseId,
+                openid: app.globalData.openid,
+                type: 2
+            },
+            header: {
+                'content-type': 'application/json'
+            },
+            success(res) {
+                that.hideLoading();
+                if (res.data.data.code == 0) {
+                    that.reloadPrePage()
+                    wx.navigateBack({
+                        delta: 1
+                    })
+                } else {
+                    that.showModal("ErrModal", res.data.data.msg);
+                }
+            },
+            fail(res) {
+                that.hideLoading();
+            }
+        });
+    },
+    verifyAdmission() {
+        let that = this;
+        that.showLoading();
+        wx.request({
+            url: constant.basePath,
+            data: {
+                service: 'Case.Approve',
+                case_id: that.data.caseId,
+                openid: app.globalData.openid,
+                type: 3
+            },
+            header: {
+                'content-type': 'application/json'
+            },
+            success(res) {
+                that.hideLoading();
+                if (res.data.data.code == 0) {
+                    that.reloadPrePage()
+                    wx.navigateBack({
+                        delta: 1
+                    })
+                } else {
+                    that.showModal("ErrModal", res.data.data.msg);
+                }
+            },
+            fail(res) {
+                that.hideLoading();
+            }
+        });
+    },
 
     reloadPrePage() {
         var pages = getCurrentPages();
