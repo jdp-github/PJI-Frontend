@@ -60,17 +60,17 @@ Page({
         operationDateMultiArray: [
             ['单位'],
             ['天', '周', '月', '年'],
-            ['1天', '2天', '3天', '4天', '5天', '6天', '7天', '8天', '9天', '10天', '11天', '12天', '13天', '14天', '15天', '16天', '17天', '18天', '19天', '20天', '21天', '22天', '23天', '24天', '25天', '26天', '27天', '28天', '29天', '30天', '31天']
+            ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31']
         ],
-        operationDateMultiIndex: [0, 0],
+        operationDateMultiIndex: [0, 0, 0],
         operationDisabled: true,
         // 症状出现时长
         symptomDateMultiArray: [
             ['单位'],
             ['天', '周', '月', '年'],
-            ['1天', '2天', '3天', '4天', '5天', '6天', '7天', '8天', '9天', '10天', '11天', '12天', '13天', '14天', '15天', '16天', '17天', '18天', '19天', '20天', '21天', '22天', '23天', '24天', '25天', '26天', '27天', '28天', '29天', '30天', '31天']
+            ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31']
         ],
-        symptomDateMultiIndex: [0, 0],
+        symptomDateMultiIndex: [0, 0, 0],
         xingzhiIndex: 0,
         xingzhiValue: '',
         // 是否合并风湿免疫性疾病
@@ -355,7 +355,7 @@ Page({
                 switch (data.operationDateMultiIndex[0]) {
                     case 0:
                         data.operationDateMultiArray[1] = ['天', '月', '年'];
-                        data.operationDateMultiArray[2] = ['1天', '2天', '3天', '4天', '5天', '6天', '7天', '8天', '9天', '10天', '11天', '12天', '13天', '14天', '15天', '16天', '17天', '18天', '19天', '20天', '21天', '22天', '23天', '24天', '25天', '26天', '27天', '28天', '29天', '30天', '31天'];
+                        data.operationDateMultiArray[2] = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'];
                         break;
                 }
                 data.operationDateMultiIndex[1] = 0;
@@ -366,16 +366,16 @@ Page({
                     case 0:
                         switch (data.operationDateMultiIndex[1]) {
                             case 0:
-                                data.operationDateMultiArray[2] = ['1天', '2天', '3天', '4天', '5天', '6天', '7天', '8天', '9天', '10天', '11天', '12天', '13天', '14天', '15天', '16天', '17天', '18天', '19天', '20天', '21天', '22天', '23天', '24天', '25天', '26天', '27天', '28天', '29天', '30天', '31天'];
+                                data.operationDateMultiArray[2] = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'];
                                 break;
                             case 1:
-                                data.operationDateMultiArray[2] = ['1周', '2周', '3周', '4周'];
+                                data.operationDateMultiArray[2] = ['1', '2', '3', '4'];
                                 break;
                             case 2:
-                                data.operationDateMultiArray[2] = ['1个月', '2个月', '3个月', '4个月', '5个月', '6个月', '7个月', '8个月', '9个月', '10个月', '11个月', '12个月'];
+                                data.operationDateMultiArray[2] = ['1个', '2个', '3个', '4个', '5个', '6个', '7个', '8个', '9个', '10个', '11个', '12个'];
                                 break;
                             case 3:
-                                data.operationDateMultiArray[2] = ['1年', '2年', '3年', '4年', '5年', '6年', '7年', '8年', '9年', '10年'];
+                                data.operationDateMultiArray[2] = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
                                 break;
                         }
                         break;
@@ -411,7 +411,7 @@ Page({
                 switch (data.symptomDateMultiIndex[0]) {
                     case 0:
                         data.symptomDateMultiArray[1] = ['天', '月', '年'];
-                        data.symptomDateMultiArray[2] = ['1天', '2天', '3天', '4天', '5天', '6天', '7天', '8天', '9天', '10天', '11天', '12天', '13天', '14天', '15天', '16天', '17天', '18天', '19天', '20天', '21天', '22天', '23天', '24天', '25天', '26天', '27天', '28天', '29天', '30天', '31天'];
+                        data.symptomDateMultiArray[2] = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'];
                         break;
                 }
                 data.symptomDateMultiIndex[1] = 0;
@@ -422,16 +422,16 @@ Page({
                     case 0:
                         switch (data.symptomDateMultiIndex[1]) {
                             case 0:
-                                data.symptomDateMultiArray[2] = ['1天', '2天', '3天', '4天', '5天', '6天', '7天', '8天', '9天', '10天', '11天', '12天', '13天', '14天', '15天', '16天', '17天', '18天', '19天', '20天', '21天', '22天', '23天', '24天', '25天', '26天', '27天', '28天', '29天', '30天', '31天'];
+                                data.symptomDateMultiArray[2] = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'];
                                 break;
                             case 1:
-                                data.symptomDateMultiArray[2] = ['1周', '2周', '3周', '4周'];
+                                data.symptomDateMultiArray[2] = ['1', '2', '3', '4'];
                                 break;
                             case 2:
-                                data.symptomDateMultiArray[2] = ['1个月', '2个月', '3个月', '4个月', '5个月', '6个月', '7个月', '8个月', '9个月', '10个月', '11个月', '12个月'];
+                                data.symptomDateMultiArray[2] = ['1个', '2个', '3个', '4个', '5个', '6个', '7个', '8个', '9个', '10个', '11个', '12个'];
                                 break;
                             case 3:
-                                data.symptomDateMultiArray[2] = ['1年', '2年', '3年', '4年', '5年', '6年', '7年', '8年', '9年', '10年'];
+                                data.symptomDateMultiArray[2] = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
                                 break;
                         }
                         break;
@@ -1068,7 +1068,7 @@ Page({
             },
             success(res) {
                 that.hideLoading();
-                let data = JSON.parse(res.data)
+                let data = JSON.parse(res.data);
                 if (data.data.code == 0) {
                     switch (le) {
                         case "11":
@@ -1234,7 +1234,7 @@ Page({
 
     onLoad: function(options) {
         this.loadProgress();
-        var caseId = options.case_id
+        var caseId = options.case_id;
         this.setData({
             centerId: options.centerId ? options.centerId : '',
             centerName: options.centerName ? options.centerName : '',
@@ -1283,6 +1283,8 @@ Page({
             caseInfo: info
         });
         // 基本信息
+        let tempOperationDateArray = [0, parseInt(info.base.last_to_now_unit), parseInt(info.base.last_to_now)];
+        let tempSymptomsUnit = [0, parseInt(info.base.duration_symptoms_unit), parseInt(info.base.duration_symptoms)];
         this.setData({
             name: info.base.patient_name,
             caseNO: info.base.case_no,
@@ -1298,11 +1300,9 @@ Page({
             tel2Disabled: this.getValueDisable(info.base.telphone2),
             part: info.base.part,
             type: info.base.type,
-            'operationDateMultiIndex[2]': info.base.last_to_now,
-            'operationDateMultiIndex[1]': info.base.last_to_now_unit,
+            operationDateMultiIndex: tempOperationDateArray,
             operationDisabled: this.getNumDisable(info.base.last_to_now),
-            'symptomDateMultiIndex[2]': info.base.duration_symptoms,
-            'symptomDateMultiIndex[1]': info.base.duration_symptoms_unit,
+            symptomDateMultiIndex: tempSymptomsUnit,
             xingzhiIndex: info.base.duration_symptoms_prop,
             xingzhiValue: info.base.duration_symptoms_prop == 1 ? "急性" : "慢性",
             ris: info.base.is_merge_disease,
@@ -1417,7 +1417,6 @@ Page({
         var avatarList = [];
         var avatarLen = avatarObjList.length;
         for (var i = 0; i < avatarLen; i++) {
-            console.log(avatarObjList[i])
             if (avatarObjList[i].base_editor_avatar) {
                 avatarList[i] = avatarObjList[i].base_editor_avatar
             } else if (avatarObjList[i].puncture_editor_avatar) {
@@ -1495,11 +1494,11 @@ Page({
             type: parseInt(that.data.type),
 
             // 末次手术至今时长
-            last_to_now: parseInt(that.data.operationDateMultiIndex[2]) + 1,
+            last_to_now: parseInt(that.data.operationDateMultiIndex[2]),
             // 末次手术至今时长单位。1天，2月
             last_to_now_unit: parseInt(that.data.operationDateMultiIndex[1]),
             // 症状出现时长
-            duration_symptoms: parseInt(that.data.symptomDateMultiIndex[2]) + 1,
+            duration_symptoms: parseInt(that.data.symptomDateMultiIndex[2]),
             // 症状出现时长单位。1天，2月(必填项)
             duration_symptoms_unit: parseInt(that.data.symptomDateMultiIndex[1]),
             // 症状出现时长性质。1急性，2慢性(必填项)
