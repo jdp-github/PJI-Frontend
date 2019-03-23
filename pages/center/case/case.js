@@ -38,7 +38,6 @@ Page({
         errMsg: ''
     },
     onLoad: function(options) {
-
         this.setData({
             centerId: options.centerId,
             centerName: options.centerName,
@@ -171,13 +170,29 @@ Page({
                 'content-type': 'application/json'
             },
             success(res) {
+                console.log("Case.SearchCaseList:" + JSON.stringify(res))
                 if (res.data.data.code == constant.response_success) {
                     for (let i = 0, len = res.data.data.list.length; i < len; i++) {
                         let caseInfo = res.data.data.list[i];
-                        caseInfo.puncture_date = util.formatTime(caseInfo.puncture_date, 'Y-M-D');
-                        caseInfo.operation_date = util.formatTime(caseInfo.operation_date, 'Y-M-D')
+                        // 日期
+                        if (caseInfo.puncture_date == 0) {
+                            caseInfo.puncture_date = "暂无"
+                        } else {
+                            caseInfo.puncture_date = util.formatTime(caseInfo.puncture_date, 'Y-M-D');
+                        }
+                        if (caseInfo.operation_date == 0) {
+                            caseInfo.operation_date = "暂无"
+                        } else {
+                            caseInfo.operation_date = util.formatTime(caseInfo.operation_date, 'Y-M-D')
+                        }
                         caseInfo.patient_name_prefix_letter = caseInfo.patient_name.substr(0, 1);
+
+                         // 进度
+                        caseInfo.baseStatValue = that.getStateValue(caseInfo.base_state)
+                        caseInfo.punctureStatValue = that.getStateValue(caseInfo.puncture_state)
+                        caseInfo.beinStatValue = that.getStateValue(caseInfo.bein_state)
                     }
+
                     that.setData({
                         caseList: res.data.data.list
                     });
@@ -192,6 +207,20 @@ Page({
             }
         });
     },
+
+    getStateValue(state) {
+        var stateValue = ""
+        if (state == 0) {
+            stateValue = "未完成"
+        } else if (state == 1) {
+            stateValue = "已完成未审核"
+        } else if (state == 2) {
+            stateValue = "已审核"
+        }
+
+        return stateValue
+    },
+
     onAddCase: function(e) {
         wx.navigateTo({
             url: '../../center/case/detail/detail?centerId=' + this.data.centerId + "&centerName=" + this.data.centerName + "&case_id="

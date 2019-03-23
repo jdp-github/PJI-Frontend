@@ -67,11 +67,11 @@
                         </view>
                         <view class="cu-form-group">
                             <view class='title'>姓名</view>
-                            <input placeholder="请输入姓名" class='radius' bindinput="onNameInput" value=""></input>
+                            <input placeholder="请输入姓名" class='radius' bindinput="onNameInput" value="{{name}}"></input>
                         </view>
                         <view class="cu-form-group">
                             <view class='title'>ID</view>
-                            <input placeholder="请输入病历号" class='radius' bindinput="onCaseNOInput" value=""></input>
+                            <input placeholder="请输入病历号" class='radius' bindinput="onCaseNOInput" value="{{caseNO}}"></input>
                         </view>
                         <view class="cu-form-group">
                             <view class='title'>建档日期</view>
@@ -91,15 +91,15 @@
                         </view>
                         <view class="cu-form-group">
                             <view class='title'>年龄</view>
-                            <input placeholder="请输入年龄" class='radius' bindinput="onAgeInput" value=""></input>
+                            <input placeholder="请输入年龄" class='radius' bindinput="onAgeInput" value="{{age}}"></input>
                         </view>
                         <view class="cu-form-group">
                             <view class='title'>身高(m)</view>
-                            <input placeholder="请注意单位换算" class='radius' bindinput="onHeightInput" value=""></input>
+                            <input placeholder="请注意单位换算" class='radius' bindinput="onHeightInput" value="{{height}}"></input>
                         </view>
                         <view class="cu-form-group">
                             <view class='title'>体重(Kg)</view>
-                            <input placeholder="请注意单位换算" class='radius' bindinput="onWeightInput" value=""></input>
+                            <input placeholder="请注意单位换算" class='radius' bindinput="onWeightInput" value="{{weight}}"></input>
                         </view>
                         <view class="cu-form-group disabled">
                             <view class='title'>BMI(Kg/m2)</view>
@@ -107,16 +107,16 @@
                         </view>
                         <view class="cu-form-group">
                             <view class='title'>主诊医师</view>
-                            <input placeholder="请输入主诊医师姓名" class='radius' bindinput="onChiefDocInput" value=""></input>
+                            <input placeholder="请输入主诊医师姓名" class='radius' bindinput="onChiefDocInput" value="{{chiefDoc}}"></input>
                         </view>
                         <view class="cu-form-group">
                             <view class='title'>联系电话1</view>
-                            <input placeholder="请输入联系方式" class='radius' bindinput="onTel1Input" value=""></input>
+                            <input placeholder="请输入联系方式" class='radius' bindinput="onTel1Input" value="{{tel1}}"></input>
                         </view>
                         <view class="cu-form-group {{tel2Disabled?'disabled':''}}">
                             <view class='title'>联系电话2</view>
                             <input placeholder="请输入联系方式" class='radius' bindinput="onTel2Input" value='{{tel2}}' disabled='{{tel2Disabled}}'></input>
-                            <switch class='green sm' bindchange="onTel2SwitchChange"></switch>
+                            <switch class='green sm' bindchange="onTel2SwitchChange" checked='{{!tel2Disabled}}'></switch>
                         </view>
                         <view class="cu-form-group">
                             <view class='title'>部位</view>
@@ -141,7 +141,7 @@
                                     {{operationDateMultiArray[2][operationDateMultiIndex[2]]?operationDateMultiArray[2][operationDateMultiIndex[2]]:'请选择'}}
                                 </view>
                             </picker>
-                            <switch class='green sm' style="margin-left: 15rpx;" bindchange="onOperationcSwitchChange"></switch>
+                            <switch class='green sm' style="margin-left: 15rpx;" bindchange="onOperationcSwitchChange" checked='{{!operationDisabled}}'></switch>
                         </view>
                         <view class="cu-form-group {{symptomDisabled?'disabled':''}}">
                             <view class='title'>症状出现时长</view>
@@ -165,7 +165,7 @@
                         </view>
                         <view class="cu-form-group">
                             <view class='title'>其他伴随疾病</view>
-                            <input placeholder='请输入文字, 没有请填"无"' class='radius' bindinput="onQtbsjbInput" value=""></input>
+                            <input placeholder='请输入文字, 没有请填"无"' class='radius' bindinput="onQtbsjbInput" value="{{qtbsjb}}"></input>
                         </view>
                         <view class="cu-form-group">
                             <view class='title'>近期(2周)应用抗生素</view>
@@ -177,15 +177,15 @@
                         </view>
                         <view class="cu-form-group">
                             <view class='title'>简要病史</view>
-                            <input placeholder='请输入文字, 没有请填"无"' class='radius' bindinput="onJybsInput" value=""></input>
+                            <input placeholder='请输入文字, 没有请填"无"' class='radius' bindinput="onJybsInput" value="{{jybs}}"></input>
                         </view>
                         <view class="cu-form-group">
                             <view class='title'>初步诊断</view>
-                            <input placeholder='请输入文字, 没有请填"无"' class='radius' bindinput="onCbzdInput" value=""></input>
+                            <input placeholder='请输入文字, 没有请填"无"' class='radius' bindinput="onCbzdInput" value="{{cbzd}}"></input>
                         </view>
                         <view class="cu-form-group">
                             <view class='title'>特殊事项备注</view>
-                            <input placeholder='请输入文字, 没有请填"无"' class='radius' bindinput="onTsssbzInput" value=""></input>
+                            <input placeholder='请输入文字, 没有请填"无"' class='radius' bindinput="onTsssbzInput" value="{{tssxbz}}"></input>
                         </view>
                     </view>
                 </view>
@@ -197,7 +197,7 @@
                         提交录入
                     </button>
                     <button class='cu-btn bg-green shadow' style="margin-left: 15rpx;" form-type="submit" bindtap='verify' disabled='{{isCreateCase}}'>
-                        确认审核
+                        {{isBaseLock == 0 ?"确认审核":"解除锁定"}}
                     </button>
                 </view>
             </view>
@@ -220,7 +220,7 @@
                                     {{chuangciDate}}
                                 </view>
                             </picker>
-                            <switch class='green sm' bindchange="onCCDateSwitchChange" style='margin-left: 15rpx;'></switch>
+                            <switch class='green sm' bindchange="onCCDateSwitchChange" style='margin-left: 15rpx;' checked='{{!ccDateDisabled}}'></switch>
                         </view>
                         <!-- 穿刺描述 -->
                         <view class="cu-form-group {{ccDescribeDisabeld?'disabled':''}}">
@@ -228,7 +228,7 @@
                                 <view class='title' style='text-align:left'>穿刺描述</view>
                                 <input placeholder="请简述穿刺时一般情况" class='radius' style='width: 350rpx;text-align:left;' type='number' bindinput="onCCDescribeInput" disabled='{{ccDescribeDisabeld}}' value='{{ccDescribe}}'></input>
                             </view>
-                            <switch class='green sm' bindchange="onCCDescribeSwitchChange" style='margin-left: 15rpx;'></switch>
+                            <switch class='green sm' bindchange="onCCDescribeSwitchChange" style='margin-left: 15rpx;' checked='{{!ccDescribeDisabeld}}'></switch>
                         </view>
                         <!-- 抽出关节液总量 -->
                         <view class="cu-form-group {{ccgjyDisabled?'disabled':''}}">
@@ -236,7 +236,7 @@
                                 <view class='title' style='text-align:left'>抽出关节液总量(ml)</view>
                                 <input placeholder="请输入数字，不适用请点击右侧" class='radius' style='width: 350rpx;text-align:left;' type='number' bindinput="onCcgjyInput" disabled='{{ccgjyDisabled}}' value='{{ccgjy}}'></input>
                             </view>
-                            <switch class='green sm' bindchange="onCcgjySwitchChange" style='margin-left: 15rpx;'></switch>
+                            <switch class='green sm' bindchange="onCcgjySwitchChange" style='margin-left: 15rpx;' checked='{{!ccgjyDisabled}}'></switch>
                         </view>
                         <!-- 抽出灌洗液总量 -->
                         <view class="cu-form-group {{ccgxyDisabled?'disabled':''}}">
@@ -244,7 +244,7 @@
                                 <view class='title' style='text-align:left'>抽出灌洗液总量(ml)</view>
                                 <input placeholder="请输入数字，不适用请点击右侧" class='radius' style='width: 350rpx;text-align:left;' type='number' bindinput="onCcgxyInput" disabled='{{ccgxyDisabled}}' value='{{ccgxy}}'></input>
                             </view>
-                            <switch class='green sm' bindchange="onCcgxySwitchChange" style='margin-left: 15rpx;'></switch>
+                            <switch class='green sm' bindchange="onCcgxySwitchChange" style='margin-left: 15rpx;' checked='{{!ccgxyDisabled}}'></switch>
                         </view>
                         <!-- LE试纸（原液） -->
                         <view class="cu-form-group {{leDisabled?'disabled':''}}">
@@ -255,7 +255,7 @@
                                 </view>
                             </picker>
                             <button class='cu-btn round sm' style='margin-left: 15rpx;' disabled='{{leDisabled}}' bindtap="showModal" data-target="LEDrawerModalR">上传图片</button>
-                            <switch class='green sm' bindchange="onLeSwitchChange" style='margin-left: 15rpx;'></switch>
+                            <switch class='green sm' bindchange="onLeSwitchChange" style='margin-left: 15rpx;' checked='{{!leDisabled}}'></switch>
                         </view>
                         <!-- LE试纸（离心后） -->
                         <view class="cu-form-group {{leAfterDisabled?'disabled':''}}">
@@ -266,7 +266,7 @@
                                 </view>
                             </picker>
                             <button class='cu-btn round sm' style='margin-left: 15rpx;' disabled='{{leAfterDisabled}}' bindtap="showModal" data-target="LEAfterDrawerModalR">上传图片</button>
-                            <switch class='green sm' bindchange="onLeAfterSwitchChange" style='margin-left: 15rpx;'></switch>
+                            <switch class='green sm' bindchange="onLeAfterSwitchChange" style='margin-left: 15rpx;' checked='{{!leAfterDisabled}}'></switch>
                         </view>
                         <!-- 关节液白细胞计数（cells/μL） -->
                         <view class="cu-form-group {{gjybxbDisabled?'disabled':''}}">
@@ -274,7 +274,7 @@
                                 <view class='title' style='text-align:left'>关节液白细胞计数(cells/μL)</view>
                                 <input placeholder="请输入数字，请注意单位换算" class='radius' style='width: 350rpx;text-align:left;' type='number' bindinput="onGjybxbInput" disabled='{{gjybxbDisabled}}' value='{{gjybxb}}'></input>
                             </view>
-                            <switch class='green sm' bindchange="onGjybxbSwitchChange" style='margin-left: 15rpx;'></switch>
+                            <switch class='green sm' bindchange="onGjybxbSwitchChange" style='margin-left: 15rpx;' checked='{{!gjybxbDisabled}}'></switch>
                         </view>
                         <!-- 关节液中性粒细胞百分比（0.01） -->
                         <view class="cu-form-group {{gjyzxDisabled?'disabled':''}}">
@@ -282,7 +282,7 @@
                                 <view class='title' style='text-align:left'>关节液中性粒细胞百分比(0.01)</view>
                                 <input placeholder="请注意格式，保留小数点2位" style=' width: 350rpx;text-align:left;' class='radius' type='digit' bindinput="onGjyzxInput" disabled='{{gjyzxDisabled}}' value='{{gjyzx}}'></input>
                             </view>
-                            <switch class='green sm' bindchange="onGjyzxSwitchChange" style='margin-left: 15rpx;'></switch>
+                            <switch class='green sm' bindchange="onGjyzxSwitchChange" style='margin-left: 15rpx;' checked='{{!gjyzxDisabled}}'></switch>
                         </view>
                         <!-- 本次培养送检类型 -->
                         <view class="cu-form-group {{bcpysjDisabled?'disabled':''}}">
@@ -292,7 +292,7 @@
                                     {{bcpysjPicker[bcpysjIndex]}}
                                 </view>
                             </picker>
-                            <switch class='green sm' bindchange="onBcpysjSwitchChange" style='margin-left: 15rpx;'></switch>
+                            <switch class='green sm' bindchange="onBcpysjSwitchChange" style='margin-left: 15rpx;' checked='{{!bcpysjDisabled}}'></switch>
                         </view>
                         <!-- 打入各培养瓶量（ml） -->
                         <view class="cu-form-group {{drgpypDisabled?'disabled':''}}">
@@ -300,7 +300,7 @@
                                 <view class='title' style='text-align:left'>打入各培养瓶量(ml)</view>
                                 <input style=' width: 350rpx;text-algin:left;' class='radius' type='digit' style='text-align:left;' bindinput="onDrgpypjChange" disabled='{{drgpypDisabled}}' value='{{drgpyp}}'></input>
                             </view>
-                            <switch class='green sm' bindchange="onDrgpypSwitchChange" style='margin-left: 15rpx;'></switch>
+                            <switch class='green sm' bindchange="onDrgpypSwitchChange" style='margin-left: 15rpx;' checked='{{!drgpypDisabled}}'></switch>
                         </view>
                         <!-- 本次需氧+真菌培养结果 -->
                         <view class="cu-form-group {{bcxyResultDisabled?'disabled':''}}">
@@ -308,7 +308,7 @@
                                 <view class='title' style='text-align:left'>本次需氧+真菌培养结果</view>
                                 <input placeholder="请输入文字，报告日期+微生物名称" style='width: 380rpx;text-align:left;' class='radius' type='digit' bindinput="onBcxyChange" disabled='{{bcxyResultDisabled}}' value='{{bcxyResult}}'></input>
                             </view>
-                            <switch class='green sm' bindchange="onBcxySwitchChange" style='margin-left: 15rpx;'></switch>
+                            <switch class='green sm' bindchange="onBcxySwitchChange" style='margin-left: 15rpx;' checked='{{!bcxyResultDisabled}}'></switch>
                         </view>
                         <!-- 本次需氧+真菌培养时长（天） -->
                         <view class="cu-form-group {{bcxyLastDisabled?'disabled':''}}">
@@ -316,7 +316,7 @@
                                 <view class='title' style='text-align:left'>本次需氧+真菌培养时长(天)</view>
                                 <input placeholder="请输入数字" style='width: 350rpx;text-align:left;' class='radius' type='digit' bindinput="onBcxyLastChange" disabled='{{bcxyLastDisabled}}' value='{{bcxyLast}}'></input>
                             </view>
-                            <switch class='green sm' bindchange="onBcxyLastSwitchChange" style='margin-left: 15rpx;'></switch>
+                            <switch class='green sm' bindchange="onBcxyLastSwitchChange" style='margin-left: 15rpx;' checked='{{!bcxyLastDisabled}}'></switch>
                         </view>
                         <!-- 本次厌氧培养结果 -->
                         <view class="cu-form-group {{bcyyResultDisabled?'disabled':''}}">
@@ -324,7 +324,7 @@
                                 <view class='title' style='text-align:left'>本次厌氧培养结果</view>
                                 <input placeholder="请输入文字，报告日期+微生物名称" style='width: 350rpx;text-align:left;' class='radius' type='digit' bindinput="onBcyyChange" disabled='{{bcyyResultDisabled}}' value='{{bcyyResult}}'></input>
                             </view>
-                            <switch class='green sm' bindchange="onBcyySwitchChange" style='margin-left: 15rpx;'></switch>
+                            <switch class='green sm' bindchange="onBcyySwitchChange" style='margin-left: 15rpx;' checked='{{!bcyyResultDisabled}}'></switch>
                         </view>
                         <!-- 本次厌氧培养时长（天） -->
                         <view class="cu-form-group {{bcyyLastDisabled?'disabled':''}}">
@@ -332,7 +332,7 @@
                                 <view class='title' style='text-align:left'>本次厌氧培养时长(天)</view>
                                 <input placeholder="请输入数字" style='width: 350rpx;text-align:left;' class='radius' type='digit' bindinput="onBcyyLastChange" disabled='{{bcyyLastDisabled}}' value='{{bcyyLast}}'></input>
                             </view>
-                            <switch class='green sm' bindchange="onBcyyLastSwitchChange" style='margin-left: 15rpx;'></switch>
+                            <switch class='green sm' bindchange="onBcyyLastSwitchChange" style='margin-left: 15rpx;' checked='{{!bcyyLastDisabled}}'></switch>
                         </view>
                         <!-- 关节液/冲洗液mNGS结果 -->
                         <view class="cu-form-group {{mNGSResultDisabled?'disabled':''}}">
@@ -340,7 +340,21 @@
                                 <view class='title' style='text-align:left'>关节液/冲洗液mNGS结果</view>
                                 <input placeholder="请输入文字，报告日期+微生物名称" style='width: 350rpx;text-align:left;' class='radius' type='digit' bindinput="onMNGsChange" disabled='{{mNGSResultDisabled}}' value='{{mNGSResult}}'></input>
                             </view>
-                            <switch class='green sm' bindchange="onMNGSSwitchChange" style='margin-left: 15rpx;'></switch>
+                            <switch class='green sm' bindchange="onMNGSSwitchChange" style='margin-left: 15rpx;' checked='{{!mNGSResultDisabled}}'></switch>
+                        </view>
+                        <!-- 标本存放情况 -->
+                        <view class="cu-form-group">
+                            <view style='display:flex;flex-direction: column; '>
+                                <view class='title' style='text-align:left'>标本存放情况</view>
+                                <input placeholder="暂未存放可用标本" style='width: 350rpx;text-align:left;' class='radius' disabled='{{true}}' value=''></input>
+                            </view>
+                        </view>
+                        <!-- 标本使用情况 -->
+                        <view class="cu-form-group">
+                            <view style='display:flex;flex-direction: column; '>
+                                <view class='title' style='text-align:left'>标本使用情况</view>
+                                <textarea placeholder="暂未使用该患者标本" style='width: 350rpx;text-align:left;' class='radius' disabled='{{true}}' value='' auto-height></textarea>
+                            </view>
                         </view>
                     </view>
                 </view>

@@ -41,15 +41,15 @@
                                         <i class="icon-lock text-red" wx:if="{{item.base_state == 2 &&item.puncture_state == 2 && item.bein_state == 2  }}"></i>
                                         <i class="icon-unlock text-green" wx:else></i>
                                         <view class="cu-tag sm radius" style="font-size: 22rpx;background-color:#ccc;color:#fff;font-weight:bold;margin-left:8rpx;">{{item.type_name}}</view>
-                                        <view class="cu-tag sm radius" style="font-size: 22rpx;background-color:#ccc;color:#fff;font-weight:bold;">{{item.msis_name}}</view>
+                                        <view class="cu-tag sm radius" style="font-size: 22rpx;background-color:#ccc;color:#fff;font-weight:bold;">{{item.msis_name.length == 0?"暂无":item.msis_name}}</view>
                                         <view class="cu-tag sm radius" style="font-size: 22rpx;background-color:#ccc;color:#fff;font-weight:bold;">{{item.sample_enable == 0?"不可用":"可用"}}</view>
                                     </view>
                                 </div>
                             </view>
                             <view class="flex-sub text-small">
                                 <div class="flex">
-                                    <view class="flex-sub">穿刺: {{item.puncture_date}}</view>
-                                    <view class="flex-sub">手术: {{item.operation_date}}</view>
+                                    <view class="flex-sub">穿刺日期: {{item.puncture_date}}</view>
+                                    <view class="flex-sub">手术日期: {{item.operation_date}}</view>
                                 </div>
                             </view>
                             <view class="flex-sub text-small">
@@ -64,13 +64,13 @@
                 <view class="flex-sub">
                     <view class="flex">
                         <view class="cu-progress radius striped active margin-top-special">
-                            <view class='bg-olive' style="width:{{item.base_progress}}%;">基本信息:{{item.base_state == 0?"未完成":item.base_state == 1?"已完成未审核":"已审核"}}</view>
+                            <view class='bg-olive' style="width:100%;">基本信息:{{item.baseStatValue}}</view>
                         </view>
                         <view class="cu-progress radius striped active margin-top-special" style="margin-left: 6rpx;">
-                            <view class='bg-cyan' style="width:{{item.puncture_progress}}%;">诊断穿刺:{{item.puncture_state == 0?"未完成":item.puncture_state == 1?"已完成未审核":"已审核"}}</view>
+                            <view class='bg-cyan' style="width:100%;">诊断穿刺:{{item.punctureStatValue}}</view>
                         </view>
                         <view class="cu-progress radius striped active margin-top-special" style="margin-left: 6rpx;">
-                            <view class='bg-red' style="width:{{item.bein_progress}}%;">入院信息:{{item.bein_state == 0?"未完成":item.bein_state == 1?"已完成未审核":"已审核"}}</view>
+                            <view class='bg-red' style="width:100%;">入院信息:{{item.beinStatValue}}</view>
                         </view>
                     </view>
                 </view>

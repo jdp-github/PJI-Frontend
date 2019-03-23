@@ -82,6 +82,7 @@ Page({
         jybs: '',
         cbzd: '',
         tssxbz: '',
+        isBaseLock: 0,
         // -------- 基本信息 end -------- //
 
         // -------- 诊断性穿刺 begin -------- //
@@ -144,7 +145,7 @@ Page({
         szLEPicker: ["请选择", "无法判定", "neg.", "25", "75", "250(+)", "500(+)"],
         szLEDisabled: true,
         szLEAfterIndex: 0,
-        szLEAfterPicker: ["请选择", "/无法判定", "neg.", "25", "75", "250(+)", "500(+)"],
+        szLEAfterPicker: ["请选择", "无法判定", "neg.", "25", "75", "250(+)", "500(+)"],
         szLEAfterDisabled: true,
         szgjybxb: '',
         szgjybxbDisabled: true,
@@ -204,10 +205,15 @@ Page({
                     ShowBasic: true,
                     ShowDiagnose: false,
                     ShowAdmission: false,
-                    addAvatar: this.data.caseInfo.base.base_creator_avatar,
-                    updateAvatarArr: this.makeUpdateAvatar(this.data.caseInfo.base.base_editor_list),
-                    approveAvatar: this.data.caseInfo.base.base_auditor_avatar,
+
                 });
+                if (!this.data.isCreateCase) {
+                    this.setData({
+                        addAvatar: this.data.caseInfo.base.base_creator_avatar,
+                        updateAvatarArr: this.makeUpdateAvatar(this.data.caseInfo.base.base_editor_list),
+                        approveAvatar: this.data.caseInfo.base.base_auditor_avatar,
+                    })
+                }
                 break;
             case 1:
                 this.setData({
@@ -216,10 +222,14 @@ Page({
                     ShowBasic: false,
                     ShowDiagnose: true,
                     ShowAdmission: false,
-                    addAvatar: this.data.caseInfo.puncture.puncture_creator_avatar,
-                    updateAvatarArr: this.makeUpdateAvatar(this.data.caseInfo.puncture.puncture_editor_list),
-                    approveAvatar: this.data.caseInfo.puncture.puncture_auditor_avatar,
                 });
+                if (!this.data.isCreateCase) {
+                    this.setData({
+                        addAvatar: this.data.caseInfo.puncture.puncture_creator_avatar,
+                        updateAvatarArr: this.makeUpdateAvatar(this.data.caseInfo.puncture.puncture_editor_list),
+                        approveAvatar: this.data.caseInfo.puncture.puncture_auditor_avatar,
+                    })
+                }
                 break;
             case 2:
                 this.setData({
@@ -228,10 +238,15 @@ Page({
                     ShowBasic: false,
                     ShowDiagnose: false,
                     ShowAdmission: true,
-                    addAvatar: this.data.caseInfo.bein.bein_creator_avatar,
-                    updateAvatarArr: this.makeUpdateAvatar(this.data.caseInfo.bein.bein_editor_list),
-                    approveAvatar: this.data.caseInfo.bein.bein_auditor_avatar,
                 });
+                if (!this.data.isCreateCase) {
+                    this.setData({
+                        addAvatar: this.data.caseInfo.bein.bein_creator_avatar,
+                        updateAvatarArr: this.makeUpdateAvatar(this.data.caseInfo.bein.bein_editor_list),
+                        approveAvatar: this.data.caseInfo.bein.bein_auditor_avatar,
+
+                    })
+                }
                 break;
         }
     },
@@ -1089,7 +1104,7 @@ Page({
                             break;
                         case "31":
                             that.setData({
-                                pic7: data.data.url,
+                                pic7: data.data.info.url,
                                 pic7Upload: data.data.info.file,
                             });
                             break;
@@ -1244,6 +1259,7 @@ Page({
                 'content-type': 'application/json'
             },
             success(res) {
+                console.log("Case.GetCaseInfo:" + JSON.stringify(res))
                 that.hideLoading();
                 if (res.data.data.code == 0) {
                     that.initViewByData(res.data.data)
@@ -1279,7 +1295,7 @@ Page({
             type: info.base.type,
             'operationDateMultiIndex[2]': info.base.last_to_now,
             'operationDateMultiIndex[1]': info.base.last_to_now_unit,
-            // operationDisabled:this.getDoubleSelectDisable(),// TODO
+            operationDisabled: this.getNumDisable(info.base.last_to_now),
             'symptomDateMultiIndex[2]': info.base.duration_symptoms,
             'symptomDateMultiIndex[1]': info.base.duration_symptoms_unit,
             xingzhiIndex: info.base.duration_symptoms_prop,
@@ -1293,38 +1309,37 @@ Page({
             addAvatar: info.base.base_creator_avatar,
             updateAvatarArr: this.makeUpdateAvatar(info.base.base_editor_list),
             approveAvatar: info.base.base_auditor_avatar,
+            isBaseLock: info.base.is_lock
         })
         // 诊断性穿刺
         this.setData({
-            chuangciDate: util.formatTime(info.puncture.puncture_date, 'Y-M-D'),
+            chuangciDate: this.getDefaultDate(info.puncture.puncture_date),
             ccDateDisabled: this.getNumDisable(info.puncture.puncture_date),
             ccDescribe: info.puncture.puncture_desc,
             ccDescribeDisabeld: this.getValueDisable(info.puncture.puncture_desc),
-            ccgjy: info.puncture.rinse_fluid_volume,
+            ccgjy: this.getDefaultNum(info.puncture.rinse_fluid_volume),
             ccgjyDisabled: this.getNumDisable(info.puncture.rinse_fluid_volume),
-            ccgxy: info.puncture.rinse_lavage_volume,
+            ccgxy: this.getDefaultNum(info.puncture.rinse_lavage_volume),
             ccgxyDisabled: this.getNumDisable(info.puncture.rinse_lavage_volume),
             leIndex: info.puncture.le_testpaper_stoste,
             leDisabled: this.getNumDisable(info.puncture.le_testpaper_stoste),
-            chuangciDate: info.puncture.le_testpaper_pic, // TODO 图片
             leAfterIndex: info.puncture.le_testpaper_centrifugal,
             leAfterDisabled: this.getNumDisable(info.puncture.le_testpaper_centrifugal),
-            chuangciDate: info.puncture.le_testpaper_centr_pic, // TODO 图片
-            gjybxb: info.puncture.joint_fluid_leukocyte,
+            gjybxb: this.getDefaultNum(info.puncture.joint_fluid_leukocyte),
             gjybxbDisabled: this.getNumDisable(info.puncture.joint_fluid_leukocyte),
-            gjyzx: info.puncture.neutrophils_percent,
+            gjyzx: this.getDefaultNum(info.puncture.neutrophils_percent),
             gjyzxDisabled: this.getNumDisable(info.puncture.neutrophils_percent),
             bcpysjIndex: info.puncture.culture_type,
             bcpysjDisabled: this.getNumDisable(info.puncture.culture_type),
-            drgpyp: info.puncture.culture_bottle_fluid_volume,
-            drgpypDisabled: this.getNumDisable(info.puncture.drgpyp),
+            drgpyp: this.getDefaultNum(info.puncture.culture_bottle_fluid_volume),
+            drgpypDisabled: this.getNumDisable(info.puncture.culture_bottle_fluid_volume),
             bcxyResult: info.puncture.aerobic_culture_result,
             bcxyResultDisabled: this.getValueDisable(info.puncture.aerobic_culture_result),
-            bcxyLast: info.puncture.aerobic_culture_time,
+            bcxyLast: this.getDefaultNum(info.puncture.aerobic_culture_time),
             bcxyLastDisabled: this.getNumDisable(info.puncture.aerobic_culture_time),
             bcyyResult: info.puncture.anaerobic_culture_result,
             bcyyResultDisabled: this.getValueDisable(info.puncture.anaerobic_culture_result),
-            bcyyLast: info.puncture.anaerobic_culture_time,
+            bcyyLast: this.getDefaultNum(info.puncture.anaerobic_culture_time),
             bcyyLastDisabled: this.getNumDisable(info.puncture.anaerobic_culture_time),
             mNGSResult: info.puncture.joint_fluid_mngs_result,
             mNGSResultDisabled: this.getValueDisable(info.puncture.joint_fluid_mngs_result),
@@ -1335,14 +1350,14 @@ Page({
             doudaoIndex: info.bein.sious,
             sqesr: info.bein.preoperative_esr,
             sqcrp: info.bein.preoperative_crp,
-            bzhcrp: info.bein.normal_crp,
-            il6: info.bein.il6,
+            bzhcrp: this.getDefaultNum(info.bein.normal_crp),
+            il6: this.getDefaultNum(info.bein.il6),
             il6Disabled: this.getNumDisable(info.bein.il6),
-            xwdby: info.bein.fibrinogen,
+            xwdby: this.getDefaultNum(info.bein.fibrinogen),
             xwdbyDisabled: this.getNumDisable(info.bein.fibrinogen),
-            ddimer: info.bein.dimer,
+            ddimer: this.getDefaultNum(info.bein.dimer),
             ddimerDisabled: this.getNumDisable(info.bein.dimer),
-            shoushuDate: util.formatTime(info.bein.operation_date, 'Y-M-D'),
+            shoushuDate: this.getDefaultDate(info.bein.operation_date),
             ssDateDisabled: this.getNumDisable(info.bein.operation_date),
             szjnIndex: info.bein.culture_pus,
             szjnDisabled: this.getNumDisable(info.bein.culture_pus),
@@ -1350,13 +1365,13 @@ Page({
             blDisabled: this.getNumDisable(info.bein.pathology),
             szLEIndex: info.bein.intrao_le_testpaper_stoste,
             szLEDisabled: this.getNumDisable(info.bein.intrao_le_testpaper_stoste),
-            doudaoIndex: info.bein.intrao_le_testpaper_pic, // TODO pic
+            // doudaoIndex: info.bein.intrao_le_testpaper_pic, // TODO pic
             szLEAfterIndex: info.bein.intrao_le_testpaper_centrifugal,
             szLEAfterDisabled: this.getNumDisable(info.bein.intrao_le_testpaper_centrifugal),
-            doudaoIndex: info.bein.intrao_le_testpaper_centr_pic, // TODO pic
-            szgjybxb: info.bein.intrao_joint_fluid_leukocyte,
+            // doudaoIndex: info.bein.intrao_le_testpaper_centr_pic, // TODO pic
+            szgjybxb: this.getDefaultNum(info.bein.intrao_joint_fluid_leukocyte),
             szgjybxbDisabled: this.getNumDisable(info.bein.intrao_joint_fluid_leukocyte),
-            szgjyzxl: info.bein.intrao_neutrophils_percent,
+            szgjyzxl: this.getDefaultNum(info.bein.intrao_neutrophils_percent),
             szgjyzxlDisabled: this.getNumDisable(info.bein.intrao_neutrophils_percent),
             qbgjy: info.bein.all_culture_result,
             qbgjyDisabled: this.getValueDisable(info.bein.all_culture_result),
@@ -1373,12 +1388,24 @@ Page({
         })
     },
 
+    getDefaultNum(num) {
+        return num > 0 ? num : ""
+    },
+
+    getDefaultDate(date) {
+        var dateValue = "请选择日期"
+        if (date != 0) {
+            dateValue = util.formatTime(date, 'Y-M-D')
+        }
+        return dateValue
+    },
+
     getValueDisable(value) {
-        return !value.length > 0
+        return value.length <= 0
     },
 
     getNumDisable(value) {
-        return !value > 0
+        return value <= 0
     },
 
     makeUpdateAvatar(avatarObjList) {
@@ -1418,7 +1445,7 @@ Page({
             url: constant.basePath,
             data: {
                 service: 'Case.CreateEditCaseBase',
-                case_id: that.data.centerId,
+                case_id: that.data.caseId,
                 openid: app.globalData.openid,
                 json_data: that.makeBasicData()
             },
@@ -1426,6 +1453,7 @@ Page({
                 'content-type': 'application/json'
             },
             success(res) {
+                console.log("Case.CreateEditCaseBase:" + JSON.stringify(res))
                 that.hideLoading();
                 if (res.data.data.code == 0) {
                     that.reloadPrePage()
@@ -1433,7 +1461,7 @@ Page({
                         delta: 1
                     })
                 } else {
-                    that.showModal("ErrModal", res.data.msg);
+                    that.showModal("ErrModal", res.data.data.msg);
                 }
             },
             fail(res) {
@@ -1444,7 +1472,6 @@ Page({
 
     makeBasicData() {
         let that = this;
-        console.log(that.data.operationDateMultiIndex[2])
         var jsonData = {
             center_id: that.data.centerId,
             patient_name: that.data.name,
@@ -1479,6 +1506,7 @@ Page({
             diagnose: that.data.cbzd,
             special_matter: that.data.tssxbz,
         }
+        console.log("基本信息：" + JSON.stringify(jsonData))
         return JSON.stringify(jsonData)
     },
     submitDiagnose() {
@@ -1489,7 +1517,7 @@ Page({
             url: constant.basePath,
             data: {
                 service: 'Case.CreateEditCasePuncture',
-                case_id: that.data.centerId,
+                case_id: that.data.caseId,
                 openid: app.globalData.openid,
                 json_data: that.makeDiagnoseData()
             },
@@ -1525,29 +1553,32 @@ Page({
             pic6Upload: that.data.pic6Upload,
         }
         var jsonData = {
-            puncture_date: new Date(that.data.chuangciDate).getTime() / 1000,
+            puncture_date: that.data.ccDateDisabled ? 0 : new Date(that.data.chuangciDate).getTime() / 1000,
             puncture_desc: that.data.ccDescribe,
-            rinse_fluid_volume: that.data.ccgjy,
-            rinse_lavage_volume: that.data.ccgxy,
-            le_testpaper_stoste: that.data.leIndex,
+            rinse_fluid_volume: parseFloat(this.getDefaultValue(that.data.ccgjy)),
+            rinse_lavage_volume: parseFloat(this.getDefaultValue(that.data.ccgxy)),
+            le_testpaper_stoste: parseInt(this.getDefaultValue(that.data.leIndex)),
             le_testpaper_pic: JSON.stringify(lePic),
-            le_testpaper_centrifugal: that.data.leAfterIndex,
+            le_testpaper_centrifugal: parseInt(this.getDefaultValue(that.data.leAfterIndex)),
             le_testpaper_centr_pic: JSON.stringify(leCentrPic),
-            joint_fluid_leukocyte: that.data.gjybxb,
-            neutrophils_percent: that.data.gjyzx,
-            culture_type: that.data.bcpysjIndex,
-            culture_bottle_fluid_volume: that.data.drgpyp,
+            joint_fluid_leukocyte: parseInt(this.getDefaultValue(that.data.gjybxb)),
+            neutrophils_percent: parseFloat(this.getDefaultValue(that.data.gjyzx)),
+            culture_type: parseInt(this.getDefaultValue(that.data.bcpysjIndex)),
+            culture_bottle_fluid_volume: parseFloat(this.getDefaultValue(that.data.drgpyp)),
             aerobic_culture_result: that.data.bcxyResult,
-            aerobic_culture_time: that.data.bcxyLast,
+            aerobic_culture_time: parseInt(this.getDefaultValue(that.data.bcxyLast)),
             anaerobic_culture_result: that.data.bcyyResult,
-            anaerobic_culture_time: that.data.bcyyLast,
+            anaerobic_culture_time: parseInt(this.getDefaultValue(that.data.bcyyLast)),
             joint_fluid_mngs_result: that.data.mNGSResult,
-            sample_deposit_status: that.data.chuangciDate, // TODO
-            sample_deposit_desc: that.data.chuangciDate, // TODO
-            sample_used: that.data.chuangciDate, // TODO
         }
+        console.log("穿刺：" + JSON.stringify(jsonData))
         return JSON.stringify(jsonData)
     },
+
+    getDefaultValue(value) {
+        return value.length == 0 ? 0 : value
+    },
+
     submitAdmission() {
         if (!this.isAdmissionValueRight()) {
             return;
@@ -1558,7 +1589,7 @@ Page({
             url: constant.basePath,
             data: {
                 service: 'Case.CreateEditCasePuncture',
-                case_id: that.data.centerId,
+                case_id: that.data.caseId,
                 openid: app.globalData.openid,
                 json_data: that.makePunctureData()
             },
@@ -1573,7 +1604,7 @@ Page({
                         delta: 1
                     })
                 } else {
-                    that.showModal("ErrModal", res.data.msg);
+                    that.showModal("ErrModal", res.data.data.msg);
                 }
             },
             fail(res) {
@@ -1594,29 +1625,30 @@ Page({
             pic12Upload: that.data.pic12Upload,
         }
         var jsonData = {
-            sious: that.data.doudaoIndex,
-            preoperative_esr: that.data.sqesr,
-            preoperative_crp: that.data.sqcrp,
-            normal_crp: that.data.bzhcrp,
-            il6: that.data.il6,
-            fibrinogen: that.data.xwdby,
-            dimer: that.data.ddimer,
-            operation_date: new Date(that.data.shoushuDate).getTime() / 1000,
-            culture_pus: that.data.szjnIndex,
-            pathology: that.data.blIndex,
-            intrao_le_testpaper_stoste: that.data.szLEIndex,
+            sious: parseInt(that.data.doudaoIndex),
+            preoperative_esr: parseInt(this.getDefaultValue(that.data.sqesr)),
+            preoperative_crp: parseFloat(this.getDefaultValue(that.data.sqcrp)),
+            normal_crp: parseFloat(this.getDefaultValue(that.data.bzhcrp)),
+            il6: parseFloat(this.getDefaultValue(that.data.il6)),
+            fibrinogen: parseFloat(this.getDefaultValue(that.data.xwdby)),
+            dimer: parseFloat(this.getDefaultValue(that.data.ddimer)),
+            operation_date: that.data.ssDateDisabled ? 0 : new Date(that.data.shoushuDate).getTime() / 1000,
+            culture_pus: parseInt(this.getDefaultValue(that.data.szjnIndex)),
+            pathology: parseInt(this.getDefaultValue(that.data.blIndex)),
+            intrao_le_testpaper_stoste: parseInt(this.getDefaultValue(that.data.szLEIndex)),
             intrao_le_testpaper_pic: JSON.stringify(lePic),
-            intrao_le_testpaper_centrifugal: that.data.szLEAfterIndex,
+            intrao_le_testpaper_centrifugal: parseInt(this.getDefaultValue(that.data.szLEAfterIndex)),
             intrao_le_testpaper_centr_pic: JSON.stringify(leCentrPic),
-            intrao_joint_fluid_leukocyte: that.data.szgjybxb,
-            intrao_neutrophils_percent: that.data.szgjyzxl,
+            intrao_joint_fluid_leukocyte: parseFloat(this.getDefaultValue(that.data.szgjybxb)),
+            intrao_neutrophils_percent: parseFloat(this.getDefaultValue(that.data.szgjyzxl)),
             all_culture_result: that.data.qbgjy,
             intrao_culture_result: that.data.szzzpy,
             tissue_ngs_result: that.data.zznMGSResult,
             ultrasonic_degradation_ngs_result: that.data.csljy,
-            msis: that.data.msisIndex,
-            final_disposal: that.data.zzclIndex,
+            msis: parseInt(this.getDefaultValue(that.data.msisIndex)),
+            final_disposal: parseInt(this.getDefaultValue(that.data.zzclIndex)),
         }
+        console.log("入院后：" + JSON.stringify(jsonData))
         return JSON.stringify(jsonData)
     },
 
