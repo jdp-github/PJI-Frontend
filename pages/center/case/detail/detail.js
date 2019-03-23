@@ -1443,37 +1443,38 @@ Page({
     },
 
     makeBasicData() {
-        let that = this
+        let that = this;
+        console.log(that.data.operationDateMultiIndex[2])
         var jsonData = {
             center_id: that.data.centerId,
             patient_name: that.data.name,
             case_no: that.data.caseNO,
             create_time: new Date(that.data.createDate).getTime() / 1000,
             sex: that.data.sex,
-            age: that.data.age,
-            height: that.data.height,
-            weight: that.data.weight,
-            bmi: that.data.bmi,
+            age: parseInt(that.data.age),
+            height: parseFloat(that.data.height),
+            weight: parseFloat(that.data.weight),
+            bmi: parseFloat(that.data.bmi),
             pro_doctor: that.data.chiefDoc,
             telphone1: that.data.tel1,
             telphone2: that.data.tel2,
-            part: that.data.part,
-            type: that.data.type,
+            part: parseInt(that.data.part),
+            type: parseInt(that.data.type),
 
             // 末次手术至今时长
-            last_to_now: that.data.operationDateMultiIndex[2],
+            last_to_now: parseInt(that.data.operationDateMultiIndex[2]) + 1,
             // 末次手术至今时长单位。1天，2月
-            last_to_now_unit: that.data.operationDateMultiIndex[1],
+            last_to_now_unit: parseInt(that.data.operationDateMultiIndex[1]),
             // 症状出现时长
-            duration_symptoms: that.data.symptomDateMultiArray[2],
+            duration_symptoms: parseInt(that.data.symptomDateMultiIndex[2]) + 1,
             // 症状出现时长单位。1天，2月(必填项)
-            duration_symptoms_unit: that.data.symptomDateMultiArray[1],
+            duration_symptoms_unit: parseInt(that.data.symptomDateMultiIndex[1]),
             // 症状出现时长性质。1急性，2慢性(必填项)
-            duration_symptoms_prop: that.data.xingzhiIndex,
+            duration_symptoms_prop: parseInt(that.data.xingzhiIndex),
 
-            is_merge_disease: that.data.ris,
+            is_merge_disease: parseInt(that.data.ris),
             other_concomitant_diseases: that.data.qtbsjb,
-            is_used_antibiotics: that.data.antibiotic,
+            is_used_antibiotics: parseInt(that.data.antibiotic),
             medical_history: that.data.jybs,
             diagnose: that.data.cbzd,
             special_matter: that.data.tssxbz,

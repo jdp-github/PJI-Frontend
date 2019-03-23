@@ -270,7 +270,7 @@ Page({
     },
     deleCase: function() {
         let that = this;
-        that.showLoading();
+        that.loadProgress();
         wx.request({
             url: constant.basePath,
             data: {
@@ -283,7 +283,7 @@ Page({
             },
             success(res) {
                 console.log("Case.DeleteCase:" + JSON.stringify(res));
-                that.hideLoading()
+                that.completeProgress();
                 if (res.data.data.code == constant.response_success) {
                     that.requestCaseList(that.data.searchValue, that.data.sortType);
                 } else {
@@ -291,7 +291,7 @@ Page({
                 }
             },
             fail(res) {
-                that.hideLoading();
+                that.completeProgress();
             }
         });
     },
