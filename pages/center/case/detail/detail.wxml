@@ -35,7 +35,7 @@
             <view class="cu-avatar-group">
                 <view wx:if="{{approveAvatar.length > 0}}">
                     <view class='cu-tag radius' style="margin-right: 40rpx;">审</view>
-                    <view class="cu-avatar round" style="background-image:url(approveAvatar);"></view>
+                    <view class="cu-avatar round" style="background-image:url({{approveAvatar}});"></view>
                 </view>
                 <view wx:else>
                     <view class='cu-tag radius' style="margin-right: 10rpx;">审</view>
