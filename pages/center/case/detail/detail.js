@@ -1414,10 +1414,10 @@ Page({
     },
 
     makeUpdateAvatar(avatarObjList) {
-        debugger
         var avatarList = [];
         var avatarLen = avatarObjList.length;
         for (var i = 0; i < avatarLen; i++) {
+            console.log(avatarObjList[i])
             if (avatarObjList[i].base_editor_avatar) {
                 avatarList[i] = avatarObjList[i].base_editor_avatar
             } else if (avatarObjList[i].puncture_editor_avatar) {

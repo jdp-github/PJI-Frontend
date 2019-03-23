@@ -21,7 +21,7 @@
             <view class="cu-avatar-group">
                 <view wx:if="{{updateAvatarArr.length > 0}}">
                     <view class='cu-tag radius' style="margin-right: 40rpx;">修</view>
-                    <view class="cu-avatar round" wx:for="{{updateAvatarArr}}" wx:key style="background-image:url(item);"></view>
+                    <view class="cu-avatar round" wx:for="{{updateAvatarArr}}" wx:key style="background-image:url({{item}});"></view>
                 </view>
                 <view wx:else>
                     <view class='cu-tag radius' style="margin-right: 10rpx;">修</view>
