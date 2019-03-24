@@ -47,9 +47,9 @@ Page({
                 console.log("stats modal");
             });
         }
+        this.onLoad();
     },
     onLoad: function () {
-        this.loadProgress();
         this.initLogic();
     },
     initLogic: async function () {
@@ -135,11 +135,11 @@ Page({
                             centerValueList: that.data.centerValueList
                         });
                     }
-                    that.completeProgress();
+                    // that.completeProgress();
                     resolve(res);
                 },
                 fail(res) {
-                    that.completeProgress();
+                    // that.completeProgress();
                     that.showToast(res.data.msg);
                     reject(res);
                 }

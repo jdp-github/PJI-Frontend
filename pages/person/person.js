@@ -41,15 +41,14 @@ Page({
                 console.log("person modal");
             });
         }
+        this.onLoad();
     },
     onLoad: function () {
-        this.loadProgress();
         this.setData({
             avatarUrl: app.globalData.avatarUrl,
             nickName: app.globalData.nickName
         });
         this.init();
-
     },
     init: async function () {
         await this.requestUserInfo();
@@ -205,11 +204,11 @@ Page({
                     } else {
                         that.showToast(res.data.msg);
                     }
-                    that.completeProgress();
+                    // that.completeProgress();
                     resolve(res);
                 },
                 fail(res) {
-                    that.completeProgress();
+                    // that.completeProgress();
                     reject(res);
                 }
             });
