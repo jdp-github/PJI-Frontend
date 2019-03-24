@@ -212,8 +212,6 @@ Page({
                         updateAvatarArr: this.makeUpdateAvatar(this.data.caseInfo.base.base_editor_list),
                         approveAvatar: this.data.caseInfo.base.base_auditor_avatar,
                     })
-                    console.log("addAvatar1:"+this.data.addAvatar)
-                    console.log("updateAvatarArr1:" + this.data.updateAvatarArr)
                 }
                 break;
             case 1:
@@ -230,8 +228,6 @@ Page({
                         updateAvatarArr: this.makeUpdateAvatar(this.data.caseInfo.puncture.puncture_editor_list),
                         approveAvatar: this.data.caseInfo.puncture.puncture_auditor_avatar,
                     })
-                    console.log("addAvatar2:" + this.data.addAvatar)
-                    console.log("updateAvatarArr2:" + this.data.updateAvatarArr)
                 }
                 break;
             case 2:
@@ -249,8 +245,6 @@ Page({
                         approveAvatar: this.data.caseInfo.bein.bein_auditor_avatar,
 
                     })
-                    console.log("addAvatar3:" + this.data.addAvatar)
-                    console.log("updateAvatarArr3:" + this.data.updateAvatarArr)
                 }
                 break;
         }
@@ -558,8 +552,11 @@ Page({
             this.setData({
                 leIndex: 0,
                 pic1: '',
+                pic1Upload: '',
                 pic2: '',
+                pic2Upload: '',
                 pic3: '',
+                pic3Upload: '',
             })
         }
     },
@@ -576,8 +573,11 @@ Page({
             this.setData({
                 leAfterIndex: 0,
                 pic4: '',
+                pic4Upload: '',
                 pic5: '',
+                pic5Upload: '',
                 pic6: '',
+                pic6Upload: ''
             })
         }
     },
@@ -836,7 +836,13 @@ Page({
         });
         if (this.data.szLEDisabled) {
             this.setData({
-                szLEIndex: 0
+                szLEIndex: 0,
+                pic7: '',
+                pic7Upload: '',
+                pic8: '',
+                pic8Upload: '',
+                pic9: '',
+                pic9Upload: ''
             })
         }
     },
@@ -851,7 +857,13 @@ Page({
         });
         if (this.data.szLEAfterDisabled) {
             this.setData({
-                szLEAfterIndex: 0
+                szLEAfterIndex: 0,
+                pic10: '',
+                pic10Upload: '',
+                pic11: '',
+                pic11Upload: '',
+                pic12: '',
+                pic12Upload: ''
             })
         }
     },
@@ -1328,8 +1340,14 @@ Page({
             ccgxyDisabled: this.getNumDisable(info.puncture.rinse_lavage_volume),
             leIndex: info.puncture.le_testpaper_stoste,
             leDisabled: this.getNumDisable(info.puncture.le_testpaper_stoste),
+            pic1: info.puncture.le_testpaper_pic.pic1Upload,
+            pic2: info.puncture.le_testpaper_pic.pic2Upload,
+            pic3: info.puncture.le_testpaper_pic.pic3Upload,
             leAfterIndex: info.puncture.le_testpaper_centrifugal,
             leAfterDisabled: this.getNumDisable(info.puncture.le_testpaper_centrifugal),
+            pic4: info.puncture.le_testpaper_centr_pic.pic4Upload,
+            pic5: info.puncture.le_testpaper_centr_pic.pic5Upload,
+            pic6: info.puncture.le_testpaper_centr_pic.pic6Upload,
             gjybxb: this.getDefaultNum(info.puncture.joint_fluid_leukocyte),
             gjybxbDisabled: this.getNumDisable(info.puncture.joint_fluid_leukocyte),
             gjyzx: this.getDefaultNum(info.puncture.neutrophils_percent),
@@ -1370,10 +1388,14 @@ Page({
             blDisabled: this.getNumDisable(info.bein.pathology),
             szLEIndex: info.bein.intrao_le_testpaper_stoste,
             szLEDisabled: this.getNumDisable(info.bein.intrao_le_testpaper_stoste),
-            // doudaoIndex: info.bein.intrao_le_testpaper_pic, // TODO pic
+            pic7: info.bein.intrao_le_testpaper_pic.pic7Upload,
+            pic8: info.bein.intrao_le_testpaper_pic.pic8Upload,
+            pic9: info.bein.intrao_le_testpaper_pic.pic9Upload,
             szLEAfterIndex: info.bein.intrao_le_testpaper_centrifugal,
             szLEAfterDisabled: this.getNumDisable(info.bein.intrao_le_testpaper_centrifugal),
-            // doudaoIndex: info.bein.intrao_le_testpaper_centr_pic, // TODO pic
+            pic10: info.bein.intrao_le_testpaper_centr_pic.pic10Upload,
+            pic11: info.bein.intrao_le_testpaper_centr_pic.pic11Upload,
+            pic12: info.bein.intrao_le_testpaper_centr_pic.pic12Upload,
             szgjybxb: this.getDefaultNum(info.bein.intrao_joint_fluid_leukocyte),
             szgjybxbDisabled: this.getNumDisable(info.bein.intrao_joint_fluid_leukocyte),
             szgjyzxl: this.getDefaultNum(info.bein.intrao_neutrophils_percent),
@@ -1515,6 +1537,10 @@ Page({
         return JSON.stringify(jsonData)
     },
     submitDiagnose() {
+        if (!this.isDiagnoseValueRight()) {
+            return
+        }
+
         let that = this;
         that.showLoading();
 
@@ -1545,6 +1571,20 @@ Page({
             }
         });
     },
+
+    isDiagnoseValueRight() {
+        if ((this.data.pic1Upload.length > 0 || this.data.pic2Upload.length > 0 || this.data.pic3Upload.length > 0) && this.data.leIndex == 0) {
+            this.showToast("请选择LE试纸(原液)")
+            return false;
+        }
+        if ((this.data.pic4Upload.length > 0 || this.data.pic5Upload.length > 0 || this.data.pic6Upload.length > 0) && this.data.leAfterIndex == 0) {
+            this.showToast("请选择LE试纸(离心后)")
+            return false;
+        }
+
+        return true
+    },
+
     makeDiagnoseData() {
         let that = this
         var lePic = {
@@ -1584,6 +1624,7 @@ Page({
         return value.length == 0 ? 0 : value
     },
 
+    // 入院后
     submitAdmission() {
         if (!this.isAdmissionValueRight()) {
             return;
@@ -1593,7 +1634,7 @@ Page({
         wx.request({
             url: constant.basePath,
             data: {
-                service: 'Case.CreateEditCasePuncture',
+                service: 'Case.CreateEditCaseBein',
                 case_id: that.data.caseId,
                 openid: app.globalData.openid,
                 json_data: that.makePunctureData()
@@ -1602,6 +1643,7 @@ Page({
                 'content-type': 'application/json'
             },
             success(res) {
+                console.log("Case.CreateEditCaseBein:" + JSON.stringify(res))
                 that.hideLoading();
                 if (res.data.data.code == 0) {
                     that.reloadPrePage()
@@ -1740,6 +1782,14 @@ Page({
         }
         if (this.data.sqcrp.length <= 0) {
             this.showToast("请填写术前CRP")
+            return false;
+        }
+        if ((this.data.pic7Upload.length > 0 || this.data.pic8Upload.length > 0 || this.data.pic9Upload.length > 0) && this.data.szLEIndex == 0) {
+            this.showToast("请选择术中LE试纸(原液)")
+            return false;
+        }
+        if ((this.data.pic10Upload.length > 0 || this.data.pic11Upload.length > 0 || this.data.pic12Upload.length > 0) && this.data.szLEAfterIndex == 0) {
+            this.showToast("请选择术中LE试纸(离心后)")
             return false;
         }
 

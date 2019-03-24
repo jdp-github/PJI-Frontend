@@ -193,11 +193,11 @@
             <!-- 底部按钮 -->
             <view class="btn-block bg-white shadow">
                 <view class="flex margin-special">
-                    <button class='cu-btn line-green shadow' style="margin-right: 15rpx;" form-type="submit" bindtap='submit'>
+                    <button class='cu-btn line-green shadow' style="margin-right: 15rpx;" form-type="submit" bindtap='submit' disabled='{{caseInfo.base.base_state == 2}}'>
                         提交录入
                     </button>
                     <button class='cu-btn bg-green shadow' style="margin-left: 15rpx;" form-type="submit" bindtap='verify' disabled='{{isCreateCase}}'>
-                        {{isBaseLock == 0 ?"确认审核":"解除锁定"}}
+                        {{caseInfo.base.base_state != 2 ?"确认审核":"解除锁定"}}
                     </button>
                 </view>
             </view>
@@ -362,11 +362,11 @@
             <!-- 底部按钮 -->
             <view class="btn-block bg-white shadow">
                 <view class="flex margin-special">
-                    <button class='cu-btn line-green shadow' style="margin-right: 15rpx;" form-type="submit" bindtap='submit'>
+                    <button class='cu-btn line-green shadow' style="margin-right: 15rpx;" form-type="submit" bindtap='submit' disabled='{{caseInfo.puncture.puncture_state == 2}}'>
                         提交录入
                     </button>
                     <button class='cu-btn bg-green shadow' style="margin-left: 15rpx;" form-type="submit" bindtap='verify' disabled='{{isCreateCase}}'>
-                        确认审核
+                        {{caseInfo.puncture.puncture_state != 2 ?"确认审核":"解除锁定"}}
                     </button>
                 </view>
             </view>
@@ -392,12 +392,12 @@
                         <!-- 术前ESR (mm/h) -->
                         <view class="cu-form-group">
                             <view class='title'>术前ESR(mm/h)</view>
-                            <input placeholder="请输入数字" class='radius' name='input' type="number" value="" bindinput="onSqesrChange"></input>
+                            <input placeholder="请输入数字" class='radius' name='input' type="number" value="{{sqesr}}" bindinput="onSqesrChange"></input>
                         </view>
                         <!-- 术前CRP (mg/dl)-->
                         <view class="cu-form-group">
                             <view class='title'>术前CRP(mg/dl)</view>
-                            <input placeholder="请输入数字，注意单位换算" class='radius' name='input' type="number" value="" bindinput="onSqcrpChange"></input>
+                            <input placeholder="请输入数字，注意单位换算" class='radius' name='input' type="number" value="{{sqcrp}}" bindinput="onSqcrpChange"></input>
                         </view>
                         <!-- 标准化的CRP (mg/L) -->
                         <view class="cu-form-group disabled">
@@ -410,7 +410,7 @@
                                 <view class='title' style='text-align:left'>IL-6(pg/ml)</view>
                                 <input placeholder="请输入数字，未测请点右侧" class='radius' disabled='{{il6Disabled}}' type="number" style='width: 350rpx;text-align:left;' bindinput="onIl6Change" value='{{il6}}'></input>
                             </view>
-                            <switch class='green sm' bindchange="onIl6SwitchChange" style='margin-left: 15rpx;'></switch>
+                            <switch class='green sm' bindchange="onIl6SwitchChange" style='margin-left: 15rpx;' checked='{{!il6Disabled}}'></switch>
                         </view>
                         <!-- 纤维蛋白原 (μg/ml) -->
                         <view class="cu-form-group {{xwdbyDisabled?'disabled':''}}">
@@ -418,7 +418,7 @@
                                 <view class='title' style='text-align:left'>纤维蛋白原(μg/ml)</view>
                                 <input placeholder="请输入数字，未测请点右侧" class='radius' disabled='{{xwdbyDisabled}}' type="number" style='width: 350rpx;text-align:left;' bindinput="onXwdbyChange" value='{{xwdby}}'></input>
                             </view>
-                            <switch class='green sm' bindchange="onXwdbySwitchChange" style='margin-left: 15rpx;'></switch>
+                            <switch class='green sm' bindchange="onXwdbySwitchChange" style='margin-left: 15rpx;' checked='{{!xwdbyDisabled}}'></switch>
                         </view>
                         <!-- D-dimer (μg/ml) -->
                         <view class="cu-form-group {{ddimerDisabled?'disabled':''}}">
@@ -426,7 +426,7 @@
                                 <view class='title' style='text-align:left'>D-dimer(μg/ml)</view>
                                 <input placeholder="请输入数字，未测请点右侧" class='radius' disabled='{{ddimerDisabled}}' type="number" style='width: 350rpx;text-align:left;' bindinput="onDdimerChange" value='{{ddimer}}'></input>
                             </view>
-                            <switch class='green sm' bindchange="onDdimerSwitchChange" style='margin-left: 15rpx;'></switch>
+                            <switch class='green sm' bindchange="onDdimerSwitchChange" style='margin-left: 15rpx;' checked='{{!ddimerDisabled}}'></switch>
                         </view>
                         <!-- 手术日期 -->
                         <view class="cu-form-group  {{ssDateDisabled?'disabled':''}}">
@@ -436,7 +436,7 @@
                                     {{shoushuDate}}
                                 </view>
                             </picker>
-                            <switch class='green sm' bindchange="onShoushuSwitchChange" style='margin-left: 15rpx;'></switch>
+                            <switch class='green sm' bindchange="onShoushuSwitchChange" style='margin-left: 15rpx;' checked='{{!ssDateDisabled}}'></switch>
                         </view>
                         <!-- 术中见脓 -->
                         <view class="cu-form-group {{szjnDisabled?'disabled':''}}">
@@ -446,7 +446,7 @@
                                     {{szjnPicker[szjnIndex]}}
                                 </view>
                             </picker>
-                            <switch class='green sm' bindchange="onSzjnSwitchChange" style='margin-left: 15rpx;'></switch>
+                            <switch class='green sm' bindchange="onSzjnSwitchChange" style='margin-left: 15rpx;' checked='{{!szjnDisabled}}'></switch>
                         </view>
                         <!-- 病理 -->
                         <view class="cu-form-group {{blDisabled?'disabled':''}}">
@@ -456,7 +456,7 @@
                                     {{blPicker[blIndex]}}
                                 </view>
                             </picker>
-                            <switch class='green sm' bindchange="onBlSwitchChange" style='margin-left: 15rpx;'></switch>
+                            <switch class='green sm' bindchange="onBlSwitchChange" style='margin-left: 15rpx;' checked='{{!blDisabled}}'></switch>
                         </view>
                         <!-- 术中LE试纸（原液） -->
                         <view class="cu-form-group {{szLEDisabled?'disabled':''}}">
@@ -467,7 +467,7 @@
                                 </view>
                             </picker>
                             <button class='cu-btn round sm' style='margin-left: 15rpx;' disabled='{{szLEDisabled}}' bindtap="showModal" data-target="LESecondDrawerModalR">上传图片</button>
-                            <switch class='green sm' bindchange="onSZLESwitchChange" style='margin-left: 15rpx;'></switch>
+                            <switch class='green sm' bindchange="onSZLESwitchChange" style='margin-left: 15rpx;' checked='{{!szLEDisabled}}'></switch>
                         </view>
                         <!--术中LE试纸（离心后） -->
                         <view class="cu-form-group {{szLEAfterDisabled?'disabled':''}}">
@@ -478,7 +478,7 @@
                                 </view>
                             </picker>
                             <button class='cu-btn round sm' style='margin-left: 15rpx;' disabled='{{szLEAfterDisabled}}' bindtap="showModal" data-target="LESecondAfterDrawerModalR">上传图片</button>
-                            <switch class='green sm' bindchange="onSZLEAfterSwitchChange" style='margin-left: 15rpx;'></switch>
+                            <switch class='green sm' bindchange="onSZLEAfterSwitchChange" style='margin-left: 15rpx;' checked='{{!szLEAfterDisabled}}'></switch>
                         </view>
                         <!-- 术中关节液白细胞计数（cells/μL） -->
                         <view class="cu-form-group {{szgjybxbDisabled?'disabled':''}}">
@@ -486,7 +486,7 @@
                                 <view class='title' style='text-align:left'>术中关节液白细胞计数(cells/μL)</view>
                                 <input placeholder="请输入数字，请注意单位换算" class='radius' style='width: 350rpx;text-align:left;' type='number' bindinput="onSzgjybxbInput" disabled='{{szgjybxbDisabled}}' value='{{szgjybxb}}'></input>
                             </view>
-                            <switch class='green sm' bindchange="onSzgjybxbSwitchChange" style='margin-left: 15rpx;'></switch>
+                            <switch class='green sm' bindchange="onSzgjybxbSwitchChange" style='margin-left: 15rpx;' checked='{{!szgjybxbDisabled}}'></switch>
                         </view>
                         <!-- 术中关节液中性粒细胞百分比（0.01） -->
                         <view class="cu-form-group {{szgjyzxlDisabled?'disabled':''}}">
@@ -494,7 +494,7 @@
                                 <view class='title' style='text-align:left'>术中关节液中性粒细胞百分比(0.01)</view>
                                 <input placeholder="请输入数字，请注意格式，保留小数点2位" class='radius' style='width: 350rpx;text-align:left;' type='number' bindinput="onSzgjyzxlInput" disabled='{{szgjyzxlDisabled}}' value='{{szgjyzxl}}'></input>
                             </view>
-                            <switch class='green sm' bindchange="onSzgjyzxlSwitchChange" style='margin-left: 15rpx;'></switch>
+                            <switch class='green sm' bindchange="onSzgjyzxlSwitchChange" style='margin-left: 15rpx;' checked='{{!szgjyzxlDisabled}}'></switch>
                         </view>
                         <!-- 全部关节液培养结果汇总 -->
                         <view class="cu-form-group {{qbgjyDisabled?'disabled':''}}">
@@ -502,7 +502,7 @@
                                 <view class='title' style='text-align:left'>全部关节液培养结果汇总</view>
                                 <input placeholder="请输入文字，报告日期+微生物名称" class='radius' style='width: 350rpx;text-align:left;' bindinput="onQbgjyInput" disabled='{{qbgjyDisabled}}' value='{{qbgjy}}'></input>
                             </view>
-                            <switch class='green sm' bindchange="onQbgjySwitchChange" style='margin-left: 15rpx;'></switch>
+                            <switch class='green sm' bindchange="onQbgjySwitchChange" style='margin-left: 15rpx;' checked='{{!qbgjyDisabled}}'></switch>
                         </view>
                         <!-- 术中组织培养结果汇总 -->
                         <view class="cu-form-group {{szzzpyDisabled?'disabled':''}}">
@@ -510,7 +510,7 @@
                                 <view class='title' style='text-align:left'>术中组织培养结果汇总</view>
                                 <input placeholder="请输入文字，报告日期+微生物名称" class='radius' style='width: 350rpx;text-align:left;' bindinput="onSzzzpyInput" disabled='{{szzzpyDisabled}}' value='{{szzzpy}}'></input>
                             </view>
-                            <switch class='green sm' bindchange="onSzzzpySwitchChange" style='margin-left: 15rpx;'></switch>
+                            <switch class='green sm' bindchange="onSzzzpySwitchChange" style='margin-left: 15rpx;' checked='{{!szzzpyDisabled}}'></switch>
                         </view>
                         <!-- 组织mNGS结果 -->
                         <view class="cu-form-group {{zznMGSResultDisabled?'disabled':''}}">
@@ -518,7 +518,7 @@
                                 <view class='title' style='text-align:left'>组织mNGS结果</view>
                                 <input placeholder="请输入数字，请注意单位换算" class='radius' style='width: 350rpx;text-align:left;' type='number' bindinput="onZznMGSResultInput" disabled='{{zznMGSResultDisabled}}' value='{{zznMGSResult}}'></input>
                             </view>
-                            <switch class='green sm' bindchange="onZznMGSResultSwitchChange" style='margin-left: 15rpx;'></switch>
+                            <switch class='green sm' bindchange="onZznMGSResultSwitchChange" style='margin-left: 15rpx;' checked='{{!zznMGSResultDisabled}}'></switch>
                         </view>
                         <!-- 超声裂解液mNGS结果 -->
                         <view class="cu-form-group {{csljyDisabled?'disabled':''}}">
@@ -526,7 +526,7 @@
                                 <view class='title' style='text-align:left'>超声裂解液mNGS结果</view>
                                 <input placeholder="请输入数字，请注意单位换算" class='radius' style='width: 350rpx;text-align:left;' type='number' bindinput="onCsljyInput" disabled='{{csljyDisabled}}' value='{{csljy}}'></input>
                             </view>
-                            <switch class='green sm' bindchange="onCsljySwitchChange" style='margin-left: 15rpx;'></switch>
+                            <switch class='green sm' bindchange="onCsljySwitchChange" style='margin-left: 15rpx;' checked='{{!csljyDisabled}}'></switch>
                         </view>
                         <!-- MSIS最终判定 -->
                         <view class="cu-form-group {{msisDisabled?'disabled':''}}">
@@ -536,7 +536,7 @@
                                     {{msisPicker[msisIndex]}}
                                 </view>
                             </picker>
-                            <switch class='green sm' bindchange="onMsisSwitchChange" style='margin-left: 15rpx;'></switch>
+                            <switch class='green sm' bindchange="onMsisSwitchChange" style='margin-left: 15rpx;' checked='{{!msisDisabled}}'></switch>
                         </view>
                         <!-- 最终处理 -->
                         <view class="cu-form-group {{zzclDisabled?'disabled':''}}">
@@ -546,7 +546,7 @@
                                     {{zzclPicker[zzclIndex]}}
                                 </view>
                             </picker>
-                            <switch class='green sm' bindchange="onZzclSwitchChange" style='margin-left: 15rpx;'></switch>
+                            <switch class='green sm' bindchange="onZzclSwitchChange" style='margin-left: 15rpx;' checked='{{!zzclDisabled}}'></switch>
                         </view>
                     </view>
                 </view>
@@ -554,11 +554,11 @@
             <!-- 底部按钮 -->
             <view class="btn-block bg-white shadow">
                 <view class="flex margin-special">
-                    <button class='cu-btn line-green shadow' style="margin-right: 15rpx;" form-type="submit" bindtap='submit'>
+                    <button class='cu-btn line-green shadow' style="margin-right: 15rpx;" form-type="submit" bindtap='submit' disabled='{{caseInfo.bein.bein_state == 2}}'>
                         提交录入
                     </button>
                     <button class='cu-btn bg-green shadow' style="margin-left: 15rpx;" form-type="submit" bindtap='verify' disabled='{{isCreateCase}}'>
-                        确认审核
+                        {{caseInfo.bein.bein_state != 2 ?"确认审核":"解除锁定"}}
                     </button>
                 </view>
             </view>
