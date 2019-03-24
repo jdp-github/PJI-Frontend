@@ -1270,7 +1270,8 @@ Page({
             url: constant.basePath,
             data: {
                 service: 'Case.GetCaseInfo',
-                case_id: caseId
+                case_id: caseId,
+                openid: app.globalData.openid
             },
             header: {
                 'content-type': 'application/json'
@@ -1340,14 +1341,20 @@ Page({
             ccgxyDisabled: this.getNumDisable(info.puncture.rinse_lavage_volume),
             leIndex: info.puncture.le_testpaper_stoste,
             leDisabled: this.getNumDisable(info.puncture.le_testpaper_stoste),
-            pic1: info.puncture.le_testpaper_pic.pic1Upload,
-            pic2: info.puncture.le_testpaper_pic.pic2Upload,
-            pic3: info.puncture.le_testpaper_pic.pic3Upload,
+            pic1: info.puncture.le_testpaper_pic != null ? info.puncture.le_testpaper_pic.pic1Upload : '',
+            pic1Upload: info.puncture.le_testpaper_pic_file != null ? info.puncture.le_testpaper_pic_file.pic1Upload : '',
+            pic2: info.puncture.le_testpaper_pic != null ? info.puncture.le_testpaper_pic.pic2Upload : '',
+            pic2Upload: info.puncture.le_testpaper_pic_file != null ? info.puncture.le_testpaper_pic_file.pic2Upload : '',
+            pic3: info.puncture.le_testpaper_pic != null ? info.puncture.le_testpaper_pic.pic3Upload : '',
+            pic3Upload: info.puncture.le_testpaper_pic_file != null ? info.puncture.le_testpaper_pic_file.pic3Upload : '',
             leAfterIndex: info.puncture.le_testpaper_centrifugal,
             leAfterDisabled: this.getNumDisable(info.puncture.le_testpaper_centrifugal),
-            pic4: info.puncture.le_testpaper_centr_pic.pic4Upload,
-            pic5: info.puncture.le_testpaper_centr_pic.pic5Upload,
-            pic6: info.puncture.le_testpaper_centr_pic.pic6Upload,
+            pic4: info.puncture.le_testpaper_centr_pic != null ? info.puncture.le_testpaper_centr_pic.pic4Upload : '',
+            pic4Upload: info.puncture.le_testpaper_centr_pic_file != null ? info.puncture.le_testpaper_centr_pic_file.pic4Upload : '',
+            pic5: info.puncture.le_testpaper_centr_pic != null ? info.puncture.le_testpaper_centr_pic.pic5Upload : '',
+            pic5Upload: info.puncture.le_testpaper_centr_pic_file != null ? info.puncture.le_testpaper_centr_pic_file.pic5Upload : '',
+            pic6: info.puncture.le_testpaper_centr_pic != null ? info.puncture.le_testpaper_centr_pic.pic6Upload : '',
+            pic6Upload: info.puncture.le_testpaper_centr_pic_file != null ? info.puncture.le_testpaper_centr_pic_file.pic6Upload : '',
             gjybxb: this.getDefaultNum(info.puncture.joint_fluid_leukocyte),
             gjybxbDisabled: this.getNumDisable(info.puncture.joint_fluid_leukocyte),
             gjyzx: this.getDefaultNum(info.puncture.neutrophils_percent),
@@ -1371,8 +1378,8 @@ Page({
         // 入院后信息
         this.setData({
             doudaoIndex: info.bein.sious,
-            sqesr: info.bein.preoperative_esr,
-            sqcrp: info.bein.preoperative_crp,
+            sqesr: this.getDefaultNum(info.bein.preoperative_esr),
+            sqcrp: this.getDefaultNum(info.bein.preoperative_crp),
             bzhcrp: this.getDefaultNum(info.bein.normal_crp),
             il6: this.getDefaultNum(info.bein.il6),
             il6Disabled: this.getNumDisable(info.bein.il6),
@@ -1388,14 +1395,20 @@ Page({
             blDisabled: this.getNumDisable(info.bein.pathology),
             szLEIndex: info.bein.intrao_le_testpaper_stoste,
             szLEDisabled: this.getNumDisable(info.bein.intrao_le_testpaper_stoste),
-            pic7: info.bein.intrao_le_testpaper_pic.pic7Upload,
-            pic8: info.bein.intrao_le_testpaper_pic.pic8Upload,
-            pic9: info.bein.intrao_le_testpaper_pic.pic9Upload,
+            pic7: info.bein.intrao_le_testpaper_pic != null && info.bein.intrao_le_testpaper_pic.length > 0 ? info.bein.intrao_le_testpaper_pic.pic7Upload : '',
+            pic7Upload: info.bein.intrao_le_testpaper_pic_file != null && info.bein.intrao_le_testpaper_pic.length > 0 ? info.bein.intrao_le_testpaper_pic_file.pic7Upload : '',
+            pic8: info.bein.intrao_le_testpaper_pic != null && info.bein.intrao_le_testpaper_pic.length > 0 ? info.bein.intrao_le_testpaper_pic.pic8Upload : '',
+            pic8Upload: info.bein.intrao_le_testpaper_pic_file != null && info.bein.intrao_le_testpaper_pic.length > 0 ? info.bein.intrao_le_testpaper_pic_file.pic8Upload : '',
+            pic9: info.bein.intrao_le_testpaper_pic != null && info.bein.intrao_le_testpaper_pic.length > 0 ? info.bein.intrao_le_testpaper_pic.pic9Upload : '',
+            pic9Upload: info.bein.intrao_le_testpaper_pic_file != null && info.bein.intrao_le_testpaper_pic.length > 0 ? info.bein.intrao_le_testpaper_pic_file.pic9Upload : '',
             szLEAfterIndex: info.bein.intrao_le_testpaper_centrifugal,
             szLEAfterDisabled: this.getNumDisable(info.bein.intrao_le_testpaper_centrifugal),
-            pic10: info.bein.intrao_le_testpaper_centr_pic.pic10Upload,
-            pic11: info.bein.intrao_le_testpaper_centr_pic.pic11Upload,
-            pic12: info.bein.intrao_le_testpaper_centr_pic.pic12Upload,
+            pic10: info.bein.intrao_le_testpaper_centr_pic != null && info.bein.intrao_le_testpaper_centr_pic.length > 0 ? info.bein.intrao_le_testpaper_centr_pic.pic10Upload : '',
+            pic10Upload: info.bein.intrao_le_testpaper_centr_pic_file != null && info.bein.intrao_le_testpaper_centr_pic.length > 0 ? info.bein.intrao_le_testpaper_centr_pic_file.pic10Upload : '',
+            pic11: info.bein.intrao_le_testpaper_centr_pic != null && info.bein.intrao_le_testpaper_centr_pic.length > 0 ? info.bein.intrao_le_testpaper_centr_pic.pic11Upload : '',
+            pic11Upload: info.bein.intrao_le_testpaper_centr_pic_file != null && info.bein.intrao_le_testpaper_centr_pic.length > 0 ? info.bein.intrao_le_testpaper_centr_pic_file.pic11Upload : '',
+            pic12: info.bein.intrao_le_testpaper_centr_pic != null && info.bein.intrao_le_testpaper_centr_pic.length > 0 ? info.bein.intrao_le_testpaper_centr_pic.pic12Upload : '',
+            pic12Upload: info.bein.intrao_le_testpaper_centr_pic_file != null && info.bein.intrao_le_testpaper_centr_pic.length > 0 ? info.bein.intrao_le_testpaper_centr_pic_file.pic12Upload : '',
             szgjybxb: this.getDefaultNum(info.bein.intrao_joint_fluid_leukocyte),
             szgjybxbDisabled: this.getNumDisable(info.bein.intrao_joint_fluid_leukocyte),
             szgjyzxl: this.getDefaultNum(info.bein.intrao_neutrophils_percent),
@@ -1421,7 +1434,7 @@ Page({
 
     getDefaultDate(date) {
         var dateValue = "请选择日期"
-        if (date != 0) {
+        if (date != null && date != 0) {
             dateValue = util.formatTime(date, 'Y-M-D')
         }
         return dateValue
@@ -1797,7 +1810,6 @@ Page({
     },
 
     verify: function(e) {
-        this.showToast("ss")
         if (this.data.ShowBasic) { // 基本信息
             this.verifyBasic()
         } else if (this.data.ShowDiagnose) { // 诊断性穿刺
@@ -1816,12 +1828,14 @@ Page({
                 service: 'Case.Approve',
                 case_id: that.data.caseId,
                 openid: app.globalData.openid,
-                type: 1
+                type: 1,
+                state: that.data.caseInfo.base.base_state == 2 ? 2 : 1
             },
             header: {
                 'content-type': 'application/json'
             },
             success(res) {
+                console.log("Case.Approve:" + JSON.stringify(res))
                 that.hideLoading();
                 if (res.data.data.code == 0) {
                     that.reloadPrePage()
@@ -1846,7 +1860,8 @@ Page({
                 service: 'Case.Approve',
                 case_id: that.data.caseId,
                 openid: app.globalData.openid,
-                type: 2
+                type: 2,
+                state: that.data.caseInfo.puncture.puncture_state == 2 ? 2 : 1
             },
             header: {
                 'content-type': 'application/json'
@@ -1876,7 +1891,8 @@ Page({
                 service: 'Case.Approve',
                 case_id: that.data.caseId,
                 openid: app.globalData.openid,
-                type: 3
+                type: 3,
+                state: that.data.caseInfo.bein.bein_state == 2 ? 2 : 1
             },
             header: {
                 'content-type': 'application/json'

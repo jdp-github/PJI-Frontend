@@ -314,6 +314,7 @@ Page({
                 console.log("Case.DeleteCase:" + JSON.stringify(res));
                 that.completeProgress();
                 if (res.data.data.code == constant.response_success) {
+                    that.loadProgress();
                     that.requestCaseList(that.data.searchValue, that.data.sortType);
                 } else {
                     that.showModal("ErrModal", res.data.data.msg);

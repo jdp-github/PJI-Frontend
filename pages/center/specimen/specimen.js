@@ -33,11 +33,11 @@ Page({
         // 排序
         sortType: SORT_BY_NAME_ASC,
         filterItems: [{
-            type: 'sort',
-            label: '名称',
-            value: 'name',
-            groups: ['001'],
-        },
+                type: 'sort',
+                label: '名称',
+                value: 'name',
+                groups: ['001'],
+            },
             {
                 type: 'sort',
                 label: '启用时间',
@@ -62,15 +62,70 @@ Page({
         boxName: '',
         // 新增标本盒存放点
         depositary: '',
-        visibleBox: false
+        boxUse: 1,
+        boxPicUrl: '',
+        boxPicUploud: '',
     },
-    onLoad: function (options) {
+    radioChange(e) {
+        this.setData({
+            boxUse: e.detail.value
+        })
+    },
+    onChooseImage: function(e) {
+        let that = this;
+        wx.chooseImage({
+            count: 1,
+            sizeType: ['original', 'compressed'],
+            sourceType: ['album', 'camera'],
+            success(res) {
+                const tempFilePaths = res.tempFilePaths;
+                that.uploadImg(tempFilePaths[0])
+            }
+        });
+    },
+    uploadImg(filePath) {
+        let that = this;
+        that.showLoading();
+        wx.uploadFile({
+            url: constant.basePath + "",
+            filePath: filePath,
+            name: "file",
+            formData: {
+                service: 'Common.Upload'
+            },
+            header: {
+                "Content-Type": "multipart/form-data"
+            },
+            success(res) {
+                that.hideLoading();
+                let data = JSON.parse(res.data);
+                if (data.data.code == 0) {
+                    that.setData({
+                        boxPicUrl: data.data.info.url,
+                        boxPicUploud: data.data.info.file
+                    });
+                } else {
+                    that.showModal("ErrModal", data.msg);
+                }
+            },
+            fail(res) {
+                that.hideLoading();
+            }
+        });
+    },
+    onRemovePic() {
+        this.setData({
+            boxPicUrl: '',
+            boxPicUploud: ''
+        })
+    },
+    onLoad: function(options) {
         this.loadProgress();
         this.setData({
             centerId: options.centerId
         });
         // 从病历页进来
-        if (typeof (options.caseId) != "undefined") {
+        if (typeof(options.caseId) != "undefined") {
             this.setData({
                 caseId: options.caseId,
                 patient_name: options.patient_name
@@ -78,7 +133,7 @@ Page({
         }
         this.requestBoxList(this.data.searchValue, this.data.sortType);
     },
-    loadProgress: function () {
+    loadProgress: function() {
         if (this.data.loadProgress < 96) {
             this.setData({
                 loadProgress: this.data.loadProgress + 3
@@ -94,23 +149,23 @@ Page({
             });
         }
     },
-    completeProgress: function () {
+    completeProgress: function() {
         this.setData({
             loadProgress: 100
         });
     },
-    showToast: function (msg) {
+    showToast: function(msg) {
         wx.showToast({
             icon: 'none',
             title: msg,
         });
     },
-    showLoading: function () {
+    showLoading: function() {
         this.setData({
             loadModal: true
         });
     },
-    hideLoading: function () {
+    hideLoading: function() {
         setTimeout(() => {
             this.setData({
                 loadModal: false
@@ -127,7 +182,7 @@ Page({
             modalName: null
         })
     },
-    onFilterChange: function (e) {
+    onFilterChange: function(e) {
         const checkedItems = e.detail.checkedItems;
         const params = {};
         checkedItems.forEach((n) => {
@@ -154,36 +209,36 @@ Page({
             }
         });
     },
-    onFilterOpen: function (e) {
+    onFilterOpen: function(e) {
         this.setData({
             pageStyle: 'height: 100%; overflow: hidden',
         });
     },
-    onFilterClose: function (e) {
+    onFilterClose: function(e) {
         this.setData({
             pageStyle: '',
         });
     },
-    onSearchChange: function (e) {
+    onSearchChange: function(e) {
         this.setData({
             searchValue: e.detail.value
         });
     },
-    onSearch: function () {
+    onSearch: function() {
         this.loadProgress();
         this.requestBoxList(this.data.searchValue, this.data.sortType);
     },
-    ListTouchStart: function (e) {
+    ListTouchStart: function(e) {
         this.setData({
             ListTouchStart: e.touches[0].pageX
         });
     },
-    ListTouchMove: function (e) {
+    ListTouchMove: function(e) {
         this.setData({
             ListTouchDirection: e.touches[0].pageX - this.data.ListTouchStart > 0 ? 'right' : 'left'
         });
     },
-    ListTouchEnd: function (e) {
+    ListTouchEnd: function(e) {
         if (this.data.ListTouchDirection == 'left') {
             this.setData({
                 modalName: e.currentTarget.dataset.target
@@ -197,7 +252,7 @@ Page({
             ListTouchDirection: null
         });
     },
-    requestBoxList: function (searchValue, sortType) {
+    requestBoxList: function(searchValue, sortType) {
         let that = this;
         wx.request({
             url: constant.basePath,
@@ -236,18 +291,18 @@ Page({
             }
         });
     },
-    cancelAddBox: function (e) {
+    cancelAddBox: function(e) {
         this.setData({
             modalName: '',
             depositary: ''
         });
     },
-    onItemClick: function (e) {
+    onItemClick: function(e) {
         wx.navigateTo({
             url: '../../center/specimen/detail/detail?boxId=' + e.currentTarget.dataset.selecteditem.id + '&centerId=' + this.data.centerId + "&caseId=" + this.data.caseId
         });
     },
-    onInput: function (e) {
+    onInput: function(e) {
         if (e.target.dataset.prop == "boxName") {
             this.setData({
                 boxName: e.detail.value
@@ -258,7 +313,7 @@ Page({
             });
         }
     },
-    onItemDelete: function (e) {
+    onItemDelete: function(e) {
         let that = this;
         let selectedItem = e.target.dataset.selecteditem;
         wx.showModal({
@@ -267,12 +322,11 @@ Page({
             success(res) {
                 if (res.confirm) {
                     that.deleteBox(selectedItem.id)
-                } else if (res.cancel) {
-                }
+                } else if (res.cancel) {}
             }
         });
     },
-    deleteBox: function (boxId) {
+    deleteBox: function(boxId) {
         let that = this;
         that.showLoading();
         wx.request({
@@ -291,7 +345,7 @@ Page({
                     that.loadProgress();
                     that.requestBoxList(that.data.searchValue, that.data.sortType);
                 } else {
-                    that.showToast(res.data.msg);
+                    that.showToast(res.data.data.msg);
                 }
             },
             fail(res) {
@@ -299,7 +353,7 @@ Page({
             }
         });
     },
-    onItemLockOrUnlock: function (e) {
+    onItemLockOrUnlock: function(e) {
         let box = e.target.dataset.selecteditem;
         let that = this;
         that.showLoading();
@@ -328,7 +382,7 @@ Page({
             }
         });
     },
-    okAddBox: function () {
+    okAddBox: function() {
         let that = this;
         if (that.data.boxName.length == 0) {
             that.showToast('请输入标本盒名称');
@@ -349,7 +403,9 @@ Page({
                 openid: app.globalData.openid,
                 center_id: that.data.centerId,
                 name: that.data.boxName,
-                depositary: that.data.depositary
+                depositary: that.data.depositary,
+                uses: parseInt(that.data.boxUse),
+                image: that.data.boxPicUploud
             },
             header: {
                 'content-type': 'application/json'
@@ -359,6 +415,13 @@ Page({
                 if (res.data.data.code == constant.response_success) {
                     that.loadProgress();
                     that.requestBoxList(that.data.searchValue, that.data.sortType);
+                    that.setData({
+                        boxName: '',
+                        depositary: '',
+                        boxUse: 1,
+                        boxPicUploud: '',
+                        boxPicUploud: ''
+                    })
                 } else {
                     that.showToast(res.data.msg);
                 }
@@ -368,15 +431,4 @@ Page({
             }
         });
     },
-    onChooseImage: function(e) {
-        let that = this;
-        wx.chooseImage({
-            count: 1,
-            sizeType: ['original', 'compressed'],
-            sourceType: ['album', 'camera'],
-            success(res) {
-                const tempFilePaths = res.tempFilePaths;
-            }
-        });
-    }
 });

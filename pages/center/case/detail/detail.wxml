@@ -193,10 +193,10 @@
             <!-- 底部按钮 -->
             <view class="btn-block bg-white shadow">
                 <view class="flex margin-special">
-                    <button class='cu-btn line-green shadow' style="margin-right: 15rpx;" form-type="submit" bindtap='submit' disabled='{{caseInfo.base.base_state == 2}}'>
+                    <button class='cu-btn line-green shadow' style="margin-right: 15rpx;" form-type="submit" bindtap='submit' disabled='{{caseInfo.base_submit_button == 0}}'>
                         提交录入
                     </button>
-                    <button class='cu-btn bg-green shadow' style="margin-left: 15rpx;" form-type="submit" bindtap='verify' disabled='{{isCreateCase}}'>
+                    <button class='cu-btn bg-green shadow' style="margin-left: 15rpx;" form-type="submit" bindtap='verify' disabled='{{isCreateCase || caseInfo.approve_button == 2}}'>
                         {{caseInfo.base.base_state != 2 ?"确认审核":"解除锁定"}}
                     </button>
                 </view>
@@ -226,7 +226,7 @@
                         <view class="cu-form-group {{ccDescribeDisabeld?'disabled':''}}">
                             <view style='display:flex;flex-direction: column; '>
                                 <view class='title' style='text-align:left'>穿刺描述</view>
-                                <input placeholder="请简述穿刺时一般情况" class='radius' style='width: 350rpx;text-align:left;' type='number' bindinput="onCCDescribeInput" disabled='{{ccDescribeDisabeld}}' value='{{ccDescribe}}'></input>
+                                <input placeholder="请简述穿刺时一般情况" class='radius' style='width: 350rpx;text-align:left;' bindinput="onCCDescribeInput" disabled='{{ccDescribeDisabeld}}' value='{{ccDescribe}}'></input>
                             </view>
                             <switch class='green sm' bindchange="onCCDescribeSwitchChange" style='margin-left: 15rpx;' checked='{{!ccDescribeDisabeld}}'></switch>
                         </view>
@@ -306,7 +306,7 @@
                         <view class="cu-form-group {{bcxyResultDisabled?'disabled':''}}">
                             <view style='display:flex;flex-direction: column; '>
                                 <view class='title' style='text-align:left'>本次需氧+真菌培养结果</view>
-                                <input placeholder="请输入文字，报告日期+微生物名称" style='width: 380rpx;text-align:left;' class='radius' type='digit' bindinput="onBcxyChange" disabled='{{bcxyResultDisabled}}' value='{{bcxyResult}}'></input>
+                                <input placeholder="请输入文字，报告日期+微生物名称" style='width: 380rpx;text-align:left;' class='radius' bindinput="onBcxyChange" disabled='{{bcxyResultDisabled}}' value='{{bcxyResult}}'></input>
                             </view>
                             <switch class='green sm' bindchange="onBcxySwitchChange" style='margin-left: 15rpx;' checked='{{!bcxyResultDisabled}}'></switch>
                         </view>
@@ -322,7 +322,7 @@
                         <view class="cu-form-group {{bcyyResultDisabled?'disabled':''}}">
                             <view style='display:flex;flex-direction: column; '>
                                 <view class='title' style='text-align:left'>本次厌氧培养结果</view>
-                                <input placeholder="请输入文字，报告日期+微生物名称" style='width: 350rpx;text-align:left;' class='radius' type='digit' bindinput="onBcyyChange" disabled='{{bcyyResultDisabled}}' value='{{bcyyResult}}'></input>
+                                <input placeholder="请输入文字，报告日期+微生物名称" style='width: 350rpx;text-align:left;' class='radius' bindinput="onBcyyChange" disabled='{{bcyyResultDisabled}}' value='{{bcyyResult}}'></input>
                             </view>
                             <switch class='green sm' bindchange="onBcyySwitchChange" style='margin-left: 15rpx;' checked='{{!bcyyResultDisabled}}'></switch>
                         </view>
@@ -338,7 +338,7 @@
                         <view class="cu-form-group {{mNGSResultDisabled?'disabled':''}}">
                             <view style='display:flex;flex-direction: column; '>
                                 <view class='title' style='text-align:left'>关节液/冲洗液mNGS结果</view>
-                                <input placeholder="请输入文字，报告日期+微生物名称" style='width: 350rpx;text-align:left;' class='radius' type='digit' bindinput="onMNGsChange" disabled='{{mNGSResultDisabled}}' value='{{mNGSResult}}'></input>
+                                <input placeholder="请输入文字，报告日期+微生物名称" style='width: 350rpx;text-align:left;' class='radius' bindinput="onMNGsChange" disabled='{{mNGSResultDisabled}}' value='{{mNGSResult}}'></input>
                             </view>
                             <switch class='green sm' bindchange="onMNGSSwitchChange" style='margin-left: 15rpx;' checked='{{!mNGSResultDisabled}}'></switch>
                         </view>
@@ -362,10 +362,10 @@
             <!-- 底部按钮 -->
             <view class="btn-block bg-white shadow">
                 <view class="flex margin-special">
-                    <button class='cu-btn line-green shadow' style="margin-right: 15rpx;" form-type="submit" bindtap='submit' disabled='{{caseInfo.puncture.puncture_state == 2}}'>
+                    <button class='cu-btn line-green shadow' style="margin-right: 15rpx;" form-type="submit" bindtap='submit' disabled='{{caseInfo.puncture.puncture_submit_button == 0}}'>
                         提交录入
                     </button>
-                    <button class='cu-btn bg-green shadow' style="margin-left: 15rpx;" form-type="submit" bindtap='verify' disabled='{{isCreateCase}}'>
+                    <button class='cu-btn bg-green shadow' style="margin-left: 15rpx;" form-type="submit" bindtap='verify' disabled='{{isCreateCase  || caseInfo.approve_button == 2}}'>
                         {{caseInfo.puncture.puncture_state != 2 ?"确认审核":"解除锁定"}}
                     </button>
                 </view>
@@ -554,10 +554,10 @@
             <!-- 底部按钮 -->
             <view class="btn-block bg-white shadow">
                 <view class="flex margin-special">
-                    <button class='cu-btn line-green shadow' style="margin-right: 15rpx;" form-type="submit" bindtap='submit' disabled='{{caseInfo.bein.bein_state == 2}}'>
+                    <button class='cu-btn line-green shadow' style="margin-right: 15rpx;" form-type="submit" bindtap='submit' disabled='{{caseInfo.bein.bein_submit_button==0}}'>
                         提交录入
                     </button>
-                    <button class='cu-btn bg-green shadow' style="margin-left: 15rpx;" form-type="submit" bindtap='verify' disabled='{{isCreateCase}}'>
+                    <button class='cu-btn bg-green shadow' style="margin-left: 15rpx;" form-type="submit" bindtap='verify' disabled='{{isCreateCase || caseInfo.approve_button == 2}}'>
                         {{caseInfo.bein.bein_state != 2 ?"确认审核":"解除锁定"}}
                     </button>
                 </view>
