@@ -231,6 +231,7 @@ Page({
             },
             success(res) {
                 if (res.data.data.code == constant.response_success) {
+                    that.loadProgress();
                     that.requestRegister();
                     that.requestApprove();
                 } else {
@@ -260,6 +261,7 @@ Page({
             },
             success(res) {
                 if (res.data.data.code == constant.response_success) {
+                    that.loadProgress();
                     that.requestRegister();
                     that.requestApprove();
                 } else {
