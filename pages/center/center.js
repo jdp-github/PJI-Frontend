@@ -38,6 +38,7 @@ Page({
                 modalName: 'AddCenterModal'
             });
         });
+        this.onLoad();
     },
     onLoad: function() {
         let that = this;
@@ -129,7 +130,6 @@ Page({
     },
     initData: function() {
         let that = this;
-        this.loadProgress();
         wx.request({
             url: constant.basePath,
             data: {
@@ -140,7 +140,6 @@ Page({
                 'content-type': 'application/json'
             },
             success(res) {
-                that.completeProgress();
                 wx.stopPullDownRefresh();
                 if (res.data.data.code == constant.response_success) {
                     for (let i = 0, len = res.data.data.list.length; i < len; i++) {
@@ -172,7 +171,6 @@ Page({
                 }
             },
             fail(res) {
-                that.completeProgress();
                 wx.stopPullDownRefresh();
             }
         });
