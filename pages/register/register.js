@@ -66,27 +66,6 @@ Page({
             }
         });
     },
-    loadProgress: function () {
-        if (this.data.loadProgress < 96) {
-            this.setData({
-                loadProgress: this.data.loadProgress + 3
-            });
-        }
-        if (this.data.loadProgress < 100) {
-            setTimeout(() => {
-                this.loadProgress();
-            }, 100);
-        } else {
-            this.setData({
-                loadProgress: 0
-            });
-        }
-    },
-    completeProgress: function () {
-        this.setData({
-            loadProgress: 100
-        });
-    },
     showToast: function (msg) {
         wx.showToast({
             icon: 'none',
