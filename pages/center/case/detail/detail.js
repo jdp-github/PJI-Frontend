@@ -963,31 +963,31 @@ Page({
             msisIndex: e.detail.value,
         });
     },
-    onMsisSwitchChange: function(e) {
-        this.setData({
-            msisDisabled: !e.detail.value
-        });
-        if (this.data.msisDisabled) {
-            this.setData({
-                msisIndex: 0
-            })
-        }
-    },
+    // onMsisSwitchChange: function(e) {
+    //     this.setData({
+    //         msisDisabled: !e.detail.value
+    //     });
+    //     if (this.data.msisDisabled) {
+    //         this.setData({
+    //             msisIndex: 0
+    //         })
+    //     }
+    // },
     onZzclChange: function(e) {
         this.setData({
             zzclIndex: e.detail.value,
         });
     },
-    onZzclSwitchChange: function(e) {
-        this.setData({
-            zzclDisabled: !e.detail.value
-        });
-        if (this.data.zzclDisabled) {
-            this.setData({
-                zzclIndex: 0
-            })
-        }
-    },
+    // onZzclSwitchChange: function(e) {
+    //     this.setData({
+    //         zzclDisabled: !e.detail.value
+    //     });
+    //     if (this.data.zzclDisabled) {
+    //         this.setData({
+    //             zzclIndex: 0
+    //         })
+    //     }
+    // },
     // -------- 入院后信息 end -------- //
 
     // -------- 提示框 begin -------- //
@@ -1786,7 +1786,7 @@ Page({
     },
     isAdmissionValueRight() {
         if (this.data.doudaoIndex == 0) {
-            this.showToast("请选择窦道")
+            this.showToast("请选择与假体相通的窦道")
             return false;
         }
         if (this.data.sqesr.length <= 0) {
@@ -1803,6 +1803,14 @@ Page({
         }
         if ((this.data.pic10Upload.length > 0 || this.data.pic11Upload.length > 0 || this.data.pic12Upload.length > 0) && this.data.szLEAfterIndex == 0) {
             this.showToast("请选择术中LE试纸(离心后)")
+            return false;
+        }
+        if (this.data.msisIndex <= 0) {
+            this.showToast("请选择MSIS最终判定")
+            return false;
+        }
+        if (this.data.zzclIndex <= 0) {
+            this.showToast("请选择最终处理")
             return false;
         }
 
