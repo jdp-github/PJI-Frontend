@@ -25,7 +25,6 @@ Page({
     },
     onLoad: function () {
         let that = this;
-        that.loadProgress();
         // 中心列表
         wx.request({
             url: constant.basePath,
@@ -62,10 +61,8 @@ Page({
                         multiArray: current
                     });
                 }
-                that.completeProgress();
             },
             fail(res) {
-                that.completeProgress();
             }
         });
     },
