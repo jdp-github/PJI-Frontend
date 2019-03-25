@@ -95,7 +95,7 @@
                         </view>
                         <view class="cu-form-group">
                             <view class='title'>身高(m)</view>
-                            <input placeholder="请注意单位换算" class='radius' bindinput="onHeightInput" value="{{height}}"></input>
+                            <input placeholder="请注意单位换算" class='radius' bindinput="onHeightInput"  type="digit"  value="{{height}}"></input>
                         </view>
                         <view class="cu-form-group">
                             <view class='title'>体重(Kg)</view>
