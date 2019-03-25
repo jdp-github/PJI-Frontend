@@ -134,20 +134,20 @@
                                 </view>
                             </picker>
                         </view>
-                        <view class="cu-form-group {{operationDisabled?'disabled':''}}">
+                        <view class="cu-form-group {{operationDisabled?'disabled':''}}" bindtap="defaultOperationDate">
                             <view class='title'>末次手术至今时长</view>
                             <picker mode="multiSelector" disabled='{{operationDisabled}}' bindchange="operationDateChange" bindcolumnchange="operationDateColumnChange" value="{{operationDateMultiIndex}}" range="{{operationDateMultiArray}}">
                                 <view class="picker">
-                                    {{operationDateMultiArray[2][operationDateMultiIndex[2]]?operationDateMultiArray[2][operationDateMultiIndex[2]]:'请选择'}} {{!operationDisabled?operationDateMultiArray[1][operationDateMultiIndex[1]]:''}}
+                                    {{operationDateValue?operationDateValue:'请选择'}}
                                 </view>
                             </picker>
                             <switch class='green sm' style="margin-left: 15rpx;" bindchange="onOperationcSwitchChange" checked='{{!operationDisabled}}'></switch>
                         </view>
-                        <view class="cu-form-group {{symptomDisabled?'disabled':''}}">
+                        <view class="cu-form-group {{symptomDisabled?'disabled':''}}" bindtap="defaultSymptomDate">
                             <view class='title'>症状出现时长</view>
                             <picker mode="multiSelector" disabled='{{symptomDisabled}}' bindchange="symptomDateChange" bindcolumnchange="symptomDateColumnChange" value="{{symptomDateMultiIndex}}" range="{{symptomDateMultiArray}}">
                                 <view class="picker">
-                                    {{symptomDateMultiArray[2][symptomDateMultiIndex[2]]?symptomDateMultiArray[2][symptomDateMultiIndex[2]]:'请选择'}} {{symptomDateMultiArray[1][symptomDateMultiIndex[1]]?symptomDateMultiArray[1][symptomDateMultiIndex[1]]:''}}
+                                    {{symptomDateValue?symptomDateValue:'请选择'}}
                                 </view>
                             </picker>
                         </view>

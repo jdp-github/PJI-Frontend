@@ -63,6 +63,7 @@ Page({
             ['请选择', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31']
         ],
         operationDateMultiIndex: [0, 0, 0],
+        operationDateValue: '请选择',
         operationDisabled: true,
         // 症状出现时长
         symptomDateMultiArray: [
@@ -71,6 +72,7 @@ Page({
             ['请选择', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31']
         ],
         symptomDateMultiIndex: [0, 0, 0],
+        symptomDateValue: '请选择',
         xingzhiIndex: 0,
         xingzhiValue: '',
         // 是否合并风湿免疫性疾病
@@ -335,7 +337,8 @@ Page({
     },
     operationDateChange: function(e) {
         this.setData({
-            operationDateMultiIndex: e.detail.value
+            operationDateMultiIndex: e.detail.value,
+            operationDateValue: ''+ e.detail.value[2] + this.data.operationDateMultiArray[1][e.detail.value[1]]
         })
     },
     operationDateColumnChange: function(e) {
@@ -401,10 +404,63 @@ Page({
             })
         }
     },
+    defaultOperationDate: function() {
+        let data = {
+            operationDateMultiArray: this.data.operationDateMultiArray,
+            operationDateMultiIndex: this.data.operationDateMultiIndex
+        };
+        switch (data.operationDateMultiIndex[1]) {
+            case 0:
+                data.operationDateMultiArray[1] = ['天', '周', '月', '年'];
+                data.operationDateMultiArray[2] = ['请选择', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'];
+                break;
+            case 1:
+                data.operationDateMultiArray[1] = ['天', '周', '月', '年'];
+                data.operationDateMultiArray[2] = ['请选择', '1', '2', '3', '4'];
+                break;
+            case 2:
+                data.operationDateMultiArray[1] = ['天', '周','月', '年'];
+                data.operationDateMultiArray[2] = ['请选择', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+                break;
+            case 3:
+                data.operationDateMultiArray[1] = ['天', '周', '月', '年'];
+                data.operationDateMultiArray[2] = ['请选择', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50'];
+                break;
+        }
+        this.setData(data);
+        return data.operationDateMultiArray;
+    },
+    defaultSymptomDate: function() {
+        let data = {
+            symptomDateMultiArray: this.data.symptomDateMultiArray,
+            symptomDateMultiIndex: this.data.symptomDateMultiIndex
+        };
+        switch (data.symptomDateMultiIndex[1]) {
+            case 0:
+                data.symptomDateMultiArray[1] = ['天', '周', '月', '年'];
+                data.symptomDateMultiArray[2] = ['请选择', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'];
+                break;
+            case 1:
+                data.symptomDateMultiArray[1] = ['天', '周', '月', '年'];
+                data.symptomDateMultiArray[2] = ['请选择', '1', '2', '3', '4'];
+                break;
+            case 2:
+                data.symptomDateMultiArray[1] = ['天', '周','月', '年'];
+                data.symptomDateMultiArray[2] = ['请选择', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+                break;
+            case 3:
+                data.symptomDateMultiArray[1] = ['天', '周', '月', '年'];
+                data.symptomDateMultiArray[2] = ['请选择', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50'];
+                break;
+        }
+        this.setData(data);
+        return data.symptomDateMultiArray;
+    },
     symptomDateChange: function(e) {
         this.setData({
-            symptomDateMultiIndex: e.detail.value
-        })
+            symptomDateMultiIndex: e.detail.value,
+            symptomDateValue: ''+ e.detail.value[2] + this.data.symptomDateMultiArray[1][e.detail.value[1]]
+        });
     },
     symptomDateColumnChange: function(e) {
         let data = {
@@ -412,7 +468,6 @@ Page({
             symptomDateMultiIndex: this.data.symptomDateMultiIndex
         };
         data.symptomDateMultiIndex[e.detail.column] = e.detail.value;
-        console.log(e.detail.column)
         switch (e.detail.column) {
             case 0:
                 switch (data.symptomDateMultiIndex[0]) {
@@ -1315,7 +1370,6 @@ Page({
             }
         });
     },
-
     initViewByData(info) {
         this.setData({
             caseInfo: info
@@ -1340,7 +1394,9 @@ Page({
             type: info.base.type,
             operationDateMultiIndex: tempOperationDateArray,
             operationDisabled: this.getNumDisable(info.base.last_to_now),
+            operationDateValue: tempOperationDateArray[2]?''+ tempOperationDateArray[2] + this.data.operationDateMultiArray[1][tempOperationDateArray[1]]:'请选择',
             symptomDateMultiIndex: tempSymptomsUnit,
+            symptomDateValue: tempSymptomsUnit[2]?''+ tempSymptomsUnit[2] + this.data.symptomDateMultiArray[1][tempSymptomsUnit[1]]:'请选择',
             xingzhiIndex: info.base.duration_symptoms_prop,
             xingzhiValue: info.base.duration_symptoms_prop == 1 ? "急性" : "慢性",
             ris: info.base.is_merge_disease,
