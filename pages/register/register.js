@@ -25,7 +25,6 @@ Page({
     },
     onLoad: function () {
         let that = this;
-        that.loadProgress();
         // 中心列表
         wx.request({
             url: constant.basePath,
@@ -62,32 +61,9 @@ Page({
                         multiArray: current
                     });
                 }
-                that.completeProgress();
             },
             fail(res) {
-                that.completeProgress();
             }
-        });
-    },
-    loadProgress: function () {
-        if (this.data.loadProgress < 96) {
-            this.setData({
-                loadProgress: this.data.loadProgress + 3
-            });
-        }
-        if (this.data.loadProgress < 100) {
-            setTimeout(() => {
-                this.loadProgress();
-            }, 100);
-        } else {
-            this.setData({
-                loadProgress: 0
-            });
-        }
-    },
-    completeProgress: function () {
-        this.setData({
-            loadProgress: 100
         });
     },
     showToast: function (msg) {
