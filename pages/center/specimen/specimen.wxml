@@ -34,8 +34,8 @@
                     </view>
                     <view class='radius' style="flex:4;padding-right: 30rpx;">
                         <view class="flex-sub sub-title">
-                            <i class="icon-unlock text-green" wx:if="{{item.is_lock != 0}}"></i>
-                            <i class="icon-lock text-red" wx:if="{{item.is_lock == 0}}"></i> {{item.name}}
+                            <i class="icon-unlock text-green" wx:if="{{item.is_lock != 1}}"></i>
+                            <i class="icon-lock text-red" wx:if="{{item.is_lock == 1}}"></i> {{item.name}}
                             <view class="cu-tag sm radius" style="font-size: 22rpx;background-color:#ccc;color:#fff;font-weight:bold;margin-left:8rpx;">{{item.uses == 1?"常规存储":"送检用"}}</view>
                         </view>
                         <view class="flex-sub text-small text-gray">
