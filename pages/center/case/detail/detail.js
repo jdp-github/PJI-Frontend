@@ -348,8 +348,20 @@ Page({
             case 0:
                 switch (data.operationDateMultiIndex[0]) {
                     case 0:
-                        data.operationDateMultiArray[1] = ['天', '月', '年'];
+                        data.operationDateMultiArray[1] = ['天', '周', '月', '年'];
                         data.operationDateMultiArray[2] = ['请选择', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'];
+                        break;
+                    case 1:
+                        data.operationDateMultiArray[1] = ['天', '周', '月', '年'];
+                        data.operationDateMultiArray[2] = ['请选择', '1', '2', '3', '4'];
+                        break;
+                    case 2:
+                        data.operationDateMultiArray[1] = ['天', '周','月', '年'];
+                        data.operationDateMultiArray[2] = ['请选择', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+                        break;
+                    case 3:
+                        data.operationDateMultiArray[1] = ['天', '周', '月', '年'];
+                        data.operationDateMultiArray[2] = ['请选择', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50'];
                         break;
                 }
                 data.operationDateMultiIndex[1] = 0;
@@ -400,12 +412,25 @@ Page({
             symptomDateMultiIndex: this.data.symptomDateMultiIndex
         };
         data.symptomDateMultiIndex[e.detail.column] = e.detail.value;
+        console.log(e.detail.column)
         switch (e.detail.column) {
             case 0:
                 switch (data.symptomDateMultiIndex[0]) {
                     case 0:
-                        data.symptomDateMultiArray[1] = ['天', '月', '年'];
+                        data.symptomDateMultiArray[1] = ['天', '周', '月', '年'];
                         data.symptomDateMultiArray[2] = ['请选择', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'];
+                        break;
+                    case 1:
+                        data.symptomDateMultiArray[1] = ['天', '周', '月', '年'];
+                        data.symptomDateMultiArray[2] = ['请选择', '1', '2', '3', '4'];
+                        break;
+                    case 2:
+                        data.symptomDateMultiArray[1] = ['天', '周','月', '年'];
+                        data.symptomDateMultiArray[2] = ['请选择', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+                        break;
+                    case 3:
+                        data.symptomDateMultiArray[1] = ['天', '周', '月', '年'];
+                        data.symptomDateMultiArray[2] = ['请选择', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50'];
                         break;
                 }
                 data.symptomDateMultiIndex[1] = 0;
