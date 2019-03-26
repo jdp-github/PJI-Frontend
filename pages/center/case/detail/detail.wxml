@@ -91,15 +91,15 @@
                         </view>
                         <view class="cu-form-group">
                             <view class='title'>年龄</view>
-                            <input placeholder="请输入年龄" class='radius' bindinput="onAgeInput" value="{{age}}"></input>
+                            <input placeholder="请输入年龄" class='radius' bindinput="onAgeInput" type="digit" value="{{age}}"></input>
                         </view>
                         <view class="cu-form-group">
                             <view class='title'>身高(m)</view>
-                            <input placeholder="请注意单位换算" class='radius' bindinput="onHeightInput" value="{{height}}"></input>
+                            <input placeholder="请注意单位换算" class='radius' bindinput="onHeightInput" type="digit" value="{{height}}"></input>
                         </view>
                         <view class="cu-form-group">
                             <view class='title'>体重(Kg)</view>
-                            <input placeholder="请注意单位换算" class='radius' bindinput="onWeightInput" value="{{weight}}"></input>
+                            <input placeholder="请注意单位换算" class='radius' bindinput="onWeightInput" type="digit" value="{{weight}}"></input>
                         </view>
                         <view class="cu-form-group disabled">
                             <view class='title'>BMI(Kg/m2)</view>
@@ -134,20 +134,20 @@
                                 </view>
                             </picker>
                         </view>
-                        <view class="cu-form-group {{operationDisabled?'disabled':''}}">
+                        <view class="cu-form-group {{operationDisabled?'disabled':''}}" bindtap="defaultOperationDate">
                             <view class='title'>末次手术至今时长</view>
                             <picker mode="multiSelector" disabled='{{operationDisabled}}' bindchange="operationDateChange" bindcolumnchange="operationDateColumnChange" value="{{operationDateMultiIndex}}" range="{{operationDateMultiArray}}">
                                 <view class="picker">
-                                    {{operationDateMultiArray[2][operationDateMultiIndex[2]]?operationDateMultiArray[2][operationDateMultiIndex[2]]:'请选择'}} {{!operationDisabled?operationDateMultiArray[1][operationDateMultiIndex[1]]:''}}
+                                    {{operationDateValue?operationDateValue:'请选择'}}
                                 </view>
                             </picker>
                             <switch class='green sm' style="margin-left: 15rpx;" bindchange="onOperationcSwitchChange" checked='{{!operationDisabled}}'></switch>
                         </view>
-                        <view class="cu-form-group {{symptomDisabled?'disabled':''}}">
+                        <view class="cu-form-group {{symptomDisabled?'disabled':''}}" bindtap="defaultSymptomDate">
                             <view class='title'>症状出现时长</view>
                             <picker mode="multiSelector" disabled='{{symptomDisabled}}' bindchange="symptomDateChange" bindcolumnchange="symptomDateColumnChange" value="{{symptomDateMultiIndex}}" range="{{symptomDateMultiArray}}">
                                 <view class="picker">
-                                    {{symptomDateMultiArray[2][symptomDateMultiIndex[2]]?symptomDateMultiArray[2][symptomDateMultiIndex[2]]:'请选择'}} {{symptomDateMultiArray[1][symptomDateMultiIndex[1]]?symptomDateMultiArray[1][symptomDateMultiIndex[1]]:''}}
+                                    {{symptomDateValue?symptomDateValue:'请选择'}}
                                 </view>
                             </picker>
                         </view>
@@ -234,7 +234,7 @@
                         <view class="cu-form-group {{ccgjyDisabled?'disabled':''}}">
                             <view style='display:flex;flex-direction: column; '>
                                 <view class='title' style='text-align:left'>抽出关节液总量(ml)</view>
-                                <input placeholder="请输入数字，不适用请点击右侧" class='radius' style='width: 350rpx;text-align:left;' type='number' bindinput="onCcgjyInput" disabled='{{ccgjyDisabled}}' value='{{ccgjy}}'></input>
+                                <input placeholder="请输入数字，不适用请点击右侧" class='radius' style='width: 350rpx;text-align:left;' type='digit' bindinput="onCcgjyInput" disabled='{{ccgjyDisabled}}' value='{{ccgjy}}'></input>
                             </view>
                             <switch class='green sm' bindchange="onCcgjySwitchChange" style='margin-left: 15rpx;' checked='{{!ccgjyDisabled}}'></switch>
                         </view>
@@ -242,7 +242,7 @@
                         <view class="cu-form-group {{ccgxyDisabled?'disabled':''}}">
                             <view style='display:flex;flex-direction: column; '>
                                 <view class='title' style='text-align:left'>抽出灌洗液总量(ml)</view>
-                                <input placeholder="请输入数字，不适用请点击右侧" class='radius' style='width: 350rpx;text-align:left;' type='number' bindinput="onCcgxyInput" disabled='{{ccgxyDisabled}}' value='{{ccgxy}}'></input>
+                                <input placeholder="请输入数字，不适用请点击右侧" class='radius' style='width: 350rpx;text-align:left;' type='digit' bindinput="onCcgxyInput" disabled='{{ccgxyDisabled}}' value='{{ccgxy}}'></input>
                             </view>
                             <switch class='green sm' bindchange="onCcgxySwitchChange" style='margin-left: 15rpx;' checked='{{!ccgxyDisabled}}'></switch>
                         </view>
@@ -306,7 +306,7 @@
                         <view class="cu-form-group {{bcxyResultDisabled?'disabled':''}}">
                             <view style='display:flex;flex-direction: column; '>
                                 <view class='title' style='text-align:left'>本次需氧+真菌培养结果</view>
-                                <input placeholder="请输入文字，报告日期+微生物名称" style='width: 380rpx;text-align:left;' class='radius' bindinput="onBcxyChange" disabled='{{bcxyResultDisabled}}' value='{{bcxyResult}}'></input>
+                                <input placeholder="请输入培养结果，不适用请点击右侧" style='width: 380rpx;text-align:left;' class='radius' bindinput="onBcxyChange" disabled='{{bcxyResultDisabled}}' value='{{bcxyResult}}'></input>
                             </view>
                             <switch class='green sm' bindchange="onBcxySwitchChange" style='margin-left: 15rpx;' checked='{{!bcxyResultDisabled}}'></switch>
                         </view>
@@ -322,7 +322,7 @@
                         <view class="cu-form-group {{bcyyResultDisabled?'disabled':''}}">
                             <view style='display:flex;flex-direction: column; '>
                                 <view class='title' style='text-align:left'>本次厌氧培养结果</view>
-                                <input placeholder="请输入文字，报告日期+微生物名称" style='width: 350rpx;text-align:left;' class='radius' bindinput="onBcyyChange" disabled='{{bcyyResultDisabled}}' value='{{bcyyResult}}'></input>
+                                <input placeholder="请输入培养结果，不适用请点击右侧" style='width: 350rpx;text-align:left;' class='radius' bindinput="onBcyyChange" disabled='{{bcyyResultDisabled}}' value='{{bcyyResult}}'></input>
                             </view>
                             <switch class='green sm' bindchange="onBcyySwitchChange" style='margin-left: 15rpx;' checked='{{!bcyyResultDisabled}}'></switch>
                         </view>
@@ -338,7 +338,7 @@
                         <view class="cu-form-group {{mNGSResultDisabled?'disabled':''}}">
                             <view style='display:flex;flex-direction: column; '>
                                 <view class='title' style='text-align:left'>关节液/冲洗液mNGS结果</view>
-                                <input placeholder="请输入文字，报告日期+微生物名称" style='width: 350rpx;text-align:left;' class='radius' bindinput="onMNGsChange" disabled='{{mNGSResultDisabled}}' value='{{mNGSResult}}'></input>
+                                <input placeholder="请输入培养结果，不适用请点击右侧" style='width: 350rpx;text-align:left;' class='radius' bindinput="onMNGsChange" disabled='{{mNGSResultDisabled}}' value='{{mNGSResult}}'></input>
                             </view>
                             <switch class='green sm' bindchange="onMNGSSwitchChange" style='margin-left: 15rpx;' checked='{{!mNGSResultDisabled}}'></switch>
                         </view>
@@ -380,9 +380,9 @@
                 </view>
                 <view class="cu-list menu menu-avatar">
                     <view class="cu-item-special">
-                        <!-- 窦道 -->
+                        <!-- 与假体相通的窦道 -->
                         <view class="cu-form-group">
-                            <view class='title'>窦道</view>
+                            <view class='title'>与假体相通的窦道</view>
                             <picker bindchange="onDoudaoChange" value="{{doudaoIndex}}" range="{{doudaoPicker}}">
                                 <view class="picker">
                                     {{doudaoPicker[doudaoIndex]}}
@@ -397,7 +397,7 @@
                         <!-- 术前CRP (mg/dl)-->
                         <view class="cu-form-group">
                             <view class='title'>术前CRP(mg/dl)</view>
-                            <input placeholder="请输入数字，注意单位换算" class='radius' name='input' type="number" value="{{sqcrp}}" bindinput="onSqcrpChange"></input>
+                            <input placeholder="请输入数字，注意单位换算" class='radius' name='input' type="digit" value="{{sqcrp}}" bindinput="onSqcrpChange"></input>
                         </view>
                         <!-- 标准化的CRP (mg/L) -->
                         <view class="cu-form-group disabled">
@@ -408,7 +408,7 @@
                         <view class="cu-form-group {{il6Disabled?'disabled':''}}">
                             <view style='display:flex;flex-direction: column;'>
                                 <view class='title' style='text-align:left'>IL-6(pg/ml)</view>
-                                <input placeholder="请输入数字，未测请点右侧" class='radius' disabled='{{il6Disabled}}' type="number" style='width: 350rpx;text-align:left;' bindinput="onIl6Change" value='{{il6}}'></input>
+                                <input placeholder="请输入数字，未测请点右侧" class='radius' disabled='{{il6Disabled}}' type="digit" style='width: 350rpx;text-align:left;' bindinput="onIl6Change" value='{{il6}}'></input>
                             </view>
                             <switch class='green sm' bindchange="onIl6SwitchChange" style='margin-left: 15rpx;' checked='{{!il6Disabled}}'></switch>
                         </view>
@@ -416,7 +416,7 @@
                         <view class="cu-form-group {{xwdbyDisabled?'disabled':''}}">
                             <view style='display:flex;flex-direction: column;'>
                                 <view class='title' style='text-align:left'>纤维蛋白原(μg/ml)</view>
-                                <input placeholder="请输入数字，未测请点右侧" class='radius' disabled='{{xwdbyDisabled}}' type="number" style='width: 350rpx;text-align:left;' bindinput="onXwdbyChange" value='{{xwdby}}'></input>
+                                <input placeholder="请输入数字，未测请点右侧" class='radius' disabled='{{xwdbyDisabled}}' type="digit" style='width: 350rpx;text-align:left;' bindinput="onXwdbyChange" value='{{xwdby}}'></input>
                             </view>
                             <switch class='green sm' bindchange="onXwdbySwitchChange" style='margin-left: 15rpx;' checked='{{!xwdbyDisabled}}'></switch>
                         </view>
@@ -424,7 +424,7 @@
                         <view class="cu-form-group {{ddimerDisabled?'disabled':''}}">
                             <view style='display:flex;flex-direction: column;'>
                                 <view class='title' style='text-align:left'>D-dimer(μg/ml)</view>
-                                <input placeholder="请输入数字，未测请点右侧" class='radius' disabled='{{ddimerDisabled}}' type="number" style='width: 350rpx;text-align:left;' bindinput="onDdimerChange" value='{{ddimer}}'></input>
+                                <input placeholder="请输入数字，未测请点右侧" class='radius' disabled='{{ddimerDisabled}}' type="digit" style='width: 350rpx;text-align:left;' bindinput="onDdimerChange" value='{{ddimer}}'></input>
                             </view>
                             <switch class='green sm' bindchange="onDdimerSwitchChange" style='margin-left: 15rpx;' checked='{{!ddimerDisabled}}'></switch>
                         </view>
@@ -492,7 +492,7 @@
                         <view class="cu-form-group {{szgjyzxlDisabled?'disabled':''}}">
                             <view style='display:flex;flex-direction: column; '>
                                 <view class='title' style='text-align:left'>术中关节液中性粒细胞百分比(0.01)</view>
-                                <input placeholder="请输入数字，请注意格式，保留小数点2位" class='radius' style='width: 350rpx;text-align:left;' type='number' bindinput="onSzgjyzxlInput" disabled='{{szgjyzxlDisabled}}' value='{{szgjyzxl}}'></input>
+                                <input placeholder="请输入数字，请注意格式，保留小数点2位" class='radius' style='width: 350rpx;text-align:left;' type='digit' bindinput="onSzgjyzxlInput" disabled='{{szgjyzxlDisabled}}' value='{{szgjyzxl}}'></input>
                             </view>
                             <switch class='green sm' bindchange="onSzgjyzxlSwitchChange" style='margin-left: 15rpx;' checked='{{!szgjyzxlDisabled}}'></switch>
                         </view>
@@ -529,24 +529,24 @@
                             <switch class='green sm' bindchange="onCsljySwitchChange" style='margin-left: 15rpx;' checked='{{!csljyDisabled}}'></switch>
                         </view>
                         <!-- MSIS最终判定 -->
-                        <view class="cu-form-group {{msisDisabled?'disabled':''}}">
+                        <view class="cu-form-group">
                             <view class='title'>MSIS最终判定</view>
-                            <picker bindchange="onMsisChange" value="{{msisIndex}}" range="{{msisPicker}}" disabled='{{msisDisabled}}'>
+                            <picker bindchange="onMsisChange" value="{{msisIndex}}" range="{{msisPicker}}">
                                 <view class="picker">
                                     {{msisPicker[msisIndex]}}
                                 </view>
                             </picker>
-                            <switch class='green sm' bindchange="onMsisSwitchChange" style='margin-left: 15rpx;' checked='{{!msisDisabled}}'></switch>
+                            <!-- <switch class='green sm' bindchange="onMsisSwitchChange" style='margin-left: 15rpx;' checked='{{!msisDisabled}}'></switch> -->
                         </view>
                         <!-- 最终处理 -->
-                        <view class="cu-form-group {{zzclDisabled?'disabled':''}}">
+                        <view class="cu-form-group">
                             <view class='title'>最终处理</view>
-                            <picker bindchange="onZzclChange" value="{{zzclIndex}}" range="{{zzclPicker}}" disabled='{{zzclDisabled}}'>
+                            <picker bindchange="onZzclChange" value="{{zzclIndex}}" range="{{zzclPicker}}">
                                 <view class="picker">
                                     {{zzclPicker[zzclIndex]}}
                                 </view>
                             </picker>
-                            <switch class='green sm' bindchange="onZzclSwitchChange" style='margin-left: 15rpx;' checked='{{!zzclDisabled}}'></switch>
+                            <!-- <switch class='green sm' bindchange="onZzclSwitchChange" style='margin-left: 15rpx;' checked='{{!zzclDisabled}}'></switch> -->
                         </view>
                     </view>
                 </view>

@@ -63,6 +63,7 @@ Page({
             ['请选择', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31']
         ],
         operationDateMultiIndex: [0, 0, 0],
+        operationDateValue: '请选择',
         operationDisabled: true,
         // 症状出现时长
         symptomDateMultiArray: [
@@ -71,6 +72,7 @@ Page({
             ['请选择', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31']
         ],
         symptomDateMultiIndex: [0, 0, 0],
+        symptomDateValue: '请选择',
         xingzhiIndex: 0,
         xingzhiValue: '',
         // 是否合并风湿免疫性疾病
@@ -87,38 +89,38 @@ Page({
 
         // -------- 诊断性穿刺 begin -------- //
         chuangciDate: '请选择日期',
-        ccDateDisabled: true,
+        ccDateDisabled: false,
         ccDescribe: '',
-        ccDescribeDisabeld: true,
+        ccDescribeDisabeld: false,
         ccgjy: '',
-        ccgjyDisabled: true,
+        ccgjyDisabled: false,
         ccgxy: '',
-        ccgxyDisabled: true,
+        ccgxyDisabled: false,
         leIndex: 0,
-        lePicker: ["请选择", "无法判定", "neg.", "25", "75", "250 (+)", "500 (++)",],
-        leDisabled: true,
+        lePicker: ["请选择", "无法判定", "neg.", "25", "75", "250 (+)", "500 (++)", ],
+        leDisabled: false,
         leAfterIndex: 0,
         leAfterPicker: ["请选择", "无法判定", "neg.", "25", "75", "250 (+)", "500 (++)"],
-        leAfterDisabled: true,
+        leAfterDisabled: false,
         gjybxb: '',
-        gjybxbDisabled: true,
+        gjybxbDisabled: false,
         gjyzx: '',
-        gjyzxDisabled: true,
+        gjyzxDisabled: false,
         bcpysjIndex: 0,
         bcpysjPicker: ["请选择", "关节液", "灌洗液", "混合液"],
-        bcpysjDisabled: true,
+        bcpysjDisabled: false,
         drgpyp: '',
-        drgpypDisabled: true,
+        drgpypDisabled: false,
         bcxyResult: '',
-        bcxyResultDisabled: true,
+        bcxyResultDisabled: false,
         bcxyLast: '',
-        bcxyLastDisabled: true,
+        bcxyLastDisabled: false,
         bcyyResult: '',
-        bcyyResultDisabled: true,
+        bcyyResultDisabled: false,
         bcyyLast: '',
-        bcyyLastDisabled: true,
+        bcyyLastDisabled: false,
         mNGSResult: '',
-        mNGSResultDisabled: true,
+        mNGSResultDisabled: false,
         // -------- 诊断性穿刺 end -------- //
 
         // -------- 入院后信息 begin -------- //
@@ -195,7 +197,7 @@ Page({
         // ------- 图片上传 end  ---------- //
     },
 
-    tabSelect: function (e) {
+    tabSelect: function(e) {
         let tabId = e.currentTarget.dataset.id;
         switch (tabId) {
             case 0:
@@ -251,32 +253,32 @@ Page({
     },
 
     // -------- 基本信息事件 begin -------- //
-    onNameInput: function (e) {
+    onNameInput: function(e) {
         this.setData({
             name: e.detail.value
         });
     },
-    onCaseNOInput: function (e) {
+    onCaseNOInput: function(e) {
         this.setData({
             caseNO: e.detail.value
         });
     },
-    onCreateDateChange: function (e) {
+    onCreateDateChange: function(e) {
         this.setData({
             createDate: e.detail.value
         });
     },
-    onSexChange: function (e) {
+    onSexChange: function(e) {
         this.setData({
             sex: parseInt(e.detail.value)
         });
     },
-    onAgeInput: function (e) {
+    onAgeInput: function(e) {
         this.setData({
             age: e.detail.value,
         });
     },
-    onHeightInput: function (e) {
+    onHeightInput: function(e) {
         this.setData({
             height: e.detail.value
         });
@@ -287,7 +289,7 @@ Page({
             })
         }
     },
-    onWeightInput: function (e) {
+    onWeightInput: function(e) {
         this.setData({
             weight: e.detail.value
         });
@@ -298,22 +300,22 @@ Page({
             })
         }
     },
-    onChiefDocInput: function (e) {
+    onChiefDocInput: function(e) {
         this.setData({
             chiefDoc: e.detail.value
         });
     },
-    onTel1Input: function (e) {
+    onTel1Input: function(e) {
         this.setData({
             tel1: e.detail.value
         });
     },
-    onTel2Input: function (e) {
+    onTel2Input: function(e) {
         this.setData({
             tel2: e.detail.value
         });
     },
-    onTel2SwitchChange: function (e) {
+    onTel2SwitchChange: function(e) {
         this.setData({
             tel2Disabled: !e.detail.value
         });
@@ -323,22 +325,23 @@ Page({
             });
         }
     },
-    onPartChange: function (e) {
+    onPartChange: function(e) {
         this.setData({
             part: e.detail.value,
         });
     },
-    onTypeChange: function (e) {
+    onTypeChange: function(e) {
         this.setData({
             type: e.detail.value,
         });
     },
-    operationDateChange: function (e) {
+    operationDateChange: function(e) {
         this.setData({
-            operationDateMultiIndex: e.detail.value
+            operationDateMultiIndex: e.detail.value,
+            operationDateValue: ''+ e.detail.value[2] + this.data.operationDateMultiArray[1][e.detail.value[1]]
         })
     },
-    operationDateColumnChange: function (e) {
+    operationDateColumnChange: function(e) {
         let data = {
             operationDateMultiArray: this.data.operationDateMultiArray,
             operationDateMultiIndex: this.data.operationDateMultiIndex
@@ -348,8 +351,20 @@ Page({
             case 0:
                 switch (data.operationDateMultiIndex[0]) {
                     case 0:
-                        data.operationDateMultiArray[1] = ['天', '月', '年'];
+                        data.operationDateMultiArray[1] = ['天', '周', '月', '年'];
                         data.operationDateMultiArray[2] = ['请选择', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'];
+                        break;
+                    case 1:
+                        data.operationDateMultiArray[1] = ['天', '周', '月', '年'];
+                        data.operationDateMultiArray[2] = ['请选择', '1', '2', '3', '4'];
+                        break;
+                    case 2:
+                        data.operationDateMultiArray[1] = ['天', '周','月', '年'];
+                        data.operationDateMultiArray[2] = ['请选择', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+                        break;
+                    case 3:
+                        data.operationDateMultiArray[1] = ['天', '周', '月', '年'];
+                        data.operationDateMultiArray[2] = ['请选择', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50'];
                         break;
                 }
                 data.operationDateMultiIndex[1] = 0;
@@ -366,10 +381,10 @@ Page({
                                 data.operationDateMultiArray[2] = ['请选择', '1', '2', '3', '4'];
                                 break;
                             case 2:
-                                data.operationDateMultiArray[2] = ['请选择', '1个', '2个', '3个', '4个', '5个', '6个', '7个', '8个', '9个', '10个', '11个', '12个'];
+                                data.operationDateMultiArray[2] = ['请选择', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
                                 break;
                             case 3:
-                                data.operationDateMultiArray[2] = ['请选择', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
+                                data.operationDateMultiArray[2] = ['请选择', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50'];
                                 break;
                         }
                         break;
@@ -379,7 +394,7 @@ Page({
         }
         this.setData(data);
     },
-    onOperationcSwitchChange: function (e) {
+    onOperationcSwitchChange: function(e) {
         this.setData({
             operationDisabled: !e.detail.value
         });
@@ -389,12 +404,65 @@ Page({
             })
         }
     },
-    symptomDateChange: function (e) {
-        this.setData({
-            symptomDateMultiIndex: e.detail.value
-        })
+    defaultOperationDate: function() {
+        let data = {
+            operationDateMultiArray: this.data.operationDateMultiArray,
+            operationDateMultiIndex: this.data.operationDateMultiIndex
+        };
+        switch (data.operationDateMultiIndex[1]) {
+            case 0:
+                data.operationDateMultiArray[1] = ['天', '周', '月', '年'];
+                data.operationDateMultiArray[2] = ['请选择', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'];
+                break;
+            case 1:
+                data.operationDateMultiArray[1] = ['天', '周', '月', '年'];
+                data.operationDateMultiArray[2] = ['请选择', '1', '2', '3', '4'];
+                break;
+            case 2:
+                data.operationDateMultiArray[1] = ['天', '周','月', '年'];
+                data.operationDateMultiArray[2] = ['请选择', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+                break;
+            case 3:
+                data.operationDateMultiArray[1] = ['天', '周', '月', '年'];
+                data.operationDateMultiArray[2] = ['请选择', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50'];
+                break;
+        }
+        this.setData(data);
+        return data.operationDateMultiArray;
     },
-    symptomDateColumnChange: function (e) {
+    defaultSymptomDate: function() {
+        let data = {
+            symptomDateMultiArray: this.data.symptomDateMultiArray,
+            symptomDateMultiIndex: this.data.symptomDateMultiIndex
+        };
+        switch (data.symptomDateMultiIndex[1]) {
+            case 0:
+                data.symptomDateMultiArray[1] = ['天', '周', '月', '年'];
+                data.symptomDateMultiArray[2] = ['请选择', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'];
+                break;
+            case 1:
+                data.symptomDateMultiArray[1] = ['天', '周', '月', '年'];
+                data.symptomDateMultiArray[2] = ['请选择', '1', '2', '3', '4'];
+                break;
+            case 2:
+                data.symptomDateMultiArray[1] = ['天', '周','月', '年'];
+                data.symptomDateMultiArray[2] = ['请选择', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+                break;
+            case 3:
+                data.symptomDateMultiArray[1] = ['天', '周', '月', '年'];
+                data.symptomDateMultiArray[2] = ['请选择', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50'];
+                break;
+        }
+        this.setData(data);
+        return data.symptomDateMultiArray;
+    },
+    symptomDateChange: function(e) {
+        this.setData({
+            symptomDateMultiIndex: e.detail.value,
+            symptomDateValue: ''+ e.detail.value[2] + this.data.symptomDateMultiArray[1][e.detail.value[1]]
+        });
+    },
+    symptomDateColumnChange: function(e) {
         let data = {
             symptomDateMultiArray: this.data.symptomDateMultiArray,
             symptomDateMultiIndex: this.data.symptomDateMultiIndex
@@ -404,8 +472,20 @@ Page({
             case 0:
                 switch (data.symptomDateMultiIndex[0]) {
                     case 0:
-                        data.symptomDateMultiArray[1] = ['天', '月', '年'];
+                        data.symptomDateMultiArray[1] = ['天', '周', '月', '年'];
                         data.symptomDateMultiArray[2] = ['请选择', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'];
+                        break;
+                    case 1:
+                        data.symptomDateMultiArray[1] = ['天', '周', '月', '年'];
+                        data.symptomDateMultiArray[2] = ['请选择', '1', '2', '3', '4'];
+                        break;
+                    case 2:
+                        data.symptomDateMultiArray[1] = ['天', '周','月', '年'];
+                        data.symptomDateMultiArray[2] = ['请选择', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+                        break;
+                    case 3:
+                        data.symptomDateMultiArray[1] = ['天', '周', '月', '年'];
+                        data.symptomDateMultiArray[2] = ['请选择', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50'];
                         break;
                 }
                 data.symptomDateMultiIndex[1] = 0;
@@ -422,10 +502,10 @@ Page({
                                 data.symptomDateMultiArray[2] = ['请选择', '1', '2', '3', '4'];
                                 break;
                             case 2:
-                                data.symptomDateMultiArray[2] = ['请选择', '1个', '2个', '3个', '4个', '5个', '6个', '7个', '8个', '9个', '10个', '11个', '12个'];
+                                data.symptomDateMultiArray[2] = ['请选择', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
                                 break;
                             case 3:
-                                data.symptomDateMultiArray[2] = ['请选择', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
+                                data.symptomDateMultiArray[2] = ['请选择', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50'];
                                 break;
                         }
                         break;
@@ -446,32 +526,32 @@ Page({
         }
         this.setData(data);
     },
-    onRisChange: function (e) {
+    onRisChange: function(e) {
         this.setData({
             ris: e.detail.value,
         });
     },
-    onQtbsjbInput: function (e) {
+    onQtbsjbInput: function(e) {
         this.setData({
             qtbsjb: e.detail.value
         });
     },
-    onAntibioticChange: function (e) {
+    onAntibioticChange: function(e) {
         this.setData({
             antibiotic: e.detail.value,
         });
     },
-    onJybsInput: function (e) {
+    onJybsInput: function(e) {
         this.setData({
             jybs: e.detail.value
         });
     },
-    onCbzdInput: function (e) {
+    onCbzdInput: function(e) {
         this.setData({
             cbzd: e.detail.value
         });
     },
-    onTsssbzInput: function (e) {
+    onTsssbzInput: function(e) {
         this.setData({
             tssxbz: e.detail.value
         });
@@ -479,12 +559,12 @@ Page({
     // -------- 基本信息事件 end -------- //
 
     // -------- 诊断性穿刺 begin -------- //
-    onChuanciDateChange: function (e) {
+    onChuanciDateChange: function(e) {
         this.setData({
             chuangciDate: e.detail.value
         });
     },
-    onCCDateSwitchChange: function (e) {
+    onCCDateSwitchChange: function(e) {
         this.setData({
             ccDateDisabled: !e.detail.value
         });
@@ -494,12 +574,12 @@ Page({
             })
         }
     },
-    onCCDescribeInput: function (e) {
+    onCCDescribeInput: function(e) {
         this.setData({
             ccDescribe: e.detail.value
         });
     },
-    onCCDescribeSwitchChange: function (e) {
+    onCCDescribeSwitchChange: function(e) {
         this.setData({
             ccDescribeDisabeld: !e.detail.value
         });
@@ -509,12 +589,12 @@ Page({
             })
         }
     },
-    onCcgjyInput: function (e) {
+    onCcgjyInput: function(e) {
         this.setData({
             ccgjy: e.detail.value
         });
     },
-    onCcgjySwitchChange: function (e) {
+    onCcgjySwitchChange: function(e) {
         this.setData({
             ccgjyDisabled: !e.detail.value
         });
@@ -524,12 +604,12 @@ Page({
             })
         }
     },
-    onCcgxyInput: function (e) {
+    onCcgxyInput: function(e) {
         this.setData({
             ccgxy: e.detail.value
         });
     },
-    onCcgxySwitchChange: function (e) {
+    onCcgxySwitchChange: function(e) {
         this.setData({
             ccgxyDisabled: !e.detail.value
         });
@@ -539,12 +619,12 @@ Page({
             })
         }
     },
-    onLeChange: function (e) {
+    onLeChange: function(e) {
         this.setData({
             leIndex: e.detail.value,
         });
     },
-    onLeSwitchChange: function (e) {
+    onLeSwitchChange: function(e) {
         this.setData({
             leDisabled: !e.detail.value
         });
@@ -560,12 +640,12 @@ Page({
             })
         }
     },
-    onLeAfterChange: function (e) {
+    onLeAfterChange: function(e) {
         this.setData({
             leAfterIndex: e.detail.value,
         });
     },
-    onLeAfterSwitchChange: function (e) {
+    onLeAfterSwitchChange: function(e) {
         this.setData({
             leAfterDisabled: !e.detail.value
         });
@@ -581,12 +661,12 @@ Page({
             })
         }
     },
-    onGjybxbInput: function (e) {
+    onGjybxbInput: function(e) {
         this.setData({
             gjybxb: e.detail.value
         });
     },
-    onGjybxbSwitchChange: function (e) {
+    onGjybxbSwitchChange: function(e) {
         this.setData({
             gjybxbDisabled: !e.detail.value
         });
@@ -596,12 +676,12 @@ Page({
             })
         }
     },
-    onGjyzxInput: function (e) {
+    onGjyzxInput: function(e) {
         this.setData({
             gjyzx: e.detail.value
         });
     },
-    onGjyzxSwitchChange: function (e) {
+    onGjyzxSwitchChange: function(e) {
         this.setData({
             gjyzxDisabled: !e.detail.value
         });
@@ -611,12 +691,12 @@ Page({
             })
         }
     },
-    onBcpysjChange: function (e) {
+    onBcpysjChange: function(e) {
         this.setData({
             bcpysjIndex: e.detail.value,
         });
     },
-    onBcpysjSwitchChange: function (e) {
+    onBcpysjSwitchChange: function(e) {
         this.setData({
             bcpysjDisabled: !e.detail.value
         });
@@ -626,12 +706,12 @@ Page({
             })
         }
     },
-    onDrgpypjChange: function (e) {
+    onDrgpypjChange: function(e) {
         this.setData({
             drgpyp: e.detail.value,
         });
     },
-    onDrgpypSwitchChange: function (e) {
+    onDrgpypSwitchChange: function(e) {
         this.setData({
             drgpypDisabled: !e.detail.value
         });
@@ -641,12 +721,12 @@ Page({
             })
         }
     },
-    onBcxyChange: function (e) {
+    onBcxyChange: function(e) {
         this.setData({
             bcxyResult: e.detail.value,
         });
     },
-    onBcxySwitchChange: function (e) {
+    onBcxySwitchChange: function(e) {
         this.setData({
             bcxyResultDisabled: !e.detail.value
         });
@@ -656,12 +736,12 @@ Page({
             })
         }
     },
-    onBcxyLastChange: function (e) {
+    onBcxyLastChange: function(e) {
         this.setData({
             bcxyLast: e.detail.value,
         });
     },
-    onBcxyLastSwitchChange: function (e) {
+    onBcxyLastSwitchChange: function(e) {
         this.setData({
             bcxyLastDisabled: !e.detail.value
         });
@@ -671,12 +751,12 @@ Page({
             })
         }
     },
-    onBcyyChange: function (e) {
+    onBcyyChange: function(e) {
         this.setData({
             bcyyResult: e.detail.value,
         });
     },
-    onBcyySwitchChange: function (e) {
+    onBcyySwitchChange: function(e) {
         this.setData({
             bcyyResultDisabled: !e.detail.value
         });
@@ -686,12 +766,12 @@ Page({
             })
         }
     },
-    onBcyyLastChange: function (e) {
+    onBcyyLastChange: function(e) {
         this.setData({
             bcyyLast: e.detail.value,
         });
     },
-    onBcyyLastSwitchChange: function (e) {
+    onBcyyLastSwitchChange: function(e) {
         this.setData({
             bcyyLastDisabled: !e.detail.value
         });
@@ -701,12 +781,12 @@ Page({
             })
         }
     },
-    onMNGsChange: function (e) {
+    onMNGsChange: function(e) {
         this.setData({
             mNGSResult: e.detail.value,
         });
     },
-    onMNGSSwitchChange: function (e) {
+    onMNGSSwitchChange: function(e) {
         this.setData({
             mNGSResultDisabled: !e.detail.value
         });
@@ -719,28 +799,28 @@ Page({
     // -------- 诊断性穿刺 end -------- //
 
     // -------- 入院后信息 begin -------- //
-    onDoudaoChange: function (e) {
+    onDoudaoChange: function(e) {
         this.setData({
             doudaoIndex: e.detail.value,
         });
     },
-    onSqesrChange: function (e) {
+    onSqesrChange: function(e) {
         this.setData({
             sqesr: e.detail.value,
         });
     },
-    onSqcrpChange: function (e) {
+    onSqcrpChange: function(e) {
         this.setData({
             sqcrp: e.detail.value,
             bzhcrp: e.detail.value * 10
         });
     },
-    onIl6Change: function (e) {
+    onIl6Change: function(e) {
         this.setData({
             il6: e.detail.value
         });
     },
-    onIl6SwitchChange: function (e) {
+    onIl6SwitchChange: function(e) {
         this.setData({
             il6Disabled: !e.detail.value
         });
@@ -750,12 +830,12 @@ Page({
             })
         }
     },
-    onXwdbyChange: function (e) {
+    onXwdbyChange: function(e) {
         this.setData({
             xwdby: e.detail.value
         });
     },
-    onXwdbySwitchChange: function (e) {
+    onXwdbySwitchChange: function(e) {
         this.setData({
             xwdbyDisabled: !e.detail.value
         });
@@ -765,12 +845,12 @@ Page({
             })
         }
     },
-    onDdimerChange: function (e) {
+    onDdimerChange: function(e) {
         this.setData({
             ddimer: e.detail.value
         });
     },
-    onDdimerSwitchChange: function (e) {
+    onDdimerSwitchChange: function(e) {
         this.setData({
             ddimerDisabled: !e.detail.value
         });
@@ -780,12 +860,12 @@ Page({
             })
         }
     },
-    onShoushuDateChange: function (e) {
+    onShoushuDateChange: function(e) {
         this.setData({
             shoushuDate: e.detail.value
         });
     },
-    onShoushuSwitchChange: function (e) {
+    onShoushuSwitchChange: function(e) {
         this.setData({
             ssDateDisabled: !e.detail.value
         });
@@ -795,12 +875,12 @@ Page({
             })
         }
     },
-    onSzjnChange: function (e) {
+    onSzjnChange: function(e) {
         this.setData({
             szjnIndex: e.detail.value,
         });
     },
-    onSzjnSwitchChange: function (e) {
+    onSzjnSwitchChange: function(e) {
         this.setData({
             szjnDisabled: !e.detail.value
         });
@@ -810,12 +890,12 @@ Page({
             })
         }
     },
-    onBlChange: function (e) {
+    onBlChange: function(e) {
         this.setData({
             blIndex: e.detail.value,
         });
     },
-    onBlSwitchChange: function (e) {
+    onBlSwitchChange: function(e) {
         this.setData({
             blDisabled: !e.detail.value
         });
@@ -825,12 +905,12 @@ Page({
             })
         }
     },
-    onSZLEChange: function (e) {
+    onSZLEChange: function(e) {
         this.setData({
             szLEIndex: e.detail.value,
         });
     },
-    onSZLESwitchChange: function (e) {
+    onSZLESwitchChange: function(e) {
         this.setData({
             szLEDisabled: !e.detail.value
         });
@@ -846,12 +926,12 @@ Page({
             })
         }
     },
-    onSZLEAfterChange: function (e) {
+    onSZLEAfterChange: function(e) {
         this.setData({
             szLEAfterIndex: e.detail.value,
         });
     },
-    onSZLEAfterSwitchChange: function (e) {
+    onSZLEAfterSwitchChange: function(e) {
         this.setData({
             szLEAfterDisabled: !e.detail.value
         });
@@ -867,12 +947,12 @@ Page({
             })
         }
     },
-    onSzgjybxbInput: function (e) {
+    onSzgjybxbInput: function(e) {
         this.setData({
             szgjybxb: e.detail.value
         });
     },
-    onSzgjybxbSwitchChange: function (e) {
+    onSzgjybxbSwitchChange: function(e) {
         this.setData({
             szgjybxbDisabled: !e.detail.value
         });
@@ -882,13 +962,13 @@ Page({
             })
         }
     },
-    onSzgjyzxlInput: function (e) {
+    onSzgjyzxlInput: function(e) {
         this.setData({
             szgjyzxl: e.detail.value
         });
 
     },
-    onSzgjyzxlSwitchChange: function (e) {
+    onSzgjyzxlSwitchChange: function(e) {
         this.setData({
             szgjyzxlDisabled: !e.detail.value
         });
@@ -898,12 +978,12 @@ Page({
             })
         }
     },
-    onQbgjyInput: function (e) {
+    onQbgjyInput: function(e) {
         this.setData({
             qbgjy: e.detail.value
         });
     },
-    onQbgjySwitchChange: function (e) {
+    onQbgjySwitchChange: function(e) {
         this.setData({
             qbgjyDisabled: !e.detail.value
         });
@@ -913,12 +993,12 @@ Page({
             })
         }
     },
-    onSzzzpyInput: function (e) {
+    onSzzzpyInput: function(e) {
         this.setData({
             szzzpy: e.detail.value
         });
     },
-    onSzzzpySwitchChange: function (e) {
+    onSzzzpySwitchChange: function(e) {
         this.setData({
             szzzpyDisabled: !e.detail.value
         });
@@ -928,12 +1008,12 @@ Page({
             })
         }
     },
-    onZznMGSResultInput: function (e) {
+    onZznMGSResultInput: function(e) {
         this.setData({
             zznMGSResult: e.detail.value
         });
     },
-    onZznMGSResultSwitchChange: function (e) {
+    onZznMGSResultSwitchChange: function(e) {
         this.setData({
             zznMGSResultDisabled: !e.detail.value
         });
@@ -943,12 +1023,12 @@ Page({
             })
         }
     },
-    onCsljyInput: function (e) {
+    onCsljyInput: function(e) {
         this.setData({
             csljy: e.detail.value
         });
     },
-    onCsljySwitchChange: function (e) {
+    onCsljySwitchChange: function(e) {
         this.setData({
             csljyDisabled: !e.detail.value
         });
@@ -958,40 +1038,40 @@ Page({
             })
         }
     },
-    onMsisChange: function (e) {
+    onMsisChange: function(e) {
         this.setData({
             msisIndex: e.detail.value,
         });
     },
-    onMsisSwitchChange: function (e) {
-        this.setData({
-            msisDisabled: !e.detail.value
-        });
-        if (this.data.msisDisabled) {
-            this.setData({
-                msisIndex: 0
-            })
-        }
-    },
-    onZzclChange: function (e) {
+    // onMsisSwitchChange: function(e) {
+    //     this.setData({
+    //         msisDisabled: !e.detail.value
+    //     });
+    //     if (this.data.msisDisabled) {
+    //         this.setData({
+    //             msisIndex: 0
+    //         })
+    //     }
+    // },
+    onZzclChange: function(e) {
         this.setData({
             zzclIndex: e.detail.value,
         });
     },
-    onZzclSwitchChange: function (e) {
-        this.setData({
-            zzclDisabled: !e.detail.value
-        });
-        if (this.data.zzclDisabled) {
-            this.setData({
-                zzclIndex: 0
-            })
-        }
-    },
+    // onZzclSwitchChange: function(e) {
+    //     this.setData({
+    //         zzclDisabled: !e.detail.value
+    //     });
+    //     if (this.data.zzclDisabled) {
+    //         this.setData({
+    //             zzclIndex: 0
+    //         })
+    //     }
+    // },
     // -------- 入院后信息 end -------- //
 
     // -------- 提示框 begin -------- //
-    loadProgress: function () {
+    loadProgress: function() {
         if (this.data.loadProgress < 96) {
             this.setData({
                 loadProgress: this.data.loadProgress + 3
@@ -1007,23 +1087,23 @@ Page({
             });
         }
     },
-    completeProgress: function () {
+    completeProgress: function() {
         this.setData({
             loadProgress: 100
         });
     },
-    showToast: function (msg) {
+    showToast: function(msg) {
         wx.showToast({
             icon: 'none',
             title: msg,
         });
     },
-    showLoading: function () {
+    showLoading: function() {
         this.setData({
             loadModal: true
         });
     },
-    hideLoading: function () {
+    hideLoading: function() {
         setTimeout(() => {
             this.setData({
                 loadModal: false
@@ -1033,7 +1113,7 @@ Page({
     // -------- 提示框 end -------- //
 
     // -------- 模态对话框 start -------- //
-    showModal: function (e, errMsg) {
+    showModal: function(e, errMsg) {
         if (e.currentTarget) {
             this.setData({
                 modalName: e.currentTarget.dataset.target
@@ -1045,7 +1125,7 @@ Page({
             });
         }
     },
-    hideModal: function (e) {
+    hideModal: function(e) {
         this.setData({
             modalName: null
         });
@@ -1053,7 +1133,7 @@ Page({
     // -------- 模态对话框 end  -------- //
 
     // -------- 上传图片 start --------- //
-    onChooseImage: function (e) {
+    onChooseImage: function(e) {
         let that = this;
         wx.chooseImage({
             count: 1,
@@ -1165,7 +1245,7 @@ Page({
             }
         });
     },
-    onRemovePic: function (e) {
+    onRemovePic: function(e) {
         let that = this;
         switch (e.target.dataset.le) {
             case "11":
@@ -1244,7 +1324,7 @@ Page({
     },
     // -------- 上传图片 end  ---------- //
 
-    onLoad: function (options) {
+    onLoad: function(options) {
         this.loadProgress();
         var caseId = options.case_id;
         this.setData({
@@ -1290,7 +1370,6 @@ Page({
             }
         });
     },
-
     initViewByData(info) {
         this.setData({
             caseInfo: info
@@ -1315,7 +1394,9 @@ Page({
             type: info.base.type,
             operationDateMultiIndex: tempOperationDateArray,
             operationDisabled: this.getNumDisable(info.base.last_to_now),
+            operationDateValue: tempOperationDateArray[2]?''+ tempOperationDateArray[2] + this.data.operationDateMultiArray[1][tempOperationDateArray[1]]:'请选择',
             symptomDateMultiIndex: tempSymptomsUnit,
+            symptomDateValue: tempSymptomsUnit[2]?''+ tempSymptomsUnit[2] + this.data.symptomDateMultiArray[1][tempSymptomsUnit[1]]:'请选择',
             xingzhiIndex: info.base.duration_symptoms_prop,
             xingzhiValue: info.base.duration_symptoms_prop == 1 ? "急性" : "慢性",
             ris: info.base.is_merge_disease,
@@ -1464,7 +1545,7 @@ Page({
         return avatarList
     },
 
-    submit: function (e) {
+    submit: function(e) {
         if (this.data.ShowBasic) { // 基本信息
             this.submitBasic()
         } else if (this.data.ShowDiagnose) { // 诊断性穿刺
@@ -1786,7 +1867,7 @@ Page({
     },
     isAdmissionValueRight() {
         if (this.data.doudaoIndex == 0) {
-            this.showToast("请选择窦道")
+            this.showToast("请选择与假体相通的窦道")
             return false;
         }
         if (this.data.sqesr.length <= 0) {
@@ -1805,11 +1886,19 @@ Page({
             this.showToast("请选择术中LE试纸(离心后)")
             return false;
         }
+        if (this.data.msisIndex <= 0) {
+            this.showToast("请选择MSIS最终判定")
+            return false;
+        }
+        if (this.data.zzclIndex <= 0) {
+            this.showToast("请选择最终处理")
+            return false;
+        }
 
         return true;
     },
 
-    verify: function (e) {
+    verify: function(e) {
         if (this.data.ShowBasic) { // 基本信息
             this.verifyBasic()
         } else if (this.data.ShowDiagnose) { // 诊断性穿刺

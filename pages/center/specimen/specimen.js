@@ -67,6 +67,7 @@ Page({
         boxPicUploud: '',
     },
     radioChange(e) {
+        console.log(e.detail.value)
         this.setData({
             boxUse: e.detail.value
         })
@@ -396,6 +397,7 @@ Page({
         that.setData({
             modalName: ''
         });
+        console.log(parseInt(that.data.boxUse))
         wx.request({
             url: constant.basePath,
             data: {
@@ -419,7 +421,7 @@ Page({
                         boxName: '',
                         depositary: '',
                         boxUse: 1,
-                        boxPicUploud: '',
+                        boxPicUrl: '',
                         boxPicUploud: ''
                     })
                 } else {
