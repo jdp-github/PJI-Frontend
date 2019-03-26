@@ -9,7 +9,7 @@ Component({
     },
     attached: function () {
     },
-    methods: {
+    methods : {
         navigateToCenter: function (e) {
             if (emitter) {
                 this.data.emitter.removeAllListeners('addEmitter');

@@ -338,7 +338,7 @@ Page({
     operationDateChange: function(e) {
         this.setData({
             operationDateMultiIndex: e.detail.value,
-            operationDateValue: ''+ e.detail.value[2] + this.data.operationDateMultiArray[1][e.detail.value[1]]
+            operationDateValue: '' + e.detail.value[2] + this.data.operationDateMultiArray[1][e.detail.value[1]]
         })
     },
     operationDateColumnChange: function(e) {
@@ -359,7 +359,7 @@ Page({
                         data.operationDateMultiArray[2] = ['请选择', '1', '2', '3', '4'];
                         break;
                     case 2:
-                        data.operationDateMultiArray[1] = ['天', '周','月', '年'];
+                        data.operationDateMultiArray[1] = ['天', '周', '月', '年'];
                         data.operationDateMultiArray[2] = ['请选择', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
                         break;
                     case 3:
@@ -419,7 +419,7 @@ Page({
                 data.operationDateMultiArray[2] = ['请选择', '1', '2', '3', '4'];
                 break;
             case 2:
-                data.operationDateMultiArray[1] = ['天', '周','月', '年'];
+                data.operationDateMultiArray[1] = ['天', '周', '月', '年'];
                 data.operationDateMultiArray[2] = ['请选择', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
                 break;
             case 3:
@@ -445,7 +445,7 @@ Page({
                 data.symptomDateMultiArray[2] = ['请选择', '1', '2', '3', '4'];
                 break;
             case 2:
-                data.symptomDateMultiArray[1] = ['天', '周','月', '年'];
+                data.symptomDateMultiArray[1] = ['天', '周', '月', '年'];
                 data.symptomDateMultiArray[2] = ['请选择', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
                 break;
             case 3:
@@ -459,7 +459,7 @@ Page({
     symptomDateChange: function(e) {
         this.setData({
             symptomDateMultiIndex: e.detail.value,
-            symptomDateValue: ''+ e.detail.value[2] + this.data.symptomDateMultiArray[1][e.detail.value[1]]
+            symptomDateValue: '' + e.detail.value[2] + this.data.symptomDateMultiArray[1][e.detail.value[1]]
         });
     },
     symptomDateColumnChange: function(e) {
@@ -480,7 +480,7 @@ Page({
                         data.symptomDateMultiArray[2] = ['请选择', '1', '2', '3', '4'];
                         break;
                     case 2:
-                        data.symptomDateMultiArray[1] = ['天', '周','月', '年'];
+                        data.symptomDateMultiArray[1] = ['天', '周', '月', '年'];
                         data.symptomDateMultiArray[2] = ['请选择', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
                         break;
                     case 3:
@@ -1394,9 +1394,9 @@ Page({
             type: info.base.type,
             operationDateMultiIndex: tempOperationDateArray,
             operationDisabled: this.getNumDisable(info.base.last_to_now),
-            operationDateValue: tempOperationDateArray[2]?''+ tempOperationDateArray[2] + this.data.operationDateMultiArray[1][tempOperationDateArray[1]]:'请选择',
+            operationDateValue: tempOperationDateArray[2] ? '' + tempOperationDateArray[2] + this.data.operationDateMultiArray[1][tempOperationDateArray[1]] : '请选择',
             symptomDateMultiIndex: tempSymptomsUnit,
-            symptomDateValue: tempSymptomsUnit[2]?''+ tempSymptomsUnit[2] + this.data.symptomDateMultiArray[1][tempSymptomsUnit[1]]:'请选择',
+            symptomDateValue: tempSymptomsUnit[2] ? '' + tempSymptomsUnit[2] + this.data.symptomDateMultiArray[1][tempSymptomsUnit[1]] : '请选择',
             xingzhiIndex: info.base.duration_symptoms_prop,
             xingzhiValue: info.base.duration_symptoms_prop == 1 ? "急性" : "慢性",
             ris: info.base.is_merge_disease,
@@ -1667,12 +1667,64 @@ Page({
     },
 
     isDiagnoseValueRight() {
-        if ((this.data.pic1Upload.length > 0 || this.data.pic2Upload.length > 0 || this.data.pic3Upload.length > 0) && this.data.leIndex == 0) {
+        if (!this.data.ccDateDisabled && this.data.chuangciDate == "请选择日期") {
+            this.showToast("请选择穿刺日期")
+            return false;
+        }
+        if (!this.data.ccDescribeDisabeld && this.data.ccDescribe.length == 0) {
+            this.showToast("请填写穿刺描述")
+            return false;
+        }
+        if (!this.data.ccgjyDisabled && this.data.ccgjy.length == 0) {
+            this.showToast("请填写抽出关节液总量")
+            return false;
+        }
+        if (!this.data.ccgxyDisabled && this.data.ccgxy.length == 0) {
+            this.showToast("请填写抽出灌洗液总量")
+            return false;
+        }
+        if (!this.data.leDisabled && this.data.leIndex == 0) {
             this.showToast("请选择LE试纸(原液)")
             return false;
         }
-        if ((this.data.pic4Upload.length > 0 || this.data.pic5Upload.length > 0 || this.data.pic6Upload.length > 0) && this.data.leAfterIndex == 0) {
+        if (!this.data.leAfterDisabled && this.data.leAfterIndex == 0) {
             this.showToast("请选择LE试纸(离心后)")
+            return false;
+        }
+        if (!this.data.gjybxbDisabled && this.data.gjybxb.length == 0) {
+            this.showToast("请填写关节液白细胞计数")
+            return false;
+        }
+        if (!this.data.gjyzxDisabled && this.data.gjyzx.length == 0) {
+            this.showToast("请填写关节液中心粒细胞百分比")
+            return false;
+        }
+        if (!this.data.bcpysjDisabled && this.data.bcpysjIndex == 0) {
+            this.showToast("请选择本次培养送检类型")
+            return false;
+        }
+        if (!this.data.drgpypDisabled && this.data.drgpyp.length == 0) {
+            this.showToast("请填写打入各培养瓶量")
+            return false;
+        }
+        if (!this.data.bcxyResultDisabled && this.data.bcxyResult.length == 0) {
+            this.showToast("请填写本次需氧+真菌培养结果")
+            return false;
+        }
+        if (!this.data.bcxyLastDisabled && this.data.bcxyLast.length == 0) {
+            this.showToast("请填写本次需氧+真菌培养时长")
+            return false;
+        }
+        if (!this.data.bcyyResultDisabled && this.data.bcyyResult.length == 0) {
+            this.showToast("请填写本次厌氧培养结果")
+            return false;
+        }
+        if (!this.data.bcyyLastDisabled && this.data.bcyyLast.length == 0) {
+            this.showToast("请填写本次厌氧培养时长")
+            return false;
+        }
+        if (!this.data.mNGSResultDisabled && this.data.mNGSResult.length == 0) {
+            this.showToast("请填写关节液/冲洗液mNGS结果")
             return false;
         }
 
@@ -1862,6 +1914,14 @@ Page({
             this.showToast("请填写特殊事项备注")
             return false;
         }
+        if (!this.data.tel2Disabled && this.data.tel2.length == 0) {
+            this.showToast("请填写联系电话2")
+            return false;
+        }
+        if (!this.data.operationDisabled && this.data.operationDateValue == "请选择") {
+            this.showToast("请选择末次手术至今时长")
+            return false;
+        }
 
         return true;
     },
@@ -1878,12 +1938,60 @@ Page({
             this.showToast("请填写术前CRP")
             return false;
         }
-        if ((this.data.pic7Upload.length > 0 || this.data.pic8Upload.length > 0 || this.data.pic9Upload.length > 0) && this.data.szLEIndex == 0) {
+        if (!this.data.il6Disabled && this.data.il6.length == 0) {
+            this.showToast("请填写IL-6")
+            return false;
+        }
+        if (!this.data.xwdbyDisabled && this.data.xwdby.length == 0) {
+            this.showToast("请填写纤维蛋白原")
+            return false;
+        }
+        if (!this.data.ddimerDisabled && this.data.ddimer.length == 0) {
+            this.showToast("请填写D-dimer")
+            return false;
+        }
+        if (!this.data.ssDateDisabled && this.data.shoushuDate == "请选择日期") {
+            this.showToast("请选择手术日期")
+            return false;
+        }
+        if (!this.data.szjnDisabled && this.data.szjnIndex == 0) {
+            this.showToast("请选择术中见脓")
+            return false;
+        }
+        if (!this.data.blDisabled && this.data.blIndex == 0) {
+            this.showToast("请选择病理")
+            return false;
+        }
+        if (!this.data.szLEDisabled && this.data.szLEIndex == 0) {
             this.showToast("请选择术中LE试纸(原液)")
             return false;
         }
-        if ((this.data.pic10Upload.length > 0 || this.data.pic11Upload.length > 0 || this.data.pic12Upload.length > 0) && this.data.szLEAfterIndex == 0) {
+        if (!this.data.szLEAfterDisabled && this.data.szLEAfterIndex == 0) {
             this.showToast("请选择术中LE试纸(离心后)")
+            return false;
+        }
+        if (!this.data.szgjybxbDisabled && this.data.szgjybxb.length == 0) {
+            this.showToast("请填写术中关节液白细胞计数")
+            return false;
+        }
+        if (!this.data.szgjyzxlDisabled && this.data.szgjyzxl.length == 0) {
+            this.showToast("请填写术中关节液中性粒细胞百分比")
+            return false;
+        }
+        if (!this.data.qbgjyDisabled && this.data.qbgjy.length == 0) {
+            this.showToast("请填写全部关节液培养结果汇总")
+            return false;
+        }
+        if (!this.data.szzzpyDisabled && this.data.szzzpy.length == 0) {
+            this.showToast("请填写术中组织培养结果汇总")
+            return false;
+        }
+        if (!this.data.zznMGSResultDisabled && this.data.zznMGSResult.length == 0) {
+            this.showToast("请填写组织mNGS结果")
+            return false;
+        }
+        if (!this.data.csljyDisabled && this.data.csljy.length == 0) {
+            this.showToast("请填写超声裂解液mNGS结果")
             return false;
         }
         if (this.data.msisIndex <= 0) {
