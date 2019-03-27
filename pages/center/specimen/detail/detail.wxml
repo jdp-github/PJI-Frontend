@@ -166,7 +166,57 @@
     </view>
 </scroll-view>
 <view class="cu-modal drawer-modal justify-end {{modalName=='specimenInfo'?'show':''}}" bindtap='hideModal'>
-    <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;">
+    <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;" wx:if="{{multipleOut}}">
+        <view class="cu-bar bg-white solid-bottom">
+            <view class='action' style="font-size: 24rpx;">
+                <text class='icon-title text-green'></text>即将批量取出标本
+            </view>
+        </view>
+        <view>
+            <view class="cu-form-group">
+                <view class='title' style="font-size: 24rpx!important;">选择可用取出盒</view>
+                <picker bindchange="onClickOuterBox" style="font-size: 24rpx!important;" value="{{outerBoxValue}}" range="{{outerBoxList}}">
+                    <view class="picker" style="font-size: 24rpx!important;">
+                        {{outerBoxList[outerBoxIndex]}}
+                    </view>
+                </picker>
+                </view>
+            </view>
+            <view class='padding-sm flex'>
+                <button class='cu-btn bg-green shadow margin-right' bindtap="onMultipleOutClick" style="width:100%;">
+                    批量取出
+                </button>
+                <button class='cu-btn line-green shadow' bindtap="onMultipleGetBackClick" style="width:100%;">
+                    返回
+                </button>
+        </view>
+    </view>
+    <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;" wx:if="{{singleOut}}">
+        <view class="cu-bar bg-white solid-bottom">
+            <view class='action' style="font-size: 24rpx;">
+                <text class='icon-title text-green'></text>即将取出标本{{selectedSpecimen.number}}
+            </view>
+        </view>
+        <view>
+            <view class="cu-form-group">
+                <view class='title' style="font-size: 24rpx!important;">选择可用取出盒</view>
+                <picker bindchange="onClickOuterBox" style="font-size: 24rpx!important;" value="{{outerBoxValue}}" range="{{outerBoxList}}">
+                    <view class="picker" style="font-size: 24rpx!important;">
+                        {{outerBoxList[outerBoxIndex]}}
+                    </view>
+                </picker>
+            </view>
+        </view>
+        <view class='padding-sm flex' style="display:{{selectedSpecimen.status == 2?'none':''}}">
+            <button class='cu-btn bg-green shadow margin-right' bindtap="onSingleOutClick" style="width:100%;">
+                取出
+            </button>
+            <button class='cu-btn line-green shadow' bindtap="onGetBackClick" style="width:100%;">
+                返回
+            </button>
+        </view>
+    </view>
+    <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;" wx:if="{{!singleOut && !multipleOut}}">
         <view class="cu-bar bg-white solid-bottom">
             <view class='action' style="font-size: 24rpx;">
                 <text class='icon-title text-green'></text>标本{{selectedSpecimen.number}}的信息

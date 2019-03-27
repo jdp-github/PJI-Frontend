@@ -77,6 +77,7 @@ Page({
             modalName: null
         });
     },
+
     onLoad: function (options) {
         let boxInfo = JSON.parse(options.boxInfo);
         let specimenInfo = JSON.parse(options.specimenInfo);
@@ -179,8 +180,9 @@ Page({
                 openid: app.globalData.openid,
                 sample_id: this.data.specimenInfo.sample_id,
                 case_id: this.data.selectedCaseInfo.case_id,
-                msis: this.data.selectedCaseInfo.msis,
-                type: this.data.selectedCaseInfo.type,
+                type: this.data.typeIndex,
+                msis: this.data.eccentricityIndex,
+                // type: this.data.axenicList,
                 remark: this.data.remark
             },
             header: {

@@ -50,7 +50,16 @@ Page({
         modalName: '',
         infectList: ['请选择', '不能确定', '非感染', '感染'],
         typeList: ['请选择', '置换术后', '占位器'],
-        ownerList: ['请选择']
+        ownerList: ['请选择'],
+        // 取出UI标识位
+        singleOut: false,
+        multipleOut: false,
+        // 可用取出盒列表
+        outerBoxTitle: '请选择',
+        outerBoxValue: '',
+        outerBoxList: ['请选择','假数据1','假数据2','假数据3'],
+        outerBoxIndex: 0,
+
     },
     loadProgress: function() {
         if (this.data.loadProgress < 96) {
@@ -98,7 +107,9 @@ Page({
     },
     hideModal(e) {
         this.setData({
-            modalName: null
+            modalName: null,
+            singleOut: false,
+            multipleOut: false,
         });
     },
     onLoad: function(options) {
@@ -321,10 +332,56 @@ Page({
         return msisValue
     },
     onGetClick: function() {
+        // 取出逻辑更改，暂时注释之前代码
+        // this.setData({
+        //     modalName: ''
+        // });
+        // this.getSpecimen(this.data.selectedSpecimen.sample_id)
         this.setData({
+            multipleOut: false,
+            singleOut: true
+        });
+    },
+    onGetBackClick: function() {
+        this.setData({
+            singleOut: false
+        });
+    },
+    onSingleOutClick: function() {
+        //单个取出逻辑放在这里
+
+        //最后关闭对话框
+        this.setData({
+            singleOut: false,
             modalName: ''
         });
-        this.getSpecimen(this.data.selectedSpecimen.sample_id)
+    },
+    onMultipleGetBackClick: function() {
+        this.setData({
+            multipleOut: false,
+            modalName: '',
+        });
+    },
+    onMultipleOutClick: function() {
+        //批量取出逻辑放在这里
+
+        //最后关闭对话框
+        this.setData({
+            multipleOut: false,
+            modalName: ''
+        });
+    },
+    onClickOuterBox: function(e) {
+        let tmp = parseInt(e.detail.value);
+        if (tmp >= 0) {
+            this.setData({
+                outerBoxValue: tmp,
+                outerBoxTitle: this.data.outerBoxList[tmp],
+                outerBoxIndex: tmp
+            });
+            this.loadProgress();
+            this.requestSampleList(this.data.infectIndex, this.data.typeIndex, this.data.staffList[this.data.ownerIndex].staff_id);
+        }
     },
     // 取出标本
     getSpecimen: function(sample_ids) {
@@ -401,12 +458,18 @@ Page({
         }
     },
     onGetAllMode: function() {
-        this.setData({
-            isGetAll: true
-        });
         this.clearFilter();
-        this.loadProgress();
-        this.requestSampleList(this.data.infectIndex, this.data.typeIndex, this.data.staffList[this.data.ownerIndex].staff_id);
+        // 取出逻辑更改，暂时注释之前代码
+        // this.setData({
+        //     isGetAll: true
+        // });
+        // this.loadProgress();
+        // this.requestSampleList(this.data.infectIndex, this.data.typeIndex, this.data.staffList[this.data.ownerIndex].staff_id);
+        this.setData({
+            modalName: "specimenInfo",
+            singleOut: false,
+            multipleOut: true
+        });
     },
     onGetAllBack: function() {
         this.setData({
@@ -414,7 +477,6 @@ Page({
         });
         this.clearSelectStatus();
     },
-
     onGetAll: function() {
         if (this.data.getAllList.length == 0) {
             this.showToast('请选择要取出的标本');

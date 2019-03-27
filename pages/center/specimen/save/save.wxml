@@ -1,15 +1,13 @@
 <view class="cu-custom" style="height:{{CustomBar}}px;">
     <view class="cu-bar fixed bg-gradual-green" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
-        <navigator class='action border-custom' open-type="navigateBack" delta="1" hover-class="none"
-                   style='width:{{Custom.width}}px;height:{{Custom.height}}px;margin-left:calc(750rpx - {{Custom.right}}px)'>
+        <navigator class='action border-custom' open-type="navigateBack" delta="1" hover-class="none" style='width:{{Custom.width}}px;height:{{Custom.height}}px;margin-left:calc(750rpx - {{Custom.right}}px)'>
             <text class='icon-back'></text>
             <text class='icon-homefill'></text>
         </navigator>
         <view class='content' style='top:{{StatusBar}}px;'>标本存放</view>
     </view>
 </view>
-<scroll-view scroll-y class="indexes margin-bottom" scroll-into-view="indexes-{{listCurID}}"
-             style='height:calc(100vh - {{CustomBar}}px)' scroll-with-animation="true" enable-back-to-top="true">
+<scroll-view scroll-y class="indexes margin-bottom" scroll-into-view="indexes-{{listCurID}}" style='height:calc(100vh - {{CustomBar}}px)' scroll-with-animation="true" enable-back-to-top="true">
     <view class="title-section shadow">
         <view class="box-title">
             标本{{specimenInfo.number}}({{boxInfo.depositary}})
@@ -22,7 +20,7 @@
     </view>
     <view class="cu-form-group margin-top">
         <view class='title text-special'>标本说明</view>
-        <input class='radius text-small special' name='input' placeholder="请输入标本说明信息..." bindinput="onInput" value="{{remark}}"></input>
+        <input class='radius text-small special' style='text-align:right' name='input' placeholder="请输入标本说明信息..." bindinput="onInput" value="{{remark}}"></input>
     </view>
     <view class="cu-form-group">
         <view class='title text-special'>标本类型</view>
@@ -63,7 +61,7 @@
         </view>
     </view>
     <view class="cu-list menu">
-        <view class="cu-item arrow"  wx:for="{{caseList}}" wx:key="">
+        <view class="cu-item arrow" wx:for="{{caseList}}" wx:key="">
             <view class="cu-item arrow" style="width:100%;" data-item="{{item}}" catchtap="onItemClick">
                 <view class='content'>
                     <text class="{{item.isSelected?'icon-check text-green':'icon-edit'}}" style="width:100%;text-align:left;"> {{item.patient_name}} ({{item.create_time}})</text>
