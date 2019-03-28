@@ -334,6 +334,16 @@
                             </view>
                             <switch class='green sm' bindchange="onBcyyLastSwitchChange" style='margin-left: 15rpx;' checked='{{!bcyyLastDisabled}}'></switch>
                         </view>
+                        <!-- mNGS送检类型 -->
+                        <view class="cu-form-group {{mNGSTypeDisabled?'disabled':''}}">
+                            <view class='title'>mNGS送检类型</view>
+                            <picker bindchange="onMNGSTypeChange" value="{{mNGSTypeIndex}}" range="{{mNGSTypePicker}}" disabled='{{mNGSTypeDisabled}}'>
+                                <view class="picker">
+                                    {{mNGSTypePicker[mNGSTypeIndex]}}
+                                </view>
+                            </picker>
+                            <switch class='green sm' bindchange="oMNGSTypeSwitchChange" style='margin-left: 15rpx;' checked='{{!mNGSTypeDisabled}}'></switch>
+                        </view>
                         <!-- 关节液/冲洗液mNGS结果 -->
                         <view class="cu-form-group {{mNGSResultDisabled?'disabled':''}}">
                             <view style='display:flex;flex-direction: column; '>
@@ -342,18 +352,50 @@
                             </view>
                             <switch class='green sm' bindchange="onMNGSSwitchChange" style='margin-left: 15rpx;' checked='{{!mNGSResultDisabled}}'></switch>
                         </view>
+                        <!-- 术前第2次穿刺需氧+真菌培养结果 -->
+                        <view class="cu-form-group {{sqSecondxyDisabled?'disabled':''}}">
+                            <view style='display:flex;flex-direction: column; '>
+                                <view class='title' style='text-align:left'>术前第2次穿刺需氧+真菌培养结果</view>
+                                <input placeholder="请输入培养结果，不适用请点击右侧" style='width: 380rpx;text-align:left;' class='radius' bindinput="onSQSecXYChange" disabled='{{sqSecondxyDisabled}}' value='{{sqSecondxy}}'></input>
+                            </view>
+                            <switch class='green sm' bindchange="onSQSecXYwitchChange" style='margin-left: 15rpx;' checked='{{!sqSecondxyDisabled}}'></switch>
+                        </view>
+                        <!-- 术前第2次穿刺厌氧培养结果 -->
+                        <view class="cu-form-group {{sqSecondyyDisabled?'disabled':''}}">
+                            <view style='display:flex;flex-direction: column; '>
+                                <view class='title' style='text-align:left'>术前第2次穿刺厌氧培养结果</view>
+                                <input placeholder="请输入培养结果，不适用请点击右侧" style='width: 380rpx;text-align:left;' class='radius' bindinput="onSQSecondYYChange" disabled='{{sqSecondyyDisabled}}' value='{{sqSecondyy}}'></input>
+                            </view>
+                            <switch class='green sm' bindchange="onSQSecondYYSwitchChange" style='margin-left: 15rpx;' checked='{{!sqSecondyyDisabled}}'></switch>
+                        </view>
+                        <!-- 术前第3次穿刺需氧+真菌培养结果 -->
+                        <view class="cu-form-group {{sqThirdxyDisabled?'disabled':''}}">
+                            <view style='display:flex;flex-direction: column; '>
+                                <view class='title' style='text-align:left'>术前第3次穿刺需氧+真菌培养结果</view>
+                                <input placeholder="请输入培养结果，不适用请点击右侧" style='width: 380rpx;text-align:left;' class='radius' bindinput="onSQThirdXYChange" disabled='{{sqThirdxyDisabled}}' value='{{sqThirdxy}}'></input>
+                            </view>
+                            <switch class='green sm' bindchange="onSQThirdXYSwitchChange" style='margin-left: 15rpx;' checked='{{!sqThirdxyDisabled}}'></switch>
+                        </view>
+                        <!-- 术前第3次穿刺厌氧培养结果 -->
+                        <view class="cu-form-group {{sqThirdyyDisabled?'disabled':''}}">
+                            <view style='display:flex;flex-direction: column; '>
+                                <view class='title' style='text-align:left'>术前第3次穿刺厌氧培养结果</view>
+                                <input placeholder="请输入培养结果，不适用请点击右侧" style='width: 380rpx;text-align:left;' class='radius' bindinput="onSQThridYYChange" disabled='{{sqThirdyyDisabled}}' value='{{sqThirdyy}}'></input>
+                            </view>
+                            <switch class='green sm' bindchange="onSQThirdYYSwitchChange" style='margin-left: 15rpx;' checked='{{!sqThirdyyDisabled}}'></switch>
+                        </view>
                         <!-- 标本存放情况 -->
                         <view class="cu-form-group">
                             <view style='display:flex;flex-direction: column; '>
                                 <view class='title' style='text-align:left'>标本存放情况</view>
-                                <input placeholder="暂未存放可用标本" style='width: 350rpx;text-align:left;' class='radius' disabled='{{true}}' value=''></input>
+                                <input placeholder="暂未存放可用标本" style='width: 350rpx;text-align:left;' class='radius' disabled='{{true}}' value='{{sample_desc}}'></input>
                             </view>
                         </view>
                         <!-- 标本使用情况 -->
                         <view class="cu-form-group">
                             <view style='display:flex;flex-direction: column; '>
                                 <view class='title' style='text-align:left'>标本使用情况</view>
-                                <textarea placeholder="暂未使用该患者标本" style='width: 350rpx;text-align:left;' class='radius' disabled='{{true}}' value='' auto-height></textarea>
+                                <textarea placeholder="暂未使用该患者标本" style='width: 350rpx;text-align:left;' class='radius' disabled='{{true}}' value='{{sample_used}}' auto-height></textarea>
                             </view>
                         </view>
                     </view>
@@ -496,21 +538,77 @@
                             </view>
                             <switch class='green sm' bindchange="onSzgjyzxlSwitchChange" style='margin-left: 15rpx;' checked='{{!szgjyzxlDisabled}}'></switch>
                         </view>
-                        <!-- 全部关节液培养结果汇总 -->
-                        <view class="cu-form-group {{qbgjyDisabled?'disabled':''}}">
+                        <!-- 术中组织培养结果1 -->
+                        <view class="cu-form-group {{szzz1Disabled?'disabled':''}}">
                             <view style='display:flex;flex-direction: column; '>
-                                <view class='title' style='text-align:left'>全部关节液培养结果汇总</view>
-                                <input placeholder="请输入文字，报告日期+微生物名称" class='radius' style='width: 350rpx;text-align:left;' bindinput="onQbgjyInput" disabled='{{qbgjyDisabled}}' value='{{qbgjy}}'></input>
+                                <view class='title' style='text-align:left'>术中组织培养结果1</view>
+                                <input placeholder="请输入培养结果，不适用请点击右侧" class='radius' style='width: 350rpx;text-align:left;' bindinput="onSzzz1Input" disabled='{{szzz1Disabled}}' value='{{szzz1}}'></input>
                             </view>
-                            <switch class='green sm' bindchange="onQbgjySwitchChange" style='margin-left: 15rpx;' checked='{{!qbgjyDisabled}}'></switch>
+                            <switch class='green sm' bindchange="onSzzz1SwitchChange" style='margin-left: 15rpx;' checked='{{!szzz1Disabled}}'></switch>
                         </view>
-                        <!-- 术中组织培养结果汇总 -->
-                        <view class="cu-form-group {{szzzpyDisabled?'disabled':''}}">
+                        <!-- 术中组织培养结果2 -->
+                        <view class="cu-form-group {{szzz2Disabled?'disabled':''}}">
                             <view style='display:flex;flex-direction: column; '>
-                                <view class='title' style='text-align:left'>术中组织培养结果汇总</view>
-                                <input placeholder="请输入文字，报告日期+微生物名称" class='radius' style='width: 350rpx;text-align:left;' bindinput="onSzzzpyInput" disabled='{{szzzpyDisabled}}' value='{{szzzpy}}'></input>
+                                <view class='title' style='text-align:left'>术中组织培养结果2</view>
+                                <input placeholder="请输入培养结果，不适用请点击右侧" class='radius' style='width: 350rpx;text-align:left;' bindinput="onSzzz2Input" disabled='{{szzz2Disabled}}' value='{{szzz2}}'></input>
                             </view>
-                            <switch class='green sm' bindchange="onSzzzpySwitchChange" style='margin-left: 15rpx;' checked='{{!szzzpyDisabled}}'></switch>
+                            <switch class='green sm' bindchange="onSzzz2SwitchChange" style='margin-left: 15rpx;' checked='{{!szzz2Disabled}}'></switch>
+                        </view>
+                        <!-- 术中组织培养结果3 -->
+                        <view class="cu-form-group {{szzz3Disabled?'disabled':''}}">
+                            <view style='display:flex;flex-direction: column; '>
+                                <view class='title' style='text-align:left'>术中组织培养结果3</view>
+                                <input placeholder="请输入培养结果，不适用请点击右侧" class='radius' style='width: 350rpx;text-align:left;' bindinput="onSzzz3Input" disabled='{{szzz3Disabled}}' value='{{szzz3}}'></input>
+                            </view>
+                            <switch class='green sm' bindchange="onSzzz3SwitchChange" style='margin-left: 15rpx;' checked='{{!szzz3Disabled}}'></switch>
+                        </view>
+                        <!-- 术中组织培养结果4 -->
+                        <view class="cu-form-group {{szzz4Disabled?'disabled':''}}">
+                            <view style='display:flex;flex-direction: column; '>
+                                <view class='title' style='text-align:left'>术中组织培养结果4</view>
+                                <input placeholder="请输入培养结果，不适用请点击右侧" class='radius' style='width: 350rpx;text-align:left;' bindinput="onSzzz4Input" disabled='{{szzz4Disabled}}' value='{{szzz4}}'></input>
+                            </view>
+                            <switch class='green sm' bindchange="onSzzz4SwitchChange" style='margin-left: 15rpx;' checked='{{!szzz4Disabled}}'></switch>
+                        </view>
+                        <!-- 术中关节液需氧+真菌培养结果 -->
+                        <view class="cu-form-group {{szxyDisabled?'disabled':''}}">
+                            <view style='display:flex;flex-direction: column; '>
+                                <view class='title' style='text-align:left'>术中关节液需氧+真菌培养结果</view>
+                                <input placeholder="请输入培养结果，不适用请点击右侧" class='radius' style='width: 350rpx;text-align:left;' bindinput="onSzxyInput" disabled='{{szxyDisabled}}' value='{{szxy}}'></input>
+                            </view>
+                            <switch class='green sm' bindchange="onSzxySwitchChange" style='margin-left: 15rpx;' checked='{{!szxyDisabled}}'></switch>
+                        </view>
+                        <!-- 术中关节液厌氧培养结果 -->
+                        <view class="cu-form-group {{szyyDisabled?'disabled':''}}">
+                            <view style='display:flex;flex-direction: column; '>
+                                <view class='title' style='text-align:left'>术中关节液厌氧培养结果</view>
+                                <input placeholder="请输入培养结果，不适用请点击右侧" class='radius' style='width: 350rpx;text-align:left;' bindinput="onSzyyInput" disabled='{{szyyDisabled}}' value='{{szyy}}'></input>
+                            </view>
+                            <switch class='green sm' bindchange="onSzyySwitchChange" style='margin-left: 15rpx;' checked='{{!szyyDisabled}}'></switch>
+                        </view>
+                        <!-- 术中关节液mNGS培养结果 -->
+                        <view class="cu-form-group {{szgjymNGSDisabled?'disabled':''}}">
+                            <view style='display:flex;flex-direction: column; '>
+                                <view class='title' style='text-align:left'>术中关节液mNGS培养结果</view>
+                                <input placeholder="请输入培养结果，不适用请点击右侧" class='radius' style='width: 350rpx;text-align:left;' bindinput="onSzgjymNGSInput" disabled='{{szgjymNGSDisabled}}' value='{{szgjymNGS}}'></input>
+                            </view>
+                            <switch class='green sm' bindchange="onSzgjymNGSSwitchChange" style='margin-left: 15rpx;' checked='{{!szgjymNGSDisabled}}'></switch>
+                        </view>
+                        <!-- 术中组织mNGS培养结果 -->
+                        <view class="cu-form-group {{szzzmNGSDisabled?'disabled':''}}">
+                            <view style='display:flex;flex-direction: column; '>
+                                <view class='title' style='text-align:left'>术中组织mNGS培养结果</view>
+                                <input placeholder="请输入培养结果，不适用请点击右侧" class='radius' style='width: 350rpx;text-align:left;' bindinput="onSzzzmNGSInput" disabled='{{szzzmNGSDisabled}}' value='{{szzzmNGS}}'></input>
+                            </view>
+                            <switch class='green sm' bindchange="onSzzzmNGSSwitchChange" style='margin-left: 15rpx;' checked='{{!szzzmNGSDisabled}}'></switch>
+                        </view>
+                        <!-- 超声裂解液mNGS培养结果 -->
+                        <view class="cu-form-group {{csljymNGSDisabled?'disabled':''}}">
+                            <view style='display:flex;flex-direction: column; '>
+                                <view class='title' style='text-align:left'>超声裂解液mNGS培养结果</view>
+                                <input placeholder="请输入培养结果，不适用请点击右侧" class='radius' style='width: 350rpx;text-align:left;' bindinput="onCsljymNGSInput" disabled='{{csljymNGSDisabled}}' value='{{csljymNGS}}'></input>
+                            </view>
+                            <switch class='green sm' bindchange="onCsljymNGSSwitchChange" style='margin-left: 15rpx;' checked='{{!csljymNGSDisabled}}'></switch>
                         </view>
                         <!-- 组织mNGS结果 -->
                         <view class="cu-form-group {{zznMGSResultDisabled?'disabled':''}}">

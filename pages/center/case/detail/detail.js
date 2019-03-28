@@ -119,8 +119,21 @@ Page({
         bcyyResultDisabled: false,
         bcyyLast: '',
         bcyyLastDisabled: false,
+        mNGSTypeIndex: 0,
+        mNGSTypePicker: ["请选择", "关节液", "灌洗液", "混合液"],
+        mNGSTypeDisabled: false,
         mNGSResult: '',
         mNGSResultDisabled: false,
+        sqSecondxy: '',
+        sqSecondxyDisabled: false,
+        sqSecondyy: '',
+        sqSecondyyDisabled: false,
+        sqThirdxy: '',
+        sqThirdxyDisabled: false,
+        sqThirdyy: '',
+        sqThirdyyDisabled: false,
+        sample_desc: '',
+        sample_used: '',
         // -------- 诊断性穿刺 end -------- //
 
         // -------- 入院后信息 begin -------- //
@@ -153,10 +166,24 @@ Page({
         szgjybxbDisabled: true,
         szgjyzxl: '',
         szgjyzxlDisabled: true,
-        qbgjy: '',
-        qbgjyDisabled: true,
-        szzzpy: '',
-        szzzpyDisabled: true,
+        szzz1: '',
+        szzz1Disabled: true,
+        szzz2: '',
+        szzz2Disabled: true,
+        szzz3: '',
+        szzz3Disabled: true,
+        szzz4: '',
+        szzz4Disabled: true,
+        szxy: '',
+        szxyDisabled: true,
+        szyy: '',
+        szyyDisabled: true,
+        szgjymNGS: '',
+        szgjymNGSDisabled: true,
+        szzzmNGS: '',
+        szzzmNGSDisabled: true,
+        csljymNGS: '',
+        csljymNGSDisabled: true,
         zznMGSResult: '',
         zznMGSResultDisabled: true,
         csljy: '',
@@ -781,6 +808,21 @@ Page({
             })
         }
     },
+    onMNGSTypeChange: function(e) {
+        this.setData({
+            mNGSTypeIndex: e.detail.value,
+        });
+    },
+    oMNGSTypeSwitchChange: function(e) {
+        this.setData({
+            mNGSTypeDisabled: !e.detail.value
+        });
+        if (this.data.mNGSTypeDisabled) {
+            this.setData({
+                mNGSTypeIndex: 0
+            })
+        }
+    },
     onMNGsChange: function(e) {
         this.setData({
             mNGSResult: e.detail.value,
@@ -793,6 +835,66 @@ Page({
         if (this.data.mNGSResultDisabled) {
             this.setData({
                 mNGSResult: ''
+            })
+        }
+    },
+    onSQSecXYChange: function(e) {
+        this.setData({
+            sqSecondxy: e.detail.value,
+        });
+    },
+    onSQSecXYwitchChange: function(e) {
+        this.setData({
+            sqSecondxyDisabled: !e.detail.value
+        });
+        if (this.data.sqSecondxyDisabled) {
+            this.setData({
+                sqSecondxy: ''
+            })
+        }
+    },
+    onSQSecondYYChange: function(e) {
+        this.setData({
+            sqSecondyy: e.detail.value,
+        });
+    },
+    onSQSecondYYSwitchChange: function(e) {
+        this.setData({
+            sqSecondyyDisabled: !e.detail.value
+        });
+        if (this.data.sqSecondyyDisabled) {
+            this.setData({
+                sqSecondyy: ''
+            })
+        }
+    },
+    onSQThirdXYChange: function(e) {
+        this.setData({
+            sqThirdxy: e.detail.value,
+        });
+    },
+    onSQThirdXYSwitchChange: function(e) {
+        this.setData({
+            sqThirdxyDisabled: !e.detail.value
+        });
+        if (this.data.sqThirdxyDisabled) {
+            this.setData({
+                sqThirdxy: ''
+            })
+        }
+    },
+    onSQThridYYChange: function(e) {
+        this.setData({
+            sqThirdyy: e.detail.value,
+        });
+    },
+    onSQThirdYYSwitchChange: function(e) {
+        this.setData({
+            sqThirdyyDisabled: !e.detail.value
+        });
+        if (this.data.sqThirdyyDisabled) {
+            this.setData({
+                sqThirdyy: ''
             })
         }
     },
@@ -978,36 +1080,142 @@ Page({
             })
         }
     },
-    onQbgjyInput: function(e) {
+    onSzzz1Input: function(e) {
         this.setData({
-            qbgjy: e.detail.value
+            szzz1: e.detail.value
         });
     },
-    onQbgjySwitchChange: function(e) {
+    onSzzz1SwitchChange: function(e) {
         this.setData({
-            qbgjyDisabled: !e.detail.value
+            szzz1Disabled: !e.detail.value
         });
-        if (this.data.qbgjyDisabled) {
+        if (this.data.szzz1Disabled) {
             this.setData({
-                qbgjy: ""
+                szzz1: ""
             })
         }
     },
-    onSzzzpyInput: function(e) {
+    onSzzz2Input: function(e) {
         this.setData({
-            szzzpy: e.detail.value
+            szzz2: e.detail.value
         });
     },
-    onSzzzpySwitchChange: function(e) {
+    onSzzz2SwitchChange: function(e) {
         this.setData({
-            szzzpyDisabled: !e.detail.value
+            szzz2Disabled: !e.detail.value
         });
-        if (this.data.szzzpyDisabled) {
+        if (this.data.szzz2Disabled) {
             this.setData({
-                szzzpy: ""
+                szzz2: ""
             })
         }
     },
+    onSzzz3Input: function(e) {
+        this.setData({
+            szzz3: e.detail.value
+        });
+    },
+    onSzzz3SwitchChange: function(e) {
+        this.setData({
+            szzz3Disabled: !e.detail.value
+        });
+        if (this.data.szzz3Disabled) {
+            this.setData({
+                szzz3: ""
+            })
+        }
+    },
+    onSzzz4Input: function(e) {
+        this.setData({
+            szzz4: e.detail.value
+        });
+    },
+    onSzzz4SwitchChange: function(e) {
+        this.setData({
+            szzz4Disabled: !e.detail.value
+        });
+        if (this.data.szzz4Disabled) {
+            this.setData({
+                szzz4: ""
+            })
+        }
+    },
+    onSzxyInput: function(e) {
+        this.setData({
+            szxy: e.detail.value
+        });
+    },
+    onSzxySwitchChange: function(e) {
+        this.setData({
+            szxyDisabled: !e.detail.value
+        });
+        if (this.data.szxyDisabled) {
+            this.setData({
+                szxy: ""
+            })
+        }
+    },
+    onSzyyInput: function(e) {
+        this.setData({
+            szyy: e.detail.value
+        });
+    },
+    onSzyySwitchChange: function(e) {
+        this.setData({
+            szyyDisabled: !e.detail.value
+        });
+        if (this.data.szyyDisabled) {
+            this.setData({
+                szyy: ""
+            })
+        }
+    },
+    onSzgjymNGSInput: function(e) {
+        this.setData({
+            szgjymNGS: e.detail.value
+        });
+    },
+    onSzgjymNGSSwitchChange: function(e) {
+        this.setData({
+            szgjymNGSDisabled: !e.detail.value
+        });
+        if (this.data.szgjymNGSDisabled) {
+            this.setData({
+                szgjymNGS: ""
+            })
+        }
+    },
+    onSzzzmNGSInput: function(e) {
+        this.setData({
+            szzzmNGS: e.detail.value
+        });
+    },
+    onSzzzmNGSSwitchChange: function(e) {
+        this.setData({
+            szzzmNGSDisabled: !e.detail.value
+        });
+        if (this.data.szzzmNGSDisabled) {
+            this.setData({
+                szzzmNGS: ""
+            })
+        }
+    },
+    onCsljymNGSInput: function(e) {
+        this.setData({
+            csljymNGS: e.detail.value
+        });
+    },
+    onCsljymNGSSwitchChange: function(e) {
+        this.setData({
+            csljymNGSDisabled: !e.detail.value
+        });
+        if (this.data.csljymNGSDisabled) {
+            this.setData({
+                csljymNGS: ""
+            })
+        }
+    },
+
     onZznMGSResultInput: function(e) {
         this.setData({
             zznMGSResult: e.detail.value
@@ -1452,9 +1660,20 @@ Page({
             bcyyResultDisabled: this.getValueDisable(info.puncture.anaerobic_culture_result),
             bcyyLast: this.getDefaultNum(info.puncture.anaerobic_culture_time),
             bcyyLastDisabled: this.getNumDisable(info.puncture.anaerobic_culture_time),
+            mNGSTypeIndex: info.puncture.mngs_type,
+            mNGSTypeDisabled: this.getNumDisable(info.puncture.mngs_type),
             mNGSResult: info.puncture.joint_fluid_mngs_result,
             mNGSResultDisabled: this.getValueDisable(info.puncture.joint_fluid_mngs_result),
-            // TOOD 标本
+            sqSecondxy: info.puncture.puncture_aerobic_culture_result2,
+            sqSecondxyDisabled: this.getValueDisable(info.puncture.puncture_aerobic_culture_result2),
+            sqSecondyy: info.puncture.puncture_anaerobic_culture_result2,
+            sqSecondyyDisabled: this.getValueDisable(info.puncture.puncture_anaerobic_culture_result2),
+            sqThirdxy: info.puncture.puncture_aerobic_culture_result3,
+            sqThirdxyDisabled: this.getValueDisable(info.puncture.puncture_aerobic_culture_result3),
+            sqThirdyy: info.puncture.puncture_anaerobic_culture_result3,
+            sqThirdyyDisabled: this.getValueDisable(info.puncture.puncture_anaerobic_culture_result3),
+            sample_desc: info.puncture.sample_deposit_desc,
+            sample_used: info.puncture.sample_used,
         })
         // 入院后信息
         this.setData({
@@ -1494,10 +1713,26 @@ Page({
             szgjybxbDisabled: this.getNumDisable(info.bein.intrao_joint_fluid_leukocyte),
             szgjyzxl: this.getDefaultNum(info.bein.intrao_neutrophils_percent),
             szgjyzxlDisabled: this.getNumDisable(info.bein.intrao_neutrophils_percent),
-            qbgjy: info.bein.all_culture_result,
-            qbgjyDisabled: this.getValueDisable(info.bein.all_culture_result),
-            szzzpy: info.bein.intrao_culture_result,
-            szzzpyDisabled: this.getValueDisable(info.bein.intrao_culture_result),
+            szzz1: info.bein.culture_result1,
+            szzz1Disabled: this.getValueDisable(info.bein.culture_result1),
+            szzz2: info.bein.culture_result2,
+            szzz2Disabled: this.getValueDisable(info.bein.culture_result2),
+            szzz3: info.bein.culture_result3,
+            szzz3Disabled: this.getValueDisable(info.bein.culture_result3),
+            szzz4: info.bein.culture_result4,
+            szzz4Disabled: this.getValueDisable(info.bein.culture_result4),
+            szzz5: '',
+            szxy: info.bein.intrao_aerobic_culture_result,
+            szxyDisabled: this.getValueDisable(info.bein.intrao_aerobic_culture_result),
+            szyy: info.bein.intrao_anaerobic_culture_result,
+            szyyDisabled: this.getValueDisable(info.bein.intrao_anaerobic_culture_result),
+            szgjymNGS: info.bein.culture_ngs_result,
+            szgjymNGSDisabled: this.getValueDisable(info.bein.culture_ngs_result),
+            szzzmNGS: info.bein.tissue_ngs_result,
+            szzzmNGSDisabled: this.getValueDisable(info.bein.tissue_ngs_result),
+            csljymNGS: info.bein.ultrasonic_degradation_ngs_result,
+            csljymNGSDisabled: this.getValueDisable(info.bein.ultrasonic_degradation_ngs_result),
+
             zznMGSResult: info.bein.tissue_ngs_result,
             zznMGSResultDisabled: this.getNumDisable(info.bein.tissue_ngs_result),
             csljy: info.bein.ultrasonic_degradation_ngs_result,
@@ -1723,8 +1958,28 @@ Page({
             this.showToast("请填写本次厌氧培养时长")
             return false;
         }
+        if (!this.data.mNGSTypeDisabled && this.data.mNGSTypeIndex == 0) {
+            this.showToast("请选择本次培养送检类型")
+            return false;
+        }
         if (!this.data.mNGSResultDisabled && this.data.mNGSResult.length == 0) {
             this.showToast("请填写关节液/冲洗液mNGS结果")
+            return false;
+        }
+        if (!this.data.sqSecondxyDisabled && this.data.sqSecondxy.length == 0) {
+            this.showToast("术前第2次穿刺需氧+真菌培养结果")
+            return false;
+        }
+        if (!this.data.sqSecondyyDisabled && this.data.sqSecondyy.length == 0) {
+            this.showToast("术前第2次穿刺厌氧培养结果")
+            return false;
+        }
+        if (!this.data.sqThirdxyDisabled && this.data.sqThirdxy.length == 0) {
+            this.showToast("术前第3次穿刺需氧+真菌培养结果")
+            return false;
+        }
+        if (!this.data.sqThirdyyDisabled && this.data.sqThirdyy.length == 0) {
+            this.showToast("术前第3次穿刺厌氧培养结果")
             return false;
         }
 
@@ -1760,7 +2015,12 @@ Page({
             aerobic_culture_time: parseInt(this.getDefaultValue(that.data.bcxyLast)),
             anaerobic_culture_result: that.data.bcyyResult,
             anaerobic_culture_time: parseInt(this.getDefaultValue(that.data.bcyyLast)),
+            mngs_type: parseInt(that.data.mNGSTypeIndex),
             joint_fluid_mngs_result: that.data.mNGSResult,
+            puncture_aerobic_culture_result2: that.data.sqSecondxy,
+            puncture_anaerobic_culture_result2: that.data.sqSecondyy,
+            puncture_aerobic_culture_result3: that.data.sqThirdxy,
+            puncture_anaerobic_culture_result3: that.data.sqThirdyy,
         }
         console.log("穿刺：" + JSON.stringify(jsonData))
         return JSON.stringify(jsonData)
@@ -1835,7 +2095,6 @@ Page({
             intrao_joint_fluid_leukocyte: parseFloat(this.getDefaultValue(that.data.szgjybxb)),
             intrao_neutrophils_percent: parseFloat(this.getDefaultValue(that.data.szgjyzxl)),
             all_culture_result: that.data.qbgjy,
-            intrao_culture_result: that.data.szzzpy,
             tissue_ngs_result: that.data.zznMGSResult,
             ultrasonic_degradation_ngs_result: that.data.csljy,
             msis: parseInt(this.getDefaultValue(that.data.msisIndex)),
@@ -1978,12 +2237,40 @@ Page({
             this.showToast("请填写术中关节液中性粒细胞百分比")
             return false;
         }
-        if (!this.data.qbgjyDisabled && this.data.qbgjy.length == 0) {
-            this.showToast("请填写全部关节液培养结果汇总")
+        if (!this.data.szzz1Disabled && this.data.szzz1.length == 0) {
+            this.showToast("术中组织培养结果1")
             return false;
         }
-        if (!this.data.szzzpyDisabled && this.data.szzzpy.length == 0) {
-            this.showToast("请填写术中组织培养结果汇总")
+        if (!this.data.szzz2Disabled && this.data.szzz2.length == 0) {
+            this.showToast("术中组织培养结果2")
+            return false;
+        }
+        if (!this.data.szzz3Disabled && this.data.szzz3.length == 0) {
+            this.showToast("术中组织培养结果3")
+            return false;
+        }
+        if (!this.data.szzz4Disabled && this.data.szzz4.length == 0) {
+            this.showToast("术中组织培养结果4")
+            return false;
+        }
+        if (!this.data.szxyDisabled && this.data.szxy.length == 0) {
+            this.showToast("术中关节液需氧+真菌培养结果")
+            return false;
+        }
+        if (!this.data.szyyDisabled && this.data.szyy.length == 0) {
+            this.showToast("术中关节液厌氧培养结果")
+            return false;
+        }
+        if (!this.data.szgjymNGSDisabled && this.data.szgjymNGS.length == 0) {
+            this.showToast("术中关节液mNGS培养结果")
+            return false;
+        }
+        if (!this.data.szzzmNGSDisabled && this.data.szzzmNGS.length == 0) {
+            this.showToast("术中组织mNGS培养结果")
+            return false;
+        }
+        if (!this.data.csljymNGSDisabled && this.data.csljymNGS.length == 0) {
+            this.showToast("超声裂解液mNGS培养结果")
             return false;
         }
         if (!this.data.zznMGSResultDisabled && this.data.zznMGSResult.length == 0) {

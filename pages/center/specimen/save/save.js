@@ -28,7 +28,7 @@ Page({
         axenicList: ['是', '否'],
         axenicIndex: 0
     },
-    loadProgress: function () {
+    loadProgress: function() {
         if (this.data.loadProgress < 96) {
             this.setData({
                 loadProgress: this.data.loadProgress + 3
@@ -44,23 +44,23 @@ Page({
             });
         }
     },
-    completeProgress: function () {
+    completeProgress: function() {
         this.setData({
             loadProgress: 100
         });
     },
-    showToast: function (msg) {
+    showToast: function(msg) {
         wx.showToast({
             icon: 'none',
             title: msg,
         });
     },
-    showLoading: function () {
+    showLoading: function() {
         this.setData({
             loadModal: true
         });
     },
-    hideLoading: function () {
+    hideLoading: function() {
         setTimeout(() => {
             this.setData({
                 loadModal: false
@@ -78,7 +78,7 @@ Page({
         });
     },
 
-    onLoad: function (options) {
+    onLoad: function(options) {
         let boxInfo = JSON.parse(options.boxInfo);
         let specimenInfo = JSON.parse(options.specimenInfo);
         this.setData({
@@ -88,7 +88,7 @@ Page({
         });
         this.requestCaseList(this.data.searchValue);
     },
-    requestCaseList: function (searchValue) {
+    requestCaseList: function(searchValue) {
         let that = this;
         that.showLoading();
         wx.request({
@@ -123,12 +123,12 @@ Page({
             }
         });
     },
-    onInput: function (e) {
+    onInput: function(e) {
         this.setData({
             remark: e.detail.value
         });
     },
-    onClickType: function (e) {
+    onClickType: function(e) {
         let tmp = parseInt(e.detail.value);
         if (parseInt(e.detail.value) >= 0) {
             this.setData({
@@ -136,7 +136,7 @@ Page({
             });
         }
     },
-    onClickEccentricity: function (e) {
+    onClickEccentricity: function(e) {
         let tmp = parseInt(e.detail.value);
         if (parseInt(e.detail.value) >= 0) {
             this.setData({
@@ -144,7 +144,7 @@ Page({
             });
         }
     },
-    onClickAxenic: function (e) {
+    onClickAxenic: function(e) {
         let tmp = parseInt(e.detail.value);
         if (parseInt(e.detail.value) >= 0) {
             this.setData({
@@ -152,15 +152,15 @@ Page({
             });
         }
     },
-    onSearchChange: function (e) {
+    onSearchChange: function(e) {
         this.setData({
             searchValue: e.detail.value
         });
     },
-    onSearch: function (e) {
+    onSearch: function(e) {
         this.requestCaseList(this.data.searchValue);
     },
-    onItemClick: function (e) {
+    onItemClick: function(e) {
         let caseInfo = e.currentTarget.dataset.item;
         for (let i = 0, length = this.data.caseList.length; i < length; i++) {
             this.data.caseList[i].isSelected = caseInfo.case_id == this.data.caseList[i].case_id;
@@ -170,7 +170,7 @@ Page({
             selectedCaseInfo: caseInfo
         });
     },
-    onPutClick: function () {
+    onPutClick: function() {
         let that = this;
         that.showLoading();
         wx.request({
@@ -181,8 +181,8 @@ Page({
                 sample_id: this.data.specimenInfo.sample_id,
                 case_id: this.data.selectedCaseInfo.case_id,
                 type: this.data.typeIndex,
-                msis: this.data.eccentricityIndex,
-                // type: this.data.axenicList,
+                eccentricity: this.data.eccentricityIndex,
+                is_asepsis: this.data.axenicList,
                 remark: this.data.remark
             },
             header: {
@@ -204,7 +204,7 @@ Page({
             }
         });
     },
-    reloadPrePage: function () {
+    reloadPrePage: function() {
         let pages = getCurrentPages();
         if (pages.length > 1) {
             //上一个页面实例对象
@@ -213,7 +213,7 @@ Page({
             prePage.initData();
         }
     },
-    onBackClick: function () {
+    onBackClick: function() {
         wx.navigateBack({
             delta: -1
         });
