@@ -300,7 +300,7 @@ Page({
     },
     onItemClick: function(e) {
         wx.navigateTo({
-            url: '../../center/specimen/detail/detail?boxId=' + e.currentTarget.dataset.selecteditem.id + '&centerId=' + this.data.centerId + "&caseId=" + this.data.caseId
+            url: '../../center/specimen/detail/detail?boxId=' + e.currentTarget.dataset.selecteditem.id + '&centerId=' + this.data.centerId + "&caseId=" + this.data.caseId + "&boxUse=" + e.currentTarget.dataset.selecteditem.uses
         });
     },
     onInput: function(e) {
@@ -375,7 +375,7 @@ Page({
                     that.loadProgress();
                     that.requestBoxList(that.data.searchValue, that.data.sortType);
                 } else {
-                    that.showToast(res.data.msg);
+                    that.showToast(res.data.data.msg);
                 }
             },
             fail(res) {
@@ -397,7 +397,6 @@ Page({
         that.setData({
             modalName: ''
         });
-        console.log(parseInt(that.data.boxUse))
         wx.request({
             url: constant.basePath,
             data: {
@@ -425,7 +424,7 @@ Page({
                         boxPicUploud: ''
                     })
                 } else {
-                    that.showToast(res.data.msg);
+                    that.showToast(res.data.data.msg);
                 }
             },
             fail(res) {

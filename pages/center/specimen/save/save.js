@@ -25,7 +25,7 @@ Page({
         typeIndex: 0,
         eccentricityList: ['6600*3min', '1000g*5min', '1000g*10min', '未离心'],
         eccentricityIndex: 0,
-        axenicList: ['是', '否'],
+        axenicList: ['否', '是'],
         axenicIndex: 0
     },
     loadProgress: function() {
@@ -145,6 +145,7 @@ Page({
         }
     },
     onClickAxenic: function(e) {
+        console.log(e)
         let tmp = parseInt(e.detail.value);
         if (parseInt(e.detail.value) >= 0) {
             this.setData({
@@ -173,22 +174,24 @@ Page({
     onPutClick: function() {
         let that = this;
         that.showLoading();
+        console.log("typeIndex:" + that.data.typeIndex)
         wx.request({
             url: constant.basePath,
             data: {
                 service: 'Sample.PutSample',
                 openid: app.globalData.openid,
-                sample_id: this.data.specimenInfo.sample_id,
-                case_id: this.data.selectedCaseInfo.case_id,
-                type: this.data.typeIndex,
-                eccentricity: this.data.eccentricityIndex,
-                is_asepsis: this.data.axenicList,
-                remark: this.data.remark
+                sample_id: that.data.specimenInfo.sample_id,
+                case_id: that.data.selectedCaseInfo.case_id,
+                type: parseInt(that.data.typeIndex) + 1,
+                eccentricity: parseInt(that.data.eccentricityIndex),
+                is_asepsis: parseInt(that.data.axenicIndex),
+                remark: that.data.remark
             },
             header: {
                 'content-type': 'application/json'
             },
             success(res) {
+                console.log("Sample.PutSample:" + JSON.stringify(res))
                 that.hideLoading();
                 if (res.data.data.code == constant.response_success) {
                     that.reloadPrePage();
@@ -196,7 +199,7 @@ Page({
                         delta: -1
                     });
                 } else {
-                    that.showToast(res.data.msg);
+                    that.showToast(res.data.data.msg);
                 }
             },
             fail(res) {

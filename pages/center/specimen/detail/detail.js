@@ -14,6 +14,9 @@ const SPECIMEN_TYPE_GET = 2;
 // 无权限
 const SPECIMEN_TYPE_NO_RIGHT = 3;
 
+const SPECIMEN_TYPE_LIST = ['关节液', '血液', '组织'];
+const ECCENTRICITY_LIST = ['6600*3min', '1000g*5min', '1000g*10min', '未离心'];
+
 Page({
     data: {
         loadProgress: 0,
@@ -23,10 +26,13 @@ Page({
         Custom: app.globalData.Custom,
         hidden: true,
         isAdmin: false,
+
         centerId: '',
         boxId: '',
         boxInfo: {},
         caseId: '',
+        boxUse: 1,
+
         letterArr: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", ],
         specimenGrid: [],
         selectedSpecimen: {},
@@ -57,7 +63,7 @@ Page({
         // 可用取出盒列表
         outerBoxTitle: '请选择',
         outerBoxValue: '',
-        outerBoxList: ['请选择','假数据1','假数据2','假数据3'],
+        outerBoxList: ['请选择', '假数据1', '假数据2', '假数据3'],
         outerBoxIndex: 0,
 
     },
@@ -112,17 +118,19 @@ Page({
             multipleOut: false,
         });
     },
+
     onLoad: function(options) {
         this.setData({
             boxId: options.boxId,
             centerId: options.centerId,
-            caseId: options.caseId
+            caseId: options.caseId,
+            boxUse: options.boxUse
         });
-        this.loadProgress();
         this.clearFilter();
-        this.init();
+        this.initData();
     },
-    init: async function() {
+    initData: async function() {
+        this.loadProgress();
         await this.requestCenterStaffList(this.data.centerId);
         await this.requestSampleList();
     },
@@ -302,12 +310,23 @@ Page({
                 'content-type': 'application/json'
             },
             success(res) {
+                console.log("Sample.CheckSample:" + JSON.stringify(res))
                 that.hideLoading();
                 if (res.data.data.code == constant.response_success) {
                     let specimenInfo = res.data.data.info;
-                    specimenInfo.msis = that.getMsisInfo(specimenInfo.msis);
                     specimenInfo.put_time = util.formatTime(specimenInfo.put_time, 'Y-M-D h:m');
-                    specimenInfo.get_time = util.formatTime(specimenInfo.get_time, 'Y-M-D h:m');
+                    if (specimenInfo.get_time == 0) {
+                        specimenInfo.get_time = "-"
+                    } else {
+                        specimenInfo.get_time = util.formatTime(specimenInfo.get_time, 'Y-M-D h:m');
+                    }
+
+                    // 标本类型
+                    specimenInfo.typeValue = SPECIMEN_TYPE_LIST[specimenInfo.type - 1]
+                    // 离心转数
+                    specimenInfo.eccentricityValue = ECCENTRICITY_LIST[specimenInfo.eccentricity]
+                    // 是否无菌
+                    specimenInfo.isAsepsisValue = specimenInfo.is_asepsis == 0 ? "否" : "是"
                     that.setData({
                         selectedSpecimen: specimenInfo
                     });
@@ -320,18 +339,9 @@ Page({
             }
         });
     },
-    getMsisInfo: function(msisFlag) {
-        let msisValue;
-        if (msisFlag == 1) {
-            msisValue = "不能确定"
-        } else if (msisFlag == 2) {
-            msisValue = "非感染"
-        } else if (msisFlag == 3) {
-            msisValue = "感染"
-        }
-        return msisValue
-    },
+    // ======================== 取出标本 begin ======================== //
     onGetClick: function() {
+        debugger
         // 取出逻辑更改，暂时注释之前代码
         // this.setData({
         //     modalName: ''
@@ -348,8 +358,33 @@ Page({
         });
     },
     onSingleOutClick: function() {
+        debugger
         //单个取出逻辑放在这里
-
+        // let that = this;
+        // that.showLoading();
+        // wx.request({
+        //     url: constant.basePath,
+        //     data: {
+        //         service: 'Sample.DeleteSampleBox',
+        //         openid: app.globalData.openid,
+        //         box_id: boxId
+        //     },
+        //     header: {
+        //         'content-type': 'application/json'
+        //     },
+        //     success(res) {
+        //         that.hideLoading();
+        //         if (res.data.data.code == constant.response_success) {
+        //             that.loadProgress();
+        //             that.requestBoxList(that.data.searchValue, that.data.sortType);
+        //         } else {
+        //             that.showToast(res.data.data.msg);
+        //         }
+        //     },
+        //     fail(res) {
+        //         that.hideLoading();
+        //     }
+        // });
         //最后关闭对话框
         this.setData({
             singleOut: false,
@@ -370,6 +405,40 @@ Page({
             multipleOut: false,
             modalName: ''
         });
+    },
+    onGetAllMode: function() {
+        this.clearFilter();
+        // 取出逻辑更改，暂时注释之前代码
+        // this.setData({
+        //     isGetAll: true
+        // });
+        // this.loadProgress();
+        // this.requestSampleList(this.data.infectIndex, this.data.typeIndex, this.data.staffList[this.data.ownerIndex].staff_id);
+        this.setData({
+            modalName: "specimenInfo",
+            singleOut: false,
+            multipleOut: true
+        });
+    },
+    onGetAllBack: function() {
+        this.setData({
+            isGetAll: false
+        });
+        this.clearSelectStatus();
+    },
+    onGetAll: function() {
+        if (this.data.getAllList.length == 0) {
+            this.showToast('请选择要取出的标本');
+            return
+        }
+        let sample_ids = "";
+        let getAllList = this.data.getAllList;
+        for (let i = 0, length = getAllList.length; i < length; i++) {
+            sample_ids += getAllList[i] + ",";
+        }
+        sample_ids = sample_ids.substr(0, sample_ids.length - 1);
+        // console.log(sample_ids)
+        this.getSpecimen(sample_ids);
     },
     onClickOuterBox: function(e) {
         let tmp = parseInt(e.detail.value);
@@ -412,6 +481,10 @@ Page({
             }
         });
     },
+
+    // ======================== 取出标本 begin ======================== //
+
+    // 感染筛选
     onClickInfect: function(e) {
         if (this.data.isGetAll) {
             return
@@ -427,6 +500,7 @@ Page({
             this.requestSampleList(this.data.infectIndex, this.data.typeIndex, this.data.staffList[this.data.ownerIndex].staff_id);
         }
     },
+    // 类型筛选
     onClickType: function(e) {
         if (this.data.isGetAll) {
             return
@@ -442,6 +516,7 @@ Page({
             this.requestSampleList(this.data.infectIndex, this.data.typeIndex, this.data.staffList[this.data.ownerIndex].staff_id);
         }
     },
+    // 存放者筛选
     onClickOwner: function(e) {
         if (this.data.isGetAll) {
             return
@@ -456,40 +531,6 @@ Page({
             this.loadProgress();
             this.requestSampleList(this.data.infectIndex, this.data.typeIndex, this.data.staffList[this.data.ownerIndex].staff_id);
         }
-    },
-    onGetAllMode: function() {
-        this.clearFilter();
-        // 取出逻辑更改，暂时注释之前代码
-        // this.setData({
-        //     isGetAll: true
-        // });
-        // this.loadProgress();
-        // this.requestSampleList(this.data.infectIndex, this.data.typeIndex, this.data.staffList[this.data.ownerIndex].staff_id);
-        this.setData({
-            modalName: "specimenInfo",
-            singleOut: false,
-            multipleOut: true
-        });
-    },
-    onGetAllBack: function() {
-        this.setData({
-            isGetAll: false
-        });
-        this.clearSelectStatus();
-    },
-    onGetAll: function() {
-        if (this.data.getAllList.length == 0) {
-            this.showToast('请选择要取出的标本');
-            return
-        }
-        let sample_ids = "";
-        let getAllList = this.data.getAllList;
-        for (let i = 0, length = getAllList.length; i < length; i++) {
-            sample_ids += getAllList[i] + ",";
-        }
-        sample_ids = sample_ids.substr(0, sample_ids.length - 1);
-        // console.log(sample_ids)
-        this.getSpecimen(sample_ids);
     },
     // 清空选中标本的状态
     clearSelectStatus: function() {

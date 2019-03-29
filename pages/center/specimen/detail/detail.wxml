@@ -1,15 +1,13 @@
 <view class="cu-custom" style="height:{{CustomBar}}px;">
     <view class="cu-bar fixed bg-gradual-green" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
-        <navigator class='action border-custom' open-type="navigateBack" delta="1" hover-class="none"
-                   style='width:{{Custom.width}}px;height:{{Custom.height}}px;margin-left:calc(750rpx - {{Custom.right}}px)'>
+        <navigator class='action border-custom' open-type="navigateBack" delta="1" hover-class="none" style='width:{{Custom.width}}px;height:{{Custom.height}}px;margin-left:calc(750rpx - {{Custom.right}}px)'>
             <text class='icon-back'></text>
             <text class='icon-homefill'></text>
         </navigator>
         <view class='content' style='top:{{StatusBar}}px;'>标本列表</view>
     </view>
 </view>
-<scroll-view scroll-y class="indexes margin-bottom" scroll-into-view="indexes-{{listCurID}}"
-             style='height:calc(100vh - {{CustomBar}}px)' scroll-with-animation="true" enable-back-to-top="true">
+<scroll-view scroll-y class="indexes margin-bottom" scroll-into-view="indexes-{{listCurID}}" style='height:calc(100vh - {{CustomBar}}px)' scroll-with-animation="true" enable-back-to-top="true">
     <view class="title-section shadow">
         <view class="box-title">
             {{boxInfo.name?boxInfo.name:'-'}} ({{boxInfo.used_volume?boxInfo.used_volume:'-'}} / {{boxInfo.volume?boxInfo.volume:'-'}})
@@ -141,7 +139,7 @@
             </view>
         </view>
         <view class='padding-sm flex' wx:if='{{!isGetAll}}'>
-            <button class='cu-btn bg-green shadow' bindtap='onGetAllMode' style="width:100%;">
+            <button class='cu-btn bg-green shadow' bindtap='onGetAllMode' style="width:100%;" disabled="{{boxUse == 2}}">
                 批量取出
             </button>
         </view>
@@ -149,7 +147,7 @@
             <view class="flex-sub" style="padding-right:10rpx;">
                 <!-- 取出按钮 -->
                 <view wx:if='{{isGetAll}}'>
-                    <button class='cu-btn bg-green shadow' bindtap='onGetAll' style="width:100%;">
+                    <button class='cu-btn bg-green shadow' bindtap='onGetAll' style="width:100%;" disabled="{{boxUse == 2}}">
                         取出
                     </button>
                 </view>
@@ -165,7 +163,9 @@
         </view>
     </view>
 </scroll-view>
+
 <view class="cu-modal drawer-modal justify-end {{modalName=='specimenInfo'?'show':''}}" bindtap='hideModal'>
+    <!-- 批量取出 -->
     <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;" wx:if="{{multipleOut}}">
         <view class="cu-bar bg-white solid-bottom">
             <view class='action' style="font-size: 24rpx;">
@@ -180,17 +180,18 @@
                         {{outerBoxList[outerBoxIndex]}}
                     </view>
                 </picker>
-                </view>
             </view>
-            <view class='padding-sm flex'>
-                <button class='cu-btn bg-green shadow margin-right' bindtap="onMultipleOutClick" style="width:100%;">
-                    批量取出
-                </button>
-                <button class='cu-btn line-green shadow' bindtap="onMultipleGetBackClick" style="width:100%;">
-                    返回
-                </button>
+        </view>
+        <view class='padding-sm flex'>
+            <button class='cu-btn bg-green shadow margin-right' bindtap="onMultipleOutClick" style="width:100%;" disabled="{{boxUse == 2}}">
+                批量取出
+            </button>
+            <button class='cu-btn line-green shadow' bindtap="onMultipleGetBackClick" style="width:100%;">
+                返回
+            </button>
         </view>
     </view>
+    <!-- 取出 -->
     <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;" wx:if="{{singleOut}}">
         <view class="cu-bar bg-white solid-bottom">
             <view class='action' style="font-size: 24rpx;">
@@ -208,7 +209,7 @@
             </view>
         </view>
         <view class='padding-sm flex' style="display:{{selectedSpecimen.status == 2?'none':''}}">
-            <button class='cu-btn bg-green shadow margin-right' bindtap="onSingleOutClick" style="width:100%;">
+            <button class='cu-btn bg-green shadow margin-right' bindtap="onSingleOutClick" style="width:100%;" disabled="{{boxUse == 2}}">
                 取出
             </button>
             <button class='cu-btn line-green shadow' bindtap="onGetBackClick" style="width:100%;">
@@ -216,6 +217,7 @@
             </button>
         </view>
     </view>
+    <!-- 标本详情 -->
     <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;" wx:if="{{!singleOut && !multipleOut}}">
         <view class="cu-bar bg-white solid-bottom">
             <view class='action' style="font-size: 24rpx;">
@@ -233,19 +235,15 @@
             </view>
             <view class="cu-form-group cu-form-group-sepcial text-align-left text-small">
                 <view class='title text-small special'>标本类型</view>
-                <input class='radius text-small special' name='input' value="-" disabled></input>
+                <input class='radius text-small special' name='input' value="{{selectedSpecimen.typeValue}}" disabled></input>
             </view>
             <view class="cu-form-group cu-form-group-sepcial text-align-left text-small">
                 <view class='title text-small special'>离心转数</view>
-                <input class='radius text-small special' name='input' value="-" disabled></input>
+                <input class='radius text-small special' name='input' value="{{selectedSpecimen.eccentricityValue}}" disabled></input>
             </view>
             <view class="cu-form-group cu-form-group-sepcial text-align-left text-small">
                 <view class='title text-small special'>是否无菌</view>
-                <input class='radius text-small special' name='input' value="-" disabled></input>
-            </view>
-            <view class="cu-form-group cu-form-group-sepcial text-align-left text-small">
-                <view class='title text-small special'>是否感染</view>
-                <input class='radius text-small special' name='input' value="{{selectedSpecimen.msis?selectedSpecimen.msis:'-'}}" disabled></input>
+                <input class='radius text-small special' name='input' value="{{selectedSpecimen.isAsepsisValue}}" disabled></input>
             </view>
             <view class="cu-form-group cu-form-group-sepcial text-align-left text-small">
                 <view class='title text-small special'>存放日期</view>
@@ -269,7 +267,7 @@
             </view>
         </view>
         <view class='padding-sm flex' style="display:{{selectedSpecimen.status == 2?'none':''}}">
-            <button class='cu-btn bg-green shadow' bindtap="onGetClick" style="width:100%;">
+            <button class='cu-btn bg-green shadow' bindtap="onGetClick" style="width:100%;" disabled="{{boxUse == 2}}">
                 取出
             </button>
         </view>

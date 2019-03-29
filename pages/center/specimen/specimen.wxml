@@ -51,7 +51,7 @@
             </view>
             <view class='move'>
                 <view class='bg-cyan' data-selecteditem="{{item}}" bindtap="onItemClick">详情</view>
-                <view class='bg-olive' data-selecteditem="{{item}}" bindtap="onItemLockOrUnlock" disable="{{item.is_display_lock != 1?'disable':''}}">{{item.is_lock == 0?'解锁':'锁定'}}</view>
+                <view class='bg-olive' data-selecteditem="{{item}}" bindtap="onItemLockOrUnlock" disable="{{item.is_display_lock != 1?'disable':''}}">{{item.is_lock == 0?'锁定':'解锁'}}</view>
                 <view class='bg-red' data-selecteditem="{{item}}" bindtap='onItemDelete' hidden='true' disable="{{item.is_display_lock != 1?'disable':''}}">删除</view>
             </view>
         </view>
