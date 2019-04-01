@@ -57,15 +57,16 @@ Page({
         infectList: ['请选择', '不能确定', '非感染', '感染'],
         typeList: ['请选择', '置换术后', '占位器'],
         ownerList: ['请选择'],
-        // 取出UI标识位
-        singleOut: false,
-        multipleOut: false,
         // 可用取出盒列表
+        showDetail: false,
         outerBoxTitle: '请选择',
         outerBoxValue: '',
-        outerBoxList: ['请选择', '假数据1', '假数据2', '假数据3'],
+        outerBoxList: [],
+        outerBoxNameList: [],
         outerBoxIndex: 0,
-
+        outerBoxId: '',
+        // 取出的标本id
+        getSpecimenIds: ''
     },
     loadProgress: function() {
         if (this.data.loadProgress < 96) {
@@ -114,8 +115,6 @@ Page({
     hideModal(e) {
         this.setData({
             modalName: null,
-            singleOut: false,
-            multipleOut: false,
         });
     },
 
@@ -269,7 +268,7 @@ Page({
             } else if (specimen.color_type == SPECIMEN_TYPE_PUT || specimen.color_type == SPECIMEN_TYPE_GET) { // 已存放 or 已取出
                 this.showDetail(specimen.sample_id);
             }
-        } else { // 批量取出
+        } else if (specimen.color_type == SPECIMEN_TYPE_PUT) { // 批量取出，只有存放状态的可以取出
             let number = specimen.number;
             let columnIndex = this.data.letterArr.indexOf(number.substring(0, 1));
             let rowIndex = number.substring(1, number.length);
@@ -290,12 +289,12 @@ Page({
             this.setData({
                 specimenGrid: this.data.specimenGrid
             });
-            // console.log(this.data.getAllList)
         }
     },
     showDetail: function(specimenId) {
         this.setData({
-            modalName: 'specimenInfo'
+            modalName: 'specimenInfo',
+            showDetail: true
         });
         this.showLoading();
         let that = this;
@@ -340,93 +339,19 @@ Page({
         });
     },
     // ======================== 取出标本 begin ======================== //
-    onGetClick: function() {
-        debugger
-        // 取出逻辑更改，暂时注释之前代码
-        // this.setData({
-        //     modalName: ''
-        // });
-        // this.getSpecimen(this.data.selectedSpecimen.sample_id)
+    // 单取
+    onSingleGetClick: function(e) {
         this.setData({
-            multipleOut: false,
-            singleOut: true
-        });
+            showDetail: false,
+            getSpecimenIds: e.target.dataset.id
+        })
+        this.requestAbleBox(1)
     },
     onGetBackClick: function() {
-        this.setData({
-            singleOut: false
-        });
+        this.hideModal()
     },
-    onSingleOutClick: function() {
-        debugger
-        //单个取出逻辑放在这里
-        // let that = this;
-        // that.showLoading();
-        // wx.request({
-        //     url: constant.basePath,
-        //     data: {
-        //         service: 'Sample.DeleteSampleBox',
-        //         openid: app.globalData.openid,
-        //         box_id: boxId
-        //     },
-        //     header: {
-        //         'content-type': 'application/json'
-        //     },
-        //     success(res) {
-        //         that.hideLoading();
-        //         if (res.data.data.code == constant.response_success) {
-        //             that.loadProgress();
-        //             that.requestBoxList(that.data.searchValue, that.data.sortType);
-        //         } else {
-        //             that.showToast(res.data.data.msg);
-        //         }
-        //     },
-        //     fail(res) {
-        //         that.hideLoading();
-        //     }
-        // });
-        //最后关闭对话框
-        this.setData({
-            singleOut: false,
-            modalName: ''
-        });
-    },
-    onMultipleGetBackClick: function() {
-        this.setData({
-            multipleOut: false,
-            modalName: '',
-        });
-    },
-    onMultipleOutClick: function() {
-        //批量取出逻辑放在这里
-
-        //最后关闭对话框
-        this.setData({
-            multipleOut: false,
-            modalName: ''
-        });
-    },
-    onGetAllMode: function() {
-        this.clearFilter();
-        // 取出逻辑更改，暂时注释之前代码
-        // this.setData({
-        //     isGetAll: true
-        // });
-        // this.loadProgress();
-        // this.requestSampleList(this.data.infectIndex, this.data.typeIndex, this.data.staffList[this.data.ownerIndex].staff_id);
-        this.setData({
-            modalName: "specimenInfo",
-            singleOut: false,
-            multipleOut: true
-        });
-    },
-    onGetAllBack: function() {
-        this.setData({
-            isGetAll: false
-        });
-        this.clearSelectStatus();
-    },
-    onGetAll: function() {
+    // 批量取出
+    onMultipleGetClick: function() {
         if (this.data.getAllList.length == 0) {
             this.showToast('请选择要取出的标本');
             return
@@ -437,23 +362,82 @@ Page({
             sample_ids += getAllList[i] + ",";
         }
         sample_ids = sample_ids.substr(0, sample_ids.length - 1);
-        // console.log(sample_ids)
-        this.getSpecimen(sample_ids);
+
+        this.requestAbleBox(getAllList.length)
+        this.setData({
+            showDetail: false,
+            modalName: 'specimenInfo',
+            getSpecimenIds: sample_ids
+        })
+    },
+    onMultipleGetBackClick: function() {
+        this.hideModal()
+    },
+    toGetAllMode: function() {
+        this.clearFilter();
+        this.setData({
+            isGetAll: true
+        });
+    },
+    toNormalMode: function() {
+        this.setData({
+            isGetAll: false
+        });
+        this.clearSelectStatus();
+    },
+    // 获取可以存放的标本盒列表接口
+    requestAbleBox(specimenCount) {
+        let that = this;
+        that.showLoading();
+        wx.request({
+            url: constant.basePath,
+            data: {
+                service: 'Sample.EnablePutBoxList',
+                openid: app.globalData.openid,
+                center_id: that.data.centerId,
+                quantity: specimenCount
+            },
+            header: {
+                'content-type': 'application/json'
+            },
+            success(res) {
+                console.log("Sample.EnablePutBoxList:" + JSON.stringify(res))
+                that.hideLoading();
+                if (res.data.data.code == constant.response_success) {
+                    var boxNameList = []
+                    var boxList = res.data.data.list
+                    for (var i = 0, length = boxList.length; i < length; i++) {
+                        boxNameList[i] = boxList[i].name
+                    }
+                    boxNameList.unshift('请选择')
+                    that.setData({
+                        outerBoxList: boxList,
+                        outerBoxNameList: boxNameList
+                    })
+                } else {
+                    that.showToast(res.data.data.msg);
+                }
+            },
+            fail(res) {
+                that.hideLoading();
+            }
+        });
     },
     onClickOuterBox: function(e) {
         let tmp = parseInt(e.detail.value);
         if (tmp >= 0) {
             this.setData({
                 outerBoxValue: tmp,
-                outerBoxTitle: this.data.outerBoxList[tmp],
-                outerBoxIndex: tmp
+                outerBoxTitle: this.data.outerBoxNameList[tmp],
+                outerBoxIndex: tmp,
+                outerBoxId: this.data.outerBoxList[tmp - 1].id
             });
-            this.loadProgress();
-            this.requestSampleList(this.data.infectIndex, this.data.typeIndex, this.data.staffList[this.data.ownerIndex].staff_id);
+            // this.loadProgress();
+            // this.requestSampleList(this.data.infectIndex, this.data.typeIndex, this.data.staffList[this.data.ownerIndex].staff_id);
         }
     },
-    // 取出标本
-    getSpecimen: function(sample_ids) {
+    // 真正的取出
+    onFinalGet(sample_ids) {
         this.showLoading();
         let that = this;
         wx.request({
