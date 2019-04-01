@@ -898,6 +898,14 @@ Page({
             })
         }
     },
+    // 标本存放情况
+    onSpecimenDesc: function(e) {
+        if (this.data.caseInfo.puncture.sample_deposit_desc.length > 0) {
+            wx.navigateTo({
+                url: '../../center/specimen/detail/detail?boxId=' + e.currentTarget.dataset.selecteditem.id + '&centerId=' + this.data.centerId + "&caseId=" + this.data.caseId + "&boxUse=" + e.currentTarget.dataset.selecteditem.uses
+            })
+        }
+    },
     // -------- 诊断性穿刺 end -------- //
 
     // -------- 入院后信息 begin -------- //
@@ -1672,7 +1680,9 @@ Page({
             sqThirdxyDisabled: this.getValueDisable(info.puncture.puncture_aerobic_culture_result3),
             sqThirdyy: info.puncture.puncture_anaerobic_culture_result3,
             sqThirdyyDisabled: this.getValueDisable(info.puncture.puncture_anaerobic_culture_result3),
-            sample_desc: info.puncture.sample_deposit_desc,
+            // 已存标本
+            sample_desc: info.puncture.sample_deposit,
+            // 已取标本
             sample_used: info.puncture.sample_used,
         })
         // 入院后信息
@@ -1721,7 +1731,6 @@ Page({
             szzz3Disabled: this.getValueDisable(info.bein.culture_result3),
             szzz4: info.bein.culture_result4,
             szzz4Disabled: this.getValueDisable(info.bein.culture_result4),
-            szzz5: '',
             szxy: info.bein.intrao_aerobic_culture_result,
             szxyDisabled: this.getValueDisable(info.bein.intrao_aerobic_culture_result),
             szyy: info.bein.intrao_anaerobic_culture_result,
@@ -1959,7 +1968,7 @@ Page({
             return false;
         }
         if (!this.data.mNGSTypeDisabled && this.data.mNGSTypeIndex == 0) {
-            this.showToast("请选择本次培养送检类型")
+            this.showToast("请选择mNGS送检类型")
             return false;
         }
         if (!this.data.mNGSResultDisabled && this.data.mNGSResult.length == 0) {
@@ -2094,7 +2103,14 @@ Page({
             intrao_le_testpaper_centr_pic: JSON.stringify(leCentrPic),
             intrao_joint_fluid_leukocyte: parseFloat(this.getDefaultValue(that.data.szgjybxb)),
             intrao_neutrophils_percent: parseFloat(this.getDefaultValue(that.data.szgjyzxl)),
-            all_culture_result: that.data.qbgjy,
+            culture_result1: that.data.szzz1,
+            culture_result2: that.data.szzz2,
+            culture_result3: that.data.szzz3,
+            culture_result4: that.data.szzz4,
+            culture_result5: '',
+            intrao_aerobic_culture_result: that.data.szxy,
+            intrao_anaerobic_culture_result: that.data.szyy,
+            culture_ngs_result: that.data.szgjymNGS,
             tissue_ngs_result: that.data.zznMGSResult,
             ultrasonic_degradation_ngs_result: that.data.csljy,
             msis: parseInt(this.getDefaultValue(that.data.msisIndex)),
@@ -2238,39 +2254,39 @@ Page({
             return false;
         }
         if (!this.data.szzz1Disabled && this.data.szzz1.length == 0) {
-            this.showToast("术中组织培养结果1")
+            this.showToast("请填写术中组织培养结果1")
             return false;
         }
         if (!this.data.szzz2Disabled && this.data.szzz2.length == 0) {
-            this.showToast("术中组织培养结果2")
+            this.showToast("请填写术中组织培养结果2")
             return false;
         }
         if (!this.data.szzz3Disabled && this.data.szzz3.length == 0) {
-            this.showToast("术中组织培养结果3")
+            this.showToast("请填写术中组织培养结果3")
             return false;
         }
         if (!this.data.szzz4Disabled && this.data.szzz4.length == 0) {
-            this.showToast("术中组织培养结果4")
+            this.showToast("请填写术中组织培养结果4")
             return false;
         }
         if (!this.data.szxyDisabled && this.data.szxy.length == 0) {
-            this.showToast("术中关节液需氧+真菌培养结果")
+            this.showToast("请填写术中关节液需氧+真菌培养结果")
             return false;
         }
         if (!this.data.szyyDisabled && this.data.szyy.length == 0) {
-            this.showToast("术中关节液厌氧培养结果")
+            this.showToast("请填写术中关节液厌氧培养结果")
             return false;
         }
         if (!this.data.szgjymNGSDisabled && this.data.szgjymNGS.length == 0) {
-            this.showToast("术中关节液mNGS培养结果")
+            this.showToast("请填写术中关节液mNGS培养结果")
             return false;
         }
         if (!this.data.szzzmNGSDisabled && this.data.szzzmNGS.length == 0) {
-            this.showToast("术中组织mNGS培养结果")
+            this.showToast("请填写术中组织mNGS培养结果")
             return false;
         }
         if (!this.data.csljymNGSDisabled && this.data.csljymNGS.length == 0) {
-            this.showToast("超声裂解液mNGS培养结果")
+            this.showToast("请填写超声裂解液mNGS培养结果")
             return false;
         }
         if (!this.data.zznMGSResultDisabled && this.data.zznMGSResult.length == 0) {

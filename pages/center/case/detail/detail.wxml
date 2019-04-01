@@ -385,17 +385,17 @@
                             <switch class='green sm' bindchange="onSQThirdYYSwitchChange" style='margin-left: 15rpx;' checked='{{!sqThirdyyDisabled}}'></switch>
                         </view>
                         <!-- 标本存放情况 -->
-                        <view class="cu-form-group">
+                        <view class="cu-form-group" bindtap='onSpecimenDesc'>
                             <view style='display:flex;flex-direction: column; '>
                                 <view class='title' style='text-align:left'>标本存放情况</view>
-                                <input placeholder="暂未存放可用标本" style='width: 350rpx;text-align:left;' class='radius' disabled='{{true}}' value='{{sample_desc}}'></input>
+                                <input placeholder="暂未存放可用标本" style='width: 350rpx;text-align:left;' class='radius' value='{{sample_desc}}'></input>
                             </view>
                         </view>
                         <!-- 标本使用情况 -->
                         <view class="cu-form-group">
                             <view style='display:flex;flex-direction: column; '>
                                 <view class='title' style='text-align:left'>标本使用情况</view>
-                                <textarea placeholder="暂未使用该患者标本" style='width: 350rpx;text-align:left;' class='radius' disabled='{{true}}' value='{{sample_used}}' auto-height></textarea>
+                                <textarea placeholder="暂未使用该患者标本" style='width: 350rpx;text-align:left;' class='radius' value='{{sample_used}}' auto-height></textarea>
                             </view>
                         </view>
                     </view>

@@ -110,7 +110,7 @@
             </view>
         </view>
         <view class="cu-form-group">
-            <view class='title text-special'>是否感染</view>
+            <view class='title text-special'>是否无菌</view>
             <picker bindchange="onClickInfect" value="{{infectValue}}" range="{{infectList}}">
                 <view class="picker">
                     {{infectList[infectIndex]}}
@@ -118,7 +118,7 @@
             </picker>
         </view>
         <view class="cu-form-group">
-            <view class='title text-special'>手术类型</view>
+            <view class='title text-special'>标本类型</view>
             <picker bindchange="onClickType" value="{{typeValue}}" range="{{typeList}}">
                 <view class="picker">
                     {{typeList[typeIndex]}}

@@ -174,7 +174,6 @@ Page({
     onPutClick: function() {
         let that = this;
         that.showLoading();
-        console.log("typeIndex:" + that.data.typeIndex)
         wx.request({
             url: constant.basePath,
             data: {

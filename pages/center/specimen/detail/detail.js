@@ -54,8 +54,8 @@ Page({
         staffNameList: [],
         // 弹出框
         modalName: '',
-        infectList: ['请选择', '不能确定', '非感染', '感染'],
-        typeList: ['请选择', '置换术后', '占位器'],
+        infectList: ['请选择', '否', '是'],
+        typeList: ['请选择', '关节液', '血液', '组织'],
         ownerList: ['请选择'],
         // 可用取出盒列表
         showDetail: false,
@@ -199,7 +199,7 @@ Page({
                     service: 'Sample.GetSampleList',
                     openid: app.globalData.openid,
                     box_id: that.data.boxId,
-                    msis: msis,
+                    is_asepsis: msis,
                     type: type,
                     staff_id: staffId,
                     case_id: that.data.caseId
@@ -208,6 +208,7 @@ Page({
                     'content-type': 'application/json'
                 },
                 success(res) {
+                    console.log("Sample.GetSampleList:" + JSON.stringify(res))
                     that.completeProgress();
                     if (res.data.data.code == constant.response_success) {
                         let boxInfo = res.data.data.info;
@@ -219,6 +220,7 @@ Page({
                         let specimenGrid = that.makeSpecimenGrid(res.data.data.list);
                         that.setData({
                             boxInfo: boxInfo,
+                            boxUse: boxInfo.uses,
                             specimenGrid: specimenGrid
                         });
                     } else {
@@ -435,7 +437,11 @@ Page({
         }
     },
     // 真正的取出
-    onFinalGet(sample_ids) {
+    onFinalGet() {
+        if (this.data.outerBoxIndex == 0) {
+            this.showToast("请选择可用的取出盒")
+            return
+        }
         this.showLoading();
         let that = this;
         wx.request({
@@ -443,8 +449,7 @@ Page({
             data: {
                 service: 'Sample.GetSample',
                 openid: app.globalData.openid,
-                case_id: that.data.caseId,
-                sample_ids: sample_ids,
+                sample_ids: that.data.getSpecimenIds,
                 box_id: that.data.outerBoxId
             },
             header: {
@@ -464,7 +469,8 @@ Page({
                         isGetAll: false
                     })
                     that.hideModal()
-                    that.requestSampleList(that.data.infectIndex, that.data.typeIndex, that.data.staffList[that.data.ownerIndex].staff_id);
+                    // that.loadProgress();
+                    that.requestSampleList()
                 } else {
                     that.showToast(res.data.data.msg);
                 }
