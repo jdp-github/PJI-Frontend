@@ -432,8 +432,6 @@ Page({
                 outerBoxIndex: tmp,
                 outerBoxId: this.data.outerBoxList[tmp - 1].id
             });
-            // this.loadProgress();
-            // this.requestSampleList(this.data.infectIndex, this.data.typeIndex, this.data.staffList[this.data.ownerIndex].staff_id);
         }
     },
     // 真正的取出
@@ -445,19 +443,30 @@ Page({
             data: {
                 service: 'Sample.GetSample',
                 openid: app.globalData.openid,
-                sample_ids: sample_ids
+                case_id: that.data.caseId,
+                sample_ids: sample_ids,
+                box_id: that.data.outerBoxId
             },
             header: {
                 'content-type': 'application/json'
             },
             success(res) {
+                console.log("Sample.GetSample:" + JSON.stringify(res))
                 that.hideLoading();
                 if (res.data.data.code == constant.response_success) {
                     that.clearFilter();
                     that.loadProgress();
+                    that.setData({
+                        boxId: that.data.outerBoxId,
+                        outerBoxIndex: 0,
+                        outerBoxId: '',
+                        getSpecimenIds: '',
+                        isGetAll: false
+                    })
+                    that.hideModal()
                     that.requestSampleList(that.data.infectIndex, that.data.typeIndex, that.data.staffList[that.data.ownerIndex].staff_id);
                 } else {
-                    that.showToast(res.data.msg);
+                    that.showToast(res.data.data.msg);
                 }
             },
             fail(res) {
@@ -466,7 +475,7 @@ Page({
         });
     },
 
-    // ======================== 取出标本 begin ======================== //
+    // ======================== 取出标本 end ======================== //
 
     // 感染筛选
     onClickInfect: function(e) {
