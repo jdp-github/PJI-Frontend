@@ -900,9 +900,9 @@ Page({
     },
     // 标本存放情况
     onSpecimenDesc: function(e) {
-        if (this.data.caseInfo.puncture.sample_deposit_desc.length > 0) {
+        if (this.data.sample_desc.length > 0) {
             wx.navigateTo({
-                url: '../../center/specimen/detail/detail?boxId=' + e.currentTarget.dataset.selecteditem.id + '&centerId=' + this.data.centerId + "&caseId=" + this.data.caseId + "&boxUse=" + e.currentTarget.dataset.selecteditem.uses
+                url: '../../specimen/detail/detail?boxId=' + this.data.sample_desc[0].box_id + '&centerId=' + this.data.centerId + "&caseId=" + this.data.caseId + "&boxUse=" + this.data.sample_desc[0].uses
             })
         }
     },
