@@ -1756,7 +1756,7 @@ Page({
 
         // 标本存放情况
         let saveInfo = {};
-        for (let i = 0; i < this.data.sample_desc.length; i ++) {
+        for (let i = 0; i < this.data.sample_desc.length; i++) {
             let boxName = this.data.sample_desc[i].box_name;
             let number = this.data.sample_desc[i].number;
             if (saveInfo && saveInfo[boxName]) {
@@ -1766,7 +1766,7 @@ Page({
             }
         }
         let saveMsg = '';
-        for(let key in saveInfo){
+        for (let key in saveInfo) {
             saveMsg += saveInfo[key].join(',') + "," + key + " "
         }
         this.setData({
@@ -1775,7 +1775,7 @@ Page({
 
         // 标本取出情况
         let usedInfo = {};
-        for (let i = 0; i < this.data.sample_used.length; i ++) {
+        for (let i = 0; i < this.data.sample_used.length; i++) {
             let boxName = this.data.sample_used[i].box_name;
             let number = this.data.sample_used[i].number;
             if (usedInfo && usedInfo[boxName]) {
@@ -1785,7 +1785,7 @@ Page({
             }
         }
         let usedMsg = '';
-        for(let key in usedInfo){
+        for (let key in usedInfo) {
             usedMsg += usedInfo[key].join(',') + "," + key + " "
         }
         this.setData({
@@ -2463,4 +2463,33 @@ Page({
             prePage.initData()
         }
     },
+
+    onUnload() {
+        let that = this;
+        that.showLoading();
+        wx.request({
+            url: constant.basePath,
+            data: {
+                service: 'Case.ClearWritingStatus',
+                case_id: that.data.caseId,
+            },
+            header: {
+                'content-type': 'application/json'
+            },
+            success(res) {
+                that.hideLoading();
+                if (res.data.data.code == 0) {
+                    // that.reloadPrePage()
+                    // wx.navigateBack({
+                    //     delta: 1
+                    // })
+                } else {
+                    that.showModal("ErrModal", res.data.data.msg);
+                }
+            },
+            fail(res) {
+                that.hideLoading();
+            }
+        });
+    }
 });
