@@ -22,12 +22,16 @@
 <scroll-view scroll-y class="indexes margin-bottom" scroll-into-view="indexes-{{listCurID}}" style='padding-top:220rpx;height:calc(100vh - {{CustomBar}}px)' scroll-with-animation="true" enable-back-to-top="true">
     <view class="cu-list menu menu-avatar">
         <view style='display:flex;flex-direction:row'>
-            <button class='cu-btn bg-green shadow block margin-btn' bindtap="onAddCase">
-                添加病历
-            </button>
-            <button class='cu-btn bg-green shadow block margin-btn' bindtap="onRefresh">
-                刷新
-            </button>
+            <view class="flex-sub">
+                <button class='cu-btn bg-green shadow margin-btn block' bindtap="onAddCase">
+                    添加病历
+                </button>
+            </view>
+            <view class="flex-sub">
+                <button class='cu-btn bg-green shadow margin-btn block' bindtap="onRefresh">
+                    刷新列表
+                </button>
+            </view>
         </view>
         <view view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}}" wx:for="{{caseList}}" wx:key="" bindtouchstart='ListTouchStart' bindtouchmove='ListTouchMove' bindtouchend='ListTouchEnd' data-target="move-box-{{index}}">
             <view class='content'>
