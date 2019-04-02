@@ -1755,42 +1755,31 @@ Page({
         })
 
         // 标本存放情况
-        let saveInfo = {};
-        for (let i = 0; i < this.data.sample_desc.length; i++) {
-            let boxName = this.data.sample_desc[i].box_name;
-            let number = this.data.sample_desc[i].number;
-            if (saveInfo && saveInfo[boxName]) {
-                saveInfo[boxName] = saveInfo[boxName].push(number)
-            } else {
-                saveInfo[boxName] = [number]
-            }
-        }
-        let saveMsg = '';
-        for (let key in saveInfo) {
-            saveMsg += saveInfo[key].join(',') + "," + key + " "
-        }
         this.setData({
-            saveMsg: saveMsg
+            saveMsg: this.getSpecimenInfo(this.data.sample_desc)
         });
-
         // 标本取出情况
-        let usedInfo = {};
-        for (let i = 0; i < this.data.sample_used.length; i++) {
-            let boxName = this.data.sample_used[i].box_name;
-            let number = this.data.sample_used[i].number;
-            if (usedInfo && usedInfo[boxName]) {
-                usedInfo[boxName] = usedInfo[boxName].push(number)
+        this.setData({
+            usedMsg: this.getSpecimenInfo(this.data.sample_used)
+        });
+    },
+
+    getSpecimenInfo(specimenArr) {
+        let specimenMap = new Map()
+        for (let i = 0; i < specimenArr.length; i++) {
+            let box_name = specimenArr[i].box_name
+            if (!specimenMap.has(box_name)) {
+                specimenMap.set(box_name, [])
             } else {
-                usedInfo[boxName] = [number]
+                specimenMap.get(box_name).push(specimenArr[i].number)
             }
         }
-        let usedMsg = '';
-        for (let key in usedInfo) {
-            usedMsg += usedInfo[key].join(',') + "," + key + " "
-        }
-        this.setData({
-            usedMsg: usedMsg
+
+        let specimenMsg = '';
+        specimenMap.forEach(function(value, key, map) {
+            specimenMsg += "标本盒:" + key + ",标本序号:" + value+"   "
         });
+        return specimenMsg
     },
 
     getDefaultNum(num) {
