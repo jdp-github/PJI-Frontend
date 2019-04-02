@@ -1759,7 +1759,7 @@ Page({
         for (let i = 0; i < this.data.sample_desc.length; i ++) {
             let boxName = this.data.sample_desc[i].box_name;
             let number = this.data.sample_desc[i].number;
-            if (saveInfo[boxName]) {
+            if (saveInfo && saveInfo[boxName]) {
                 saveInfo[boxName] = saveInfo[boxName].push(number)
             } else {
                 saveInfo[boxName] = [number]
@@ -1778,7 +1778,7 @@ Page({
         for (let i = 0; i < this.data.sample_used.length; i ++) {
             let boxName = this.data.sample_used[i].box_name;
             let number = this.data.sample_used[i].number;
-            if (usedInfo[boxName]) {
+            if (usedInfo && usedInfo[boxName]) {
                 usedInfo[boxName] = usedInfo[boxName].push(number)
             } else {
                 usedInfo[boxName] = [number]
