@@ -253,6 +253,10 @@ Page({
             ListTouchDirection: null
         });
     },
+    onRefresh() {
+        this.loadProgress();
+        this.requestBoxList(this.data.searchValue, this.data.sortType);
+    },
     requestBoxList: function(searchValue, sortType) {
         let that = this;
         wx.request({

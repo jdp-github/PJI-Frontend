@@ -187,7 +187,7 @@ Page({
                         }
                         caseInfo.patient_name_prefix_letter = caseInfo.patient_name.substr(0, 1);
 
-                         // 进度
+                        // 进度
                         caseInfo.baseStatValue = that.getStateValue(caseInfo.base_state)
                         caseInfo.punctureStatValue = that.getStateValue(caseInfo.puncture_state)
                         caseInfo.beinStatValue = that.getStateValue(caseInfo.bein_state)
@@ -219,6 +219,10 @@ Page({
         }
 
         return stateValue
+    },
+
+    onRefresh: function(e) {
+        this.initData()
     },
 
     onAddCase: function(e) {
