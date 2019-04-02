@@ -1684,6 +1684,8 @@ Page({
             sample_desc: info.puncture.sample_deposit,
             // 已取标本
             sample_used: info.puncture.sample_used,
+            saveMsg: '',
+            usedMsg: '',
         })
         // 入院后信息
         this.setData({
@@ -1751,6 +1753,44 @@ Page({
             zzclIndex: info.bein.final_disposal,
             zzclDisabled: this.getNumDisable(info.bein.final_disposal)
         })
+
+        // 标本存放情况
+        let saveInfo = {};
+        for (let i = 0; i < this.data.sample_desc.length; i ++) {
+            let boxName = this.data.sample_desc[i].box_name;
+            let number = this.data.sample_desc[i].number;
+            if (saveInfo[boxName]) {
+                saveInfo[boxName] = saveInfo[boxName].push(number)
+            } else {
+                saveInfo[boxName] = [number]
+            }
+        }
+        let saveMsg = '';
+        for(let key in saveInfo){
+            saveMsg += saveInfo[key].join(',') + "," + key + " "
+        }
+        this.setData({
+            saveMsg: saveMsg
+        });
+
+        // 标本取出情况
+        let usedInfo = {};
+        for (let i = 0; i < this.data.sample_used.length; i ++) {
+            let boxName = this.data.sample_used[i].box_name;
+            let number = this.data.sample_used[i].number;
+            if (usedInfo[boxName]) {
+                usedInfo[boxName] = usedInfo[boxName].push(number)
+            } else {
+                usedInfo[boxName] = [number]
+            }
+        }
+        let usedMsg = '';
+        for(let key in usedInfo){
+            usedMsg += usedInfo[key].join(',') + "," + key + " "
+        }
+        this.setData({
+            usedMsg: usedMsg
+        });
     },
 
     getDefaultNum(num) {
