@@ -316,6 +316,7 @@ Page({
                 'content-type': 'application/json'
             },
             success(res) {
+                console.log("Sample.SetWritingStaff:" + JSON.stringify(res))
                 that.hideLoading();
                 if (res.data.data.code == constant.response_success) {
                     wx.navigateTo({
