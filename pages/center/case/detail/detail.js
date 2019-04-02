@@ -1813,7 +1813,6 @@ Page({
             } else if (avatarObjList[i].bein_editor_avatar) {
                 avatarList[i] = avatarObjList[i].bein_editor_avatar
             }
-
         }
         return avatarList
     },

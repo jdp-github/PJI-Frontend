@@ -299,9 +299,31 @@ Page({
         });
     },
     onItemClick: function(e) {
-        console.log(e)
-        wx.navigateTo({
-            url: '../../center/specimen/detail/detail?boxId=' + e.currentTarget.dataset.selecteditem.id + '&centerId=' + this.data.centerId + "&caseId=" + this.data.caseId + "&boxUse=" + e.currentTarget.dataset.selecteditem.uses
+        let that = this;
+        that.showLoading();
+        wx.request({
+            url: constant.basePath,
+            data: {
+                service: 'Sample.SetWritingStaff',
+                openid: app.globalData.openid,
+                box_id: e.target.dataset.selecteditem.id
+            },
+            header: {
+                'content-type': 'application/json'
+            },
+            success(res) {
+                that.hideLoading();
+                if (res.data.data.code == constant.response_success) {
+                    wx.navigateTo({
+                        url: '../../center/specimen/detail/detail?boxId=' + e.currentTarget.dataset.selecteditem.id + '&centerId=' + that.data.centerId + "&caseId=" + that.data.caseId + "&boxUse=" + e.currentTarget.dataset.selecteditem.uses
+                    });
+                } else {
+                    that.showToast(res.data.data.msg);
+                }
+            },
+            fail(res) {
+                that.hideLoading();
+            }
         });
     },
     onInput: function(e) {
