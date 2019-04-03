@@ -15,6 +15,7 @@ Page({
         isAdmin: false,
         // -------- modal begin ----------- //
         modalName: '',
+        errMsg: '',
         // -------- modal end ------------- //
         // -------- tab切换 begin -------- //
         TabCur: 0,
@@ -1946,7 +1947,7 @@ Page({
                 'content-type': 'application/json'
             },
             success(res) {
-                console.log("Case.CreateEditCasePuncture:"+JSON.stringify(res))
+                console.log("Case.CreateEditCasePuncture:" + JSON.stringify(res))
                 that.hideLoading();
                 if (res.data.data.code == 0) {
                     that.showToast("提交成功")

@@ -497,7 +497,7 @@ Page({
                         isGetAll: false
                     })
                     that.hideModal()
-                    that.showToast("取出成功")
+                    that.showToast("取出成功，标本列表已跳转至[" + that.data.outerBoxTitle + "]")
                     that.requestSampleList()
                 } else {
                     that.showToast(res.data.data.msg);
