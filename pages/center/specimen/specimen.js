@@ -65,6 +65,8 @@ Page({
         boxUse: 1,
         boxPicUrl: '',
         boxPicUploud: '',
+        // 新增标本盒备注
+        comment: ''
     },
     radioChange(e) {
         console.log(e.detail.value)
@@ -253,6 +255,10 @@ Page({
             ListTouchDirection: null
         });
     },
+    onRefresh() {
+        this.loadProgress();
+        this.requestBoxList(this.data.searchValue, this.data.sortType);
+    },
     requestBoxList: function(searchValue, sortType) {
         let that = this;
         wx.request({
@@ -299,9 +305,32 @@ Page({
         });
     },
     onItemClick: function(e) {
-        console.log(e)
-        wx.navigateTo({
-            url: '../../center/specimen/detail/detail?boxId=' + e.currentTarget.dataset.selecteditem.id + '&centerId=' + this.data.centerId + "&caseId=" + this.data.caseId + "&boxUse=" + e.currentTarget.dataset.selecteditem.uses
+        let that = this;
+        that.showLoading();
+        wx.request({
+            url: constant.basePath,
+            data: {
+                service: 'Sample.SetWritingStaff',
+                openid: app.globalData.openid,
+                box_id: e.target.dataset.selecteditem.id
+            },
+            header: {
+                'content-type': 'application/json'
+            },
+            success(res) {
+                console.log("Sample.SetWritingStaff:" + JSON.stringify(res))
+                that.hideLoading();
+                if (res.data.data.code == constant.response_success) {
+                    wx.navigateTo({
+                        url: '../../center/specimen/detail/detail?boxId=' + e.currentTarget.dataset.selecteditem.id + '&centerId=' + that.data.centerId + "&caseId=" + that.data.caseId + "&boxUse=" + e.currentTarget.dataset.selecteditem.uses
+                    });
+                } else {
+                    that.showToast(res.data.data.msg);
+                }
+            },
+            fail(res) {
+                that.hideLoading();
+            }
         });
     },
     onInput: function(e) {
@@ -312,6 +341,10 @@ Page({
         } else if (e.target.dataset.prop == "depositary") {
             this.setData({
                 depositary: e.detail.value
+            });
+        } else if (e.target.dataset.prop == "comment") {
+            this.setData({
+                comment: e.detail.value
             });
         }
     },
@@ -407,7 +440,8 @@ Page({
                 name: that.data.boxName,
                 depositary: that.data.depositary,
                 uses: parseInt(that.data.boxUse),
-                image: that.data.boxPicUploud
+                image: that.data.boxPicUploud,
+                remark: that.data.comment
             },
             header: {
                 'content-type': 'application/json'

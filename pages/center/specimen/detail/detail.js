@@ -447,6 +447,34 @@ Page({
         wx.request({
             url: constant.basePath,
             data: {
+                service: 'Sample.SetWritingStaff',
+                openid: app.globalData.openid,
+                box_id: that.data.outerBoxId
+            },
+            header: {
+                'content-type': 'application/json'
+            },
+            success(res) {
+                that.hideLoading();
+                if (res.data.data.code == constant.response_success) {
+                    that.requestGetSpecimen()
+                } else {
+                    that.showToast(res.data.data.msg);
+                }
+            },
+            fail(res) {
+                that.hideLoading();
+            }
+        });
+
+    },
+
+    requestGetSpecimen() {
+        this.showLoading();
+        let that = this;
+        wx.request({
+            url: constant.basePath,
+            data: {
                 service: 'Sample.GetSample',
                 openid: app.globalData.openid,
                 sample_ids: that.data.getSpecimenIds,
@@ -469,7 +497,6 @@ Page({
                         isGetAll: false
                     })
                     that.hideModal()
-                    // that.loadProgress();
                     that.requestSampleList()
                 } else {
                     that.showToast(res.data.data.msg);
@@ -480,7 +507,6 @@ Page({
             }
         });
     },
-
     // ======================== 取出标本 end ======================== //
 
     // 感染筛选
@@ -546,6 +572,35 @@ Page({
         }
         this.setData({
             specimenGrid: specimenGrid
+        });
+    },
+
+    onUnload() {
+        let that = this;
+        that.showLoading();
+        wx.request({
+            url: constant.basePath,
+            data: {
+                service: 'Sample.ClearWritingStatus',
+                box_id: that.data.boxId,
+            },
+            header: {
+                'content-type': 'application/json'
+            },
+            success(res) {
+                that.hideLoading();
+                if (res.data.data.code == 0) {
+                    // that.reloadPrePage()
+                    // wx.navigateBack({
+                    //     delta: 1
+                    // })
+                } else {
+                    that.showModal("ErrModal", res.data.data.msg);
+                }
+            },
+            fail(res) {
+                that.hideLoading();
+            }
         });
     }
 });

@@ -178,12 +178,20 @@ Page({
             success(res) {
                 that.hideLoading();
                 if (res.data.data.code == constant.response_success) {
-                    that.showToast('申请提交成功，需上级审批，请耐心等待');
-                    wx.navigateBack({
-                        delta: 2
+                    wx.showToast({
+                        icon: 'none',
+                        title: '申请提交成功，请耐心等待',
                     });
+                    setTimeout(function() {
+                        wx.navigateBack({
+                            delta: 2
+                        });
+                    }, 3000)
                 } else {
-                    that.showToast(res.data.msg);
+                    wx.showToast({
+                        icon: 'none',
+                        title: res.data.data.msg,
+                    });
                 }
             },
             fail(res) {

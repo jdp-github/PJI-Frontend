@@ -21,9 +21,18 @@
 </view>
 <scroll-view scroll-y class="indexes margin-bottom" scroll-into-view="indexes-{{listCurID}}" style='padding-top:220rpx;height:calc(100vh - {{CustomBar}}px)' scroll-with-animation="true" enable-back-to-top="true">
     <view class="cu-list menu menu-avatar">
-        <button class='cu-btn bg-green shadow block margin-btn' bindtap="onAddCase">
-            添加病历
-        </button>
+        <view style='display:flex;flex-direction:row'>
+            <view class="flex-sub">
+                <button class='cu-btn bg-green shadow margin-btn block' bindtap="onAddCase">
+                    添加病历
+                </button>
+            </view>
+            <view class="flex-sub">
+                <button class='cu-btn bg-green shadow margin-btn block' bindtap="onRefresh">
+                    刷新列表
+                </button>
+            </view>
+        </view>
         <view view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}}" wx:for="{{caseList}}" wx:key="" bindtouchstart='ListTouchStart' bindtouchmove='ListTouchMove' bindtouchend='ListTouchEnd' data-target="move-box-{{index}}">
             <view class='content'>
                 <view class="flex-twice">
@@ -38,7 +47,7 @@
                             <view class="flex-sub text-small">
                                 <div class="flex">
                                     <view class="flex-sub">
-                                        <i class="icon-lock text-red" wx:if="{{item.base_state == 2 &&item.puncture_state == 2 && item.bein_state == 2  }}"></i>
+                                        <i class="icon-lock text-red" wx:if="{{item.base_state == 2 || item.puncture_state == 2 || item.bein_state == 2  }}"></i>
                                         <i class="icon-unlock text-green" wx:else></i>
                                         <view class="cu-tag sm radius" style="font-size: 22rpx;background-color:#ccc;color:#fff;font-weight:bold;margin-left:8rpx;">{{item.type_name}}</view>
                                         <view class="cu-tag sm radius" style="font-size: 22rpx;background-color:#ccc;color:#fff;font-weight:bold;">{{item.msis_name.length == 0?"暂无":item.msis_name}}</view>

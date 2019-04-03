@@ -174,6 +174,8 @@ Page({
         szzz3Disabled: true,
         szzz4: '',
         szzz4Disabled: true,
+        szzz5: '',
+        szzz5Disabled: true,
         szxy: '',
         szxyDisabled: true,
         szyy: '',
@@ -1148,6 +1150,21 @@ Page({
             })
         }
     },
+    onSzzz5Input: function(e) {
+        this.setData({
+            szzz5: e.detail.value
+        });
+    },
+    onSzzz5SwitchChange: function(e) {
+        this.setData({
+            szzz5Disabled: !e.detail.value
+        });
+        if (this.data.szzz5Disabled) {
+            this.setData({
+                szzz5: ""
+            })
+        }
+    },
     onSzxyInput: function(e) {
         this.setData({
             szxy: e.detail.value
@@ -1733,6 +1750,8 @@ Page({
             szzz3Disabled: this.getValueDisable(info.bein.culture_result3),
             szzz4: info.bein.culture_result4,
             szzz4Disabled: this.getValueDisable(info.bein.culture_result4),
+            szzz5: info.bein.culture_result5,
+            szzz5Disabled: this.getValueDisable(info.bein.culture_result5),
             szxy: info.bein.intrao_aerobic_culture_result,
             szxyDisabled: this.getValueDisable(info.bein.intrao_aerobic_culture_result),
             szyy: info.bein.intrao_anaerobic_culture_result,
@@ -1755,42 +1774,31 @@ Page({
         })
 
         // 标本存放情况
-        let saveInfo = {};
-        for (let i = 0; i < this.data.sample_desc.length; i ++) {
-            let boxName = this.data.sample_desc[i].box_name;
-            let number = this.data.sample_desc[i].number;
-            if (saveInfo[boxName]) {
-                saveInfo[boxName] = saveInfo[boxName].push(number)
-            } else {
-                saveInfo[boxName] = [number]
-            }
-        }
-        let saveMsg = '';
-        for(let key in saveInfo){
-            saveMsg += saveInfo[key].join(',') + "," + key + " "
-        }
         this.setData({
-            saveMsg: saveMsg
+            saveMsg: this.getSpecimenInfo(this.data.sample_desc)
         });
-
         // 标本取出情况
-        let usedInfo = {};
-        for (let i = 0; i < this.data.sample_used.length; i ++) {
-            let boxName = this.data.sample_used[i].box_name;
-            let number = this.data.sample_used[i].number;
-            if (usedInfo[boxName]) {
-                usedInfo[boxName] = usedInfo[boxName].push(number)
+        this.setData({
+            usedMsg: this.getSpecimenInfo(this.data.sample_used)
+        });
+    },
+
+    getSpecimenInfo(specimenArr) {
+        let specimenMap = new Map()
+        for (let i = 0; i < specimenArr.length; i++) {
+            let box_name = specimenArr[i].box_name
+            if (!specimenMap.has(box_name)) {
+                specimenMap.set(box_name, [])
             } else {
-                usedInfo[boxName] = [number]
+                specimenMap.get(box_name).push(specimenArr[i].number)
             }
         }
-        let usedMsg = '';
-        for(let key in usedInfo){
-            usedMsg += usedInfo[key].join(',') + "," + key + " "
-        }
-        this.setData({
-            usedMsg: usedMsg
+
+        let specimenMsg = '';
+        specimenMap.forEach(function(value, key, map) {
+            specimenMsg += "标本盒:" + key + ",标本序号:" + value+"   "
         });
+        return specimenMsg
     },
 
     getDefaultNum(num) {
@@ -1824,7 +1832,6 @@ Page({
             } else if (avatarObjList[i].bein_editor_avatar) {
                 avatarList[i] = avatarObjList[i].bein_editor_avatar
             }
-
         }
         return avatarList
     },
@@ -2147,7 +2154,7 @@ Page({
             culture_result2: that.data.szzz2,
             culture_result3: that.data.szzz3,
             culture_result4: that.data.szzz4,
-            culture_result5: '',
+            culture_result5: that.data.szzz5,
             intrao_aerobic_culture_result: that.data.szxy,
             intrao_anaerobic_culture_result: that.data.szyy,
             culture_ngs_result: that.data.szgjymNGS,
@@ -2309,6 +2316,10 @@ Page({
             this.showToast("请填写术中组织培养结果4")
             return false;
         }
+        if (!this.data.szzz5Disabled && this.data.szzz5.length == 0) {
+            this.showToast("请填写术中组织培养结果5")
+            return false;
+        }
         if (!this.data.szxyDisabled && this.data.szxy.length == 0) {
             this.showToast("请填写术中关节液需氧+真菌培养结果")
             return false;
@@ -2463,4 +2474,33 @@ Page({
             prePage.initData()
         }
     },
+
+    onUnload() {
+        let that = this;
+        that.showLoading();
+        wx.request({
+            url: constant.basePath,
+            data: {
+                service: 'Case.ClearWritingStatus',
+                case_id: that.data.caseId,
+            },
+            header: {
+                'content-type': 'application/json'
+            },
+            success(res) {
+                that.hideLoading();
+                if (res.data.data.code == 0) {
+                    // that.reloadPrePage()
+                    // wx.navigateBack({
+                    //     delta: 1
+                    // })
+                } else {
+                    that.showModal("ErrModal", res.data.data.msg);
+                }
+            },
+            fail(res) {
+                that.hideLoading();
+            }
+        });
+    }
 });
