@@ -1347,7 +1347,7 @@ Page({
     // -------- 提示框 end -------- //
 
     // -------- 模态对话框 start -------- //
-    showModal: function(e, errMessage) {
+    showModal: function(e, errMessage = '') {
         if (e.currentTarget) {
             this.setData({
                 modalName: e.currentTarget.dataset.target

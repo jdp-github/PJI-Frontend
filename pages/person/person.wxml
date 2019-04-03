@@ -80,7 +80,7 @@
 </view>
 <view class="load-curtain" wx:if="{{loadProgress!=0}}"></view>
 <view class="cu-modal drawer-modal justify-end {{modalName=='DrawerModalRight'?'show':''}}" bindtap='hideModal'>
-    <view class="cu-dialog basis-lg" catchtap="ignoreTap" style="top:{{CustomBar}}px;height:100%;width:100%;">
+    <view class="cu-dialog basis-lg" catchtap="ignoreTap" style="top:{{CustomBar}}px;height:100%;width:100%;padding-bottom: 145rpx;">
         <scroll-view scroll-y class="bg-white nav text-center" style="height:100%;width:100%;padding-bottom: 115rpx;">
             <view class="cu-item {{index==TabCur?'text-orange cur':''}}" wx:for="{{tabItems}}" wx:key bindtap='tabSelect' data-id="{{index}}">
                 {{item}}
