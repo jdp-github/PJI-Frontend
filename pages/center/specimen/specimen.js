@@ -65,6 +65,8 @@ Page({
         boxUse: 1,
         boxPicUrl: '',
         boxPicUploud: '',
+        // 新增标本盒备注
+        comment: ''
     },
     radioChange(e) {
         console.log(e.detail.value)
@@ -340,6 +342,10 @@ Page({
             this.setData({
                 depositary: e.detail.value
             });
+        } else if (e.target.dataset.prop == "comment") {
+            this.setData({
+                comment: e.detail.value
+            });
         }
     },
     onItemDelete: function(e) {
@@ -434,7 +440,8 @@ Page({
                 name: that.data.boxName,
                 depositary: that.data.depositary,
                 uses: parseInt(that.data.boxUse),
-                image: that.data.boxPicUploud
+                image: that.data.boxPicUploud,
+                remark: that.data.comment
             },
             header: {
                 'content-type': 'application/json'

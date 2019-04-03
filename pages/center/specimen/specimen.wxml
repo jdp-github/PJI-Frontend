@@ -89,6 +89,10 @@
             <view class='title text-small'>存放地点</view>
             <input placeholder='请输入存放地点' class='radius text-small' value='{{depositary}}' data-prop='depositary' bindinput="onInput"></input>
         </view>
+        <view class="cu-form-group">
+            <view class='title text-small'>备注</view>
+            <input placeholder='请输入备注信息' class='radius text-small' value='{{comment}}' data-prop='comment' bindinput="onInput"></input>
+        </view>
         <view class="cu-form-group padding-bottom">
             <radio-group class="block" bindchange="radioChange">
                 <view class='title text-small'>标本盒用途</view>

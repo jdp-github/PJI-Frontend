@@ -19,10 +19,6 @@
         </view>
     </view>
     <view class="cu-form-group margin-top">
-        <view class='title text-special'>标本说明</view>
-        <input class='radius text-small special' style='text-align:right' name='input' placeholder="请输入标本说明信息..." bindinput="onInput" value="{{remark}}"></input>
-    </view>
-    <view class="cu-form-group">
         <view class='title text-special'>标本类型</view>
         <picker bindchange="onClickType" value="{{typeIndex}}" range="{{typeList}}">
             <view class="picker">
@@ -45,6 +41,10 @@
                 {{axenicList[axenicIndex]}}
             </view>
         </picker>
+    </view>
+    <view class="cu-form-group">
+        <view class='title text-special'>标本说明</view>
+        <input class='radius text-small special' style='text-align:right' name='input' placeholder="请输入标本说明信息..." bindinput="onInput" value="{{remark}}"></input>
     </view>
     <view class="cu-bar bg-white solid-bottom margin-top">
         <view class='action' style="font-size: 24rpx;">

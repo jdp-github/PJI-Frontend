@@ -298,7 +298,7 @@
                         <view class="cu-form-group {{drgpypDisabled?'disabled':''}}">
                             <view style='display:flex;flex-direction: column; '>
                                 <view class='title' style='text-align:left'>打入各培养瓶量(ml)</view>
-                                <input style=' width: 350rpx;text-algin:left;' class='radius' type='digit' style='text-align:left;' bindinput="onDrgpypjChange" disabled='{{drgpypDisabled}}' value='{{drgpyp}}'></input>
+                                <input style=' width: 350rpx;text-algin:left;' class='radius' type='digit' style='text-align:left;' bindinput="onDrgpypjChange" disabled='{{drgpypDisabled}}' value='{{drgpyp}}' placeholder="请输入数字，不适用请点击右侧"></input>
                             </view>
                             <switch class='green sm' bindchange="onDrgpypSwitchChange" style='margin-left: 15rpx;' checked='{{!drgpypDisabled}}'></switch>
                         </view>
@@ -569,6 +569,14 @@
                                 <input placeholder="请输入培养结果，不适用请点击右侧" class='radius' style='width: 350rpx;text-align:left;' bindinput="onSzzz4Input" disabled='{{szzz4Disabled}}' value='{{szzz4}}'></input>
                             </view>
                             <switch class='green sm' bindchange="onSzzz4SwitchChange" style='margin-left: 15rpx;' checked='{{!szzz4Disabled}}'></switch>
+                        </view>
+                        <!-- 术中组织培养结果5 -->
+                        <view class="cu-form-group {{szzz5Disabled?'disabled':''}}">
+                            <view style='display:flex;flex-direction: column; '>
+                                <view class='title' style='text-align:left'>术中组织培养结果5</view>
+                                <input placeholder="请输入培养结果，不适用请点击右侧" class='radius' style='width: 350rpx;text-align:left;' bindinput="onSzzz5Input" disabled='{{szzz5Disabled}}' value='{{szzz5}}'></input>
+                            </view>
+                            <switch class='green sm' bindchange="onSzzz5SwitchChange" style='margin-left: 15rpx;' checked='{{!szzz5Disabled}}'></switch>
                         </view>
                         <!-- 术中关节液需氧+真菌培养结果 -->
                         <view class="cu-form-group {{szxyDisabled?'disabled':''}}">

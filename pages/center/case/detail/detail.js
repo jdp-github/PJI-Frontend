@@ -174,6 +174,8 @@ Page({
         szzz3Disabled: true,
         szzz4: '',
         szzz4Disabled: true,
+        szzz5: '',
+        szzz5Disabled: true,
         szxy: '',
         szxyDisabled: true,
         szyy: '',
@@ -1148,6 +1150,21 @@ Page({
             })
         }
     },
+    onSzzz5Input: function(e) {
+        this.setData({
+            szzz5: e.detail.value
+        });
+    },
+    onSzzz5SwitchChange: function(e) {
+        this.setData({
+            szzz5Disabled: !e.detail.value
+        });
+        if (this.data.szzz5Disabled) {
+            this.setData({
+                szzz5: ""
+            })
+        }
+    },
     onSzxyInput: function(e) {
         this.setData({
             szxy: e.detail.value
@@ -1733,6 +1750,8 @@ Page({
             szzz3Disabled: this.getValueDisable(info.bein.culture_result3),
             szzz4: info.bein.culture_result4,
             szzz4Disabled: this.getValueDisable(info.bein.culture_result4),
+            szzz5: info.bein.culture_result5,
+            szzz5Disabled: this.getValueDisable(info.bein.culture_result5),
             szxy: info.bein.intrao_aerobic_culture_result,
             szxyDisabled: this.getValueDisable(info.bein.intrao_aerobic_culture_result),
             szyy: info.bein.intrao_anaerobic_culture_result,
@@ -2135,7 +2154,7 @@ Page({
             culture_result2: that.data.szzz2,
             culture_result3: that.data.szzz3,
             culture_result4: that.data.szzz4,
-            culture_result5: '',
+            culture_result5: that.data.szzz5,
             intrao_aerobic_culture_result: that.data.szxy,
             intrao_anaerobic_culture_result: that.data.szyy,
             culture_ngs_result: that.data.szgjymNGS,
@@ -2295,6 +2314,10 @@ Page({
         }
         if (!this.data.szzz4Disabled && this.data.szzz4.length == 0) {
             this.showToast("请填写术中组织培养结果4")
+            return false;
+        }
+        if (!this.data.szzz5Disabled && this.data.szzz5.length == 0) {
+            this.showToast("请填写术中组织培养结果5")
             return false;
         }
         if (!this.data.szxyDisabled && this.data.szxy.length == 0) {
