@@ -36,15 +36,15 @@
     </view>
     <view class="canvas-bottom shadow cf flex align-center">
         <view class='cu-tag radius bg-green small fl'>已审核</view>
-        <view class="fr text-special">{{complete_list.approve?complete_list.approve:'-'}} 例</view>
+        <view class="fr text-special">{{complete_list.approve?complete_list.approve:'0'}} 例</view>
     </view>
     <view class="canvas-bottom shadow cf flex align-center">
         <view class='cu-tag radius bg-orange text-white small fl'>未审核</view>
-        <view class="fr text-special">{{complete_list.notapprove?complete_list.notapprove:'-'}} 例</view>
+        <view class="fr text-special">{{complete_list.no_approve_cases?complete_list.no_approve_cases:'0'}} 例</view>
     </view>
     <view class="canvas-bottom shadow cf flex align-center">
-        <view class='cu-tag radius bg-gray small fl'>未完成</view>
-        <view class="fr text-special">{{complete_list.notcomplete?complete_list.notcomplete:'-'}} 例</view>
+        <view class='cu-tag radius bg-gray small fl'>总共</view>
+        <view class="fr text-special">{{complete_list.total_cases?complete_list.total_cases:'0'}} 例</view>
     </view>
     <view class="canvas-header shadow">感染比例</view>
     <view class="shadow canvas-container">
@@ -58,11 +58,11 @@
     </view>
     <view class="canvas-bottom shadow cf flex align-center">
         <view class='cu-tag radius bg-green small fl'>非感染</view>
-        <view class="fr text-special">{{infect_list.notinfect?infect_list.notinfect:'-'}} 例</view>
+        <view class="fr text-special">{{infect_list.notinfect?infect_list.notinfect:'0'}} 例</view>
     </view>
     <view class="canvas-bottom shadow cf flex align-center">
         <view class='cu-tag radius bg-gray small fl'>已感染</view>
-        <view class="fr text-special">{{infect_list.infect?infect_list.infect:'-'}} 例</view>
+        <view class="fr text-special">{{infect_list.infect?infect_list.infect:'0'}} 例</view>
     </view>
     <view class="canvas-header shadow">类型比例</view>
     <view class="shadow canvas-container">
@@ -76,11 +76,11 @@
     </view>
     <view class="canvas-bottom shadow cf flex align-center">
         <view class='cu-tag radius bg-green small fl'>占位器</view>
-        <view class="fr text-special">{{type_list.seize?type_list.seize:'-'}} 例</view>
+        <view class="fr text-special">{{type_list.seize?type_list.seize:'0'}} 例</view>
     </view>
     <view class="canvas-bottom shadow cf flex align-center">
         <view class='cu-tag radius bg-gray small fl'>置换术后</view>
-        <view class="fr text-special">{{type_list.displace?type_list.displace:'-'}} 例</view>
+        <view class="fr text-special">{{type_list.displace?type_list.displace:'0'}} 例</view>
     </view>
 </scroll-view>
 <view class='load-progress {{loadProgress!=0?"show":"hide"}}' style="top:{{CustomBar}}px;">

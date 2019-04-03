@@ -117,7 +117,8 @@ Page({
             wx.request({
                 url: constant.basePath,
                 data: {
-                    service: 'Center.GetCenterList'
+                    service: 'Center.SearchStaffCenter',
+                    openid: app.globalData.openid
                 },
                 header: {
                     'content-type': 'application/json'
@@ -125,10 +126,11 @@ Page({
                 success(res) {
                     if (res.data.data.code == constant.response_success) {
                         that.setData({
+                            centerValueList: [],
                             centerObjList: res.data.data.list
                         });
                         for (let i = 0, len = that.data.centerObjList.length; i < len; i++) {
-                            that.data.centerValueList[i] = that.data.centerObjList[i].name;
+                            that.data.centerValueList[i] = that.data.centerObjList[i].center_name;
                         }
                         that.data.centerValueList.push('全部');
                         that.setData({
@@ -153,7 +155,8 @@ Page({
                 url: constant.basePath,
                 data: {
                     service: 'Statistics.GetCharts',
-                    center_id: all ? "" : that.data.centerObjList[that.data.centerIndex].id
+                    center_id: all ? "" : that.data.centerObjList[that.data.centerIndex].id,
+                    openid: app.globalData.openid
                 },
                 header: {
                     'content-type': 'application/json'
@@ -165,16 +168,16 @@ Page({
                         let seize = res.data.data.type_list.seize;
                         let displace = res.data.data.type_list.displace;
                         let approve = res.data.data.finished_list.approve;
-                        let notApprove = res.data.data.finished_list.notapprove;
-                        let notCompleted = res.data.data.finished_list.notcomplete;
+                        let notApprove = res.data.data.finished_list.no_approve_cases;
+                        let totalCases = res.data.data.finished_list.total_cases;
                         that.setData({
                             complete_list: res.data.data.finished_list,
                             infect_list: res.data.data.infect_list,
                             type_list: res.data.data.type_list,
-                            noInfectPercentage: Math.round((parseInt(notInfect) / (parseInt(notInfect) + parseInt(infect))) * 100),
-                            seizePercentage: Math.round((parseInt(seize) / (parseInt(seize) + parseInt(displace))) * 100),
-                            approvePercentage: Math.round((parseInt(approve) / (parseInt(approve) + parseInt(notApprove) + parseInt(notCompleted))) * 100),
-                            notApprovePercentage: Math.round((notApprove / (parseInt(approve) + parseInt(notApprove) + parseInt(notCompleted))) * 100)
+                            noInfectPercentage: Math.round((parseInt(notInfect) / (parseInt(notInfect) + parseInt(infect))) * 100)?Math.round((parseInt(notInfect) / (parseInt(notInfect) + parseInt(infect))) * 100):0,
+                            seizePercentage: Math.round((parseInt(seize) / (parseInt(seize) + parseInt(displace))) * 100)?Math.round((parseInt(seize) / (parseInt(seize) + parseInt(displace))) * 100):0,
+                            approvePercentage: Math.round((parseInt(approve) / parseInt(totalCases)) * 100)? Math.round((parseInt(approve) / parseInt(totalCases)) * 100):0,
+                            notApprovePercentage: Math.round((notApprove / parseInt(totalCases)) * 100)?Math.round((notApprove / parseInt(totalCases)) * 100):0
                         });
                     } else {
                         that.showToast(res.data.msg);
