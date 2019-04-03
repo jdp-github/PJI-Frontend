@@ -1346,7 +1346,7 @@ Page({
     // -------- 提示框 end -------- //
 
     // -------- 模态对话框 start -------- //
-    showModal: function(e, errMsg) {
+    showModal: function(e, errMessage) {
         if (e.currentTarget) {
             this.setData({
                 modalName: e.currentTarget.dataset.target
@@ -1354,7 +1354,7 @@ Page({
         } else {
             this.setData({
                 modalName: e,
-                errMsg: errMsg
+                errMsg: errMessage
             });
         }
     },
