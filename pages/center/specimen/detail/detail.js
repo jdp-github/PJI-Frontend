@@ -497,6 +497,7 @@ Page({
                         isGetAll: false
                     })
                     that.hideModal()
+                    that.showToast("取出成功")
                     that.requestSampleList()
                 } else {
                     that.showToast(res.data.data.msg);

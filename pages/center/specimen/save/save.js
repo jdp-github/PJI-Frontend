@@ -194,6 +194,7 @@ Page({
                 console.log("Sample.PutSample:" + JSON.stringify(res))
                 that.hideLoading();
                 if (res.data.data.code == constant.response_success) {
+                    that.showToast("存储成功")
                     that.reloadPrePage();
                     wx.navigateBack({
                         delta: -1

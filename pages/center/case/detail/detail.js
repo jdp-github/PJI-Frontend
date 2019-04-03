@@ -55,7 +55,7 @@ Page({
         partPicker: ['请选择', '髋', '膝'],
         // 类型
         type: 0,
-        typePicker: ['请选择', '置换术后', '占位器'],
+        typePicker: ['请选择', '置换术后', '占位器', '初次', '其他内置物'],
         // 末次手术至今时长
         operationDateMultiArray: [
             ['单位'],
@@ -103,35 +103,35 @@ Page({
         leAfterPicker: ["请选择", "无法判定", "neg.", "25", "75", "250 (+)", "500 (++)"],
         leAfterDisabled: false,
         gjybxb: '',
-        gjybxbDisabled: false,
+        gjybxbDisabled: true,
         gjyzx: '',
-        gjyzxDisabled: false,
+        gjyzxDisabled: true,
         bcpysjIndex: 0,
         bcpysjPicker: ["请选择", "关节液", "灌洗液", "混合液"],
         bcpysjDisabled: false,
         drgpyp: '',
         drgpypDisabled: false,
         bcxyResult: '',
-        bcxyResultDisabled: false,
+        bcxyResultDisabled: true,
         bcxyLast: '',
-        bcxyLastDisabled: false,
+        bcxyLastDisabled: true,
         bcyyResult: '',
-        bcyyResultDisabled: false,
+        bcyyResultDisabled: true,
         bcyyLast: '',
-        bcyyLastDisabled: false,
+        bcyyLastDisabled: true,
         mNGSTypeIndex: 0,
         mNGSTypePicker: ["请选择", "关节液", "灌洗液", "混合液"],
-        mNGSTypeDisabled: false,
+        mNGSTypeDisabled: true,
         mNGSResult: '',
-        mNGSResultDisabled: false,
+        mNGSResultDisabled: true,
         sqSecondxy: '',
-        sqSecondxyDisabled: false,
+        sqSecondxyDisabled: true,
         sqSecondyy: '',
-        sqSecondyyDisabled: false,
+        sqSecondyyDisabled: true,
         sqThirdxy: '',
-        sqThirdxyDisabled: false,
+        sqThirdxyDisabled: true,
         sqThirdyy: '',
-        sqThirdyyDisabled: false,
+        sqThirdyyDisabled: true,
         sample_desc: '',
         sample_used: '',
         // -------- 诊断性穿刺 end -------- //
@@ -194,7 +194,7 @@ Page({
         msisPicker: ["请选择", "暂不能确定", "感染", "非感染"],
         msisDisabled: true,
         zzclIndex: 0,
-        zzclPicker: ["请选择", "手术-占位器植入", "手术-假体植入", "手术-清创换垫", "未手术-抗生素压制", "未手术-门诊随访", "失访-不详"],
+        zzclPicker: ["请选择", "失访-不详", "未手术-门诊随访", "未手术-抗生素压制", "手术-清创换垫", "手术-关节融合", "手术-截肢", "未手术-抗生素压制", "手术-假体植入", "手术-占位器植入"],
         zzclDisabled: true,
         // -------- 入院后信息 end -------- //
 
@@ -1796,7 +1796,7 @@ Page({
 
         let specimenMsg = '';
         specimenMap.forEach(function(value, key, map) {
-            specimenMsg += "标本盒:" + key + ",标本序号:" + value+"   "
+            specimenMsg += "标本盒:" + key + ",标本序号:" + value + "   "
         });
         return specimenMsg
     },
@@ -1868,10 +1868,15 @@ Page({
                 console.log("Case.CreateEditCaseBase:" + JSON.stringify(res))
                 that.hideLoading();
                 if (res.data.data.code == 0) {
-                    that.reloadPrePage()
-                    wx.navigateBack({
-                        delta: 1
-                    })
+                    that.showToast("提交成功")
+                    var args = {
+                        currentTarget: {
+                            dataset: {
+                                id: 1
+                            }
+                        }
+                    }
+                    that.tabSelect(args)
                 } else {
                     that.showModal("ErrModal", res.data.data.msg);
                 }
@@ -1941,12 +1946,18 @@ Page({
                 'content-type': 'application/json'
             },
             success(res) {
+                console.log("Case.CreateEditCasePuncture:"+JSON.stringify(res))
                 that.hideLoading();
                 if (res.data.data.code == 0) {
-                    that.reloadPrePage()
-                    wx.navigateBack({
-                        delta: 1
-                    })
+                    that.showToast("提交成功")
+                    var args = {
+                        currentTarget: {
+                            dataset: {
+                                id: 2
+                            }
+                        }
+                    }
+                    that.tabSelect(args)
                 } else {
                     that.showModal("ErrModal", res.data.data.msg);
                 }
@@ -2108,6 +2119,7 @@ Page({
                 console.log("Case.CreateEditCaseBein:" + JSON.stringify(res))
                 that.hideLoading();
                 if (res.data.data.code == 0) {
+                    that.showToast("提交成功")
                     that.reloadPrePage()
                     wx.navigateBack({
                         delta: 1
