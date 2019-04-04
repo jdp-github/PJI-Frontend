@@ -173,6 +173,10 @@ Page({
         });
     },
     onPutClick: function() {
+        if (!this.data.selectedCaseInfo.case_id) {
+            this.showToast("请选择关联的病历")
+            return
+        }
         let that = this;
         that.showLoading();
         wx.request({
@@ -200,12 +204,7 @@ Page({
                         delta: -1
                     });
                 } else {
-                    if (res.data.msg) {
-                        that.showToast(res.data.msg);
-                    } else {
-                        that.showToast(res.data.data.msg);
-                    }
-
+                    that.showToast(res.data.data.msg);
                 }
             },
             fail(res) {
