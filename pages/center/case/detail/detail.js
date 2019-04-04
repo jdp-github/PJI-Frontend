@@ -1869,6 +1869,9 @@ Page({
                 console.log("Case.CreateEditCaseBase:" + JSON.stringify(res))
                 that.hideLoading();
                 if (res.data.data.code == 0) {
+                    that.setData({
+                        caseId: res.data.data.info.case_id
+                    })
                     that.showToast("提交成功")
                     var args = {
                         currentTarget: {
