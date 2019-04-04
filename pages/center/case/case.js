@@ -261,6 +261,13 @@ Page({
         });
     },
 
+    onLookCase: function(e) {
+        let caseInfo = e.currentTarget.dataset.case;
+        wx.navigateTo({
+            url: '../../center/case/detail/detail?case_id=' + caseInfo.case_id + "&centerId=" + this.data.centerId + "&centerName=" + this.data.centerName + "&isLook=" + true
+        });
+    },
+
     // onLockCase: function(e) {
     //     let that = this;
     //     let selectedCase = e.currentTarget.dataset.case;
