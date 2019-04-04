@@ -200,7 +200,12 @@ Page({
                         delta: -1
                     });
                 } else {
-                    that.showToast(res.data.data.msg);
+                    if (res.data.msg) {
+                        that.showToast(res.data.msg);
+                    } else {
+                        that.showToast(res.data.data.msg);
+                    }
+
                 }
             },
             fail(res) {
