@@ -36,7 +36,7 @@
     </view>
     <view class="canvas-bottom shadow cf flex align-center">
         <view class='cu-tag radius bg-green small fl'>已审核</view>
-        <view class="fr text-special">{{complete_list.approve?complete_list.approve:'0'}} 例</view>
+        <view class="fr text-special">{{complete_list.completed_cases?complete_list.completed_cases:'0'}} 例</view>
     </view>
     <view class="canvas-bottom shadow cf flex align-center">
         <view class='cu-tag radius bg-orange text-white small fl'>未审核</view>
@@ -73,14 +73,43 @@
                 <div class="fill"></div>
             </div>
         </div>
+        <div class="c100 p{{displacePercentage}} small orange">
+            <span>{{displacePercentage}}%</span>
+            <div class="slice">
+                <div class="bar"></div>
+                <div class="fill"></div>
+            </div>
+        </div>
+        <div class="c100 p{{firstPercentage}} small cyan">
+            <span>{{firstPercentage}}%</span>
+            <div class="slice">
+                <div class="bar"></div>
+                <div class="fill"></div>
+            </div>
+        </div>
+        <div class="c100 p{{otherPercentage}} small olive">
+            <span>{{otherPercentage}}%</span>
+            <div class="slice">
+                <div class="bar"></div>
+                <div class="fill"></div>
+            </div>
+        </div>
     </view>
     <view class="canvas-bottom shadow cf flex align-center">
         <view class='cu-tag radius bg-green small fl'>占位器</view>
         <view class="fr text-special">{{type_list.seize?type_list.seize:'0'}} 例</view>
     </view>
     <view class="canvas-bottom shadow cf flex align-center">
-        <view class='cu-tag radius bg-gray small fl'>置换术后</view>
+        <view class='cu-tag radius bg-orange small fl'>置换术后</view>
         <view class="fr text-special">{{type_list.displace?type_list.displace:'0'}} 例</view>
+    </view>
+    <view class="canvas-bottom shadow cf flex align-center">
+        <view class='cu-tag radius bg-cyan small fl'>初次</view>
+        <view class="fr text-special">{{type_list.first?type_list.first:'0'}} 例</view>
+    </view>
+    <view class="canvas-bottom shadow cf flex align-center">
+        <view class='cu-tag radius bg-olive small fl'>其他内置物</view>
+        <view class="fr text-special">{{type_list.other?type_list.other:'0'}} 例</view>
     </view>
 </scroll-view>
 <view class='load-progress {{loadProgress!=0?"show":"hide"}}' style="top:{{CustomBar}}px;">

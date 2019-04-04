@@ -51,7 +51,7 @@
                                         <i class="icon-unlock text-green" wx:else></i>
                                         <view class="cu-tag sm radius" style="font-size: 22rpx;background-color:#ccc;color:#fff;font-weight:bold;margin-left:8rpx;">{{item.type_name}}</view>
                                         <view class="cu-tag sm radius" style="font-size: 22rpx;background-color:#ccc;color:#fff;font-weight:bold;">{{item.msis_name.length == 0?"暂无":item.msis_name}}</view>
-                                        <view class="cu-tag sm radius" style="font-size: 22rpx;background-color:#ccc;color:#fff;font-weight:bold;">{{item.sample_enable == 0?"不可用":"可用"}}</view>
+                                        <view class="cu-tag sm radius" style="font-size: 22rpx;background-color:#ccc;color:#fff;font-weight:bold;">{{item.sample_enable == 0?"标本不可用":"标本可用"}}</view>
                                     </view>
                                 </div>
                             </view>
