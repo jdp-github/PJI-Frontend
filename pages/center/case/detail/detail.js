@@ -7,6 +7,8 @@ const app = getApp();
 
 Page({
     data: {
+        showImageModal: false,
+        modalImage: '',
         loadProgress: 0,
         loadModal: false,
         StatusBar: app.globalData.StatusBar,
@@ -1359,9 +1361,22 @@ Page({
             });
         }
     },
+    showImageModal: function(e) {
+        if (e.target.dataset.img && e.target.dataset.img != '') {
+            this.setData({
+                showImageModal: true,
+                modalImage: e.target.dataset.img
+            });
+        }
+    },
     hideModal: function(e) {
         this.setData({
             modalName: null
+        });
+    },
+    hideImageModal: function(e) {
+        this.setData({
+            showImageModal: false,
         });
     },
     // -------- 模态对话框 end  -------- //
@@ -1869,6 +1884,9 @@ Page({
                 console.log("Case.CreateEditCaseBase:" + JSON.stringify(res))
                 that.hideLoading();
                 if (res.data.data.code == 0) {
+                    that.setData({
+                        caseId: res.data.data.info.case_id
+                    })
                     that.showToast("提交成功")
                     var args = {
                         currentTarget: {
