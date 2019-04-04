@@ -155,7 +155,7 @@ Page({
                 url: constant.basePath,
                 data: {
                     service: 'Statistics.GetCharts',
-                    center_id: all ? "" : that.data.centerObjList[that.data.centerIndex].id,
+                    center_id: all ? "" : that.data.centerObjList[that.data.centerIndex].center_id,
                     openid: app.globalData.openid
                 },
                 header: {
@@ -167,7 +167,10 @@ Page({
                         let infect = res.data.data.infect_list.infect;
                         let seize = res.data.data.type_list.seize;
                         let displace = res.data.data.type_list.displace;
-                        let approve = res.data.data.finished_list.approve;
+                        let totalType = res.data.data.type_list.total_type;
+                        let firstType = res.data.data.type_list.first;
+                        let otherType = res.data.data.type_list.other;
+                        let approve = res.data.data.finished_list.completed_cases;
                         let notApprove = res.data.data.finished_list.no_approve_cases;
                         let totalCases = res.data.data.finished_list.total_cases;
                         that.setData({
@@ -175,7 +178,10 @@ Page({
                             infect_list: res.data.data.infect_list,
                             type_list: res.data.data.type_list,
                             noInfectPercentage: Math.round((parseInt(notInfect) / (parseInt(notInfect) + parseInt(infect))) * 100)?Math.round((parseInt(notInfect) / (parseInt(notInfect) + parseInt(infect))) * 100):0,
-                            seizePercentage: Math.round((parseInt(seize) / (parseInt(seize) + parseInt(displace))) * 100)?Math.round((parseInt(seize) / (parseInt(seize) + parseInt(displace))) * 100):0,
+                            seizePercentage: Math.round((parseInt(seize) / parseInt(totalType)) * 100)?Math.round((parseInt(seize) / parseInt(totalType)) * 100):0,
+                            displacePercentage: Math.round((parseInt(displace) / parseInt(totalType)) * 100)?Math.round((parseInt(displace) / parseInt(totalType)) * 100):0,
+                            firstPercentage: Math.round((parseInt(firstType) / parseInt(totalType)) * 100)?Math.round((parseInt(firstType) / parseInt(totalType)) * 100):0,
+                            otherPercentage: Math.round((parseInt(otherType) / parseInt(totalType)) * 100)?Math.round((parseInt(otherType) / parseInt(totalType)) * 100):0,
                             approvePercentage: Math.round((parseInt(approve) / parseInt(totalCases)) * 100)? Math.round((parseInt(approve) / parseInt(totalCases)) * 100):0,
                             notApprovePercentage: Math.round((notApprove / parseInt(totalCases)) * 100)?Math.round((notApprove / parseInt(totalCases)) * 100):0
                         });
