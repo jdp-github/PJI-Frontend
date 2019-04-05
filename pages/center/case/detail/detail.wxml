@@ -191,7 +191,7 @@
                 </view>
             </view>
             <!-- 底部按钮 -->
-            <view class="btn-block bg-white shadow">
+            <view class="btn-block bg-white shadow" hidden='{{isLook}}'>
                 <view class="flex margin-special">
                     <button class='cu-btn line-green shadow' style="margin-right: 15rpx;" form-type="submit" bindtap='submit' disabled='{{caseInfo.base_submit_button == 0}}'>
                         提交录入
@@ -402,7 +402,7 @@
                 </view>
             </view>
             <!-- 底部按钮 -->
-            <view class="btn-block bg-white shadow">
+            <view class="btn-block bg-white shadow" hidden='{{isLook}}'>
                 <view class="flex margin-special">
                     <button class='cu-btn line-green shadow' style="margin-right: 15rpx;" form-type="submit" bindtap='submit' disabled='{{caseInfo.puncture.puncture_submit_button == 0}}'>
                         提交录入
@@ -658,7 +658,7 @@
                 </view>
             </view>
             <!-- 底部按钮 -->
-            <view class="btn-block bg-white shadow">
+            <view class="btn-block bg-white shadow" hidden='{{isLook}}'>
                 <view class="flex margin-special">
                     <button class='cu-btn line-green shadow' style="margin-right: 15rpx;" form-type="submit" bindtap='submit' disabled='{{caseInfo.bein.bein_submit_button==0}}'>
                         提交录入
@@ -682,7 +682,7 @@
         <view class="cu-form-group margin-top centerPlace">
             <view class="grid col-3 grid-square flex-sub centerPlace">
                 <view class="imageShow solids padding-xs" wx:if="{{pic1 !== ''}}">
-                    <image src="{{pic1}}" mode='aspectFit' />
+                    <image src="{{pic1}}" mode='aspectFit' bindtap="showImageModal" data-img="{{pic1}}"/>
                     <button class='cu-btn bg-red shadow sm' bindtap="onRemovePic" data-le="11">
                         删除
                     </button>
@@ -691,7 +691,7 @@
                     <text class='icon-cameraadd' bindtap="onChooseImage" data-le="11"></text>
                 </view>
                 <view class="imageShow solids padding-xs" wx:if="{{pic2 !== ''}}">
-                    <image src="{{pic2}}" mode='aspectFit' />
+                    <image src="{{pic2}}" mode='aspectFit' bindtap="showImageModal" data-img="{{pic2}}"/>
                     <button class='cu-btn bg-red shadow sm' bindtap="onRemovePic" data-le="12">
                         删除
                     </button>
@@ -700,7 +700,7 @@
                     <text class='icon-cameraadd' bindtap="onChooseImage" data-le="12"></text>
                 </view>
                 <view class="imageShow solids padding-xs" wx:if="{{pic3 !== ''}}">
-                    <image src="{{pic3}}" mode='aspectFit' />
+                    <image src="{{pic3}}" mode='aspectFit' bindtap="showImageModal" data-img="{{pic3}}"/>
                     <button class='cu-btn bg-red shadow sm' bindtap="onRemovePic" data-le="13">
                         删除
                     </button>
@@ -722,7 +722,7 @@
         <view class="cu-form-group margin-top centerPlace">
             <view class="grid col-3 grid-square flex-sub centerPlace">
                 <view class="imageShow solids padding-xs" wx:if="{{pic4 !== ''}}">
-                    <image src="{{pic4}}" mode='aspectFit' />
+                    <image src="{{pic4}}" mode='aspectFit' bindtap="showImageModal" data-img="{{pic4}}"/>
                     <button class='cu-btn bg-red shadow sm' bindtap="onRemovePic" data-le="21">
                         删除
                     </button>
@@ -731,7 +731,7 @@
                     <text class='icon-cameraadd' bindtap="onChooseImage" data-le="21"></text>
                 </view>
                 <view class="imageShow solids padding-xs" wx:if="{{pic5 !== ''}}">
-                    <image src="{{pic5}}" mode='aspectFit' />
+                    <image src="{{pic5}}" mode='aspectFit' bindtap="showImageModal" data-img="{{pic5}}"/>
                     <button class='cu-btn bg-red shadow sm' bindtap="onRemovePic" data-le="22">
                         删除
                     </button>
@@ -740,7 +740,7 @@
                     <text class='icon-cameraadd' bindtap="onChooseImage" data-le="22"></text>
                 </view>
                 <view class="imageShow solids padding-xs" wx:if="{{pic6 !== ''}}">
-                    <image src="{{pic6}}" mode='aspectFit' />
+                    <image src="{{pic6}}" mode='aspectFit' bindtap="showImageModal" data-img="{{pic6}}"/>
                     <button class='cu-btn bg-red shadow sm' bindtap="onRemovePic" data-le="23">
                         删除
                     </button>
@@ -762,7 +762,7 @@
         <view class="cu-form-group margin-top centerPlace">
             <view class="grid col-3 grid-square flex-sub centerPlace">
                 <view class="imageShow solids padding-xs" wx:if="{{pic7 !== ''}}">
-                    <image src="{{pic7}}" mode='aspectFit' />
+                    <image src="{{pic7}}" mode='aspectFit' bindtap="showImageModal" data-img="{{pic7}}"/>
                     <button class='cu-btn bg-red shadow sm' bindtap="onRemovePic" data-le="31">
                         删除
                     </button>
@@ -771,7 +771,7 @@
                     <text class='icon-cameraadd' bindtap="onChooseImage" data-le="31"></text>
                 </view>
                 <view class="imageShow solids padding-xs" wx:if="{{pic8 !== ''}}">
-                    <image src="{{pic8}}" mode='aspectFit' />
+                    <image src="{{pic8}}" mode='aspectFit' bindtap="showImageModal" data-img="{{pic8}}" />
                     <button class='cu-btn bg-red shadow sm' bindtap="onRemovePic" data-le="32">
                         删除
                     </button>
@@ -780,7 +780,7 @@
                     <text class='icon-cameraadd' bindtap="onChooseImage" data-le="32"></text>
                 </view>
                 <view class="imageShow solids padding-xs" wx:if="{{pic9 !== ''}}">
-                    <image src="{{pic9}}" mode='aspectFit' />
+                    <image src="{{pic9}}" mode='aspectFit'  bindtap="showImageModal" data-img="{{pic9}}"/>
                     <button class='cu-btn bg-red shadow sm' bindtap="onRemovePic" data-le="33">
                         删除
                     </button>
@@ -802,7 +802,7 @@
         <view class="cu-form-group margin-top centerPlace">
             <view class="grid col-3 grid-square flex-sub centerPlace">
                 <view class="imageShow solids padding-xs" wx:if="{{pic10 !== ''}}">
-                    <image src="{{pic10}}" mode='aspectFit' />
+                    <image src="{{pic10}}" mode='aspectFit' bindtap="showImageModal" data-img="{{pic10}}"/>
                     <button class='cu-btn bg-red shadow sm' bindtap="onRemovePic" data-le="41">
                         删除
                     </button>
@@ -811,7 +811,7 @@
                     <text class='icon-cameraadd' bindtap="onChooseImage" data-le="41"></text>
                 </view>
                 <view class="imageShow solids padding-xs" wx:if="{{pic11 !== ''}}">
-                    <image src="{{pic11}}" mode='aspectFit' />
+                    <image src="{{pic11}}" mode='aspectFit' bindtap="showImageModal" data-img="{{pic11}}" />
                     <button class='cu-btn bg-red shadow sm' bindtap="onRemovePic" data-le="42">
                         删除
                     </button>
@@ -820,7 +820,7 @@
                     <text class='icon-cameraadd' bindtap="onChooseImage" data-le="42"></text>
                 </view>
                 <view class="imageShow solids padding-xs" wx:if="{{pic12 !== ''}}">
-                    <image src="{{pic12}}" mode='aspectFit' />
+                    <image src="{{pic12}}" mode='aspectFit' bindtap="showImageModal" data-img="{{pic12}}" />
                     <button class='cu-btn bg-red shadow sm' bindtap="onRemovePic" data-le="43">
                         删除
                     </button>
@@ -829,6 +829,20 @@
                     <text class='icon-cameraadd' bindtap="onChooseImage" data-le="43"></text>
                 </view>
             </view>
+        </view>
+    </view>
+</view>
+<view class="cu-modal {{showImageModal?'show':''}}">
+    <view class="cu-dialog">
+        <view class="">
+                <view style="float:left;width:100%;">
+                    <image src="{{modalImage}}" mode='aspectFit' style="height: 800rpx;" />
+                </view>
+                <view style="float:left;width:100%;margin: 30rpx 0rpx;">
+                    <button class='cu-btn bg-red shadow' bindtap="hideImageModal">
+                        关闭
+                    </button>
+                </view>
         </view>
     </view>
 </view>

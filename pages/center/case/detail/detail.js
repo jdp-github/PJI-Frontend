@@ -7,6 +7,8 @@ const app = getApp();
 
 Page({
     data: {
+        showImageModal: false,
+        modalImage: '',
         loadProgress: 0,
         loadModal: false,
         StatusBar: app.globalData.StatusBar,
@@ -31,6 +33,7 @@ Page({
         centerName: '',
         caseId: '',
         isCreateCase: '',
+        isLook: false,
         caseInfo: {},
         addAvatar: '',
         updateAvatarArr: [],
@@ -61,7 +64,13 @@ Page({
         operationDateMultiArray: [
             ['单位'],
             ['天', '周', '月', '年'],
-            ['请选择', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31']
+            (() => {
+                let temp = ['请选择'];
+                for (let i = 1; i <= 250; i++) {
+                    temp.push(i + '')
+                }
+                return temp
+            })()
         ],
         operationDateMultiIndex: [0, 0, 0],
         operationDateValue: '请选择',
@@ -70,7 +79,13 @@ Page({
         symptomDateMultiArray: [
             ['单位'],
             ['天', '周', '月', '年'],
-            ['请选择', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31']
+            (() => {
+                let temp = ['请选择'];
+                for (let i = 1; i <= 250; i++) {
+                    temp.push(i + '')
+                }
+                return temp
+            })(),
         ],
         symptomDateMultiIndex: [0, 0, 0],
         symptomDateValue: '请选择',
@@ -382,19 +397,43 @@ Page({
                 switch (data.operationDateMultiIndex[0]) {
                     case 0:
                         data.operationDateMultiArray[1] = ['天', '周', '月', '年'];
-                        data.operationDateMultiArray[2] = ['请选择', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'];
+                        data.operationDateMultiArray[2] = (() => {
+                            let temp = ['请选择'];
+                            for (let i = 1; i <= 250; i++) {
+                                temp.push(i + '')
+                            }
+                            return temp
+                        })();
                         break;
                     case 1:
                         data.operationDateMultiArray[1] = ['天', '周', '月', '年'];
-                        data.operationDateMultiArray[2] = ['请选择', '1', '2', '3', '4'];
+                        data.operationDateMultiArray[2] = (() => {
+                            let temp = ['请选择'];
+                            for (let i = 1; i <= 250; i++) {
+                                temp.push(i + '')
+                            }
+                            return temp
+                        })();
                         break;
                     case 2:
                         data.operationDateMultiArray[1] = ['天', '周', '月', '年'];
-                        data.operationDateMultiArray[2] = ['请选择', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+                        data.operationDateMultiArray[2] = (() => {
+                            let temp = ['请选择'];
+                            for (let i = 1; i <= 250; i++) {
+                                temp.push(i + '')
+                            }
+                            return temp
+                        })();
                         break;
                     case 3:
                         data.operationDateMultiArray[1] = ['天', '周', '月', '年'];
-                        data.operationDateMultiArray[2] = ['请选择', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50'];
+                        data.operationDateMultiArray[2] = (() => {
+                            let temp = ['请选择'];
+                            for (let i = 1; i <= 250; i++) {
+                                temp.push(i + '')
+                            }
+                            return temp
+                        })();
                         break;
                 }
                 data.operationDateMultiIndex[1] = 0;
@@ -405,16 +444,40 @@ Page({
                     case 0:
                         switch (data.operationDateMultiIndex[1]) {
                             case 0:
-                                data.operationDateMultiArray[2] = ['请选择', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'];
+                                data.operationDateMultiArray[2] = (() => {
+                                    let temp = ['请选择'];
+                                    for (let i = 1; i <= 250; i++) {
+                                        temp.push(i + '')
+                                    }
+                                    return temp
+                                })();
                                 break;
                             case 1:
-                                data.operationDateMultiArray[2] = ['请选择', '1', '2', '3', '4'];
+                                data.operationDateMultiArray[2] = (() => {
+                                    let temp = ['请选择'];
+                                    for (let i = 1; i <= 250; i++) {
+                                        temp.push(i + '')
+                                    }
+                                    return temp
+                                })();
                                 break;
                             case 2:
-                                data.operationDateMultiArray[2] = ['请选择', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+                                data.operationDateMultiArray[2] = (() => {
+                                    let temp = ['请选择'];
+                                    for (let i = 1; i <= 250; i++) {
+                                        temp.push(i + '')
+                                    }
+                                    return temp
+                                })();
                                 break;
                             case 3:
-                                data.operationDateMultiArray[2] = ['请选择', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50'];
+                                data.operationDateMultiArray[2] = (() => {
+                                    let temp = ['请选择'];
+                                    for (let i = 1; i <= 250; i++) {
+                                        temp.push(i + '')
+                                    }
+                                    return temp
+                                })();
                                 break;
                         }
                         break;
@@ -442,19 +505,43 @@ Page({
         switch (data.operationDateMultiIndex[1]) {
             case 0:
                 data.operationDateMultiArray[1] = ['天', '周', '月', '年'];
-                data.operationDateMultiArray[2] = ['请选择', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'];
+                data.operationDateMultiArray[2] = (() => {
+                    let temp = ['请选择'];
+                    for (let i = 1; i <= 250; i++) {
+                        temp.push(i + '')
+                    }
+                    return temp
+                })();
                 break;
             case 1:
                 data.operationDateMultiArray[1] = ['天', '周', '月', '年'];
-                data.operationDateMultiArray[2] = ['请选择', '1', '2', '3', '4'];
+                data.operationDateMultiArray[2] = (() => {
+                    let temp = ['请选择'];
+                    for (let i = 1; i <= 250; i++) {
+                        temp.push(i + '')
+                    }
+                    return temp
+                })();
                 break;
             case 2:
                 data.operationDateMultiArray[1] = ['天', '周', '月', '年'];
-                data.operationDateMultiArray[2] = ['请选择', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+                data.operationDateMultiArray[2] = (() => {
+                    let temp = ['请选择'];
+                    for (let i = 1; i <= 250; i++) {
+                        temp.push(i + '')
+                    }
+                    return temp
+                })();
                 break;
             case 3:
                 data.operationDateMultiArray[1] = ['天', '周', '月', '年'];
-                data.operationDateMultiArray[2] = ['请选择', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50'];
+                data.operationDateMultiArray[2] = (() => {
+                    let temp = ['请选择'];
+                    for (let i = 1; i <= 250; i++) {
+                        temp.push(i + '')
+                    }
+                    return temp
+                })();
                 break;
         }
         this.setData(data);
@@ -468,19 +555,43 @@ Page({
         switch (data.symptomDateMultiIndex[1]) {
             case 0:
                 data.symptomDateMultiArray[1] = ['天', '周', '月', '年'];
-                data.symptomDateMultiArray[2] = ['请选择', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'];
+                data.symptomDateMultiArray[2] = (() => {
+                    let temp = ['请选择'];
+                    for (let i = 1; i <= 250; i++) {
+                        temp.push(i + '')
+                    }
+                    return temp
+                })();
                 break;
             case 1:
                 data.symptomDateMultiArray[1] = ['天', '周', '月', '年'];
-                data.symptomDateMultiArray[2] = ['请选择', '1', '2', '3', '4'];
+                data.symptomDateMultiArray[2] = (() => {
+                    let temp = ['请选择'];
+                    for (let i = 1; i <= 250; i++) {
+                        temp.push(i + '')
+                    }
+                    return temp
+                })();
                 break;
             case 2:
                 data.symptomDateMultiArray[1] = ['天', '周', '月', '年'];
-                data.symptomDateMultiArray[2] = ['请选择', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+                data.symptomDateMultiArray[2] = (() => {
+                    let temp = ['请选择'];
+                    for (let i = 1; i <= 250; i++) {
+                        temp.push(i + '')
+                    }
+                    return temp
+                })();
                 break;
             case 3:
                 data.symptomDateMultiArray[1] = ['天', '周', '月', '年'];
-                data.symptomDateMultiArray[2] = ['请选择', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50'];
+                data.symptomDateMultiArray[2] = (() => {
+                    let temp = ['请选择'];
+                    for (let i = 1; i <= 250; i++) {
+                        temp.push(i + '')
+                    }
+                    return temp
+                })();
                 break;
         }
         this.setData(data);
@@ -503,19 +614,43 @@ Page({
                 switch (data.symptomDateMultiIndex[0]) {
                     case 0:
                         data.symptomDateMultiArray[1] = ['天', '周', '月', '年'];
-                        data.symptomDateMultiArray[2] = ['请选择', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'];
+                        data.symptomDateMultiArray[2] = (() => {
+                            let temp = ['请选择'];
+                            for (let i = 1; i <= 250; i++) {
+                                temp.push(i + '')
+                            }
+                            return temp
+                        })();
                         break;
                     case 1:
                         data.symptomDateMultiArray[1] = ['天', '周', '月', '年'];
-                        data.symptomDateMultiArray[2] = ['请选择', '1', '2', '3', '4'];
+                        data.symptomDateMultiArray[2] = (() => {
+                            let temp = ['请选择'];
+                            for (let i = 1; i <= 250; i++) {
+                                temp.push(i + '')
+                            }
+                            return temp
+                        })();
                         break;
                     case 2:
                         data.symptomDateMultiArray[1] = ['天', '周', '月', '年'];
-                        data.symptomDateMultiArray[2] = ['请选择', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+                        data.symptomDateMultiArray[2] = (() => {
+                            let temp = ['请选择'];
+                            for (let i = 1; i <= 250; i++) {
+                                temp.push(i + '')
+                            }
+                            return temp
+                        })();
                         break;
                     case 3:
                         data.symptomDateMultiArray[1] = ['天', '周', '月', '年'];
-                        data.symptomDateMultiArray[2] = ['请选择', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50'];
+                        data.symptomDateMultiArray[2] = (() => {
+                            let temp = ['请选择'];
+                            for (let i = 1; i <= 250; i++) {
+                                temp.push(i + '')
+                            }
+                            return temp
+                        })();
                         break;
                 }
                 data.symptomDateMultiIndex[1] = 0;
@@ -526,16 +661,40 @@ Page({
                     case 0:
                         switch (data.symptomDateMultiIndex[1]) {
                             case 0:
-                                data.symptomDateMultiArray[2] = ['请选择', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'];
+                                data.symptomDateMultiArray[2] = (() => {
+                                    let temp = ['请选择'];
+                                    for (let i = 1; i <= 250; i++) {
+                                        temp.push(i + '')
+                                    }
+                                    return temp
+                                })();
                                 break;
                             case 1:
-                                data.symptomDateMultiArray[2] = ['请选择', '1', '2', '3', '4'];
+                                data.symptomDateMultiArray[2] = (() => {
+                                    let temp = ['请选择'];
+                                    for (let i = 1; i <= 250; i++) {
+                                        temp.push(i + '')
+                                    }
+                                    return temp
+                                })();
                                 break;
                             case 2:
-                                data.symptomDateMultiArray[2] = ['请选择', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+                                data.symptomDateMultiArray[2] = (() => {
+                                    let temp = ['请选择'];
+                                    for (let i = 1; i <= 250; i++) {
+                                        temp.push(i + '')
+                                    }
+                                    return temp
+                                })();
                                 break;
                             case 3:
-                                data.symptomDateMultiArray[2] = ['请选择', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50'];
+                                data.symptomDateMultiArray[2] = (() => {
+                                    let temp = ['请选择'];
+                                    for (let i = 1; i <= 250; i++) {
+                                        temp.push(i + '')
+                                    }
+                                    return temp
+                                })();
                                 break;
                         }
                         break;
@@ -1359,9 +1518,22 @@ Page({
             });
         }
     },
+    showImageModal: function(e) {
+        if (e.target.dataset.img && e.target.dataset.img != '') {
+            this.setData({
+                showImageModal: true,
+                modalImage: e.target.dataset.img
+            });
+        }
+    },
     hideModal: function(e) {
         this.setData({
             modalName: null
+        });
+    },
+    hideImageModal: function(e) {
+        this.setData({
+            showImageModal: false,
         });
     },
     // -------- 模态对话框 end  -------- //
@@ -1567,6 +1739,7 @@ Page({
             isAdmin: app.globalData.is_admin == '1',
             caseId: caseId,
             isCreateCase: caseId.length <= 0,
+            isLook: options.isLook ? options.isLook : false
         });
         if (!this.data.isCreateCase) {
             this.requestCaseInfo(caseId)
@@ -2492,6 +2665,9 @@ Page({
     },
 
     onUnload() {
+        if (this.data.isLook) {
+            return
+        }
         let that = this;
         that.showLoading();
         wx.request({
