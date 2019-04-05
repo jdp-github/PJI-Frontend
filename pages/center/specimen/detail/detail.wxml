@@ -241,9 +241,14 @@
             </view>
         </view>
         <view class='padding-sm flex' style="display:{{selectedSpecimen.status == 2?'none':''}}">
-            <button class='cu-btn bg-green shadow' bindtap="onSingleGetClick" data-id="{{selectedSpecimen.sample_id}}" style="width:100%;" disabled="{{boxUse == 2}}">
-                取出
-            </button>
+            <view style='width:100%;display:flex;flex-direction:column'>
+                <button class='cu-btn bg-green shadow' bindtap="onSingleGetClick" data-id="{{selectedSpecimen.sample_id}}" style="width:100%;" disabled="{{boxUse == 2}}">
+                    取出
+                </button>
+                <button class='cu-btn bg-red shadow' bindtap="onSingleDeleClick" data-id="{{selectedSpecimen.sample_id}}" style="width:100%;margin-top:20rpx;">
+                    删除
+                </button>
+            </view>
         </view>
     </view>
 </view>

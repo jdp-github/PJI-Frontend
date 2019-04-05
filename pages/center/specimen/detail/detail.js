@@ -352,6 +352,36 @@ Page({
     onGetBackClick: function() {
         this.hideModal()
     },
+    // 删除
+    onSingleDeleClick: function(e) {
+        let that = this;
+        that.showLoading();
+        wx.request({
+            url: constant.basePath,
+            data: {
+                service: 'Sample.DeleteSample',
+                openid: app.globalData.openid,
+                sample_id: e.target.dataset.id
+            },
+            header: {
+                'content-type': 'application/json'
+            },
+            success(res) {
+                console.log("Sample.DeleteSample:" + JSON.stringify(res))
+                that.hideLoading();
+                if (res.data.data.code == constant.response_success) {
+                    that.hideModal()
+                    that.loadProgress();
+                    that.requestSampleList(that.data.infectIndex, that.data.typeIndex, that.data.staffList[that.data.ownerIndex].staff_id);
+                } else {
+                    that.showToast(res.data.data.msg);
+                }
+            },
+            fail(res) {
+                that.hideLoading();
+            }
+        });
+    },
     // 批量取出
     onMultipleGetClick: function() {
         if (this.data.getAllList.length == 0) {

@@ -427,6 +427,11 @@ Page({
             that.showToast('请输入标本盒存放地点');
             return
         }
+        if (that.data.comment.length == 0) {
+            that.showToast('请输入标本盒备注');
+            return
+        }
+
         that.showLoading();
         that.setData({
             modalName: ''
@@ -447,6 +452,7 @@ Page({
                 'content-type': 'application/json'
             },
             success(res) {
+                console.log("Sample.CreateSampleBox:" + JSON.stringify(res))
                 that.hideLoading();
                 if (res.data.data.code == constant.response_success) {
                     that.loadProgress();
