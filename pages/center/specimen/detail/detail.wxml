@@ -200,7 +200,7 @@
         </view>
         <view>
             <view class="cu-form-group cu-form-group-sepcial text-align-left text-small">
-                <view class='title text-small special'>ID</view>
+                <view class='title text-small special'>标本编号</view>
                 <input class='radius text-small special' name='input' value="{{selectedSpecimen.sample_id?selectedSpecimen.sample_id:'-'}}" disabled></input>
             </view>
             <view class="cu-form-group cu-form-group-sepcial text-align-left text-small">
