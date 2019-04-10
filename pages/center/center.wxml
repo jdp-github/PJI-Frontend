@@ -18,7 +18,7 @@
 </view>
 <scroll-view scroll-y class="indexes margin-tab-bottom" scroll-into-view="indexes-{{listCurID}}" style='padding-top:50px; height:calc(100vh - {{CustomBar}}px - 50px)' scroll-with-animation="true" enable-back-to-top="true">
     <view class="cu-list menu menu-avatar">
-        <view class="bg-grey light" style="text-align:center;width: 100%;padding:20rpx 15rpx 15rpx 15rpx;font-size: 24rpx;">
+        <view class="bg-grey light" style="text-align:center;width: 100%;padding:20rpx 15rpx 15rpx 15rpx;font-size: 24rpx;font-weight: bold;">
             左滑中心列表项显示更多操作
         </view>
         <view view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}}" wx:for="{{centerList}}" wx:key="{{item.center_id}}" bindtouchstart='ListTouchStart' bindtouchmove='ListTouchMove' bindtouchend='ListTouchEnd' data-target="move-box-{{index}}">
