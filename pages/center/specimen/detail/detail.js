@@ -66,7 +66,9 @@ Page({
         outerBoxIndex: 0,
         outerBoxId: '',
         // 取出的标本id
-        getSpecimenIds: ''
+        getSpecimenIds: '',
+        // 待删除的标本id
+        deleteSpecimenId: ''
     },
     loadProgress: function() {
         if (this.data.loadProgress < 96) {
@@ -112,12 +114,22 @@ Page({
             modalName: e.currentTarget.dataset.target
         });
     },
+    showDeleteModal(e) {
+        this.setData({
+            deleteModalName: e.currentTarget.dataset.target,
+            deleteSpecimenId: e.currentTarget.dataset.id
+        });
+    },
     hideModal(e) {
         this.setData({
             modalName: null,
         });
     },
-
+    hideDeleteModal(e) {
+        this.setData({
+            deleteModalName: null,
+        });
+    },
     onLoad: function(options) {
         this.setData({
             boxId: options.boxId,
@@ -355,22 +367,26 @@ Page({
     // 删除
     onSingleDeleClick: function(e) {
         let that = this;
+        that.hideDeleteModal();
         that.showLoading();
         wx.request({
             url: constant.basePath,
             data: {
                 service: 'Sample.DeleteSample',
                 openid: app.globalData.openid,
-                sample_id: e.target.dataset.id
+                sample_id: that.data.deleteSpecimenId
             },
             header: {
                 'content-type': 'application/json'
             },
             success(res) {
-                console.log("Sample.DeleteSample:" + JSON.stringify(res))
+                console.log("Sample.DeleteSample:" + JSON.stringify(res));
+                that.setData({
+                   deleteSpecimenId: ''
+                });
                 that.hideLoading();
                 if (res.data.data.code == constant.response_success) {
-                    that.hideModal()
+                    that.hideModal();
                     that.loadProgress();
                     that.requestSampleList(that.data.infectIndex, that.data.typeIndex, that.data.staffList[that.data.ownerIndex].staff_id);
                 } else {
@@ -378,6 +394,9 @@ Page({
                 }
             },
             fail(res) {
+                that.setData({
+                    deleteSpecimenId: ''
+                });
                 that.hideLoading();
             }
         });

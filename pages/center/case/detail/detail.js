@@ -702,7 +702,8 @@ Page({
                 data.symptomDateMultiIndex[2] = 0;
                 break;
         }
-        if (data.symptomDateMultiIndex[1] == 0 || data.symptomDateMultiIndex[1] == 1) {
+        if (data.symptomDateMultiIndex[1] == 0 && data.symptomDateMultiIndex[2] < 31 || data.symptomDateMultiIndex[1] == 1 && data.symptomDateMultiIndex[2] < 3) {
+            // <= 21天 或者 <= 3周是急性
             this.setData({
                 xingzhiIndex: 1,
                 xingzhiValue: '急性'

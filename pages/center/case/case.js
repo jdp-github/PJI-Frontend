@@ -4,10 +4,10 @@ let constant = require('../../../utils/constant.js');
 let util = require('../../../utils/util.js');
 
 const app = getApp();
-const SORT_BY_DOCTOR_ASC = 1;
-const SORT_BY_DOCTOR_DESC = -1;
-const SORT_BY_INFLECT_ASC = 2;
-const SORT_BY_INFLECT_DESC = -2;
+const SORT_BY_CHUANCI_DATA_ASC= 1;
+const SORT_BY_CHUANCI_DATA_DESC= -1;
+const SORT_BY_SHOUSHU_DATA_ASC = 2;
+const SORT_BY_SHOUSHU_DATA_DESC= -2;
 
 Page({
     data: {
@@ -21,17 +21,17 @@ Page({
         searchValue: '',
         caseList: [],
         selectedCase: {},
-        sortType: SORT_BY_DOCTOR_ASC,
+        sortType: SORT_BY_CHUANCI_DATA_ASC,
         filterItems: [{
                 type: 'sort',
-                label: '主诊医师',
-                value: 'doctor',
+                label: '穿刺日期',
+                value: 'chuanci',
                 groups: ['001'],
             },
             {
                 type: 'sort',
-                label: '感染',
-                value: 'inflect',
+                label: '手术日期',
+                value: 'shoushu',
                 groups: ['002'],
             },
         ],
@@ -105,12 +105,12 @@ Page({
 
         checkedItems.forEach((n) => {
             if (n.checked) {
-                if (n.value === 'doctor') {
+                if (n.value === 'chuanci') {
                     params.sort = n.value;
-                    params.order = n.sort === 1 ? SORT_BY_DOCTOR_ASC : SORT_BY_DOCTOR_DESC;
-                } else if (n.value === 'inflect') {
+                    params.order = n.sort === 1 ? SORT_BY_CHUANCI_DATA_ASC : SORT_BY_CHUANCI_DATA_DESC;
+                } else if (n.value === 'shoushu') {
                     params.sort = n.value;
-                    params.order = n.sort === 1 ? SORT_BY_INFLECT_ASC : SORT_BY_INFLECT_DESC;
+                    params.order = n.sort === 1 ? SORT_BY_SHOUSHU_DATA_ASC : SORT_BY_SHOUSHU_DATA_DESC;
                 }
 
                 this.setData({
