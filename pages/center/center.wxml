@@ -1,0 +1,144 @@
+<view class="cu-custom" style="height:{{CustomBar}}px;">
+    <view class="cu-bar fixed bg-gradual-blue" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+        <navigator class='action border-custom' open-type="navigateBack" delta="1" hover-class="none" style='width:{{Custom.width}}px;height:{{Custom.height}}px;margin-left:calc(750rpx - {{Custom.right}}px)' bindtap="backToAuth">
+            <text class='icon-back'></text>
+            <text class='icon-homefill'></text>
+        </navigator>
+        <view class='content' style='top:{{StatusBar}}px;'>中心列表</view>
+    </view>
+</view>
+<view class="cu-bar bg-white search fixed" style="top:{{CustomBar}}px;">
+    <view class='search-form round'>
+        <text class="icon-search"></text>
+        <input type="text" placeholder="搜索中心、名称、关键字" confirm-type="search" value="{{searchValue}}" bindinput="onSearchChange"></input>
+    </view>
+    <view class='action'>
+        <button class='cu-btn bg-blue shadow-blur round' bindtap="onSearch">搜索</button>
+    </view>
+</view>
+<scroll-view scroll-y class="indexes margin-tab-bottom" scroll-into-view="indexes-{{listCurID}}" style='padding-top:50px; height:calc(100vh - {{CustomBar}}px - 50px)' scroll-with-animation="true" enable-back-to-top="true">
+
+    <view style='display:flex;flex-direction:row'>
+        <view class="flex-sub" style="margin:10px">
+            <button class='cu-btn bg-blue shadow margin-btn block' bindtap='onClickManage'>
+                新增中心
+            </button>
+        </view>
+        <view class="flex-sub" style="margin:10px">
+            <button class='cu-btn bg-blue shadow margin-btn block' bindtap='onPullDownRefresh'>
+                刷新列表
+            </button>
+        </view>
+    </view>
+
+    <view class="cu-list menu menu-avatar" wx:for="{{centerList}}" wx:key="item.id">
+        <!-- PJI设计: 中心列表 -->
+        <view class="center-card">
+            <view class="center-img">
+                <view class="center-name">
+                    <view class="center-name-inner">
+                        {{item.center_name}}
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="center-btn">
+            <!-- 公告 -->
+            <view class="center-btn-inner">
+                <button class='cu-btn bg-gray shadow lg block' data-centerid="{{item.center_id}}" bindtap="onClickManage">
+                    <view style="width: 100%; height: 100%;">
+                        <view class="center-btn-icon">
+                            <text class='icon-hot'></text>
+                        </view>
+                        <view class="center-btn-txt">
+                            中心
+                        </view>
+                    </view>
+                </button>
+            </view>
+            <view class="center-btn-inner">
+                <button class='cu-btn bg-gray shadow lg block' data-center="{{item}}" bindtap="onClickCase">
+                    <view style="width: 100%; height: 100%;">
+                        <view class="center-btn-icon">
+                            <text class='icon-form'></text>
+                        </view>
+                        <view class="center-btn-txt">
+                            病历
+                        </view>
+                    </view>
+                </button>
+            </view>
+
+            <view class="center-btn-inner">
+                <button class='cu-btn bg-gray shadow lg block' bindtap="onClickSpecimen">
+                    <view style="width: 100%; height: 100%;">
+                        <view class="center-btn-icon">
+                            <text class='icon-flashlightopen'></text>
+                        </view>
+                        <view class="center-btn-txt">
+                            标本
+                        </view>
+                    </view>
+                </button>
+            </view>
+            <view class="center-btn-inner">
+                <button class='cu-btn bg-gray shadow lg block' data-centerid="{{item.center_id}}" bindtap="onClickMember">
+                    <view style="width: 100%; height: 100%;">
+                        <view class="center-btn-icon">
+                            <text class='icon-friend'></text>
+                        </view>
+                        <view class="center-btn-txt">
+                            数据
+                        </view>
+                    </view>
+                </button>
+            </view>
+        </view>
+        <view class="center-notice">
+            <view class="center-notice-inner">
+                <view>
+                    <text class='icon-notificationfill'></text>公告:{{noticeTitle}}
+                    <view class='center-notice-content'>{{noticeContent}}</view>
+                </view>
+            </view>
+        </view>
+        <!-- PJI设计结束: 中心列表 -->
+    </view>
+</scroll-view>
+<view class='load-progress {{loadProgress!=0?"show":"hide"}}' style="top:{{CustomBar}}px;">
+    <view class='load-progress-bar bg-blue' style="transform: translate3d(-{{100-loadProgress}}%, 0px, 0px);"></view>
+    <view class='load-progress-spinner text-blue'></view>
+</view>
+<view class='cu-load load-modal' wx:if="{{loadModal}}">
+    <view class='gray-text'>处理中...</view>
+</view>
+<view class="cu-modal {{modalName=='AddCenterModal'?'show':''}}">
+    <view class="cu-dialog">
+        <view class="cu-bar bg-white justify-end">
+            <view class='content'>新增中心</view>
+            <view class='action' bindtap='hideModal'>
+                <text class='icon-close text-red'></text>
+            </view>
+        </view>
+        <view class='padding-xl' wx:if="{{isAdmin}}">
+            <view class="cu-form-group margin-top">
+                <view class='title'>中心名称</view>
+                <input placeholder="请输入中心名称" class='radius' name='input' value="{{centerName}}" bindinput="centerNameInput"></input>
+            </view>
+        </view>
+        <view class='solids-bottom padding-xs flex align-center' wx:if="{{!isAdmin}}">
+            <view class='flex-sub text-center'>
+                <view class='solid-bottom text-sl padding'>
+                    <text class='icon-warnfill text-red'></text>
+                </view>
+                <view class='padding'>您无此权限，如需申请新增中心请联系E-mail：ryanlee301@163.com</view>
+            </view>
+        </view>
+        <view class="cu-bar bg-white justify-end">
+            <view class='action'>
+                <button class='cu-btn line-blue text-blue' bindtap='hideModal'>取消</button>
+                <button class='cu-btn bg-blue margin-left' bindtap='hideModal' wx:if="{{isAdmin}}" bindtap="addCenter">确定</button>
+            </view>
+        </view>
+    </view>
+</view>

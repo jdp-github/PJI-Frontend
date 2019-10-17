@@ -1,0 +1,37 @@
+@import "../../../miniprogram_npm/wux-weapp/styles/index.wxss";
+
+.cu-avatar{
+    width: 80rpx;
+    height: 80rpx;
+}
+.margin-left {
+    margin-left: 0rpx;
+}
+.cu-list>.cu-item .move {
+    display: flex;
+    width: 400rpx;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    transform: translateX(100%);
+}
+.cu-list>.cu-item.move-cur {
+    transform: translateX(-400rpx);
+}
+.margin-btn {
+    margin: 0rpx 30rpx 15rpx 30rpx;
+}
+.cu-list.menu-avatar>.cu-item {
+    padding-left: 30rpx;
+    height: 170rpx;
+}
+.sub-title {
+    font-size: 30rpx;
+}
+.text-small {
+    font-size: 22rpx!important;
+    line-height: 1.5em;
+}
+.padding-bottom {
+    padding-bottom: 15rpx;
+}

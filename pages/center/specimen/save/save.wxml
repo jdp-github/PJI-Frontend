@@ -1,0 +1,85 @@
+<view class="cu-custom" style="height:{{CustomBar}}px;">
+    <view class="cu-bar fixed bg-gradual-green" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+        <navigator class='action border-custom' open-type="navigateBack" delta="1" hover-class="none" style='width:{{Custom.width}}px;height:{{Custom.height}}px;margin-left:calc(750rpx - {{Custom.right}}px)'>
+            <text class='icon-back'></text>
+            <text class='icon-homefill'></text>
+        </navigator>
+        <view class='content' style='top:{{StatusBar}}px;'>标本存放</view>
+    </view>
+</view>
+<scroll-view scroll-y class="indexes margin-bottom" scroll-into-view="indexes-{{listCurID}}" style='height:calc(100vh - {{CustomBar}}px)' scroll-with-animation="true" enable-back-to-top="true">
+    <view class="title-section shadow">
+        <view class="box-title">
+            标本{{specimenInfo.number}}({{boxInfo.depositary}})
+        </view>
+        <view class="box-description text-gray">
+            <span>
+                <text class='icon-message lg text-gray'></text> 请填写并存放对应标本
+            </span>
+        </view>
+    </view>
+    <view class="cu-form-group margin-top">
+        <view class='title text-special'>标本类型</view>
+        <picker bindchange="onClickType" value="{{typeIndex}}" range="{{typeList}}">
+            <view class="picker">
+                {{typeList[typeIndex]}}
+            </view>
+        </picker>
+    </view>
+    <view class="cu-form-group">
+        <view class='title text-special'>离心率</view>
+        <picker bindchange="onClickEccentricity" value="{{eccentricityIndex}}" range="{{eccentricityList}}">
+            <view class="picker">
+                {{eccentricityList[eccentricityIndex]}}
+            </view>
+        </picker>
+    </view>
+    <view class="cu-form-group">
+        <view class='title text-special'>是否无菌</view>
+        <picker bindchange="onClickAxenic" value="{{axenicIndex}}" range="{{axenicList}}">
+            <view class="picker">
+                {{axenicList[axenicIndex]}}
+            </view>
+        </picker>
+    </view>
+    <view class="cu-form-group">
+        <view class='title text-special'>标本说明</view>
+        <input class='radius text-small special' style='text-align:right' name='input' placeholder="请输入标本说明信息..." bindinput="onInput" value="{{remark}}"></input>
+    </view>
+    <view class="cu-bar bg-white solid-bottom margin-top">
+        <view class='action' style="font-size: 24rpx;">
+            <text class='icon-title text-green'></text>关联信息
+        </view>
+    </view>
+    <view class="cu-bar bg-white search">
+        <view class='search-form round'>
+            <text class="icon-search"></text>
+            <input type="text" placeholder="请输入患者姓名或病历号" confirm-type="search" value="{{searchValue}}" bindinput="onSearchChange"></input>
+        </view>
+        <view class='action'>
+            <button class='cu-btn bg-green shadow-blur round' bindtap="onSearch">搜索</button>
+        </view>
+    </view>
+    <view class="cu-list menu">
+        <view class="cu-item arrow" wx:for="{{caseList}}" wx:key="">
+            <view class="cu-item arrow" style="width:100%;" data-item="{{item}}" catchtap="onItemClick">
+                <view class='content'>
+                    <text class="{{item.isSelected?'icon-check text-green':'icon-edit'}}" style="width:100%;text-align:left;"> {{item.patient_name}} ({{item.create_time}})</text>
+                    <text class='cu-tag bg-grey sm radius'>ID: {{item.case_no}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class='padding-sm flex'>
+        <view class='flex-sub' style="margin-right: 15rpx;">
+            <button class='cu-btn bg-green shadow block' bindtap="onPutClick">
+                存放
+            </button>
+        </view>
+        <view class='flex-sub'>
+            <button class='cu-btn line-green shadow block' bindtap="onBackClick">
+                返回
+            </button>
+        </view>
+    </view>
+</scroll-view>

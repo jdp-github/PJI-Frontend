@@ -1,0 +1,7 @@
+{
+  "disableScroll": true,
+  "usingComponents": {
+    "wux-filterbar": "../../../miniprogram_npm/wux-weapp/filterbar/index"
+  },
+  "enablePullDownRefresh": false
+}

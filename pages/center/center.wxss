@@ -1,0 +1,25 @@
+.cu-list.menu>.cu-item .content {
+    line-height:1.1em;
+    flex:1;
+    font-size:30rpx;
+}
+.margin-tab-bottom {
+    margin-bottom: 120rpx;
+}
+.leader-text {
+    width: 100rpx;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+.cu-list>.cu-item .move {
+    display: flex;
+    width: 400rpx;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    transform: translateX(100%);
+}
+.cu-list>.cu-item.move-cur {
+    transform: translateX(-400rpx);
+}

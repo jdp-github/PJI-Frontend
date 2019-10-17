@@ -1,0 +1,122 @@
+<view class="cu-custom" style="height:{{CustomBar}}px;">
+    <view class="cu-bar fixed bg-gradual-green" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+        <navigator class='action border-custom' open-type="navigateBack" delta="1" hover-class="none"
+                   style='width:{{Custom.width}}px;height:{{Custom.height}}px;margin-left:calc(750rpx - {{Custom.right}}px)' bindtap="backToAuth">
+            <text class='icon-back'></text>
+            <text class='icon-homefill'></text>
+        </navigator>
+        <view class='content' style='top:{{StatusBar}}px;'>统计图</view>
+    </view>
+</view>
+<scroll-view scroll-y class="indexes" scroll-into-view="indexes-{{listCurID}}" style='height:calc(100vh - {{CustomBar}}px - 50px)' scroll-with-animation="true" enable-back-to-top="true">
+    <view class="cu-form-group">
+        <view class='title'>更改中心</view>
+        <picker bindchange="centerChange" value="{{centerIndex}}" range="{{centerValueList}}">
+            <view class="picker">
+                {{centerValue}}
+            </view>
+        </picker>
+    </view>
+    <view class="canvas-header shadow">完成比例</view>
+    <view class="shadow canvas-container">
+        <div class="c100 p{{approvePercentage}} small green">
+            <span>{{approvePercentage}}%</span>
+            <div class="slice">
+                <div class="bar"></div>
+                <div class="fill"></div>
+            </div>
+        </div>
+        <div class="c100 p{{notApprovePercentage}} small orange">
+            <span>{{notApprovePercentage}}%</span>
+            <div class="slice">
+                <div class="bar"></div>
+                <div class="fill"></div>
+            </div>
+        </div>
+    </view>
+    <view class="canvas-bottom shadow cf flex align-center">
+        <view class='cu-tag radius bg-green small fl'>已审核</view>
+        <view class="fr text-special">{{complete_list.completed_cases?complete_list.completed_cases:'0'}} 例</view>
+    </view>
+    <view class="canvas-bottom shadow cf flex align-center">
+        <view class='cu-tag radius bg-orange text-white small fl'>未审核</view>
+        <view class="fr text-special">{{complete_list.no_approve_cases?complete_list.no_approve_cases:'0'}} 例</view>
+    </view>
+    <view class="canvas-bottom shadow cf flex align-center">
+        <view class='cu-tag radius bg-gray small fl'>总共</view>
+        <view class="fr text-special">{{complete_list.total_cases?complete_list.total_cases:'0'}} 例</view>
+    </view>
+    <view class="canvas-header shadow">感染比例</view>
+    <view class="shadow canvas-container">
+        <div class="c100 p{{noInfectPercentage}} small green">
+            <span>{{noInfectPercentage}}%</span>
+            <div class="slice">
+                <div class="bar"></div>
+                <div class="fill"></div>
+            </div>
+        </div>
+    </view>
+    <view class="canvas-bottom shadow cf flex align-center">
+        <view class='cu-tag radius bg-green small fl'>非感染</view>
+        <view class="fr text-special">{{infect_list.notinfect?infect_list.notinfect:'0'}} 例</view>
+    </view>
+    <view class="canvas-bottom shadow cf flex align-center">
+        <view class='cu-tag radius bg-gray small fl'>已感染</view>
+        <view class="fr text-special">{{infect_list.infect?infect_list.infect:'0'}} 例</view>
+    </view>
+    <view class="canvas-header shadow">类型比例</view>
+    <view class="shadow canvas-container">
+        <div class="c100 p{{seizePercentage}} small green">
+            <span>{{seizePercentage}}%</span>
+            <div class="slice">
+                <div class="bar"></div>
+                <div class="fill"></div>
+            </div>
+        </div>
+        <div class="c100 p{{displacePercentage}} small orange">
+            <span>{{displacePercentage}}%</span>
+            <div class="slice">
+                <div class="bar"></div>
+                <div class="fill"></div>
+            </div>
+        </div>
+        <div class="c100 p{{firstPercentage}} small cyan">
+            <span>{{firstPercentage}}%</span>
+            <div class="slice">
+                <div class="bar"></div>
+                <div class="fill"></div>
+            </div>
+        </div>
+        <div class="c100 p{{otherPercentage}} small olive">
+            <span>{{otherPercentage}}%</span>
+            <div class="slice">
+                <div class="bar"></div>
+                <div class="fill"></div>
+            </div>
+        </div>
+    </view>
+    <view class="canvas-bottom shadow cf flex align-center">
+        <view class='cu-tag radius bg-green small fl'>占位器</view>
+        <view class="fr text-special">{{type_list.seize?type_list.seize:'0'}} 例</view>
+    </view>
+    <view class="canvas-bottom shadow cf flex align-center">
+        <view class='cu-tag radius bg-orange small fl'>置换术后</view>
+        <view class="fr text-special">{{type_list.displace?type_list.displace:'0'}} 例</view>
+    </view>
+    <view class="canvas-bottom shadow cf flex align-center">
+        <view class='cu-tag radius bg-cyan small fl'>初次</view>
+        <view class="fr text-special">{{type_list.first?type_list.first:'0'}} 例</view>
+    </view>
+    <view class="canvas-bottom shadow cf flex align-center">
+        <view class='cu-tag radius bg-olive small fl'>其他内置物</view>
+        <view class="fr text-special">{{type_list.other?type_list.other:'0'}} 例</view>
+    </view>
+</scroll-view>
+<view class='load-progress {{loadProgress!=0?"show":"hide"}}' style="top:{{CustomBar}}px;">
+    <view class='load-progress-bar bg-green' style="transform: translate3d(-{{100-loadProgress}}%, 0px, 0px);"></view>
+    <view class='load-progress-spinner text-green'></view>
+</view>
+<view class='cu-load load-modal' wx:if="{{loadModal}}">
+    <view class='gray-text'>处理中...</view>
+</view>
+<view class="load-curtain" wx:if="{{loadProgress!=0}}"></view>

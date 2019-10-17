@@ -1,0 +1,129 @@
+<view class="cu-custom" style="height:{{CustomBar}}px;">
+    <view class="cu-bar fixed bg-gradual-green" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+        <navigator class='action border-custom' open-type="navigateBack" delta="1" hover-class="none" style='width:{{Custom.width}}px;height:{{Custom.height}}px;margin-left:calc(750rpx - {{Custom.right}}px)'>
+            <text class='icon-back'></text>
+            <text class='icon-homefill'></text>
+        </navigator>
+        <view class='content' style='top:{{StatusBar}}px;'>{{caseId.length > 0? patient_name+"的标本":"标本盒"}}</view>
+    </view>
+</view>
+<view class="cu-bar bg-white search fixed" style="top:{{CustomBar}}px;">
+    <view class='search-form round'>
+        <text class="icon-search"></text>
+        <input type="text" placeholder="搜索标本盒、名称、关键字" confirm-type="search" value="{{searchValue}}" bindinput="onSearchChange"></input>
+    </view>
+    <view class='action'>
+        <button class='cu-btn bg-green shadow-blur round' bindtap="onSearch">搜索</button>
+    </view>
+</view>
+<view class="cu-bar bg-white fixed" style="top:{{CustomBar}}px; margin-top: 110rpx; width: 100%; border-bottom: 0;">
+    <wux-filterbar style="width: 100%;font-size: 24rpx;" items="{{ filterItems }}" bind:change="onFilterChange" bind:open="onFilterOpen" bind:close="onFilterClose" />
+</view>
+<scroll-view scroll-y class="indexes margin-bottom" scroll-into-view="indexes-{{listCurID}}" style='padding-top:220rpx;height:calc(100vh - {{CustomBar}}px)' scroll-with-animation="true" enable-back-to-top="true">
+    <view class="cu-list menu menu-avatar">
+        <view style='display:flex;flex-direction:row'>
+            <view class="flex-sub">
+                <button class='cu-btn bg-green shadow block margin-btn' bindtap="showModal" data-target="DrawerModalR">
+                    添加标本盒
+                </button>
+            </view>
+            <view class="flex-sub">
+                <button class='cu-btn bg-green shadow block margin-btn' bindtap="onRefresh" data-target="DrawerModalR">
+                    刷新列表
+                </button>
+            </view>
+        </view>
+        <view view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}}" wx:for="{{boxList}}" wx:key="" bindtouchstart='ListTouchStart' bindtouchmove='ListTouchMove' bindtouchend='ListTouchEnd' data-target="move-box-{{index}}">
+            <view class='content'>
+                <view class="flex">
+                    <view class='flex-sub radius' style="padding-right: 30rpx;">
+                        <view class="solids" style="width: 120rpx; height: 120rpx;">
+                            <image src="{{item.image}}" style="width: 120rpx; height: 120rpx;"></image>
+                        </view>
+                    </view>
+                    <view class='radius' style="flex:4;padding-right: 30rpx;">
+                        <view class="flex-sub sub-title">
+                            <i class="icon-unlock text-green" wx:if="{{item.is_lock != 1}}"></i>
+                            <i class="icon-lock text-red" wx:if="{{item.is_lock == 1}}"></i> {{item.name}}
+                            <view class="cu-tag sm radius" style="font-size: 22rpx;background-color:#ccc;color:#fff;font-weight:bold;margin-left:8rpx;">{{item.uses == 1?"常规存储":"送检用"}}</view>
+                        </view>
+                        <view class="flex-sub text-small text-gray">
+                            {{item.depositary}} {{item.ctime}}
+                        </view>
+                        <view class="flex-sub">
+                            <view class="cu-progress radius striped active margin-top-special">
+                                <view class='bg-olive' style="width:{{item.used_volume}}%;">{{item.used_volume==0?'.':item.used_volume}}</view>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class='move'>
+                <view class='bg-cyan' data-selecteditem="{{item}}" bindtap="onItemClick">详情</view>
+                <view class='bg-olive' data-selecteditem="{{item}}" bindtap="onItemLockOrUnlock" disable="{{item.is_display_lock != 1?'disable':''}}">{{item.is_lock == 0?'锁定':'解锁'}}</view>
+                <view class='bg-red' data-selecteditem="{{item}}" bindtap='onItemDelete' hidden='true' disable="{{item.is_display_lock != 1?'disable':''}}">删除</view>
+            </view>
+        </view>
+    </view>
+</scroll-view>
+<view class='load-progress {{loadProgress!=0?"show":"hide"}}' style="top:{{CustomBar}}px;">
+    <view class='load-progress-bar bg-green' style="transform: translate3d(-{{100-loadProgress}}%, 0px, 0px);"></view>
+    <view class='load-progress-spinner text-green'></view>
+</view>
+<view class='cu-load load-modal' wx:if="{{loadModal}}">
+    <view class='gray-text'>处理中...</view>
+</view>
+<view class="load-curtain" wx:if="{{loadProgress!=0}}"></view>
+<view class="cu-modal drawer-modal justify-end {{modalName=='DrawerModalR'?'show':''}}" bindtap='hideModal'>
+    <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;">
+        <view class="cu-bar bg-white solid-bottom">
+            <view class='action' style="font-size: 24rpx;">
+                <text class='icon-title text-green'></text>新增标本盒
+            </view>
+        </view>
+        <view class="cu-form-group">
+            <view class='title text-small'>标本盒名称</view>
+            <input placeholder='请输入标本盒名称' class='radius text-small' value='{{boxName}}' data-prop='boxName' bindinput="onInput"></input>
+        </view>
+        <view class="cu-form-group">
+            <view class='title text-small'>存放地点</view>
+            <input placeholder='请输入存放地点' class='radius text-small' value='{{depositary}}' data-prop='depositary' bindinput="onInput"></input>
+        </view>
+        <view class="cu-form-group">
+            <view class='title text-small'>备注</view>
+            <input placeholder='请输入备注信息' class='radius text-small' value='{{comment}}' data-prop='comment' bindinput="onInput"></input>
+        </view>
+        <view class="cu-form-group padding-bottom">
+            <radio-group class="block" bindchange="radioChange">
+                <view class='title text-small'>标本盒用途</view>
+                <view class="text-small">
+                    <radio class='blue radio text-small' value='1'></radio> 常规存储
+                    <radio class='blue margin-left-sm text-small' value='2'></radio> 送检用
+                </view>
+            </radio-group>
+        </view>
+        <view class="cu-form-group padding">
+            <view class="padding-xs solids imageAdd" wx:if="{{boxPicUrl == ''}}">
+                <text class='icon-cameraadd' style="width:200rpx;height:200rpx;font-size:100rpx" bindtap="onChooseImage"></text>
+            </view>
+            <view class="imageShow solids padding-xs" wx:if="{{boxPicUrl !== ''}}" style='display:flex;flex-direction:column '>
+                <image src="{{boxPicUrl}}" style="width:200rpx;height:200rpx;" mode='aspectFit' />
+                <button class='cu-btn bg-red shadow sm' bindtap="onRemovePic">
+                    删除
+                </button>
+            </view>
+        </view>
+        <view class='padding-sm flex'>
+            <view class="flex-sub">
+                <button class='cu-btn  bg-green shadow sm block' bindtap="okAddBox">
+                    确定
+                </button>
+            </view>
+            <view class="flex-sub" style="margin-left: 15rpx">
+                <button class='cu-btn line-green shadow sm block' bindtap="cancelAddBox" bindinput="onInput" data-prop='depositary'>
+                    取消
+                </button>
+            </view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,283 @@
+<view class="cu-custom" style="height:{{CustomBar}}px;">
+    <view class="cu-bar fixed bg-gradual-green" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+        <navigator class='action border-custom' open-type="navigateBack" delta="1" hover-class="none" style='width:{{Custom.width}}px;height:{{Custom.height}}px;margin-left:calc(750rpx - {{Custom.right}}px)'>
+            <text class='icon-back'></text>
+            <text class='icon-homefill'></text>
+        </navigator>
+        <view class='content' style='top:{{StatusBar}}px;'>标本列表</view>
+    </view>
+</view>
+<scroll-view scroll-y class="indexes margin-bottom" scroll-into-view="indexes-{{listCurID}}" style='height:calc(100vh - {{CustomBar}}px)' scroll-with-animation="true" enable-back-to-top="true">
+    <view class="title-section shadow">
+        <view class="box-title">
+            {{boxInfo.name?boxInfo.name:'-'}} ({{boxInfo.used_volume?boxInfo.used_volume:'-'}} / {{boxInfo.volume?boxInfo.volume:'-'}})
+        </view>
+        <view class="box-description text-gray">
+            <span>
+                <text class='icon-timefill lg text-gray'></text> {{boxInfo.showTime}}
+            </span>
+            <span style="margin-left: 20rpx;">
+                <text class='icon-locationfill lg text-gray'></text> {{boxInfo.depositary}}
+            </span>
+            <span style="margin-left: 20rpx;">
+                <text class='icon-myfill lg text-gray'></text> {{boxInfo.creator}}
+            </span>
+        </view>
+        <view class="top-ruler-view">
+            <wux-row>
+                <wux-col span="2">
+                    <view style="text-align: center; font-size: 16px;">
+                        <i class="fa fa-arrows-h" aria-hidden="true"></i>
+                    </view>
+                </wux-col>
+                <wux-col span="1">
+                    <view style="text-align: center; font-size: 16px;">
+                        1
+                    </view>
+                </wux-col>
+                <wux-col span="1">
+                    <view style="text-align: center; font-size: 16px;">
+                        2
+                    </view>
+                </wux-col>
+                <wux-col span="1">
+                    <view style="text-align: center; font-size: 16px;">
+                        3
+                    </view>
+                </wux-col>
+                <wux-col span="1">
+                    <view style="text-align: center; font-size: 16px;">
+                        4
+                    </view>
+                </wux-col>
+                <wux-col span="1">
+                    <view style="text-align: center; font-size: 16px;">
+                        5
+                    </view>
+                </wux-col>
+                <wux-col span="1">
+                    <view style="text-align: center; font-size: 16px;">
+                        6
+                    </view>
+                </wux-col>
+                <wux-col span="1">
+                    <view style="text-align: center; font-size: 16px;">
+                        7
+                    </view>
+                </wux-col>
+                <wux-col span="1">
+                    <view style="text-align: center; font-size: 16px;">
+                        8
+                    </view>
+                </wux-col>
+                <wux-col span="1">
+                    <view style="text-align: center; font-size: 16px;">
+                        9
+                    </view>
+                </wux-col>
+                <wux-col span="1">
+                    <view style="text-align: center; font-size: 16px;">
+                        10
+                    </view>
+                </wux-col>
+            </wux-row>
+        </view>
+        <view class="left-ruler-view" wx:for="{{specimenGrid}}" wx:key="">
+            <wux-row>
+                <view wx:for="{{item}}" wx:key="">
+                    <!-- letter -->
+                    <view wx:if="{{item.index == 0}}">
+                        <wux-col span="2">
+                            <view style="text-align: center; font-size: 16px; background-color: #e7e7e7;">
+                                {{item.text}}
+                            </view>
+                        </wux-col>
+                    </view>
+                    <!-- 标本 -->
+                    <view wx:else>
+                        <wux-col span="1">
+                            <view style="text-align: center; font-size: 16px;" data-selecteditem="{{item}}" bindtap='onItemClick'>
+                                <i class="fa {{item.icon}}" aria-hidden="true" style="color:{{item.color_hex}}"></i>
+                            </view>
+                        </wux-col>
+                    </view>
+                </view>
+            </wux-row>
+        </view>
+        <view class="cu-bar bg-white solid-bottom margin-top">
+            <view class='action' style="font-size: 24rpx;">
+                <text class='icon-title text-green'></text>标本筛选
+            </view>
+        </view>
+        <view class="cu-form-group">
+            <view class='title text-special'>是否无菌</view>
+            <picker bindchange="onClickInfect" value="{{infectValue}}" range="{{infectList}}">
+                <view class="picker">
+                    {{infectList[infectIndex]}}
+                </view>
+            </picker>
+        </view>
+        <view class="cu-form-group">
+            <view class='title text-special'>标本类型</view>
+            <picker bindchange="onClickType" value="{{typeValue}}" range="{{typeList}}">
+                <view class="picker">
+                    {{typeList[typeIndex]}}
+                </view>
+            </picker>
+        </view>
+        <view class="cu-form-group">
+            <view class='title text-special'>存放者</view>
+            <picker bindchange="onClickOwner" value="{{ownerValue}}" range="{{staffNameList}}">
+                <view class="picker">
+                    {{staffNameList[ownerIndex]}}
+                </view>
+            </picker>
+        </view>
+        <view class="cu-bar bg-white solid-bottom margin-top">
+            <view class='action' style="font-size: 24rpx;">
+                <text class='icon-title text-green'></text>操作区域
+            </view>
+        </view>
+        <!-- 底部按钮 -->
+        <view class='padding-sm flex' wx:if='{{!isGetAll}}'>
+            <button class='cu-btn bg-green shadow' bindtap='toGetAllMode' style="width:100%;" disabled="{{boxUse == 2}}">
+                批量取出
+            </button>
+        </view>
+        <view class="padding-sm flex">
+            <view class="flex-sub" style="padding-right:10rpx;">
+                <view wx:if='{{isGetAll}}'>
+                    <button class='cu-btn bg-green shadow' bindtap='onMultipleGetClick' style="width:100%;" disabled="{{boxUse == 2}}">
+                        取出
+                    </button>
+                </view>
+            </view>
+            <view class="flex-sub">
+                <view wx:if='{{isGetAll}}'>
+                    <button class='cu-btn line-green shadow' bindtap='toNormalMode' style="width:100%;">
+                        返回
+                    </button>
+                </view>
+            </view>
+        </view>
+    </view>
+</scroll-view>
+
+<!-- 取出弹出框 -->
+<view class="cu-modal drawer-modal justify-end {{modalName=='specimenInfo'?'show':''}}" bindtap='hideModal'>
+    <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;" wx:if="{{!showDetail}}">
+        <view class="cu-bar bg-white solid-bottom">
+            <view class='action' style="font-size: 24rpx;">
+                <text class='icon-title text-green'></text>取出标本
+            </view>
+        </view>
+        <view>
+            <view class="cu-form-group">
+                <view class='title' style="font-size: 24rpx!important;">选择可用取出盒</view>
+                <picker bindchange="onClickOuterBox" style="font-size: 24rpx!important;" value="{{outerBoxValue}}" range="{{outerBoxNameList}}">
+                    <view class="picker" style="font-size: 24rpx!important;">
+                        {{outerBoxNameList[outerBoxIndex]}}
+                    </view>
+                </picker>
+            </view>
+        </view>
+        <view class='padding-sm flex'>
+            <!-- 真正的取出 -->
+            <button class='cu-btn bg-green shadow margin-right' bindtap="onFinalGet" style="width:100%;" disabled="{{boxUse == 2}}">
+                取出
+            </button>
+            <button class='cu-btn line-green shadow' bindtap="onMultipleGetBackClick" style="width:100%;">
+                返回
+            </button>
+        </view>
+    </view>
+    <!-- 标本详情 -->
+    <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;" wx:if="{{showDetail}}">
+        <view class="cu-bar bg-white solid-bottom">
+            <view class='action' style="font-size: 24rpx;">
+                <text class='icon-title text-green'></text>标本{{selectedSpecimen.number}}的信息
+            </view>
+        </view>
+        <view>
+            <view class="cu-form-group cu-form-group-sepcial text-align-left text-small">
+                <view class='title text-small special'>标本编号</view>
+                <input class='radius text-small special' name='input' value="{{selectedSpecimen.sample_id?selectedSpecimen.sample_id:'-'}}" disabled></input>
+            </view>
+            <view class="cu-form-group cu-form-group-sepcial text-align-left text-small">
+                <view class='title text-small special'>姓名</view>
+                <input class='radius text-small special' name='input' value="{{selectedSpecimen.patient_name?selectedSpecimen.patient_name:'-'}}" disabled></input>
+            </view>
+            <view class="cu-form-group cu-form-group-sepcial text-align-left text-small">
+                <view class='title text-small special'>标本类型</view>
+                <input class='radius text-small special' name='input' value="{{selectedSpecimen.typeValue}}" disabled></input>
+            </view>
+            <view class="cu-form-group cu-form-group-sepcial text-align-left text-small">
+                <view class='title text-small special'>离心转数</view>
+                <input class='radius text-small special' name='input' value="{{selectedSpecimen.eccentricityValue}}" disabled></input>
+            </view>
+            <view class="cu-form-group cu-form-group-sepcial text-align-left text-small">
+                <view class='title text-small special'>是否无菌</view>
+                <input class='radius text-small special' name='input' value="{{selectedSpecimen.isAsepsisValue}}" disabled></input>
+            </view>
+            <view class="cu-form-group cu-form-group-sepcial text-align-left text-small">
+                <view class='title text-small special'>存放日期</view>
+                <input class='radius text-small special' name='input' value="{{selectedSpecimen.put_time?selectedSpecimen.put_time:'-'}}" disabled></input>
+            </view>
+            <view class="cu-form-group cu-form-group-sepcial text-align-left text-small">
+                <view class='title text-small special'>存放者</view>
+                <input class='radius text-small special' name='input' value="{{selectedSpecimen.put_staff?selectedSpecimen.put_staff:'-'}}" disabled></input>
+            </view>
+            <view class="cu-form-group cu-form-group-sepcial text-align-left text-small">
+                <view class='title text-small special'>存放备注</view>
+                <input class='radius text-small special' name='input' value="{{selectedSpecimen.remark?selectedSpecimen.remark:'-'}}" disabled></input>
+            </view>
+            <view class="cu-form-group cu-form-group-sepcial text-align-left text-small">
+                <view class='title text-small special'>取出日期</view>
+                <input class='radius text-small special' name='input' value="{{selectedSpecimen.get_time?selectedSpecimen.get_time:'-'}}" disabled></input>
+            </view>
+            <view class="cu-form-group cu-form-group-sepcial text-align-left text-small">
+                <view class='title text-small special'>取出者</view>
+                <input class='radius text-small special' name='input' value="{{selectedSpecimen.get_staff?selectedSpecimen.get_staff:'-'}}" disabled></input>
+            </view>
+        </view>
+        <view class='padding-sm flex' style="display:{{selectedSpecimen.status == 2?'none':''}}">
+            <view style='width:100%;display:flex;flex-direction:column'>
+                <button class='cu-btn bg-green shadow' bindtap="onSingleGetClick" data-id="{{selectedSpecimen.sample_id}}" style="width:100%;" disabled="{{boxUse == 2}}">
+                    取出
+                </button>
+                <button class='cu-btn bg-red shadow' data-target="DeleteSpecimenModal" bindtap="showDeleteModal" data-id="{{selectedSpecimen.sample_id}}" style="width:100%;margin-top:20rpx;">
+                    删除
+                </button>
+            </view>
+        </view>
+    </view>
+</view>
+<view class='load-progress {{loadProgress!=0?"show":"hide"}}' style="top:{{CustomBar}}px;">
+    <view class='load-progress-bar bg-green' style="transform: translate3d(-{{100-loadProgress}}%, 0px, 0px);"></view>
+    <view class='load-progress-spinner text-green'></view>
+</view>
+<view class="cu-modal {{deleteModalName=='DeleteSpecimenModal'?'show':''}}">
+    <view class="cu-dialog">
+        <view class="cu-bar bg-white justify-end">
+            <view class='content'>删除标本</view>
+        </view>
+        <view class='padding-xl'>
+            <view class='flex-sub text-center'>
+                <view class='solid-bottom text-sl padding'>
+                    <text class='icon-warnfill text-red'></text>
+                </view>
+                <view class='padding'>是否删除标本{{selectedSpecimen.number}}</view>
+            </view>
+        </view>
+        <view class="cu-bar bg-white justify-end">
+            <view class='action'>
+                <button class='cu-btn line-green text-green' bindtap='hideDeleteModal'>取消</button>
+                <button class='cu-btn bg-green margin-left' bindtap="onSingleDeleClick">确定</button>
+            </view>
+        </view>
+    </view>
+</view>
+<view class='cu-load load-modal' wx:if="{{loadModal}}">
+    <view class='gray-text'>处理中...</view>
+</view>
+<view class="load-curtain" wx:if="{{loadProgress!=0}}"></view>

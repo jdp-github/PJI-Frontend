@@ -1,0 +1,29 @@
+<view class='UCenter-bg'>
+    <view class="cu-avatar round xl bg-gray margin-xs" style="background-image:url({{avatarUrl}});">
+    </view>
+    <view class='text-xl'>
+        PJI-登记系统
+        <text class='text-df'>v2.0</text>
+    </view>
+    <view class='margin-top-sm'>
+        <text class='text-df'>授权后的信息仅用于小程序</text>
+    </view>
+</view>
+<view class='padding-xl'>
+    <view class='basis-xs margin-xs padding-sm radius'>
+        <button class='cu-btn  bg-green shadow lg block' data-type="login" open-type="getUserInfo"
+                bindgetuserinfo="onGetUserInfo">
+            微信登录
+        </button>
+    </view>
+    <view class='basis-xs margin-xs padding-sm radius'>
+        <button class='cu-btn line-green shadow lg block' data-type="register" open-type="getUserInfo"
+                bindgetuserinfo="onGetUserInfo">
+            注册申请
+        </button>
+    </view>
+</view>
+<view class='cu-load load-modal' wx:if="{{loadModal}}">
+    <view class='gray-text'>加载中...</view>
+</view>
+<view class="load-curtain" wx:if="{{loadModal}}"></view>

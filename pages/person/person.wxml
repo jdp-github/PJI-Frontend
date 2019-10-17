@@ -1,0 +1,133 @@
+<view class='UCenter-bg'>
+    <view class="cu-avatar round xl bg-gray margin-xs" style="background-image:url({{avatarUrl}});"></view>
+    <view class='text-xl'>PJI-登记系统
+        <text class='text-df'>v2.0</text>
+    </view>
+    <view class='margin-top-sm'>
+        <text>{{nickName}}</text>
+    </view>
+    <image src='https://image.weilanwl.com/gif/wave.gif' mode='scaleToFill' class='gif-wave'></image>
+</view>
+<view class='padding flex text-center text-grey bg-white shadow-warp'>
+    <view class='flex flex-sub flex-direction solid-right'>
+        <view class="text-xxl text-{{centerCount>0?'green':'red'}}">{{centerCount}}</view>
+        <view class="margin-top-sm">
+            <text class='icon-homefill'></text>
+            中心
+        </view>
+    </view>
+    <view class='flex flex-sub flex-direction' bindtap="showDrawer" data-target="DrawerModalRight">
+        <view class="text-xxl text-{{(registerCount+approveCount)>0?'red':'green'}} text-decoration">
+            {{registerCount+approveCount}}
+        </view>
+        <view class="margin-top-sm">
+            <text class='icon-formfill'></text>
+            申请/审批
+        </view>
+    </view>
+</view>
+<view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg">
+    <view class="cu-item">
+        <view class='content' hover-class='none'>
+            <view class='action title-style-3'>
+                <text class='text-xl text-bold text-grey'>基本信息</text>
+                <text class='text-Abc text-gray self-end margin-left-sm'>Info</text>
+            </view>
+        </view>
+    </view>
+    <view class="cu-item">
+        <view class='content' hover-class='none'>
+            <text class='icon-people text-grey'></text>
+            <text class='text-grey'>姓名: {{userInfo.name}}</text>
+        </view>
+    </view>
+    <view class="cu-item">
+        <view class='content' hover-class='none'>
+            <text class='icon-phone text-gray'></text>
+            <text class='text-grey'>电话: {{userInfo.phone}}</text>
+        </view>
+    </view>
+    <view class="cu-item">
+        <view class='content' hover-class='none'>
+            <text class='icon-mail text-gray'></text>
+            <text class='text-grey'>邮箱: {{userInfo.email}}</text>
+        </view>
+    </view>
+</view>
+<view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg">
+    <view class="cu-item">
+        <view class='content' hover-class='none'>
+            <view class='action title-style-3'>
+                <text class='text-xl text-bold text-grey'>所属中心</text>
+                <text class='text-Abc text-gray self-end margin-left-sm'>Center</text>
+            </view>
+        </view>
+    </view>
+    <view class="cu-item" wx:for="{{userInfo.center_list}}" wx:key="">
+        <view class='content' hover-class='none'>
+            <text class='text-grey'>{{item.center_name}}</text>
+            <view class='cu-tag radius sm' style="margin-left: 8rpx;">{{item.role_list[0].role_name}}</view>
+        </view>
+    </view>
+</view>
+<view class='cu-tabbar-height'></view>
+<view class='load-progress {{loadProgress!=0?"show":"hide"}}' style="top:{{CustomBar}}px;">
+    <view class='load-progress-bar bg-green' style="transform: translate3d(-{{100-loadProgress}}%, 0px, 0px);"></view>
+    <view class='load-progress-spinner text-green'></view>
+</view>
+<view class='cu-load load-modal' wx:if="{{loadModal}}">
+    <view class='gray-text'>处理中...</view>
+</view>
+<view class="load-curtain" wx:if="{{loadProgress!=0}}"></view>
+<view class="cu-modal drawer-modal justify-end {{modalName=='DrawerModalRight'?'show':''}}" bindtap='hideModal'>
+    <view class="cu-dialog basis-lg" catchtap="ignoreTap" style="top:{{CustomBar}}px;height:100%;width:100%;padding-bottom: 145rpx;">
+        <scroll-view scroll-y class="bg-white nav text-center" style="height:100%;width:100%;padding-bottom: 115rpx;">
+            <view class="cu-item {{index==TabCur?'text-orange cur':''}}" wx:for="{{tabItems}}" wx:key bindtap='tabSelect' data-id="{{index}}">
+                {{item}}
+            </view>
+            <view wx:for='{{registerList}}' wx:key="{{item.apply_id}}" wx:if="{{TabCur==0}}">
+                <block wx:if="{{item.state == 0}}">
+                    <view class="special-bg-gradual-yellow content item-container text-white">
+                        <view class="text-bold">{{item.order_number}}</view>
+                        <view class="text-left margin-top">申请中心: {{item.center_name}}</view>
+                        <view class="text-left">申请角色: {{item.role_name}}</view>
+                        <view class="text-left">申请日期: {{item.apply_time}}</view>
+                    </view>
+                </block>
+                <block wx:if="{{item.state == 1}}">
+                    <view class="bg-gradual-green content item-container text-white">
+                        <view class="text-bold">{{item.order_number}}</view>
+                        <view class="text-left margin-top">申请中心: {{item.center_name}}</view>
+                        <view class="text-left">申请角色: {{item.role_name}}</view>
+                        <view class="text-left">申请日期: {{item.apply_time}}</view>
+                    </view>
+                </block>
+                <block wx:if="{{item.state == 2}}">
+                    <view class="bg-gradual-orange content item-container text-white">
+                        <view class="text-bold">{{item.order_number}}</view>
+                        <view class="text-left margin-top">申请中心: {{item.center_name}}</view>
+                        <view class="text-left">申请角色: {{item.role_name}}</view>
+                        <view class="text-left">申请日期: {{item.apply_time}}</view>
+                    </view>
+                </block>
+            </view>
+            <view wx:for='{{approveList}}' wx:key="{{item.apply_id}}" wx:if="{{TabCur==1}}">
+                <block>
+                    <view class="content item-container border-container">
+                        <view class="text-bold">{{item.order_number}}</view>
+                        <view class="text-left margin-top">姓名: {{item.name}}</view>
+                        <view class="text-left">电话: {{item.phone}}</view>
+                        <view class="text-left">邮箱: {{item.email}}</view>
+                        <view class="text-left">申请中心: {{item.center_name}}</view>
+                        <view class="text-left">申请角色: {{item.role_name}}</view>
+                        <view class="text-left">申请日期: {{item.apply_time}}</view>
+                        <view class="grid margin-top float-right">
+                            <view class="grid col-6"><view class="cu-btn round sm bg-green" data-applyid="{{item.apply_id}}" bindtap="onApprove">同意</view></view>
+                            <view class="grid col-6"><view class="cu-btn round sm bg-red" data-applyid="{{item.apply_id}}" bindtap="onRefuse" style="margin-left: 10rpx;"> 拒绝</view></view>
+                        </view>
+                    </view>
+                </block>
+            </view>
+        </scroll-view>
+    </view>
+</view>

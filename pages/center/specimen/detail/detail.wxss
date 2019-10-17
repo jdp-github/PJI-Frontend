@@ -1,0 +1,61 @@
+@import "../../../../font-awesome.wxss";
+
+.title-section {
+    width: 100%;
+    height: 120rpx;
+    background-color: #ffffff;
+}
+.box-title {
+    padding-left: 30rpx;
+    padding-top: 15rpx;
+    font-size: 28rpx;
+}
+.box-description {
+    padding-left: 30rpx;
+    padding-top: 15rpx;
+    font-size: 24rpx;
+}
+.select-view {
+    width: 100%;
+    height: 700rpx;
+    margin-top: 10rpx;
+}
+.top-ruler {
+    width: 100%;
+    height: 20px;
+}
+.top-ruler-view {
+    background-color: #e7e7e7;
+    border-radius: 10px;
+    margin-left: 15rpx;
+    margin-right: 15rpx;
+    margin-top: 45rpx;
+}
+.ruler-text-top {
+    font-size: 16px;
+    color: #444;
+    margin-top: 10px;
+    margin-left: 15rpx;
+}
+.left-ruler-view {
+    margin-top: 15rpx;
+    margin-left: 15rpx;
+    margin-right: 15rpx;
+}
+.text-align-left {
+    text-align: left;
+}
+.text-small {
+    font-size: 22rpx!important;
+    line-height: 1.5em;
+}
+.cu-form-group-sepcial {
+    min-height: 80rpx;
+}
+.cu-form-group .special {
+    height:30rpx;
+    line-height:30rpx;
+}
+.text-special {
+    font-size: 28rpx!important;
+}

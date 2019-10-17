@@ -1,0 +1,146 @@
+<view class="cu-custom" style="height:{{CustomBar}}px;">
+    <view class="cu-bar fixed bg-gradual-green" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+        <navigator class='action border-custom' open-type="navigateBack" delta="1" hover-class="none" style='width:{{Custom.width}}px;height:{{Custom.height}}px;margin-left:calc(750rpx - {{Custom.right}}px)'>
+            <text class='icon-back'></text>
+            <text class='icon-homefill'></text>
+        </navigator>
+        <view class='content' style='top:{{StatusBar}}px;'>病历列表</view>
+    </view>
+</view>
+<view class="cu-bar bg-white search fixed" style="top:{{CustomBar}}px;">
+    <view class='search-form round'>
+        <text class="icon-search"></text>
+        <input type="text" placeholder="搜索病厉、名称、关键字" confirm-type="search" value="{{searchValue}}" bindinput="onSearchChange"></input>
+    </view>
+    <view class='action'>
+        <button class='cu-btn bg-green shadow-blur round' bindtap="onSearch">搜索</button>
+    </view>
+</view>
+<view class="cu-bar bg-white fixed" style="top:{{CustomBar}}px; margin-top: 110rpx; width: 100%; border-bottom: 0;">
+    <wux-filterbar style="width: 100%;font-size: 24rpx;" items="{{ filterItems }}" bind:change="onFilterChange" bind:open="onFilterOpen" bind:close="onFilterClose" />
+</view>
+<scroll-view scroll-y class="indexes margin-bottom" scroll-into-view="indexes-{{listCurID}}" style='padding-top:220rpx;height:calc(100vh - {{CustomBar}}px)' scroll-with-animation="true" enable-back-to-top="true">
+    <view class="cu-list menu menu-avatar">
+        <view style='display:flex;flex-direction:row'>
+            <view class="flex-sub">
+                <button class='cu-btn bg-green shadow margin-btn block' bindtap="onAddCase">
+                    添加病历
+                </button>
+            </view>
+            <view class="flex-sub">
+                <button class='cu-btn bg-green shadow margin-btn block' bindtap="onRefresh">
+                    刷新列表
+                </button>
+            </view>
+        </view>
+        <view view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}}" wx:for="{{caseList}}" wx:key="" bindtouchstart='ListTouchStart' bindtouchmove='ListTouchMove' bindtouchend='ListTouchEnd' data-target="move-box-{{index}}">
+            <view class='content'>
+                <view class="flex-twice">
+                    <view class="flex">
+                        <view class='flex-sub radius' style="padding-right: 30rpx;">
+                            <view class="avatar-special bg-grey radius">
+                                <view class="flex-sub avatar-text-small">{{item.patient_name}}</view>
+                                <view class="flex-sub text-small">ID: {{item.case_no}}</view>
+                            </view>
+                        </view>
+                        <view class='flex-treble radius text-gray'>
+                            <view class="flex-sub text-small">
+                                <div class="flex">
+                                    <view class="flex-sub">
+                                        <i class="icon-lock text-red" wx:if="{{item.base_state == 2 || item.puncture_state == 2 || item.bein_state == 2  }}"></i>
+                                        <i class="icon-unlock text-green" wx:else></i>
+                                        <view class="cu-tag sm radius" style="font-size: 22rpx;background-color:#ccc;color:#fff;font-weight:bold;margin-left:8rpx;">{{item.type_name}}</view>
+                                        <view class="cu-tag sm radius" style="font-size: 22rpx;background-color:#ccc;color:#fff;font-weight:bold;">{{item.msis_name.length == 0?"暂无":item.msis_name}}</view>
+                                        <view class="cu-tag sm radius" style="font-size: 22rpx;background-color:#ccc;color:#fff;font-weight:bold;">{{item.sample_enable == 0?"标本不可用":"标本可用"}}</view>
+                                    </view>
+                                </div>
+                            </view>
+                            <view class="flex-sub text-small">
+                                <div class="flex">
+                                    <view class="flex-sub">穿刺日期: {{item.puncture_date}}</view>
+                                    <view class="flex-sub">手术日期: {{item.operation_date}}</view>
+                                </div>
+                            </view>
+                            <view class="flex-sub text-small">
+                                <div class="flex">
+                                    <view class="flex-sub">录入: {{item.editor_name}}</view>
+                                    <view class="flex-sub">主诊: {{item.pro_doctor}}</view>
+                                </div>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+                <view class="flex-sub">
+                    <view class="flex">
+                        <view class="cu-progress radius striped active margin-top-special">
+                            <view class='bg-olive' style="width:100%;">基本信息:{{item.baseStatValue}}</view>
+                        </view>
+                        <view class="cu-progress radius striped active margin-top-special" style="margin-left: 6rpx;">
+                            <view class='bg-cyan' style="width:100%;">诊断穿刺:{{item.punctureStatValue}}</view>
+                        </view>
+                        <view class="cu-progress radius striped active margin-top-special" style="margin-left: 6rpx;">
+                            <view class='bg-red' style="width:100%;">入院信息:{{item.beinStatValue}}</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+
+            <view class='move'>
+                <view class='bg-olive' data-case="{{item}}" bindtap="onEditCase">编辑</view>
+                 <view class='bg-cyan' data-case="{{item}}" bindtap="onLookCase">查看</view>
+                <view class='bg-red' data-case="{{item}}" bindtap='onDeleCase' hidden='true' disabled="{{item.delete_button == 0}}">删除</view>
+            </view>
+        </view>
+    </view>
+</scroll-view>
+<view class='load-progress {{loadProgress!=0?"show":"hide"}}' style="top:{{CustomBar}}px;">
+    <view class='load-progress-bar bg-green' style="transform: translate3d(-{{100-loadProgress}}%, 0px, 0px);"></view>
+    <view class='load-progress-spinner text-green'></view>
+</view>
+<view class='cu-load load-modal' wx:if="{{loadModal}}">
+    <view class='gray-text'>处理中...</view>
+</view>
+<view class="load-curtain" wx:if="{{loadProgress!=0}}"></view>
+<!-- dialog -->
+<view class="cu-modal {{modalName=='ErrModal'?'show':''}}">
+    <view class="cu-dialog">
+        <view class="cu-bar bg-white justify-end">
+            <view class='content'>无法操作</view>
+            <view class='action' bindtap='hideModal'>
+                <text class='icon-close text-red'></text>
+            </view>
+        </view>
+        <view class='padding-xl'>
+            <view class='flex-sub text-center'>
+                <view class='solid-bottom text-sl padding'>
+                    <text class='icon-warnfill text-red'></text>
+                </view>
+                <view class='padding'>{{errMsg}}</view>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="cu-modal {{modalName=='DeleteCaseModal'?'show':''}}">
+    <view class="cu-dialog">
+        <view class="cu-bar bg-white justify-end">
+            <view class='content'>删除病历</view>
+            <view class='action' bindtap='hideModal'>
+                <text class='icon-close text-red'></text>
+            </view>
+        </view>
+        <view class='padding-xl'>
+            <view class='flex-sub text-center'>
+                <view class='solid-bottom text-sl padding'>
+                    <text class='icon-warnfill text-red'></text>
+                </view>
+                <view class='padding'>是否删除{{selectedCase.patient_name}}的病历</view>
+            </view>
+        </view>
+        <view class="cu-bar bg-white justify-end">
+            <view class='action'>
+                <button class='cu-btn line-green text-green' bindtap='hideModal'>取消</button>
+                <button class='cu-btn bg-green margin-left-15' bindtap='hideModal' bindtap="deleCase">确定</button>
+            </view>
+        </view>
+    </view>
+</view>

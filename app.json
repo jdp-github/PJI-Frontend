@@ -1,0 +1,48 @@
+{
+    "pages": [
+        "pages/center/manage/manage",
+        "pages/auth/auth",
+        "pages/center/center",
+        "pages/stats/stats",
+        "pages/person/person",
+        "pages/service/service",
+        "pages/register/register",
+        "pages/center/member/member",
+        "pages/center/case/case",
+        "pages/center/case/detail/detail",
+        "pages/center/specimen/specimen",
+        "pages/center/specimen/detail/detail",
+        "pages/center/specimen/save/save",
+        "pages/tool/tool"
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationStyle": "custom",
+        "navigationBarTextStyle": "white",
+        "navigationBarTitleText": "PJI-登记系统",
+        "navigationBarBackgroundColor": "#23292D",
+        "enablePullDownRefresh": false
+    },
+    "tabBar": {
+        "custom": true,
+        "list": [
+            {
+                "pagePath": "pages/center/center",
+                "text": "中心"
+            },
+            {
+                "pagePath": "pages/stats/stats",
+                "text": "统计"
+            },
+            {
+                "pagePath": "pages/service/service",
+                "text": "客服"
+            },
+            {
+                "pagePath": "pages/person/person",
+                "text": "我的"
+            }
+        ]
+    },
+    "sitemapLocation": "sitemap.json"
+}

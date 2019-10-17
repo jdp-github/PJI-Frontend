@@ -1,0 +1,6 @@
+.DS_Store
+.dockerfile
+*.swp
+*.pyc
+.idea
+package-lock.json
