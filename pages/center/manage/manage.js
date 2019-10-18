@@ -410,12 +410,12 @@ Page({
         let that = this;
         wx.createSelectorQuery().select('.indexBar-box').boundingClientRect(function(res) {
             that.setData({
-                boxTop: res.top
+                boxTop: res ? res.top : 0
             });
         }).exec();
         wx.createSelectorQuery().select('.indexes').boundingClientRect(function(res) {
             that.setData({
-                barTop: res.top
+                barTop: res ? res.top : 0
             });
         }).exec();
     },

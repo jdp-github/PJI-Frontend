@@ -33,7 +33,7 @@
         </view>
 
         <!-- 列表item -->
-        <view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}}" style="height:120rpx;padding:0rpx" wx:for="{{noticeList}}" wx:key="{{item.id}}" bindtouchstart='ListTouchStart' bindtouchmove='ListTouchMove' bindtouchend='ListTouchEnd' data-target="move-box-{{index}}"
+        <view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}}" style="height:100%" wx:for="{{noticeList}}" wx:key="{{item.id}}" bindtouchstart='ListTouchStart' bindtouchmove='ListTouchMove' bindtouchend='ListTouchEnd' data-target="move-box-{{index}}"
             bindtap='showNotice' data-item="{{item}}">
             <view class='content'>
                 <view class="item-container">
@@ -43,7 +43,7 @@
                         </view>
                     </view>
                     <view class="notice-avatar">
-                        <view class="cu-avatar round xl bg-gray margin-xs" style="background-image:url({{item.staff_avatar}});"></view>
+                        <view class="cu-avatar round lg bg-gray margin-xs" style="background-image:url({{item.staff_avatar}});"></view>
                     </view>
                     <view class='notice-middle'>
                         <view class="notice-content">
@@ -71,17 +71,30 @@
     <block wx:for="{{staffList}}" wx:key wx:for-index="key" wx:for-item="value">
         <view class='padding indexItem-{{key}}' id="indexes-{{key}}" data-index="{{key}}">{{key}}</view>
         <view class="cu-list menu menu-avatar no-padding">
-            <view class="cu-item {{modalName=='move-box-'+ item.staff_id?'move-cur':''}}" wx:for="{{value}}" wx:key="{{item.staff_id}}" bindtouchstart='ListTouchStart' bindtouchmove='ListTouchMove' bindtouchend='ListTouchEnd' data-target="move-box-{{item.staff_id}}">
+            <view style="display:flex;flex-direction:row;justify-content:flex-start;align-items:center;height:100%;padding-top:10px;padding-bottom:10px" class="cu-item {{modalName=='move-box-'+ item.staff_id?'move-cur':''}}" wx:for="{{value}}" wx:key="{{item.staff_id}}" bindtouchstart='ListTouchStart' bindtouchmove='ListTouchMove' bindtouchend='ListTouchEnd'
+                data-target="move-box-{{item.staff_id}}">
                 <view class="cu-avatar round lg" style="background-image:url({{item.staff_avatar}});"></view>
-                <view class='content'>
-                    <view class='text-grey'>{{item.staff_name}}</view>
-                    <view class='text-gray text-sm'>
-                        {{item.role_name}}
+                <view style="display:flex;flex-direction:row;align-items:flex-end">
+                    <view class="member-item-container">
+                        <view class='text-grey'>{{item.staff_name}}</view>
+                        <view class='text-gray text-sm'>{{item.role_name}}</view>
+                    </view>
+                    <view class="member-item-container">
+                        <view class='text-black text-sm'>患者建档:12</view>
+                        <view class='text-black text-sm'>随访录入:10</view>
+                    </view>
+                    <view class="member-item-container">
+                        <view class='text-black text-sm'>穿刺录入:13</view>
+                        <view class='text-black text-sm'>审核要素:190</view>
+                    </view>
+                    <view class="member-item-container">
+                        <view class='text-black text-sm'>手术录入:9</view>
+                        <view class='text-black text-sm'>标本存放:1</view>
                     </view>
                 </view>
-                <view class='move'>
-                    <view class='bg-red' bindtap="showModal" data-target="DeleteMemberModal" data-staff="{{item}}">删除</view>
+                <view class='move' style="margin-top: -10px;">
                     <view class='bg-olive' bindtap="showModal" data-target="EditMemberModal" data-staff="{{item}}">编辑</view>
+                    <view class='bg-red' bindtap="showModal" data-target="DeleteMemberModal" data-staff="{{item}}">删除</view>
                 </view>
             </view>
         </view>
@@ -116,7 +129,7 @@
         </view>
         <view class="cu-bar bg-white justify-end" wx:if="{{noticeState != 0}}">
             <view class='action'>
-                <button class='cu-btn bg-blue margin-left' style='margin-left:10rpx' bindtap="onSubmit">确定</button>
+                <button class='cu-btn bg-blue margin-left' style='margin-right:10rpx' bindtap="onSubmit">确定</button>
                 <button class='cu-btn line-blue text-blue' bindtap='hideModal' style='margin-left:10rpx'>取消</button>
             </view>
         </view>
@@ -154,8 +167,8 @@
         </view> -->
         <view class="cu-bar bg-white justify-end">
             <view class='action'>
+                <button class='cu-btn bg-blue' style="margin-right:20rpx;" bindtap='hideModal' bindtap="dele">确定</button>
                 <button class='cu-btn line-blue text-blue' bindtap='hideModal'>取消</button>
-                <button class='cu-btn bg-blue' style="margin-left:20rpx;" bindtap='hideModal' bindtap="dele">确定</button>
             </view>
         </view>
     </view>
@@ -207,8 +220,8 @@
         </view>
         <view class="cu-bar bg-white justify-end">
             <view class='action'>
+                <button class='cu-btn bg-green margin-left' style="margin-right:10px" bindtap='hideModal' wx:if="{{isAdmin}}" bindtap="editMember">确定</button>
                 <button class='cu-btn line-green text-green' bindtap='hideModal'>取消</button>
-                <button class='cu-btn bg-green margin-left' bindtap='hideModal' wx:if="{{isAdmin}}" bindtap="editMember">确定</button>
             </view>
         </view>
     </view>
@@ -239,8 +252,8 @@
         </view>
         <view class="cu-bar bg-white justify-end">
             <view class='action'>
+                <button class='cu-btn bg-green margin-left' style="margin-right:10px" bindtap='hideModal' wx:if="{{isAdmin}}" bindtap="deleteMember">确定</button>
                 <button class='cu-btn line-green text-green' bindtap='hideModal'>取消</button>
-                <button class='cu-btn bg-green margin-left' bindtap='hideModal' wx:if="{{isAdmin}}" bindtap="deleteMember">确定</button>
             </view>
         </view>
     </view>

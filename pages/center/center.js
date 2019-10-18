@@ -31,7 +31,7 @@ Page({
         if (typeof this.getTabBar === 'function' &&
             this.getTabBar()) {
             this.getTabBar().setData({
-                selected: 1,
+                selected: 0,
                 emitter: app.globalData.emitter
             });
         }
@@ -274,7 +274,7 @@ Page({
     },
     onClickStats: function(e) {
         wx.navigateTo({
-            url: '../../stats/stats?centerId=' + e.currentTarget.dataset.centerid
+            url: '../stats/stats?centerId=' + e.currentTarget.dataset.center.center_id
         });
     },
     onClickSpecimen: function(e) {

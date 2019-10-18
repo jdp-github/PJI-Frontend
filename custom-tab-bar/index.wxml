@@ -1,7 +1,7 @@
 <view class='box-bottom'>
     <view class="cu-bar tabbar bg-white">
-        <view class="action text-{{selected === 0 ? 'green':'gray'}}">
-            <view class='icon-homefill' bindtap="navigateToCenter"></view> 中心
+        <view class="action text-{{selected == 0 ? 'green':'gray'}}" bindtap="navigateToCenter">
+            <view class='icon-homefill'></view> 中心
         </view>
         <!-- <view class="action text-{{selected === 1 ? 'green':'gray'}}">
             <view class='icon-rankfill' bindtap="navigateToStats"></view> 统计
@@ -16,10 +16,8 @@
             </view>
             客服
         </button>-->
-        <view class="action text-{{selected === 1 ? 'green':'gray'}}" bindtap="navigateToPerson">
-            <view class='icon-my'>
-                <view class='cu-tag badge'></view>
-            </view>
+        <view class="action text-{{selected == 1 ? 'green':'gray'}}" bindtap="navigateToPerson">
+            <view style="font-size:40rpx;margin-bottom:10rpx" class='icon-myfill'></view>
             我的
         </view>
     </view>

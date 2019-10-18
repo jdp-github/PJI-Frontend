@@ -7,7 +7,6 @@
         "pages/person/person",
         "pages/service/service",
         "pages/register/register",
-        "pages/center/member/member",
         "pages/center/case/case",
         "pages/center/case/detail/detail",
         "pages/center/specimen/specimen",

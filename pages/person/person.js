@@ -34,7 +34,7 @@ Page({
         if (typeof this.getTabBar === 'function' &&
             this.getTabBar()) {
             this.getTabBar().setData({
-                selected: 3,
+                selected: 1,
                 emitter: app.globalData.emitter
             });
             app.globalData.emitter.on('addEmitter', () => {
@@ -52,7 +52,7 @@ Page({
     },
     init: async function () {
         await this.requestUserInfo();
-        await this.requestRegister();
+        // await this.requestRegister();
         await this.requestApprove();
     },
     loadProgress: function () {
@@ -230,7 +230,7 @@ Page({
             },
             success(res) {
                 if (res.data.data.code == constant.response_success) {
-                    that.requestRegister();
+                    // that.requestRegister();
                     that.requestApprove();
                 } else {
                     that.showToast(res.data.msg);
@@ -259,7 +259,7 @@ Page({
             },
             success(res) {
                 if (res.data.data.code == constant.response_success) {
-                    that.requestRegister();
+                    // that.requestRegister();
                     that.requestApprove();
                 } else {
                     that.showToast(res.data.msg);

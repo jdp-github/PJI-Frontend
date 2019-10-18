@@ -12,7 +12,7 @@ Page({
         StatusBar: app.globalData.StatusBar,
         CustomBar: app.globalData.CustomBar,
         Custom: app.globalData.Custom,
-        emitter: null,
+        // emitter: null,
         centerObjList: [],
         centerValueList: [],
         centerValue: '全部',
@@ -36,19 +36,19 @@ Page({
             modalName: ''
         });
     },
-    onShow: function () {
-        if (typeof this.getTabBar === 'function' &&
-            this.getTabBar()) {
-            this.getTabBar().setData({
-                selected: 1,
-                emitter: app.globalData.emitter
-            });
-            app.globalData.emitter.on('addEmitter', () => {
-                console.log("stats modal");
-            });
-        }
-        this.onLoad();
-    },
+    // onShow: function () {
+    //     if (typeof this.getTabBar === 'function' &&
+    //         this.getTabBar()) {
+    //         this.getTabBar().setData({
+    //             selected: 1,
+    //             emitter: app.globalData.emitter
+    //         });
+    //         app.globalData.emitter.on('addEmitter', () => {
+    //             console.log("stats modal");
+    //         });
+    //     }
+    //     this.onLoad();
+    // },
     onLoad: function () {
         this.initLogic();
     },
