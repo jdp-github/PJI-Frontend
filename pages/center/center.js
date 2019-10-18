@@ -134,7 +134,7 @@ Page({
     },
     initData: function() {
         let that = this;
-        that.showLoading()
+        // that.showLoading()
         wx.request({
             url: constant.basePath,
             data: {
@@ -145,7 +145,8 @@ Page({
                 'content-type': 'application/json'
             },
             success(res) {
-                that.hideLoading()
+                // that.hideLoading()
+                console.log("Center.SearchStaffCenter:" + JSON.stringify(res))
                 if (res.data.data.code == constant.response_success) {
                     for (let i = 0, len = res.data.data.list.length; i < len; i++) {
                         let center = res.data.data.list[i];
@@ -197,7 +198,7 @@ Page({
             },
             success(res) {
                 console.log("Notice.GetDisplayNotice:" + JSON.stringify(res))
-                that.hideLoading();
+                // that.hideLoading();
                 if (res.data.data.code == constant.response_success) {
                     that.setData({
                         noticeTitle: res.data.data.info.title,
@@ -271,14 +272,14 @@ Page({
             url: '../center/case/case?centerId=' + e.currentTarget.dataset.center.center_id + "&centerName=" + e.currentTarget.dataset.center.center_name
         });
     },
-    onClickMember: function(e) {
+    onClickStats: function(e) {
         wx.navigateTo({
-            url: '../center/member/member?centerId=' + e.currentTarget.dataset.centerid
+            url: '../../stats/stats?centerId=' + e.currentTarget.dataset.centerid
         });
     },
     onClickSpecimen: function(e) {
         wx.navigateTo({
-            url: '../center/specimen/specimen?centerId=' + e.target.dataset.center.center_id + "&centerName=" + e.target.dataset.center.center_name
+            url: '../center/specimen/specimen?centerId=' + e.currentTarget.dataset.center.center_id + "&centerName=" + e.currentTarget.dataset.center.center_name
         })
     },
     onClickManage: function(e) {
@@ -286,7 +287,7 @@ Page({
         //     url: '../notice/notice?centerId=' + e.currentTarget.dataset.centerid
         // })
         wx.navigateTo({
-            url: '../center/manage/manage'
+            url: '../center/manage/manage?centerId=' + e.currentTarget.dataset.centerid
         })
     },
     centerNameInput: function(e) {

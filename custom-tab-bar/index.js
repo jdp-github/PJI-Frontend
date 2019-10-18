@@ -21,34 +21,34 @@ Component({
                 url: '../center/center'
             });
         },
-        navigateToStats: function (e) {
-            if (emitter) {
-                this.data.emitter.removeAllListeners('addEmitter');
-            }
-            this.setData({
-                selected: 1
-            });
-            wx.switchTab({
-                url: '../stats/stats'
-            });
-        },
-        navigateToService: function (e) {
-            if (emitter) {
-                this.data.emitter.removeAllListeners('addEmitter');
-            }
-            this.setData({
-                selected: 2
-            });
-            wx.switchTab({
-                url: '../service/service'
-            });
-        },
+        // navigateToStats: function (e) {
+        //     if (emitter) {
+        //         this.data.emitter.removeAllListeners('addEmitter');
+        //     }
+        //     this.setData({
+        //         selected: 1
+        //     });
+        //     wx.switchTab({
+        //         url: '../stats/stats'
+        //     });
+        // },
+        // navigateToService: function (e) {
+        //     if (emitter) {
+        //         this.data.emitter.removeAllListeners('addEmitter');
+        //     }
+        //     this.setData({
+        //         selected: 2
+        //     });
+        //     wx.switchTab({
+        //         url: '../service/service'
+        //     });
+        // },
         navigateToPerson: function (e) {
             if (emitter) {
                 this.data.emitter.removeAllListeners('addEmitter');
             }
             this.setData({
-                selected: 3
+                selected: 1
             });
             wx.switchTab({
                 url: '../person/person'

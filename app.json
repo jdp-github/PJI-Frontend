@@ -1,7 +1,7 @@
 {
     "pages": [
-        "pages/center/manage/manage",
         "pages/auth/auth",
+        "pages/center/manage/manage",
         "pages/center/center",
         "pages/stats/stats",
         "pages/person/person",
@@ -12,8 +12,7 @@
         "pages/center/case/detail/detail",
         "pages/center/specimen/specimen",
         "pages/center/specimen/detail/detail",
-        "pages/center/specimen/save/save",
-        "pages/tool/tool"
+        "pages/center/specimen/save/save"
     ],
     "window": {
         "backgroundTextStyle": "light",
