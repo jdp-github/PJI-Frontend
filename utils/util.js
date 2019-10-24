@@ -24,9 +24,9 @@ function formatTime(number, format) {
     return format;
 }
 
-function getNowFormatDate() {
+function getNowFormatDate(lastYear) {
     let date = new Date();
-    let year = date.getFullYear();
+    let year = lastYear ? date.getFullYear() - 1 : date.getFullYear();
     let month = date.getMonth() + 1;
     let strDate = date.getDate();
     if (month >= 1 && month <= 9) {

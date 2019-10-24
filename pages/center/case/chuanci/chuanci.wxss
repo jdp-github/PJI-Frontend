@@ -1,0 +1,113 @@
+@import '../../../../font-awesome.wxss';
+
+page, .page {
+    background-color: #ffffff;
+}
+
+.avatar-group {
+    overflow: hidden;
+    width: 100%;
+}
+
+.cu-avatar-group {
+    direction: unset;
+    unicode-bidi: bidi-override;
+    padding: 0 40rpx 0 40rpx;
+    display: block;
+}
+
+.VerticalNav {
+    background-color: #fff;
+}
+
+.VerticalNav.nav {
+    width: 200rpx;
+    white-space: initial;
+}
+
+.VerticalNav.nav .cu-item {
+    width: 100%;
+    text-align: center;
+    background-color: #fff;
+    margin: 0;
+    border: none;
+    height: 50px;
+    position: relative;
+}
+
+.VerticalNav.nav .cu-item.cur {
+    background-color: #f1f1f1;
+}
+
+.VerticalNav.nav .cu-item.cur::after {
+    content: "";
+    width: 8rpx;
+    height: 30rpx;
+    border-radius: 10rpx 0 0 10rpx;
+    position: absolute;
+    background-color: currentColor;
+    top: 0;
+    right: 0rpx;
+    bottom: 0;
+    margin: auto;
+}
+
+.VerticalBox {
+    display: flex;
+}
+
+.VerticalMain {
+    background-color: #f1f1f1;
+}
+
+.cu-item-special, .cu-form-group .title, .cu-form-group input,
+.cu-form-group picker .picker {
+    font-size: 22rpx;
+    text-align: right;
+}
+
+.disabled {
+    background-color: #ccc;
+}
+
+.cu-form-group textarea, .cu-form-group textarea textarea {
+    font-size: 22rpx;
+    text-align: right;
+}
+
+.btn-block {
+    width: 100%;
+}
+
+.padding-left-special {
+    padding-left: 2rpx;
+}
+.margin-special {
+    padding: 15rpx 0rpx;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+.imageAdd {
+    width: 240rpx!important;
+    height: 240rpx!important;
+}
+.imageShow {
+    width: 240rpx!important;
+    height: 280rpx!important;
+}
+.imageShow image {
+    width: 200rpx!important;
+    height: 200rpx!important;
+}
+.centerPlace {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+.grid.grid-square > view {
+    margin-right: 0rpx!important;
+}
+.VerticalMain {
+    backgroun-color: #fff!important;
+}

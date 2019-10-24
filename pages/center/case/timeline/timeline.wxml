@@ -19,7 +19,7 @@
 <!-- 筛选 -->
 <view class="cu-bar bg-white fixed" style="top:{{CustomBar}}px; margin-top: 110rpx; width: 100%; border-bottom: 0;">
     <view class="filter-container">
-        <view class="title">开始:</view>
+        <view class="title">开始：</view>
         <picker mode="date" value="{{startDate}}" start="2015-01-01" end="2030-12-31" bindchange="StartDateChange">
             <view class="picker" style="margin-top:5rpx">
                 {{startDate}}
@@ -27,7 +27,7 @@
         </picker>
     </view>
     <view class="filter-container">
-        <view class="title">结束:</view>
+        <view class="title">结束：</view>
         <picker mode="date" value="{{endDate}}" start="2015-01-01" end="2030-12-31" bindchange="EndDateChange">
             <view class="picker" style="margin-top:5rpx">
                 {{endDate}}
@@ -35,7 +35,7 @@
         </picker>
     </view>
     <view class="filter-container">
-        <view class="title">状态:</view>
+        <view class="title">审核状态：</view>
         <picker value="{{stateIndex}}" range="{{statePicker}}" bindchange="StatePickerChange">
             <view class="picker">
                 {{statePicker[stateIndex]}}
@@ -67,7 +67,7 @@
                         <view class='flex-sub radius' style="padding-right: 15rpx;">
                             <view class="avatar-special bg-grey radius" style="display:flex;flex-direction:column;padding-top:10rpx;padding-bottom:10rpx">
                                 <view class="flex-sub" style="font-size:28rpx">{{item.patient_name}}</view>
-                                <view class="flex-sub" style="font-size:28rpx">ID:{{item.case_no}}</view>
+                                <view class="flex-sub" style="font-size:28rpx">ID: {{item.case_no}}</view>
                                 <view class="flex-sub" style="font-size:28rpx">左髋</view>
                             </view>
                         </view>
@@ -206,8 +206,8 @@
         </view>
         <view class="cu-bar bg-white justify-end">
             <view class='action'>
-                <button class='cu-btn bg-blue margin-left' style='margin-right:10rpx' bindtap="onSubmitAdd">确定</button>
-                <button class='cu-btn line-blue text-blue' bindtap='onHideAdd' style='margin-left:10rpx'>取消</button>
+                <button class='cu-btn bg-blue margin-left' style='margin-right:10rpx' bindtap="onSubmit">确定</button>
+                <button class='cu-btn line-blue text-blue' bindtap='hideModal' style='margin-left:10rpx'>取消</button>
             </view>
         </view>
     </view>

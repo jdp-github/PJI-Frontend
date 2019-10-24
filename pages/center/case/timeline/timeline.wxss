@@ -1,4 +1,4 @@
-@import "../../../miniprogram_npm/wux-weapp/styles/index.wxss";
+@import "../../../../miniprogram_npm/wux-weapp/styles/index.wxss";
 
 .cu-avatar {
     width: 80rpx;
@@ -33,7 +33,6 @@
 
 .avatar-special {
     width: 100%;
-    min-width: 170rpx;
     text-align: center;
     font-variant: small-caps;
     margin: 0;

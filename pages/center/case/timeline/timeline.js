@@ -1,7 +1,7 @@
 'use strict';
 
-let constant = require('../../../utils/constant.js');
-let util = require('../../../utils/util.js');
+let constant = require('../../../../utils/constant.js');
+let util = require('../../../../utils/util.js');
 
 const app = getApp();
 
@@ -137,23 +137,44 @@ Page({
         wx.navigateTo({
             url: '../case/base/base?centerId=' + this.data.centerId + "&centerName=" + this.data.centerName + "&case_id="
         });
-        this.hideModal()
     },
-    onHideAdd() {
-        this.setData({
-            modalName: null,
-            addCaseName: '',
-            addCaseID: '',
-            addCasePartIndex: 0,
-            addCaseSideIndex: 0
-        });
-    },
+
+    // onEditCase: function(e) {
+    //     let that = this;
+    //     that.showLoading();
+    //     let caseInfo = e.currentTarget.dataset.case;
+    //     wx.request({
+    //         url: constant.basePath,
+    //         data: {
+    //             service: 'Case.SetCaseWritingStaff',
+    //             openid: app.globalData.openid,
+    //             case_id: caseInfo.case_id,
+    //             type: 1
+    //         },
+    //         header: {
+    //             'content-type': 'application/json'
+    //         },
+    //         success(res) {
+    //             if (res.data.data.code == 0) {
+    //                 wx.navigateTo({
+    //                     url: '../../center/case/detail/detail?case_id=' + caseInfo.case_id + "&centerId=" + that.data.centerId + "&centerName=" + that.data.centerName
+    //                 });
+    //             } else {
+    //                 that.showModal("ErrModal", res.data.data.msg);
+    //             }
+    //             that.hideLoading();
+    //         },
+    //         fail(res) {
+    //             that.hideLoading();
+    //         }
+    //     });
+    // },
 
     // 查看
     onLookCase: function(e) {
         let caseInfo = e.currentTarget.dataset.case;
         wx.navigateTo({
-            url: '../../center/case/base/base?case_id=' + caseInfo.case_id + "&centerId=" + this.data.centerId + "&centerName=" + this.data.centerName + "&isLook=" + true
+            url: '../../center/case/detail/detail?case_id=' + caseInfo.case_id + "&centerId=" + this.data.centerId + "&centerName=" + this.data.centerName + "&isLook=" + true
         });
     },
 
