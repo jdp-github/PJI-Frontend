@@ -69,6 +69,36 @@ Page({
         duration_symptoms_date: util.getNowFormatDate(),
         // 本次发病可能诱因
         this_time_cause: '',
+        // 弹出框
+        is_rheumatism: 0,
+        is_rheumatoid: 1,
+        is_as: 1,
+        is_spa: 1,
+        is_psa: 1,
+        is_gout: 1,
+        is_cancer: 0,
+        cure_state: 1,
+        radiotherapy: 0,
+        radiotherapy_picker: ['请选择', '1月内', '3月内', '半年内', '1年内', '1年以上'],
+        chemotherapy: 0,
+        glycuresis: 1,
+        hypertension: 1,
+        cvd: 1,
+        chd: 1,
+        ledvt: 1,
+        pud: 1,
+        copd: 1,
+        abnormal_heart: 1,
+        abnormal_liver: 1,
+        abnormal_renal: 1,
+        abnormal_thyroid: 1,
+        anemia: 1,
+        is_smoke: 0,
+        is_drink: 0,
+        is_drink_picker: ['请选择', '少量', '中量', '大量', '已戒3月以上'],
+        other_disease: '',
+        score: '',
+        remark: '',
     },
 
     // -------- 基本信息事件 begin -------- //
@@ -199,11 +229,46 @@ Page({
             this_time_cause: e.detail.value
         });
     },
-
     onShowDrawer() {
         this.setData({
             modalName: "DrawerModalR"
         })
+    },
+    radioChange(e) {
+        let param = e.currentTarget.dataset.type
+        this.setData({
+            [param]: parseInt(e.detail.value)
+        })
+    },
+    onRadiotherapyChange: function(e) {
+        this.setData({
+            radiotherapy: parseInt(e.detail.value),
+        });
+    },
+    onIs_smokeChange: function(e) {
+        this.setData({
+            is_smoke: parseInt(e.detail.value),
+        });
+    },
+    onIs_drinkChange: function(e) {
+        this.setData({
+            is_drink: parseInt(e.detail.value),
+        });
+    },
+    onRadiotherapyChange: function(e) {
+        this.setData({
+            radiotherapy: parseInt(e.detail.value),
+        });
+    },
+    onOther_diseaseInput: function(e) {
+        this.setData({
+            other_disease: e.detail.value
+        });
+    },
+    onRemarkInput: function(e) {
+        this.setData({
+            remark: e.detail.value
+        });
     },
     // -------- 基本信息事件 end -------- //
 
@@ -271,22 +336,22 @@ Page({
 
     onLoad: function(options) {
         // this.loadProgress();
-        var caseId = options.case_id;
-        this.setData({
-            centerId: options.centerId ? options.centerId : '',
-            centerName: options.centerName ? options.centerName : '',
-            isAdmin: app.globalData.is_admin == '1',
-            caseId: caseId,
-            isCreate: caseId.length <= 0,
-        });
-        if (!this.data.isCreate) {
-            this.requestCaseInfo(caseId)
-        } else {
-            this.setData({
-                addAvatar: app.globalData.avatarUrl
-            })
-        }
-        this.completeProgress();
+        // var caseId = options.case_id;
+        // this.setData({
+        //     centerId: options.centerId ? options.centerId : '',
+        //     centerName: options.centerName ? options.centerName : '',
+        //     isAdmin: app.globalData.is_admin == '1',
+        //     caseId: caseId,
+        //     isCreate: caseId.length <= 0,
+        // });
+        // if (!this.data.isCreate) {
+        //     this.requestCaseInfo(caseId)
+        // } else {
+        //     this.setData({
+        //         addAvatar: app.globalData.avatarUrl
+        //     })
+        // }
+        // this.completeProgress();
     },
 
     requestCaseInfo(caseId) {

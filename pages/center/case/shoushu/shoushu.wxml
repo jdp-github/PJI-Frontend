@@ -671,36 +671,38 @@
         </scroll-view>
     </view>
 </scroll-view>
+
 <!-- 模态对话框 -->
-<view class="cu-modal drawer-modal justify-end {{modalName=='LEDrawerModalR'?'show':''}}" bindtap='hideModal'>
+<!-- 上传图片 3张 -->
+<view class="cu-modal drawer-modal justify-end {{modalName=='threeImgModal'?'show ':''}}" bindtap='hideModal'>
     <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;">
         <view class="cu-bar bg-white solid-bottom">
-            <view class='action' style="font-size: 24rpx;">
-                <text class='icon-title text-green'></text>诊断性穿刺-术中LE试纸(原液)
+            <view class='action ' style="font-size: 24rpx;">
+                <text class='icon-title text-blue'></text>{{imageModalName}}
             </view>
         </view>
         <view class="cu-form-group margin-top centerPlace">
             <view class="grid col-3 grid-square flex-sub centerPlace">
                 <view class="imageShow solids padding-xs" wx:if="{{pic1 !== ''}}">
-                    <image src="{{pic1}}" mode='aspectFit' bindtap="showImageModal" data-img="{{pic1}}"/>
-                    <button class='cu-btn bg-red shadow sm' bindtap="onRemovePic" data-le="11">
+                    <image src="{{pic1}}" mode='aspectFit' bindtap="showImageModal" data-img="{{pic1}}" />
+                    <button class='cu-btn bg-red shadow sm ' bindtap="onRemovePic" data-le="11">
                         删除
                     </button>
                 </view>
                 <view class="padding-xs solids imageAdd" wx:if="{{pic1 == ''}}">
-                    <text class='icon-cameraadd' bindtap="onChooseImage" data-le="11"></text>
+                    <text class='icon-cameraadd ' bindtap="onChooseImage" data-le="11"></text>
                 </view>
                 <view class="imageShow solids padding-xs" wx:if="{{pic2 !== ''}}">
-                    <image src="{{pic2}}" mode='aspectFit' bindtap="showImageModal" data-img="{{pic2}}"/>
-                    <button class='cu-btn bg-red shadow sm' bindtap="onRemovePic" data-le="12">
+                    <image src="{{pic2}}" mode='aspectFit ' bindtap="showImageModal" data-img="{{pic2}}" />
+                    <button class='cu-btn bg-red shadow sm ' bindtap="onRemovePic" data-le="12">
                         删除
                     </button>
                 </view>
                 <view class="padding-xs solids imageAdd" wx:if="{{pic2 == ''}}">
-                    <text class='icon-cameraadd' bindtap="onChooseImage" data-le="12"></text>
+                    <text class='icon-cameraadd ' bindtap="onChooseImage" data-le="12"></text>
                 </view>
                 <view class="imageShow solids padding-xs" wx:if="{{pic3 !== ''}}">
-                    <image src="{{pic3}}" mode='aspectFit' bindtap="showImageModal" data-img="{{pic3}}"/>
+                    <image src="{{pic3}}" mode='aspectFit' bindtap="showImageModal" data-img="{{pic3}}" />
                     <button class='cu-btn bg-red shadow sm' bindtap="onRemovePic" data-le="13">
                         删除
                     </button>
@@ -712,142 +714,24 @@
         </view>
     </view>
 </view>
-<view class="cu-modal drawer-modal justify-end {{modalName=='LEAfterDrawerModalR'?'show':''}}" bindtap='hideModal'>
-    <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;">
-        <view class="cu-bar bg-white solid-bottom">
-            <view class='action' style="font-size: 24rpx;">
-                <text class='icon-title text-green'></text>诊断性穿刺-术中LE试纸(离心后)
-            </view>
-        </view>
-        <view class="cu-form-group margin-top centerPlace">
-            <view class="grid col-3 grid-square flex-sub centerPlace">
-                <view class="imageShow solids padding-xs" wx:if="{{pic4 !== ''}}">
-                    <image src="{{pic4}}" mode='aspectFit' bindtap="showImageModal" data-img="{{pic4}}"/>
-                    <button class='cu-btn bg-red shadow sm' bindtap="onRemovePic" data-le="21">
-                        删除
-                    </button>
-                </view>
-                <view class="padding-xs solids imageAdd" wx:if="{{pic4 == ''}}">
-                    <text class='icon-cameraadd' bindtap="onChooseImage" data-le="21"></text>
-                </view>
-                <view class="imageShow solids padding-xs" wx:if="{{pic5 !== ''}}">
-                    <image src="{{pic5}}" mode='aspectFit' bindtap="showImageModal" data-img="{{pic5}}"/>
-                    <button class='cu-btn bg-red shadow sm' bindtap="onRemovePic" data-le="22">
-                        删除
-                    </button>
-                </view>
-                <view class="padding-xs solids imageAdd" wx:if="{{pic5 == ''}}">
-                    <text class='icon-cameraadd' bindtap="onChooseImage" data-le="22"></text>
-                </view>
-                <view class="imageShow solids padding-xs" wx:if="{{pic6 !== ''}}">
-                    <image src="{{pic6}}" mode='aspectFit' bindtap="showImageModal" data-img="{{pic6}}"/>
-                    <button class='cu-btn bg-red shadow sm' bindtap="onRemovePic" data-le="23">
-                        删除
-                    </button>
-                </view>
-                <view class="padding-xs solids imageAdd" wx:if="{{pic6 == ''}}">
-                    <text class='icon-cameraadd' bindtap="onChooseImage" data-le="23"></text>
-                </view>
-            </view>
-        </view>
-    </view>
-</view>
-<view class="cu-modal drawer-modal justify-end {{modalName=='LESecondDrawerModalR'?'show':''}}" bindtap='hideModal'>
-    <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;">
-        <view class="cu-bar bg-white solid-bottom">
-            <view class='action' style="font-size: 24rpx;">
-                <text class='icon-title text-green'></text>入院后-术中LE试纸(原液)
-            </view>
-        </view>
-        <view class="cu-form-group margin-top centerPlace">
-            <view class="grid col-3 grid-square flex-sub centerPlace">
-                <view class="imageShow solids padding-xs" wx:if="{{pic7 !== ''}}">
-                    <image src="{{pic7}}" mode='aspectFit' bindtap="showImageModal" data-img="{{pic7}}"/>
-                    <button class='cu-btn bg-red shadow sm' bindtap="onRemovePic" data-le="31">
-                        删除
-                    </button>
-                </view>
-                <view class="padding-xs solids imageAdd" wx:if="{{pic7 == ''}}">
-                    <text class='icon-cameraadd' bindtap="onChooseImage" data-le="31"></text>
-                </view>
-                <view class="imageShow solids padding-xs" wx:if="{{pic8 !== ''}}">
-                    <image src="{{pic8}}" mode='aspectFit' bindtap="showImageModal" data-img="{{pic8}}" />
-                    <button class='cu-btn bg-red shadow sm' bindtap="onRemovePic" data-le="32">
-                        删除
-                    </button>
-                </view>
-                <view class="padding-xs solids imageAdd" wx:if="{{pic8 == ''}}">
-                    <text class='icon-cameraadd' bindtap="onChooseImage" data-le="32"></text>
-                </view>
-                <view class="imageShow solids padding-xs" wx:if="{{pic9 !== ''}}">
-                    <image src="{{pic9}}" mode='aspectFit'  bindtap="showImageModal" data-img="{{pic9}}"/>
-                    <button class='cu-btn bg-red shadow sm' bindtap="onRemovePic" data-le="33">
-                        删除
-                    </button>
-                </view>
-                <view class="padding-xs solids imageAdd" wx:if="{{pic9 == ''}}">
-                    <text class='icon-cameraadd' bindtap="onChooseImage" data-le="33"></text>
-                </view>
-            </view>
-        </view>
-    </view>
-</view>
-<view class="cu-modal drawer-modal justify-end {{modalName=='LESecondAfterDrawerModalR'?'show':''}}" bindtap='hideModal'>
-    <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;">
-        <view class="cu-bar bg-white solid-bottom">
-            <view class='action' style="font-size: 24rpx;">
-                <text class='icon-title text-green'></text>入院后-术中LE试纸(离心后)
-            </view>
-        </view>
-        <view class="cu-form-group margin-top centerPlace">
-            <view class="grid col-3 grid-square flex-sub centerPlace">
-                <view class="imageShow solids padding-xs" wx:if="{{pic10 !== ''}}">
-                    <image src="{{pic10}}" mode='aspectFit' bindtap="showImageModal" data-img="{{pic10}}"/>
-                    <button class='cu-btn bg-red shadow sm' bindtap="onRemovePic" data-le="41">
-                        删除
-                    </button>
-                </view>
-                <view class="padding-xs solids imageAdd" wx:if="{{pic10 == ''}}">
-                    <text class='icon-cameraadd' bindtap="onChooseImage" data-le="41"></text>
-                </view>
-                <view class="imageShow solids padding-xs" wx:if="{{pic11 !== ''}}">
-                    <image src="{{pic11}}" mode='aspectFit' bindtap="showImageModal" data-img="{{pic11}}" />
-                    <button class='cu-btn bg-red shadow sm' bindtap="onRemovePic" data-le="42">
-                        删除
-                    </button>
-                </view>
-                <view class="padding-xs solids imageAdd" wx:if="{{pic11 == ''}}">
-                    <text class='icon-cameraadd' bindtap="onChooseImage" data-le="42"></text>
-                </view>
-                <view class="imageShow solids padding-xs" wx:if="{{pic12 !== ''}}">
-                    <image src="{{pic12}}" mode='aspectFit' bindtap="showImageModal" data-img="{{pic12}}" />
-                    <button class='cu-btn bg-red shadow sm' bindtap="onRemovePic" data-le="43">
-                        删除
-                    </button>
-                </view>
-                <view class="padding-xs solids imageAdd" wx:if="{{pic12 == ''}}">
-                    <text class='icon-cameraadd' bindtap="onChooseImage" data-le="43"></text>
-                </view>
-            </view>
-        </view>
-    </view>
-</view>
+<!-- 显示大图 -->
 <view class="cu-modal {{showImageModal?'show':''}}">
     <view class="cu-dialog">
         <view class="">
-                <view style="float:left;width:100%;">
-                    <image src="{{modalImage}}" mode='aspectFit' style="height: 800rpx;" />
-                </view>
-                <view style="float:left;width:100%;margin: 30rpx 0rpx;">
-                    <button class='cu-btn bg-red shadow' bindtap="hideImageModal">
-                        关闭
-                    </button>
-                </view>
+            <view style="float:left;width:100%;">
+                <image src="{{modalImage}}" mode='aspectFit' style="height: 800rpx;" />
+            </view>
+            <view style="float:left;width:100%;margin: 30rpx 0rpx;">
+                <button class='cu-btn bg-red shadow' bindtap="hideImageModal">
+                    关闭
+                </button>
+            </view>
         </view>
     </view>
 </view>
 <view class='load-progress {{loadProgress!=0?"show":"hide"}}' style="top:{{CustomBar}}px;">
-    <view class='load-progress-bar bg-green' style="transform: translate3d(-{{100-loadProgress}}%, 0px, 0px);"></view>
+    <view class='load-progress-bar bg-green' style="transform: translate3d(-{{100-loadProgress}}%, 0px, 0px);">
+    </view>
     <view class='load-progress-spinner text-green'></view>
 </view>
 <view class='cu-load load-modal' wx:if="{{loadModal}}">

@@ -1,7 +1,7 @@
 @import '../../../../font-awesome.wxss';
 
 page, .page {
-    background-color: #ffffff;
+    background-color: #fff;
 }
 
 .avatar-group {
@@ -66,10 +66,6 @@ page, .page {
     text-align: right;
 }
 
-.disabled {
-    background-color: #ccc;
-}
-
 .cu-form-group textarea, .cu-form-group textarea textarea {
     font-size: 22rpx;
     text-align: right;
@@ -82,32 +78,52 @@ page, .page {
 .padding-left-special {
     padding-left: 2rpx;
 }
+
 .margin-special {
     padding: 15rpx 0rpx;
     text-align: center;
     align-items: center;
     justify-content: center;
 }
+
 .imageAdd {
-    width: 240rpx!important;
-    height: 240rpx!important;
+    width: 240rpx !important;
+    height: 240rpx !important;
 }
+
 .imageShow {
-    width: 240rpx!important;
-    height: 280rpx!important;
+    width: 240rpx !important;
+    height: 280rpx !important;
 }
+
 .imageShow image {
-    width: 200rpx!important;
-    height: 200rpx!important;
+    width: 200rpx !important;
+    height: 200rpx !important;
 }
+
 .centerPlace {
     text-align: center;
     justify-content: center;
     align-items: center;
 }
+
 .grid.grid-square > view {
-    margin-right: 0rpx!important;
+    margin-right: 0rpx !important;
 }
+
 .VerticalMain {
-    backgroun-color: #fff!important;
+    background-color: #fff !important;
+}
+
+i {
+    color: #555;
+    margin-left: 30rpx;
+}
+
+.disabled {
+    background-color: #ccc;
+}
+
+.clock {
+    background-color: #fcd9da;
 }

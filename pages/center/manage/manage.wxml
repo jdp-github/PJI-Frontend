@@ -69,7 +69,7 @@
 <!-- 成员列表 -->
 <scroll-view wx-else scroll-y class="indexes margin-bottom" scroll-into-view="indexes-{{listCurID}}" style='height:calc(100vh - {{CustomBar}}px - 50px)' scroll-with-animation="true" enable-back-to-top="true">
     <block wx:for="{{staffList}}" wx:key wx:for-index="key" wx:for-item="value">
-        <view class='padding indexItem-{{key}}' id="indexes-{{key}}" data-index="{{key}}">{{key}}</view>
+        <view class='padding padding-top-xs padding-bottom-xs indexItem-{{key}}' id="indexes-{{key}}" data-index="{{key}}">{{key}}</view>
         <view class="cu-list menu menu-avatar no-padding">
             <view style="display:flex;flex-direction:row;justify-content:flex-start;align-items:center;height:100%;padding-top:10px;padding-bottom:10px" class="cu-item {{modalName=='move-box-'+ item.staff_id?'move-cur':''}}" wx:for="{{value}}" wx:key="{{item.staff_id}}" bindtouchstart='ListTouchStart' bindtouchmove='ListTouchMove' bindtouchend='ListTouchEnd'
                 data-target="move-box-{{item.staff_id}}">
@@ -92,7 +92,7 @@
                         <view class='text-black text-sm'>标本存放:1</view>
                     </view>
                 </view>
-                <view class='move' style="margin-top: -10px;">
+                <view class='move'>
                     <view class='bg-olive' bindtap="showModal" data-target="EditMemberModal" data-staff="{{item}}">编辑</view>
                     <view class='bg-red' bindtap="showModal" data-target="DeleteMemberModal" data-staff="{{item}}">删除</view>
                 </view>

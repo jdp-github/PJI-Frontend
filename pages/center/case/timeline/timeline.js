@@ -12,22 +12,10 @@ Page({
         StatusBar: app.globalData.StatusBar,
         CustomBar: app.globalData.CustomBar,
         Custom: app.globalData.Custom,
-        hidden: true,
-        isAdmin: false,
-        searchValue: '',
-        startDate: '2018-12-25',
-        endDate: '2018-12-25',
-        stateIndex: "0",
-        statePicker: ["全部病例", '未审核', '已审核'],
-        addCaseName: '',
-        addCaseID: '',
-        addCaseSideIndex: 0,
-        addCaseSidePicker: ['左侧', '右侧'],
-        addCasePartIndex: 0,
-        addCasePartPicker: ['髋', '膝'],
-        caseList: [],
-        selectedCase: {},
-        errMsg: ''
+
+        tabList: ["要素速览", "诊疗日历"],
+        currTab: 0,
+        scrollLeft: 0,
     },
 
     onLoad: function(options) {
@@ -36,20 +24,12 @@ Page({
             centerName: options.centerName,
             isAdmin: app.globalData.is_admin == '1'
         });
-        this.initData()
+        // this.initData()
     },
 
     initData() {
-        this.makeDate();
         this.loadProgress();
         this.requestCaseList(this.data.searchValue);
-    },
-
-    makeDate() {
-        this.setData({
-            startDate: util.getNowFormatDate(true),
-            endDate: util.getNowFormatDate()
-        })
     },
 
     requestCaseList: function(searchValue) {
@@ -105,120 +85,19 @@ Page({
         });
     },
 
-    getStateValue(state) {
-        var stateValue = ""
-        if (state == 0) {
-            stateValue = "未完成"
-        } else if (state == 1) {
-            stateValue = "已完成未审核"
-        } else if (state == 2) {
-            stateValue = "已审核"
-        }
-
-        return stateValue
-    },
-
-
-    onAddCase: function(e) {
-        this.setData({
-            modalName: 'AddCase'
-        })
-    },
-
-    onSubmitAdd() {
-        if (this.data.addCaseName.length == 0) {
-            this.showToast("请输入姓名")
-            return
-        }
-        if (this.data.addCaseID.length == 0) {
-            this.showToast("请输入ID号")
-            return
-        }
+    onPuncture() {
         wx.navigateTo({
-            url: '../case/base/base?centerId=' + this.data.centerId + "&centerName=" + this.data.centerName + "&case_id="
-        });
-    },
-
-    // onEditCase: function(e) {
-    //     let that = this;
-    //     that.showLoading();
-    //     let caseInfo = e.currentTarget.dataset.case;
-    //     wx.request({
-    //         url: constant.basePath,
-    //         data: {
-    //             service: 'Case.SetCaseWritingStaff',
-    //             openid: app.globalData.openid,
-    //             case_id: caseInfo.case_id,
-    //             type: 1
-    //         },
-    //         header: {
-    //             'content-type': 'application/json'
-    //         },
-    //         success(res) {
-    //             if (res.data.data.code == 0) {
-    //                 wx.navigateTo({
-    //                     url: '../../center/case/detail/detail?case_id=' + caseInfo.case_id + "&centerId=" + that.data.centerId + "&centerName=" + that.data.centerName
-    //                 });
-    //             } else {
-    //                 that.showModal("ErrModal", res.data.data.msg);
-    //             }
-    //             that.hideLoading();
-    //         },
-    //         fail(res) {
-    //             that.hideLoading();
-    //         }
-    //     });
-    // },
-
-    // 查看
-    onLookCase: function(e) {
-        let caseInfo = e.currentTarget.dataset.case;
-        wx.navigateTo({
-            url: '../../center/case/detail/detail?case_id=' + caseInfo.case_id + "&centerId=" + this.data.centerId + "&centerName=" + this.data.centerName + "&isLook=" + true
-        });
-    },
-
-    onDeleCase: function(e) {
-        let selectedCase = e.currentTarget.dataset.case;
-        this.setData({
-            selectedCase: selectedCase
-        });
-        this.showModal("DeleteCaseModal");
-    },
-    deleCase: function() {
-        let that = this;
-        that.loadProgress();
-        wx.request({
-            url: constant.basePath,
-            data: {
-                service: 'Case.DeleteCase',
-                openid: app.globalData.openid,
-                case_id: that.data.selectedCase.case_id
-            },
-            header: {
-                'content-type': 'application/json'
-            },
-            success(res) {
-                console.log("Case.DeleteCase:" + JSON.stringify(res));
-                that.completeProgress();
-                if (res.data.data.code == constant.response_success) {
-                    that.loadProgress();
-                    that.requestCaseList(that.data.searchValue);
-                    that.setData({
-                        modalName: ''
-                    });
-                } else {
-                    that.showModal("ErrModal", res.data.data.msg);
-                }
-            },
-            fail(res) {
-                that.completeProgress();
-            }
+            url: '../chuanci/chuanci?centerId=' + this.data.centerId + "&centerName=" + this.data.centerName + "&case_id="
         });
     },
 
     // ============ 事件 begin ============ //
-
+    tabSelect(e) {
+        this.setData({
+            currTab: e.currentTarget.dataset.id,
+            scrollLeft: (e.currentTarget.dataset.id - 1) * 60
+        })
+    },
     loadProgress: function() {
         if (this.data.loadProgress < 96) {
             this.setData({
@@ -269,75 +148,6 @@ Page({
             modalName: null
         });
     },
-    onSearchChange: function(e) {
-        this.setData({
-            searchValue: e.detail.value
-        });
-    },
-    onSearch: function() {
-        this.loadProgress();
-        this.requestCaseList(this.data.searchValue);
-    },
-    StatePickerChange(e) {
-        this.setData({
-            stateIndex: e.detail.value
-        })
-    },
-    onAddNameInput: function(e) {
-        this.setData({
-            addCaseName: e.detail.value
-        });
-    },
-    onAddIDInput: function(e) {
-        this.setData({
-            addCaseID: e.detail.value
-        });
-    },
-    SidePickerChange(e) {
-        this.setData({
-            addCaseSideIndex: e.detail.value
-        })
-    },
-    PartPickerChange(e) {
-        this.setData({
-            addCasePartIndex: e.detail.value
-        })
-    },
-    StartDateChange(e) {
-        this.setData({
-            startDate: e.detail.value
-        })
-    },
-    EndDateChange(e) {
-        this.setData({
-            endDate: e.detail.value
-        })
-    },
-    ListTouchStart: function(e) {
-        this.setData({
-            ListTouchStart: e.touches[0].pageX
-        });
-    },
-    ListTouchMove: function(e) {
-        this.setData({
-            ListTouchDirection: e.touches[0].pageX - this.data.ListTouchStart > 0 ? 'right' : 'left'
-        });
-    },
-    ListTouchEnd: function(e) {
-        if (this.data.ListTouchDirection == 'left') {
-            this.setData({
-                modalName: e.currentTarget.dataset.target
-            });
-        } else {
-            this.setData({
-                modalName: null
-            });
-        }
-        this.setData({
-            ListTouchDirection: null
-        });
-    },
-
     onRefresh: function(e) {
         this.initData()
     },

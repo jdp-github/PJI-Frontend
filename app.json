@@ -2,6 +2,8 @@
     "pages": [
         "pages/center/case/base/base",
         "pages/auth/auth",
+        "pages/center/case/chuanci/chuanci",
+        "pages/center/case/timeline/timeline",
         "pages/center/manage/manage",
         "pages/center/center",
         "pages/stats/stats",
@@ -9,9 +11,7 @@
         "pages/service/service",
         "pages/register/register",
         "pages/center/case/case",
-        "pages/center/case/chuanci/chuanci",
         "pages/center/case/shoushu/shoushu",
-        "pages/center/case/timeline/timeline",
         "pages/center/specimen/specimen",
         "pages/center/specimen/detail/detail",
         "pages/center/specimen/save/save"

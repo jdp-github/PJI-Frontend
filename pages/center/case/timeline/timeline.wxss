@@ -1,88 +1,45 @@
-@import "../../../../miniprogram_npm/wux-weapp/styles/index.wxss";
+@import "../../../../font-awesome.wxss";
 
-.cu-avatar {
-    width: 80rpx;
-    height: 80rpx;
-}
-
-.margin-left {
-    margin-left: 0rpx;
-}
-
-.cu-list>.cu-item .move {
-    display: flex;
-    width: 150rpx;
-    height: 100%;
-    position: absolute;
-    right: 0;
-    transform: translateX(100%);
-}
-
-.cu-list>.cu-item.move-cur {
-    transform: translateX(-150rpx);
-}
-
-.margin-btn {
-    margin: 0rpx 30rpx 15rpx 30rpx;
-}
-
-.cu-list.menu-avatar>.cu-item {
-    padding-left: 15rpx;
-    height: 100%;
-}
-
-.avatar-special {
-    width: 100%;
-    text-align: center;
-    font-variant: small-caps;
-    margin: 0;
-    padding: 0;
-    justify-content: center;
-    align-items: center;
-    background: #ccc;
-    color: #fff;
-    position: relative;
-    background-size: cover;
-    background-position: center;
-    vertical-align: middle;
-    font-size: 1.5em;
-    margin-right: 30rpx;
-}
-
-.text-small {
-    font-size: 22rpx;
-    line-height: 1.5em;
-}
-
-.avatar-text-small {
-    font-size: 26rpx;
-}
-
-.margin-top-special {
-    margin-top: 10rpx;
-}
-
-.margin-bottom-special {
-    margin-bottom: 10rpx;
-}
-
-.margin-left-special {
-    margin-left: 15rpx;
-}
-
-.padding-left-special {
-    padding-left: 15rpx;
-}
-
-.margin-left-15 {
-    margin-left: 15rpx;
-}
-
-.filter-container {
+.title-container {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    width: 50%;
+    width: 100%;
+    font-size: 16px;
+    padding: 10rpx;
 }
 
+.title-container> view {
+    margin-left: 20rpx;
+}
+
+.btn-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    font-size: 16px;
+    padding: 20rpx;
+}
+
+.btn-container> button {
+    width: 180rpx;
+}
+
+.cu-timeline .cu-time {
+    width: 160rpx;
+    font-size: 30rpx;
+}
+
+.timeline-item-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.timeline-item-content {
+    display: flex;
+    flex-direction: column;
+}

@@ -36,7 +36,7 @@ Page({
             centerName: options.centerName,
             isAdmin: app.globalData.is_admin == '1'
         });
-        this.initData()
+        // this.initData()
     },
 
     initData() {

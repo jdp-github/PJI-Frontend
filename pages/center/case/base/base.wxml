@@ -4,7 +4,7 @@
             <text class='icon-back'></text>
             <text class='icon-homefill'></text>
         </navigator>
-        <view class='content' style='top:{{StatusBar}}px;'>病历录入</view>
+        <view class='content' style='top:{{StatusBar}}px;'>基本信息</view>
     </view>
 </view>
 <!-- 头 -->
@@ -258,11 +258,11 @@
             <view class="cu-bar bg-white" style="justify-content:flex-start;padding-left:15rpx;min-height:60rpx;">
                 <text class='icon-title text-green'></text>风湿免疫性疾病
             </view>
-            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange">
-                <view>
-                    <radio class='blue radio text-small' value='1'></radio> 有
+            <radio-group style="justify-content:flex-start;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="is_rheumatism">
+                <view style="margin-left:18rpx">
+                    <radio class='blue text-small' value='1'></radio> 有
                 </view>
-                <view style="margin-left: 50rpx;">
+                <view style="margin-left: 105rpx;">
                     <radio class='blue margin-left-sm text-small' value='0'></radio> 无
                 </view>
             </radio-group>
@@ -270,9 +270,9 @@
             <view class="cu-bar bg-white" style="justify-content:flex-start;padding-left:15rpx;min-height:60rpx;">
                 <text class='icon-title text-green'></text>类风湿
             </view>
-            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange">
+            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="is_rheumatoid">
                 <view>
-                    <radio class='blue radio text-small' value='1'></radio> 控制可
+                    <radio class='blue text-small' value='1'></radio> 控制可
                 </view>
                 <view style="margin-left: 50rpx;">
                     <radio class='blue margin-left-sm text-small' value='2'></radio> 控制差
@@ -282,9 +282,9 @@
             <view class="cu-bar bg-white" style="justify-content:flex-start;padding-left:15rpx;min-height:60rpx;">
                 <text class='icon-title text-green'></text>强直性脊柱炎
             </view>
-            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange">
+            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="is_as">
                 <view>
-                    <radio class='blue radio text-small' value='1'></radio> 控制可
+                    <radio class='blue text-small' value='1'></radio> 控制可
                 </view>
                 <view style="margin-left: 50rpx;">
                     <radio class='blue margin-left-sm text-small' value='2'></radio> 控制差
@@ -294,9 +294,9 @@
             <view class="cu-bar bg-white" style="justify-content:flex-start;padding-left:15rpx;min-height:60rpx;">
                 <text class='icon-title text-green'></text>脊柱关节病
             </view>
-            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange">
+            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="is_spa">
                 <view>
-                    <radio class='blue radio text-small' value='1'></radio> 控制可
+                    <radio class='blue text-small' value='1'></radio> 控制可
                 </view>
                 <view style="margin-left: 50rpx;">
                     <radio class='blue margin-left-sm text-small' value='2'></radio> 控制差
@@ -306,9 +306,9 @@
             <view class="cu-bar bg-white" style="justify-content:flex-start;padding-left:15rpx;min-height:60rpx;">
                 <text class='icon-title text-green'></text>银屑病性关节炎
             </view>
-            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange">
+            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="is_psa">
                 <view>
-                    <radio class='blue radio text-small' value='1'></radio> 控制可
+                    <radio class='blue text-small' value='1'></radio> 控制可
                 </view>
                 <view style="margin-left: 50rpx;">
                     <radio class='blue margin-left-sm text-small' value='2'></radio> 控制差
@@ -318,9 +318,9 @@
             <view class="cu-bar bg-white" style="justify-content:flex-start;padding-left:15rpx;min-height:60rpx;">
                 <text class='icon-title text-green'></text>痛风
             </view>
-            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange">
+            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="is_gout">
                 <view>
-                    <radio class='blue radio text-small' value='1'></radio> 控制可
+                    <radio class='blue text-small' value='1'></radio> 控制可
                 </view>
                 <view style="margin-left: 50rpx;">
                     <radio class='blue margin-left-sm text-small' value='2'></radio> 控制差
@@ -330,11 +330,11 @@
             <view class="cu-bar bg-white" style="justify-content:flex-start;padding-left:15rpx;min-height:60rpx;">
                 <text class='icon-title text-green'></text>恶性肿瘤病史
             </view>
-            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange">
-                <view>
-                    <radio class='blue radio text-small' value='1'></radio> 有
+            <radio-group style="justify-content:flex-start;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="is_cancer">
+                <view style="margin-left:18rpx">
+                    <radio class='blue text-small' value='1'></radio> 有
                 </view>
-                <view style="margin-left: 50rpx;">
+                <view style="margin-left: 105rpx;">
                     <radio class='blue margin-left-sm text-small' value='0'></radio> 无
                 </view>
             </radio-group>
@@ -342,45 +342,39 @@
             <view class="cu-bar bg-white" style="justify-content:flex-start;padding-left:15rpx;min-height:60rpx;">
                 <text class='icon-title text-green'></text>治愈情况
             </view>
-            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange">
+            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="cure_state">
                 <view>
-                    <radio class='blue radio text-small' value='1'></radio> 控制可
+                    <radio class='blue text-small' value='1'></radio> 控制可
                 </view>
                 <view style="margin-left: 50rpx;">
                     <radio class='blue margin-left-sm text-small' value='2'></radio> 控制差
                 </view>
             </radio-group>
             <!-- 放疗病史 -->
-            <view class="cu-bar bg-white" style="justify-content:flex-start;padding-left:15rpx;min-height:60rpx;">
+            <view class="cu-bar bg-white solid-bottom" style="justify-content:flex-start;padding-left:15rpx;min-height:120rpx;">
                 <text class='icon-title text-green'></text>放疗病史
+                <picker style="flex:2" bindchange="onRadiotherapyChange" value="{{radiotherapy}}" range="{{radiotherapy_picker}}">
+                    <view class="picker" style="text-align:right;margin-right:46rpx;">
+                        {{radiotherapy_picker[radiotherapy]}}
+                    </view>
+                </picker>
             </view>
-            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange">
-                <view>
-                    <radio class='blue radio text-small' value='1'></radio> 控制可
-                </view>
-                <view style="margin-left: 50rpx;">
-                    <radio class='blue margin-left-sm text-small' value='2'></radio> 控制差
-                </view>
-            </radio-group>
             <!-- 化疗病史 -->
-            <view class="cu-bar bg-white" style="justify-content:flex-start;padding-left:15rpx;min-height:60rpx;">
+            <view class="cu-bar bg-white solid-bottom" style="justify-content:flex-start;padding-left:15rpx;min-height:120rpx;">
                 <text class='icon-title text-green'></text>化疗病史
+                <picker style="flex:2" bindchange="onChemotherapyChange" value="{{chemotherapy}}" range="{{radiotherapy_picker}}">
+                    <view class="picker" style="text-align:right;margin-right:46rpx;">
+                        {{radiotherapy_picker[chemotherapy]}}
+                    </view>
+                </picker>
             </view>
-            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange">
-                <view>
-                    <radio class='blue radio text-small' value='1'></radio> 控制可
-                </view>
-                <view style="margin-left: 50rpx;">
-                    <radio class='blue margin-left-sm text-small' value='2'></radio> 控制差
-                </view>
-            </radio-group>
             <!-- 糖尿病 -->
             <view class="cu-bar bg-white" style="justify-content:flex-start;padding-left:15rpx;min-height:60rpx;">
                 <text class='icon-title text-green'></text>糖尿病
             </view>
-            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange">
+            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="glycuresis">
                 <view>
-                    <radio class='blue radio text-small' value='1'></radio> 控制可
+                    <radio class='blue text-small' value='1'></radio> 控制可
                 </view>
                 <view style="margin-left: 50rpx;">
                     <radio class='blue margin-left-sm text-small' value='2'></radio> 控制差
@@ -390,9 +384,9 @@
             <view class="cu-bar bg-white" style="justify-content:flex-start;padding-left:15rpx;min-height:60rpx;">
                 <text class='icon-title text-green'></text>高血压
             </view>
-            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange">
+            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="hypertension">
                 <view>
-                    <radio class='blue radio text-small' value='1'></radio> 控制可
+                    <radio class='blue text-small' value='1'></radio> 控制可
                 </view>
                 <view style="margin-left: 50rpx;">
                     <radio class='blue margin-left-sm text-small' value='2'></radio> 控制差
@@ -402,9 +396,9 @@
             <view class="cu-bar bg-white" style="justify-content:flex-start;padding-left:15rpx;min-height:60rpx;">
                 <text class='icon-title text-green'></text>脑血管病
             </view>
-            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange">
+            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="cvd">
                 <view>
-                    <radio class='blue radio text-small' value='1'></radio> 控制可
+                    <radio class='blue text-small' value='1'></radio> 控制可
                 </view>
                 <view style="margin-left: 50rpx;">
                     <radio class='blue margin-left-sm text-small' value='2'></radio> 控制差
@@ -414,9 +408,9 @@
             <view class="cu-bar bg-white" style="justify-content:flex-start;padding-left:15rpx;min-height:60rpx;">
                 <text class='icon-title text-green'></text>冠心病
             </view>
-            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange">
+            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="chd">
                 <view>
-                    <radio class='blue radio text-small' value='1'></radio> 控制可
+                    <radio class='blue text-small' value='1'></radio> 控制可
                 </view>
                 <view style="margin-left: 50rpx;">
                     <radio class='blue margin-left-sm text-small' value='2'></radio> 控制差
@@ -426,9 +420,9 @@
             <view class="cu-bar bg-white" style="justify-content:flex-start;padding-left:15rpx;min-height:60rpx;">
                 <text class='icon-title text-green'></text>下肢静脉血栓
             </view>
-            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange">
+            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="ledvt">
                 <view>
-                    <radio class='blue radio text-small' value='1'></radio> 控制可
+                    <radio class='blue text-small' value='1'></radio> 控制可
                 </view>
                 <view style="margin-left: 50rpx;">
                     <radio class='blue margin-left-sm text-small' value='2'></radio> 控制差
@@ -438,9 +432,9 @@
             <view class="cu-bar bg-white" style="justify-content:flex-start;padding-left:15rpx;min-height:60rpx;">
                 <text class='icon-title text-green'></text>消化性溃疡病
             </view>
-            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange">
+            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="pud">
                 <view>
-                    <radio class='blue radio text-small' value='1'></radio> 控制可
+                    <radio class='blue text-small' value='1'></radio> 控制可
                 </view>
                 <view style="margin-left: 50rpx;">
                     <radio class='blue margin-left-sm text-small' value='2'></radio> 控制差
@@ -450,14 +444,14 @@
             <view class="cu-bar bg-white" style="justify-content:flex-start;padding-left:15rpx;min-height:60rpx;">
                 <text class='icon-title text-green'></text>慢性肺阻病
             </view>
-            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange">
+            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="copd">
                 <view>
-                    <radio class='blue radio text-small' value='1'></radio> 轻度
+                    <radio class='blue text-small' value='1'></radio> 轻度
                 </view>
-                <view style="margin-left: 50rpx;">
+                <view>
                     <radio class='blue margin-left-sm text-small' value='2'></radio> 中度
                 </view>
-                <view style="margin-left: 50rpx;">
+                <view>
                     <radio class='blue margin-left-sm text-small' value='3'></radio> 重度
                 </view>
             </radio-group>
@@ -465,14 +459,14 @@
             <view class="cu-bar bg-white" style="justify-content:flex-start;padding-left:15rpx;min-height:60rpx;">
                 <text class='icon-title text-green'></text>心功能异常
             </view>
-            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange">
+            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="abnormal_heart">
                 <view>
-                    <radio class='blue radio text-small' value='1'></radio> 轻度
+                    <radio class='blue text-small' value='1'></radio> 轻度
                 </view>
-                <view style="margin-left: 50rpx;">
+                <view>
                     <radio class='blue margin-left-sm text-small' value='2'></radio> 中度
                 </view>
-                <view style="margin-left: 50rpx;">
+                <view>
                     <radio class='blue margin-left-sm text-small' value='3'></radio> 重度
                 </view>
             </radio-group>
@@ -480,14 +474,14 @@
             <view class="cu-bar bg-white" style="justify-content:flex-start;padding-left:15rpx;min-height:60rpx;">
                 <text class='icon-title text-green'></text>肝功能异常
             </view>
-            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange">
+            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="abnormal_liver">
                 <view>
-                    <radio class='blue radio text-small' value='1'></radio> 轻度
+                    <radio class='blue text-small' value='1'></radio> 轻度
                 </view>
-                <view style="margin-left: 50rpx;">
+                <view>
                     <radio class='blue margin-left-sm text-small' value='2'></radio> 中度
                 </view>
-                <view style="margin-left: 50rpx;">
+                <view>
                     <radio class='blue margin-left-sm text-small' value='3'></radio> 重度
                 </view>
             </radio-group>
@@ -495,14 +489,14 @@
             <view class="cu-bar bg-white" style="justify-content:flex-start;padding-left:15rpx;min-height:60rpx;">
                 <text class='icon-title text-green'></text>肾功能异常
             </view>
-            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange">
+            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="abnormal_renal">
                 <view>
-                    <radio class='blue radio text-small' value='1'></radio> 轻度
+                    <radio class='blue text-small' value='1'></radio> 轻度
                 </view>
-                <view style="margin-left: 50rpx;">
+                <view>
                     <radio class='blue margin-left-sm text-small' value='2'></radio> 中度
                 </view>
-                <view style="margin-left: 50rpx;">
+                <view>
                     <radio class='blue margin-left-sm text-small' value='3'></radio> 重度
                 </view>
             </radio-group>
@@ -510,14 +504,14 @@
             <view class="cu-bar bg-white" style="justify-content:flex-start;padding-left:15rpx;min-height:60rpx;">
                 <text class='icon-title text-green'></text>甲状腺功能异常
             </view>
-            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange">
+            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="abnormal_thyroid">
                 <view>
-                    <radio class='blue radio text-small' value='1'></radio> 轻度
+                    <radio class='blue text-small' value='1'></radio> 轻度
                 </view>
-                <view style="margin-left: 50rpx;">
+                <view>
                     <radio class='blue margin-left-sm text-small' value='2'></radio> 中度
                 </view>
-                <view style="margin-left: 50rpx;">
+                <view>
                     <radio class='blue margin-left-sm text-small' value='3'></radio> 重度
                 </view>
             </radio-group>
@@ -525,87 +519,68 @@
             <view class="cu-bar bg-white" style="justify-content:flex-start;padding-left:15rpx;min-height:60rpx;">
                 <text class='icon-title text-green'></text>贫血
             </view>
-            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange">
+            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="anemia">
                 <view>
-                    <radio class='blue radio text-small' value='1'></radio> 轻度
+                    <radio class='blue text-small' value='1'></radio> 轻度
                 </view>
-                <view style="margin-left: 50rpx;">
+                <view>
                     <radio class='blue margin-left-sm text-small' value='2'></radio> 中度
                 </view>
-                <view style="margin-left: 50rpx;">
+                <view>
                     <radio class='blue margin-left-sm text-small' value='3'></radio> 重度
                 </view>
             </radio-group>
             <!-- 吸烟史 -->
-            <view class="cu-bar bg-white" style="justify-content:flex-start;padding-left:15rpx;min-height:60rpx;">
+            <view class="cu-bar bg-white solid-bottom" style="justify-content:flex-start;padding-left:15rpx;min-height:120rpx;">
                 <text class='icon-title text-green'></text>吸烟史
+                <picker style="flex:2" bindchange="onIs_smokeChange" value="{{is_smoke}}" range="{{is_drink_picker}}">
+                    <view class="picker" style=" text-align:right;margin-right:46rpx; ">
+                        {{is_drink_picker[is_smoke]}}
+                    </view>
+                </picker>
             </view>
-            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange">
-                <view>
-                    <radio class='blue radio text-small' value='1'></radio> 控制可
-                </view>
-                <view style="margin-left: 50rpx;">
-                    <radio class='blue margin-left-sm text-small' value='2'></radio> 控制差
-                </view>
-            </radio-group>
             <!-- 饮酒史 -->
-            <view class="cu-bar bg-white" style="justify-content:flex-start;padding-left:15rpx;min-height:60rpx;">
+            <view class="cu-bar bg-white solid-bottom" style="justify-content:flex-start;padding-left:15rpx;min-height:120rpx; ">
                 <text class='icon-title text-green'></text>饮酒史
+                <picker style="flex:2" bindchange="onIs_drinkChange " value="{{is_drink}} " range="{{is_drink_picker}}">
+                    <view class="picker" style=" text-align:right;margin-right:46rpx; ">
+                        {{is_drink_picker[is_drink]}}
+                    </view>
+                </picker>
             </view>
-            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange">
-                <view>
-                    <radio class='blue radio text-small' value='1'></radio> 控制可
-                </view>
-                <view style="margin-left: 50rpx;">
-                    <radio class='blue margin-left-sm text-small' value='2'></radio> 控制差
-                </view>
-            </radio-group>
+
             <!-- 其他疾病 -->
-            <view class="cu-bar bg-white" style="justify-content:flex-start;padding-left:15rpx;min-height:60rpx;">
+            <view class="cu-bar bg-white " style="justify-content:flex-start;padding-left:15rpx;min-height:60rpx; ">
                 <text class='icon-title text-green'></text>其他疾病
             </view>
-            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange">
-                <view>
-                    <radio class='blue radio text-small' value='1'></radio> 控制可
-                </view>
-                <view style="margin-left: 50rpx;">
-                    <radio class='blue margin-left-sm text-small' value='2'></radio> 控制差
-                </view>
-            </radio-group>
+            <input style="text-align:left;padding-left:20rpx;height:80rpx;" placeholder="请输入其他疾病" class='radius bg-white solid-bottom' bindinput="onOther_diseaseInput" value="{{other_disease}}"></input>
             <!-- 评分系统 -->
-            <view class="cu-bar bg-white" style="justify-content:flex-start;padding-left:15rpx;min-height:60rpx;">
+            <view class="cu-bar bg-white " style="justify-content:flex-start;padding-left:15rpx;min-height:60rpx; ">
                 <text class='icon-title text-green'></text>评分系统
             </view>
-            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange">
+            <radio-group style="justify-content:center;min-height:80rpx; " class="cu-form-group solid-bottom " bindchange="radioChange ">
                 <view>
                     <radio class='blue radio text-small' value='1'></radio> 控制可
                 </view>
-                <view style="margin-left: 50rpx;">
+                <view style="margin-left: 50rpx; ">
                     <radio class='blue margin-left-sm text-small' value='2'></radio> 控制差
                 </view>
             </radio-group>
             <!-- 备注 -->
-            <view class="cu-bar bg-white" style="justify-content:flex-start;padding-left:15rpx;min-height:60rpx;">
+            <view class="cu-bar bg-white " style="justify-content:flex-start;padding-left:15rpx;min-height:60rpx; ">
                 <text class='icon-title text-green'></text>备注
             </view>
-            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange">
-                <view>
-                    <radio class='blue radio text-small' value='1'></radio> 控制可
-                </view>
-                <view style="margin-left: 50rpx;">
-                    <radio class='blue radio margin-left-sm text-small' value='2'></radio> 控制差
-                </view>
-            </radio-group>
+            <input style="text-align:left;padding-left:20rpx;height:80rpx;" placeholder="请输入备注（不适用填NA）" class='radius bg-white solid-bottom' bindinput="onRemarkInput" value="{{remark}}"></input>
 
             <!-- 底部按钮 -->
             <view class='padding-sm flex'>
-                <view class="flex-sub">
-                    <button class='cu-btn  bg-green shadow block' bindtap="okAddBox">
+                <view class="flex-sub ">
+                    <button class='cu-btn  bg-green shadow block' bindtap="okAddBox ">
                         确定
                     </button>
                 </view>
-                <view class="flex-sub" style="margin-left: 15rpx">
-                    <button class='cu-btn line-green shadow block' bindtap="cancelAddBox" bindinput="onInput" data-prop='depositary'>
+                <view class="flex-sub " style="margin-left: 15rpx ">
+                    <button class='cu-btn line-green shadow block' bindtap="cancelAddBox " bindinput="onInput " data-prop='depositary'>
                         取消
                     </button>
                 </view>
