@@ -213,6 +213,67 @@ Page({
     },
 
     // -------- 基本情况 begin -------- //
+    onSwitchChange(e) {
+        let type = e.currentTarget.dataset.type
+        this.setData({
+            [type]: e.detail.value
+        })
+    },
+
+    onPickerChange(e) {
+        let type = e.currentTarget.dataset.type
+        this.setData({
+            [type]: e.detail.value
+        })
+    },
+    onDateChange(e) {
+        let type = e.currentTarget.dataset.type
+        this.setData({
+            [type]: e.detail.value
+        })
+    },
+    onInput(e) {
+        let type = e.currentTarget.dataset.type
+        this.setData({
+            [type]: e.detail.value
+        })
+    },
+    on3StateChange(e) {
+        let state = e.currentTarget.dataset.state
+        let type = e.currentTarget.dataset.type
+        if (state == 0) {
+            this.setData({
+                [type]: 1,
+                [type + "_value"]: "pencil"
+            })
+        } else if (state == 1) {
+            this.setData({
+                [type]: 2,
+                [type + "_value"]: "clock-o"
+            })
+        } else if (state == 2) {
+            this.setData({
+                [type]: 0,
+                [type + "_value"]: "ban"
+            })
+        }
+    },
+    on2StateChange(e) {
+        let state = e.currentTarget.dataset.state
+        let type = e.currentTarget.dataset.type
+        if (state == 0) {
+            this.setData({
+                [type]: 1,
+                [type + "_value"]: "pencil"
+            })
+        } else if (state == 1) {
+            this.setData({
+                [type]: 0,
+                [type + "_value"]: "ban"
+            })
+        }
+    },
+
     onBaseDelaySwitchChange: function(e) {
         this.setData({
             base_info: e.detail.value
@@ -226,94 +287,9 @@ Page({
             immuno_history_state: state,
         })
     },
-    onChuanciDateChange: function(e) {
-        this.setData({
-            puncture_date: e.detail.value
-        });
-    },
-    onPuncture_typeChange: function(e) {
-        this.setData({
-            puncture_type: e.detail.value,
-        });
-    },
-    onPuncture_descInput: function(e) {
-        this.setData({
-            puncture_desc: e.detail.value
-        });
-    },
-    onAntibiotic_historyChange: function(e) {
-        this.setData({
-            antibiotic_history: e.detail.value,
-        });
-    },
-    onImmuno_historyChange: function(e) {
-        this.setData({
-            immuno_history: e.detail.value,
-        });
-    },
-    onIs_heatChange(e) {
-        this.setData({
-            is_heat: e.detail.value
-        })
-    },
-    onIs_erythemaChange(e) {
-        this.setData({
-            is_erythema: e.detail.value
-        })
-    },
-    onIs_swellingChange(e) {
-        this.setData({
-            is_swelling: e.detail.value
-        })
-    },
-    onIs_feverChange(e) {
-        this.setData({
-            is_fever: e.detail.value
-        })
-    },
-    onIs_painChange(e) {
-        this.setData({
-            is_pain: e.detail.value
-        })
-    },
-    onIs_sinusChange(e) {
-        this.setData({
-            is_sinus: e.detail.value
-        })
-    },
     // -------- 基本情况 end -------- //
 
-    on3StateChange(state, stateParam, stateValueParam) {
-        if (state == 0) {
-            this.setData({
-                [stateParam]: 1,
-                [stateValueParam]: "pencil"
-            })
-        } else if (state == 1) {
-            this.setData({
-                [stateParam]: 2,
-                [stateValueParam]: "clock-o"
-            })
-        } else if (state == 2) {
-            this.setData({
-                [stateParam]: 0,
-                [stateValueParam]: "ban"
-            })
-        }
-    },
-    on2StateChange(state, stateParam, stateValueParam) {
-        if (state == 0) {
-            this.setData({
-                [stateParam]: 1,
-                [stateValueParam]: "pencil"
-            })
-        } else if (state == 1) {
-            this.setData({
-                [stateParam]: 0,
-                [stateValueParam]: "ban"
-            })
-        }
-    },
+
 
     // -------- 检查化验 begin -------- //
     onCheckDelaySwitchChange: function(e) {
@@ -352,10 +328,7 @@ Page({
             esr: e.detail.value
         });
     },
-    onEsrStateChange(e) {
-        let state = e.currentTarget.dataset.state
-        this.on3StateChange(state, "esr_state", "esr_state_value")
-    },
+
     onCrpInput: function(e) {
         this.setData({
             crp: e.detail.value,

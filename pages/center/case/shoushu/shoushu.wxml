@@ -50,23 +50,23 @@
 
         <scroll-view class="VerticalMain" scroll-y style="height:100%">
             <view class="padding-left-special">
-                <!-- 基本情况 -->
+                <!-- 术前小结 -->
                 <view class='cu-bar solid-bottom bg-white'>
                     <view class='action'>
                         <text class='icon-title text-green'></text>术前小结</view>
                     <view>延后录入
-                        <switch class='green sm margin-right' bindchange="onBaseDelaySwitchChange" style='margin-left: 15rpx;' checked='{{base_info}}'></switch>
+                        <switch class='green sm margin-right' bindchange="onSwitchChange" style='margin-left: 15rpx;' checked='{{operation_before_summary}}' data-type="operation_before_summary"></switch>
                     </view>
                 </view>
                 <!-- item -->
                 <view class="cu-list menu menu-avatar">
                     <view class="cu-item-special">
                         <!-- 入院日期 -->
-                        <view class="cu-form-group {{puncture_date_state==2?'clock':''}}">
+                        <view class="cu-form-group {{hospitalized_date_state==2?'clock':''}}">
                             <view class='title'>入院日期</view>
-                            <picker mode="date" value="{{puncture_date}}" start="2015-01-01" end="2030-12-31" bindchange="onChuanciDateChange" disabled="{{puncture_date_state==2}}">
+                            <picker mode="date" value="{{hospitalized_date}}" start="2015-01-01" end="2030-12-31" bindchange="onDateChange" disabled="{{hospitalized_date_state==2}}" data-type="hospitalized_date">
                                 <view class="picker">
-                                    {{puncture_date}}
+                                    {{hospitalized_date}}
                                 </view>
                             </picker>
                         </view>
@@ -75,41 +75,41 @@
                             <view class='title' style='text-align:left'>本次手术相关的诊断穿刺</view>
                         </view>
                         <!-- 抗生素使用史 -->
-                        <view class="cu-form-group {{puncture_type_state==2?'clock':''}}">
-                            <view class='title'>抗生素使用史</view>
-                            <picker bindchange="onPuncture_typeChange" value="{{puncture_type}}" range="{{puncture_type_picker}}" disabled="{{puncture_type_state==2}}">
-                                <view class="picker">
-                                    {{puncture_type_picker[puncture_type]}}
-                                </view>
-                            </picker>
-                        </view>
-                        <!-- 免疫抑制剂使用史 -->
                         <view class="cu-form-group {{antibiotic_history_state==2?'clock':''}}">
-                            <view class='title'>免疫抑制剂使用史</view>
-                            <picker bindchange="onAntibiotic_historyChange" value="{{antibiotic_history}}" range="{{antibiotic_history_picker}}" disabled="{{antibiotic_history_state==2}}">
+                            <view class='title'>抗生素使用史</view>
+                            <picker bindchange="onPickerChange" value="{{antibiotic_history}}" range="{{antibiotic_history_picker}}" disabled="{{antibiotic_history_state==2}}" data-type="antibiotic_history">
                                 <view class="picker">
                                     {{antibiotic_history_picker[antibiotic_history]}}
                                 </view>
                             </picker>
                         </view>
-                        <view class="cu-form-group {{base_info?'clock':''}}" bindtap="onShowDrawer">
+                        <!-- 免疫抑制剂使用史 -->
+                        <view class="cu-form-group {{immuno_history_state==2?'clock':''}}">
+                            <view class='title'>免疫抑制剂使用史</view>
+                            <picker bindchange="onPickerChange" value="{{immuno_history}}" range="{{immuno_history_picker}}" disabled="{{immuno_history_state==2}}" data-type="immuno_history">
+                                <view class="picker">
+                                    {{immuno_history_picker[immuno_history]}}
+                                </view>
+                            </picker>
+                        </view>
+                        <view class="cu-form-group {{operation_before_summary?'clock':''}}" bindtap="onShowDrawer">
                             <view class='title'>病状体征</view>
                         </view>
                         <!-- ESR (mm/h) -->
                         <view class="cu-form-group {{esr_state==0?'disabled':esr_state==2?'clock':''}}">
                             <view style='display:flex;flex-direction: column; '>
                                 <view class='title' style='text-align:left'>入院时ESR (mm/h)</view>
-                                <input placeholder="请输入数字" class='radius' style='width: 350rpx;text-align:left;' type='number' bindinput="onEsrInput" disabled='{{esr_state!=1}}' value='{{esr}}'></input>
+                                <input placeholder="请输入数字" class='radius' style='width: 350rpx;text-align:left;' type='number' bindinput="onInput" disabled='{{esr_state!=1}}' value='{{esr}}' data-type="esr"></input>
                             </view>
-                            <i class="fa fa-{{esr_state_value}} fa-2x" data-state="{{esr_state}}" bindtap="onEsrStateChange"></i>
+                            <i class="fa fa-{{esr_state_value}} fa-2x" data-state="{{esr_state}}" data-type="esr_state" bindtap="on3StateChange"></i>
                         </view>
                         <!-- CRP (mg/dl)-->
                         <view class="cu-form-group {{crp_state==0?'disabled':crp_state==2?'clock':''}}">
                             <view style='display:flex;flex-direction: column; '>
                                 <view class='title' style='text-align:left'>入院时CRP (mg/dl)</view>
-                                <input placeholder="请输入数字" class='radius' style='width: 350rpx;text-align:left;' type='digit' bindinput="onCrpInput" disabled='{{crp_state!=1}}' value='{{crp}}'></input>
+                                <input placeholder="请输入数字" class='radius' style='width: 350rpx;text-align:left;' type='digit' bindinput="onInput" disabled='{{crp_state!=1}}' value='{{crp}}' data-type="crp"></input>
                             </view>
-                            <i class="fa fa-{{crp_state_value}} fa-2x" data-state="{{crp_state}}" bindtap="onCrpStateChange"></i>
+                            <i class="fa fa-{{crp_state_value}} fa-2x" data-state="{{crp_state}}" data-type="crp_state" bindtap="on3StateChange"></i>
                         </view>
                         <!-- 换算后的CRP (mg/L) -->
                         <view class="cu-form-group disabled">
@@ -122,25 +122,25 @@
                         <view class="cu-form-group {{il6_state==0?'disabled':il6_state==2?'clock':''}}">
                             <view style='display:flex;flex-direction: column; '>
                                 <view class='title' style='text-align:left'>入院时IL-6 (pg/ml)</view>
-                                <input placeholder="请输入数字" class='radius' style='width: 350rpx;text-align:left;' type='digit' bindinput="onIl6Input" disabled='{{il6_state!=1}}' value='{{il6}}'></input>
+                                <input placeholder="请输入数字" class='radius' style='width: 350rpx;text-align:left;' type='digit' bindinput="onInput" disabled='{{il6_state!=1}}' value='{{il6}}' data-type="il6"></input>
                             </view>
-                            <i class="fa fa-{{il6_state_value}} fa-2x" data-state="{{il6_state}}" bindtap="onIl6StateChange"></i>
+                            <i class="fa fa-{{il6_state_value}} fa-2x" data-state="{{il6_state}}" data-type="il6_state" bindtap="on3StateChange"></i>
                         </view>
                         <!-- D-dimer (g/L) -->
                         <view class="cu-form-group {{dimer_state==0?'disabled':dimer_state==2?'clock':''}}">
                             <view style='display:flex;flex-direction: column; '>
                                 <view class='title' style='text-align:left'>入院时D-dimer (g/L)</view>
-                                <input placeholder="请输入数字" class='radius' style='width: 350rpx;text-align:left;' type='digit' bindinput="onDimerInput" disabled='{{dimer_state!=1}}' value='{{dimer}}'></input>
+                                <input placeholder="请输入数字" class='radius' style='width: 350rpx;text-align:left;' type='digit' bindinput="onInput" disabled='{{dimer_state!=1}}' value='{{dimer}}' data-type="dimer"></input>
                             </view>
-                            <i class="fa fa-{{dimer_state_value}} fa-2x" data-state="{{dimer_state}}" bindtap="onDimerStateChange"></i>
+                            <i class="fa fa-{{dimer_state_value}} fa-2x" data-state="{{dimer_state}}" data-type="dimer_state" bindtap="on3StateChange"></i>
                         </view>
                         <!-- Fibrinogen (μg/ml) -->
                         <view class="cu-form-group {{fibrinogen_state==0?'disabled':fibrinogen_state==2?'clock':''}}">
                             <view style='display:flex;flex-direction: column; '>
                                 <view class='title' style='text-align:left'>入院时Fibrinogen (μg/ml)</view>
-                                <input placeholder="请输入数字" class='radius' style='width: 350rpx;text-align:left;' type='digit' bindinput="onFibrinogenInput" disabled='{{fibrinogen_state!=1}}' value='{{fibrinogen}}'></input>
+                                <input placeholder="请输入数字" class='radius' style='width: 350rpx;text-align:left;' type='digit' bindinput="onFibrinogenInput" disabled='{{fibrinogen_state!=1}}' value='{{fibrinogen}}' data-type="fibrinogen"></input>
                             </view>
-                            <i class="fa fa-{{fibrinogen_state_value}} fa-2x" data-state="{{fibrinogen_state}}" bindtap="onFibrinogenStateChange"></i>
+                            <i class="fa fa-{{fibrinogen_state_value}} fa-2x" data-state="{{fibrinogen_state}}" data-type="fibrinogen_state" bindtap="on3StateChange"></i>
                         </view>
                     </view>
                 </view>
@@ -150,7 +150,7 @@
                 <view class='action'>
                     <text class='icon-title text-green'></text>术中诊断</view>
                 <view>延后录入
-                    <switch class='green sm margin-right' bindchange="onCheckDelaySwitchChange" style='margin-left: 15rpx;' checked='{{assay_check}}'></switch>
+                    <switch class='green sm margin-right' bindchange="onSwitchChange" style='margin-left: 15rpx;' checked='{{operation_during_check}}' data-type="operation_during_check"></switch>
                 </view>
             </view>
             <!-- item -->
@@ -166,19 +166,19 @@
                         </picker>
                     </view>
                     <!-- 术中见脓 -->
-                    <view class="cu-form-group {{le_testpaper_stoste_state==2?'clock':''}}">
+                    <view class="cu-form-group {{culture_pus_state==2?'clock':''}}">
                         <view class='title'>术中见脓</view>
-                        <picker bindchange="onLe_testpaper_stosteChange" value="{{le_testpaper_stoste}}" range="{{le_testpaper_stoste_picker}}" disabled='{{le_testpaper_stoste_state==2}}'>
+                        <picker bindchange="onPickerChange" value="{{culture_pus}}" range="{{culture_pus_picker}}" disabled='{{culture_pus_state==2}}' data-type="culture_pus">
                             <view class="picker">
-                                {{le_testpaper_stoste_picker[le_testpaper_stoste]}}
+                                {{culture_pus_picker[culture_pus]}}
                             </view>
                         </picker>
-                        <button class='cu-btn round sm' style='margin-left: 15rpx;' bindtap="showModal" data-target="threeImgModal" data-imgtype="le_testpaper_stoste" disabled="{{le_testpaper_stoste_state==2}}">上传图片</button>
+                        <button class='cu-btn round sm' style='margin-left: 15rpx;' bindtap="showModal" data-target="threeImgModal" data-imgtype="culture_pus_picker" disabled="{{culture_pus_picker_state==2}}">上传图片</button>
                     </view>
                     <!-- LE试纸（离心前） -->
                     <view class="cu-form-group {{le_testpaper_stoste_state==2?'clock':''}}">
                         <view class='title'>术中LE试纸(离心前)</view>
-                        <picker bindchange="onLe_testpaper_stosteChange" value="{{le_testpaper_stoste}}" range="{{le_testpaper_stoste_picker}}" disabled='{{le_testpaper_stoste_state==2}}'>
+                        <picker bindchange="onPickerChange" value="{{le_testpaper_stoste}}" range="{{le_testpaper_stoste_picker}}" disabled='{{le_testpaper_stoste_state==2}}' data-type="le_testpaper_stoste">
                             <view class="picker">
                                 {{le_testpaper_stoste_picker[le_testpaper_stoste]}}
                             </view>
@@ -188,7 +188,7 @@
                     <!-- LE试纸（离心后） -->
                     <view class="cu-form-group {{le_testpaper_centrifugal_state==2?'clock':''}}">
                         <view class='title'>术中LE试纸(离心后)</view>
-                        <picker bindchange="onLe_testpaper_centrifugalChange" value="{{le_testpaper_centrifugal}}" range="{{le_testpaper_centrifugal_picker}}" disabled="{{le_testpaper_centrifugal_state==2}}">
+                        <picker bindchange="onPickerChange" value="{{le_testpaper_centrifugal}}" range="{{le_testpaper_centrifugal_picker}}" disabled="{{le_testpaper_centrifugal_state==2}}" data-type="le_testpaper_centrifugal">
                             <view class="picker">
                                 {{le_testpaper_centrifugal_picker[le_testpaper_centrifugal]}}
                             </view>
@@ -199,158 +199,159 @@
                     <view class="cu-form-group {{joint_fluid_wbc_state==0?'disabled':joint_fluid_wbc_state==2?'clock':''}}">
                         <view style='display:flex;flex-direction: column; '>
                             <view class='title' style='text-align:left'>关节液WBC (cells/μl)</view>
-                            <input placeholder="请输入数字" class='radius' style='width: 350rpx;text-align:left;' type='number' bindinput="onJoint_fluid_wbcInput" disabled='{{joint_fluid_wbc_state!=1}}' value='{{joint_fluid_wbc}}'></input>
+                            <input placeholder="请输入数字" class='radius' style='width: 350rpx;text-align:left;' type='number' bindinput="onInput" disabled='{{joint_fluid_wbc_state!=1}}' value='{{joint_fluid_wbc}}' data-type="joint_fluid_wbc"></input>
                         </view>
-                        <i class="fa fa-{{joint_fluid_wbc_state_value}} fa-2x" data-state="{{joint_fluid_wbc_state}}" bindtap="onJoint_fluid_wbcStateChange"></i>
+                        <i class="fa fa-{{joint_fluid_wbc_state_value}} fa-2x" data-state="{{joint_fluid_wbc_state}}" bindtap="on3StateChange"></i>
                     </view>
                     <!-- PMN%(0.01) -->
                     <view class="cu-form-group {{pmn_state==0?'disabled':pmn_state==2?'clock':''}}">
                         <view style='display:flex;flex-direction: column; '>
                             <view class='title' style='text-align:left'>PMN%(0.01)</view>
-                            <input placeholder="请输入数字" class='radius' style='width: 350rpx;text-align:left;' type='digit' bindinput="onPmnInput" disabled='{{pmn_state!=1}}' value='{{pmn}}'></input>
+                            <input placeholder="请输入数字" class='radius' style='width: 350rpx;text-align:left;' type='digit' bindinput="onInput" disabled='{{pmn_state!=1}}' value='{{pmn}}' data-type="pmn"></input>
                         </view>
-                        <i class="fa fa-{{pmn_state_value}} fa-2x" data-state="{{pmn_state}}" bindtap="onPmnStateChange"></i>
+                        <i class="fa fa-{{pmn_state_value}} fa-2x" data-state="{{pmn_state}}" data-type="pmn_state" bindtap="on3StateChange"></i>
                     </view>
                     <!-- 组织病理(中性粒细胞计数) -->
-                    <view class="cu-form-group {{le_testpaper_centrifugal_state==2?'clock':''}}">
+                    <view class="cu-form-group {{neutrophil_state==2?'clock':''}}">
                         <view class='title'>组织病理(中性粒细胞计数)</view>
-                        <picker bindchange="onLe_testpaper_centrifugalChange" value="{{le_testpaper_centrifugal}}" range="{{le_testpaper_centrifugal_picker}}" disabled="{{le_testpaper_centrifugal_state==2}}">
+                        <picker bindchange="onPickerChange" value="{{neutrophil}}" range="{{neutrophil_picker}}" disabled="{{neutrophil_state==2}}" data-type="neutrophil">
                             <view class="picker">
-                                {{le_testpaper_centrifugal_picker[le_testpaper_centrifugal]}}
+                                {{neutrophil_picker[neutrophil]}}
                             </view>
                         </picker>
-                        <button class='cu-btn round sm' style='margin-left: 15rpx;' bindtap="showModal" data-target="threeImgModal" data-imgtype="le_testpaper_centrifugal" disabled="{{le_testpaper_centrifugal_state==2}}">上传图片</button>
+                        <button class='cu-btn round sm' style='margin-left: 15rpx;' bindtap="showModal" data-target="threeImgModal" data-imgtype="neutrophil" disabled="{{neutrophil_state==2}}">上传图片</button>
+                        <i class="fa fa-{{neutrophil_state_value}} fa-2x" data-state="{{neutrophil_state}}" data-type="neutrophil_state" bindtap="on3StateChange"></i>
                     </view>
                     <!-- 术中组织培养1 -->
-                    <view class="cu-form-group {{sious_throat_swabs1_state==0?'disabled':sious_throat_swabs1_state==2?'clock':''}}">
+                    <view class="cu-form-group {{tissue_culture1_state==0?'disabled':tissue_culture1_state==2?'clock':''}}">
                         <view style='display:flex;flex-direction: column; '>
                             <view class='title' style='text-align:left'>术中组织培养1</view>
-                            <input placeholder="请输入培养结果" class='radius' style='width: 350rpx;text-align:left;' bindinput="onSious_throat_swabs1Input" disabled='{{sious_throat_swabs1_state!=1}}' value='{{sious_throat_swabs1}}'></input>
+                            <input placeholder="请输入培养结果" class='radius' style='width: 350rpx;text-align:left;' bindinput="onInput" disabled='{{tissue_culture1_state!=1}}' value='{{tissue_culture1}}' data-type="tissue_culture1"></input>
                         </view>
                         <view>
-                            <button class='cu-btn round sm' disabled='{{sious_throat_swabs1_state!=1}}' bindtap="showModal" data-target="threeImgModal" data-imgtype="sious_throat_swabs1">上传图片</button>
-                            <i class="fa fa-{{sious_throat_swabs1_state_value}} fa-2x" data-state="{{sious_throat_swabs1_state}}" bindtap="onSious_throat_swabs1StateChange"></i>
+                            <button class='cu-btn round sm' disabled='{{tissue_culture1_state!=1}}' bindtap="showModal" data-target="threeImgModal" data-imgtype="tissue_culture1">上传图片</button>
+                            <i class="fa fa-{{tissue_culture1_state_value}} fa-2x" data-state="{{tissue_culture1_state}}" data-type="tissue_culture1_state" bindtap="on3StateChange"></i>
                         </view>
                     </view>
                     <!-- 术中组织培养2 -->
-                    <view class="cu-form-group {{sious_throat_swabs2_state==0?'disabled':sious_throat_swabs2_state==2?'clock':''}}">
+                    <view class="cu-form-group {{tissue_culture2_state==0?'disabled':tissue_culture2_state==2?'clock':''}}">
                         <view style='display:flex;flex-direction: column; '>
                             <view class='title' style='text-align:left'>术中组织培养2</view>
-                            <input placeholder="请输入培养结果" class='radius' style='width: 350rpx;text-align:left;' bindinput="onSious_throat_swabs2Input" disabled='{{sious_throat_swabs2_state!=1}}' value='{{sious_throat_swabs2}}'></input>
+                            <input placeholder="请输入培养结果" class='radius' style='width: 350rpx;text-align:left;' bindinput="onInput" disabled='{{tissue_culture2_state!=1}}' value='{{tissue_culture2}}' data-type="tissue_culture2"></input>
                         </view>
                         <view>
-                            <button class='cu-btn round sm' style='margin-left: 15rpx;' disabled='{{sious_throat_swabs2_state!=1}}' value='{{sious_throat_swabs2}}' bindtap="showModal" data-target="threeImgModal" data-imgtype="sious_throat_swabs2">上传图片</button>
-                            <i class="fa fa-{{sious_throat_swabs2_state_value}} fa-2x" data-state="{{sious_throat_swabs2_state}}" bindtap="onSious_throat_swabs2StateChange"></i>
+                            <button class='cu-btn round sm' style='margin-left: 15rpx;' disabled='{{tissue_culture2_state!=1}}' value='{{tissue_culture2}}' bindtap="showModal" data-target="threeImgModal" data-imgtype="tissue_culture2">上传图片</button>
+                            <i class="fa fa-{{tissue_culture2_state_value}} fa-2x" data-state="{{tissue_culture2_state}}" data-type="tissue_culture2_state" bindtap="on3StateChange"></i>
                         </view>
                     </view>
                     <!-- 术中组织培养3 -->
-                    <view class="cu-form-group {{sious_throat_swabs3_state==0?'disabled':sious_throat_swabs3_state==2?'clock':''}}">
+                    <view class="cu-form-group {{tissue_culture3_state==0?'disabled':tissue_culture3_state==2?'clock':''}}">
                         <view style='display:flex;flex-direction: column; '>
                             <view class='title' style='text-align:left'>术中组织培养3</view>
-                            <input placeholder="请输入培养结果" class='radius' style='width: 350rpx;text-align:left;' bindinput="onSious_throat_swabs3Input" disabled='{{sious_throat_swabs3_state!=1}}' value='{{sious_throat_swabs3}}'></input>
+                            <input placeholder="请输入培养结果" class='radius' style='width: 350rpx;text-align:left;' bindinput="onInput" disabled='{{tissue_culture3_state!=1}}' value='{{tissue_culture3}}' data-type="tissue_culture3"></input>
                         </view>
                         <view>
-                            <button class='cu-btn round sm' style='margin-left: 15rpx;' disabled='{{sious_throat_swabs3_state!=1}}' bindtap="showModal" data-target="threeImgModal" data-imgtype="sious_throat_swabs3">上传图片</button>
-                            <i class="fa fa-{{sious_throat_swabs3_state_value}} fa-2x" data-state="{{sious_throat_swabs3_state}}" bindtap="onSious_throat_swabs3StateChange"></i>
+                            <button class='cu-btn round sm' style='margin-left: 15rpx;' disabled='{{tissue_culture3_state!=1}}' bindtap="showModal" data-target="threeImgModal" data-imgtype="tissue_culture3">上传图片</button>
+                            <i class="fa fa-{{tissue_culture3_state_value}} fa-2x" data-state="{{tissue_culture3_state}}" data-type="tissue_culture3_state" bindtap="on3StateChange"></i>
                         </view>
                     </view>
                     <!-- 术中组织培养4 -->
-                    <view class="cu-form-group {{sious_throat_swabs3_state==0?'disabled':sious_throat_swabs3_state==2?'clock':''}}">
+                    <view class="cu-form-group {{tissue_culture4_state==0?'disabled':tissue_culture4_state==2?'clock':''}}">
                         <view style='display:flex;flex-direction: column; '>
                             <view class='title' style='text-align:left'>术中组织培养4</view>
-                            <input placeholder="请输入培养结果" class='radius' style='width: 350rpx;text-align:left;' bindinput="onSious_throat_swabs3Input" disabled='{{sious_throat_swabs3_state!=1}}' value='{{sious_throat_swabs3}}'></input>
+                            <input placeholder="请输入培养结果" class='radius' style='width: 350rpx;text-align:left;' bindinput="onInput" disabled='{{tissue_culture4_state!=1}}' value='{{tissue_culture4}}' data-type="tissue_culture4"></input>
                         </view>
                         <view>
-                            <button class='cu-btn round sm' style='margin-left: 15rpx;' disabled='{{sious_throat_swabs3_state!=1}}' bindtap="showModal" data-target="threeImgModal" data-imgtype="sious_throat_swabs3">上传图片</button>
-                            <i class="fa fa-{{sious_throat_swabs3_state_value}} fa-2x" data-state="{{sious_throat_swabs3_state}}" bindtap="onSious_throat_swabs3StateChange"></i>
+                            <button class='cu-btn round sm' style='margin-left: 15rpx;' disabled='{{tissue_culture4_state!=1}}' bindtap="showModal" data-target="threeImgModal" data-imgtype="tissue_culture4">上传图片</button>
+                            <i class="fa fa-{{tissue_culture4_state_value}} fa-2x" data-state="{{tissue_culture4_state}}" data-type="tissue_culture4_state" bindtap="on3StateChange"></i>
                         </view>
                     </view>
                     <!-- 术中组织培养5 -->
-                    <view class="cu-form-group {{sious_throat_swabs3_state==0?'disabled':sious_throat_swabs3_state==2?'clock':''}}">
+                    <view class="cu-form-group {{tissue_culture5_state==0?'disabled':tissue_culture5_state==2?'clock':''}}">
                         <view style='display:flex;flex-direction: column; '>
                             <view class='title' style='text-align:left'>术中组织培养5</view>
-                            <input placeholder="请输入培养结果" class='radius' style='width: 350rpx;text-align:left;' bindinput="onSious_throat_swabs3Input" disabled='{{sious_throat_swabs3_state!=1}}' value='{{sious_throat_swabs3}}'></input>
+                            <input placeholder="请输入培养结果" class='radius' style='width: 350rpx;text-align:left;' bindinput="onInput" disabled='{{tissue_culture5_state!=1}}' value='{{tissue_culture5}}' data-type="tissue_culture5"></input>
                         </view>
                         <view>
-                            <button class='cu-btn round sm' style='margin-left: 15rpx;' disabled='{{sious_throat_swabs3_state!=1}}' bindtap="showModal" data-target="threeImgModal" data-imgtype="sious_throat_swabs3">上传图片</button>
-                            <i class="fa fa-{{sious_throat_swabs3_state_value}} fa-2x" data-state="{{sious_throat_swabs3_state}}" bindtap="onSious_throat_swabs3StateChange"></i>
+                            <button class='cu-btn round sm' style='margin-left: 15rpx;' disabled='{{tissue_culture5_state!=1}}' bindtap="showModal" data-target="threeImgModal" data-imgtype="tissue_culture5">上传图片</button>
+                            <i class="fa fa-{{tissue_culture5_state_value}} fa-2x" data-state="{{tissue_culture5_state}}" data-type="tissue_culture5_state" bindtap="on3StateChange"></i>
                         </view>
                     </view>
                     <!-- 术中组织mNGS -->
-                    <view class="cu-form-group {{aerobic_result_state==0?'disabled':aerobic_result_state==2?'clock':''}}">
+                    <view class="cu-form-group {{tissue_mngs_state==0?'disabled':tissue_mngs_state==2?'clock':''}}">
                         <view style='display:flex;flex-direction: column; '>
                             <view class='title' style='text-align:left'>术中组织mNGS</view>
-                            <input placeholder="请输入培养结果" class='radius' style='width: 350rpx;text-align:left;' bindinput="onAerobic_resultInput" disabled='{{c_state!=1}}' value='{{aerobic_result}}'></input>
+                            <input placeholder="请输入培养结果" class='radius' style='width: 350rpx;text-align:left;' bindinput="onInput" disabled='{{tissue_mngs_state!=1}}' value='{{tissue_mngs}}' data-type="tissue_mngs"></input>
                         </view>
                         <view>
-                            <button class='cu-btn round sm' style='margin-left: 15rpx;' disabled='{{aerobic_result_state!=1}}' bindtap="showModal" data-target="threeImgModal" data-imgtype="aerobic_result">上传图片</button>
-                            <i class="fa fa-{{aerobic_result_state_value}} fa-2x" data-state="{{aerobic_result_state}}" bindtap="onAerobic_resultStateChange"></i>
+                            <button class='cu-btn round sm' style='margin-left: 15rpx;' disabled='{{tissue_mngs_state!=1}}' bindtap="showModal" data-target="threeImgModal" data-imgtype="tissue_mngs">上传图片</button>
+                            <i class="fa fa-{{tissue_mngs_state_value}} fa-2x" data-state="{{tissue_mngs_state}}" data-type="tissue_mngs_state" bindtap="on3StateChange"></i>
                         </view>
                     </view>
                     <!-- 术中关节液需氧+真菌 -->
-                    <view class="cu-form-group {{aerobic_result_state==0?'disabled':aerobic_result_state==2?'clock':''}}">
+                    <view class="cu-form-group {{joint_aerobic_result_state==0?'disabled':joint_aerobic_result_state==2?'clock':''}}">
                         <view style='display:flex;flex-direction: column; '>
                             <view class='title' style='text-align:left'>术中关节液需氧+真菌</view>
-                            <input placeholder="请输入培养结果" class='radius' style='width: 350rpx;text-align:left;' bindinput="onAerobic_resultInput" disabled='{{c_state!=1}}' value='{{aerobic_result}}'></input>
+                            <input placeholder="请输入培养结果" class='radius' style='width: 350rpx;text-align:left;' bindinput="onInput" disabled='{{joint_aerobic_result_state!=1}}' value='{{joint_aerobic_result}}' data-type="joint_aerobic_result"></input>
                         </view>
                         <view>
-                            <button class='cu-btn round sm' style='margin-left: 15rpx;' disabled='{{aerobic_result_state!=1}}' bindtap="showModal" data-target="threeImgModal" data-imgtype="aerobic_result">上传图片</button>
-                            <i class="fa fa-{{aerobic_result_state_value}} fa-2x" data-state="{{aerobic_result_state}}" bindtap="onAerobic_resultStateChange"></i>
+                            <button class='cu-btn round sm' style='margin-left: 15rpx;' disabled='{{joint_aerobic_result_state!=1}}' bindtap="showModal" data-target="threeImgModal" data-imgtype="joint_aerobic_result">上传图片</button>
+                            <i class="fa fa-{{joint_aerobic_result_state_value}} fa-2x" data-state="{{joint_aerobic_result_state}}" data-type="joint_aerobic_result_state" bindtap="on3StateChange"></i>
                         </view>
                     </view>
                     <!-- 术中关节液厌氧 -->
-                    <view class="cu-form-group {{aerobic_result_state==0?'disabled':aerobic_result_state==2?'clock':''}}">
+                    <view class="cu-form-group {{joint_anaerobic_result_state==0?'disabled':joint_anaerobic_result_state==2?'clock':''}}">
                         <view style='display:flex;flex-direction: column; '>
                             <view class='title' style='text-align:left'>术中关节液厌氧</view>
-                            <input placeholder="请输入培养结果" class='radius' style='width: 350rpx;text-align:left;' bindinput="onAerobic_resultInput" disabled='{{c_state!=1}}' value='{{aerobic_result}}'></input>
+                            <input placeholder="请输入培养结果" class='radius' style='width: 350rpx;text-align:left;' bindinput="onInput" disabled='{{joint_anaerobic_result_state!=1}}' value='{{joint_anaerobic_result}}' data-type="joint_anaerobic_result"></input>
                         </view>
                         <view>
-                            <button class='cu-btn round sm' style='margin-left: 15rpx;' disabled='{{aerobic_result_state!=1}}' bindtap="showModal" data-target="threeImgModal" data-imgtype="aerobic_result">上传图片</button>
-                            <i class="fa fa-{{aerobic_result_state_value}} fa-2x" data-state="{{aerobic_result_state}}" bindtap="onAerobic_resultStateChange"></i>
+                            <button class='cu-btn round sm' style='margin-left: 15rpx;' disabled='{{joint_anaerobic_result_state!=1}}' bindtap="showModal" data-target="threeImgModal" data-imgtype="joint_anaerobic_result">上传图片</button>
+                            <i class="fa fa-{{joint_anaerobic_result_state_value}} fa-2x" data-state="{{joint_anaerobic_result_state}}" data-type="joint_anaerobic_result_state" bindtap="on3StateChange"></i>
                         </view>
                     </view>
                     <!-- 术中关节液mNGS -->
-                    <view class="cu-form-group {{aerobic_result_state==0?'disabled':aerobic_result_state==2?'clock':''}}">
+                    <view class="cu-form-group {{joint_mngs_result_state==0?'disabled':joint_mngs_result_state==2?'clock':''}}">
                         <view style='display:flex;flex-direction: column; '>
                             <view class='title' style='text-align:left'>术中关节液mNGS</view>
-                            <input placeholder="请输入培养结果" class='radius' style='width: 350rpx;text-align:left;' bindinput="onAerobic_resultInput" disabled='{{c_state!=1}}' value='{{aerobic_result}}'></input>
+                            <input placeholder="请输入培养结果" class='radius' style='width: 350rpx;text-align:left;' bindinput="onInput" disabled='{{joint_mngs_result_state!=1}}' value='{{joint_mngs_result}}' data-type="joint_mngs_result"></input>
                         </view>
                         <view>
-                            <button class='cu-btn round sm' style='margin-left: 15rpx;' disabled='{{aerobic_result_state!=1}}' bindtap="showModal" data-target="threeImgModal" data-imgtype="aerobic_result">上传图片</button>
-                            <i class="fa fa-{{aerobic_result_state_value}} fa-2x" data-state="{{aerobic_result_state}}" bindtap="onAerobic_resultStateChange"></i>
+                            <button class='cu-btn round sm' style='margin-left: 15rpx;' disabled='{{joint_mngs_result_state!=1}}' bindtap="showModal" data-target="threeImgModal" data-imgtype="joint_mngs_result">上传图片</button>
+                            <i class="fa fa-{{joint_mngs_result_state_value}} fa-2x" data-state="{{joint_mngs_result_state}}" data-type="joint_mngs_result_state" bindtap="on3StateChange"></i>
                         </view>
                     </view>
                     <!-- 超声裂解液需氧+真菌 -->
-                    <view class="cu-form-group {{aerobic_result_state==0?'disabled':aerobic_result_state==2?'clock':''}}">
+                    <view class="cu-form-group {{splitting_aerobic_result_state==0?'disabled':splitting_aerobic_result_state==2?'clock':''}}">
                         <view style='display:flex;flex-direction: column; '>
                             <view class='title' style='text-align:left'>超声裂解液需氧+真菌</view>
-                            <input placeholder="请输入培养结果" class='radius' style='width: 350rpx;text-align:left;' bindinput="onAerobic_resultInput" disabled='{{c_state!=1}}' value='{{aerobic_result}}'></input>
+                            <input placeholder="请输入培养结果" class='radius' style='width: 350rpx;text-align:left;' bindinput="onInput" disabled='{{splitting_aerobic_result_state!=1}}' value='{{splitting_aerobic_result}}' data-type="splitting_aerobic_result"></input>
                         </view>
                         <view>
-                            <button class='cu-btn round sm' style='margin-left: 15rpx;' disabled='{{aerobic_result_state!=1}}' bindtap="showModal" data-target="threeImgModal" data-imgtype="aerobic_result">上传图片</button>
-                            <i class="fa fa-{{aerobic_result_state_value}} fa-2x" data-state="{{aerobic_result_state}}" bindtap="onAerobic_resultStateChange"></i>
+                            <button class='cu-btn round sm' style='margin-left: 15rpx;' disabled='{{splitting_aerobic_result_state!=1}}' bindtap="showModal" data-target="threeImgModal" data-imgtype="splitting_aerobic_result">上传图片</button>
+                            <i class="fa fa-{{splitting_aerobic_resultt_state_value}} fa-2x" data-state="{{splitting_aerobic_result_state}}" data-type="splitting_aerobic_result_state" bindtap="on3StateChange"></i>
                         </view>
                     </view>
                     <!-- 超声裂解液厌氧 -->
-                    <view class="cu-form-group {{aerobic_result_state==0?'disabled':aerobic_result_state==2?'clock':''}}">
+                    <view class="cu-form-group {{splitting_anaerobic_result_state==0?'disabled':splitting_anaerobic_result_state==2?'clock':''}}">
                         <view style='display:flex;flex-direction: column; '>
                             <view class='title' style='text-align:left'>超声裂解液厌氧</view>
-                            <input placeholder="请输入培养结果" class='radius' style='width: 350rpx;text-align:left;' bindinput="onAerobic_resultInput" disabled='{{c_state!=1}}' value='{{aerobic_result}}'></input>
+                            <input placeholder="请输入培养结果" class='radius' style='width: 350rpx;text-align:left;' bindinput="onInput" disabled='{{splitting_anaerobic_result_state!=1}}' value='{{splitting_anaerobic_result}}' data-type="splitting_anaerobic_result"></input>
                         </view>
                         <view>
-                            <button class='cu-btn round sm' style='margin-left: 15rpx;' disabled='{{aerobic_result_state!=1}}' bindtap="showModal" data-target="threeImgModal" data-imgtype="aerobic_result">上传图片</button>
-                            <i class="fa fa-{{aerobic_result_state_value}} fa-2x" data-state="{{aerobic_result_state}}" bindtap="onAerobic_resultStateChange"></i>
+                            <button class='cu-btn round sm' style='margin-left: 15rpx;' disabled='{{splitting_anaerobic_result_state!=1}}' bindtap="showModal" data-target="threeImgModal" data-imgtype="splitting_anaerobic_result">上传图片</button>
+                            <i class="fa fa-{{splitting_anaerobic_result_state_value}} fa-2x" data-state="{{splitting_anaerobic_result_state}}" data-type="splitting_anaerobic_result_state" bindtap="on3StateChange"></i>
                         </view>
                     </view>
                     <!-- 术中超声裂解液mNGS -->
-                    <view class="cu-form-group {{aerobic_result_state==0?'disabled':aerobic_result_state==2?'clock':''}}">
+                    <view class="cu-form-group {{splitting_mngs_result_state==0?'disabled':splitting_mngs_result_state==2?'clock':''}}">
                         <view style='display:flex;flex-direction: column; '>
                             <view class='title' style='text-align:left'>术中超声裂解液mNGS</view>
-                            <input placeholder="请输入培养结果" class='radius' style='width: 350rpx;text-align:left;' bindinput="onAerobic_resultInput" disabled='{{c_state!=1}}' value='{{aerobic_result}}'></input>
+                            <input placeholder="请输入培养结果" class='radius' style='width: 350rpx;text-align:left;' bindinput="onInput" disabled='{{splitting_mngs_result_state!=1}}' value='{{splitting_mngs_result}}' data-type="splitting_mngs_result"></input>
                         </view>
                         <view>
-                            <button class='cu-btn round sm' style='margin-left: 15rpx;' disabled='{{aerobic_result_state!=1}}' bindtap="showModal" data-target="threeImgModal" data-imgtype="aerobic_result">上传图片</button>
-                            <i class="fa fa-{{aerobic_result_state_value}} fa-2x" data-state="{{aerobic_result_state}}" bindtap="onAerobic_resultStateChange"></i>
+                            <button class='cu-btn round sm' style='margin-left: 15rpx;' disabled='{{splitting_mngs_result_state!=1}}' bindtap="showModal" data-target="threeImgModal" data-imgtype="splitting_mngs_result">上传图片</button>
+                            <i class="fa fa-{{splitting_mngs_result_state_value}} fa-2x" data-state="{{splitting_mngs_result_state}}" data-type="splitting_mngs_result_state" bindtap="on3StateChange"></i>
                         </view>
                     </view>
                 </view>
@@ -360,7 +361,7 @@
                 <view class='action'>
                     <text class='icon-title text-green'></text>术中治疗</view>
                 <view>延后录入
-                    <switch class='green sm margin-right' bindchange="onPuncture_summarySwitchChange" style='margin-left: 15rpx;' checked='{{puncture_summary}}'></switch>
+                    <switch class='green sm margin-right' bindchange="onSwitchChange" style='margin-left: 15rpx;' checked='{{operation_during_treat}}' data-type="operation_during_treat"></switch>
                 </view>
             </view>
             <!-- item -->
@@ -369,85 +370,85 @@
                     <!-- 主刀医师 -->
                     <view class="cu-form-group">
                         <view class='title'>主刀医师</view>
-                        <input placeholder="请输入主刀医师" class='radius' bindinput="onAgeInput" value="{{age}}"></input>
+                        <input placeholder="请输入主刀医师" class='radius' bindinput="onInput" value="{{pro_doctor}}" data-type="pro_doctor"></input>
                     </view>
                     <!-- 麻醉分级 -->
-                    <view class="cu-form-group {{present_result_state==0?'disabled':present_result_state==2?'clock':''}}">
+                    <view class="cu-form-group {{narcosis_level_state==0?'disabled':narcosis_level_state==2?'clock':''}}">
                         <view class='title'>麻醉分级</view>
-                        <picker bindchange="onPresent_resultChange" value="{{present_result}}" range="{{present_result_picker}}" disabled='{{present_result_state != 1}}'>
+                        <picker bindchange="onPickerChange" value="{{narcosis_level}}" range="{{narcosis_level_picker}}" disabled='{{narcosis_level_state != 1}}' data-type="narcosis_level">
                             <view class="picker">
-                                {{present_result_picker[present_result]}}
+                                {{narcosis_level_picker[narcosis_level]}}
                             </view>
                         </picker>
                     </view>
                     <!-- 麻醉方式 -->
-                    <view class="cu-form-group {{present_result_state==0?'disabled':present_result_state==2?'clock':''}}">
+                    <view class="cu-form-group {{narcosis_type_state==0?'disabled':narcosis_type_state==2?'clock':''}}">
                         <view class='title'>麻醉方式</view>
-                        <picker bindchange="onPresent_resultChange" value="{{present_result}}" range="{{present_result_picker}}" disabled='{{present_result_state != 1}}'>
+                        <picker bindchange="onPickerChange" value="{{narcosis_type}}" range="{{narcosis_type_picker}}" disabled='{{narcosis_type_state != 1}}' data-type="narcosis_type">
                             <view class="picker">
-                                {{present_result_picker[present_result]}}
+                                {{narcosis_type_picker[narcosis_type]}}
                             </view>
                         </picker>
                     </view>
                     <!-- 术式 -->
-                    <view class="cu-form-group {{present_result_state==0?'disabled':present_result_state==2?'clock':''}}">
+                    <view class="cu-form-group {{operation_state==0?'disabled':operation_state==2?'clock':''}}">
                         <view class='title'>术式</view>
-                        <picker bindchange="onPresent_resultChange" value="{{present_result}}" range="{{present_result_picker}}" disabled='{{present_result_state != 1}}'>
+                        <picker bindchange="onPickerChange" value="{{operation}}" range="{{operation_picker}}" disabled='{{operation_state != 1}}' data-type="operation">
                             <view class="picker">
-                                {{present_result_picker[present_result]}}
+                                {{operation_picker[operation]}}
                             </view>
                         </picker>
                     </view>
                     <!-- 术中假体 -->
-                    <view class="cu-form-group {{present_result_state==0?'disabled':present_result_state==2?'clock':''}}">
+                    <view class="cu-form-group {{prosthesis_state==0?'disabled':prosthesis_state==2?'clock':''}}">
                         <view class='title'>术中假体</view>
-                        <picker bindchange="onPresent_resultChange" value="{{present_result}}" range="{{present_result_picker}}" disabled='{{present_result_state != 1}}'>
+                        <picker bindchange="onPickerChange" value="{{prosthesis}}" range="{{prosthesis_picker}}" disabled='{{prosthesis_state != 1}}' data-type="prosthesis">
                             <view class="picker">
-                                {{present_result_picker[present_result]}}
+                                {{prosthesis_picker[prosthesis]}}
                             </view>
                         </picker>
                     </view>
                     <!-- 手术时长（min） -->
                     <view class="cu-form-group">
                         <view class='title'>手术时长（min）</view>
-                        <input placeholder="请输入数字" class='radius' bindinput="onAgeInput" type="digit" value="{{age}}"></input>
+                        <input placeholder="请输入数字" class='radius' bindinput="onInput" type="digit" value="{{operation_duration}}" data-type="operation_duration"></input>
                     </view>
                     <!-- 出血量（ml） -->
                     <view class="cu-form-group">
                         <view class='title'>出血量（ml）</view>
-                        <input placeholder="请输入数字" class='radius' bindinput="onAgeInput" type="digit" value="{{age}}"></input>
+                        <input placeholder="请输入数字" class='radius' bindinput="onInput" type="digit" value="{{haemorrhage_volume}}" data-type="haemorrhage_volume"></input>
                     </view>
                     <!-- 骨水泥类型 -->
-                    <view class="cu-form-group {{present_result_state==0?'disabled':present_result_state==2?'clock':''}}">
+                    <view class="cu-form-group {{bone_cement_type_state==0?'disabled':bone_cement_type_state==2?'clock':''}}">
                         <view class='title'>骨水泥类型</view>
-                        <picker bindchange="onPresent_resultChange" value="{{present_result}}" range="{{present_result_picker}}" disabled='{{present_result_state != 1}}'>
+                        <picker bindchange="onPickerChange" value="{{bone_cement_type}}" range="{{bone_cement_type_picker}}" disabled='{{bone_cement_type_state != 1}}' data-type="bone_cement_type">
                             <view class="picker">
-                                {{present_result_picker[present_result]}}
+                                {{bone_cement_type_picker[bone_cement_type]}}
                             </view>
                         </picker>
-                        <i class="fa fa-{{present_result_state_value}} fa-2x" data-state="{{present_result_state}}" bindtap="onPresent_resultStateChange"></i>
+                        <i class="fa fa-{{bone_cement_type_state_value}} fa-2x" data-state="{{bone_cement_type_state}}" data-type="bone_cement_type_state" bindtap="on2StateChange"></i>
                     </view>
                     <!-- 每40g骨水泥中，抗生素种类及含量 -->
-                    <view class="cu-form-group {{aerobic_result_state==0?'disabled':aerobic_result_state==2?'clock':''}}">
+                    <view class="cu-form-group {{bone_cement_volume_state==0?'disabled':bone_cement_volume_state==2?'clock':''}}">
                         <view style='display:flex;flex-direction: column; '>
                             <view class='title' style='text-align:left'>每40g骨水泥中，抗生素种类及含量</view>
-                            <input placeholder="请输入培养结果" class='radius' style='width: 350rpx;text-align:left;' bindinput="onAerobic_resultInput" disabled='{{c_state!=1}}' value='{{aerobic_result}}'></input>
+                            <input placeholder="请输入培养结果" class='radius' style='width: 350rpx;text-align:left;' bindinput="onInput" disabled='{{c_state!=1}}' value='{{bone_cement_volume}}' data-type="bone_cement_volume"></input>
                         </view>
                         <view>
-                            <i class="fa fa-{{aerobic_result_state_value}} fa-2x" data-state="{{aerobic_result_state}}" bindtap="onAerobic_resultStateChange"></i>
+                            <i class="fa fa-{{bone_cement_volume_state_value}} fa-2x" data-state="{{bone_cement_volume_state}}" data-type="bone_cement_volume_state" bindtap="on2StateChange"></i>
                         </view>
                     </view>
                     <!-- 典型影像资料留存-照片 -->
                     <view class="cu-form-group">
                         <view class='title' style='text-align:left'>典型影像资料留存-照片</view>
-                        <button class='cu-btn round sm' style='margin-left: 15rpx;' disabled='{{aerobic_result_state!=1}}' bindtap="showModal" data-target="threeImgModal" data-imgtype="aerobic_result">上传图片</button>
-                        <i class="fa fa-{{aerobic_result_state_value}} fa-2x" data-state="{{aerobic_result_state}}" bindtap="onAerobic_resultStateChange"></i>
+                        <button class='cu-btn round sm' style='margin-left: 15rpx;' disabled='{{data_pic_state!=1}}' bindtap="showModal" data-target="threeImgModal" data-imgtype="data_pic">上传图片</button>
+                        <i class="fa fa-{{data_pic_state_value}} fa-2x" data-state="{{data_pic_state}}" data-type="data_pic_state" bindtap="on2StateChange"></i>
                     </view>
                     <!-- 典型影像资料留存-视频 -->
                     <view class="cu-form-group">
                         <view class='title' style='text-align:left'>典型影像资料留存-视频</view>
-                        <button class='cu-btn round sm' style='margin-left: 15rpx;' disabled='{{aerobic_result_state!=1}}' bindtap="showModal" data-target="threeImgModal" data-imgtype="aerobic_result">上传图片</button>
-                        <i class="fa fa-{{aerobic_result_state_value}} fa-2x" data-state="{{aerobic_result_state}}" bindtap="onAerobic_resultStateChange"></i>
+                        <button class='cu-btn round sm' style='margin-left: 15rpx;' disabled='{{data_video_state!=1}}' bindtap="showModal" data-target="threeImgModal" data-imgtype="data_video">上传图片</button>
+                        <i class="fa fa-{{data_video_state_value}} fa-2x" data-state="{{data_video_state}}" data-type="data_video_state" bindtap="on2StateChange"></i>
                     </view>
                 </view>
             </view>
@@ -456,60 +457,60 @@
                 <view class='action'>
                     <text class='icon-title text-green'></text>出院小结</view>
                 <view>延后录入
-                    <switch class='green sm margin-right' bindchange="onPuncture_summarySwitchChange" style='margin-left: 15rpx;' checked='{{puncture_summary}}'></switch>
+                    <switch class='green sm margin-right' bindchange="onSwitchChange" style='margin-left: 15rpx;' checked='{{leave_summary}}' data-type="leave_summary"></switch>
                 </view>
             </view>
             <!-- item -->
             <view class="cu-list menu menu-avatar">
                 <view class="cu-item-special">
                     <!-- 出院日期 -->
-                    <view class="cu-form-group {{puncture_date_state==2?'clock':''}}">
+                    <view class="cu-form-group {{leave_hospital_date_state==2?'clock':''}}">
                         <view class='title'>出院日期</view>
-                        <picker mode="date" value="{{puncture_date}}" start="2015-01-01" end="2030-12-31" bindchange="onChuanciDateChange" disabled="{{puncture_date_state==2}}">
+                        <picker mode="date" value="{{leave_hospital_date}}" start="2015-01-01" end="2030-12-31" bindchange="onDateChange" disabled="{{leave_hospital_date_state==2}}" data-type="leave_hospital_date">
                             <view class="picker">
-                                {{puncture_date}}
+                                {{leave_hospital_date}}
                             </view>
                         </picker>
                     </view>
                     <!-- 2014MSIS诊断标准 -->
-                    <view class="cu-form-group {{is_remain_sample_state==2?'clock':''}}">
+                    <view class="cu-form-group {{msis_state==2?'clock':''}}">
                         <view class='title'>2014MSIS诊断标准</view>
-                        <picker bindchange="onIs_remain_sampleChange" value="{{is_remain_sample}}" range="{{is_remain_sample_picker}}" disabled="{{is_remain_sample_state==2}}">
+                        <picker bindchange="onPickerChange" value="{{msis}}" range="{{msis_picker}}" disabled="{{msis_state==2}}" data-type="msis">
                             <view class="picker">
-                                {{is_remain_sample_picker[is_remain_sample]}}
+                                {{msis_picker[msis]}}
                             </view>
                         </picker>
                     </view>
                     <!-- 2018ICM新标准 -->
-                    <view class="cu-form-group {{is_remain_sample_state==2?'clock':''}}">
+                    <view class="cu-form-group {{icm_state==2?'clock':''}}">
                         <view class='title'>2018ICM新标准</view>
-                        <picker bindchange="onIs_remain_sampleChange" value="{{is_remain_sample}}" range="{{is_remain_sample_picker}}" disabled="{{is_remain_sample_state==2}}">
+                        <picker bindchange="onPickerChange" value="{{icm}}" range="{{icm_picker}}" disabled="{{icm_state==2}}" data-type="icm">
                             <view class="picker">
-                                {{is_remain_sample_picker[is_remain_sample]}}
+                                {{icm_picker[icm]}}
                             </view>
                         </picker>
                     </view>
                     <!-- 住院期间特殊事件 -->
-                    <view class="cu-form-group {{thistime_result_state==2?'clock':''}}">
+                    <view class="cu-form-group {{special_event_state==2?'clock':''}}">
                         <view style='display:flex;flex-direction: column; '>
                             <view class='title' style='text-align:left'>住院期间特殊事件</view>
-                            <input placeholder="请输入文字" class='radius' style='width: 350rpx;text-align:left;' bindinput="onThistime_resultInput" value='{{thistime_result}}' disabled="{{thistime_result_state==2}}"></input>
+                            <input placeholder="请输入文字" class='radius' style='width: 350rpx;text-align:left;' bindinput="onInput" value='{{special_event}}' disabled="{{special_event_state==2}}" data-type="special_event"></input>
                         </view>
                     </view>
                     <!-- 抗生素应用情景 -->
-                    <view class="cu-form-group {{is_remain_sample_state==2?'clock':''}}">
+                    <view class="cu-form-group {{antibiotic_scene_state==2?'clock':''}}">
                         <view class='title'>抗生素应用情景</view>
-                        <picker bindchange="onIs_remain_sampleChange" value="{{is_remain_sample}}" range="{{is_remain_sample_picker}}" disabled="{{is_remain_sample_state==2}}">
+                        <picker bindchange="onPickerChange" value="{{antibiotic_scene}}" range="{{antibiotic_scene_picker}}" disabled="{{antibiotic_scene_state==2}}" data-type="antibiotic_scene">
                             <view class="picker">
-                                {{is_remain_sample_picker[is_remain_sample]}}
+                                {{antibiotic_scene_picker[antibiotic_scene]}}
                             </view>
                         </picker>
                     </view>
                     <!-- 细菌名称 -->
-                    <view class="cu-form-group {{thistime_result_state==2?'clock':''}}">
+                    <view class="cu-form-group {{germ_name_state==2?'clock':''}}">
                         <view style='display:flex;flex-direction: column; '>
                             <view class='title' style='text-align:left'>细菌名称</view>
-                            <input placeholder="请输入文字" class='radius' style='width: 350rpx;text-align:left;' bindinput="onThistime_resultInput" value='{{thistime_result}}' disabled="{{thistime_result_state==2}}"></input>
+                            <input placeholder="请输入具体细菌名称，或菌培养阴性/非感染等" class='radius' style='width: 350rpx;text-align:left;' bindinput="onInput" value='{{germ_name}}' disabled="{{germ_name_state==2}}" data-type="germ_name"></input>
                         </view>
                     </view>
                     <!-- 抗生素治疗方案 -->
