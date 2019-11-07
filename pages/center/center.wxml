@@ -1,5 +1,5 @@
 <view class="cu-custom" style="height:{{CustomBar}}px;">
-    <view class="cu-bar fixed bg-gradual-blue" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+    <view class="cu-bar fixed bg-gradual-red" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
         <navigator class='action border-custom' open-type="navigateBack" delta="1" hover-class="none" style='width:{{Custom.width}}px;height:{{Custom.height}}px;margin-left:calc(750rpx - {{Custom.right}}px)' bindtap="backToAuth">
             <text class='icon-back'></text>
             <text class='icon-homefill'></text>
@@ -13,19 +13,19 @@
         <input type="text" placeholder="搜索中心、名称、关键字" confirm-type="search" value="{{searchValue}}" bindinput="onSearchChange"></input>
     </view>
     <view class='action'>
-        <button class='cu-btn bg-blue shadow-blur round' bindtap="onSearch">搜索</button>
+        <button class='cu-btn bg-red shadow-blur round' bindtap="onSearch">搜索</button>
     </view>
 </view>
 <scroll-view scroll-y class="indexes margin-tab-bottom" scroll-into-view="indexes-{{listCurID}}" style='padding-top:50px; height:calc(100vh - {{CustomBar}}px - 50px)' scroll-with-animation="true" enable-back-to-top="true">
 
     <view style='display:flex;flex-direction:row'>
         <view class="flex-sub" style="margin:10px">
-            <button class='cu-btn bg-blue shadow margin-btn block' bindtap='showModal'>
+            <button class='cu-btn bg-red shadow margin-btn block' bindtap='showModal'>
                 新增中心
             </button>
         </view>
         <view class="flex-sub" style="margin:10px">
-            <button class='cu-btn bg-blue shadow margin-btn block' bindtap='onPullDownRefresh'>
+            <button class='cu-btn bg-red shadow margin-btn block' bindtap='onPullDownRefresh'>
                 刷新列表
             </button>
         </view>
@@ -106,8 +106,8 @@
     </view>
 </scroll-view>
 <view class='load-progress {{loadProgress!=0?"show":"hide"}}' style="top:{{CustomBar}}px;">
-    <view class='load-progress-bar bg-blue' style="transform: translate3d(-{{100-loadProgress}}%, 0px, 0px);"></view>
-    <view class='load-progress-spinner text-blue'></view>
+    <view class='load-progress-bar bg-red' style="transform: translate3d(-{{100-loadProgress}}%, 0px, 0px);"></view>
+    <view class='load-progress-spinner text-red'></view>
 </view>
 <view class='cu-load load-modal' wx:if="{{loadModal}}">
     <view class='gray-text'>处理中...</view>
@@ -136,8 +136,8 @@
         </view>
         <view class="cu-bar bg-white justify-end">
             <view class='action'>
-                <button class='cu-btn line-blue text-blue' bindtap='hideModal'>取消</button>
-                <button class='cu-btn bg-blue margin-left' bindtap='hideModal' wx:if="{{isAdmin}}" bindtap="addCenter">确定</button>
+                <button class='cu-btn line-red text-red' bindtap='hideModal'>取消</button>
+                <button class='cu-btn bg-red margin-left' bindtap='hideModal' wx:if="{{isAdmin}}" bindtap="addCenter">确定</button>
             </view>
         </view>
     </view>

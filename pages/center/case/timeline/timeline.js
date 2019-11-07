@@ -91,6 +91,12 @@ Page({
         });
     },
 
+    onShouShu() {
+        wx.navigateTo({
+            url: '../shoushu/shoushu?centerId=' + this.data.centerId + "&centerName=" + this.data.centerName + "&case_id="
+        });
+    },
+
     // ============ 事件 begin ============ //
     tabSelect(e) {
         this.setData({

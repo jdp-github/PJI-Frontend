@@ -90,7 +90,7 @@ Page({
         fibrinogen_state_value: 'pencil',
         joint_fluid_desc: '',
         joint_fluid_desc_state: 1,
-        joint_fluid_desc_pics: [],
+        joint_fluid_desc_pic: [],
         rinse_fluid_volume: '',
         rinse_fluid_volume_state: 1,
         rinse_lavage_volume: '',
@@ -98,11 +98,11 @@ Page({
         le_testpaper_stoste: 0,
         le_testpaper_stoste_state: 1,
         le_testpaper_stoste_picker: ['请选择', '500', '250', '75', '25', 'neg', '未测（血性关节液）', '未测（其他原因）'],
-        le_testpaper_stoste_pics: [],
+        le_testpaper_stoste_pic: [],
         le_testpaper_centrifugal: 0,
         le_testpaper_centrifugal_state: 1,
         le_testpaper_centrifugal_picker: ['请选择', '500', '250', '75', '25', 'neg', '未测'],
-        le_testpaper_centrifugal_pics: [],
+        le_testpaper_centrifugal_pic: [],
         joint_fluid_wbc: '',
         joint_fluid_wbc_state: 1,
         joint_fluid_wbc_state_value: 'pencil',
@@ -178,320 +178,89 @@ Page({
         // ------- 图片上传 end  ---------- //
     },
 
-    // -------- 基本情况 begin -------- //
     onBaseDelaySwitchChange: function(e) {
         this.setData({
             base_info: e.detail.value
         });
         let state = this.data.base_info ? 2 : 1
         this.setData({
+            puncture_date: '请选择日期',
             puncture_date_state: state,
+            puncture_type: 0,
             puncture_type_state: state,
+            puncture_desc: '',
             puncture_desc_state: state,
+            last_operation_duration: '',
+            symptoms_duration: '',
+            properties: '',
+            antibiotic_history: 0,
             antibiotic_history_state: state,
+            immuno_history: 0,
             immuno_history_state: state,
         })
     },
-    onChuanciDateChange: function(e) {
-        this.setData({
-            puncture_date: e.detail.value
-        });
-    },
-    onPuncture_typeChange: function(e) {
-        this.setData({
-            puncture_type: e.detail.value,
-        });
-    },
-    onPuncture_descInput: function(e) {
-        this.setData({
-            puncture_desc: e.detail.value
-        });
-    },
-    onAntibiotic_historyChange: function(e) {
-        this.setData({
-            antibiotic_history: e.detail.value,
-        });
-    },
-    onImmuno_historyChange: function(e) {
-        this.setData({
-            immuno_history: e.detail.value,
-        });
-    },
-    onIs_heatChange(e) {
-        this.setData({
-            is_heat: e.detail.value
-        })
-    },
-    onIs_erythemaChange(e) {
-        this.setData({
-            is_erythema: e.detail.value
-        })
-    },
-    onIs_swellingChange(e) {
-        this.setData({
-            is_swelling: e.detail.value
-        })
-    },
-    onIs_feverChange(e) {
-        this.setData({
-            is_fever: e.detail.value
-        })
-    },
-    onIs_painChange(e) {
-        this.setData({
-            is_pain: e.detail.value
-        })
-    },
-    onIs_sinusChange(e) {
-        this.setData({
-            is_sinus: e.detail.value
-        })
-    },
-    // -------- 基本情况 end -------- //
-
-    on3StateChange(state, stateParam, stateValueParam) {
-        if (state == 0) {
-            this.setData({
-                [stateParam]: 1,
-                [stateValueParam]: "pencil"
-            })
-        } else if (state == 1) {
-            this.setData({
-                [stateParam]: 2,
-                [stateValueParam]: "clock-o"
-            })
-        } else if (state == 2) {
-            this.setData({
-                [stateParam]: 0,
-                [stateValueParam]: "ban"
-            })
-        }
-    },
-    on2StateChange(state, stateParam, stateValueParam) {
-        if (state == 0) {
-            this.setData({
-                [stateParam]: 1,
-                [stateValueParam]: "pencil"
-            })
-        } else if (state == 1) {
-            this.setData({
-                [stateParam]: 0,
-                [stateValueParam]: "ban"
-            })
-        }
-    },
-
-    // -------- 检查化验 begin -------- //
     onCheckDelaySwitchChange: function(e) {
         this.setData({
             assay_check: e.detail.value
         });
         let state = this.data.assay_check ? 2 : 1
         this.setData({
+            esr: '',
             esr_state: state,
+            crp: '',
             crp_state: state,
+            conver_crp: '',
+            il6: '',
             il6_state: state,
+            dimer: '',
             dimer_state: state,
+            fibrinogen: '',
             fibrinogen_state: state,
+            joint_fluid_desc: '',
+            joint_fluid_desc_pic: [],
             joint_fluid_desc_state: state,
+            rinse_fluid_volume: '',
             rinse_fluid_volume_state: state,
+            rinse_lavage_volume: '',
             rinse_lavage_volume_state: state,
+            le_testpaper_stoste: 0,
+            le_testpaper_stoste_pic: [],
             le_testpaper_stoste_state: state,
+            le_testpaper_centrifugal: 0,
+            le_testpaper_centrifugal_pic: [],
             le_testpaper_centrifugal_state: state,
+            joint_fluid_wbc: '',
             joint_fluid_wbc_state: state,
+            pmn: '',
             pmn_state: state,
+            sious_throat_swabs1: '',
+            sious_throat_swabs1_pic: [],
             sious_throat_swabs1_state: state,
+            sious_throat_swabs2: '',
+            sious_throat_swabs2_pic: [],
             sious_throat_swabs2_state: state,
+            sious_throat_swabs3: '',
+            sious_throat_swabs3_pic: [],
             sious_throat_swabs3_state: state,
+            culture_type: 0,
             culture_type_state: state,
+            culture_bottle_fluid_volume: '',
             culture_bottle_fluid_volume_state: state,
+            aerobic_result: '',
             aerobic_result_state: state,
+            anaerobic_result: '',
             anaerobic_result_state: state,
+            ngs_type: 0,
             ngs_type_state: state,
+            ngs_fluid_volume: '',
             ngs_fluid_volume_state: state,
+            ngs_result: '',
             ngs_result_state: state,
+            other_check: '',
             other_check_state: state,
         })
     },
-    onEsrInput: function(e) {
-        this.setData({
-            esr: e.detail.value
-        });
-    },
-    onEsrStateChange(e) {
-        let state = e.currentTarget.dataset.state
-        this.on3StateChange(state, "esr_state", "esr_state_value")
-    },
-    onCrpInput: function(e) {
-        this.setData({
-            crp: e.detail.value,
-            conver_crp: e.detail.value * 10
-        });
-    },
-    onCrpStateChange(e) {
-        let state = e.currentTarget.dataset.state
-        this.on3StateChange(state, "crp_state", "crp_state_value")
-    },
-    onIl6Input: function(e) {
-        this.setData({
-            il6: e.detail.value
-        });
-    },
-    onIl6StateChange(e) {
-        let state = e.currentTarget.dataset.state
-        this.on3StateChange(state, "il6_state", "il6_state_value")
-    },
-    onDimerInput: function(e) {
-        this.setData({
-            dimer: e.detail.value
-        });
-    },
-    onDimerStateChange(e) {
-        let state = e.currentTarget.dataset.state
-        this.on3StateChange(state, "dimer_state", "dimer_state_value")
-    },
-    onFibrinogenInput: function(e) {
-        this.setData({
-            fibrinogen: e.detail.value
-        });
-    },
-    onFibrinogenStateChange(e) {
-        let state = e.currentTarget.dataset.state
-        this.on3StateChange(state, "fibrinogen_state", "fibrinogen_state_value")
-    },
-    onJoint_fluid_descInput: function(e) {
-        this.setData({
-            joint_fluid_desc: e.detail.value
-        });
-    },
-    onRinse_fluid_volumeInput: function(e) {
-        this.setData({
-            rinse_fluid_volume: e.detail.value
-        });
-    },
-    onRinse_lavage_volumeInput: function(e) {
-        this.setData({
-            rinse_lavage_volume: e.detail.value
-        });
-    },
-    onLe_testpaper_stosteChange: function(e) {
-        this.setData({
-            le_testpaper_stoste: e.detail.value,
-        });
-    },
-    onLe_testpaper_centrifugalChange: function(e) {
-        this.setData({
-            le_testpaper_centrifugal: e.detail.value,
-        });
-    },
-    onJoint_fluid_wbcInput: function(e) {
-        this.setData({
-            joint_fluid_wbc: e.detail.value
-        });
-    },
-    onJoint_fluid_wbcStateChange(e) {
-        let state = e.currentTarget.dataset.state
-        this.on3StateChange(state, "joint_fluid_wbc_state", "joint_fluid_wbc_state_value")
-    },
-    onPmnInput: function(e) {
-        this.setData({
-            pmn: e.detail.value
-        });
-    },
-    onPmnStateChange(e) {
-        let state = e.currentTarget.dataset.state
-        this.on3StateChange(state, "pmn_state", "pmn_state_value")
-    },
-    onSious_throat_swabs1Input: function(e) {
-        this.setData({
-            sious_throat_swabs1: e.detail.value
-        });
-    },
-    onSious_throat_swabs1StateChange(e) {
-        let state = e.currentTarget.dataset.state
-        this.on3StateChange(state, "sious_throat_swabs1_state", "sious_throat_swabs1_state_value")
-    },
-    onSious_throat_swabs2Input: function(e) {
-        this.setData({
-            sious_throat_swabs2: e.detail.value
-        });
-    },
-    onSious_throat_swabs2StateChange(e) {
-        let state = e.currentTarget.dataset.state
-        this.on3StateChange(state, "sious_throat_swabs2_state", "sious_throat_swabs2_state_value")
-    },
-    onSious_throat_swabs3Input: function(e) {
-        this.setData({
-            sious_throat_swabs3: e.detail.value
-        });
-    },
-    onSious_throat_swabs3StateChange(e) {
-        let state = e.currentTarget.dataset.state
-        this.on3StateChange(state, "sious_throat_swabs3_state", "sious_throat_swabs3_state_value")
-    },
-    onCulture_typeChange: function(e) {
-        this.setData({
-            culture_type: e.detail.value,
-        });
-    },
-    onCulture_bottle_fluid_volumeInput: function(e) {
-        this.setData({
-            culture_bottle_fluid_volume: e.detail.value
-        });
-    },
-    onCulture_bottle_fluid_volumeStateChange(e) {
-        let state = e.currentTarget.dataset.state
-        this.on2StateChange(state, "culture_bottle_fluid_volume_state", "culture_bottle_fluid_volume_state_value")
-    },
-    onAerobic_resultInput: function(e) {
-        this.setData({
-            aerobic_result: e.detail.value
-        });
-    },
-    onAerobic_resultStateChange(e) {
-        let state = e.currentTarget.dataset.state
-        this.on3StateChange(state, "aerobic_result_state", "aerobic_result_state_value")
-    },
-    onAnaerobic_resultInput: function(e) {
-        this.setData({
-            anaerobic_result: e.detail.value
-        });
-    },
-    onAnaerobic_resultStateChange(e) {
-        let state = e.currentTarget.dataset.state
-        this.on3StateChange(state, "anaerobic_result_state", "anaerobic_result_state_value")
-    },
-    onNgs_typeChange: function(e) {
-        this.setData({
-            ngs_type: e.detail.value,
-        });
-    },
-    onNgs_fluid_volumeInput: function(e) {
-        this.setData({
-            ngs_fluid_volume: e.detail.value
-        });
-    },
-    onNgs_fluid_volumeStateChange(e) {
-        let state = e.currentTarget.dataset.state
-        this.on2StateChange(state, "ngs_fluid_volume_state", "ngs_fluid_volume_state_value")
-    },
-    onNgs_resultInput: function(e) {
-        this.setData({
-            ngs_result: e.detail.value
-        });
-    },
-    onNgs_resultStateChange(e) {
-        let state = e.currentTarget.dataset.state
-        this.on2StateChange(state, "ngs_result_state", "ngs_result_state_value")
-    },
-    onOther_checkInput: function(e) {
-        this.setData({
-            other_check: e.detail.value
-        });
-    },
-    // -------- 检查化验 begin -------- //
 
-    // -------- 穿刺小结 begin -------- //
     onPuncture_summarySwitchChange: function(e) {
         this.setData({
             puncture_summary: e.detail.value
@@ -499,31 +268,105 @@ Page({
 
         let state = this.data.puncture_summary ? 2 : 1
         this.setData({
+            present_result: 0,
             present_result_state: state,
+            thistime_result: '',
             thistime_result_state: state,
+            is_remain_sample: 0,
             is_remain_sample_state: state,
         })
     },
-    onPresent_resultChange: function(e) {
+
+    onPickerChange(e) {
+        let type = e.currentTarget.dataset.type
         this.setData({
-            present_result: e.detail.value
-        });
+            [type]: parseInt(e.detail.value)
+        })
     },
-    onPresent_resultStateChange(e) {
+    onDateChange(e) {
+        let type = e.currentTarget.dataset.type
+        this.setData({
+            [type]: e.detail.value
+        })
+    },
+    onInput(e) {
+        let type = e.currentTarget.dataset.type
+        if (type == "crp") {
+            this.setData({
+                conver_crp: e.detail.value * 10
+            })
+        }
+        this.setData({
+            [type]: e.detail.value
+        })
+    },
+    on3StateChange(e) {
         let state = e.currentTarget.dataset.state
-        this.on3StateChange(state, "present_result_state", "present_result_state_value")
+        let type = e.currentTarget.dataset.type
+        let style = e.currentTarget.dataset.style
+        if (state == 0) {
+            this.setData({
+                [type]: 1,
+                [type + "_value"]: "pencil"
+            })
+        } else if (state == 1) {
+            this.setData({
+                [type]: 2,
+                [type + "_value"]: "clock-o"
+            })
+            this.setDefaultValue(type, style)
+        } else if (state == 2) {
+            this.setData({
+                [type]: 0,
+                [type + "_value"]: "ban"
+            })
+            this.setDefaultValue(type, style)
+        }
     },
-    onThistime_resultInput(e) {
+    on2StateChange(e) {
+        let state = e.currentTarget.dataset.state
+        let type = e.currentTarget.dataset.type
+        let style = e.currentTarget.dataset.style
+        if (state == 0) {
+            this.setData({
+                [type]: 1,
+                [type + "_value"]: "pencil"
+            })
+        } else if (state == 1) {
+            this.setData({
+                [type]: 0,
+                [type + "_value"]: "ban"
+            })
+            this.setDefaultValue(type, style)
+        }
+    },
+    setDefaultValue(type, style) {
+        let param = type.replace("_state", "")
+        if (style == "input") {
+            this.setData({
+                [param]: ''
+            })
+        } else if (style == "picker") {
+            this.setData({
+                [param]: 0
+            })
+        } else if (style == "input_pic") {
+            this.setData({
+                [param]: '',
+                [param + '_pic']: []
+            })
+        } else if (style == "pic") {
+            this.setData({
+                [param]: []
+            })
+        }
+    },
+    onRadioChange(e) {
+        let type = e.currentTarget.dataset.type
         this.setData({
-            thistime_result: e.detail.value
-        });
+            [type]: e.detail.value
+        })
     },
-    onIs_remain_sampleChange: function(e) {
-        this.setData({
-            is_remain_sample: e.detail.value
-        });
-    },
-    // -------- 穿刺小结 begin -------- //
 
     // 标本存放情况
     onSpecimenDesc: function(e) {
@@ -1019,23 +862,7 @@ Page({
                 modalName: e.currentTarget.dataset.target,
                 imageType: e.currentTarget.dataset.imgtype
             });
-            if (that.data.imageType == "joint_fluid_desc") {
-                that.assignPic(that.data.joint_fluid_desc_pics)
-            } else if (that.data.imageType == "le_testpaper_stoste") {
-                that.assignPic(that.data.le_testpaper_stoste_pics)
-            } else if (that.data.imageType == "le_testpaper_centrifugal") {
-                that.assignPic(that.data.le_testpaper_centrifugal_pics)
-            } else if (that.data.imageType == "sious_throat_swabs1") {
-                that.assignPic(that.data.sious_throat_swabs1_pic)
-            } else if (that.data.imageType == "sious_throat_swabs2") {
-                that.assignPic(that.data.sious_throat_swabs2_pic)
-            } else if (that.data.imageType == "sious_throat_swabs3") {
-                that.assignPic(that.data.sious_throat_swabs3_pic)
-            } else if (that.data.imageType == "aerobic_result") {
-                that.assignPic(that.data.aerobic_result_pic)
-            } else if (that.data.imageType == "anaerobic_result") {
-                that.assignPic(that.data.anaerobic_result_pic)
-            }
+            that.assignPic(that.data[that.data.imageType])
         } else {
             this.setData({
                 modalName: e,
@@ -1046,9 +873,9 @@ Page({
 
     assignPic(pics) {
         this.setData({
-            pic1: pics[0] ? pics[0].pic : "",
-            pic2: pics[1] ? pics[1].pic : "",
-            pic3: pics[2] ? pics[2].pic : ""
+            pic1: pics[0] ? pics[0].pic1 : "",
+            pic2: pics[1] ? pics[1].pic2 : "",
+            pic3: pics[2] ? pics[2].pic3 : ""
         })
     },
 
@@ -1177,25 +1004,10 @@ Page({
 
     setImage(index, img, extra) {
         let that = this
-        if (that.data.imageType == "joint_fluid_desc") {
-            that.data.joint_fluid_desc_pics[index] = img
-        } else if (that.data.imageType == "le_testpaper_stoste") {
-            that.data.le_testpaper_stoste_pics[index] = img
-        } else if (that.data.imageType == "le_testpaper_centrifugal") {
-            that.data.le_testpaper_centrifugal_pics[index] = img
-        } else if (that.data.imageType == "sious_throat_swabs1") {
-            that.data.sious_throat_swabs1_pic[index] = img
-        } else if (that.data.imageType == "sious_throat_swabs2") {
-            that.data.sious_throat_swabs2_pic[index] = img
-        } else if (that.data.imageType == "sious_throat_swabs3") {
-            that.data.sious_throat_swabs3_pic[index] = img
-        } else if (that.data.imageType == "aerobic_result") {
-            that.data.aerobic_result_pic[index] = img
-        } else if (that.data.imageType == "anaerobic_result") {
-            that.data.anaerobic_result_pic[index] = img
-        }
         if (extra) {
             that.data.exterior_pics[index] = img
+        } else {
+            that.data[that.data.imageType][index] = img
         }
     },
 
@@ -1242,25 +1054,10 @@ Page({
     },
     removePic(index, extra) {
         let that = this
-        if (that.data.imageType == "joint_fluid_desc") {
-            that.data.joint_fluid_desc_pics[index] = null
-        } else if (that.data.imageType == "le_testpaper_stoste") {
-            that.data.le_testpaper_stoste_pics[index] = null
-        } else if (that.data.imageType == "le_testpaper_centrifugal") {
-            that.data.le_testpaper_centrifugal_pics[index] = null
-        } else if (that.data.imageType == "sious_throat_swabs1") {
-            that.data.sious_throat_swabs1_pic[index] = null
-        } else if (that.data.imageType == "sious_throat_swabs2") {
-            that.data.sious_throat_swabs2_pic[index] = null
-        } else if (that.data.imageType == "sious_throat_swabs3") {
-            that.data.sious_throat_swabs3_pic[index] = null
-        } else if (that.data.imageType == "aerobic_result") {
-            that.data.aerobic_result_pic[index] = null
-        } else if (that.data.imageType == "anaerobic_result") {
-            that.data.anaerobic_result_pic[index] = null
-        }
         if (extra) {
             that.data.exterior_pics[index] = null
+        } else {
+            that.data[that.data.imageType][index] = null
         }
     },
     // -------- 图片 end  ---------- //

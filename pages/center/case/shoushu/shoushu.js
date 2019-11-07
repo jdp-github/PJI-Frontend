@@ -282,40 +282,40 @@ Page({
             pmn_state: state,
             neutrophil: 0,
             neutrophil_state: state,
-            tissue_culture1: 0,
+            tissue_culture1: '',
             tissue_culture1_pic: [],
             tissue_culture1_state: state,
-            tissue_culture2: 0,
+            tissue_culture2: '',
             tissue_culture2_pic: [],
             tissue_culture2_state: state,
-            tissue_culture3: 0,
+            tissue_culture3: '',
             tissue_culture3_pic: [],
             tissue_culture3_state: state,
-            tissue_culture4: 0,
+            tissue_culture4: '',
             tissue_culture4_pic: [],
             tissue_culture4_state: state,
-            tissue_culture5: 0,
+            tissue_culture5: '',
             tissue_culture5_pic: [],
             tissue_culture5_state: state,
-            tissue_mngs: 0,
+            tissue_mngs: '',
             tissue_mngs_pic: [],
             tissue_mngs_state: state,
-            joint_aerobic_result: 0,
+            joint_aerobic_result: '',
             joint_aerobic_result_pic: [],
             joint_aerobic_result_state: state,
-            joint_anaerobic_result: 0,
+            joint_anaerobic_result: '',
             joint_anaerobic_result_pic: [],
             joint_anaerobic_result_state: state,
-            joint_mngs_result: 0,
+            joint_mngs_result: '',
             joint_mngs_result_pic: [],
             joint_mngs_result_state: state,
-            splitting_aerobic_result: 0,
+            splitting_aerobic_result: '',
             splitting_aerobic_result_pic: [],
             splitting_aerobic_result_state: state,
-            splitting_anaerobic_result: 0,
+            splitting_anaerobic_result: '',
             splitting_anaerobic_result_pic: [],
             splitting_anaerobic_result_state: state,
-            splitting_mngs_result: 0,
+            splitting_mngs_result: '',
             splitting_mngs_result_pic: [],
             splitting_mngs_result_state: state,
         })
@@ -343,7 +343,7 @@ Page({
             haemorrhage_volume_state: state,
             bone_cement_type: 0,
             bone_cement_type_state: state,
-            bone_cement_volume: 0,
+            bone_cement_volume: '',
             bone_cement_volume_state: state,
             data_pic: [],
             data_pic_state: state,
@@ -449,7 +449,7 @@ Page({
         } else if (style == "input_pic") {
             this.setData({
                 [param]: '',
-                [param_pic]: []
+                [param + '_pic']: []
             })
         } else if (style == "pic") {
             this.setData({
@@ -951,23 +951,6 @@ Page({
                 imageType: e.currentTarget.dataset.imgtype
             });
             that.assignPic(that.data[that.data.imageType])
-            // if (that.data.imageType == "joint_fluid_desc") {
-            //     that.assignPic(that.data.joint_fluid_desc_pics)
-            // } else if (that.data.imageType == "le_testpaper_stoste") {
-            //     that.assignPic(that.data.le_testpaper_stoste_pics)
-            // } else if (that.data.imageType == "le_testpaper_centrifugal") {
-            //     that.assignPic(that.data.le_testpaper_centrifugal_pics)
-            // } else if (that.data.imageType == "sious_throat_swabs1") {
-            //     that.assignPic(that.data.sious_throat_swabs1_pic)
-            // } else if (that.data.imageType == "sious_throat_swabs2") {
-            //     that.assignPic(that.data.sious_throat_swabs2_pic)
-            // } else if (that.data.imageType == "sious_throat_swabs3") {
-            //     that.assignPic(that.data.sious_throat_swabs3_pic)
-            // } else if (that.data.imageType == "aerobic_result") {
-            //     that.assignPic(that.data.aerobic_result_pic)
-            // } else if (that.data.imageType == "anaerobic_result") {
-            //     that.assignPic(that.data.anaerobic_result_pic)
-            // }
         } else {
             this.setData({
                 modalName: e,
@@ -978,9 +961,9 @@ Page({
 
     assignPic(pics) {
         this.setData({
-            pic1: pics[0] ? pics[0].pic : "",
-            pic2: pics[1] ? pics[1].pic : "",
-            pic3: pics[2] ? pics[2].pic : ""
+            pic1: pics[0] ? pics[0].pic1 : "",
+            pic2: pics[1] ? pics[1].pic2: "",
+            pic3: pics[2] ? pics[2].pic3 : ""
         })
     },
 
@@ -1114,24 +1097,6 @@ Page({
         } else {
             that.data[that.data.imageType][index] = img
         }
-        // if (that.data.imageType == "joint_fluid_desc") {
-        //     that.data.joint_fluid_desc_pics[index] = img
-        // } else if (that.data.imageType == "le_testpaper_stoste") {
-        //     that.data.le_testpaper_stoste_pics[index] = img
-        // } else if (that.data.imageType == "le_testpaper_centrifugal") {
-        //     that.data.le_testpaper_centrifugal_pics[index] = img
-        // } else if (that.data.imageType == "sious_throat_swabs1") {
-        //     that.data.sious_throat_swabs1_pic[index] = img
-        // } else if (that.data.imageType == "sious_throat_swabs2") {
-        //     that.data.sious_throat_swabs2_pic[index] = img
-        // } else if (that.data.imageType == "sious_throat_swabs3") {
-        //     that.data.sious_throat_swabs3_pic[index] = img
-        // } else if (that.data.imageType == "aerobic_result") {
-        //     that.data.aerobic_result_pic[index] = img
-        // } else if (that.data.imageType == "anaerobic_result") {
-        //     that.data.anaerobic_result_pic[index] = img
-        // }
-
     },
 
     onRemovePic: function(e) {
@@ -1177,26 +1142,10 @@ Page({
     },
     removePic(index, extra) {
         let that = this
-        that.data[that.data.imageType][index] = null
-        // if (that.data.imageType == "joint_fluid_desc") {
-        //     that.data.joint_fluid_desc_pics[index] = null
-        // } else if (that.data.imageType == "le_testpaper_stoste") {
-        //     that.data.le_testpaper_stoste_pics[index] = null
-        // } else if (that.data.imageType == "le_testpaper_centrifugal") {
-        //     that.data.le_testpaper_centrifugal_pics[index] = null
-        // } else if (that.data.imageType == "sious_throat_swabs1") {
-        //     that.data.sious_throat_swabs1_pic[index] = null
-        // } else if (that.data.imageType == "sious_throat_swabs2") {
-        //     that.data.sious_throat_swabs2_pic[index] = null
-        // } else if (that.data.imageType == "sious_throat_swabs3") {
-        //     that.data.sious_throat_swabs3_pic[index] = null
-        // } else if (that.data.imageType == "aerobic_result") {
-        //     that.data.aerobic_result_pic[index] = null
-        // } else if (that.data.imageType == "anaerobic_result") {
-        //     that.data.anaerobic_result_pic[index] = null
-        // }
         if (extra) {
             that.data.exterior_pics[index] = null
+        } else {
+            that.data[that.data.imageType][index] = null
         }
     },
     // -------- 图片 end  ---------- //

@@ -29,7 +29,7 @@
         <button class='cu-btn bg-red shadow' bindtap="onPuncture">
             <i class="fa fa-plus" style="margin-right:5rpx"></i>穿刺
         </button>
-        <button class='cu-btn bg-red shadow' bindtap="onAddCase">
+        <button class='cu-btn bg-red shadow' bindtap="onShouShu">
             <i class="fa fa-stethoscope" style="margin-right:5rpx"></i>手术
         </button>
         <button class='cu-btn bg-red shadow' bindtap="onAddCase">

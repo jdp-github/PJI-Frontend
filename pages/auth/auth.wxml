@@ -11,13 +11,13 @@
 </view>
 <view class='padding-xl'>
     <view class='basis-xs margin-xs padding-sm radius'>
-        <button class='cu-btn  bg-green shadow lg block' data-type="login" open-type="getUserInfo"
+        <button class='cu-btn  bg-red shadow lg block' data-type="login" open-type="getUserInfo"
                 bindgetuserinfo="onGetUserInfo">
             微信登录
         </button>
     </view>
     <view class='basis-xs margin-xs padding-sm radius'>
-        <button class='cu-btn line-green shadow lg block' data-type="register" open-type="getUserInfo"
+        <button class='cu-btn line-red shadow lg block' data-type="register" open-type="getUserInfo"
                 bindgetuserinfo="onGetUserInfo">
             注册申请
         </button>

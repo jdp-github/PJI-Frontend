@@ -1,6 +1,6 @@
 <view class='box-bottom'>
     <view class="cu-bar tabbar bg-white">
-        <view class="action text-{{selected == 0 ? 'green':'gray'}}" bindtap="navigateToCenter">
+        <view class="action text-{{selected == 0 ? 'red':'gray'}}" bindtap="navigateToCenter">
             <view class='icon-homefill'></view> 中心
         </view>
         <!-- <view class="action text-{{selected === 1 ? 'green':'gray'}}">
@@ -16,7 +16,7 @@
             </view>
             客服
         </button>-->
-        <view class="action text-{{selected == 1 ? 'green':'gray'}}" bindtap="navigateToPerson">
+        <view class="action text-{{selected == 1 ? 'red':'gray'}}" bindtap="navigateToPerson">
             <view style="font-size:40rpx;margin-bottom:10rpx" class='icon-myfill'></view>
             我的
         </view>

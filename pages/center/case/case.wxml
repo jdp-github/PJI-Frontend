@@ -1,5 +1,5 @@
 <view class="cu-custom" style="height:{{CustomBar}}px;">
-    <view class="cu-bar fixed bg-gradual-green" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+    <view class="cu-bar fixed bg-gradual-red" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
         <navigator class='action border-custom' open-type="navigateBack" delta="1" hover-class="none" style='width:{{Custom.width}}px;height:{{Custom.height}}px;margin-left:calc(750rpx - {{Custom.right}}px)'>
             <text class='icon-back'></text>
             <text class='icon-homefill'></text>
@@ -13,7 +13,7 @@
         <input type="text" placeholder="搜索病厉、名称、关键字" confirm-type="search" value="{{searchValue}}" bindinput="onSearchChange"></input>
     </view>
     <view class='action'>
-        <button class='cu-btn bg-green shadow-blur round' bindtap="onSearch">搜索</button>
+        <button class='cu-btn bg-red shadow-blur round' bindtap="onSearch">搜索</button>
     </view>
 </view>
 <!-- 筛选 -->
@@ -47,12 +47,12 @@
     <view class="cu-list menu menu-avatar">
         <view style='display:flex;flex-direction:row'>
             <view class="flex-sub">
-                <button class='cu-btn bg-green shadow margin-btn block' bindtap="onAddCase">
+                <button class='cu-btn bg-red shadow margin-btn block' bindtap="onAddCase">
                     患者建档
                 </button>
             </view>
             <view class="flex-sub">
-                <button class='cu-btn bg-green shadow margin-btn block' bindtap="onRefresh">
+                <button class='cu-btn bg-red shadow margin-btn block' bindtap="onRefresh">
                     刷新列表
                 </button>
             </view>
@@ -119,8 +119,8 @@
     </view>
 </scroll-view>
 <view class='load-progress {{loadProgress!=0?"show":"hide"}}' style="top:{{CustomBar}}px;">
-    <view class='load-progress-bar bg-green' style="transform: translate3d(-{{100-loadProgress}}%, 0px, 0px);"></view>
-    <view class='load-progress-spinner text-green'></view>
+    <view class='load-progress-bar bg-red' style="transform: translate3d(-{{100-loadProgress}}%, 0px, 0px);"></view>
+    <view class='load-progress-spinner text-red'></view>
 </view>
 <view class='cu-load load-modal' wx:if="{{loadModal}}">
     <view class='gray-text'>处理中...</view>
@@ -163,8 +163,8 @@
         </view>
         <view class="cu-bar bg-white justify-end">
             <view class='action'>
-                <button class='cu-btn line-green text-green' bindtap='hideModal'>取消</button>
-                <button class='cu-btn bg-green margin-left-15' bindtap='hideModal' bindtap="deleCase">确定</button>
+                <button class='cu-btn line-red text-red' bindtap='hideModal'>取消</button>
+                <button class='cu-btn bg-red margin-left-15' bindtap='hideModal' bindtap="deleCase">确定</button>
             </view>
         </view>
     </view>
@@ -206,8 +206,8 @@
         </view>
         <view class="cu-bar bg-white justify-end">
             <view class='action'>
-                <button class='cu-btn bg-blue margin-left' style='margin-right:10rpx' bindtap="onSubmitAdd">确定</button>
-                <button class='cu-btn line-blue text-blue' bindtap='onHideAdd' style='margin-left:10rpx'>取消</button>
+                <button class='cu-btn bg-red margin-left' style='margin-right:10rpx' bindtap="onSubmitAdd">确定</button>
+                <button class='cu-btn line-red text-red' bindtap='onHideAdd' style='margin-left:10rpx'>取消</button>
             </view>
         </view>
     </view>

@@ -318,7 +318,10 @@ Page({
     },
 
     onRefresh: function(e) {
-        this.initData()
+        // this.initData()
+        wx.navigateTo({
+            url: '../case/timeline/timeline?centerId=' + this.data.centerId + "&centerName=" + this.data.centerName + "&case_id="
+        });
     },
 
     // ============ 事件 end ============ //
