@@ -19,11 +19,8 @@ Page({
         // -------- modal end ------------- //
 
         // -------- 公用信息 begin -------- //
-        centerId: '',
-        centerName: '',
-        caseId: '',
-        isCreate: false,
         isEdit: false,
+        caseId: '',
         caseInfo: {},
         addAvatar: '',
         updateAvatarArr: [],
@@ -32,10 +29,8 @@ Page({
 
         name: '',
         caseNO: "",
-        side: 0,
-        sidePicker: ['请选择', '左侧', '右侧'],
-        part: 0,
-        partPicker: ['请选择', '髋', '膝'],
+        side: '',
+        part: '',
         createDate: util.getNowFormatDate(),
         sex: 0,
         sexPicker: ['请选择', '男', '女'],
@@ -70,29 +65,29 @@ Page({
         // 本次发病可能诱因
         this_time_cause: '',
         // 弹出框
-        is_rheumatism: 0,
-        is_rheumatoid: 1,
-        is_as: 1,
-        is_spa: 1,
-        is_psa: 1,
-        is_gout: 1,
-        is_cancer: 0,
-        cure_state: 1,
+        is_rheumatism: '',
+        is_rheumatoid: '',
+        is_as: '',
+        is_spa: '',
+        is_psa: '',
+        is_gout: '',
+        is_cancer: '',
+        cure_state: '',
         radiotherapy: 0,
         radiotherapy_picker: ['请选择', '1月内', '3月内', '半年内', '1年内', '1年以上'],
         chemotherapy: 0,
-        glycuresis: 1,
-        hypertension: 1,
-        cvd: 1,
-        chd: 1,
-        ledvt: 1,
-        pud: 1,
-        copd: 1,
-        abnormal_heart: 1,
-        abnormal_liver: 1,
-        abnormal_renal: 1,
-        abnormal_thyroid: 1,
-        anemia: 1,
+        glycuresis: '',
+        hypertension: '',
+        cvd: '',
+        chd: '',
+        ledvt: '',
+        pud: '',
+        copd: '',
+        abnormal_heart: '',
+        abnormal_liver: '',
+        abnormal_renal: '',
+        abnormal_thyroid: '',
+        anemia: '',
         is_smoke: 0,
         is_drink: 0,
         is_drink_picker: ['请选择', '少量', '中量', '大量', '已戒3月以上'],
@@ -102,26 +97,6 @@ Page({
     },
 
     // -------- 基本信息事件 begin -------- //
-    onNameInput: function(e) {
-        this.setData({
-            name: e.detail.value
-        });
-    },
-    onCaseNOInput: function(e) {
-        this.setData({
-            caseNO: e.detail.value
-        });
-    },
-    onSideChange(e) {
-        this.setData({
-            side: parseInt(e.detail.value),
-        });
-    },
-    onPartChange: function(e) {
-        this.setData({
-            part: parseInt(e.detail.value),
-        });
-    },
     onCreateDateChange: function(e) {
         this.setData({
             createDate: e.detail.value
@@ -335,23 +310,17 @@ Page({
     // -------- 模态对话框 end  -------- //
 
     onLoad: function(options) {
-        // this.loadProgress();
-        // var caseId = options.case_id;
-        // this.setData({
-        //     centerId: options.centerId ? options.centerId : '',
-        //     centerName: options.centerName ? options.centerName : '',
-        //     isAdmin: app.globalData.is_admin == '1',
-        //     caseId: caseId,
-        //     isCreate: caseId.length <= 0,
-        // });
-        // if (!this.data.isCreate) {
-        //     this.requestCaseInfo(caseId)
-        // } else {
-        //     this.setData({
-        //         addAvatar: app.globalData.avatarUrl
-        //     })
-        // }
-        // this.completeProgress();
+        this.loadProgress();
+        var caseId = options.case_id;
+        this.setData({
+            isAdmin: app.globalData.is_admin == '1',
+            caseId: caseId,
+        });
+        this.requestCaseInfo(caseId)
+        this.setData({
+            addAvatar: app.globalData.avatarUrl
+        })
+        this.completeProgress();
     },
 
     requestCaseInfo(caseId) {
@@ -545,14 +514,6 @@ Page({
     },
 
     isBasicValueRight() {
-        if (this.data.name.length <= 0) {
-            this.showToast("请填写姓名")
-            return false;
-        }
-        if (this.data.caseNO.length <= 0) {
-            this.showToast("请填写病历号")
-            return false;
-        }
         if (this.data.sex == 0) {
             this.showToast("请选择性别")
             return false;
@@ -577,16 +538,136 @@ Page({
             this.showToast("请填写联系电话1")
             return false;
         }
-        if (this.data.part == 0) {
-            this.showToast("请选择部位")
+        if (!this.data.tel2Disabled && this.data.tel2.length == 0) {
+            this.showToast("请填写联系电话2")
             return false;
         }
         if (this.data.type == 0) {
-            this.showToast("请选择类型")
+            this.showToast("请选择病例类型")
             return false;
         }
-        if (!this.data.tel2Disabled && this.data.tel2.length == 0) {
-            this.showToast("请填写联系电话2")
+        if (this.data.medical_history.length == 0) {
+            this.showToast("请填写简要病史")
+            return false;
+        }
+        if (this.data.first_displace_reason == 0) {
+            this.showToast("请选择初次置换原因")
+            return false;
+        }
+        if (this.data.is_hospital_operation == 0) {
+            this.showToast("请选择是否本院手术病例")
+            return false;
+        }
+        if (this.data.repair_count == 0) {
+            this.showToast("请选择已翻修次数")
+            return false;
+        }
+        if (this.data.this_time_cause.length == 0) {
+            this.showToast("请填写本次发病可能诱因")
+            return false;
+        }
+        if (this.data.is_rheumatism.length == 0) {
+            this.showToast("请选择风湿免疫性疾病")
+            return false;
+        }
+        if (this.data.is_rheumatoid.length == 0) {
+            this.showToast("请选择类风湿")
+            return false;
+        }
+        if (this.data.is_as.length == 0) {
+            this.showToast("请选择强直性脊柱炎")
+            return false;
+        }
+        if (this.data.is_spa.length == 0) {
+            this.showToast("请选择脊柱关节病")
+            return false;
+        }
+        if (this.data.is_psa.length == 0) {
+            this.showToast("请选择银屑病性关节炎")
+            return false;
+        }
+        if (this.data.is_gout.length == 0) {
+            this.showToast("请选择痛风")
+            return false;
+        }
+        if (this.data.is_cancer.length == 0) {
+            this.showToast("请选择恶性肿瘤病史")
+            return false;
+        }
+        if (this.data.cure_state.length == 0) {
+            this.showToast("请选择治愈情况")
+            return false;
+        }
+        if (this.data.radiotherapy == 0) {
+            this.showToast("请选择放疗病史")
+            return false;
+        }
+        if (this.data.chemotherapy.length == 0) {
+            this.showToast("请选择化疗病史")
+            return false;
+        }
+        if (this.data.glycuresis.length == 0) {
+            this.showToast("请选择糖尿病")
+            return false;
+        }
+        if (this.data.hypertension.length == 0) {
+            this.showToast("请选择高血压")
+            return false;
+        }
+        if (this.data.cvd.length == 0) {
+            this.showToast("请选择脑血管病")
+            return false;
+        }
+        if (this.data.chd.length == 0) {
+            this.showToast("请选择冠心病")
+            return false;
+        }
+        if (this.data.ledvt.length == 0) {
+            this.showToast("请选择下肢静脉血栓")
+            return false;
+        }
+        if (this.data.pud.length == 0) {
+            this.showToast("请选择消化性溃疡病")
+            return false;
+        }
+        if (this.data.copd.length == 0) {
+            this.showToast("请选择慢性肺阻病")
+            return false;
+        }
+        if (this.data.abnormal_heart.length == 0) {
+            this.showToast("请选择心功能异常")
+            return false;
+        }
+        if (this.data.abnormal_liver.length == 0) {
+            this.showToast("请选择肝功能异常")
+            return false;
+        }
+        if (this.data.abnormal_renal.length == 0) {
+            this.showToast("请选择肾功能异常")
+            return false;
+        }
+        if (this.data.abnormal_thyroid.length == 0) {
+            this.showToast("请选择甲状腺功能异常")
+            return false;
+        }
+        if (this.data.anemia.length == 0) {
+            this.showToast("请选择贫血")
+            return false;
+        }
+        if (this.data.is_smoke == 0) {
+            this.showToast("请选择吸烟史")
+            return false;
+        }
+        if (this.data.is_drink == 0) {
+            this.showToast("请选择饮酒史")
+            return false;
+        }
+        if (this.data.other_disease.length == 0) {
+            this.showToast("请填写其他疾病")
+            return false;
+        }
+        if (this.data.remark.length == 0) {
+            this.showToast("请填写备注")
             return false;
         }
 

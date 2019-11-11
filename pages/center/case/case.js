@@ -14,17 +14,18 @@ Page({
         Custom: app.globalData.Custom,
         hidden: true,
         isAdmin: false,
+
         searchValue: '',
-        startDate: '2018-12-25',
-        endDate: '2018-12-25',
-        stateIndex: "0",
+        startDate: util.getNowFormatDate(true),
+        endDate: util.getNowFormatDate(),
+        stateIndex: 0,
         statePicker: ["全部病例", '未审核', '已审核'],
         addCaseName: '',
         addCaseID: '',
         addCaseSideIndex: 0,
-        addCaseSidePicker: ['左侧', '右侧'],
+        addCaseSidePicker: ['请选择', '左侧', '右侧'],
         addCasePartIndex: 0,
-        addCasePartPicker: ['髋', '膝'],
+        addCasePartPicker: ['请选择', '髋', '膝'],
         caseList: [],
         selectedCase: {},
         errMsg: ''
@@ -36,20 +37,12 @@ Page({
             centerName: options.centerName,
             isAdmin: app.globalData.is_admin == '1'
         });
-        // this.initData()
+        this.initData()
     },
 
     initData() {
-        this.makeDate();
         this.loadProgress();
         this.requestCaseList(this.data.searchValue);
-    },
-
-    makeDate() {
-        this.setData({
-            startDate: util.getNowFormatDate(true),
-            endDate: util.getNowFormatDate()
-        })
     },
 
     requestCaseList: function(searchValue) {
@@ -61,7 +54,9 @@ Page({
                 openid: app.globalData.openid,
                 center_id: that.data.centerId,
                 keyword: searchValue,
-                sort: 1
+                start_time: new Date(that.data.startDate).getTime(),
+                end_time: new Date(that.data.endDate).getTime(),
+                state: that.data.stateIndex
             },
             header: {
                 'content-type': 'application/json'
@@ -71,23 +66,18 @@ Page({
                 if (res.data.data.code == constant.response_success) {
                     for (let i = 0, len = res.data.data.list.length; i < len; i++) {
                         let caseInfo = res.data.data.list[i];
-                        // 日期
-                        if (caseInfo.puncture_date == 0) {
-                            caseInfo.puncture_date = "暂无"
+                        // 建档日期
+                        if (caseInfo.create_time == 0) {
+                            caseInfo.create_time = "暂无"
                         } else {
-                            caseInfo.puncture_date = util.formatTime(caseInfo.puncture_date, 'Y-M-D');
+                            caseInfo.create_time = util.formatTime(caseInfo.create_time, 'Y-M-D');
                         }
-                        if (caseInfo.operation_date == 0) {
-                            caseInfo.operation_date = "暂无"
+                        // 末次要素
+                        if (caseInfo.last_element == 0) {
+                            caseInfo.last_element = "暂无"
                         } else {
-                            caseInfo.operation_date = util.formatTime(caseInfo.operation_date, 'Y-M-D')
+                            caseInfo.last_element = util.formatTime(caseInfo.last_element, 'Y-M-D')
                         }
-                        caseInfo.patient_name_prefix_letter = caseInfo.patient_name.substr(0, 1);
-
-                        // 进度
-                        caseInfo.baseStatValue = that.getStateValue(caseInfo.base_state)
-                        caseInfo.punctureStatValue = that.getStateValue(caseInfo.puncture_state)
-                        caseInfo.beinStatValue = that.getStateValue(caseInfo.bein_state)
                     }
 
                     that.setData({
@@ -105,20 +95,6 @@ Page({
         });
     },
 
-    getStateValue(state) {
-        var stateValue = ""
-        if (state == 0) {
-            stateValue = "未完成"
-        } else if (state == 1) {
-            stateValue = "已完成未审核"
-        } else if (state == 2) {
-            stateValue = "已审核"
-        }
-
-        return stateValue
-    },
-
-
     onAddCase: function(e) {
         this.setData({
             modalName: 'AddCase'
@@ -134,11 +110,44 @@ Page({
             this.showToast("请输入ID号")
             return
         }
-        wx.navigateTo({
-            url: '../case/base/base?centerId=' + this.data.centerId + "&centerName=" + this.data.centerName + "&case_id="
+        if (this.data.addCaseSideIndex == 0) {
+            this.showToast("请选择侧别")
+            return
+        }
+        if (this.data.addCasePartIndex == 0) {
+            this.showToast("请选择部位")
+            return
+        }
+        let that = this;
+        wx.request({
+            url: constant.basePath,
+            data: {
+                service: 'Case.CreateCase',
+                openid: app.globalData.openid,
+                patient_name: that.data.addCaseName,
+                case_no: that.data.addCaseID,
+                side: that.data.addCaseSideIndex,
+                part: that.data.addCasePartIndex,
+            },
+            header: {
+                'content-type': 'application/json'
+            },
+            success(res) {
+                console.log("Case.CreateCase:" + JSON.stringify(res));
+                if (res.data.data.code == constant.response_success) {
+                    wx.navigateTo({
+                        url: '../case/base/base?caseId=' + res.data.data.info.case_id
+                    });
+                } else {
+                    that.showModal("ErrModal", res.data.data.msg);
+                }
+            },
+            fail(res) {}
         });
+
         this.hideModal()
     },
+
     onHideAdd() {
         this.setData({
             modalName: null,
@@ -261,6 +270,7 @@ Page({
         this.setData({
             stateIndex: e.detail.value
         })
+        this.requestCaseList(this.data.searchValue);
     },
     onAddNameInput: function(e) {
         this.setData({
@@ -286,11 +296,13 @@ Page({
         this.setData({
             startDate: e.detail.value
         })
+        this.requestCaseList(this.data.searchValue);
     },
     EndDateChange(e) {
         this.setData({
             endDate: e.detail.value
         })
+        this.requestCaseList(this.data.searchValue);
     },
     ListTouchStart: function(e) {
         this.setData({

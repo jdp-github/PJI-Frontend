@@ -68,7 +68,7 @@
                             <view class="avatar-special bg-grey radius" style="display:flex;flex-direction:column;padding-top:10rpx;padding-bottom:10rpx">
                                 <view class="flex-sub" style="font-size:28rpx">{{item.patient_name}}</view>
                                 <view class="flex-sub" style="font-size:28rpx">ID:{{item.case_no}}</view>
-                                <view class="flex-sub" style="font-size:28rpx">左髋</view>
+                                <view class="flex-sub" style="font-size:28rpx">{{item.side_name}}</view>
                             </view>
                         </view>
 
@@ -78,9 +78,9 @@
                                 <div class="flex">
                                     <view class="flex-sub">
 
-                                        <view class="cu-tag sm round" style="font-size: 22rpx;background-color:#00A8F9;color:#fff;font-weight:bold;margin-left:10rpx;">要素审核:1/2</view>
-                                        <view class="cu-tag sm round" style="font-size: 22rpx;background-color:#FAADC7;color:#fff;font-weight:bold;margin-left:10rpx;">药物治疗:未结束</view>
-                                        <view class="cu-tag sm round" style="font-size: 22rpx;background-color:#FFC814;color:#fff;font-weight:bold;margin-left:10rpx;">标本取样:1次</view>
+                                        <view class="cu-tag sm round" style="font-size: 22rpx;background-color:#00A8F9;color:#fff;font-weight:bold;margin-left:10rpx;">要素审核:{{item.element}}</view>
+                                        <view class="cu-tag sm round" style="font-size: 22rpx;background-color:#FAADC7;color:#fff;font-weight:bold;margin-left:10rpx;">药物治疗:{{item.medication}}</view>
+                                        <view class="cu-tag sm round" style="font-size: 22rpx;background-color:#FFC814;color:#fff;font-weight:bold;margin-left:10rpx;">标本取样:{{item.sample}}次</view>
                                     </view>
                                 </div>
                             </view>
@@ -88,22 +88,22 @@
                             <view class="flex-sub text-small" style="margin-top:10rpx;margin-left:10rpx">
                                 <div class="flex">
                                     <view class="flex-sub">建档日期：
-                                        <view>2019-10-10</view>
+                                        <view>{{item.create_time}}</view>
                                     </view>
                                     <view class="flex-sub">末次要素：
-                                        <view>2019-10-10</view>
+                                        <view>{{item.last_element}}</view>
                                     </view>
-                                    <view class="flex-sub">主诊医生：
-                                        <view>赵振阳</view>
+                                    <view class="flex-sub">主诊医师：
+                                        <view>{{item.pro_doctor}}</view>
                                     </view>
                                 </div>
                             </view>
                             <!-- 第三行 -->
                             <view class="flex-sub text-small" style="margin-top:10rpx;margin-left:10rpx;">
                                 <div class="flex">
-                                    <view class="flex-sub">穿刺记录:2次</view>
-                                    <view class="flex-sub">手术记录:999次</view>
-                                    <view class="flex-sub">随访记录:999次</view>
+                                    <view class="flex-sub">穿刺记录:{{item.puncture}}次</view>
+                                    <view class="flex-sub">手术记录:{{item.operation}}次</view>
+                                    <view class="flex-sub">随访记录:{{item.follow}}次</view>
                                 </div>
                             </view>
                         </view>

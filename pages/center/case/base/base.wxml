@@ -61,29 +61,22 @@
                             <view class="title">所属中心</view>
                             <input placeholder="暂无所属中心" class='radius' name='input' value="{{centerName}}" disabled></input>
                         </view>
-                        <view class="cu-form-group {{!isCreate?'disabled':''}}">
+                        <view class="cu-form-group disabled">
                             <view class='title'>姓名</view>
-                            <input placeholder="请输入姓名" class='radius' bindinput="onNameInput" value="{{name}}" disabled='{{!isCreate}}'></input>
+                            <input placeholder="请输入姓名" class='radius' bindinput="onNameInput" value="{{name}}" disabled></input>
                         </view>
-                        <view class="cu-form-group {{!isCreate?'disabled':''}}">
+                        <view class="cu-form-group disabled">
                             <view class='title'>ID</view>
-                            <input placeholder="请输入病历号" class='radius' bindinput="onCaseNOInput" value="{{caseNO}}" disabled='{{!isCreate}}'></input>
+                            <input placeholder="请输入病历号" class='radius' bindinput="onCaseNOInput" value="{{caseNO}}" disabled></input>
                         </view>
-                        <view class="cu-form-group {{!isCreate?'disabled':''}}">
+                        <view class="cu-form-group disabled">
                             <view class='title'>侧别</view>
-                            <picker bindchange="onSideChange" value="{{side}}" range="{{sidePicker}}" disabled='{{!isCreate}}'>
-                                <view class="picker">
-                                    {{sidePicker[side]}}
-                                </view>
-                            </picker>
+                            <input placeholder="请输入病历号" class='radius' bindinput="onCaseNOInput" value="{{side}}" disabled></input>
+
                         </view>
-                        <view class="cu-form-group {{!isCreate?'disabled':''}}">
+                        <view class="cu-form-group disabled">
                             <view class='title'>部位</view>
-                            <picker bindchange="onPartChange" value="{{part}}" range="{{partPicker}}" disabled='{{!isCreate}}'>
-                                <view class="picker">
-                                    {{partPicker[part]}}
-                                </view>
-                            </picker>
+                            <input placeholder="请输入病历号" class='radius' bindinput="onCaseNOInput" value="{{part}}" disabled></input>
                         </view>
                         <view class="cu-form-group">
                             <view class='title'>建档日期</view>
@@ -205,13 +198,13 @@
             <!-- 底部按钮 -->
             <view class="btn-block bg-white shadow" hidden='{{isLook}}'>
                 <view class="flex margin-special">
-                    <button wx:if="{{isEdit || isCreate}}" class='cu-btn line-green shadow' style="margin-right: 15rpx;" form-type="submit" bindtap='submit' disabled='{{caseInfo.base_submit_button == 0}}'>
+                    <button wx:if="{{isEdit}}" class='cu-btn line-green shadow' style="margin-right: 15rpx;" form-type="submit" bindtap='submit' disabled='{{caseInfo.base_submit_button == 0}}'>
                         提交录入
                     </button>
                     <button wx:else class='cu-btn line-green shadow' style="margin-right: 15rpx;" form-type="submit" bindtap='onEditCase'>
                         编辑修改
                     </button>
-                    <button class='cu-btn bg-green shadow' style="margin-left: 15rpx;" form-type="submit" bindtap='verify' disabled='{{isCreate || caseInfo.approve_button == 2}}'>
+                    <button class='cu-btn bg-green shadow' style="margin-left: 15rpx;" form-type="submit" bindtap='verify' disabled='{{caseInfo.approve_button == 2}}'>
                         {{caseInfo.base.base_state != 2 ?"确认审核":"解除锁定"}}
                     </button>
                 </view>
@@ -260,7 +253,7 @@
             </view>
             <radio-group style="justify-content:flex-start;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="is_rheumatism">
                 <view style="margin-left:18rpx">
-                    <radio class='blue text-small' value='1'></radio> 有
+                    <radio class='blue text-small' value='1' checked="{{is_rheumatism ==1}}"></radio> 有
                 </view>
                 <view style="margin-left: 105rpx;">
                     <radio class='blue margin-left-sm text-small' value='0'></radio> 无
@@ -272,7 +265,7 @@
             </view>
             <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="is_rheumatoid">
                 <view>
-                    <radio class='blue text-small' value='1'></radio> 控制可
+                    <radio class='blue text-small' value='1' checked="{{is_rheumatoid ==1}}"></radio> 控制可
                 </view>
                 <view style="margin-left: 50rpx;">
                     <radio class='blue margin-left-sm text-small' value='2'></radio> 控制差
@@ -284,7 +277,7 @@
             </view>
             <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="is_as">
                 <view>
-                    <radio class='blue text-small' value='1'></radio> 控制可
+                    <radio class='blue text-small' value='1' checked="{{is_as ==1}}"></radio> 控制可
                 </view>
                 <view style="margin-left: 50rpx;">
                     <radio class='blue margin-left-sm text-small' value='2'></radio> 控制差
@@ -296,7 +289,7 @@
             </view>
             <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="is_spa">
                 <view>
-                    <radio class='blue text-small' value='1'></radio> 控制可
+                    <radio class='blue text-small' value='1' checked="{{is_spa ==1}}"></radio> 控制可
                 </view>
                 <view style="margin-left: 50rpx;">
                     <radio class='blue margin-left-sm text-small' value='2'></radio> 控制差
@@ -308,7 +301,7 @@
             </view>
             <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="is_psa">
                 <view>
-                    <radio class='blue text-small' value='1'></radio> 控制可
+                    <radio class='blue text-small' value='1' checked="{{is_psa ==1}}"></radio> 控制可
                 </view>
                 <view style="margin-left: 50rpx;">
                     <radio class='blue margin-left-sm text-small' value='2'></radio> 控制差
@@ -320,7 +313,7 @@
             </view>
             <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="is_gout">
                 <view>
-                    <radio class='blue text-small' value='1'></radio> 控制可
+                    <radio class='blue text-small' value='1' checked="{{is_gout ==1}}"></radio> 控制可
                 </view>
                 <view style="margin-left: 50rpx;">
                     <radio class='blue margin-left-sm text-small' value='2'></radio> 控制差
@@ -332,7 +325,7 @@
             </view>
             <radio-group style="justify-content:flex-start;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="is_cancer">
                 <view style="margin-left:18rpx">
-                    <radio class='blue text-small' value='1'></radio> 有
+                    <radio class='blue text-small' value='1' checked="{{is_cancer ==1}}"></radio> 有
                 </view>
                 <view style="margin-left: 105rpx;">
                     <radio class='blue margin-left-sm text-small' value='0'></radio> 无
@@ -344,7 +337,7 @@
             </view>
             <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="cure_state">
                 <view>
-                    <radio class='blue text-small' value='1'></radio> 控制可
+                    <radio class='blue text-small' value='1' checked="{{cure_state ==1}}"></radio> 控制可
                 </view>
                 <view style="margin-left: 50rpx;">
                     <radio class='blue margin-left-sm text-small' value='2'></radio> 控制差
@@ -374,7 +367,7 @@
             </view>
             <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="glycuresis">
                 <view>
-                    <radio class='blue text-small' value='1'></radio> 控制可
+                    <radio class='blue text-small' value='1' checked="{{glycuresis ==1}}"></radio> 控制可
                 </view>
                 <view style="margin-left: 50rpx;">
                     <radio class='blue margin-left-sm text-small' value='2'></radio> 控制差
@@ -386,7 +379,7 @@
             </view>
             <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="hypertension">
                 <view>
-                    <radio class='blue text-small' value='1'></radio> 控制可
+                    <radio class='blue text-small' value='1' checked="{{hypertension ==1}}"></radio> 控制可
                 </view>
                 <view style="margin-left: 50rpx;">
                     <radio class='blue margin-left-sm text-small' value='2'></radio> 控制差
@@ -398,7 +391,7 @@
             </view>
             <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="cvd">
                 <view>
-                    <radio class='blue text-small' value='1'></radio> 控制可
+                    <radio class='blue text-small' value='1' checked="{{cvd ==1}}"></radio> 控制可
                 </view>
                 <view style="margin-left: 50rpx;">
                     <radio class='blue margin-left-sm text-small' value='2'></radio> 控制差
@@ -410,7 +403,7 @@
             </view>
             <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="chd">
                 <view>
-                    <radio class='blue text-small' value='1'></radio> 控制可
+                    <radio class='blue text-small' value='1' checked="{{chd ==1}}"></radio> 控制可
                 </view>
                 <view style="margin-left: 50rpx;">
                     <radio class='blue margin-left-sm text-small' value='2'></radio> 控制差
@@ -422,7 +415,7 @@
             </view>
             <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="ledvt">
                 <view>
-                    <radio class='blue text-small' value='1'></radio> 控制可
+                    <radio class='blue text-small' value='1' checked="{{ledvt ==1}}"></radio> 控制可
                 </view>
                 <view style="margin-left: 50rpx;">
                     <radio class='blue margin-left-sm text-small' value='2'></radio> 控制差
@@ -434,7 +427,7 @@
             </view>
             <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="pud">
                 <view>
-                    <radio class='blue text-small' value='1'></radio> 控制可
+                    <radio class='blue text-small' value='1' checked="{{pud ==1}}"></radio> 控制可
                 </view>
                 <view style="margin-left: 50rpx;">
                     <radio class='blue margin-left-sm text-small' value='2'></radio> 控制差
@@ -446,10 +439,10 @@
             </view>
             <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="copd">
                 <view>
-                    <radio class='blue text-small' value='1'></radio> 轻度
+                    <radio class='blue text-small' value='1' checked="{{copd ==1}}"></radio> 轻度
                 </view>
                 <view>
-                    <radio class='blue margin-left-sm text-small' value='2'></radio> 中度
+                    <radio class='blue margin-left-sm text-small' value='2' checked="{{copd ==2}}"></radio> 中度
                 </view>
                 <view>
                     <radio class='blue margin-left-sm text-small' value='3'></radio> 重度
@@ -461,10 +454,10 @@
             </view>
             <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="abnormal_heart">
                 <view>
-                    <radio class='blue text-small' value='1'></radio> 轻度
+                    <radio class='blue text-small' value='1' checked="{{abnormal_heart ==1}}"></radio> 轻度
                 </view>
                 <view>
-                    <radio class='blue margin-left-sm text-small' value='2'></radio> 中度
+                    <radio class='blue margin-left-sm text-small' value='2' checked="{{abnormal_heart ==2}}"></radio> 中度
                 </view>
                 <view>
                     <radio class='blue margin-left-sm text-small' value='3'></radio> 重度
@@ -476,10 +469,10 @@
             </view>
             <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="abnormal_liver">
                 <view>
-                    <radio class='blue text-small' value='1'></radio> 轻度
+                    <radio class='blue text-small' value='1' checked="{{abnormal_liver ==1}}"></radio> 轻度
                 </view>
                 <view>
-                    <radio class='blue margin-left-sm text-small' value='2'></radio> 中度
+                    <radio class='blue margin-left-sm text-small' value='2' checked="{{abnormal_liver ==2}}"></radio> 中度
                 </view>
                 <view>
                     <radio class='blue margin-left-sm text-small' value='3'></radio> 重度
@@ -491,10 +484,10 @@
             </view>
             <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="abnormal_renal">
                 <view>
-                    <radio class='blue text-small' value='1'></radio> 轻度
+                    <radio class='blue text-small' value='1' checked="{{abnormal_renal ==1}}"></radio> 轻度
                 </view>
                 <view>
-                    <radio class='blue margin-left-sm text-small' value='2'></radio> 中度
+                    <radio class='blue margin-left-sm text-small' value='2' checked="{{abnormal_renal ==2}}"></radio> 中度
                 </view>
                 <view>
                     <radio class='blue margin-left-sm text-small' value='3'></radio> 重度
@@ -506,10 +499,10 @@
             </view>
             <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="abnormal_thyroid">
                 <view>
-                    <radio class='blue text-small' value='1'></radio> 轻度
+                    <radio class='blue text-small' value='1' checked="{{abnormal_thyroid ==1}}"></radio> 轻度
                 </view>
                 <view>
-                    <radio class='blue margin-left-sm text-small' value='2'></radio> 中度
+                    <radio class='blue margin-left-sm text-small' value='2' checked="{{abnormal_thyroid ==2}}"></radio> 中度
                 </view>
                 <view>
                     <radio class='blue margin-left-sm text-small' value='3'></radio> 重度
@@ -521,10 +514,10 @@
             </view>
             <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="anemia">
                 <view>
-                    <radio class='blue text-small' value='1'></radio> 轻度
+                    <radio class='blue text-small' value='1' checked="{{anemia ==1}}"></radio> 轻度
                 </view>
                 <view>
-                    <radio class='blue margin-left-sm text-small' value='2'></radio> 中度
+                    <radio class='blue margin-left-sm text-small' value='2' checked="{{anemia ==2}}"></radio> 中度
                 </view>
                 <view>
                     <radio class='blue margin-left-sm text-small' value='3'></radio> 重度

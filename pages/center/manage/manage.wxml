@@ -71,8 +71,8 @@
     <block wx:for="{{staffList}}" wx:key wx:for-index="key" wx:for-item="value">
         <view class='padding padding-top-xs padding-bottom-xs indexItem-{{key}}' id="indexes-{{key}}" data-index="{{key}}">{{key}}</view>
         <view class="cu-list menu menu-avatar no-padding">
-            <view style="display:flex;flex-direction:row;justify-content:flex-start;align-items:center;height:100%;padding-top:10px;padding-bottom:10px" class="cu-item {{modalName=='move-box-'+ item.staff_id?'move-cur':''}}" wx:for="{{value}}" wx:key="{{item.staff_id}}" bindtouchstart='ListTouchStart' bindtouchmove='ListTouchMove' bindtouchend='ListTouchEnd'
-                data-target="move-box-{{item.staff_id}}">
+            <view style="display:flex;flex-direction:row;justify-content:flex-start;align-items:center;height:100%;padding-top:10px;padding-bottom:10px" class="cu-item {{modalName=='move-box-'+ item.staff_id?'move-cur':''}}" wx:for="{{value}}" wx:key="{{item.staff_id}}"
+                bindtouchstart='ListTouchStart' bindtouchmove='ListTouchMove' bindtouchend='ListTouchEnd' data-target="move-box-{{item.staff_id}}">
                 <view class="cu-avatar round lg" style="background-image:url({{item.staff_avatar}});"></view>
                 <view style="display:flex;flex-direction:row;align-items:flex-end">
                     <view class="member-item-container">
@@ -80,16 +80,16 @@
                         <view class='text-gray text-sm'>{{item.role_name}}</view>
                     </view>
                     <view class="member-item-container">
-                        <view class='text-black text-sm'>患者建档:12</view>
-                        <view class='text-black text-sm'>随访录入:10</view>
+                        <view class='text-black text-sm'>患者建档:{{item.create_count}}</view>
+                        <view class='text-black text-sm'>随访录入:{{item.puncture_count}}</view>
                     </view>
                     <view class="member-item-container">
-                        <view class='text-black text-sm'>穿刺录入:13</view>
-                        <view class='text-black text-sm'>审核要素:190</view>
+                        <view class='text-black text-sm'>穿刺录入:{{item.operation_count}}</view>
+                        <view class='text-black text-sm'>审核要素:{{item.visit_count}}</view>
                     </view>
                     <view class="member-item-container">
-                        <view class='text-black text-sm'>手术录入:9</view>
-                        <view class='text-black text-sm'>标本存放:1</view>
+                        <view class='text-black text-sm'>手术录入:{{item.approve_count}}</view>
+                        <view class='text-black text-sm'>标本存放:{{item.sample_count}}</view>
                     </view>
                 </view>
                 <view class='move'>
