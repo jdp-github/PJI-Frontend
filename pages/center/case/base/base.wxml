@@ -63,20 +63,20 @@
                         </view>
                         <view class="cu-form-group disabled">
                             <view class='title'>姓名</view>
-                            <input placeholder="请输入姓名" class='radius' bindinput="onNameInput" value="{{name}}" disabled></input>
+                            <input class='radius' value="{{name}}" disabled></input>
                         </view>
                         <view class="cu-form-group disabled">
                             <view class='title'>ID</view>
-                            <input placeholder="请输入病历号" class='radius' bindinput="onCaseNOInput" value="{{caseNO}}" disabled></input>
+                            <input class='radius' value="{{caseNO}}" disabled></input>
                         </view>
                         <view class="cu-form-group disabled">
                             <view class='title'>侧别</view>
-                            <input placeholder="请输入病历号" class='radius' bindinput="onCaseNOInput" value="{{side}}" disabled></input>
+                            <input class='radius' value="{{sidePicker[side]}}" disabled></input>
 
                         </view>
                         <view class="cu-form-group disabled">
                             <view class='title'>部位</view>
-                            <input placeholder="请输入病历号" class='radius' bindinput="onCaseNOInput" value="{{part}}" disabled></input>
+                            <input class='radius' value="{{partPicker[part]}}" disabled></input>
                         </view>
                         <view class="cu-form-group">
                             <view class='title'>建档日期</view>
@@ -204,7 +204,7 @@
                     <button wx:else class='cu-btn line-green shadow' style="margin-right: 15rpx;" form-type="submit" bindtap="onSetCaseWrite">
                         编辑修改
                     </button>
-                    <button wx:if="{{!isCreate}}" class='cu-btn bg-green shadow' style="margin-left: 15rpx;" form-type="submit" bindtap='verify' disabled='{{isCreate || caseInfo.approve_button == 2}}'>
+                    <button class='cu-btn bg-green shadow' style="margin-left: 15rpx;" form-type="submit" bindtap='verify' disabled='{{isCreate || caseInfo.approve_button == 2}}'>
                         {{caseInfo.base.base_state != 2 ?"确认审核":"解除锁定"}}
                     </button>
                 </view>

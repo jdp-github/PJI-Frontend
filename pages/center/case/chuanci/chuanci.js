@@ -32,7 +32,7 @@ Page({
         centerId: '',
         centerName: '',
         caseId: '',
-        isCreateCase: '',
+        isCreate: false,
         isLook: false,
         caseInfo: {},
         addAvatar: '',
@@ -385,40 +385,28 @@ Page({
     },
 
     onLoad: function(options) {
-        // this.loadProgress();
-        // var caseId = options.case_id;
-        // this.setData({
-        //     centerId: options.centerId ? options.centerId : '',
-        //     centerName: options.centerName ? options.centerName : '',
-        //     isAdmin: app.globalData.is_admin == '1',
-        //     caseId: caseId,
-        //     isCreateCase: caseId.length <= 0,
-        //     isLook: options.isLook ? options.isLook : false
-        // });
+        this.loadProgress();
+        this.setData({
+            isAdmin: app.globalData.is_admin == '1',
+            isCreate: options.isCreate,
+            centerId: options.centerId ? options.centerId : '',
+            centerName: options.centerName ? options.centerName : '',
+            caseId: options.caseId,
+        });
 
-        // if (!this.data.isCreateCase) {
-        //     this.requestCaseInfo(caseId);
-        //     this.setData({
-        //         addAvatar: this.data.caseInfo.puncture.puncture_creator_avatar,
-        //         updateAvatarArr: this.makeUpdateAvatar(this.data.caseInfo.puncture.puncture_editor_list),
-        //         approveAvatar: this.data.caseInfo.puncture.puncture_auditor_avatar,
-        //     })
-        // } else {
-        //     this.setData({
-        //         addAvatar: app.globalData.avatarUrl
-        //     })
-        // }
-        // this.completeProgress();
+        this.requestCaseInfo();
+        this.completeProgress();
     },
 
-    requestCaseInfo(caseId) {
+    requestCaseInfo() {
         let that = this;
         wx.request({
             url: constant.basePath,
             data: {
                 service: 'Case.GetCaseInfo',
-                case_id: caseId,
-                openid: app.globalData.openid
+                case_id: that.data.caseId,
+                openid: app.globalData.openid,
+                type: 2
             },
             header: {
                 'content-type': 'application/json'
@@ -427,7 +415,7 @@ Page({
                 console.log("Case.GetCaseInfo:" + JSON.stringify(res))
                 that.hideLoading();
                 if (res.data.data.code == 0) {
-                    that.initViewByData(res.data.data)
+                    // that.initViewByData(res.data.data.info)
                 } else {
                     that.showModal("ErrModal", res.data.msg);
                 }
@@ -437,9 +425,13 @@ Page({
             }
         });
     },
+
     initViewByData(info) {
         this.setData({
-            caseInfo: info
+            caseInfo: info,
+            addAvatar: info.puncture.puncture_creator_avatar,
+            updateAvatarArr: this.makeUpdateAvatar(info.puncture.puncture_editor_list),
+            approveAvatar: info.puncture.puncture_auditor_avatar,
         });
 
         // 诊断性穿刺
@@ -610,85 +602,155 @@ Page({
     },
 
     isValueRight() {
-        if (!this.data.ccDateDisabled && this.data.chuangciDate == "请选择日期") {
-            this.showToast("请选择穿刺日期")
-            return false;
+        if (!this.data.base_info) {
+            if (this.data.puncture_date_state == 1 && this.data.puncture_date == "请选择日期") {
+                this.showToast("请选择穿刺日期")
+                return false;
+            }
+            if (!this.data.puncture_type_state == 1 && this.data.puncture_type == 0) {
+                this.showToast("请选择穿刺类型")
+                return false;
+            }
+            if (!this.data.puncture_desc_state == 1 && this.data.puncture_desc.length == 0) {
+                this.showToast("请填写简要病史")
+                return false;
+            }
+            if (!this.data.antibiotic_history_state == 1 && this.data.antibiotic_history == 0) {
+                this.showToast("请选择抗生素使用史")
+                return false;
+            }
+            if (!this.data.immuno_history_state == 1 && this.data.immuno_history == 0) {
+                this.showToast("请选择免疫抑制剂使用史")
+                return false;
+            }
+            if (this.data.is_heat.length == 0) {
+                this.showToast("请选择病状体征中的发热")
+                return false;
+            }
+            if (this.data.is_erythema.length == 0) {
+                this.showToast("请选择病状体征中的皮肤发红")
+                return false;
+            }
+            if (this.data.is_swelling.length == 0) {
+                this.showToast("请选择病状体征中的积液/肿胀")
+                return false;
+            }
+            if (this.data.is_fever.length == 0) {
+                this.showToast("请选择病状体征中的局部皮温增高")
+                return false;
+            }
+            if (this.data.is_pain.length == 0) {
+                this.showToast("请选择病状体征中的疼痛")
+                return false;
+            }
+            if (this.data.is_sinus.length == 0) {
+                this.showToast("请选择病状体征中的与假体相通的窦道")
+                return false;
+            }
         }
-        if (!this.data.ccDescribeDisabeld && this.data.ccDescribe.length == 0) {
-            this.showToast("请填写穿刺描述")
-            return false;
+        if (!this.data.assay_check) {
+            if (!this.data.esr_state == 1 && this.data.esr.length == 0) {
+                this.showToast("请填写ESR")
+                return false;
+            }
+            if (!this.data.crp_state == 1 && this.data.crp.length == 0) {
+                this.showToast("请填写CRP")
+                return false;
+            }
+            if (!this.data.il6_state == 1 && this.data.il6.length == 0) {
+                this.showToast("请填写IL-6")
+                return false;
+            }
+            if (!this.data.dimer_state == 1 && this.data.dimer.length == 0) {
+                this.showToast("请填写D-dimer")
+                return false;
+            }
+            if (!this.data.fibrinogen_state == 1 && this.data.fibrinogen.length == 0) {
+                this.showToast("请填写Fibrinogen")
+                return false;
+            }
+            if (this.data.joint_fluid_desc.length == 0) {
+                this.showToast("请填写关节液描述")
+                return false;
+            }
+            if (this.data.rinse_fluid_volume.length == 0) {
+                this.showToast("请填写抽出关节液总量")
+                return false;
+            }
+            if (this.data.le_testpaper_stoste == 0) {
+                this.showToast("请选择LE试纸（离心前）")
+                return false;
+            }
+            if (this.data.le_testpaper_centrifugal == 0) {
+                this.showToast("请选择LE试纸（离心后）")
+                return false;
+            }
+            if (!this.data.joint_fluid_wbc_state == 1 && this.data.joint_fluid_wbc.length == 0) {
+                this.showToast("请填写关节液WBC")
+                return false;
+            }
+            if (!this.data.pmn_state == 1 && this.data.pmn.length == 0) {
+                this.showToast("请填写PMN%")
+                return false;
+            }
+            if (!this.data.sious_throat_swabs1_state == 1 && this.data.sious_throat_swabs1.length == 0) {
+                this.showToast("请填写窦道咽拭子1")
+                return false;
+            }
+            if (!this.data.sious_throat_swabs2_state == 1 && this.data.sious_throat_swabs2.length == 0) {
+                this.showToast("请填写窦道咽拭子2")
+                return false;
+            }
+            if (!this.data.sious_throat_swabs3_state == 1 && this.data.sious_throat_swabs3.length == 0) {
+                this.showToast("请填写窦道咽拭子3")
+                return false;
+            }
+            if (this.data.culture_type == 0) {
+                this.showToast("请选择打入每个培养瓶液体性质")
+                return false;
+            }
+            if (!this.data.culture_bottle_fluid_volume_state == 1 && this.data.culture_bottle_fluid_volume.length == 0) {
+                this.showToast("请填写打入每个培养瓶液体量")
+                return false;
+            }
+            if (!this.data.aerobic_result_state == 1 && this.data.aerobic_result.length == 0) {
+                this.showToast("请填写本次需氧+真菌培养结果")
+                return false;
+            }
+            if (!this.data.anaerobic_result_state == 1 && this.data.anaerobic_result.length == 0) {
+                this.showToast("请填写本次厌氧+真菌培养结果")
+                return false;
+            }
+            if (this.data.ngs_type == 0) {
+                this.showToast("请选择送检NGS液体性质")
+                return false;
+            }
+            if (!this.data.ngs_fluid_volume_state == 1 && this.data.ngs_fluid_volume.length == 0) {
+                this.showToast("请填写送检NGS液体量")
+                return false;
+            }
+            if (!this.data.ngs_result_state == 1 && this.data.ngs_result.length == 0) {
+                this.showToast("请填写NGS结果")
+                return false;
+            }
+            if (this.data.other_check.length == 0) {
+                this.showToast("请填写其他检查")
+                return false;
+            }
         }
-        if (!this.data.ccgjyDisabled && this.data.ccgjy.length == 0) {
-            this.showToast("请填写抽出关节液总量")
-            return false;
-        }
-        if (!this.data.ccgxyDisabled && this.data.ccgxy.length == 0) {
-            this.showToast("请填写抽出灌洗液总量")
-            return false;
-        }
-        if (!this.data.leDisabled && this.data.leIndex == 0) {
-            this.showToast("请选择LE试纸(原液)")
-            return false;
-        }
-        if (!this.data.leAfterDisabled && this.data.leAfterIndex == 0) {
-            this.showToast("请选择LE试纸(离心后)")
-            return false;
-        }
-        if (!this.data.gjybxbDisabled && this.data.gjybxb.length == 0) {
-            this.showToast("请填写关节液白细胞计数")
-            return false;
-        }
-        if (!this.data.gjyzxDisabled && this.data.gjyzx.length == 0) {
-            this.showToast("请填写关节液中心粒细胞百分比")
-            return false;
-        }
-        if (!this.data.bcpysjDisabled && this.data.bcpysjIndex == 0) {
-            this.showToast("请选择本次培养送检类型")
-            return false;
-        }
-        if (!this.data.drgpypDisabled && this.data.drgpyp.length == 0) {
-            this.showToast("请填写打入各培养瓶量")
-            return false;
-        }
-        if (!this.data.bcxyResultDisabled && this.data.bcxyResult.length == 0) {
-            this.showToast("请填写本次需氧+真菌培养结果")
-            return false;
-        }
-        if (!this.data.bcxyLastDisabled && this.data.bcxyLast.length == 0) {
-            this.showToast("请填写本次需氧+真菌培养时长")
-            return false;
-        }
-        if (!this.data.bcyyResultDisabled && this.data.bcyyResult.length == 0) {
-            this.showToast("请填写本次厌氧培养结果")
-            return false;
-        }
-        if (!this.data.bcyyLastDisabled && this.data.bcyyLast.length == 0) {
-            this.showToast("请填写本次厌氧培养时长")
-            return false;
-        }
-        if (!this.data.mNGSTypeDisabled && this.data.mNGSTypeIndex == 0) {
-            this.showToast("请选择mNGS送检类型")
-            return false;
-        }
-        if (!this.data.mNGSResultDisabled && this.data.mNGSResult.length == 0) {
-            this.showToast("请填写关节液/冲洗液mNGS结果")
-            return false;
-        }
-        if (!this.data.sqSecondxyDisabled && this.data.sqSecondxy.length == 0) {
-            this.showToast("术前第2次穿刺需氧+真菌培养结果")
-            return false;
-        }
-        if (!this.data.sqSecondyyDisabled && this.data.sqSecondyy.length == 0) {
-            this.showToast("术前第2次穿刺厌氧培养结果")
-            return false;
-        }
-        if (!this.data.sqThirdxyDisabled && this.data.sqThirdxy.length == 0) {
-            this.showToast("术前第3次穿刺需氧+真菌培养结果")
-            return false;
-        }
-        if (!this.data.sqThirdyyDisabled && this.data.sqThirdyy.length == 0) {
-            this.showToast("术前第3次穿刺厌氧培养结果")
-            return false;
+        if (!this.data.puncture_summary) {
+            if (!this.data.present_result_state == 1 && this.data.present_result == 0) {
+                this.showToast("请选择目前诊断")
+                return false;
+            }
+            if (this.data.thistime_result.length == 0) {
+                this.showToast("请填写本次诊疗周期最终诊断")
+                return false;
+            }
+            if (this.data.is_remain_sample == 0) {
+                this.showToast("请选择是否留有标本")
+                return false;
+            }
         }
 
         return true

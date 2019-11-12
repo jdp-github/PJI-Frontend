@@ -17,6 +17,8 @@ Page({
 
         centerId: '',
         centerName: '',
+        caseId: '',
+        isShowErrBtn: false,
 
         searchValue: '',
         startDate: util.getNowFormatDate(true),
@@ -139,10 +141,13 @@ Page({
                 console.log("Case.CreateCase:" + JSON.stringify(res));
                 if (res.data.data.code == constant.response_success) {
                     wx.navigateTo({
-                        url: '../case/base/base?caseId=' + res.data.data.info.case_id + "&isCreate=" + true + "&centerName=" + that.data.centerName
+                        url: '../case/base/base?caseId=' + res.data.data.info.case_id + "&isCreate=" + true + "&centerId=" + that.data.centerId + "&centerName=" + that.data.centerName
                     });
                 } else {
                     that.showModal("ErrModal", res.data.data.msg);
+                    that.setData({
+                        caseId: res.data.data.info.case_id,
+                    })
                 }
             },
             fail(res) {}
@@ -150,6 +155,7 @@ Page({
 
         this.hideModal()
     },
+
 
     onHideAdd() {
         this.setData({
@@ -161,11 +167,18 @@ Page({
         });
     },
 
+    showExistCase(e) {
+        this.hideModal()
+        wx.navigateTo({
+            url: '../case/timeline/timeline?caseId=' + this.data.caseId + "&centerId=" + this.data.centerId + "&centerName=" + this.data.centerName + "&isLook=" + true
+        });
+    },
+
     // 查看
     onLookCase: function(e) {
         let caseInfo = e.currentTarget.dataset.case;
         wx.navigateTo({
-            url: '../../center/case/timeline/timeline?case_id=' + caseInfo.case_id + "&centerId=" + this.data.centerId + "&centerName=" + this.data.centerName + "&isLook=" + true
+            url: '../case/timeline/timeline?case_id=' + caseInfo.case_id + "&centerId=" + this.data.centerId + "&centerName=" + this.data.centerName + "&isLook=" + true
         });
     },
 

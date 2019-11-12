@@ -142,7 +142,9 @@
                 </view>
                 <view class='padding'>{{errMsg}}</view>
             </view>
+            <button wx:if="{{caseId.length>0}}" class='cu-btn bg-red shadow' bindtap='showExistCase'>查看</button>
         </view>
+
     </view>
 </view>
 <view class="cu-modal {{modalName=='DeleteCaseModal'?'show':''}}">

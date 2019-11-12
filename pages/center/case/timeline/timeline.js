@@ -16,10 +16,13 @@ Page({
         tabList: ["要素速览", "诊疗日历"],
         currTab: 0,
         scrollLeft: 0,
+
+        caseId: '',
     },
 
     onLoad: function(options) {
         this.setData({
+            caseId: options.caseId,
             centerId: options.centerId,
             centerName: options.centerName,
             isAdmin: app.globalData.is_admin == '1'
@@ -87,13 +90,13 @@ Page({
 
     onPuncture() {
         wx.navigateTo({
-            url: '../chuanci/chuanci?centerId=' + this.data.centerId + "&centerName=" + this.data.centerName + "&case_id="
+            url: '../chuanci/chuanci?centerId=' + this.data.centerId + "&centerName=" + this.data.centerName + "&caseId=" + this.data.caseId + "&isCreate=" + true
         });
     },
 
     onShouShu() {
         wx.navigateTo({
-            url: '../shoushu/shoushu?centerId=' + this.data.centerId + "&centerName=" + this.data.centerName + "&case_id="
+            url: '../shoushu/shoushu?centerId=' + this.data.centerId + "&centerName=" + this.data.centerName + "&caseId=" + this.data.caseId
         });
     },
 

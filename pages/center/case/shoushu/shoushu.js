@@ -29,10 +29,10 @@ Page({
         // -------- image begin ----------- //
 
         // -------- 公用信息 begin -------- //
+        isCreate: '',
         centerId: '',
         centerName: '',
         caseId: '',
-        isCreateCase: '',
         isLook: false,
         caseInfo: {},
         addAvatar: '',
@@ -473,30 +473,24 @@ Page({
     },
 
     onLoad: function(options) {
-        // this.loadProgress();
-        // var caseId = options.case_id;
-        // this.setData({
-        //     centerId: options.centerId ? options.centerId : '',
-        //     centerName: options.centerName ? options.centerName : '',
-        //     isAdmin: app.globalData.is_admin == '1',
-        //     caseId: caseId,
-        //     isCreateCase: caseId.length <= 0,
-        //     isLook: options.isLook ? options.isLook : false
-        // });
+        this.loadProgress();
+        var caseId = options.case_id;
+        this.setData({
+            isAdmin: app.globalData.is_admin == '1',
+            isCreate: options.isCreate,
+            centerId: options.centerId,
+            centerName: options.centerName,
+            caseId: caseId
+        });
 
-        // if (!this.data.isCreateCase) {
-        //     this.requestCaseInfo(caseId);
-        //     this.setData({
-        //         addAvatar: this.data.caseInfo.puncture.puncture_creator_avatar,
-        //         updateAvatarArr: this.makeUpdateAvatar(this.data.caseInfo.puncture.puncture_editor_list),
-        //         approveAvatar: this.data.caseInfo.puncture.puncture_auditor_avatar,
-        //     })
-        // } else {
-        //     this.setData({
-        //         addAvatar: app.globalData.avatarUrl
-        //     })
-        // }
-        // this.completeProgress();
+        this.requestCaseInfo(caseId);
+        if (this.data.isCreate) {
+            this.setData({
+                addAvatar: app.globalData.avatarUrl
+            })
+
+        }
+        this.completeProgress();
     },
 
     requestCaseInfo(caseId) {
@@ -525,9 +519,13 @@ Page({
             }
         });
     },
+
     initViewByData(info) {
         this.setData({
-            caseInfo: info
+            caseInfo: info,
+            addAvatar: this.data.caseInfo.puncture.puncture_creator_avatar,
+            updateAvatarArr: this.makeUpdateAvatar(this.data.caseInfo.puncture.puncture_editor_list),
+            approveAvatar: this.data.caseInfo.puncture.puncture_auditor_avatar,
         });
 
         // 诊断性穿刺
@@ -962,7 +960,7 @@ Page({
     assignPic(pics) {
         this.setData({
             pic1: pics[0] ? pics[0].pic1 : "",
-            pic2: pics[1] ? pics[1].pic2: "",
+            pic2: pics[1] ? pics[1].pic2 : "",
             pic3: pics[2] ? pics[2].pic3 : ""
         })
     },

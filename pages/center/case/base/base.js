@@ -27,12 +27,13 @@ Page({
         updateAvatarArr: [],
         approveAvatar: '',
         // -------- 公用信息 end -------- //
+        centerId: '',
         centerName: '',
         name: '',
         caseNO: "",
-        side: '',
+        side: 0,
         sidePicker: ["请选择", "左侧", "右侧"],
-        part: '',
+        part: 0,
         partPicker: ["请选择", "髋", "膝"],
         createDate: '',
         sex: 0,
@@ -319,11 +320,11 @@ Page({
 
     onLoad: function(options) {
         this.loadProgress();
-        let caseId = options.caseId;
         this.setData({
             isAdmin: app.globalData.is_admin == '1',
+            centerId: options.centerId,
             centerName: options.centerName,
-            caseId: caseId,
+            caseId: options.caseId,
             isCreate: options.isCreate
         });
         this.requestCaseInfo(caseId)
@@ -350,7 +351,7 @@ Page({
                 console.log("Case.GetCaseInfo:" + JSON.stringify(res))
                 that.hideLoading();
                 if (res.data.data.code == 0) {
-                    that.initViewByData(res.data.data)
+                    that.initViewByData(res.data.data.info)
                 } else {
                     that.showModal("ErrModal", res.data.msg);
                 }
@@ -372,14 +373,14 @@ Page({
             centerName: this.data.centerName,
             name: info.patient_name,
             caseNO: info.case_no,
-            side: this.data.sidePicker[info.side],
-            part: this.data.partPicker[info.part],
+            side: parseInt(info.side),
+            part: parseInt(info.part),
             createDate: this.data.isCreate ? util.getNowFormatDate() : util.formatTime(info.create_time, 'Y-M-D'),
-            sex: info.sex,
-            age: info.age,
-            height: info.height,
-            weight: info.weight,
-            bmi: info.bmi,
+            sex: parseInt(info.sex),
+            age: this.getDefaultNum(info.age),
+            height: this.getDefaultNum(info.height),
+            weight: this.getDefaultNum(info.weight),
+            bmi: this.getDefaultNum(info.bmi),
             chiefDoc: info.pro_doctor,
             tel1: info.telphone1,
             tel2: info.telphone2,
@@ -387,7 +388,7 @@ Page({
             medical_history: info.medical_history,
 
             first_displace_time: this.data.isCreate ? util.getNowFormatDate() : util.formatTime(info.first_displace_time, 'Y-M-D'),
-            first_displace_reason: info.first_displace_reason,
+            first_displace_reason: parseInt(info.first_displace_reason),
             is_hospital_operation: info.is_hospital_operation,
             last_operation_date: this.data.isCreate ? util.getNowFormatDate() : util.formatTime(info.last_operation_date, 'Y-M-D'),
             repair_count: info.repair_count,
@@ -442,23 +443,22 @@ Page({
     },
 
     getValueDisable(value) {
-        return value.length <= 0
+        return value ? value.length <= 0 : false
     },
 
-    getNumDisable(value) {
-        return value <= 0
-    },
 
     makeUpdateAvatar(avatarObjList) {
         var avatarList = [];
-        var avatarLen = avatarObjList.length;
-        for (var i = 0; i < avatarLen; i++) {
-            if (avatarObjList[i].base_editor_avatar) {
-                avatarList[i] = avatarObjList[i].base_editor_avatar
-            } else if (avatarObjList[i].puncture_editor_avatar) {
-                avatarList[i] = avatarObjList[i].puncture_editor_avatar
-            } else if (avatarObjList[i].bein_editor_avatar) {
-                avatarList[i] = avatarObjList[i].bein_editor_avatar
+        if (avatarObjList && avatarObjList.length > 0) {
+            var avatarLen = avatarObjList.length;
+            for (var i = 0; i < avatarLen; i++) {
+                if (avatarObjList[i].base_editor_avatar) {
+                    avatarList[i] = avatarObjList[i].base_editor_avatar
+                } else if (avatarObjList[i].puncture_editor_avatar) {
+                    avatarList[i] = avatarObjList[i].puncture_editor_avatar
+                } else if (avatarObjList[i].bein_editor_avatar) {
+                    avatarList[i] = avatarObjList[i].bein_editor_avatar
+                }
             }
         }
         return avatarList
@@ -495,7 +495,7 @@ Page({
     },
 
     submit() {
-        if (!this.isBasicValueRight()) {
+        if (!this.isValueRight()) {
             return;
         }
 
@@ -508,7 +508,7 @@ Page({
                 case_id: that.data.caseId,
                 openid: app.globalData.openid,
                 json_data: that.makeBasicData(),
-                fields_state: that.makeFiledData(),
+                fields_state: "{}",
             },
             header: {
                 'content-type': 'application/json'
@@ -521,14 +521,16 @@ Page({
                         caseId: res.data.data.info.case_id
                     })
                     that.showToast("提交成功")
-                    var args = {
-                        currentTarget: {
-                            dataset: {
-                                id: 1
-                            }
-                        }
+                    if (that.data.isCreate) {
+                        wx.redirectTo({
+                            url: '../case/timeline/timeline?centerId=' + that.data.centerId + "&isCreate=" + true + "&centerName=" + that.data.centerName
+                        });
+                    } else {
+                        that.reloadPrePage()
+                        wx.navigateBack({
+                            delta: 1
+                        })
                     }
-                    that.tabSelect(args)
                 } else {
                     that.showModal("ErrModal", res.data.data.msg);
                 }
@@ -601,7 +603,7 @@ Page({
         return JSON.stringify(jsonData)
     },
 
-    isBasicValueRight() {
+    isValueRight() {
         if (this.data.sex == 0) {
             this.showToast("请选择性别")
             return false;
@@ -655,107 +657,107 @@ Page({
             return false;
         }
         if (this.data.is_rheumatism.length == 0) {
-            this.showToast("请选择风湿免疫性疾病")
+            this.showToast("请选择病状体征中的风湿免疫性疾病")
             return false;
         }
         if (this.data.is_rheumatoid.length == 0) {
-            this.showToast("请选择类风湿")
+            this.showToast("请选择病状体征中的类风湿")
             return false;
         }
         if (this.data.is_as.length == 0) {
-            this.showToast("请选择强直性脊柱炎")
+            this.showToast("请选择病状体征中的强直性脊柱炎")
             return false;
         }
         if (this.data.is_spa.length == 0) {
-            this.showToast("请选择脊柱关节病")
+            this.showToast("请选择病状体征中的脊柱关节病")
             return false;
         }
         if (this.data.is_psa.length == 0) {
-            this.showToast("请选择银屑病性关节炎")
+            this.showToast("请选择病状体征中的银屑病性关节炎")
             return false;
         }
         if (this.data.is_gout.length == 0) {
-            this.showToast("请选择痛风")
+            this.showToast("请选择病状体征中的痛风")
             return false;
         }
         if (this.data.is_cancer.length == 0) {
-            this.showToast("请选择恶性肿瘤病史")
+            this.showToast("请选择病状体征中的恶性肿瘤病史")
             return false;
         }
         if (this.data.cure_state.length == 0) {
-            this.showToast("请选择治愈情况")
+            this.showToast("请选择病状体征中的治愈情况")
             return false;
         }
         if (this.data.radiotherapy == 0) {
-            this.showToast("请选择放疗病史")
+            this.showToast("请选择病状体征中的放疗病史")
             return false;
         }
         if (this.data.chemotherapy.length == 0) {
-            this.showToast("请选择化疗病史")
+            this.showToast("请选择病状体征中的化疗病史")
             return false;
         }
         if (this.data.glycuresis.length == 0) {
-            this.showToast("请选择糖尿病")
+            this.showToast("请选择病状体征中的糖尿病")
             return false;
         }
         if (this.data.hypertension.length == 0) {
-            this.showToast("请选择高血压")
+            this.showToast("请选择病状体征中的高血压")
             return false;
         }
         if (this.data.cvd.length == 0) {
-            this.showToast("请选择脑血管病")
+            this.showToast("请选择病状体征中的脑血管病")
             return false;
         }
         if (this.data.chd.length == 0) {
-            this.showToast("请选择冠心病")
+            this.showToast("请选择病状体征中的冠心病")
             return false;
         }
         if (this.data.ledvt.length == 0) {
-            this.showToast("请选择下肢静脉血栓")
+            this.showToast("请选择病状体征中的下肢静脉血栓")
             return false;
         }
         if (this.data.pud.length == 0) {
-            this.showToast("请选择消化性溃疡病")
+            this.showToast("请选择病状体征中的消化性溃疡病")
             return false;
         }
         if (this.data.copd.length == 0) {
-            this.showToast("请选择慢性肺阻病")
+            this.showToast("请选择病状体征中的慢性肺阻病")
             return false;
         }
         if (this.data.abnormal_heart.length == 0) {
-            this.showToast("请选择心功能异常")
+            this.showToast("请选择病状体征中的心功能异常")
             return false;
         }
         if (this.data.abnormal_liver.length == 0) {
-            this.showToast("请选择肝功能异常")
+            this.showToast("请选择病状体征中的肝功能异常")
             return false;
         }
         if (this.data.abnormal_renal.length == 0) {
-            this.showToast("请选择肾功能异常")
+            this.showToast("请选择病状体征中的病状体征中的肾功能异常")
             return false;
         }
         if (this.data.abnormal_thyroid.length == 0) {
-            this.showToast("请选择甲状腺功能异常")
+            this.showToast("请选择病状体征中的甲状腺功能异常")
             return false;
         }
         if (this.data.anemia.length == 0) {
-            this.showToast("请选择贫血")
+            this.showToast("请选择病状体征中的贫血")
             return false;
         }
         if (this.data.is_smoke == 0) {
-            this.showToast("请选择吸烟史")
+            this.showToast("请选择病状体征中的吸烟史")
             return false;
         }
         if (this.data.is_drink == 0) {
-            this.showToast("请选择饮酒史")
+            this.showToast("请选择病状体征中的饮酒史")
             return false;
         }
         if (this.data.other_disease.length == 0) {
-            this.showToast("请填写其他疾病")
+            this.showToast("请填写病状体征中的其他疾病")
             return false;
         }
         if (this.data.remark.length == 0) {
-            this.showToast("请填写备注")
+            this.showToast("请填写病状体征中的备注")
             return false;
         }
 
