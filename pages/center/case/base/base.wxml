@@ -198,13 +198,13 @@
             <!-- 底部按钮 -->
             <view class="btn-block bg-white shadow" hidden='{{isLook}}'>
                 <view class="flex margin-special">
-                    <button wx:if="{{isEdit}}" class='cu-btn line-green shadow' style="margin-right: 15rpx;" form-type="submit" bindtap='submit' disabled='{{caseInfo.base_submit_button == 0}}'>
+                    <button wx:if="{{isEdit || isCreate}}" class='cu-btn line-green shadow' style="margin-right: 15rpx;" form-type="submit" bindtap='submit' disabled='{{caseInfo.base_submit_button == 0}}'>
                         提交录入
                     </button>
-                    <button wx:else class='cu-btn line-green shadow' style="margin-right: 15rpx;" form-type="submit" bindtap='onEditCase'>
+                    <button wx:else class='cu-btn line-green shadow' style="margin-right: 15rpx;" form-type="submit" bindtap="onSetCaseWrite">
                         编辑修改
                     </button>
-                    <button class='cu-btn bg-green shadow' style="margin-left: 15rpx;" form-type="submit" bindtap='verify' disabled='{{caseInfo.approve_button == 2}}'>
+                    <button wx:if="{{!isCreate}}" class='cu-btn bg-green shadow' style="margin-left: 15rpx;" form-type="submit" bindtap='verify' disabled='{{isCreate || caseInfo.approve_button == 2}}'>
                         {{caseInfo.base.base_state != 2 ?"确认审核":"解除锁定"}}
                     </button>
                 </view>
@@ -551,14 +551,7 @@
             <view class="cu-bar bg-white " style="justify-content:flex-start;padding-left:15rpx;min-height:60rpx; ">
                 <text class='icon-title text-green'></text>评分系统
             </view>
-            <radio-group style="justify-content:center;min-height:80rpx; " class="cu-form-group solid-bottom " bindchange="radioChange ">
-                <view>
-                    <radio class='blue radio text-small' value='1'></radio> 控制可
-                </view>
-                <view style="margin-left: 50rpx; ">
-                    <radio class='blue margin-left-sm text-small' value='2'></radio> 控制差
-                </view>
-            </radio-group>
+            <input style="text-align:left;padding-left:20rpx;height:80rpx;" placeholder="请输入评分" class='radius bg-white solid-bottom' bindinput="onScoreInput" value="{{score}}"></input>
             <!-- 备注 -->
             <view class="cu-bar bg-white " style="justify-content:flex-start;padding-left:15rpx;min-height:60rpx; ">
                 <text class='icon-title text-green'></text>备注

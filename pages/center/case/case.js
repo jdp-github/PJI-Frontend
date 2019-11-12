@@ -15,6 +15,9 @@ Page({
         hidden: true,
         isAdmin: false,
 
+        centerId: '',
+        centerName: '',
+
         searchValue: '',
         startDate: util.getNowFormatDate(true),
         endDate: util.getNowFormatDate(),
@@ -136,7 +139,7 @@ Page({
                 console.log("Case.CreateCase:" + JSON.stringify(res));
                 if (res.data.data.code == constant.response_success) {
                     wx.navigateTo({
-                        url: '../case/base/base?caseId=' + res.data.data.info.case_id
+                        url: '../case/base/base?caseId=' + res.data.data.info.case_id + "&isCreate=" + true + "&centerName=" + that.data.centerName
                     });
                 } else {
                     that.showModal("ErrModal", res.data.data.msg);
@@ -162,7 +165,7 @@ Page({
     onLookCase: function(e) {
         let caseInfo = e.currentTarget.dataset.case;
         wx.navigateTo({
-            url: '../../center/case/base/base?case_id=' + caseInfo.case_id + "&centerId=" + this.data.centerId + "&centerName=" + this.data.centerName + "&isLook=" + true
+            url: '../../center/case/timeline/timeline?case_id=' + caseInfo.case_id + "&centerId=" + this.data.centerId + "&centerName=" + this.data.centerName + "&isLook=" + true
         });
     },
 

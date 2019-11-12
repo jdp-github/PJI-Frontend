@@ -19,6 +19,7 @@ Page({
         // -------- modal end ------------- //
 
         // -------- 公用信息 begin -------- //
+        isCreate: false,
         isEdit: false,
         caseId: '',
         caseInfo: {},
@@ -26,12 +27,14 @@ Page({
         updateAvatarArr: [],
         approveAvatar: '',
         // -------- 公用信息 end -------- //
-
+        centerName: '',
         name: '',
         caseNO: "",
         side: '',
+        sidePicker: ["请选择", "左侧", "右侧"],
         part: '',
-        createDate: util.getNowFormatDate(),
+        partPicker: ["请选择", "髋", "膝"],
+        createDate: '',
         sex: 0,
         sexPicker: ['请选择', '男', '女'],
         age: '',
@@ -240,6 +243,11 @@ Page({
             other_disease: e.detail.value
         });
     },
+    onScoreInput: function(e) {
+        this.setData({
+            score: e.detail.value
+        });
+    },
     onRemarkInput: function(e) {
         this.setData({
             remark: e.detail.value
@@ -311,10 +319,12 @@ Page({
 
     onLoad: function(options) {
         this.loadProgress();
-        var caseId = options.case_id;
+        let caseId = options.caseId;
         this.setData({
             isAdmin: app.globalData.is_admin == '1',
+            centerName: options.centerName,
             caseId: caseId,
+            isCreate: options.isCreate
         });
         this.requestCaseInfo(caseId)
         this.setData({
@@ -330,6 +340,7 @@ Page({
             data: {
                 service: 'Case.GetCaseInfo',
                 case_id: caseId,
+                type: 1,
                 openid: app.globalData.openid
             },
             header: {
@@ -352,32 +363,69 @@ Page({
     initViewByData(info) {
         this.setData({
             caseInfo: info,
-            addAvatar: info.base.base_creator_avatar,
-            updateAvatarArr: this.makeUpdateAvatar(info.base.base_editor_list),
-            approveAvatar: info.base.base_auditor_avatar,
+            addAvatar: info.base_creator_avatar,
+            updateAvatarArr: this.makeUpdateAvatar(info.base_editor_list),
+            approveAvatar: info.base_auditor_avatar,
         });
         // 基本信息
         this.setData({
-            name: info.base.patient_name,
-            caseNO: info.base.case_no,
-            createDate: util.formatTime(info.base.create_time, 'Y-M-D'),
-            sex: info.base.sex,
-            age: info.base.age,
-            height: info.base.height,
-            weight: info.base.weight,
-            bmi: info.base.bmi,
-            chiefDoc: info.base.pro_doctor,
-            tel1: info.base.telphone1,
-            tel2: info.base.telphone2,
-            tel2Disabled: this.getValueDisable(info.base.telphone2),
-            part: info.base.part,
-            type: info.base.type,
+            centerName: this.data.centerName,
+            name: info.patient_name,
+            caseNO: info.case_no,
+            side: this.data.sidePicker[info.side],
+            part: this.data.partPicker[info.part],
+            createDate: this.data.isCreate ? util.getNowFormatDate() : util.formatTime(info.create_time, 'Y-M-D'),
+            sex: info.sex,
+            age: info.age,
+            height: info.height,
+            weight: info.weight,
+            bmi: info.bmi,
+            chiefDoc: info.pro_doctor,
+            tel1: info.telphone1,
+            tel2: info.telphone2,
+            tel2Disabled: this.getValueDisable(info.telphone2),
+            medical_history: info.medical_history,
 
+            first_displace_time: this.data.isCreate ? util.getNowFormatDate() : util.formatTime(info.first_displace_time, 'Y-M-D'),
+            first_displace_reason: info.first_displace_reason,
+            is_hospital_operation: info.is_hospital_operation,
+            last_operation_date: this.data.isCreate ? util.getNowFormatDate() : util.formatTime(info.last_operation_date, 'Y-M-D'),
+            repair_count: info.repair_count,
+            duration_symptoms_date: this.data.isCreate ? util.getNowFormatDate() : util.formatTime(info.duration_symptoms_date, 'Y-M-D'),
+            this_time_cause: info.this_time_cause,
 
-            addAvatar: info.base.base_creator_avatar,
-            updateAvatarArr: this.makeUpdateAvatar(info.base.base_editor_list),
-            approveAvatar: info.base.base_auditor_avatar,
-            isBaseLock: info.base.is_lock
+            is_rheumatism: info.is_rheumatism,
+            is_rheumatoid: info.is_rheumatoid,
+            is_as: info.is_as,
+            is_spa: info.is_spa,
+            is_psa: info.is_psa,
+            is_gout: info.is_gout,
+            is_cancer: info.is_cancer,
+            cure_state: info.cure_state,
+            radiotherapy: info.radiotherapy,
+            chemotherapy: info.chemotherapy,
+            glycuresis: info.glycuresis,
+            hypertension: info.hypertension,
+            cvd: info.cvd,
+            chd: info.chd,
+            ledvt: info.ledvt,
+            pud: info.pud,
+            copd: info.copd,
+            abnormal_heart: info.abnormal_heart,
+            abnormal_liver: info.abnormal_liver,
+            abnormal_renal: info.abnormal_renal,
+            abnormal_thyroid: info.abnormal_thyroid,
+            anemia: info.anemia,
+            is_smoke: info.is_smoke,
+            is_drink: info.is_drink,
+            other_disease: info.other_disease,
+            score: info.score,
+            remark: info.remark,
+
+            addAvatar: info.base_creator_avatar,
+            updateAvatarArr: this.makeUpdateAvatar(info.base_editor_list),
+            approveAvatar: info.base_auditor_avatar,
+            isBaseLock: info.is_lock
         })
     },
 
@@ -416,7 +464,7 @@ Page({
         return avatarList
     },
 
-    onEditCase: function(e) {
+    onSetCaseWrite: function(e) {
         let that = this;
         that.showLoading();
         wx.request({
@@ -459,7 +507,8 @@ Page({
                 service: 'Case.CreateEditCaseBase',
                 case_id: that.data.caseId,
                 openid: app.globalData.openid,
-                json_data: that.makeBasicData()
+                json_data: that.makeBasicData(),
+                fields_state: that.makeFiledData(),
             },
             header: {
                 'content-type': 'application/json'
@@ -490,12 +539,18 @@ Page({
         });
     },
 
+    makeFiledData() {
+
+    },
+
     makeBasicData() {
         let that = this;
         var jsonData = {
             center_id: that.data.centerId,
             patient_name: that.data.name,
             case_no: that.data.caseNO,
+            side: parseInt(that.data.side),
+            part: parseInt(that.data.side),
             create_time: new Date(that.data.createDate).getTime() / 1000,
             sex: that.data.sex,
             age: parseInt(that.data.age),
@@ -505,9 +560,42 @@ Page({
             pro_doctor: that.data.chiefDoc,
             telphone1: that.data.tel1,
             telphone2: that.data.tel2,
-            part: parseInt(that.data.part),
             type: parseInt(that.data.type),
-
+            medical_history: that.data.medical_history,
+            first_displace_time: new Date(that.data.first_displace_time).getTime() / 1000,
+            first_displace_reason: that.data.first_displace_reason,
+            is_hospital_operation: parseInt(that.data.is_hospital_operation),
+            last_operation_date: parseInt(that.data.last_operation_date),
+            repair_count: parseInt(that.data.repair_count),
+            duration_symptoms_date: new Date(that.data.duration_symptoms_date).getTime() / 1000,
+            this_time_cause: that.data.this_time_cause,
+            is_rheumatism: parseInt(that.data.is_rheumatism),
+            is_rheumatoid: parseInt(that.data.is_rheumatoid),
+            is_as: parseInt(that.data.is_as),
+            is_spa: parseInt(that.data.is_spa),
+            is_psa: parseInt(that.data.is_psa),
+            is_gout: parseInt(that.data.is_gout),
+            is_cancer: parseInt(that.data.is_cancer),
+            cure_state: parseInt(that.data.cure_state),
+            radiotherapy: parseInt(that.data.radiotherapy),
+            chemotherapy: parseInt(that.data.chemotherapy),
+            glycuresis: parseInt(that.data.glycuresis),
+            hypertension: parseInt(that.data.hypertension),
+            cvd: parseInt(that.data.cvd),
+            chd: parseInt(that.data.chd),
+            ledvt: parseInt(that.data.ledvt),
+            pud: parseInt(that.data.pud),
+            copd: parseInt(that.data.copd),
+            abnormal_heart: parseInt(that.data.abnormal_heart),
+            abnormal_liver: parseInt(that.data.abnormal_liver),
+            abnormal_renal: parseInt(that.data.abnormal_renal),
+            abnormal_thyroid: parseInt(that.data.abnormal_thyroid),
+            anemia: parseInt(that.data.anemia),
+            is_smoke: parseInt(that.data.is_smoke),
+            is_drink: parseInt(that.data.is_drink),
+            other_disease: that.data.other_disease,
+            score: that.data.score,
+            remark: that.data.remark,
         }
         console.log("基本信息：" + JSON.stringify(jsonData))
         return JSON.stringify(jsonData)
@@ -684,7 +772,7 @@ Page({
                 case_id: that.data.caseId,
                 openid: app.globalData.openid,
                 type: 1,
-                state: that.data.caseInfo.base.base_state == 2 ? 2 : 1
+                state: that.data.caseInfo.base_state == 2 ? 2 : 1
             },
             header: {
                 'content-type': 'application/json'
