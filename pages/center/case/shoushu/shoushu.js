@@ -473,24 +473,24 @@ Page({
     },
 
     onLoad: function(options) {
-        this.loadProgress();
-        var caseId = options.case_id;
-        this.setData({
-            isAdmin: app.globalData.is_admin == '1',
-            isCreate: options.isCreate,
-            centerId: options.centerId,
-            centerName: options.centerName,
-            caseId: caseId
-        });
+        // this.loadProgress();
+        // var caseId = options.case_id;
+        // this.setData({
+        //     isAdmin: app.globalData.is_admin == '1',
+        //     isCreate: options.isCreate,
+        //     centerId: options.centerId,
+        //     centerName: options.centerName,
+        //     caseId: caseId
+        // });
 
-        this.requestCaseInfo(caseId);
-        if (this.data.isCreate) {
-            this.setData({
-                addAvatar: app.globalData.avatarUrl
-            })
+        // this.requestCaseInfo(caseId);
+        // if (this.data.isCreate) {
+        //     this.setData({
+        //         addAvatar: app.globalData.avatarUrl
+        //     })
 
-        }
-        this.completeProgress();
+        // }
+        // this.completeProgress();
     },
 
     requestCaseInfo(caseId) {
@@ -696,86 +696,18 @@ Page({
     },
 
     isValueRight() {
-        if (!this.data.ccDateDisabled && this.data.chuangciDate == "请选择日期") {
-            this.showToast("请选择穿刺日期")
-            return false;
+        if (!operation_before_summary) {
+            if (this.data.hospitalized_date == "请选择日期") {
+                this.showToast("请选择入院日期")
+                return false;
+            }
+            if (this.data.antibiotic_history == 0) {
+                this.showToast("请选择抗生素使用史")
+                return false;
+            }
+
         }
-        if (!this.data.ccDescribeDisabeld && this.data.ccDescribe.length == 0) {
-            this.showToast("请填写穿刺描述")
-            return false;
-        }
-        if (!this.data.ccgjyDisabled && this.data.ccgjy.length == 0) {
-            this.showToast("请填写抽出关节液总量")
-            return false;
-        }
-        if (!this.data.ccgxyDisabled && this.data.ccgxy.length == 0) {
-            this.showToast("请填写抽出灌洗液总量")
-            return false;
-        }
-        if (!this.data.leDisabled && this.data.leIndex == 0) {
-            this.showToast("请选择LE试纸(原液)")
-            return false;
-        }
-        if (!this.data.leAfterDisabled && this.data.leAfterIndex == 0) {
-            this.showToast("请选择LE试纸(离心后)")
-            return false;
-        }
-        if (!this.data.gjybxbDisabled && this.data.gjybxb.length == 0) {
-            this.showToast("请填写关节液白细胞计数")
-            return false;
-        }
-        if (!this.data.gjyzxDisabled && this.data.gjyzx.length == 0) {
-            this.showToast("请填写关节液中心粒细胞百分比")
-            return false;
-        }
-        if (!this.data.bcpysjDisabled && this.data.bcpysjIndex == 0) {
-            this.showToast("请选择本次培养送检类型")
-            return false;
-        }
-        if (!this.data.drgpypDisabled && this.data.drgpyp.length == 0) {
-            this.showToast("请填写打入各培养瓶量")
-            return false;
-        }
-        if (!this.data.bcxyResultDisabled && this.data.bcxyResult.length == 0) {
-            this.showToast("请填写本次需氧+真菌培养结果")
-            return false;
-        }
-        if (!this.data.bcxyLastDisabled && this.data.bcxyLast.length == 0) {
-            this.showToast("请填写本次需氧+真菌培养时长")
-            return false;
-        }
-        if (!this.data.bcyyResultDisabled && this.data.bcyyResult.length == 0) {
-            this.showToast("请填写本次厌氧培养结果")
-            return false;
-        }
-        if (!this.data.bcyyLastDisabled && this.data.bcyyLast.length == 0) {
-            this.showToast("请填写本次厌氧培养时长")
-            return false;
-        }
-        if (!this.data.mNGSTypeDisabled && this.data.mNGSTypeIndex == 0) {
-            this.showToast("请选择mNGS送检类型")
-            return false;
-        }
-        if (!this.data.mNGSResultDisabled && this.data.mNGSResult.length == 0) {
-            this.showToast("请填写关节液/冲洗液mNGS结果")
-            return false;
-        }
-        if (!this.data.sqSecondxyDisabled && this.data.sqSecondxy.length == 0) {
-            this.showToast("术前第2次穿刺需氧+真菌培养结果")
-            return false;
-        }
-        if (!this.data.sqSecondyyDisabled && this.data.sqSecondyy.length == 0) {
-            this.showToast("术前第2次穿刺厌氧培养结果")
-            return false;
-        }
-        if (!this.data.sqThirdxyDisabled && this.data.sqThirdxy.length == 0) {
-            this.showToast("术前第3次穿刺需氧+真菌培养结果")
-            return false;
-        }
-        if (!this.data.sqThirdyyDisabled && this.data.sqThirdyy.length == 0) {
-            this.showToast("术前第3次穿刺厌氧培养结果")
-            return false;
-        }
+        
 
         return true
     },

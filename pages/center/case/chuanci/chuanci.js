@@ -385,6 +385,7 @@ Page({
     },
 
     onLoad: function(options) {
+        debugger
         this.loadProgress();
         this.setData({
             isAdmin: app.globalData.is_admin == '1',

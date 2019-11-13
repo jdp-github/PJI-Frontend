@@ -46,21 +46,21 @@ Page({
     },
 
     initData() {
-        this.loadProgress();
         this.requestCaseList(this.data.searchValue);
     },
 
     requestCaseList: function(searchValue) {
         let that = this;
+        that.loadProgress();
         wx.request({
             url: constant.basePath,
             data: {
                 service: 'Case.SearchCaseList',
                 openid: app.globalData.openid,
                 center_id: that.data.centerId,
-                keyword: searchValue,
-                start_time: new Date(that.data.startDate).getTime(),
-                end_time: new Date(that.data.endDate).getTime(),
+                keyword: that.data.searchValue,
+                start_time: that.data.startDate,
+                end_time: that.data.endDate,
                 state: that.data.stateIndex
             },
             header: {
@@ -77,12 +77,6 @@ Page({
                         } else {
                             caseInfo.create_time = util.formatTime(caseInfo.create_time, 'Y-M-D');
                         }
-                        // 末次要素
-                        if (caseInfo.last_element == 0) {
-                            caseInfo.last_element = "暂无"
-                        } else {
-                            caseInfo.last_element = util.formatTime(caseInfo.last_element, 'Y-M-D')
-                        }
                     }
 
                     that.setData({
@@ -91,13 +85,15 @@ Page({
                 } else {
                     that.showToast(res.data.msg);
                 }
-                that.completeProgress();
+
             },
             fail(res) {
                 that.completeProgress();
                 that.showToast(res.data.msg);
             }
         });
+
+        this.completeProgress();
     },
 
     onAddCase: function(e) {
@@ -178,7 +174,7 @@ Page({
     onLookCase: function(e) {
         let caseInfo = e.currentTarget.dataset.case;
         wx.navigateTo({
-            url: '../case/timeline/timeline?case_id=' + caseInfo.case_id + "&centerId=" + this.data.centerId + "&centerName=" + this.data.centerName + "&isLook=" + true
+            url: '../case/timeline/timeline?caseId=' + caseInfo.case_id + "&centerId=" + this.data.centerId + "&centerName=" + this.data.centerName + "&isLook=" + true
         });
     },
 
@@ -206,7 +202,6 @@ Page({
                 console.log("Case.DeleteCase:" + JSON.stringify(res));
                 that.completeProgress();
                 if (res.data.data.code == constant.response_success) {
-                    that.loadProgress();
                     that.requestCaseList(that.data.searchValue);
                     that.setData({
                         modalName: ''
@@ -272,6 +267,7 @@ Page({
         this.setData({
             modalName: null
         });
+        this.onHideAdd()
     },
     onSearchChange: function(e) {
         this.setData({
@@ -279,7 +275,6 @@ Page({
         });
     },
     onSearch: function() {
-        this.loadProgress();
         this.requestCaseList(this.data.searchValue);
     },
     StatePickerChange(e) {
@@ -346,10 +341,7 @@ Page({
     },
 
     onRefresh: function(e) {
-        // this.initData()
-        wx.navigateTo({
-            url: '../case/timeline/timeline?centerId=' + this.data.centerId + "&centerName=" + this.data.centerName + "&case_id="
-        });
+        this.initData()
     },
 
     // ============ 事件 end ============ //

@@ -213,6 +213,11 @@ Page({
             modalName: "DrawerModalR"
         })
     },
+    onCloseDrawer() {
+        this.setData({
+            modalName: null
+        })
+    },
     radioChange(e) {
         let param = e.currentTarget.dataset.type
         this.setData({
@@ -222,6 +227,11 @@ Page({
     onRadiotherapyChange: function(e) {
         this.setData({
             radiotherapy: parseInt(e.detail.value),
+        });
+    },
+    onChemotherapyChange(e) {
+        this.setData({
+            chemotherapy: parseInt(e.detail.value),
         });
     },
     onIs_smokeChange: function(e) {
@@ -327,7 +337,7 @@ Page({
             caseId: options.caseId,
             isCreate: options.isCreate
         });
-        this.requestCaseInfo(caseId)
+        this.requestCaseInfo(this.data.caseId)
         this.setData({
             addAvatar: app.globalData.avatarUrl
         })
@@ -388,7 +398,7 @@ Page({
             medical_history: info.medical_history,
 
             first_displace_time: this.data.isCreate ? util.getNowFormatDate() : util.formatTime(info.first_displace_time, 'Y-M-D'),
-            first_displace_reason: parseInt(info.first_displace_reason),
+            first_displace_reason: parseInt(info.first_displace_reason ? info.first_displace_reason : 0),
             is_hospital_operation: info.is_hospital_operation,
             last_operation_date: this.data.isCreate ? util.getNowFormatDate() : util.formatTime(info.last_operation_date, 'Y-M-D'),
             repair_count: info.repair_count,
@@ -504,7 +514,7 @@ Page({
         wx.request({
             url: constant.basePath,
             data: {
-                service: 'Case.CreateEditCaseBase',
+                service: 'Case.EditCaseBase',
                 case_id: that.data.caseId,
                 openid: app.globalData.openid,
                 json_data: that.makeBasicData(),
@@ -514,6 +524,7 @@ Page({
                 'content-type': 'application/json'
             },
             success(res) {
+                debugger
                 console.log("Case.CreateEditCaseBase:" + JSON.stringify(res))
                 that.hideLoading();
                 if (res.data.data.code == 0) {
@@ -523,7 +534,7 @@ Page({
                     that.showToast("提交成功")
                     if (that.data.isCreate) {
                         wx.redirectTo({
-                            url: '../case/timeline/timeline?centerId=' + that.data.centerId + "&isCreate=" + true + "&centerName=" + that.data.centerName
+                            url: '../timeline/timeline?centerId=' + that.data.centerId + "&isCreate=" + true + "&centerName=" + that.data.centerName
                         });
                     } else {
                         that.reloadPrePage()
@@ -567,7 +578,7 @@ Page({
             first_displace_time: new Date(that.data.first_displace_time).getTime() / 1000,
             first_displace_reason: that.data.first_displace_reason,
             is_hospital_operation: parseInt(that.data.is_hospital_operation),
-            last_operation_date: parseInt(that.data.last_operation_date),
+            last_operation_date: new Date(that.data.last_operation_date).getTime() / 1000,
             repair_count: parseInt(that.data.repair_count),
             duration_symptoms_date: new Date(that.data.duration_symptoms_date).getTime() / 1000,
             this_time_cause: that.data.this_time_cause,

@@ -535,7 +535,7 @@
             <!-- 饮酒史 -->
             <view class="cu-bar bg-white solid-bottom" style="justify-content:flex-start;padding-left:15rpx;min-height:120rpx; ">
                 <text class='icon-title text-green'></text>饮酒史
-                <picker style="flex:2" bindchange="onIs_drinkChange " value="{{is_drink}} " range="{{is_drink_picker}}">
+                <picker style="flex:2" bindchange="onIs_drinkChange" value="{{is_drink}} " range="{{is_drink_picker}}">
                     <view class="picker" style=" text-align:right;margin-right:46rpx; ">
                         {{is_drink_picker[is_drink]}}
                     </view>
@@ -561,13 +561,8 @@
             <!-- 底部按钮 -->
             <view class='padding-sm flex'>
                 <view class="flex-sub ">
-                    <button class='cu-btn  bg-green shadow block' bindtap="okAddBox ">
-                        确定
-                    </button>
-                </view>
-                <view class="flex-sub " style="margin-left: 15rpx ">
-                    <button class='cu-btn line-green shadow block' bindtap="cancelAddBox " bindinput="onInput " data-prop='depositary'>
-                        取消
+                    <button class='cu-btn  bg-green shadow block' bindtap="onCloseDrawer">
+                        关闭
                     </button>
                 </view>
             </view>
