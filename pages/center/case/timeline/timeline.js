@@ -17,64 +17,49 @@ Page({
         currTab: 0,
         scrollLeft: 0,
 
-        caseId: '',
+        caseInfo: '',
+        timeLineList: [],
+        typePicker: ["基本信息", "穿刺信息", "入院后信息", "用药方案", "复诊随访"]
     },
 
     onLoad: function(options) {
         this.setData({
-            caseId: options.caseId,
+            caseInfo: JSON.parse(options.caseInfo),
             centerId: options.centerId,
             centerName: options.centerName,
             isAdmin: app.globalData.is_admin == '1'
         });
-        // this.initData()
+        this.initData()
     },
 
     initData() {
         this.loadProgress();
-        this.requestCaseList(this.data.searchValue);
+        this.requestTimeLine();
     },
 
-    requestCaseList: function(searchValue) {
+    requestTimeLine: function() {
         let that = this;
         wx.request({
             url: constant.basePath,
             data: {
-                service: 'Case.SearchCaseList',
+                service: 'Case.Timeline',
                 openid: app.globalData.openid,
-                center_id: that.data.centerId,
-                keyword: searchValue,
-                sort: 1
+                case_no: that.data.caseInfo.case_no,
             },
             header: {
                 'content-type': 'application/json'
             },
             success(res) {
-                console.log("Case.SearchCaseList:" + JSON.stringify(res))
+                console.log("Case.Timeline:" + JSON.stringify(res))
                 if (res.data.data.code == constant.response_success) {
                     for (let i = 0, len = res.data.data.list.length; i < len; i++) {
-                        let caseInfo = res.data.data.list[i];
-                        // 日期
-                        if (caseInfo.puncture_date == 0) {
-                            caseInfo.puncture_date = "暂无"
-                        } else {
-                            caseInfo.puncture_date = util.formatTime(caseInfo.puncture_date, 'Y-M-D');
-                        }
-                        if (caseInfo.operation_date == 0) {
-                            caseInfo.operation_date = "暂无"
-                        } else {
-                            caseInfo.operation_date = util.formatTime(caseInfo.operation_date, 'Y-M-D')
-                        }
-                        caseInfo.patient_name_prefix_letter = caseInfo.patient_name.substr(0, 1);
-
-                        // 进度
-                        caseInfo.baseStatValue = that.getStateValue(caseInfo.base_state)
-                        caseInfo.punctureStatValue = that.getStateValue(caseInfo.puncture_state)
-                        caseInfo.beinStatValue = that.getStateValue(caseInfo.bein_state)
+                        let timeLineInfo = res.data.data.list[i];
+                        timeLineInfo.time = timeLineInfo.time.split(" ")[0]
+                        timeLineInfo.typeName = that.data.typePicker[timeLineInfo.type - 1]
                     }
 
                     that.setData({
-                        caseList: res.data.data.list
+                        timeLineList: res.data.data.list
                     });
                 } else {
                     that.showToast(res.data.msg);
@@ -90,13 +75,13 @@ Page({
 
     onPuncture() {
         wx.navigateTo({
-            url: '../chuanci/chuanci?centerId=' + this.data.centerId + "&centerName=" + this.data.centerName + "&caseId=" + this.data.caseId + "&isCreate=" + true
+            url: '../chuanci/chuanci?centerId=' + this.data.centerId + "&centerName=" + this.data.centerName + "&caseId=" + this.data.caseInfo.case_id + "&isCreate=" + true
         });
     },
 
     onShouShu() {
         wx.navigateTo({
-            url: '../shoushu/shoushu?centerId=' + this.data.centerId + "&centerName=" + this.data.centerName + "&caseId=" + this.data.caseId
+            url: '../shoushu/shoushu?centerId=' + this.data.centerId + "&centerName=" + this.data.centerName + "&caseId=" + this.data.caseInfo.case_id
         });
     },
 

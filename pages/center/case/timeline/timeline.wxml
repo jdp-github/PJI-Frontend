@@ -12,85 +12,53 @@
     <!-- title -->
     <view class="title-container bg-white solid-bottom solid-top">
         <view>
-            张三
+            {{caseInfo.patient_name}}
         </view>
         <view>
-            y12343123
+            {{caseInfo.case_no}}
         </view>
         <view>
-            左
+            {{caseInfo.side_name}}
         </view>
         <view>
-            膝
+            {{caseInfo.part_name}}
         </view>
     </view>
     <!-- button -->
     <view class="btn-container solid-bottom bg-white">
-        <button class='cu-btn bg-red shadow' bindtap="onPuncture">
+        <button class='cu-btn bg-green shadow' bindtap="onPuncture">
             <i class="fa fa-plus" style="margin-right:5rpx"></i>穿刺
         </button>
-        <button class='cu-btn bg-red shadow' bindtap="onShouShu">
+        <button class='cu-btn bg-green shadow' bindtap="onShouShu">
             <i class="fa fa-stethoscope" style="margin-right:5rpx"></i>手术
         </button>
-        <button class='cu-btn bg-red shadow' bindtap="onAddCase">
+        <button class='cu-btn bg-green shadow' bindtap="onAddCase">
             <i class="fa fa-hospital-o" style="margin-right:5rpx"></i>随访
         </button>
     </view>
     <!-- tab -->
     <scroll-view scroll-x class="bg-white nav">
         <view class="flex text-center">
-            <view class="cu-item flex-sub {{index==currTab?'text-blue cur':''}}" wx:for="{{tabList}}" wx:key bindtap="tabSelect" data-id="{{index}}">
+            <view class="cu-item flex-sub {{index==currTab?'text-green cur':''}}" wx:for="{{tabList}}" wx:key bindtap="tabSelect" data-id="{{index}}">
                 {{item}}
             </view>
         </view>
     </scroll-view>
     <!-- 列表 -->
-    <scroll-view scroll-y class="indexes margin-bottom" scroll-into-view="indexes-{{listCurID}}" style='height:calc(100vh - {{CustomBar}}px - 250rpx)' scroll-with-animation="true" enable-back-to-top="true">
-        <view class="cu-timeline" style="padding-left:30rpx;">
-            <view class="cu-time">2019-05-01</view>
-            <view class="cu-item">
-                <view class="timeline-item-container bg-white shadow-blur">
-                    <i class="fa fa-clock-o" style="font-size:50rpx;" />
-                    <view style="margin-left:45rpx">
+    <scroll-view scroll-y class="indexes margin-bottom bg-white" scroll-into-view="indexes-{{listCurID}}" style='height:calc(100vh - {{CustomBar}}px - 250rpx)' scroll-with-animation="true" enable-back-to-top="true">
+        <view class="cu-timeline" wx:for="{{timeLineList}}" wx:key="" style="padding-left:30rpx;">
+            <view class="cu-time">{{item.time}}</view>
+            <view class="cu-item {{item.is_verify==1?'text-green':''}}">
+                <view class="timeline-item-container shadow-blur">
+                    <i class="fa fa-clock-o" style="font-size:50rpx;{{item.alarm==1?'visibility:hidden':''}}" />
+                    <view style="margin-left:30rpx">
                         <view style="display:flex;flex-direction:row;align-items:center;">
-                            <view class="text-black text-bold" style="font-size:40rpx;">诊断穿刺 </view>
-                            <!-- <view class="cu-tag round bg-yellow text-white" style="margin-left:20rpx;">标</view> -->
+                            <view class="text-black text-bold" style="font-size:35rpx;">{{item.typeName}}</view>
+                            <view wx:if="{{item.sample==1}}" class="cu-tag round bg-yellow text-white">标</view>
                         </view>
-                        <view style="display:flex;flex-direction:row;margin-top:20rpx;">
-                            <view>录入:季大鹏</view>
-                            <view style="margin-left:40rpx;">审核:季大鹏</view>
-                        </view>
-                    </view>
-                </view>
-            </view>
-            <view class="cu-time">2019-05-01</view>
-            <view class="cu-item text-red">
-                <view class="timeline-item-container bg-white shadow-blur">
-                    <i class="fa fa-clock-o" style="font-size:50rpx;" />
-                    <view style="margin-left:45rpx">
-                        <view style="display:flex;flex-direction:row;align-items:center;">
-                            <view class="text-black text-bold" style="font-size:40rpx;">诊断穿刺 </view>
-                            <view class="cu-tag round bg-yellow text-white" style="margin-left:20rpx;">标</view>
-                        </view>
-                        <view style="display:flex;flex-direction:row;margin-top:20rpx;">
-                            <view>录入:季大鹏</view>
-                            <view style="margin-left:40rpx;">审核:季大鹏</view>
-                        </view>
-                    </view>
-                </view>
-            </view>
-            <view class="cu-time">2019-05-01</view>
-            <view class="cu-item text-red">
-                <view class="timeline-item-container bg-white shadow-blur">
-                    <i class="fa fa-clock-o" style="font-size:50rpx;visibility:hidden" />
-                    <view style="margin-left:45rpx">
-                        <view style="display:flex;flex-direction:row;align-items:center;">
-                            <view class="text-black text-bold" style="font-size:40rpx;">诊断穿刺 </view>
-                            <view class="cu-tag round bg-yellow text-white" style="margin-left:20rpx;">标</view>
-                        </view>
-                        <view style="display:flex;flex-direction:row;margin-top:20rpx;">
-                            <view>录入:季大鹏</view>
-                            <view style="margin-left:40rpx;">审核:季大鹏</view>
+                        <view class="text-black" style="display:flex;flex-direction:row;margin-top:10rpx;">
+                            <view>录入:{{item.creator}}</view>
+                            <view style="margin-left:40rpx;">审核:{{item.auditor?item.auditor:'暂无'}}</view>
                         </view>
                     </view>
                 </view>
@@ -114,13 +82,13 @@
         <view class="cu-bar bg-white justify-end">
             <view class='content'>无法操作</view>
             <view class='action' bindtap='hideModal'>
-                <text class='icon-close text-red'></text>
+                <text class='icon-close text-green'></text>
             </view>
         </view>
         <view class='padding-xl'>
             <view class='flex-sub text-center'>
                 <view class='solid-bottom text-sl padding'>
-                    <text class='icon-warnfill text-red'></text>
+                    <text class='icon-warnfill text-green'></text>
                 </view>
                 <view class='padding'>{{errMsg}}</view>
             </view>

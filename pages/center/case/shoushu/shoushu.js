@@ -705,9 +705,194 @@ Page({
                 this.showToast("请选择抗生素使用史")
                 return false;
             }
-
+            if (this.data.immuno_history == 0) {
+                this.showToast("请选择免疫抑制剂使用史")
+                return false;
+            }
+            if (this.data.is_heat.length == 0) {
+                this.showToast("请选择病状体征中的发热")
+                return false;
+            }
+            if (this.data.is_erythema.length == 0) {
+                this.showToast("请选择病状体征中的皮肤发红")
+                return false;
+            }
+            if (this.data.is_swelling.length == 0) {
+                this.showToast("请选择病状体征中的积液/肿胀")
+                return false;
+            }
+            if (this.data.is_fever.length == 0) {
+                this.showToast("请选择病状体征中的局部皮温增高")
+                return false;
+            }
+            if (this.data.is_pain.length == 0) {
+                this.showToast("请选择病状体征中的疼痛")
+                return false;
+            }
+            if (this.data.is_sinus.length == 0) {
+                this.showToast("请选择病状体征中的与假体相通的窦道")
+                return false;
+            }
+            if (!this.data.esr_state == 1 && this.data.esr.length == 0) {
+                this.showToast("请填写ESR")
+                return false;
+            }
+            if (!this.data.crp_state == 1 && this.data.crp.length == 0) {
+                this.showToast("请填写CRP")
+                return false;
+            }
+            if (!this.data.il6_state == 1 && this.data.il6.length == 0) {
+                this.showToast("请填写IL-6")
+                return false;
+            }
+            if (!this.data.dimer_state == 1 && this.data.dimer.length == 0) {
+                this.showToast("请填写D-dimer")
+                return false;
+            }
+            if (!this.data.fibrinogen_state == 1 && this.data.fibrinogen.length == 0) {
+                this.showToast("请填写Fibrinogen")
+                return false;
+            }
         }
-        
+        if (!this.data.operation_during_check) {
+            if (this.data.operation_date == "请选择日期") {
+                this.showToast("请选择手术日期")
+                return false
+            }
+            if (this.data.culture_pus == 0) {
+                this.showToast("请选择术中见脓")
+                return false
+            }
+            if (this.data.le_testpaper_stoste == 0) {
+                this.showToast("请选择术中LE试纸（离心前）")
+                return false
+            }
+            if (this.data.le_testpaper_centrifugal == 0) {
+                this.showToast("请选择术中LE试纸（离心后）")
+                return false
+            }
+            if (!this.data.joint_fluid_wbc_state == 1 && this.data.joint_fluid_wbc.length == 0) {
+                this.showToast("请填写关节液WBC")
+                return false;
+            }
+            if (!this.data.pmn_state == 1 && this.data.pmn.length == 0) {
+                this.showToast("请填写PMN%")
+                return false;
+            }
+            if (!this.data.neutrophil_state == 1 && this.data.neutrophil.length == 0) {
+                this.showToast("请选择组织病理(中性粒细胞计数)")
+                return false;
+            }
+            if (!this.data.tissue_culture1_state == 1 && this.data.tissue_culture1.length == 0) {
+                this.showToast("请填写术中组织培养1")
+                return false;
+            }
+            if (!this.data.tissue_culture2_state == 1 && this.data.tissue_culture2.length == 0) {
+                this.showToast("请填写术中组织培养2")
+                return false;
+            }
+            if (!this.data.tissue_culture3_state == 1 && this.data.tissue_culture3.length == 0) {
+                this.showToast("请填写术中组织培养3")
+                return false;
+            }
+            if (!this.data.tissue_culture4_state == 1 && this.data.tissue_culture4.length == 0) {
+                this.showToast("请填写术中组织培养4")
+                return false;
+            }
+            if (!this.data.tissue_culture5_state == 1 && this.data.tissue_culture5.length == 0) {
+                this.showToast("请填写术中组织培养5")
+                return false;
+            }
+
+            if (!this.data.tissue_mngs_state == 1 && this.data.tissue_mngs.length == 0) {
+                this.showToast("请填写术中组织mNGS")
+                return false;
+            }
+            if (!this.datajoint_aerobic_result_state == 1 && this.data.joint_aerobic_result.length == 0) {
+                this.showToast("请填写术中需氧+真菌培养结果")
+                return false;
+            }
+            if (!this.data.joint_anaerobic_result_state == 1 && this.data.joint_anaerobic_result.length == 0) {
+                this.showToast("请填写术中厌氧+真菌培养结果")
+                return false;
+            }
+            if (!this.data.splitting_aerobic_result_state == 1 && this.data.splitting_aerobic_result.length == 0) {
+                this.showToast("请填写超声裂解液需氧+真菌")
+                return false;
+            }
+            if (!this.data.splitting_anaerobic_result_state == 1 && this.data.splitting_anaerobic_result.length == 0) {
+                this.showToast("请填写超声裂解液厌氧")
+                return false;
+            }
+            if (!this.data.splitting_mngs_result_state == 1 && this.data.splitting_mngs_result.length == 0) {
+                this.showToast("请填写术中超声裂解液mNGS")
+                return false;
+            }
+        }
+        if (!this.data.pro_doctor) {
+            if (this.data.pro_doctor.length == 0) {
+                this.showToast("请填写主刀医师")
+                return false;
+            }
+            if (this.data.narcosis_level == 0) {
+                this.showToast("请选择麻醉分级")
+                return false;
+            }
+            if (this.data.narcosis_type == 0) {
+                this.showToast("请选择麻醉方式")
+                return false;
+            }
+            if (this.data.operation == 0) {
+                this.showToast("请选择术式")
+                return false;
+            }
+            if (this.data.prosthesis == 0) {
+                this.showToast("请选择术中假体")
+                return false;
+            }
+            if (this.data.operation_duration.length == 0) {
+                this.showToast("请填写手术时长")
+                return false;
+            }
+            if (this.data.haemorrhage_volume.length == 0) {
+                this.showToast("请填写出血量")
+                return false;
+            }
+            if (!this.data.bone_cement_type_state == 1 && this.data.bone_cement_type == 0) {
+                this.showToast("请选择骨水泥类型")
+                return false;
+            }
+            if (!this.data.bone_cement_volume_state == 1 && this.data.bone_cement_volume == 0) {
+                this.showToast("请填写每40g骨水泥中，抗生素种类及含量")
+                return false;
+            }
+        }
+        if (!this.data.leave_summary) {
+            if (this.data.leave_hospital_date == "请选择日期") {
+                this.showToast("请选择出院日期")
+                return false;
+            }
+            if (this.data.msis == 0) {
+                this.showToast("请选择2014MSIS诊断标准")
+                return false;
+            }
+            if (this.data.icm == 0) {
+                this.showToast("请选择2018ICM新标准")
+                return false;
+            }
+            if (this.data.special_event.length == 0) {
+                this.showToast("请填写住院期间特殊事件")
+                return false;
+            }
+            if (this.data.antibiotic_scene == 0) {
+                this.showToast("请选择抗生素应用情景")
+                return false;
+            }
+            if (this.data.germ_name.length == 0) {
+                this.showToast("请填写细菌名称")
+                return false;
+            }
+        }
 
         return true
     },

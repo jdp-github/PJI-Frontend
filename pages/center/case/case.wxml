@@ -77,7 +77,6 @@
                             <view class="flex-sub text-small">
                                 <div class="flex">
                                     <view class="flex-sub">
-
                                         <view class="cu-tag round first-line-container" style="background-color:#00A8F9;">要素审核:{{item.element}}</view>
                                         <view class="cu-tag round first-line-container" style="background-color:#FAADC7">药物治疗:{{item.medication}}</view>
                                         <view class="cu-tag round first-line-container" style="background-color:#FFC814">标本取样:{{item.sample}}次</view>

@@ -385,7 +385,6 @@ Page({
     },
 
     onLoad: function(options) {
-        debugger
         this.loadProgress();
         this.setData({
             isAdmin: app.globalData.is_admin == '1',
@@ -571,7 +570,7 @@ Page({
         wx.request({
             url: constant.basePath,
             data: {
-                service: 'Case.CreateEditCasePuncture',
+                service: 'Case.EditCasePuncture',
                 case_id: that.data.caseId,
                 openid: app.globalData.openid,
                 json_data: that.makeData()
@@ -580,7 +579,7 @@ Page({
                 'content-type': 'application/json'
             },
             success(res) {
-                console.log("Case.CreateEditCasePuncture:" + JSON.stringify(res))
+                console.log("Case.EditCasePuncture:" + JSON.stringify(res))
                 that.hideLoading();
                 if (res.data.data.code == 0) {
                     that.showToast("提交成功")

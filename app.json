@@ -1,10 +1,10 @@
 {
     "pages": [
         "pages/auth/auth",
+        "pages/center/case/timeline/timeline",
         "pages/center/case/shoushu/shoushu",
         "pages/center/case/chuanci/chuanci",
         "pages/center/case/base/base",
-        "pages/center/case/timeline/timeline",
         "pages/center/manage/manage",
         "pages/center/center",
         "pages/stats/stats",

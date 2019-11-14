@@ -100,6 +100,8 @@ Page({
         this.setData({
             modalName: 'AddCase'
         })
+
+        this.clearDialogValue()
     },
 
     onSubmitAdd() {
@@ -153,9 +155,8 @@ Page({
     },
 
 
-    onHideAdd() {
+    clearDialogValue() {
         this.setData({
-            modalName: null,
             addCaseName: '',
             addCaseID: '',
             addCasePartIndex: 0,
@@ -166,15 +167,27 @@ Page({
     showExistCase(e) {
         this.hideModal()
         wx.navigateTo({
-            url: '../case/timeline/timeline?caseId=' + this.data.caseId + "&centerId=" + this.data.centerId + "&centerName=" + this.data.centerName + "&isLook=" + true
+            url: '../case/timeline/timeline?caseInfo=' + this.makeCaseInfo() + "&centerId=" + this.data.centerId + "&centerName=" + this.data.centerName
         });
+    },
+
+    makeCaseInfo() {
+        let caseInfo = {
+            case_id: this.data.caseId,
+            case_no: this.data.addCaseID,
+            patient_name: this.data.addCaseName,
+            side_name: this.data.addCaseSidePicker[this.data.addCaseSideIndex],
+            part_name: this.data.addCasePartPicker[this.data.addCasePartIndex],
+        }
+
+        return JSON.stringify(caseInfo)
     },
 
     // 查看
     onLookCase: function(e) {
         let caseInfo = e.currentTarget.dataset.case;
         wx.navigateTo({
-            url: '../case/timeline/timeline?caseId=' + caseInfo.case_id + "&centerId=" + this.data.centerId + "&centerName=" + this.data.centerName + "&isLook=" + true
+            url: '../case/timeline/timeline?caseInfo=' + JSON.stringify(caseInfo) + "&centerId=" + this.data.centerId + "&centerName=" + this.data.centerName + "&isLook=" + true
         });
     },
 
@@ -267,7 +280,6 @@ Page({
         this.setData({
             modalName: null
         });
-        this.onHideAdd()
     },
     onSearchChange: function(e) {
         this.setData({

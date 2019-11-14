@@ -28,9 +28,26 @@
     width: 180rpx;
 }
 
+.nav .cu-item {
+    font-size: 35rpx;
+    height: 80rpx;
+    line-height: 80rpx;
+}
+
+.cu-timeline>.cu-item {
+    padding: 10rpx 20rpx 10rpx 100rpx;
+}
+
 .cu-timeline .cu-time {
     width: 160rpx;
     font-size: 30rpx;
+    padding: 15rpx 0rpx;
+}
+
+.cu-timeline .cu-tag {
+    margin-left: 20rpx;
+    font-size: 20rpx;
+    padding: 0rpx 10rpx;
 }
 
 .timeline-item-container {
