@@ -160,6 +160,10 @@ Page({
         is_remain_sample: 0,
         is_remain_sample_state: 1,
         is_remain_sample_picker: ["请选择", "否", "是"],
+        sample_desc: [],
+        sample_used: [],
+        saveMsg: '',
+        usedMsg: '',
         // -------- 穿刺小结 end -------- //
 
         // ------- 图片上传 start --------- //
@@ -283,10 +287,14 @@ Page({
             [type]: parseInt(e.detail.value)
         })
     },
+    // <= 21天 或者 <= 3周是急性
     onDateChange(e) {
         let type = e.currentTarget.dataset.type
         this.setData({
-            [type]: e.detail.value
+            [type]: e.detail.value,
+            last_operation_duration: util.getIntervalMonth(new Date(), new Date(e.detail.value)),
+            symptoms_duration: util.getIntervalDay(new Date(e.detail.value), new Date()),
+            properties: this.data.symptoms_duration <= 21 ? '急性' : '慢性'
         })
     },
     onInput(e) {
@@ -364,17 +372,17 @@ Page({
     onRadioChange(e) {
         let type = e.currentTarget.dataset.type
         this.setData({
-            [type]: e.detail.value
+            [type]: parseInt(e.detail.value)
         })
     },
 
     // 标本存放情况
     onSpecimenDesc: function(e) {
-        // if (this.data.sample_desc.length > 0) {
-        //     wx.navigateTo({
-        //         url: '../../specimen/detail/detail?boxId=' + this.data.sample_desc[0].box_id + '&centerId=' + this.data.centerId + "&caseId=" + this.data.caseId + "&boxUse=" + this.data.sample_desc[0].uses
-        //     })
-        // }
+        if (this.data.sample_desc.length > 0) {
+            wx.navigateTo({
+                url: '../../specimen/detail/detail?boxId=' + this.data.sample_desc[0].box_id + '&centerId=' + this.data.centerId + "&caseId=" + this.data.caseId + "&boxUse=" + this.data.sample_desc[0].uses
+            })
+        }
     },
     onShowDrawer() {
         if (!this.data.base_info) {
@@ -415,7 +423,7 @@ Page({
                 console.log("Case.GetCaseInfo:" + JSON.stringify(res))
                 that.hideLoading();
                 if (res.data.data.code == 0) {
-                    // that.initViewByData(res.data.data.info)
+                    that.initViewByData(res.data.data.info)
                 } else {
                     that.showModal("ErrModal", res.data.msg);
                 }
@@ -429,71 +437,76 @@ Page({
     initViewByData(info) {
         this.setData({
             caseInfo: info,
-            addAvatar: info.puncture.puncture_creator_avatar,
-            updateAvatarArr: this.makeUpdateAvatar(info.puncture.puncture_editor_list),
-            approveAvatar: info.puncture.puncture_auditor_avatar,
+            addAvatar: info.puncture_creator_avatar,
+            updateAvatarArr: this.makeUpdateAvatar(info.puncture_editor_list),
+            approveAvatar: info.puncture_auditor_avatar,
         });
 
         // 诊断性穿刺
         this.setData({
-            chuangciDate: this.getDefaultDate(info.puncture.puncture_date),
-            ccDateDisabled: this.getNumDisable(info.puncture.puncture_date),
-            ccDescribe: info.puncture.puncture_desc,
-            ccDescribeDisabeld: this.getValueDisable(info.puncture.puncture_desc),
-            ccgjy: this.getDefaultNum(info.puncture.rinse_fluid_volume),
-            ccgjyDisabled: this.getNumDisable(info.puncture.rinse_fluid_volume),
-            ccgxy: this.getDefaultNum(info.puncture.rinse_lavage_volume),
-            ccgxyDisabled: this.getNumDisable(info.puncture.rinse_lavage_volume),
-            leIndex: info.puncture.le_testpaper_stoste,
-            leDisabled: this.getNumDisable(info.puncture.le_testpaper_stoste),
-            pic1: info.puncture.le_testpaper_pic.pic1Upload ? info.puncture.le_testpaper_pic.pic1Upload : '',
-            pic1Upload: info.puncture.le_testpaper_pic_file.pic1Upload ? info.puncture.le_testpaper_pic_file.pic1Upload : '',
-            pic2: info.puncture.le_testpaper_pic.pic2Upload ? info.puncture.le_testpaper_pic.pic2Upload : '',
-            pic2Upload: info.puncture.le_testpaper_pic_file.pic2Upload ? info.puncture.le_testpaper_pic_file.pic2Upload : '',
-            pic3: info.puncture.le_testpaper_pic.pic3Upload ? info.puncture.le_testpaper_pic.pic3Upload : '',
-            pic3Upload: info.puncture.le_testpaper_pic_file.pic3Upload ? info.puncture.le_testpaper_pic_file.pic3Upload : '',
-            leAfterIndex: info.puncture.le_testpaper_centrifugal,
-            leAfterDisabled: this.getNumDisable(info.puncture.le_testpaper_centrifugal),
-            pic4: info.puncture.le_testpaper_centr_pic.pic4Upload ? info.puncture.le_testpaper_centr_pic.pic4Upload : '',
-            pic4Upload: info.puncture.le_testpaper_centr_pic_file.pic4Upload ? info.puncture.le_testpaper_centr_pic_file.pic4Upload : '',
-            pic5: info.puncture.le_testpaper_centr_pic.pic5Upload ? info.puncture.le_testpaper_centr_pic.pic5Upload : '',
-            pic5Upload: info.puncture.le_testpaper_centr_pic_file.pic5Upload ? info.puncture.le_testpaper_centr_pic_file.pic5Upload : '',
-            pic6: info.puncture.le_testpaper_centr_pic.pic6Upload ? info.puncture.le_testpaper_centr_pic.pic6Upload : '',
-            pic6Upload: info.puncture.le_testpaper_centr_pic_file.pic6Upload ? info.puncture.le_testpaper_centr_pic_file.pic6Upload : '',
-            gjybxb: this.getDefaultNum(info.puncture.joint_fluid_leukocyte),
-            gjybxbDisabled: this.getNumDisable(info.puncture.joint_fluid_leukocyte),
-            gjyzx: this.getDefaultNum(info.puncture.neutrophils_percent),
-            gjyzxDisabled: this.getNumDisable(info.puncture.neutrophils_percent),
-            bcpysjIndex: info.puncture.culture_type,
-            bcpysjDisabled: this.getNumDisable(info.puncture.culture_type),
-            drgpyp: this.getDefaultNum(info.puncture.culture_bottle_fluid_volume),
-            drgpypDisabled: this.getNumDisable(info.puncture.culture_bottle_fluid_volume),
-            bcxyResult: info.puncture.aerobic_culture_result,
-            bcxyResultDisabled: this.getValueDisable(info.puncture.aerobic_culture_result),
-            bcxyLast: this.getDefaultNum(info.puncture.aerobic_culture_time),
-            bcxyLastDisabled: this.getNumDisable(info.puncture.aerobic_culture_time),
-            bcyyResult: info.puncture.anaerobic_culture_result,
-            bcyyResultDisabled: this.getValueDisable(info.puncture.anaerobic_culture_result),
-            bcyyLast: this.getDefaultNum(info.puncture.anaerobic_culture_time),
-            bcyyLastDisabled: this.getNumDisable(info.puncture.anaerobic_culture_time),
-            mNGSTypeIndex: info.puncture.mngs_type,
-            mNGSTypeDisabled: this.getNumDisable(info.puncture.mngs_type),
-            mNGSResult: info.puncture.joint_fluid_mngs_result,
-            mNGSResultDisabled: this.getValueDisable(info.puncture.joint_fluid_mngs_result),
-            sqSecondxy: info.puncture.puncture_aerobic_culture_result2,
-            sqSecondxyDisabled: this.getValueDisable(info.puncture.puncture_aerobic_culture_result2),
-            sqSecondyy: info.puncture.puncture_anaerobic_culture_result2,
-            sqSecondyyDisabled: this.getValueDisable(info.puncture.puncture_anaerobic_culture_result2),
-            sqThirdxy: info.puncture.puncture_aerobic_culture_result3,
-            sqThirdxyDisabled: this.getValueDisable(info.puncture.puncture_aerobic_culture_result3),
-            sqThirdyy: info.puncture.puncture_anaerobic_culture_result3,
-            sqThirdyyDisabled: this.getValueDisable(info.puncture.puncture_anaerobic_culture_result3),
+            base_info: info.base_info == 1,
+            puncture_date: this.getDefaultDate(info.puncture_date),
+            puncture_type: info.puncture_type,
+            puncture_desc: info.puncture_desc,
+            last_operation_duration: this.getDefaultNum(info.last_operation_duration),
+            symptoms_duration: this.getDefaultNum(info.symptoms_duration),
+            properties: info.properties,
+            antibiotic_history: info.antibiotic_history,
+            immuno_history: info.immuno_history,
+            is_heat: info.is_heat,
+            is_erythema: info.is_erythema,
+            is_swelling: info.is_swelling,
+            is_fever: info.is_fever,
+            is_pain: info.is_pain,
+            is_sinus: info.is_sinus,
+            exterior_pics: info.exterior_pics,
+
+            assay_check: info.assay_check == 1,
+            esr: this.getDefaultNum(info.esr),
+            crp: this.getDefaultNum(info.crp),
+            conver_crp: this.getDefaultNum(info.conver_crp),
+            il6: this.getDefaultNum(info.il6),
+            dimer: this.getDefaultNum(info.dimer),
+            fibrinogen: this.getDefaultNum(info.fibrinogen),
+            joint_fluid_desc: info.joint_fluid_desc,
+            joint_fluid_desc_pic: info.joint_fluid_desc_pics,
+            rinse_fluid_volume: this.getDefaultNum(info.rinse_fluid_volume),
+            rinse_lavage_volume: this.getDefaultNum(info.rinse_lavage_volume),
+            le_testpaper_stoste: info.le_testpaper_stoste,
+            le_testpaper_stoste_pic: info.le_testpaper_stoste_pics,
+            le_testpaper_centrifugal: info.le_testpaper_centrifugal,
+            le_testpaper_centrifugal_pic: info.le_testpaper_centrifugal_pics,
+            joint_fluid_wbc: this.getDefaultNum(info.joint_fluid_wbc),
+            pmn: this.getDefaultNum(info.pmn),
+            sious_throat_swabs1: info.sious_throat_swabs1,
+            sious_throat_swabs1_pic: info.sious_throat_swabs1_pic,
+            sious_throat_swabs2: info.sious_throat_swabs2,
+            sious_throat_swabs2_pic: info.sious_throat_swabs2_pic,
+            sious_throat_swabs3: info.sious_throat_swabs3,
+            sious_throat_swabs3_pic: info.sious_throat_swabs3_pic,
+            culture_type: info.culture_type,
+            culture_bottle_fluid_volume: this.getDefaultNum(info.culture_bottle_fluid_volume),
+            aerobic_result: info.aerobic_result,
+            aerobic_result_pic: info.aerobic_result_pic,
+            anaerobic_result: info.anaerobic_result,
+            anaerobic_result_pic: info.anaerobic_result_pic,
+            ngs_type: info.ngs_type,
+            ngs_fluid_volume: this.getDefaultNum(info.ngs_fluid_volume),
+            ngs_result: info.ngs_result,
+            other_check: info.other_check,
+
+            puncture_summary: info.puncture_summary == 1,
+            present_result: info.present_result,
+            thistime_result: info.thistime_result,
+            is_remain_sample: info.is_remain_sample,
+            puncture_creator: info.puncture_creator,
+            puncture_auditor: info.puncture_auditor,
+            puncture_progress: info.puncture_progress,
+            puncture_state: info.puncture_state,
             // 已存标本
-            sample_desc: info.puncture.sample_deposit,
+            sample_desc: info.sample_deposit,
             // 已取标本
-            sample_used: info.puncture.sample_used,
-            saveMsg: '',
-            usedMsg: '',
+            sample_used: info.sample_used,
         })
 
         // 标本存放情况
@@ -536,14 +549,6 @@ Page({
         return dateValue
     },
 
-    getValueDisable(value) {
-        return value.length <= 0
-    },
-
-    getNumDisable(value) {
-        return value <= 0
-    },
-
     makeUpdateAvatar(avatarObjList) {
         var avatarList = [];
         var avatarLen = avatarObjList.length;
@@ -573,7 +578,8 @@ Page({
                 service: 'Case.EditCasePuncture',
                 case_id: that.data.caseId,
                 openid: app.globalData.openid,
-                json_data: that.makeData()
+                json_data: that.makeData(),
+                fields_state: makeFiled()
             },
             header: {
                 'content-type': 'application/json'
@@ -756,44 +762,81 @@ Page({
         return true
     },
 
+    makeFiled() {
+        
+    },
+
     makeData() {
         let that = this
-        var lePic = {
-            pic1Upload: that.data.pic1Upload,
-            pic2Upload: that.data.pic2Upload,
-            pic3Upload: that.data.pic3Upload,
-        }
-        var leCentrPic = {
-            pic4Upload: that.data.pic4Upload,
-            pic5Upload: that.data.pic5Upload,
-            pic6Upload: that.data.pic6Upload,
-        }
         var jsonData = {
-            puncture_date: that.data.ccDateDisabled ? 0 : new Date(that.data.chuangciDate).getTime() / 1000,
-            puncture_desc: that.data.ccDescribe,
-            rinse_fluid_volume: parseFloat(this.getDefaultValue(that.data.ccgjy)),
-            rinse_lavage_volume: parseFloat(this.getDefaultValue(that.data.ccgxy)),
-            le_testpaper_stoste: parseInt(this.getDefaultValue(that.data.leIndex)),
-            le_testpaper_pic: JSON.stringify(lePic),
-            le_testpaper_centrifugal: parseInt(this.getDefaultValue(that.data.leAfterIndex)),
-            le_testpaper_centr_pic: JSON.stringify(leCentrPic),
-            joint_fluid_leukocyte: parseInt(this.getDefaultValue(that.data.gjybxb)),
-            neutrophils_percent: parseFloat(this.getDefaultValue(that.data.gjyzx)),
-            culture_type: parseInt(this.getDefaultValue(that.data.bcpysjIndex)),
-            culture_bottle_fluid_volume: parseFloat(this.getDefaultValue(that.data.drgpyp)),
-            aerobic_culture_result: that.data.bcxyResult,
-            aerobic_culture_time: parseInt(this.getDefaultValue(that.data.bcxyLast)),
-            anaerobic_culture_result: that.data.bcyyResult,
-            anaerobic_culture_time: parseInt(this.getDefaultValue(that.data.bcyyLast)),
-            mngs_type: parseInt(that.data.mNGSTypeIndex),
-            joint_fluid_mngs_result: that.data.mNGSResult,
-            puncture_aerobic_culture_result2: that.data.sqSecondxy,
-            puncture_anaerobic_culture_result2: that.data.sqSecondyy,
-            puncture_aerobic_culture_result3: that.data.sqThirdxy,
-            puncture_anaerobic_culture_result3: that.data.sqThirdyy,
+            base_info: base_info ? "1" : "0",
+            puncture_date: new Date(that.data.puncture_date).getTime() / 1000,
+            puncture_type: that.data.puncture_type,
+            puncture_desc: that.data.puncture_desc,
+            last_operation_duration: that.data.last_operation_duration,
+            symptoms_duration: that.data.symptoms_duration,
+            properties: that.data.properties,
+            antibiotic_history: that.data.antibiotic_history,
+            immuno_history: that.data.immuno_history,
+            is_heat: that.data.is_heat,
+            is_erythema: that.data.is_erythema,
+            is_swelling: that.data.is_swelling,
+            is_fever: that.data.is_fever,
+            is_pain: that.data.is_pain,
+            is_sinus: that.data.is_sinus,
+            exterior_pics: that.makePicJson(that.data.exterior_pics),
+
+            assay_check: that.data.assay_check ? 1 : 0,
+            esr: parseInt(this.getDefaultValue(that.data.esr)),
+            crp: parseFloat(this.getDefaultValue(that.data.crp)),
+            conver_crp: parseFloat(this.getDefaultValue(that.data.conver_crp)),
+            il6: parseFloat(this.getDefaultValue(that.data.il6)),
+            dimer: parseFloat(this.getDefaultValue(that.data.dimer)),
+            fibrinogen: parseFloat(this.getDefaultValue(that.data.fibrinogen)),
+            joint_fluid_desc: that.data.joint_fluid_desc,
+            joint_fluid_desc_pics: that.data.joint_fluid_desc_pic,
+            rinse_fluid_volume: parseFloat(this.getDefaultValue(that.data.rinse_fluid_volume)),
+            rinse_lavage_volume: parseFloat(this.getDefaultValue(that.data.rinse_lavage_volume)),
+            le_testpaper_stoste: that.data.le_testpaper_stoste,
+            le_testpaper_stoste_pics: that.data.le_testpaper_stoste_pic,
+            le_testpaper_centrifugal: that.data.le_testpaper_centrifugal,
+            le_testpaper_centrifugal_pics: that.data.le_testpaper_centrifugal_pic,
+            joint_fluid_wbc: parseInt(this.getDefaultValue(that.data.joint_fluid_wbc)),
+            pmn: parseFloat(this.getDefaultValue(that.data.pmn)),
+            sious_throat_swabs1: that.data.sious_throat_swabs1,
+            sious_throat_swabs1_pic: that.data.sious_throat_swabs1_pic,
+            sious_throat_swabs2: that.data.sious_throat_swabs2,
+            sious_throat_swabs2_pic: that.data.sious_throat_swabs2_pic,
+            sious_throat_swabs3: that.data.sious_throat_swabs3,
+            sious_throat_swabs3_pic: that.data.sious_throat_swabs3_pic,
+            culture_type: that.data.culture_type,
+            culture_bottle_fluid_volume: parseFloat(this.getDefaultValue(that.data.culture_bottle_fluid_volume)),
+            aerobic_result: that.data.aerobic_result,
+            aerobic_result_pic: that.data.aerobic_result_pic,
+            anaerobic_result: that.data.anaerobic_result,
+            anaerobic_result_pic: that.data.anaerobic_result_pic,
+            ngs_type: that.data.ngs_type,
+            ngs_fluid_volume: parseFloat(this.getDefaultValue(that.data.ngs_fluid_volume)),
+            ngs_result: that.data.ngs_result,
+            other_check: that.data.other_check,
+
+            puncture_summary: that.data.puncture_summary ? 1 : 0,
+            present_result: that.data.present_result,
+            thistime_result: that.data.thistime_result,
+            is_remain_sample: that.data.is_remain_sample,
         }
         console.log("穿刺：" + JSON.stringify(jsonData))
         return JSON.stringify(jsonData)
+    },
+
+    makePicJson(picArr) {
+        let picArrStr = '';
+        if (picArr && picArr.length > 0) {
+            picArr.forEach(function(item) {
+                picArrStr += item.picUpload + ","
+            })
+        }
+        return picArrStr.substr(0, picArrStr.length - 1);
     },
 
     getDefaultValue(value) {

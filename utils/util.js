@@ -39,7 +39,21 @@ function getNowFormatDate(lastYear) {
     return currentdate;
 }
 
+function getIntervalMonth(startDate, endDate) {
+    var startMonth = startDate.getMonth();
+    var endMonth = endDate.getMonth();
+    var intervalMonth = (startDate.getFullYear() * 12 + startMonth) - (endDate.getFullYear() * 12 + endMonth);
+    return intervalMonth;
+}
+
+function getIntervalDay(startDate, endDate) {
+    let intervalDay = endDate.getTime() / 1000 - startDate.getTime() / 1000
+    return parseInt(intervalDay / 60 / 60 / 24)
+}
+
 module.exports = {
     formatTime: formatTime,
-    getNowFormatDate: getNowFormatDate
+    getNowFormatDate: getNowFormatDate,
+    getIntervalMonth: getIntervalMonth,
+    getIntervalDay: getIntervalDay
 };

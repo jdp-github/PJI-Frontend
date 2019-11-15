@@ -372,7 +372,7 @@
                     <view class="cu-form-group {{thistime_result_state==2?'clock':''}}">
                         <view style='display:flex;flex-direction: column; '>
                             <view class='title' style='text-align:left'>本次诊疗周期最终诊断</view>
-                            <input placeholder="请输入数字，请注意单位换算" class='radius' style='width: 350rpx;text-align:left;' type='number' bindinput="onInput" value='{{thistime_result}}' disabled="{{thistime_result_state==2}}" data-type="thistime_result"></input>
+                            <input placeholder="请输入文字" class='radius' style='width: 350rpx;text-align:left;' type='number' bindinput="onInput" value='{{thistime_result}}' disabled="{{thistime_result_state==2}}" data-type="thistime_result"></input>
                         </view>
                     </view>
                     <!-- 本次穿刺相关的后续手术治疗 -->
