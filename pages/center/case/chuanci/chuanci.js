@@ -61,12 +61,12 @@ Page({
         immuno_history_state: 1,
         immuno_history_picker: ['请选择', '无', '已停2周以上', '2周内有使用', '1周内有使用', '3天内有使用用', '持续服用中'],
         // 弹出框
-        is_heat: '',
-        is_erythema: '',
-        is_swelling: '',
-        is_fever: '',
-        is_pain: '',
-        is_sinus: '',
+        is_heat: 0,
+        is_erythema: 0,
+        is_swelling: 0,
+        is_fever: 0,
+        is_pain: 0,
+        is_sinus: 0,
         exterior_pics: [],
         // -------- 基本情况 end -------- //
 
@@ -453,12 +453,12 @@ Page({
             properties: info.properties,
             antibiotic_history: info.antibiotic_history,
             immuno_history: info.immuno_history,
-            is_heat: info.is_heat,
-            is_erythema: info.is_erythema,
-            is_swelling: info.is_swelling,
-            is_fever: info.is_fever,
-            is_pain: info.is_pain,
-            is_sinus: info.is_sinus,
+            is_heat: parseInt(info.is_heat),
+            is_erythema: parseInt(info.is_erythema),
+            is_swelling: parseInt(info.is_swelling),
+            is_fever: parseInt(info.is_fever),
+            is_pain: parseInt(info.is_pain),
+            is_sinus: parseInt(info.is_sinus),
             exterior_pics: info.exterior_pics,
 
             assay_check: info.assay_check == 1,
@@ -514,9 +514,9 @@ Page({
             saveMsg: this.getSpecimenInfo(this.data.sample_desc)
         });
         // 标本取出情况
-        this.setData({
-            usedMsg: this.getSpecimenInfo(this.data.sample_used)
-        });
+        // this.setData({
+        //     usedMsg: this.getSpecimenInfo(this.data.sample_used)
+        // });
     },
 
     getSpecimenInfo(specimenArr) {
@@ -579,7 +579,7 @@ Page({
                 case_id: that.data.caseId,
                 openid: app.globalData.openid,
                 json_data: that.makeData(),
-                fields_state: makeFiled()
+                fields_state: that.makeFiled()
             },
             header: {
                 'content-type': 'application/json'
@@ -763,18 +763,63 @@ Page({
     },
 
     makeFiled() {
-        
+        let field_state = []
+        field_state.push(this.makeFiledObj("puncture_date"));
+        field_state.push(this.makeFiledObj("puncture_type"));
+        field_state.push(this.makeFiledObj("puncture_desc"));
+        field_state.push(this.makeFiledObj("antibiotic_history"));
+        field_state.push(this.makeFiledObj("immuno_history"));
+
+        field_state.push(this.makeFiledObj("esr"));
+        field_state.push(this.makeFiledObj("crp"));
+        field_state.push(this.makeFiledObj("il6"));
+        field_state.push(this.makeFiledObj("dimer"));
+        field_state.push(this.makeFiledObj("fibrinogen"));
+        field_state.push(this.makeFiledObj("joint_fluid_desc"));
+        field_state.push(this.makeFiledObj("rinse_fluid_volume"));
+        field_state.push(this.makeFiledObj("rinse_lavage_volume"));
+        field_state.push(this.makeFiledObj("le_testpaper_stoste"));
+        field_state.push(this.makeFiledObj("le_testpaper_centrifugal"));
+        field_state.push(this.makeFiledObj("joint_fluid_wbc"));
+        field_state.push(this.makeFiledObj("pmn"));
+        field_state.push(this.makeFiledObj("sious_throat_swabs1"));
+        field_state.push(this.makeFiledObj("sious_throat_swabs2"));
+        field_state.push(this.makeFiledObj("sious_throat_swabs3"));
+        field_state.push(this.makeFiledObj("culture_type"));
+        field_state.push(this.makeFiledObj("culture_bottle_fluid_volume"));
+        field_state.push(this.makeFiledObj("aerobic_result"));
+        field_state.push(this.makeFiledObj("anaerobic_result"));
+        field_state.push(this.makeFiledObj("ngs_type"));
+        field_state.push(this.makeFiledObj("ngs_fluid_volume"));
+        field_state.push(this.makeFiledObj("ngs_result"));
+        field_state.push(this.makeFiledObj("other_check"));
+
+        field_state.push(this.makeFiledObj("present_result"));
+        field_state.push(this.makeFiledObj("thistime_result"));
+        field_state.push(this.makeFiledObj("is_remain_sample"));
+
+        let filedStr = JSON.stringify(field_state)
+        console.log("穿刺state：" + filedStr)
+        return filedStr
+    },
+
+    makeFiledObj(filedName) {
+        return {
+            field_name: filedName,
+            type: 2,
+            state: this.data[filedName + "_state"]
+        }
     },
 
     makeData() {
         let that = this
         var jsonData = {
-            base_info: base_info ? "1" : "0",
-            puncture_date: new Date(that.data.puncture_date).getTime() / 1000,
+            base_info: that.data.base_info ? "1" : "0",
+            puncture_date: that.makeDefaultDate(that.data.puncture_date),
             puncture_type: that.data.puncture_type,
             puncture_desc: that.data.puncture_desc,
-            last_operation_duration: that.data.last_operation_duration,
-            symptoms_duration: that.data.symptoms_duration,
+            last_operation_duration: that.makeDefaultNum(that.data.last_operation_duration),
+            symptoms_duration: that.makeDefaultNum(that.data.symptoms_duration),
             properties: that.data.properties,
             antibiotic_history: that.data.antibiotic_history,
             immuno_history: that.data.immuno_history,
@@ -787,22 +832,22 @@ Page({
             exterior_pics: that.makePicJson(that.data.exterior_pics),
 
             assay_check: that.data.assay_check ? 1 : 0,
-            esr: parseInt(this.getDefaultValue(that.data.esr)),
-            crp: parseFloat(this.getDefaultValue(that.data.crp)),
-            conver_crp: parseFloat(this.getDefaultValue(that.data.conver_crp)),
-            il6: parseFloat(this.getDefaultValue(that.data.il6)),
-            dimer: parseFloat(this.getDefaultValue(that.data.dimer)),
-            fibrinogen: parseFloat(this.getDefaultValue(that.data.fibrinogen)),
+            esr: parseInt(this.makeDefaultValue(that.data.esr)),
+            crp: parseFloat(this.makeDefaultValue(that.data.crp)),
+            conver_crp: parseFloat(this.makeDefaultValue(that.data.conver_crp)),
+            il6: parseFloat(this.makeDefaultValue(that.data.il6)),
+            dimer: parseFloat(this.makeDefaultValue(that.data.dimer)),
+            fibrinogen: parseFloat(this.makeDefaultValue(that.data.fibrinogen)),
             joint_fluid_desc: that.data.joint_fluid_desc,
             joint_fluid_desc_pics: that.data.joint_fluid_desc_pic,
-            rinse_fluid_volume: parseFloat(this.getDefaultValue(that.data.rinse_fluid_volume)),
-            rinse_lavage_volume: parseFloat(this.getDefaultValue(that.data.rinse_lavage_volume)),
+            rinse_fluid_volume: parseFloat(this.makeDefaultValue(that.data.rinse_fluid_volume)),
+            rinse_lavage_volume: parseFloat(this.makeDefaultValue(that.data.rinse_lavage_volume)),
             le_testpaper_stoste: that.data.le_testpaper_stoste,
             le_testpaper_stoste_pics: that.data.le_testpaper_stoste_pic,
             le_testpaper_centrifugal: that.data.le_testpaper_centrifugal,
             le_testpaper_centrifugal_pics: that.data.le_testpaper_centrifugal_pic,
-            joint_fluid_wbc: parseInt(this.getDefaultValue(that.data.joint_fluid_wbc)),
-            pmn: parseFloat(this.getDefaultValue(that.data.pmn)),
+            joint_fluid_wbc: parseInt(this.makeDefaultValue(that.data.joint_fluid_wbc)),
+            pmn: parseFloat(this.makeDefaultValue(that.data.pmn)),
             sious_throat_swabs1: that.data.sious_throat_swabs1,
             sious_throat_swabs1_pic: that.data.sious_throat_swabs1_pic,
             sious_throat_swabs2: that.data.sious_throat_swabs2,
@@ -810,13 +855,13 @@ Page({
             sious_throat_swabs3: that.data.sious_throat_swabs3,
             sious_throat_swabs3_pic: that.data.sious_throat_swabs3_pic,
             culture_type: that.data.culture_type,
-            culture_bottle_fluid_volume: parseFloat(this.getDefaultValue(that.data.culture_bottle_fluid_volume)),
+            culture_bottle_fluid_volume: parseFloat(this.makeDefaultValue(that.data.culture_bottle_fluid_volume)),
             aerobic_result: that.data.aerobic_result,
             aerobic_result_pic: that.data.aerobic_result_pic,
             anaerobic_result: that.data.anaerobic_result,
             anaerobic_result_pic: that.data.anaerobic_result_pic,
             ngs_type: that.data.ngs_type,
-            ngs_fluid_volume: parseFloat(this.getDefaultValue(that.data.ngs_fluid_volume)),
+            ngs_fluid_volume: parseFloat(this.makeDefaultValue(that.data.ngs_fluid_volume)),
             ngs_result: that.data.ngs_result,
             other_check: that.data.other_check,
 
@@ -829,6 +874,18 @@ Page({
         return JSON.stringify(jsonData)
     },
 
+    makeDefaultNum(num) {
+        return num.length > 0 ? num : 0
+    },
+
+    makeDefaultDate(date) {
+        if (date == "请选择日期") {
+            return 0
+        } else {
+            return new Date(date).getTime() / 1000
+        }
+    },
+
     makePicJson(picArr) {
         let picArrStr = '';
         if (picArr && picArr.length > 0) {
@@ -839,7 +896,7 @@ Page({
         return picArrStr.substr(0, picArrStr.length - 1);
     },
 
-    getDefaultValue(value) {
+    makeDefaultValue(value) {
         return value.length == 0 ? 0 : value
     },
 

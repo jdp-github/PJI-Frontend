@@ -635,7 +635,7 @@
                     <radio class='blue text-small' value='1' checked="{{is_heat == 1}}"></radio> 有
                 </view>
                 <view style="margin-left: 50rpx;">
-                    <radio class='blue margin-left-sm text-small' value='0'></radio> 无
+                    <radio class='blue margin-left-sm text-small' value='0' checked="{{is_heat == 0}}"></radio> 无
                 </view>
             </radio-group>
             <!-- 皮肤发红（Erythema） -->
@@ -647,7 +647,7 @@
                     <radio class='blue text-small' value='1' checked="{{is_erythema == 1}}"></radio> 有
                 </view>
                 <view style="margin-left: 50rpx;">
-                    <radio class='blue margin-left-sm text-small' value='0'></radio> 无
+                    <radio class='blue margin-left-sm text-small' value='0' checked="{{is_erythema == 0}}"></radio> 无
                 </view>
             </radio-group>
             <!-- 积液/肿胀（Effusion/swelling） -->
@@ -659,7 +659,7 @@
                     <radio class='blue text-small' value='1' checked="{{is_swelling == 1}}"></radio> 有
                 </view>
                 <view style="margin-left: 50rpx;">
-                    <radio class='blue margin-left-sm text-small' value='0'></radio> 无
+                    <radio class='blue margin-left-sm text-small' value='0' checked="{{is_swelling == 0}}"></radio> 无
                 </view>
             </radio-group>
             <!-- 局部皮温增高（fever） -->
@@ -671,7 +671,7 @@
                     <radio class='blue text-small' value='1' checked="{{is_fever == 1}}"></radio> 有
                 </view>
                 <view style="margin-left: 50rpx;">
-                    <radio class='blue margin-left-sm text-small' value='0'></radio> 无
+                    <radio class='blue margin-left-sm text-small' value='0' checked="{{is_fever == 0}}"></radio> 无
                 </view>
             </radio-group>
             <!-- 疼痛（Pain） -->
@@ -683,7 +683,7 @@
                     <radio class='blue text-small' value='1' checked="{{is_pain == 1}}"></radio> 有
                 </view>
                 <view style="margin-left: 50rpx;">
-                    <radio class='blue margin-left-sm text-small' value='0'></radio> 无
+                    <radio class='blue margin-left-sm text-small' value='0' checked="{{is_pain == 0}}"></radio> 无
                 </view>
             </radio-group>
             <!-- 与假体相通的窦道 -->
@@ -698,7 +698,7 @@
                     <radio class='blue margin-left-sm text-small' value='0' checked="{{is_sinus == 0}}"></radio> 无
                 </view>
                 <view>
-                    <radio class='blue margin-left-sm text-small' value='2'></radio> 不确定
+                    <radio class='blue margin-left-sm text-small' value='2' checked="{{is_sinus == 2}}"></radio> 不确定
                 </view>
             </radio-group>
             <!-- 外观照 -->

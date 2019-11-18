@@ -119,6 +119,7 @@
                                 </view>
                             </picker>
                         </view>
+                        <!-- 病状体征 -->
                         <view class="cu-form-group {{base_info?'clock':''}}" bindtap="onShowDrawer">
                             <view class='title'>病状体征</view>
                         </view>
@@ -376,12 +377,14 @@
                         </view>
                     </view>
                     <!-- 本次穿刺相关的后续手术治疗 -->
-                    <view class="cu-form-group">
+                    <view class="cu-form-group {{puncture_summary?'clock':''}}">
                         <view class='title' style='text-align:left'>本次穿刺相关的后续手术治疗</view>
+                        <view>暂无可关联手术</view>
                     </view>
                     <!-- 本次穿刺相关的后续随访 -->
-                    <view class="cu-form-group">
+                    <view class="cu-form-group {{puncture_summary?'clock':''}}">
                         <view class='title' style='text-align:left'>本次穿刺相关的后续随访</view>
+                        <view>暂无可关联随访</view>
                     </view>
                     <!-- 是否留有标本 -->
                     <view class="cu-form-group {{is_remain_sample_state==2?'clock':''}}">
@@ -393,14 +396,14 @@
                         </picker>
                     </view>
                     <!-- 标本存放情况 -->
-                    <view class="cu-form-group" bindtap='onSpecimenDesc'>
+                    <view wx:if="{{is_remain_sample==2}}" class="cu-form-group" bindtap='onSpecimenDesc'>
                         <view style='display:flex;flex-direction: column; '>
                             <view class='title' style='text-align:left'>标本存放情况</view>
                             <textarea placeholder="暂未存放可用标本" style='width: 350rpx;text-align:left;' class='radius' value='{{saveMsg}}' auto-height></textarea>
                         </view>
                     </view>
                     <!-- 标本使用情况 -->
-                    <view class="cu-form-group solid-bottom">
+                    <view wx:if="{{is_remain_sample==2}}" class="cu-form-group solid-bottom">
                         <view style='display:flex;flex-direction: column; '>
                             <view class='title' style='text-align:left'>标本使用情况</view>
                             <textarea placeholder="暂未使用该患者标本" style='width: 350rpx;text-align:left;' class='radius' value='{{usedMsg}}' auto-height></textarea>
@@ -521,7 +524,7 @@
                     <radio class='blue text-small' value='1' checked="{{is_heat == 1}}"></radio> 有
                 </view>
                 <view style="margin-left: 50rpx;">
-                    <radio class='blue margin-left-sm text-small' value='0'></radio> 无
+                    <radio class='blue margin-left-sm text-small' value='0' checked="{{is_heat == 0}}"></radio> 无
                 </view>
             </radio-group>
             <!-- 皮肤发红（Erythema） -->
@@ -533,7 +536,7 @@
                     <radio class='blue text-small' value='1' checked="{{is_erythema == 1}}"></radio> 有
                 </view>
                 <view style="margin-left: 50rpx;">
-                    <radio class='blue margin-left-sm text-small' value='0'></radio> 无
+                    <radio class='blue margin-left-sm text-small' value='0' checked="{{is_erythema == 0}}"></radio> 无
                 </view>
             </radio-group>
             <!-- 积液/肿胀（Effusion/swelling） -->
@@ -545,7 +548,7 @@
                     <radio class='blue text-small' value='1' checked="{{is_swelling == 1}}"></radio> 有
                 </view>
                 <view style="margin-left: 50rpx;">
-                    <radio class='blue margin-left-sm text-small' value='0'></radio> 无
+                    <radio class='blue margin-left-sm text-small' value='0' checked="{{is_swelling == 0}}"></radio> 无
                 </view>
             </radio-group>
             <!-- 局部皮温增高（fever） -->
@@ -557,7 +560,7 @@
                     <radio class='blue text-small' value='1' checked="{{is_fever == 1}}"></radio> 有
                 </view>
                 <view style="margin-left: 50rpx;">
-                    <radio class='blue margin-left-sm text-small' value='0'></radio> 无
+                    <radio class='blue margin-left-sm text-small' value='0' checked="{{is_fever == 0}}"></radio> 无
                 </view>
             </radio-group>
             <!-- 疼痛（Pain） -->
@@ -569,7 +572,7 @@
                     <radio class='blue text-small' value='1' checked="{{is_pain == 1}}"></radio> 有
                 </view>
                 <view style="margin-left: 50rpx;">
-                    <radio class='blue margin-left-sm text-small' value='0'></radio> 无
+                    <radio class='blue margin-left-sm text-small' value='0' checked="{{is_pain == 0}}"></radio> 无
                 </view>
             </radio-group>
             <!-- 与假体相通的窦道 -->
@@ -581,10 +584,10 @@
                     <radio class='blue text-small' value='1' checked="{{is_sinus == 1}}"></radio> 有
                 </view>
                 <view>
-                    <radio class='blue margin-left-sm text-small' value='0'></radio> 无
+                    <radio class='blue margin-left-sm text-small' value='0' checked="{{is_sinus == 0}}"></radio> 无
                 </view>
                 <view>
-                    <radio class='blue margin-left-sm text-small' value='2'></radio> 不确定
+                    <radio class='blue margin-left-sm text-small' value='2' checked="{{is_sinus == 2}}"></radio> 不确定
                 </view>
             </radio-group>
             <!-- 外观照 -->
