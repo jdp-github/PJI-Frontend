@@ -1,5 +1,6 @@
 {
     "pages": [
+        "pages/center/case/followup/followup",
         "pages/auth/auth",
         "pages/center/case/timeline/timeline",
         "pages/center/case/shoushu/shoushu",

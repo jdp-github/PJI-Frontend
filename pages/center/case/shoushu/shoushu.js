@@ -503,7 +503,14 @@ Page({
                 console.log("Case.GetCaseInfo:" + JSON.stringify(res))
                 that.hideLoading();
                 if (res.data.data.code == 0) {
+                    // 基本数据
                     that.initViewByData(res.data.data)
+                    // 状态
+                    res.data.data.field_state.forEach(item => {
+                        that.setData({
+                            [item.field_name + "_state"]: item.state
+                        })
+                    })
                 } else {
                     that.showModal("ErrModal", res.data.msg);
                 }
@@ -544,38 +551,38 @@ Page({
             operation_during_check: info.operation_during_check == 1,
             operation_date: this.getDefaultDate(info.operation_date),
             culture_pus: info.culture_pus,
-            culture_pus_pic: info.culture_pus_pic,
+            culture_pus_pic: this.getImgArr(info.culture_pus_pic),
             le_testpaper_stoste: info.le_testpaper_stoste,
-            le_testpaper_stoste_pic: info.le_testpaper_stoste_pics,
+            le_testpaper_stoste_pic: this.getImgArr(info.le_testpaper_stoste_pics),
             le_testpaper_centrifugal: info.le_testpaper_centrifugal,
-            le_testpaper_stoste_pic: info.le_testpaper_centrifugal_pics,
+            le_testpaper_stoste_pic: this.getImgArr(info.le_testpaper_centrifugal_pics),
             joint_fluid_wbc: this.getDefaultNum(info.joint_fluid_wbc),
             pmn: this.getDefaultNum(info.pmn),
             neutrophil: parseInt(info.neutrophil),
             tissue_culture1: info.tissue_culture1,
-            tissue_culture1_pic: info.tissue_culture1_pic,
+            tissue_culture1_pic: this.getImgArr(info.tissue_culture1_pic),
             tissue_culture2: info.tissue_culture2,
-            tissue_culture2_pic: info.tissue_culture2_pic,
+            tissue_culture2_pic: this.getImgArr(info.tissue_culture2_pic),
             tissue_culture3: info.tissue_culture3,
-            tissue_culture3_pic: info.tissue_culture3_pic,
+            tissue_culture3_pic: this.getImgArr(info.tissue_culture3_pic),
             tissue_culture4: info.tissue_culture4,
-            tissue_culture4_pic: info.tissue_culture4_pic,
+            tissue_culture4_pic: this.getImgArr(info.tissue_culture4_pic),
             tissue_culture5: info.tissue_culture5,
-            tissue_culture5_pic: info.tissue_culture5_pic,
+            tissue_culture5_pic: this.getImgArr(info.tissue_culture5_pic),
             tissue_mngs: info.tissue_mngs,
-            tissue_mngs_pic: info.tissue_mngs_pic,
+            tissue_mngs_pic: this.getImgArr(info.tissue_mngs_pic),
             joint_aerobic_result: info.joint_aerobic_result,
-            joint_aerobic_result_pic: info.joint_aerobic_result_pic,
+            joint_aerobic_result_pic: this.getImgArr(info.joint_aerobic_result_pic),
             joint_anaerobic_result: info.joint_anaerobic_result,
-            joint_anaerobic_result_pic: info.joint_anaerobic_result_pic,
+            joint_anaerobic_result_pic: this.getImgArr(info.joint_anaerobic_result_pic),
             joint_mngs_result: info.joint_mngs_result,
-            joint_mngs_result_pic: info.joint_mngs_result_pic,
+            joint_mngs_result_pic: this.getImgArr(info.joint_mngs_result_pic),
             splitting_aerobic_result: info.splitting_aerobic_result,
-            splitting_aerobic_result_pic: info.splitting_aerobic_result_pic,
+            splitting_aerobic_result_pic: this.getImgArr(info.splitting_aerobic_result_pic),
             splitting_anaerobic_result: info.splitting_anaerobic_result,
-            splitting_anaerobic_result_pic: info.splitting_anaerobic_result_pic,
+            splitting_anaerobic_result_pic: this.getImgArr(info.splitting_anaerobic_result_pic),
             splitting_mngs_result: info.splitting_mngs_result,
-            splitting_mngs_result_pic: info.splitting_mngs_result_pic,
+            splitting_mngs_result_pic: this.getImgArr(info.splitting_mngs_result_pic),
 
             operation_during_treat: info.operation_during_treat == 1,
             pro_doctor: info.pro_doctor,
@@ -587,8 +594,8 @@ Page({
             haemorrhage_volume: info.haemorrhage_volume,
             bone_cement_type: parseInt(info.bone_cement_type),
             bone_cement_volume: info.bone_cement_volume,
-            data_pic: info.data_pic,
-            data_pic: info.data_pic,
+            data_pic: this.getImgArr(info.data_pic),
+            data_video: this.getImgArr(info.data_video),
 
             leave_summary: info.leave_summary == 1,
             leave_hospital_date: this.getDefaultDate(info.leave_hospital_date),
@@ -597,28 +604,21 @@ Page({
             special_event: info.special_event,
             antibiotic_scene: parseInt(info.antibiotic_scene),
             germ_name: info.germ_name,
-            present_result: info.present_result,
-            present_result: info.present_result,
-            present_result: info.present_result,
         })
     },
 
-    getSpecimenInfo(specimenArr) {
-        let specimenMap = new Map()
-        for (let i = 0; i < specimenArr.length; i++) {
-            let box_name = specimenArr[i].box_name
-            if (!specimenMap.has(box_name)) {
-                specimenMap.set(box_name, [])
-            } else {
-                specimenMap.get(box_name).push(specimenArr[i].number)
-            }
+    getImgArr(jsonImgArr) {
+        let myImgArr = []
+        if (jsonImgArr && jsonImgArr.length > 0) {
+            jsonImgArr.forEach(function(item) {
+                let imgObj = {}
+                imgObj.pic = item;
+                imgObj.picUpload = item.replace(constant.domain + "img/", "");
+                myImgArr.push(imgObj)
+            })
         }
 
-        let specimenMsg = '';
-        specimenMap.forEach(function(value, key, map) {
-            specimenMsg += "标本盒:" + key + ",标本序号:" + value + "   "
-        });
-        return specimenMsg
+        return myImgArr;
     },
 
     getDefaultNum(num) {
@@ -681,14 +681,10 @@ Page({
                 that.hideLoading();
                 if (res.data.data.code == 0) {
                     that.showToast("提交成功")
-                    var args = {
-                        currentTarget: {
-                            dataset: {
-                                id: 2
-                            }
-                        }
-                    }
-                    that.tabSelect(args)
+                    that.reloadPrePage()
+                    wx.navigateBack({
+                        delta: 1
+                    })
                 } else {
                     that.showModal("ErrModal", res.data.data.msg);
                 }
@@ -737,23 +733,23 @@ Page({
                 this.showToast("请选择病状体征中的与假体相通的窦道")
                 return false;
             }
-            if (!this.data.esr_state == 1 && this.data.esr.length == 0) {
+            if (this.data.esr_state == 1 && this.data.esr.length == 0) {
                 this.showToast("请填写ESR")
                 return false;
             }
-            if (!this.data.crp_state == 1 && this.data.crp.length == 0) {
+            if (this.data.crp_state == 1 && this.data.crp.length == 0) {
                 this.showToast("请填写CRP")
                 return false;
             }
-            if (!this.data.il6_state == 1 && this.data.il6.length == 0) {
+            if (this.data.il6_state == 1 && this.data.il6.length == 0) {
                 this.showToast("请填写IL-6")
                 return false;
             }
-            if (!this.data.dimer_state == 1 && this.data.dimer.length == 0) {
+            if (this.data.dimer_state == 1 && this.data.dimer.length == 0) {
                 this.showToast("请填写D-dimer")
                 return false;
             }
-            if (!this.data.fibrinogen_state == 1 && this.data.fibrinogen.length == 0) {
+            if (this.data.fibrinogen_state == 1 && this.data.fibrinogen.length == 0) {
                 this.showToast("请填写Fibrinogen")
                 return false;
             }
@@ -775,60 +771,60 @@ Page({
                 this.showToast("请选择术中LE试纸（离心后）")
                 return false
             }
-            if (!this.data.joint_fluid_wbc_state == 1 && this.data.joint_fluid_wbc.length == 0) {
+            if (this.data.joint_fluid_wbc_state == 1 && this.data.joint_fluid_wbc.length == 0) {
                 this.showToast("请填写关节液WBC")
                 return false;
             }
-            if (!this.data.pmn_state == 1 && this.data.pmn.length == 0) {
+            if (this.data.pmn_state == 1 && this.data.pmn.length == 0) {
                 this.showToast("请填写PMN%")
                 return false;
             }
-            if (!this.data.neutrophil_state == 1 && this.data.neutrophil.length == 0) {
+            if (this.data.neutrophil_state == 1 && this.data.neutrophil.length == 0) {
                 this.showToast("请选择组织病理(中性粒细胞计数)")
                 return false;
             }
-            if (!this.data.tissue_culture1_state == 1 && this.data.tissue_culture1.length == 0) {
+            if (this.data.tissue_culture1_state == 1 && this.data.tissue_culture1.length == 0) {
                 this.showToast("请填写术中组织培养1")
                 return false;
             }
-            if (!this.data.tissue_culture2_state == 1 && this.data.tissue_culture2.length == 0) {
+            if (this.data.tissue_culture2_state == 1 && this.data.tissue_culture2.length == 0) {
                 this.showToast("请填写术中组织培养2")
                 return false;
             }
-            if (!this.data.tissue_culture3_state == 1 && this.data.tissue_culture3.length == 0) {
+            if (this.data.tissue_culture3_state == 1 && this.data.tissue_culture3.length == 0) {
                 this.showToast("请填写术中组织培养3")
                 return false;
             }
-            if (!this.data.tissue_culture4_state == 1 && this.data.tissue_culture4.length == 0) {
+            if (this.data.tissue_culture4_state == 1 && this.data.tissue_culture4.length == 0) {
                 this.showToast("请填写术中组织培养4")
                 return false;
             }
-            if (!this.data.tissue_culture5_state == 1 && this.data.tissue_culture5.length == 0) {
+            if (this.data.tissue_culture5_state == 1 && this.data.tissue_culture5.length == 0) {
                 this.showToast("请填写术中组织培养5")
                 return false;
             }
 
-            if (!this.data.tissue_mngs_state == 1 && this.data.tissue_mngs.length == 0) {
+            if (this.data.tissue_mngs_state == 1 && this.data.tissue_mngs.length == 0) {
                 this.showToast("请填写术中组织mNGS")
                 return false;
             }
-            if (!this.datajoint_aerobic_result_state == 1 && this.data.joint_aerobic_result.length == 0) {
+            if (this.datajoint_aerobic_result_state == 1 && this.data.joint_aerobic_result.length == 0) {
                 this.showToast("请填写术中需氧+真菌培养结果")
                 return false;
             }
-            if (!this.data.joint_anaerobic_result_state == 1 && this.data.joint_anaerobic_result.length == 0) {
+            if (this.data.joint_anaerobic_result_state == 1 && this.data.joint_anaerobic_result.length == 0) {
                 this.showToast("请填写术中厌氧+真菌培养结果")
                 return false;
             }
-            if (!this.data.splitting_aerobic_result_state == 1 && this.data.splitting_aerobic_result.length == 0) {
+            if (this.data.splitting_aerobic_result_state == 1 && this.data.splitting_aerobic_result.length == 0) {
                 this.showToast("请填写超声裂解液需氧+真菌")
                 return false;
             }
-            if (!this.data.splitting_anaerobic_result_state == 1 && this.data.splitting_anaerobic_result.length == 0) {
+            if (this.data.splitting_anaerobic_result_state == 1 && this.data.splitting_anaerobic_result.length == 0) {
                 this.showToast("请填写超声裂解液厌氧")
                 return false;
             }
-            if (!this.data.splitting_mngs_result_state == 1 && this.data.splitting_mngs_result.length == 0) {
+            if (this.data.splitting_mngs_result_state == 1 && this.data.splitting_mngs_result.length == 0) {
                 this.showToast("请填写术中超声裂解液mNGS")
                 return false;
             }
@@ -862,11 +858,11 @@ Page({
                 this.showToast("请填写出血量")
                 return false;
             }
-            if (!this.data.bone_cement_type_state == 1 && this.data.bone_cement_type == 0) {
+            if (this.data.bone_cement_type_state == 1 && this.data.bone_cement_type == 0) {
                 this.showToast("请选择骨水泥类型")
                 return false;
             }
-            if (!this.data.bone_cement_volume_state == 1 && this.data.bone_cement_volume == 0) {
+            if (this.data.bone_cement_volume_state == 1 && this.data.bone_cement_volume == 0) {
                 this.showToast("请填写每40g骨水泥中，抗生素种类及含量")
                 return false;
             }
@@ -966,35 +962,113 @@ Page({
 
     makeData() {
         let that = this
-        let jsonData = {
-            puncture_date: that.data.ccDateDisabled ? 0 : new Date(that.data.chuangciDate).getTime() / 1000,
-            puncture_desc: that.data.ccDescribe,
-            rinse_fluid_volume: parseFloat(this.getDefaultValue(that.data.ccgjy)),
-            rinse_lavage_volume: parseFloat(this.getDefaultValue(that.data.ccgxy)),
-            le_testpaper_stoste: parseInt(this.getDefaultValue(that.data.leIndex)),
-            le_testpaper_pic: JSON.stringify(lePic),
-            le_testpaper_centrifugal: parseInt(this.getDefaultValue(that.data.leAfterIndex)),
-            le_testpaper_centr_pic: JSON.stringify(leCentrPic),
-            joint_fluid_leukocyte: parseInt(this.getDefaultValue(that.data.gjybxb)),
-            neutrophils_percent: parseFloat(this.getDefaultValue(that.data.gjyzx)),
-            culture_type: parseInt(this.getDefaultValue(that.data.bcpysjIndex)),
-            culture_bottle_fluid_volume: parseFloat(this.getDefaultValue(that.data.drgpyp)),
-            aerobic_culture_result: that.data.bcxyResult,
-            aerobic_culture_time: parseInt(this.getDefaultValue(that.data.bcxyLast)),
-            anaerobic_culture_result: that.data.bcyyResult,
-            anaerobic_culture_time: parseInt(this.getDefaultValue(that.data.bcyyLast)),
-            mngs_type: parseInt(that.data.mNGSTypeIndex),
-            joint_fluid_mngs_result: that.data.mNGSResult,
-            puncture_aerobic_culture_result2: that.data.sqSecondxy,
-            puncture_anaerobic_culture_result2: that.data.sqSecondyy,
-            puncture_aerobic_culture_result3: that.data.sqThirdxy,
-            puncture_anaerobic_culture_result3: that.data.sqThirdyy,
+        var jsonData = {
+            operation_before_summary: that.data.operation_before_summary ? "1" : "0",
+            hospitalized_date: that.makeDefaultDate(that.data.hospitalized_date),
+            antibiotic_history: that.data.antibiotic_history,
+            immuno_history: that.data.immuno_history,
+            is_heat: that.data.is_heat,
+            is_erythema: that.data.is_erythema,
+            is_swelling: that.data.is_swelling,
+            is_fever: that.data.is_fever,
+            is_pain: that.data.is_pain,
+            is_sinus: that.data.is_sinus,
+            exterior_pics: that.makePicJson(that.data.exterior_pics, true),
+            esr: parseInt(this.makeDefaultValue(that.data.esr)),
+            crp: parseFloat(this.makeDefaultValue(that.data.crp)),
+            conver_crp: parseFloat(this.makeDefaultValue(that.data.conver_crp)),
+            il6: parseFloat(this.makeDefaultValue(that.data.il6)),
+            dimer: parseFloat(this.makeDefaultValue(that.data.dimer)),
+            fibrinogen: parseFloat(this.makeDefaultValue(that.data.fibrinogen)),
+
+            operation_during_check: that.data.operation_during_check ? 1 : 0,
+            operation_date: that.makeDefaultDate(that.data.operation_date),
+            culture_pus: that.data.culture_pus,
+            culture_pus_pic: that.makePicJson(that.data.culture_pus_pic),
+            le_testpaper_stoste: that.data.le_testpaper_stoste,
+            le_testpaper_stoste_pics: that.makePicJson(that.data.le_testpaper_stoste_pic),
+            le_testpaper_centrifugal: that.data.le_testpaper_centrifugal,
+            le_testpaper_centrifugal_pics: that.makePicJson(that.data.le_testpaper_centrifugal_pic),
+            joint_fluid_wbc: parseInt(this.makeDefaultValue(that.data.joint_fluid_wbc)),
+            pmn: parseFloat(this.makeDefaultValue(that.data.pmn)),
+            neutrophil: that.data.neutrophil,
+            tissue_culture1: that.data.tissue_culture1,
+            tissue_culture1_pic: that.makePicJson(that.data.tissue_culture1_pic),
+            tissue_culture2: that.data.tissue_culture2,
+            tissue_culture2_pic: that.makePicJson(that.data.tissue_culture2_pic),
+            tissue_culture3: that.data.tissue_culture3,
+            tissue_culture3_pic: that.makePicJson(that.data.tissue_culture3_pic),
+            tissue_culture4: that.data.tissue_culture4,
+            tissue_culture4_pic: that.makePicJson(that.data.tissue_culture4_pic),
+            tissue_culture5: that.data.tissue_culture5,
+            tissue_culture5_pic: that.makePicJson(that.data.tissue_culture5_pic),
+            tissue_mngs: that.data.tissue_mngs,
+            tissue_mngs_pic: that.makePicJson(that.data.tissue_mngs_pic),
+            joint_aerobic_result: that.data.joint_aerobic_result,
+            joint_aerobic_result_pic: that.makePicJson(that.data.joint_aerobic_result_pic),
+            joint_anaerobic_result: that.data.joint_anaerobic_result,
+            joint_anaerobic_result_pic: that.makePicJson(that.data.joint_anaerobic_result_pic),
+            joint_mngs_result: that.data.joint_mngs_result,
+            joint_mngs_result_pic: that.makePicJson(that.data.joint_mngs_result_pic),
+            splitting_aerobic_result: that.data.splitting_aerobic_result,
+            splitting_aerobic_result_pic: that.makePicJson(that.data.splitting_aerobic_result_pic),
+            splitting_anaerobic_result: that.data.splitting_anaerobic_result,
+            splitting_anaerobic_result_pic: that.makePicJson(that.data.splitting_anaerobic_result_pic),
+            splitting_mngs_result: that.data.splitting_mngs_result,
+            splitting_mngs_result_pic: that.makePicJson(that.data.splitting_mngs_result_pic),
+
+            operation_during_treat: that.data.operation_during_treat ? 1 : 0,
+            pro_doctor: that.data.pro_doctor,
+            narcosis_level: that.data.narcosis_level,
+            narcosis_type: that.data.narcosis_type,
+            operation: that.data.operation,
+            prosthesis: that.data.prosthesis,
+            operation_duration: that.makeDefaultNum(that.data.operation_duration),
+            haemorrhage_volume: that.makeDefaultNum(that.data.haemorrhage_volume),
+            bone_cement_type: that.data.bone_cement_type,
+            bone_cement_volume: that.data.bone_cement_volume,
+            data_pic: that.makePicJson(that.data.data_pic),
+            data_video: that.makePicJson(that.data.data_video),
+
+            leave_summary: that.data.leave_summary ? 1 : 0,
+            leave_hospital_date: that.makeDefaultDate(that.data.leave_hospital_date),
+            msis: that.data.msis,
+            icm: that.data.icm,
+            special_event: that.data.special_event,
+            antibiotic_scene: that.data.antibiotic_scene,
+            germ_name: that.data.germ_name,
         }
-        console.log("手术" + JSON.stringify(jsonData))
+        console.log("手术：" + JSON.stringify(jsonData))
         return JSON.stringify(jsonData)
     },
 
-    getDefaultValue(value) {
+    makeDefaultNum(num) {
+        return num.length > 0 ? num : 0
+    },
+
+    makeDefaultDate(date) {
+        if (date == "请选择日期") {
+            return 0
+        } else {
+            return new Date(date).getTime() / 1000
+        }
+    },
+
+    makePicJson(picArr, isExtra) {
+        let picArrStr = '';
+        let offSet = isExtra ? 3 : 0
+        if (picArr && picArr.length > 0) {
+            for (let index = 0, length = picArr.length; index < length; index++) {
+                let item = picArr[index]
+                if (item) {
+                    picArrStr += item["pic" + (index + offSet + 1) + "Upload"] + ","
+                }
+            }
+        }
+        return picArrStr.substr(0, picArrStr.length - 1);
+    },
+
+    makeDefaultValue(value) {
         return value.length == 0 ? 0 : value
     },
 

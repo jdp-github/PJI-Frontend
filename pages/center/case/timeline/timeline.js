@@ -100,7 +100,13 @@ Page({
 
     onShouShu() {
         wx.navigateTo({
-            url: '../shoushu/shoushu?centerId=' + this.data.centerId + "&centerName=" + this.data.centerName + "&caseId=" + this.data.caseInfo.case_id
+            url: '../shoushu/shoushu?centerId=' + this.data.centerId + "&centerName=" + this.data.centerName + "&caseId=" + this.data.caseInfo.case_id + "&isCreate=" + true
+        });
+    },
+
+    onFollowup() {
+        wx.navigateTo({
+            url: '../followup/followup?centerId=' + this.data.centerId + "&centerName=" + this.data.centerName + "&caseId=" + this.data.caseInfo.case_id + "&isCreate=" + true
         });
     },
 

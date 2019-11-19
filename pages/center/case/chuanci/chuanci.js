@@ -533,7 +533,7 @@ Page({
             jsonImgArr.forEach(function(item) {
                 let imgObj = {}
                 imgObj.pic = item;
-                imgObj.picUpload = item.replace(constant.basePath + "img/", "");
+                imgObj.picUpload = item.replace(constant.domain + "img/", "");
                 myImgArr.push(imgObj)
             })
         }
