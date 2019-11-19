@@ -614,14 +614,14 @@
                     <view class="padding-xs solids imageAdd" wx:if="{{pic5 == ''}}">
                         <text class='icon-cameraadd' bindtap="onChooseImage" data-le="22"></text>
                     </view>
-                    <view class="imageShow solids padding-xs" wx:if="{{pic5 !== ''}}">
-                        <image src="{{pic5}}" mode='aspectFit' bindtap="showImageModal" data-img="{{pic5}}" />
-                        <button class='cu-btn bg-red shadow sm' bindtap="onRemovePic" data-le="22">
+                    <view class="imageShow solids padding-xs" wx:if="{{pic6 !== ''}}">
+                        <image src="{{pic6}}" mode='aspectFit' bindtap="showImageModal" data-img="{{pic5}}" />
+                        <button class='cu-btn bg-red shadow sm' bindtap="onRemovePic" data-le="23">
                             删除
                         </button>
                     </view>
-                    <view class="padding-xs solids imageAdd" wx:if="{{pic5 == ''}}">
-                        <text class='icon-cameraadd' bindtap="onChooseImage" data-le="22"></text>
+                    <view class="padding-xs solids imageAdd" wx:if="{{pic6 == ''}}">
+                        <text class='icon-cameraadd' bindtap="onChooseImage" data-le="23"></text>
                     </view>
                 </view>
             </view>

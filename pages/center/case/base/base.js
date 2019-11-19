@@ -534,7 +534,7 @@ Page({
                     that.showToast("提交成功")
                     if (that.data.isCreate) {
                         wx.redirectTo({
-                            url: '../timeline/timeline?centerId=' + that.data.centerId + "&isCreate=" + true + "&centerName=" + that.data.centerName
+                            url: '../timeline/timeline?centerId=' + that.data.centerId + "&centerName=" + that.data.centerName + "&caseInfo=" + that.makeCaseInfo()
                         });
                     } else {
                         that.reloadPrePage()
@@ -552,8 +552,16 @@ Page({
         });
     },
 
-    makeFiledData() {
+    makeCaseInfo() {
+        let caseInfo = {
+            case_id: this.data.caseId,
+            case_no: this.data.caseInfo.case_no,
+            patient_name: this.data.caseInfo.patient_name,
+            side_name: this.data.sidePicker[this.data.caseInfo.side],
+            part_name: this.data.partPicker[this.data.caseInfo.part],
+        }
 
+        return JSON.stringify(caseInfo)
     },
 
     makeBasicData() {

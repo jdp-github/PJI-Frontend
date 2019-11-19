@@ -46,7 +46,7 @@
     </scroll-view>
     <!-- 列表 -->
     <scroll-view scroll-y class="indexes margin-bottom bg-white" scroll-into-view="indexes-{{listCurID}}" style='height:calc(100vh - {{CustomBar}}px - 250rpx)' scroll-with-animation="true" enable-back-to-top="true">
-        <view class="cu-timeline" wx:for="{{timeLineList}}" wx:key="" style="padding-left:30rpx;">
+        <view class="cu-timeline" wx:for="{{timeLineList}}" wx:key="" style="padding-left:30rpx;" bindtap="onItemClick" data-item="{{item}}">
             <view class="cu-time">{{item.time}}</view>
             <view class="cu-item {{item.is_verify==1?'text-green':''}}">
                 <view class="timeline-item-container shadow-blur">

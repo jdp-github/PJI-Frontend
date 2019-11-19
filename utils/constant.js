@@ -1,9 +1,10 @@
 'use strict';
-let basePath = "https://pji.think-show.com/api/Public/PJI/";
-let testPath = "https://pjitest.think-show.com/api/Public/PJI/"
+// let domain = "https://pji.think-show.com/";
+let domain = "https://pjitest.think-show.com/"
+let basePath = domain + "api/Public/PJI/";
 let response_success = 0;
 
 module.exports = {
-    basePath: testPath,
+    basePath: basePath,
     response_success: response_success
 };

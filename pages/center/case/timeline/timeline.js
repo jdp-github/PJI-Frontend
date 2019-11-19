@@ -73,6 +73,25 @@ Page({
         });
     },
 
+    onItemClick(e) {
+        let item = e.currentTarget.dataset.item
+        if (item.type == 1) { // 基本信息
+            wx.navigateTo({
+                url: '../base/base?centerId=' + this.data.centerId + "&centerName=" + this.data.centerName + "&caseId=" + this.data.caseInfo.case_id + "&isCreate=" + false
+            });
+        } else if (item.type == 2) { // 穿刺
+            wx.navigateTo({
+                url: '../chuanci/chuanci?centerId=' + this.data.centerId + "&centerName=" + this.data.centerName + "&caseId=" + this.data.caseInfo.case_id + "&isCreate=" + false
+            });
+        } else if (item.type == 3) { // 手术
+            wx.navigateTo({
+                url: '../shoushu/shoushu?centerId=' + this.data.centerId + "&centerName=" + this.data.centerName + "&caseId=" + this.data.caseInfo.case_id + "&isCreate=" + false
+            });
+        } else if (item.type == 5) { // 随访
+
+        }
+    },
+
     onPuncture() {
         wx.navigateTo({
             url: '../chuanci/chuanci?centerId=' + this.data.centerId + "&centerName=" + this.data.centerName + "&caseId=" + this.data.caseInfo.case_id + "&isCreate=" + true
@@ -86,12 +105,6 @@ Page({
     },
 
     // ============ 事件 begin ============ //
-    tabSelect(e) {
-        this.setData({
-            currTab: e.currentTarget.dataset.id,
-            scrollLeft: (e.currentTarget.dataset.id - 1) * 60
-        })
-    },
     loadProgress: function() {
         if (this.data.loadProgress < 96) {
             this.setData({
