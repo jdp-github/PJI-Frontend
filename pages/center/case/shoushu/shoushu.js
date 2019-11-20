@@ -482,7 +482,13 @@ Page({
             caseId: options.caseId
         });
 
-        this.requestCaseInfo();
+        if (this.data.isCreate == "false") {
+            this.requestCaseInfo();
+        } else {// 新建
+            this.setData({
+                addAvatar: app.globalData.avatarUrl,
+            })
+        }
         this.completeProgress();
     },
 
@@ -663,7 +669,6 @@ Page({
 
         let that = this;
         that.showLoading();
-
         wx.request({
             url: constant.basePath,
             data: {
@@ -955,7 +960,7 @@ Page({
     makeFiledObj(filedName) {
         return {
             field_name: filedName,
-            type: 2,
+            type: 3,
             state: this.data[filedName + "_state"]
         }
     },

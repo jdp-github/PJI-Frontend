@@ -1,7 +1,7 @@
 {
     "pages": [
-        "pages/center/case/followup/followup",
         "pages/auth/auth",
+        "pages/center/case/followup/followup",
         "pages/center/case/timeline/timeline",
         "pages/center/case/shoushu/shoushu",
         "pages/center/case/chuanci/chuanci",

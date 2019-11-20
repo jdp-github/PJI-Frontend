@@ -161,9 +161,7 @@ Page({
         is_remain_sample_state: 1,
         is_remain_sample_picker: ["请选择", "否", "是"],
         sample_desc: [],
-        sample_used: [],
         saveMsg: '',
-        usedMsg: '',
         // -------- 穿刺小结 end -------- //
 
         // ------- 图片上传 start --------- //
@@ -380,7 +378,7 @@ Page({
     onSpecimenDesc: function(e) {
         if (this.data.sample_desc.length > 0) {
             wx.navigateTo({
-                url: '../../specimen/detail/detail?boxId=' + this.data.sample_desc[0].box_id + '&centerId=' + this.data.centerId + "&caseId=" + this.data.caseId + "&boxUse=" + this.data.sample_desc[0].uses
+                url: '../../../specimen/detail/detail?boxId=' + this.data.sample_desc[0].box_id + '&centerId=' + this.data.centerId + "&caseId=" + this.data.caseId + "&boxUse=" + this.data.sample_desc[0].uses
             })
         }
     },
@@ -403,6 +401,10 @@ Page({
         });
         if (this.data.isCreate == "false") {
             this.requestCaseInfo();
+        } else {// 新建
+            this.setData({
+                addAvatar: app.globalData.avatarUrl,
+            })
         }
         this.completeProgress();
     },
@@ -512,19 +514,13 @@ Page({
             puncture_progress: info.puncture_progress,
             puncture_state: info.puncture_state,
             // 已存标本
-            sample_desc: info.sample_deposit,
-            // 已取标本
-            sample_used: info.sample_used,
+            sample_desc: info.sample_deposit
         })
 
         // 标本存放情况
         this.setData({
             saveMsg: this.getSpecimenInfo(this.data.sample_desc)
         });
-        // 标本取出情况
-        // this.setData({
-        //     usedMsg: this.getSpecimenInfo(this.data.sample_used)
-        // });
     },
 
     getImgArr(jsonImgArr) {

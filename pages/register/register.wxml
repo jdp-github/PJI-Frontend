@@ -43,7 +43,7 @@
                   placeholder-class='placeholder' value="{{reason}}" bindinput="reasonInput"></textarea>
     </view>
     <view class='padding-xs animation-fade' wx:if="{{errMsg!=''}}">
-        <view class='bg-red padding radius text-center light'>
+        <view class='bg-green padding radius text-center light'>
             <view class="text-lg">注册信息填写错误</view>
             <view class='margin-top-sm text-Abc'>{{errMsg}}</view>
         </view>

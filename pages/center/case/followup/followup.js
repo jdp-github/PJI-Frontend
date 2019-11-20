@@ -176,18 +176,22 @@ Page({
     },
 
     onLoad: function(options) {
-        // this.loadProgress();
-        // this.setData({
-        //     isAdmin: app.globalData.is_admin == '1',
-        //     isCreate: options.isCreate,
-        //     centerId: options.centerId ? options.centerId : '',
-        //     centerName: options.centerName ? options.centerName : '',
-        //     caseId: options.caseId,
-        // });
-        // if (this.data.isCreate == "false") {
-        //     this.requestCaseInfo();
-        // }
-        // this.completeProgress();
+        this.loadProgress();
+        this.setData({
+            isAdmin: app.globalData.is_admin == '1',
+            isCreate: options.isCreate,
+            centerId: options.centerId ? options.centerId : '',
+            centerName: options.centerName ? options.centerName : '',
+            caseId: options.caseId,
+        });
+        if (this.data.isCreate == "false") {// 编辑
+            this.requestCaseInfo();
+        } else {// 新建
+            this.setData({
+                addAvatar: app.globalData.avatarUrl,
+            })
+        }
+        this.completeProgress();
     },
 
     requestCaseInfo() {
@@ -294,11 +298,10 @@ Page({
 
         let that = this;
         that.showLoading();
-
         wx.request({
             url: constant.basePath,
             data: {
-                service: 'Case.EditCasePuncture',
+                service: 'Case.EditCaseFollowup',
                 case_id: that.data.caseId,
                 openid: app.globalData.openid,
                 json_data: that.makeData(),
@@ -308,7 +311,7 @@ Page({
                 'content-type': 'application/json'
             },
             success(res) {
-                console.log("Case.EditCasePuncture:" + JSON.stringify(res))
+                console.log("Case.EditCaseFollowup:" + JSON.stringify(res))
                 that.hideLoading();
                 if (res.data.data.code == 0) {
                     that.showToast("提交成功")
@@ -383,7 +386,7 @@ Page({
     makeFiledObj(filedName) {
         return {
             field_name: filedName,
-            type: 2,
+            type: 5,
             state: this.data[filedName + "_state"]
         }
     },

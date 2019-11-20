@@ -402,13 +402,6 @@
                             <textarea placeholder="暂未存放可用标本" style='width: 350rpx;text-align:left;' class='radius' value='{{saveMsg}}' auto-height></textarea>
                         </view>
                     </view>
-                    <!-- 标本使用情况 -->
-                    <view wx:if="{{is_remain_sample==2}}" class="cu-form-group solid-bottom">
-                        <view style='display:flex;flex-direction: column; '>
-                            <view class='title' style='text-align:left'>标本使用情况</view>
-                            <textarea placeholder="暂未使用该患者标本" style='width: 350rpx;text-align:left;' class='radius' value='{{usedMsg}}' auto-height></textarea>
-                        </view>
-                    </view>
                 </view>
             </view>
             <!-- 底部按钮 -->

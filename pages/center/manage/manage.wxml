@@ -1,6 +1,6 @@
 <!-- header -->
 <view class="cu-custom" style="height:{{CustomBar-50}}px;">
-    <view class="cu-bar fixed bg-gradual-blue" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+    <view class="cu-bar fixed bg-gradual-green" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
         <navigator class='action border-custom' open-type="navigateBack" delta="1" hover-class="none" style='width:{{Custom.width}}px;height:{{Custom.height}}px;margin-left:calc(750rpx - {{Custom.right}}px)' bindtap="backToAuth">
             <text class='icon-back'></text>
             <text class='icon-homefill'></text>
@@ -11,7 +11,7 @@
 <!-- tab -->
 <scroll-view scroll-x class="bg-white nav">
     <view class="flex text-center">
-        <view class="cu-item flex-sub {{index==currTab?'text-blue cur':''}}" wx:for="{{tabList}}" wx:key bindtap="tabSelect" data-id="{{index}}">
+        <view class="cu-item flex-sub {{index==currTab?'text-green cur':''}}" wx:for="{{tabList}}" wx:key bindtap="tabSelect" data-id="{{index}}">
             {{item}}
         </view>
     </view>
@@ -21,12 +21,12 @@
     <view class="cu-list menu menu-avatar">
         <view style='display:flex;flex-direction:row'>
             <view class="flex-sub">
-                <button class='cu-btn bg-blue shadow margin-btn block' bindtap='onAddNotice'>
+                <button class='cu-btn bg-green shadow margin-btn block' bindtap='onAddNotice'>
                     发布公告
                 </button>
             </view>
             <view class="flex-sub">
-                <button class='cu-btn bg-blue shadow margin-btn block' bindtap='refresh'>
+                <button class='cu-btn bg-green shadow margin-btn block' bindtap='refresh'>
                     刷新列表
                 </button>
             </view>
@@ -38,7 +38,7 @@
             <view class='content'>
                 <view class="item-container">
                     <view class="notice-tag">
-                        <view wx:if="{{item.is_top == 1}}" class='cu-tag radius bg-blue small fl'>
+                        <view wx:if="{{item.is_top == 1}}" class='cu-tag radius bg-green small fl'>
                             <i class="fa fa-bookmark"></i>
                         </view>
                     </view>
@@ -123,14 +123,14 @@
                 <view>{{currNoticeDate}}</view>
                 <view style="display:flex;flex-direction:row;">
                     <view class='title'>置顶</view>
-                    <switch class='blue sm' disabled="{{noticeState == 0}}" bindchange="onTopChange" checked='{{currIsTop}}'></switch>
+                    <switch class='green sm' disabled="{{noticeState == 0}}" bindchange="onTopChange" checked='{{currIsTop}}'></switch>
                 </view>
             </view>
         </view>
         <view class="cu-bar bg-white justify-end" wx:if="{{noticeState != 0}}">
             <view class='action'>
-                <button class='cu-btn bg-blue margin-left' style='margin-right:10rpx' bindtap="onSubmit">确定</button>
-                <button class='cu-btn line-blue text-blue' bindtap='hideModal' style='margin-left:10rpx'>取消</button>
+                <button class='cu-btn bg-green margin-left' style='margin-right:10rpx' bindtap="onSubmit">确定</button>
+                <button class='cu-btn line-green text-green' bindtap='hideModal' style='margin-left:10rpx'>取消</button>
             </view>
         </view>
     </view>
@@ -167,8 +167,8 @@
         </view> -->
         <view class="cu-bar bg-white justify-end">
             <view class='action'>
-                <button class='cu-btn bg-blue' style="margin-right:20rpx;" bindtap='hideModal' bindtap="dele">确定</button>
-                <button class='cu-btn line-blue text-blue' bindtap='hideModal'>取消</button>
+                <button class='cu-btn bg-green' style="margin-right:20rpx;" bindtap='hideModal' bindtap="dele">确定</button>
+                <button class='cu-btn line-green text-green' bindtap='hideModal'>取消</button>
             </view>
         </view>
     </view>
