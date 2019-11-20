@@ -1,0 +1,261 @@
+<view class="cu-custom" style="height:{{CustomBar}}px;">
+	<view class="cu-bar fixed bg-gradual-green" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+		<navigator class='action border-custom' open-type="navigateBack" delta="1" hover-class="none"
+		           style='width:{{Custom.width}}px;height:{{Custom.height}}px;margin-left:calc(750rpx - {{Custom.right}}px)' bindtap="backToAuth">
+			<text class='icon-back'></text>
+			<text class='icon-homefill'></text>
+		</navigator>
+		<view class='content' style='top:{{StatusBar}}px;'>日历</view>
+	</view>
+</view>
+<scroll-view scroll-y class="indexes" scroll-into-view="indexes-{{listCurID}}" style='height:calc(100vh - {{CustomBar}}px - 50px)' scroll-with-animation="true" enable-back-to-top="true">
+	<view class="calendar-view margin-top padding">
+		<!-- 日历表头 -->
+		<view class="calendar-header flex-column">
+			<view class="flex-cell flex-row">
+				<text class="flex-cell flex-row solid-border-no-right padding-only-horizon">周日</text>
+				<text class="flex-cell flex-row solid-border-no-right padding-only-horizon">周一</text>
+				<text class="flex-cell flex-row solid-border-no-right padding-only-horizon">周二</text>
+				<text class="flex-cell flex-row solid-border-no-right padding-only-horizon">周三</text>
+				<text class="flex-cell flex-row solid-border-no-right padding-only-horizon">周四</text>
+				<text class="flex-cell flex-row solid-border-no-right padding-only-horizon">周五</text>
+				<text class="flex-cell flex-row solid-border padding-only-horizon">周六</text>
+			</view>
+		</view>
+		<!-- 日历表体 -->
+		<view class="calendar-body flex-column">
+			<view class="flex-cell flex-row">
+				<!-- 不属于当前月份的日期 -->
+				<view class="flex-cell flex-row solid-border-no-right padding-only-horizon calendar-past date-number">
+					<view class="cu-avatar sm radius">
+						27
+						<view class="cu-tag badge sm">建档</view>
+						<view class="cu-tag badge sm multiple-1">入院</view>
+						<view class="cu-tag badge sm multiple-2">穿刺</view>
+					</view>
+				</view>
+				<view class="flex-cell flex-row solid-border-no-right padding-only-horizon calendar-past date-number">
+					<view class="cu-avatar sm radius">
+						28
+					</view>
+				</view>
+				<view class="flex-cell flex-row solid-border-no-right padding-only-horizon calendar-past date-number">
+					<view class="cu-avatar sm radius">
+						29
+					</view>
+				</view>
+				<view class="flex-cell flex-row solid-border-no-right padding-only-horizon calendar-past date-number">
+					<view class="cu-avatar sm radius">
+						30
+					</view>
+				</view>
+				<view class="flex-cell flex-row solid-border-no-right padding-only-horizon calendar-past date-number">
+					<view class="cu-avatar sm radius">
+						31
+					</view>
+				</view>
+				<!-- 属于当前月份的日期 -->
+				<view class="flex-cell flex-row solid-border-no-right padding-only-horizon date-number">
+					<view class="cu-avatar sm radius">
+						1
+					</view>
+				</view>
+				<view class="flex-cell flex-row solid-border padding-only-horizon date-number">
+					<view class="cu-avatar sm radius">
+						2
+					</view>
+				</view>
+			</view>
+		</view>
+		<view class="calendar-body flex-column">
+			<view class="flex-cell flex-row" style="position: relative">
+				<!-- 属于当前月份的日期 -->
+				<view class="flex-cell flex-row solid-border-no-right padding-only-horizon date-number">
+					<view class="cu-avatar sm radius">
+						3
+					</view>
+				</view>
+				<view class="flex-cell flex-row solid-border-no-right padding-only-horizon date-number">
+					<view class="cu-avatar sm radius">
+						4
+					</view>
+				</view>
+				<view class="flex-cell flex-row solid-border-no-right padding-only-horizon date-number">
+					<view class="cu-avatar sm radius">
+						5
+						<view class="cu-tag badge">穿刺</view>
+					</view>
+				</view>
+				<view class="flex-cell flex-row solid-border-no-right padding-only-horizon date-number">
+					<view class="cu-avatar sm radius">
+						6
+					</view>
+				</view>
+				<view class="flex-cell flex-row solid-border-no-right padding-only-horizon date-number">
+					<view class="cu-avatar sm radius">
+						7
+					</view>
+				</view>
+				<view class="flex-cell flex-row solid-border-no-right padding-only-horizon date-number">
+					<view class="cu-avatar sm radius">
+						8
+						<view class="cu-tag badge">入院</view>
+					</view>
+				</view>
+				<view class="flex-cell flex-row solid-border padding-only-horizon date-number">
+					<view class="cu-avatar sm radius">
+						9
+						<view class="cu-tag badge sm">手术</view>
+					</view>
+				</view>
+				<view class="event-offset-5">
+					<view class="event-pharmacy bg-red sm tag-not-end">万+美</view>
+				</view>
+				<view class="event-offset-5" style="top: calc({{eventTopPosition}} + 34rpx)">
+					<view class="event-pharmacy bg-blue sm tag-not-end">利福平</view>
+				</view>
+				<view class="event-offset-5" style="top: calc({{eventTopPosition}} + 68rpx)">
+					<view class="event-pharmacy bg-cyan sm tag-not-end">占位器</view>
+				</view>
+			</view>
+		</view>
+		<view class="calendar-body flex-column" style="position: relative">
+			<view class="flex-cell flex-row">
+				<!-- 属于当前月份的日期 -->
+				<view class="flex-cell flex-row solid-border-no-right padding-only-horizon date-number">
+					<view class="cu-avatar sm radius">
+						10
+					</view>
+				</view>
+				<view class="flex-cell flex-row solid-border-no-right padding-only-horizon date-number">
+					<view class="cu-avatar sm radius">
+						11
+					</view>
+				</view>
+				<view class="flex-cell flex-row solid-border-no-right padding-only-horizon date-number">
+					<view class="cu-avatar sm radius">
+						12
+					</view>
+				</view>
+				<view class="flex-cell flex-row solid-border-no-right padding-only-horizon date-number">
+					<view class="cu-avatar sm radius">
+						13
+						<view class="cu-tag badge sm">出院</view>
+					</view>
+				</view>
+				<view class="flex-cell flex-row solid-border-no-right padding-only-horizon date-number">
+					<view class="cu-avatar sm radius">
+						14
+					</view>
+				</view>
+				<view class="flex-cell flex-row solid-border-no-right padding-only-horizon date-number">
+					<view class="cu-avatar sm radius">
+						15
+					</view>
+				</view>
+				<view class="flex-cell flex-row solid-border padding-only-horizon date-number">
+					<view class="cu-avatar sm radius">
+						16
+					</view>
+				</view>
+				<view class="event-offset-0-end-4">
+					<view class="event-pharmacy bg-red sm tag-not-start">万+美</view>
+				</view>
+				<view class="event-offset-0-end-4" style="top: calc({{eventTopPosition}} + 34rpx)">
+					<view class="event-pharmacy bg-blue sm tag-not-start">利福平</view>
+				</view>
+				<view class="event-offset-0-end-4" style="top: calc({{eventTopPosition}} + 68rpx)">
+					<view class="event-pharmacy bg-cyan sm tag-not-start">占位器</view>
+				</view>
+			</view>
+		</view>
+		<view class="calendar-body flex-column" style="position: relative">
+			<view class="flex-cell flex-row">
+				<!-- 属于当前月份的日期 -->
+				<view class="flex-cell flex-row solid-border-no-right padding-only-horizon date-number">
+					<view class="cu-avatar sm radius">
+						17
+					</view>
+				</view>
+				<view class="flex-cell flex-row solid-border-no-right padding-only-horizon date-number">
+					<view class="cu-avatar sm radius">
+						18
+					</view>
+				</view>
+				<view class="flex-cell flex-row solid-border-no-right padding-only-horizon date-number">
+					<view class="cu-avatar sm radius">
+						19
+					</view>
+				</view>
+				<view class="flex-cell flex-row solid-border-no-right padding-only-horizon date-number">
+					<view class="cu-avatar sm radius bg-olive">
+						20
+					</view>
+				</view>
+				<view class="flex-cell flex-row solid-border-no-right padding-only-horizon date-number">
+					<view class="cu-avatar sm radius">
+						21
+					</view>
+				</view>
+				<view class="flex-cell flex-row solid-border-no-right padding-only-horizon date-number">
+					<view class="cu-avatar sm radius">
+						22
+					</view>
+				</view>
+				<view class="flex-cell flex-row solid-border padding-only-horizon date-number">
+					<view class="cu-avatar sm radius">
+						23
+					</view>
+				</view>
+			</view>
+		</view>
+		<view class="calendar-body flex-column" style="position: relative">
+			<view class="flex-cell flex-row">
+				<!-- 属于当前月份的日期 -->
+				<view class="flex-cell flex-row solid-border-no-right padding-only-horizon date-number">
+					<view class="cu-avatar sm radius">
+						24
+					</view>
+				</view>
+				<view class="flex-cell flex-row solid-border-no-right padding-only-horizon date-number">
+					<view class="cu-avatar sm radius">
+						25
+					</view>
+				</view>
+				<view class="flex-cell flex-row solid-border-no-right padding-only-horizon date-number">
+					<view class="cu-avatar sm radius">
+						26
+					</view>
+				</view>
+				<view class="flex-cell flex-row solid-border-no-right padding-only-horizon date-number">
+					<view class="cu-avatar sm radius">
+						27
+					</view>
+				</view>
+				<view class="flex-cell flex-row solid-border-no-right padding-only-horizon date-number">
+					<view class="cu-avatar sm radius">
+						28
+					</view>
+				</view>
+				<view class="flex-cell flex-row solid-border-no-right padding-only-horizon date-number">
+					<view class="cu-avatar sm radius">
+						29
+					</view>
+				</view>
+				<view class="flex-cell flex-row solid-border padding-only-horizon date-number">
+					<view class="cu-avatar sm radius">
+						30
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+</scroll-view>
+<view class='load-progress {{loadProgress!=0?"show":"hide"}}' style="top:{{CustomBar}}px;">
+	<view class='load-progress-bar bg-green' style="transform: translate3d(-{{100-loadProgress}}%, 0px, 0px);"></view>
+	<view class='load-progress-spinner text-green'></view>
+</view>
+<view class='cu-load load-modal' wx:if="{{loadModal}}">
+	<view class='gray-text'>处理中...</view>
+</view>
+<view class="load-curtain" wx:if="{{loadProgress!=0}}"></view>
