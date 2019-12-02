@@ -33,6 +33,7 @@ Page({
         centerId: '',
         centerName: '',
         caseId: '',
+        itemId: '',
         isLook: false,
         caseInfo: {},
         addAvatar: '',
@@ -476,15 +477,16 @@ Page({
         this.loadProgress();
         this.setData({
             isAdmin: app.globalData.is_admin == '1',
-            isCreate: options.isCreate,
             centerId: options.centerId,
             centerName: options.centerName,
-            caseId: options.caseId
+            caseId: options.caseId,
+            itemId: options.itemId,
+            isCreate: options.itemId == 0,
         });
 
         if (this.data.isCreate == "false") {
             this.requestCaseInfo();
-        } else {// 新建
+        } else { // 新建
             this.setData({
                 addAvatar: app.globalData.avatarUrl,
             })
@@ -499,6 +501,7 @@ Page({
             data: {
                 service: 'Case.GetCaseInfo',
                 case_id: that.data.caseId,
+                item_id: that.data.itemId,
                 type: 3,
                 openid: app.globalData.openid
             },
@@ -674,6 +677,7 @@ Page({
             data: {
                 service: 'Case.EditCaseBein',
                 case_id: that.data.caseId,
+                item_id: that.data.itemId,
                 openid: app.globalData.openid,
                 json_data: that.makeData(),
                 fields_state: that.makeFiled()
@@ -1085,6 +1089,7 @@ Page({
             data: {
                 service: 'Case.Approve',
                 case_id: that.data.caseId,
+                item_id: that.data.itemId,
                 openid: app.globalData.openid,
                 type: 2,
                 state: that.data.caseInfo.puncture.puncture_state == 2 ? 2 : 1
@@ -1130,6 +1135,7 @@ Page({
             data: {
                 service: 'Case.ClearWritingStatus',
                 case_id: that.data.caseId,
+                item_id: that.data.itemId,
             },
             header: {
                 'content-type': 'application/json'

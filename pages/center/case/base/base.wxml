@@ -524,18 +524,18 @@
                 </view>
             </radio-group>
             <!-- 吸烟史 -->
-            <view class="cu-bar bg-white solid-bottom " style="justify-content:flex-start;padding-left:15rpx;min-height:120rpx; ">
+            <view class="cu-bar bg-white solid-bottom" style="justify-content:flex-start;padding-left:15rpx;min-height:120rpx; ">
                 <text class='icon-title text-green'></text>吸烟史
-                <picker style="flex:2 " bindchange="onIs_smokeChange " value="{{is_smoke}} " range="{{is_drink_picker}} ">
-                    <view class="picker " style=" text-align:right;margin-right:46rpx; ">
+                <picker style="flex:2 " bindchange="onIs_smokeChange" value="{{is_smoke}}" range="{{is_drink_picker}}">
+                    <view class="picker" style=" text-align:right;margin-right:46rpx; ">
                         {{is_drink_picker[is_smoke]}}
                     </view>
                 </picker>
             </view>
             <!-- 饮酒史 -->
-            <view class="cu-bar bg-white solid-bottom " style="justify-content:flex-start;padding-left:15rpx;min-height:120rpx; ">
+            <view class="cu-bar bg-white solid-bottom" style="justify-content:flex-start;padding-left:15rpx;min-height:120rpx;">
                 <text class='icon-title text-green'></text>饮酒史
-                <picker style="flex:2 " bindchange="onIs_drinkChange " value="{{is_drink}} " range="{{is_drink_picker}} ">
+                <picker style="flex:2 " bindchange="onIs_drinkChange" value="{{is_drink}}" range="{{is_drink_picker}}">
                     <view class="picker " style=" text-align:right;margin-right:46rpx; ">
                         {{is_drink_picker[is_drink]}}
                     </view>
