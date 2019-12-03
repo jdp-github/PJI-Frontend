@@ -177,7 +177,6 @@ Page({
     },
 
     onLoad: function(options) {
-        debugger
         this.loadProgress();
         this.setData({
             isAdmin: app.globalData.is_admin == '1',
@@ -237,7 +236,7 @@ Page({
         this.setData({
             caseInfo: info,
             addAvatar: info.puncture_creator_avatar,
-            updateAvatarArr: this.makeUpdateAvatar(info.puncture_editor_list),
+            updateAvatarArr: this.makeUpdateAvatar(info.follow_editor_list),
             approveAvatar: info.puncture_auditor_avatar,
         });
 
