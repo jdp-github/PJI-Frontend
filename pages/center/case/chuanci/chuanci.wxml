@@ -410,7 +410,7 @@
                     <button wx:if="{{isEdit || isCreate}}" class='cu-btn line-green shadow' style="margin-right: 15rpx;" form-type="submit" bindtap='submit' disabled='{{caseInfo.base_submit_button == 0}}'>
                         提交录入
                     </button>
-                    <button wx:else class='cu-btn line-green shadow' style="margin-right: 15rpx;" form-type="submit" bindtap='onEditCase'>
+                    <button wx:else class='cu-btn line-green shadow' style="margin-right: 15rpx;" form-type="submit" bindtap='submit'>
                         编辑修改
                     </button>
                     <button class='cu-btn bg-green shadow' style="margin-left: 15rpx;" form-type="submit" bindtap='verify' disabled='{{isCreate || caseInfo.approve_button == 2}}'>
@@ -622,7 +622,7 @@
             <!-- 底部按钮 -->
             <view class='padding-sm flex'>
                 <view class="flex-sub">
-                    <button class='cu-btn  bg-green shadow block' bindtap="okAddBox">
+                    <button class='cu-btn  bg-green shadow block' bindtap="hideImageModal">
                         关闭
                     </button>
                 </view>

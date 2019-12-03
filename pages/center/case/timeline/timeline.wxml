@@ -50,7 +50,7 @@
             <view class="cu-time">{{item.time}}</view>
             <view class="cu-item {{item.is_verify==1?'text-green':''}}">
                 <view class="timeline-item-container shadow-blur">
-                    <i class="fa fa-clock-o" style="font-size:50rpx;{{item.alarm==1?'visibility:hidden':''}}" />
+                    <i class="fa fa-clock-o" style="font-size:50rpx;{{item.alarm==0?'visibility:hidden':''}}" />
                     <view style="margin-left:30rpx">
                         <view style="display:flex;flex-direction:row;align-items:center;">
                             <view class="text-black text-bold" style="font-size:35rpx;">{{item.typeName}}</view>

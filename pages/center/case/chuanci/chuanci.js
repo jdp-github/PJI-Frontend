@@ -401,7 +401,7 @@ Page({
             itemId: options.itemId,
             isCreate: options.itemId == 0,
         });
-        if (this.data.isCreate == "false") {
+        if (!this.data.isCreate) {
             this.requestCaseInfo();
         } else { // 新建
             this.setData({
@@ -434,7 +434,8 @@ Page({
                     // 状态
                     res.data.data.field_state.forEach(item => {
                         that.setData({
-                            [item.field_name + "_state"]: item.state
+                            [item.field_name + "_state"]: item.state,
+                            [item.field_name + "_state_value"]: item.state == 0 ? "ban" : item.state == 1 ? "pencil" : "clock-o"
                         })
                     })
                 } else {
@@ -526,17 +527,14 @@ Page({
         });
     },
 
-    getImgArr(jsonImgArr) {
+    getImgArr(jsonImg) {
         let myImgArr = []
-        if (jsonImgArr && jsonImgArr.length > 0) {
-            jsonImgArr.forEach(function(item) {
-                let imgObj = {}
-                imgObj.pic = item;
-                imgObj.picUpload = item.replace(constant.domain + "img/", "");
-                myImgArr.push(imgObj)
-            })
+        for (let key in jsonImg) {
+            let imgObj = {}
+            imgObj.pic = jsonImg[key];
+            imgObj.picUpload = jsonImg[key].replace(constant.domain + "img/", "");
+            myImgArr.push(imgObj)
         }
-
         return myImgArr;
     },
 
@@ -574,13 +572,7 @@ Page({
         var avatarList = [];
         var avatarLen = avatarObjList.length;
         for (var i = 0; i < avatarLen; i++) {
-            if (avatarObjList[i].base_editor_avatar) {
-                avatarList[i] = avatarObjList[i].base_editor_avatar
-            } else if (avatarObjList[i].puncture_editor_avatar) {
-                avatarList[i] = avatarObjList[i].puncture_editor_avatar
-            } else if (avatarObjList[i].bein_editor_avatar) {
-                avatarList[i] = avatarObjList[i].bein_editor_avatar
-            }
+            avatarList[i] = avatarObjList[i].base_editor_avatar
         }
         return avatarList
     },
@@ -905,20 +897,17 @@ Page({
     },
 
     makePicJson(picArr, isExtra) {
-        let picArrStr = '';
+        let picObj = {};
         let offSet = isExtra ? 3 : 0
         if (picArr && picArr.length > 0) {
             for (let index = 0, length = picArr.length; index < length; index++) {
                 let item = picArr[index]
                 if (item) {
-                    picArrStr += item["pic" + (index + offSet + 1) + "Upload"] + ","
+                    picObj["pic" + (index + offSet + 1) + "Upload"] = item["pic" + (index + offSet + 1) + "Upload"]
                 }
             }
-            // picArr.forEach(function(item) {
-            //     picArrStr += item.picUpload + ","
-            // })
         }
-        return picArrStr.substr(0, picArrStr.length - 1);
+        return JSON.stringify(picObj);
     },
 
     makeDefaultValue(value) {
@@ -1062,9 +1051,9 @@ Page({
 
     assignPic(pics) {
         this.setData({
-            pic1: pics[0] ? pics[0].pic1 : "",
-            pic2: pics[1] ? pics[1].pic2 : "",
-            pic3: pics[2] ? pics[2].pic3 : ""
+            pic1: pics[0] ? pics[0].pic : "",
+            pic2: pics[1] ? pics[1].pic : "",
+            pic3: pics[2] ? pics[2].pic : ""
         })
     },
 

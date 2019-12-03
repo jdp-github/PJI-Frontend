@@ -459,17 +459,9 @@ Page({
 
     makeUpdateAvatar(avatarObjList) {
         var avatarList = [];
-        if (avatarObjList && avatarObjList.length > 0) {
-            var avatarLen = avatarObjList.length;
-            for (var i = 0; i < avatarLen; i++) {
-                if (avatarObjList[i].base_editor_avatar) {
-                    avatarList[i] = avatarObjList[i].base_editor_avatar
-                } else if (avatarObjList[i].puncture_editor_avatar) {
-                    avatarList[i] = avatarObjList[i].puncture_editor_avatar
-                } else if (avatarObjList[i].bein_editor_avatar) {
-                    avatarList[i] = avatarObjList[i].bein_editor_avatar
-                }
-            }
+        var avatarLen = avatarObjList.length;
+        for (var i = 0; i < avatarLen; i++) {
+            avatarList[i] = avatarObjList[i].base_editor_avatar
         }
         return avatarList
     },
@@ -524,7 +516,6 @@ Page({
                 'content-type': 'application/json'
             },
             success(res) {
-                debugger
                 console.log("Case.CreateEditCaseBase:" + JSON.stringify(res))
                 that.hideLoading();
                 if (res.data.data.code == 0) {
@@ -711,7 +702,7 @@ Page({
             this.showToast("请选择病状体征中的放疗病史")
             return false;
         }
-        if (this.data.chemotherapy.length == 0) {
+        if (this.data.chemotherapy == 0) {
             this.showToast("请选择病状体征中的化疗病史")
             return false;
         }

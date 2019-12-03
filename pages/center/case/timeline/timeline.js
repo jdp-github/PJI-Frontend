@@ -88,7 +88,6 @@ Page({
                 url: '../shoushu/shoushu?centerId=' + this.data.centerId + "&centerName=" + this.data.centerName + "&caseId=" + this.data.caseInfo.case_id + "&itemId=" + item.item_id
             });
         } else if (item.type == 5) { // 随访
-            debugger
             wx.navigateTo({
                 url: '../followup/followup?centerId=' + this.data.centerId + "&centerName=" + this.data.centerName + "&caseId=" + this.data.caseInfo.case_id + "&itemId=" + item.item_id
             });
