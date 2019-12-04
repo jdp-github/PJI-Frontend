@@ -453,7 +453,7 @@ Page({
             for (let index = 0, length = picArr.length; index < length; index++) {
                 let item = picArr[index]
                 if (item) {
-                    picObj["pic" + (index + offSet + 1) + "Upload"] = item["pic" + (index + offSet + 1) + "Upload"]
+                    picObj["pic" + (index + offSet + 1) + "Upload"] = item.picUpload
                 }
             }
         }
@@ -470,7 +470,7 @@ Page({
                 case_id: that.data.caseId,
                 item_id: that.data.itemId,
                 openid: app.globalData.openid,
-                type: 2,
+                type: 5,
                 state: that.data.caseInfo.puncture.puncture_state == 2 ? 2 : 1
             },
             header: {
@@ -512,6 +512,7 @@ Page({
                 service: 'Case.ClearWritingStatus',
                 case_id: that.data.caseId,
                 item_id: that.data.itemId,
+                type:5
             },
             header: {
                 'content-type': 'application/json'

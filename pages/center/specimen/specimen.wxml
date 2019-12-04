@@ -34,7 +34,7 @@
             </view>
         </view>
         <view view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}}" wx:for="{{boxList}}" wx:key="" bindtouchstart='ListTouchStart' bindtouchmove='ListTouchMove' bindtouchend='ListTouchEnd' data-target="move-box-{{index}}">
-            <view class='content'>
+            <view class='content' data-selecteditem="{{item}}" bindtap="onItemClick">
                 <view class="flex">
                     <view class='flex-sub radius' style="padding-right: 30rpx;">
                         <view class="solids" style="width: 120rpx; height: 120rpx;">
@@ -59,7 +59,7 @@
                 </view>
             </view>
             <view class='move'>
-                <view class='bg-cyan' data-selecteditem="{{item}}" bindtap="onItemClick">详情</view>
+                <!-- <view class='bg-cyan' data-selecteditem="{{item}}" bindtap="onItemClick">详情</view> -->
                 <view class='bg-olive' data-selecteditem="{{item}}" bindtap="onItemLockOrUnlock" disable="{{item.is_display_lock != 1?'disable':''}}">{{item.is_lock == 0?'锁定':'解锁'}}</view>
                 <view class='bg-red' data-selecteditem="{{item}}" bindtap='onItemDelete' hidden='true' disable="{{item.is_display_lock != 1?'disable':''}}">删除</view>
             </view>

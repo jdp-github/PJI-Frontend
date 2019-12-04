@@ -138,7 +138,7 @@
                         <view class="cu-form-group {{fibrinogen_state==0?'disabled':fibrinogen_state==2?'clock':''}}">
                             <view style='display:flex;flex-direction: column; '>
                                 <view class='title' style='text-align:left'>入院时Fibrinogen (μg/ml)</view>
-                                <input placeholder="请输入数字" class='radius' style='width: 350rpx;text-align:left;' type='digit' bindinput="onFibrinogenInput" disabled='{{fibrinogen_state!=1}}' value='{{fibrinogen}}' data-type="fibrinogen"></input>
+                                <input placeholder="请输入数字" class='radius' style='width: 350rpx;text-align:left;' type='digit' bindinput="onInput" disabled='{{fibrinogen_state!=1}}' value='{{fibrinogen}}' data-type="fibrinogen"></input>
                             </view>
                             <i class="fa fa-{{fibrinogen_state_value}} fa-2x" data-state="{{fibrinogen_state}}" data-style="input" data-type="fibrinogen_state" bindtap="on3StateChange" style="pointer-events:{{operation_before_summary?'none':''}}"></i>
                         </view>
@@ -173,7 +173,7 @@
                                 {{culture_pus_picker[culture_pus]}}
                             </view>
                         </picker>
-                        <button class='cu-btn round sm' style='margin-left: 15rpx;' bindtap="showModal" data-target="threeImgModal" data-imgtype="culture_pus_pic" disabled="{{culture_pus_picker_state==2}}">上传图片</button>
+                        <button class='cu-btn round sm' style='margin-left: 15rpx;' bindtap="showModal" data-target="threeImgModal" data-imgtype="culture_pus_pic" disabled="{{culture_pus_state==2}}">上传图片</button>
                     </view>
                     <!-- LE试纸（离心前） -->
                     <view class="cu-form-group {{le_testpaper_stoste_state==2?'clock':''}}">
@@ -539,7 +539,7 @@
                         提交录入
                     </button>
                     <button wx:else class='cu-btn line-green shadow' style="margin-right: 15rpx;" form-type="submit" bindtap='onSetCaseWrite'>
-                        编辑修改
+                        开始编辑
                     </button>
                     <button class='cu-btn bg-green shadow' style="margin-left: 15rpx;" form-type="submit" bindtap='verify' disabled='{{isCreate || caseInfo.approve_button == 2}}'>
                         {{caseInfo.bein_state != 2 ?"确认审核":"解除锁定"}}
@@ -735,14 +735,14 @@
                     <view class="padding-xs solids imageAdd" wx:if="{{pic5 == ''}}">
                         <text class='icon-cameraadd' bindtap="onChooseImage" data-le="22"></text>
                     </view>
-                    <view class="imageShow solids padding-xs" wx:if="{{pic5 !== ''}}">
-                        <image src="{{pic5}}" mode='aspectFit' bindtap="showImageModal" data-img="{{pic5}}" />
-                        <button class='cu-btn bg-red shadow sm' bindtap="onRemovePic" data-le="22">
+                    <view class="imageShow solids padding-xs" wx:if="{{pic6 !== ''}}">
+                        <image src="{{pic6}}" mode='aspectFit' bindtap="showImageModal" data-img="{{pic5}}" />
+                        <button class='cu-btn bg-red shadow sm' bindtap="onRemovePic" data-le="23">
                             删除
                         </button>
                     </view>
-                    <view class="padding-xs solids imageAdd" wx:if="{{pic5 == ''}}">
-                        <text class='icon-cameraadd' bindtap="onChooseImage" data-le="22"></text>
+                    <view class="padding-xs solids imageAdd" wx:if="{{pic6 == ''}}">
+                        <text class='icon-cameraadd' bindtap="onChooseImage" data-le="23"></text>
                     </view>
                 </view>
             </view>

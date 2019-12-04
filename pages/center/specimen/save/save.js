@@ -109,7 +109,7 @@ Page({
                 if (res.data.data.code == constant.response_success) {
                     for (let i = 0, len = res.data.data.list.length; i < len; i++) {
                         let caseInfo = res.data.data.list[i];
-                        caseInfo.create_time = util.formatTime(caseInfo.ctime, 'Y-M-D');
+                        caseInfo.create_time = util.formatTime(caseInfo.create_time, 'Y-M-D');
                         caseInfo.isSelected = false;
                     }
                     that.setData({

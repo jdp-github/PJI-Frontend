@@ -312,7 +312,7 @@ Page({
             data: {
                 service: 'Sample.SetWritingStaff',
                 openid: app.globalData.openid,
-                box_id: e.target.dataset.selecteditem.id
+                box_id: e.currentTarget.dataset.selecteditem.id
             },
             header: {
                 'content-type': 'application/json'

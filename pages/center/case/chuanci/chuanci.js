@@ -604,7 +604,7 @@ Page({
         return avatarList
     },
 
-    onSetCaseWrite: function (e) {
+    onSetCaseWrite: function(e) {
         let that = this;
         that.showLoading();
         wx.request({
@@ -648,7 +648,7 @@ Page({
             data: {
                 service: 'Case.EditCasePuncture',
                 case_id: that.data.caseId,
-                item_id: that.data.item_id,
+                item_id: that.data.itemId,
                 openid: app.globalData.openid,
                 json_data: that.makeData(),
                 fields_state: that.makeFiled()
@@ -754,7 +754,7 @@ Page({
             if (this.data.rinse_lavage_volume.length == 0) {
                 this.showToast("请填写抽出灌洗液总量")
                 return false;
-            }  
+            }
             if (this.data.le_testpaper_stoste == 0) {
                 this.showToast("请选择LE试纸（离心前）")
                 return false;
@@ -965,7 +965,7 @@ Page({
             for (let index = 0, length = picArr.length; index < length; index++) {
                 let item = picArr[index]
                 if (item) {
-                    picObj["pic" + (index + offSet + 1) + "Upload"] = item["pic" + (index + offSet + 1) + "Upload"]
+                    picObj["pic" + (index + offSet + 1) + "Upload"] = item["pic" + (index + offSet + 1) + "Upload"] ? item["pic" + (index + offSet + 1) + "Upload"] : item.picUpload
                 }
             }
         }
@@ -1028,6 +1028,7 @@ Page({
                 service: 'Case.ClearWritingStatus',
                 case_id: that.data.caseId,
                 item_id: that.data.itemId,
+                type: 2
             },
             header: {
                 'content-type': 'application/json'

@@ -411,7 +411,7 @@
                         提交录入
                     </button>
                     <button wx:else class='cu-btn line-green shadow' style="margin-right: 15rpx;" form-type="submit" bindtap='onSetCaseWrite'>
-                        编辑修改
+                        开始编辑
                     </button>
                     <button class='cu-btn bg-green shadow' style="margin-left: 15rpx;" form-type="submit" bindtap='verify' disabled='{{isCreate || caseInfo.approve_button == 2}}'>
                         {{caseInfo.puncture_state != 2 ?"确认审核":"解除锁定"}}

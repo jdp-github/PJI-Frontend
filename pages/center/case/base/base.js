@@ -353,6 +353,7 @@ Page({
             data: {
                 service: 'Case.GetCaseInfo',
                 case_id: caseId,
+                item_id: that.data.itemId,
                 type: 1,
                 openid: app.globalData.openid
             },
@@ -511,6 +512,7 @@ Page({
             data: {
                 service: 'Case.EditCaseBase',
                 case_id: that.data.caseId,
+                item_id: that.data.itemId,
                 openid: app.globalData.openid,
                 json_data: that.makeBasicData(),
                 fields_state: "{}",
@@ -526,16 +528,9 @@ Page({
                         caseId: res.data.data.info.case_id
                     })
                     that.showToast("提交成功")
-                    if (that.data.isCreate) {
-                        wx.redirectTo({
-                            url: '../timeline/timeline?centerId=' + that.data.centerId + "&centerName=" + that.data.centerName + "&caseInfo=" + that.makeCaseInfo()
-                        });
-                    } else {
-                        that.reloadPrePage()
-                        wx.navigateBack({
-                            delta: 1
-                        })
-                    }
+                    wx.redirectTo({
+                        url: '../timeline/timeline?centerId=' + that.data.centerId + "&centerName=" + that.data.centerName + "&caseInfo=" + that.makeCaseInfo()
+                    });
                 } else {
                     that.showModal("ErrModal", res.data.data.msg);
                 }
@@ -786,6 +781,7 @@ Page({
                 service: 'Case.Approve',
                 case_id: that.data.caseId,
                 openid: app.globalData.openid,
+                item_id: that.data.itemId,
                 type: 1,
                 state: that.data.caseInfo.base_state == 2 ? 2 : 1
             },
@@ -831,6 +827,8 @@ Page({
             data: {
                 service: 'Case.ClearWritingStatus',
                 case_id: that.data.caseId,
+                item_id: that.data.itemId,
+                type:1
             },
             header: {
                 'content-type': 'application/json'

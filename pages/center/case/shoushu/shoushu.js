@@ -595,7 +595,7 @@ Page({
             is_fever: parseInt(info.is_fever),
             is_pain: parseInt(info.is_pain),
             is_sinus: parseInt(info.is_sinus),
-            exterior_pics: info.exterior_pics,
+            exterior_pics: this.getImgArr(info.exterior_pics),
             esr: this.getDefaultNum(info.esr),
             crp: this.getDefaultNum(info.crp),
             conver_crp: this.getDefaultNum(info.conver_crp),
@@ -712,7 +712,7 @@ Page({
                 openid: app.globalData.openid,
                 case_id: that.data.caseId,
                 item_id: that.data.itemId,
-                type: 5
+                type: 3
             },
             header: {
                 'content-type': 'application/json'
@@ -856,7 +856,7 @@ Page({
                 this.showToast("请填写PMN%")
                 return false;
             }
-            if (this.data.neutrophil_state == 1 && this.data.neutrophil.length == 0) {
+            if (this.data.neutrophil_state == 1 && this.data.neutrophil == 0) {
                 this.showToast("请选择组织病理(中性粒细胞计数)")
                 return false;
             }
@@ -890,9 +890,15 @@ Page({
                 return false;
             }
             if (this.data.joint_anaerobic_result_state == 1 && this.data.joint_anaerobic_result.length == 0) {
-                this.showToast("请填写术中厌氧+真菌培养结果")
+                this.showToast("请填写术中厌氧培养结果")
                 return false;
             }
+
+            if (this.data.joint_mngs_result_state == 1 && this.data.joint_mngs_result.length == 0) {
+                this.showToast("请填写术中厌氧培养结果")
+                return false;
+            }
+
             if (this.data.splitting_aerobic_result_state == 1 && this.data.splitting_aerobic_result.length == 0) {
                 this.showToast("请填写超声裂解液需氧+真菌")
                 return false;
@@ -986,6 +992,7 @@ Page({
         field_state.push(this.makeFiledObj("fibrinogen"));
 
         field_state.push(this.makeFiledObj("operation_date"));
+        field_state.push(this.makeFiledObj("culture_pus"));
         field_state.push(this.makeFiledObj("le_testpaper_stoste"));
         field_state.push(this.makeFiledObj("le_testpaper_centrifugal"));
         field_state.push(this.makeFiledObj("joint_fluid_wbc"));
@@ -1138,7 +1145,7 @@ Page({
             for (let index = 0, length = picArr.length; index < length; index++) {
                 let item = picArr[index]
                 if (item) {
-                    picObj["pic" + (index + offSet + 1) + "Upload"] = item["pic" + (index + offSet + 1) + "Upload"]
+                    picObj["pic" + (index + offSet + 1) + "Upload"] = item["pic" + (index + offSet + 1) + "Upload"] ? item["pic" + (index + offSet + 1) + "Upload"] : item.picUpload
                 }
             }
         }
@@ -1159,7 +1166,7 @@ Page({
                 case_id: that.data.caseId,
                 item_id: that.data.itemId,
                 openid: app.globalData.openid,
-                type: 2,
+                type: 3,
                 state: that.data.caseInfo.puncture.puncture_state == 2 ? 2 : 1
             },
             header: {
@@ -1201,6 +1208,7 @@ Page({
                 service: 'Case.ClearWritingStatus',
                 case_id: that.data.caseId,
                 item_id: that.data.itemId,
+                type: 3,
             },
             header: {
                 'content-type': 'application/json'
@@ -1385,8 +1393,8 @@ Page({
                                 pic4Upload: data.data.info.file,
                             });
                             that.setImage(0, {
-                                pic3: data.data.info.url,
-                                pic3Upload: data.data.info.file
+                                pic4: data.data.info.url,
+                                pic4Upload: data.data.info.file
                             }, "extra")
                             break;
                         case "22":
@@ -1395,8 +1403,8 @@ Page({
                                 pic5Upload: data.data.info.file,
                             });
                             that.setImage(1, {
-                                pic3: data.data.info.url,
-                                pic3Upload: data.data.info.file
+                                pic5: data.data.info.url,
+                                pic5Upload: data.data.info.file
                             }, "extra")
                             break;
                         case "23":
@@ -1405,8 +1413,8 @@ Page({
                                 pic6Upload: data.data.info.file,
                             });
                             that.setImage(2, {
-                                pic3: data.data.info.url,
-                                pic3Upload: data.data.info.file
+                                pic6: data.data.info.url,
+                                pic6Upload: data.data.info.file
                             }, "extra")
                             break;
                     }
