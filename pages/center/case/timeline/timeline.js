@@ -77,7 +77,7 @@ Page({
         let item = e.currentTarget.dataset.item
         if (item.type == 1) { // 基本信息
             wx.navigateTo({
-                url: '../base/base?centerId=' + this.data.centerId + "&centerName=" + this.data.centerName + "&caseId=" + this.data.caseInfo.case_id + "&isCreate=" + false
+                url: '../base/base?centerId=' + this.data.centerId + "&centerName=" + this.data.centerName + "&caseId=" + this.data.caseInfo.case_id + "&itemId=" + item.item_id
             });
         } else if (item.type == 2) { // 穿刺
             wx.navigateTo({

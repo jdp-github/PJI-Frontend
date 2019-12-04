@@ -34,7 +34,7 @@ Page({
         caseId: '',
         itemId: '',
         isCreate: false,
-        isLook: false,
+        isEdit: false,
         caseInfo: {},
         addAvatar: '',
         updateAvatarArr: [],
@@ -207,60 +207,84 @@ Page({
             assay_check: e.detail.value
         });
         let state = this.data.assay_check ? 2 : 1
+        let stateValue = this.data.assay_check ? "clock-o" : "pencil"
         this.setData({
             esr: '',
             esr_state: state,
+            esr_state_value: stateValue,
             crp: '',
             crp_state: state,
+            crp_state_value: stateValue,
             conver_crp: '',
             il6: '',
             il6_state: state,
+            il6_state_value: stateValue,
             dimer: '',
             dimer_state: state,
+            dimer_state_value: stateValue,
             fibrinogen: '',
             fibrinogen_state: state,
+            fibrinogen_state_value: stateValue,
             joint_fluid_desc: '',
             joint_fluid_desc_pic: [],
             joint_fluid_desc_state: state,
+            joint_fluid_desc_state_value: stateValue,
             rinse_fluid_volume: '',
             rinse_fluid_volume_state: state,
+            rinse_fluid_volume_state_value: stateValue,
             rinse_lavage_volume: '',
             rinse_lavage_volume_state: state,
+            rinse_lavage_volume_state_value: stateValue,
             le_testpaper_stoste: 0,
             le_testpaper_stoste_pic: [],
             le_testpaper_stoste_state: state,
+            le_testpaper_stoste_state_value: stateValue,
             le_testpaper_centrifugal: 0,
             le_testpaper_centrifugal_pic: [],
             le_testpaper_centrifugal_state: state,
+            le_testpaper_centrifugal_state_value: stateValue,
             joint_fluid_wbc: '',
             joint_fluid_wbc_state: state,
+            joint_fluid_wbc_state_value: stateValue,
             pmn: '',
             pmn_state: state,
+            pmn_state_value: stateValue,
             sious_throat_swabs1: '',
             sious_throat_swabs1_pic: [],
             sious_throat_swabs1_state: state,
+            sious_throat_swabs1_state_value: stateValue,
             sious_throat_swabs2: '',
             sious_throat_swabs2_pic: [],
             sious_throat_swabs2_state: state,
+            sious_throat_swabs2_state_value: stateValue,
             sious_throat_swabs3: '',
             sious_throat_swabs3_pic: [],
             sious_throat_swabs3_state: state,
+            sious_throat_swabs3_state_value: stateValue,
             culture_type: 0,
             culture_type_state: state,
+            culture_type_state_value: stateValue,
             culture_bottle_fluid_volume: '',
             culture_bottle_fluid_volume_state: state,
+            culture_bottle_fluid_volume_state_value: stateValue,
             aerobic_result: '',
             aerobic_result_state: state,
+            aerobic_result_state_value: stateValue,
             anaerobic_result: '',
             anaerobic_result_state: state,
+            anaerobic_result_state_value: stateValue,
             ngs_type: 0,
             ngs_type_state: state,
+            ngs_type_state_value: stateValue,
             ngs_fluid_volume: '',
             ngs_fluid_volume_state: state,
+            ngs_fluid_volume_state_value: stateValue,
             ngs_result: '',
             ngs_result_state: state,
+            ngs_result_state_value: stateValue,
             other_check: '',
             other_check_state: state,
+            other_check_state_value: stateValue,
         })
     },
 
@@ -270,9 +294,11 @@ Page({
         });
 
         let state = this.data.puncture_summary ? 2 : 1
+        let stateValue = this.data.assay_check ? "clock-o" : "pencil"
         this.setData({
             present_result: 0,
             present_result_state: state,
+            present_result_state_value: stateValue,
             thistime_result: '',
             thistime_result_state: state,
             is_remain_sample: 0,
@@ -388,6 +414,7 @@ Page({
             this.setData({
                 modalName: "DrawerModalR"
             })
+            this.assignPic(this.data.exterior_pics, true)
         }
     },
 
@@ -572,9 +599,40 @@ Page({
         var avatarList = [];
         var avatarLen = avatarObjList.length;
         for (var i = 0; i < avatarLen; i++) {
-            avatarList[i] = avatarObjList[i].base_editor_avatar
+            avatarList[i] = avatarObjList[i].puncture_editor_avatar
         }
         return avatarList
+    },
+
+    onSetCaseWrite: function (e) {
+        let that = this;
+        that.showLoading();
+        wx.request({
+            url: constant.basePath,
+            data: {
+                service: 'Case.SetCaseWritingStaff',
+                openid: app.globalData.openid,
+                case_id: that.data.caseId,
+                item_id: that.data.itemId,
+                type: 2
+            },
+            header: {
+                'content-type': 'application/json'
+            },
+            success(res) {
+                if (res.data.data.code == 0) {
+                    that.setData({
+                        isEdit: true
+                    })
+                } else {
+                    that.showModal("ErrModal", res.data.data.msg);
+                }
+                that.hideLoading();
+            },
+            fail(res) {
+                that.hideLoading();
+            }
+        });
     },
 
     submit() {
@@ -693,6 +751,10 @@ Page({
                 this.showToast("请填写抽出关节液总量")
                 return false;
             }
+            if (this.data.rinse_lavage_volume.length == 0) {
+                this.showToast("请填写抽出灌洗液总量")
+                return false;
+            }  
             if (this.data.le_testpaper_stoste == 0) {
                 this.showToast("请选择LE试纸（离心前）")
                 return false;
@@ -734,7 +796,7 @@ Page({
                 return false;
             }
             if (this.data.anaerobic_result_state == 1 && this.data.anaerobic_result.length == 0) {
-                this.showToast("请填写本次厌氧+真菌培养结果")
+                this.showToast("请填写本次厌氧结果")
                 return false;
             }
             if (this.data.ngs_type == 0) {
@@ -925,7 +987,7 @@ Page({
                 item_id: that.data.itemId,
                 openid: app.globalData.openid,
                 type: 2,
-                state: that.data.caseInfo.puncture.puncture_state == 2 ? 2 : 1
+                state: that.data.caseInfo.puncture_state == 2 ? 2 : 1
             },
             header: {
                 'content-type': 'application/json'
@@ -958,9 +1020,6 @@ Page({
     },
 
     onUnload() {
-        if (this.data.isLook) {
-            return
-        }
         let that = this;
         that.showLoading();
         wx.request({
@@ -1049,12 +1108,20 @@ Page({
         }
     },
 
-    assignPic(pics) {
-        this.setData({
-            pic1: pics[0] ? pics[0].pic : "",
-            pic2: pics[1] ? pics[1].pic : "",
-            pic3: pics[2] ? pics[2].pic : ""
-        })
+    assignPic(pics, isExterior) {
+        if (isExterior) {
+            this.setData({
+                pic4: pics[0] ? pics[0].pic : "",
+                pic5: pics[1] ? pics[1].pic : "",
+                pic6: pics[2] ? pics[2].pic : ""
+            })
+        } else {
+            this.setData({
+                pic1: pics[0] ? pics[0].pic : "",
+                pic2: pics[1] ? pics[1].pic : "",
+                pic3: pics[2] ? pics[2].pic : ""
+            })
+        }
     },
 
     showImageModal: function(e) {

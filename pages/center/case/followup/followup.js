@@ -34,7 +34,7 @@ Page({
         caseId: '',
         itemId: '',
         isCreate: false,
-        isLook: false,
+        isEdit: false,
         caseInfo: {},
         addAvatar: '',
         updateAvatarArr: [],
@@ -286,6 +286,37 @@ Page({
         return avatarList
     },
 
+    onSetCaseWrite: function (e) {
+        let that = this;
+        that.showLoading();
+        wx.request({
+            url: constant.basePath,
+            data: {
+                service: 'Case.SetCaseWritingStaff',
+                openid: app.globalData.openid,
+                case_id: that.data.caseId,
+                item_id: that.data.itemId,
+                type: 5
+            },
+            header: {
+                'content-type': 'application/json'
+            },
+            success(res) {
+                if (res.data.data.code == 0) {
+                    that.setData({
+                        isEdit: true
+                    })
+                } else {
+                    that.showModal("ErrModal", res.data.data.msg);
+                }
+                that.hideLoading();
+            },
+            fail(res) {
+                that.hideLoading();
+            }
+        });
+    },
+
     submit() {
         if (!this.isValueRight()) {
             return
@@ -473,9 +504,6 @@ Page({
     },
 
     onUnload() {
-        if (this.data.isLook) {
-            return
-        }
         let that = this;
         that.showLoading();
         wx.request({

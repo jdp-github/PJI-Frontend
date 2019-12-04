@@ -23,6 +23,7 @@ Page({
         isEdit: false,
         caseId: '',
         caseInfo: {},
+        itemId: '',
         addAvatar: '',
         updateAvatarArr: [],
         approveAvatar: '',
@@ -335,7 +336,8 @@ Page({
             centerId: options.centerId,
             centerName: options.centerName,
             caseId: options.caseId,
-            isCreate: options.isCreate
+            itemId: options.itemId,
+            isCreate: options.itemId == 0,
         });
         this.requestCaseInfo(this.data.caseId)
         this.setData({
@@ -475,6 +477,7 @@ Page({
                 service: 'Case.SetCaseWritingStaff',
                 openid: app.globalData.openid,
                 case_id: that.data.caseId,
+                item_id: that.data.itemId,
                 type: 1
             },
             header: {
