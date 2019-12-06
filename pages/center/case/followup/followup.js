@@ -45,6 +45,9 @@ Page({
         follow_date: '请选择日期',
         purpose: 0,
         purpose_picker: ['请选择', '针对诊断性穿刺', '针对手术治疗'],
+        puncture_info: '',
+        relateList: [],
+        relateSelect: false,
         patient_desc: '',
         patient_desc_state: 1,
         patient_desc_state_value: 'pencil',
@@ -83,6 +86,13 @@ Page({
         this.setData({
             [type]: parseInt(e.detail.value)
         })
+        if (type == "purpose") {
+            if (e.detail.value == 1) {
+                this.requestRelateList(2)
+            } else if (e.detail.value == 2) {
+                this.requestRelateList(3)
+            }
+        }
     },
 
     onDateChange(e) {
@@ -176,6 +186,101 @@ Page({
         }
     },
 
+    onRelateClick() {
+        if (!this.data.base_info) {
+            this.setData({
+                modalName: "RelateDrawerModalR"
+            })
+        }
+    },
+
+    saveRelate() {
+        this.setData({
+            modalName: ""
+        })
+    },
+
+    requestRelateList(type) {
+        let that = this;
+        wx.request({
+            url: constant.basePath,
+            data: {
+                service: 'Case.GetCaseItems',
+                case_id: that.data.caseId,
+                type: type,
+            },
+            header: {
+                'content-type': 'application/json'
+            },
+            success(res) {
+                console.log("Case.GetCaseItems:" + JSON.stringify(res))
+                if (res.data.data.code == constant.response_success) {
+                    for (let i = 0, len = res.data.data.list.length; i < len; i++) {
+                        let relateInfo = res.data.data.list[i];
+                        relateInfo.date_time = util.formatTime(relateInfo.date_time, 'Y-M-D');
+                        that.data.relateList.forEach(item => {
+                            relateInfo.isSelected = item.item_id == relateInfo.item_id
+                        })
+                        if (that.data.puncture_state) {
+                            let parseList = JSON.parse(that.data.puncture_state)
+                            parseList.forEach(item => {
+                                relateInfo.isSelected = item.item_id == relateInfo.item_id
+                            })
+                        }
+                    }
+                    that.setData({
+                        relateList: res.data.data.list
+                    });
+                    that.getRelateSelecFlag(that.data.relateList)
+                } else {
+                    that.showToast(res.data.data.msg);
+                }
+            }
+        });
+    },
+
+    onRelateItemClick(e) {
+        let relateInfo = e.currentTarget.dataset.item;
+        for (let i = 0, length = this.data.relateList.length; i < length; i++) {
+            if (relateInfo.item_id == this.data.relateList[i].item_id) {
+                this.data.relateList[i].isSelected = !this.data.relateList[i].isSelected
+            }
+        }
+
+        this.setData({
+            relateList: this.data.relateList,
+        });
+        this.getRelateSelecFlag(this.data.relateList)
+    },
+
+    getRelateSelecFlag(relateList) {
+        for (let i = 0, length = relateList.length; i < length; i++) {
+            if (relateList[i].isSelected) {
+                this.setData({
+                    relateSelect: true
+                })
+                return
+            }
+        }
+
+        this.setData({
+            relateSelect: false
+        })
+    },
+
+    gotoRelate(e) {
+        let itemInfo = e.currentTarget.dataset.item;
+        if (this.data.purpose == 1) {
+            wx.navigateTo({
+                url: '../../case/chuanci/chuanci?centerId=' + this.data.centerId + "&centerName=''" + "&caseId=" + this.data.caseId + "&itemId=" + itemInfo.item_id
+            });
+        } else if (this.data.purpose == 2) {
+            wx.navigateTo({
+                url: '../../case/shoushu/shoushu?centerId=' + this.data.centerId + "&centerName=''" + "&caseId=" + this.data.caseId + "&itemId=" + itemInfo.item_id
+            });
+        }
+    },
+
     onLoad: function(options) {
         this.loadProgress();
         this.setData({
@@ -245,6 +350,7 @@ Page({
         this.setData({
             follow_date: this.getDefaultDate(info.follow_date),
             purpose: info.purpose,
+            puncture_info: info.puncture_info,
             patient_desc: info.patient_desc,
             exterior: info.exterior,
             exterior_pic: this.getImgArr(info.exterior_pic),
@@ -286,7 +392,7 @@ Page({
         return avatarList
     },
 
-    onSetCaseWrite: function (e) {
+    onSetCaseWrite: function(e) {
         let that = this;
         that.showLoading();
         wx.request({
@@ -423,6 +529,7 @@ Page({
         var jsonData = {
             follow_date: that.makeDefaultDate(that.data.follow_date),
             purpose: that.data.purpose,
+            puncture_info: that.makeRelateInfo(),
             patient_desc: that.data.patient_desc,
             exterior: that.data.exterior,
             exterior_pic: that.makePicJson(that.data.exterior_pic),
@@ -436,6 +543,16 @@ Page({
         }
         console.log("随访：" + JSON.stringify(jsonData))
         return JSON.stringify(jsonData)
+    },
+
+    makeRelateInfo() {
+        let select = []
+        this.data.relateList.forEach(item => {
+            if (item.isSelected) {
+                select.push(item)
+            }
+        })
+        return JSON.stringify(select)
     },
 
     makeDefaultDate(date) {
@@ -512,7 +629,7 @@ Page({
                 service: 'Case.ClearWritingStatus',
                 case_id: that.data.caseId,
                 item_id: that.data.itemId,
-                type:5
+                type: 5
             },
             header: {
                 'content-type': 'application/json'
