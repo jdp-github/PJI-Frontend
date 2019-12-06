@@ -32,8 +32,7 @@
 }
 
 .avatar-special {
-    width: 100%;
-    min-width: 100rpx;
+    width: 180rpx;
     text-align: center;
     font-variant: small-caps;
     margin: 0;
@@ -47,7 +46,7 @@
     background-position: center;
     vertical-align: middle;
     font-size: 1.5em;
-    margin-right: 30rpx;
+    /* margin-right: 30rpx; */
 }
 
 .text-small {

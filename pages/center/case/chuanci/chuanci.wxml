@@ -428,7 +428,7 @@
     <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;">
         <view class="cu-bar bg-white solid-bottom">
             <view class='action ' style="font-size: 24rpx;">
-                <text class='icon-title text-blue'></text>上传图片
+                <text class='icon-title text-green'></text>上传图片
             </view>
         </view>
         <view class="cu-form-group margin-top centerPlace">

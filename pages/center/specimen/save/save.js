@@ -14,20 +14,25 @@ Page({
         Custom: app.globalData.Custom,
         hidden: true,
         isAdmin: false,
+
         centerId: '',
         boxInfo: '',
+        searchValue: '',
         specimenInfo: '',
         caseList: [],
-        searchValue: '',
         selectedCaseInfo: {},
+        punctureList: [],
+        selectedPunctureInfo: {},
+
         remark: '',
         typeList: ['关节液', '血液', '组织'],
         typeIndex: 0,
         eccentricityList: ['6600*3min', '1000g*5min', '1000g*10min', '未离心'],
         eccentricityIndex: 0,
         axenicList: ['否', '是'],
-        axenicIndex: 0
+        axenicIndex: 0,
     },
+
     loadProgress: function() {
         if (this.data.loadProgress < 96) {
             this.setData({
@@ -167,14 +172,77 @@ Page({
         for (let i = 0, length = this.data.caseList.length; i < length; i++) {
             this.data.caseList[i].isSelected = caseInfo.case_id == this.data.caseList[i].case_id;
         }
+
         this.setData({
             caseList: this.data.caseList,
-            selectedCaseInfo: caseInfo
+            selectedCaseInfo: caseInfo,
+            modalName: "DrawerModalR"
+        });
+
+        this.getPunctrueList(caseInfo.case_id);
+    },
+
+    getPunctrueList(caseId) {
+        let that = this;
+        wx.request({
+            url: constant.basePath,
+            data: {
+                service: 'Case.GetCaseItems',
+                case_id: caseId,
+                type: 2,
+            },
+            header: {
+                'content-type': 'application/json'
+            },
+            success(res) {
+                console.log("Case.GetCaseItems:" + JSON.stringify(res))
+                if (res.data.data.code == constant.response_success) {
+                    for (let i = 0, len = res.data.data.list.length; i < len; i++) {
+                        let punctrueInfo = res.data.data.list[i];
+                        punctrueInfo.date_time = util.formatTime(punctrueInfo.date_time, 'Y-M-D');
+                        punctrueInfo.isSelected = that.data.selectedPunctureInfo.item_id == punctrueInfo.item_id
+                    }
+                    that.setData({
+                        punctureList: res.data.data.list
+                    });
+                } else {
+                    that.showToast(res.data.data.msg);
+                }
+            },
+            fail(res) {
+                that.hideLoading();
+            }
         });
     },
+
+    onPunctureItemClick(e) {
+        let punctureInfo = e.currentTarget.dataset.item;
+        for (let i = 0, length = this.data.punctureList.length; i < length; i++) {
+            this.data.punctureList[i].isSelected = punctureInfo.item_id == this.data.punctureList[i].item_id;
+        }
+
+        this.setData({
+            punctureList: this.data.punctureList,
+            selectedPunctureInfo: punctureInfo
+        });
+    },
+
+    gotoPuncture(e) {
+        let punctureInfo = e.currentTarget.dataset.item;
+        wx.navigateTo({
+            url: '../../case/chuanci/chuanci?centerId=' + this.data.centerId + "&centerName=''" + "&caseId=" + this.data.selectedCaseInfo.case_id + "&itemId=" + punctureInfo.item_id
+        });
+    },
+
+    savePuncture() {
+        this.setData({
+            modalName: ''
+        })
+    },
+
     onPutClick: function() {
-        if (!this.data.selectedCaseInfo.case_id) {
-            this.showToast("请选择关联的病历")
+        if (!this.data.selectedPunctureInfo.item_id) {
+            this.showToast("请选择关联的穿刺手术")
             return
         }
         let that = this;
@@ -186,6 +254,7 @@ Page({
                 openid: app.globalData.openid,
                 sample_id: that.data.specimenInfo.sample_id,
                 case_id: that.data.selectedCaseInfo.case_id,
+                item_id: that.data.selectedPunctureInfo.item_id,
                 type: parseInt(that.data.typeIndex) + 1,
                 eccentricity: parseInt(that.data.eccentricityIndex),
                 is_asepsis: parseInt(that.data.axenicIndex),

@@ -64,8 +64,8 @@
         <view class="cu-item arrow" wx:for="{{caseList}}" wx:key="">
             <view class="cu-item arrow" style="width:100%;" data-item="{{item}}" catchtap="onItemClick">
                 <view class='content'>
-                    <text class="{{item.isSelected?'icon-check text-green':'icon-edit'}}" style="width:100%;text-align:left;"> {{item.patient_name}} ({{item.create_time}})</text>
-                    <text class='cu-tag bg-grey sm radius'>ID: {{item.case_no}}</text>
+                    <text class="{{item.isSelected?'icon-check text-green':'icon-edit'}}" style="width:100%;text-align:left;"> {{item.case_no}} {{item.patient_name}} ({{item.create_time}})</text>
+                    <!-- <text class='cu-tag bg-grey sm radius'>ID: </text> -->
                 </view>
             </view>
         </view>
@@ -83,3 +83,35 @@
         </view>
     </view>
 </scroll-view>
+<!-- 右侧弹窗 -->
+<view class="cu-modal drawer-modal justify-end {{modalName=='DrawerModalR'?'show':''}}" bindtap='hideModal'>
+    <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;">
+        <scroll-view class="VerticalMain" scroll-y style="height:100%">
+            <view class="cu-list menu">
+                <view class="cu-bar bg-white solid-bottom">
+                    <view class='action ' style="font-size: 24rpx;">
+                        <text class='icon-title text-green'></text>选择要关联的穿刺
+                    </view>
+                </view>
+                <view class="cu-item" wx:for="{{punctureList}}" wx:key="" bindtap="onPunctureItemClick" data-item="{{item}}">
+                    <view class="cu-item" style="width:100%;">
+                        <view class='content'>
+                            <text class="icon-roundcheck text-green" style="{{item.isSelected?'':'visibility:hidden;'}}" />
+                            <text class="{{item.isSelected?'text-green':''}}" style="width:100%;margin-right:50rpx;">{{item.date_time}}</text>
+                            <text class="arrow text-blue text-df" catchtap="gotoPuncture" data-item="{{item}}" style="padding:20rpx 0">点击查看</text>
+                            <!-- <text class='cu-tag bg-grey sm radius'>ID: </text> -->
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <!-- 底部按钮 -->
+            <view class='padding-sm flex'>
+                <view class="flex-sub">
+                    <button class='cu-btn  bg-green shadow block' bindtap="savePuncture">
+                        确定
+                    </button>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+</view>

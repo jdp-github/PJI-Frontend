@@ -139,7 +139,7 @@ Page({
                 console.log("Case.CreateCase:" + JSON.stringify(res));
                 if (res.data.data.code == constant.response_success) {
                     wx.navigateTo({
-                        url: '../case/base/base?caseId=' + res.data.data.info.case_id + "&isCreate=" + true + "&centerId=" + that.data.centerId + "&centerName=" + that.data.centerName
+                        url: '../case/base/base?caseId=' + res.data.data.info.case_id + "&itemId=0" + "&centerId=" + that.data.centerId + "&centerName=" + that.data.centerName
                     });
                 } else {
                     that.showModal("ErrModal", res.data.data.msg);
