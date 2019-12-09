@@ -161,6 +161,12 @@ Page({
         is_remain_sample: 0,
         is_remain_sample_state: 1,
         is_remain_sample_picker: ["请选择", "否", "是"],
+        bein_info: {},
+        bein_relate_msg: '暂无可关联手术',
+        follow_info: {},
+        follow_relate_msg: '暂无可关联随访',
+        relateList: [],
+        relateType: '',
         sample_desc: [],
         saveMsg: '',
         // -------- 穿刺小结 end -------- //
@@ -405,7 +411,7 @@ Page({
     onSpecimenDesc: function(e) {
         if (this.data.sample_desc.length > 0) {
             wx.navigateTo({
-                url: '../../../specimen/detail/detail?boxId=' + this.data.sample_desc[0].box_id + '&centerId=' + this.data.centerId + "&caseId=" + this.data.caseId + "&boxUse=" + this.data.sample_desc[0].uses
+                url: '../../../center/specimen/detail/detail?boxId=' + this.data.sample_desc[0].box_id + '&centerId=' + this.data.centerId + "&caseId=" + this.data.caseId + "&boxUse=" + this.data.sample_desc[0].uses
             })
         }
     },
@@ -415,6 +421,71 @@ Page({
                 modalName: "DrawerModalR"
             })
             this.assignPic(this.data.exterior_pics, true)
+        }
+    },
+
+    onRelateClick(e) {
+        if (!this.data.base_info) {
+            let type = e.currentTarget.dataset.type
+            this.getRelateList(type)
+            this.setData({
+                modalName: "RelateDrawerModalR",
+                relateType: type
+            })
+        }
+    },
+
+    saveRelate() {
+        this.setData({
+            modalName: ""
+        })
+    },
+
+    getRelateList(type) {
+        let relateList = type == 3 ? JSON.parse(this.data.bein_info) : JSON.parse(this.data.follow_info)
+        for (let i = 0, len = relateList.length; i < len; i++) {
+            let relateInfo = relateList[i];
+            relateInfo.date_time = util.formatTime(relateInfo.date_time, 'Y-M-D');
+            this.data.relateList.forEach(item => {
+                relateInfo.isSelected = item.item_id == relateInfo.item_id
+            })
+        }
+        this.setData({
+            relateList: relateList
+        });
+
+        let msg = ''
+        if (type == 3) {
+            if (relateList.length == 0) {
+                msg = '暂无可关联手术'
+            } else {
+                msg = '点击查看'
+            }
+            this.setData({
+                bein_relate_msg: msg
+            })
+        } else if (type == 5) {
+            if (relateList.length == 0) {
+                msg = '暂无可关联随访'
+            } else {
+                msg = '点击查看'
+            }
+            this.setData({
+                follow_relate_msg: msg
+            })
+        }
+    },
+
+    gotoRelate(e) {
+        let itemInfo = e.currentTarget.dataset.item;
+        if (this.data.relateType == 3) {
+            wx.navigateTo({
+                url: '../../case/shoushu/shoushu?centerId=' + this.data.centerId + "&centerName=''" + "&caseId=" + this.data.caseId + "&itemId=" + itemInfo.item_id
+            });
+        } else if (this.data.purpose == 5) {
+            wx.navigateTo({
+                url: '../../case/followup/followup?centerId=' + this.data.centerId + "&centerName=''" + "&caseId=" + this.data.caseId + "&itemId=" + itemInfo.item_id
+            });
         }
     },
 
@@ -544,6 +615,8 @@ Page({
             puncture_auditor: info.puncture_auditor,
             puncture_progress: info.puncture_progress,
             puncture_state: info.puncture_state,
+            bein_info: info.bein_info,
+            follow_info: info.follow_info,
             // 已存标本
             sample_desc: info.sample_deposit
         })

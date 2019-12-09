@@ -71,8 +71,16 @@
                             </picker>
                         </view>
                         <!-- 本次手术相关的诊断穿刺 -->
-                        <view class="cu-form-group">
-                            <view class='title' style='text-align:left'>本次手术相关的诊断穿刺</view>
+                        <view class="cu-form-group {{puncture_info_state == 2 ?'clock':''}}" bindtap="onPunctureClick" style="pointer-events:{{puncture_info_state == 2?'none':''}}">
+                            <view class='title'>本次手术相关的诊断穿刺</view>
+                            <view style="display: flex;align-items: center;">{{relateSelect?'已选择':'请选择'}}
+                                <view class="icon-right" style="font-size: 40rpx;color: #aaaab2;margin-left:5rpx;" />
+                            </view>
+                        </view>
+                        <!-- 本次穿刺相关的后续随访 -->
+                        <view class="cu-form-group" bindtap="onRelateClick" data-type="5">
+                            <view class='title' style='text-align:left'>本次穿刺相关的后续随访</view>
+                            <view>{{followupMsg}}</view>
                         </view>
                         <!-- 抗生素使用史 -->
                         <view class="cu-form-group {{antibiotic_history_state==2?'clock':''}}">
@@ -751,6 +759,69 @@
             <view class='padding-sm flex'>
                 <view class="flex-sub">
                     <button class='cu-btn  bg-green shadow block' bindtap="okAddBox">
+                        关闭
+                    </button>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+</view>
+<!-- 穿刺弹窗 -->
+<view class="cu-modal drawer-modal justify-end {{modalName=='PunctureDrawerModalR'?'show':''}}" bindtap='hideModal'>
+    <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;">
+        <scroll-view class="VerticalMain" scroll-y style="height:100%">
+            <view class="cu-list menu">
+                <view class="cu-bar bg-white solid-bottom">
+                    <view class='action ' style="font-size: 24rpx;">
+                        <text class='icon-title text-green'></text>选择要关联的诊断穿刺
+                    </view>
+                </view>
+                <view class="cu-item" wx:for="{{punctureList}}" wx:key="" bindtap="onPunctureItemClick" data-item="{{item}}">
+                    <view class="cu-item" style="width:100%;">
+                        <view class='content'>
+                            <text class="icon-roundcheck text-green" style="{{item.isSelected?'':'visibility:hidden;'}}" />
+                            <text class="{{item.isSelected?'text-green':''}}" style="width:100%;margin-right:50rpx;">{{item.date_time}}</text>
+                            <text class="arrow text-blue text-df" catchtap="gotoPuncture" data-item="{{item}}" style="padding:20rpx 0">点击查看</text>
+                            <!-- <text class='cu-tag bg-grey sm radius'>ID: </text> -->
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <!-- 底部按钮 -->
+            <view class='padding-sm flex'>
+                <view class="flex-sub">
+                    <button class='cu-btn  bg-green shadow block' bindtap="savePunctureInfo">
+                        确定
+                    </button>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+</view>
+<!-- 随访弹窗 -->
+<view class="cu-modal drawer-modal justify-end {{modalName=='FollowupDrawerModalR'?'show':''}}" bindtap='hideModal'>
+    <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;">
+        <scroll-view class="VerticalMain" scroll-y style="height:100%">
+            <view class="cu-list menu">
+                <view class="cu-bar bg-white solid-bottom">
+                    <view class='action ' style="font-size: 24rpx;">
+                        <text class='icon-title text-green'></text>已关联的后续随访
+                    </view>
+                </view>
+                <view class="cu-item" wx:for="{{followupList}}" wx:key="" data-item="{{item}}">
+                    <view class="cu-item" style="width:100%;">
+                        <view class='content'>
+                            <text style="width:100%;margin-right:50rpx;">{{item.date_time}}</text>
+                            <text class="arrow text-blue text-df" catchtap="gotoFollowup" data-item="{{item}}" style="padding:20rpx 0">点击查看</text>
+                            <!-- <text class='cu-tag bg-grey sm radius'>ID: </text> -->
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <!-- 底部按钮 -->
+            <view class='padding-sm flex'>
+                <view class="flex-sub">
+                    <button class='cu-btn  bg-green shadow block' bindtap="saveFollowupInfo">
                         关闭
                     </button>
                 </view>

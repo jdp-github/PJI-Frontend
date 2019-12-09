@@ -2,6 +2,7 @@
 
 let constant = require('../../../../utils/constant.js');
 let util = require('../../../../utils/util.js');
+let regeneratorRuntime = require('../../../../lib/regenerator-runtime/runtime');
 
 const app = getApp();
 
@@ -45,6 +46,12 @@ Page({
         operation_before_summary: false,
         hospitalized_date: '请选择日期',
         hospitalized_date_state: 1,
+        puncture_info: '',
+        puncture_info_state: 1,
+        punctureList: [],
+        punctureSelect: false,
+        followupList: [],
+        followupMsg: '暂无可关联随访',
         antibiotic_history: 0,
         antibiotic_history_state: 1,
         antibiotic_history_picker: ['请选择', '无', '已停2周以上', '2周内有使用', '1周内有使用', '3天内有使用', '持续服用中'],
@@ -237,8 +244,11 @@ Page({
         this.setData({
             hospitalized_date: '请选择日期',
             hospitalized_date_state: state,
+            puncture_info_state: state,
             antibiotic_history: 0,
             antibiotic_history_state: state,
+            punctureList: [],
+            punctureSelect: false,
             immuno_history: 0,
             immuno_history_state: state,
             is_heat: 0,
@@ -518,6 +528,124 @@ Page({
         }
     },
 
+    onPunctureClick() {
+        if (!this.data.base_info) {
+            this.setData({
+                modalName: "PunctureDrawerModalR"
+            })
+        }
+    },
+
+    savePunctureInfo() {
+        this.setData({
+            modalName: ""
+        })
+    },
+
+    requestPunctureList() {
+        let that = this;
+        wx.request({
+            url: constant.basePath,
+            data: {
+                service: 'Case.GetCaseItems',
+                case_id: that.data.caseId,
+                type: 2,
+            },
+            header: {
+                'content-type': 'application/json'
+            },
+            success(res) {
+                console.log("Case.GetCaseItems:" + JSON.stringify(res))
+                if (res.data.data.code == constant.response_success) {
+                    for (let i = 0, len = res.data.data.list.length; i < len; i++) {
+                        let relateInfo = res.data.data.list[i];
+                        relateInfo.date_time = util.formatTime(relateInfo.date_time, 'Y-M-D');
+                        that.data.punctureList.forEach(item => {
+                            relateInfo.isSelected = item.item_id == relateInfo.item_id
+                        })
+                        if (that.data.puncture_state) {
+                            let parseList = JSON.parse(that.data.puncture_state)
+                            parseList.forEach(item => {
+                                relateInfo.isSelected = item.item_id == relateInfo.item_id
+                            })
+                        }
+                    }
+                    that.setData({
+                        punctureList: res.data.data.list
+                    });
+                    that.getPunctureFlag(that.data.punctureList)
+                } else {
+                    that.showToast(res.data.data.msg);
+                }
+            }
+        });
+    },
+
+    getPunctureFlag(punctureList) {
+        for (let i = 0, length = punctureList.length; i < length; i++) {
+            if (punctureList[i].isSelected) {
+                this.setData({
+                    punctureSelect: true
+                })
+                return
+            }
+        }
+
+        this.setData({
+            punctureSelect: false
+        })
+    },
+
+    gotoPuncture(e) {
+        let itemInfo = e.currentTarget.dataset.item;
+        wx.navigateTo({
+            url: '../../case/chuanci/chuanci?centerId=' + this.data.centerId + "&centerName=''" + "&caseId=" + this.data.caseId + "&itemId=" + itemInfo.item_id
+        });
+    },
+
+    onFollowupClick() {
+        if (!this.data.base_info) {
+            this.setData({
+                modalName: "FollowupDrawerModalR"
+            })
+            this.getFollowupList()
+        }
+    },
+
+    saveFollowupInfo() {
+        this.setData({
+            modalName: ""
+        })
+    },
+
+    getFollowupList(type) {
+        let followupList = JSON.parse(this.data.followup_info)
+        for (let i = 0, len = followupList.length; i < len; i++) {
+            let followupInfo = followupList[i];
+            followupInfo.date_time = util.formatTime(followupInfo.date_time, 'Y-M-D');
+           
+        }
+        this.setData({
+            followupList: followupList
+        });
+
+        if (followupList.length == 0) {
+            msg = '暂无可关联随访'
+        } else {
+            msg = '点击查看'
+        }
+        this.setData({
+            followupMsg: msg
+        })
+    },
+
+    gotoFollowup(e) {
+        let itemInfo = e.currentTarget.dataset.item;
+        wx.navigateTo({
+            url: '../../case/shoushu/shoushu?centerId=' + this.data.centerId + "&centerName=''" + "&caseId=" + this.data.caseId + "&itemId=" + itemInfo.item_id
+        });
+    },
+
     onLoad: function(options) {
         this.loadProgress();
         this.setData({
@@ -529,14 +657,19 @@ Page({
             isCreate: options.itemId == 0,
         });
 
+        this.init()
+        this.completeProgress();
+    },
+
+    async init() {
         if (!this.data.isCreate) {
-            this.requestCaseInfo();
+            await this.requestCaseInfo();
         } else { // 新建
             this.setData({
                 addAvatar: app.globalData.avatarUrl,
             })
         }
-        this.completeProgress();
+        this.requestPunctureList()
     },
 
     requestCaseInfo() {
@@ -586,6 +719,8 @@ Page({
 
         this.setData({
             operation_before_summary: info.operation_before_summary == 1,
+            puncture_info: info.puncture_info,
+            followup_info: info.followup_info,
             hospitalized_date: this.getDefaultDate(info.hospitalized_date),
             antibiotic_history: info.antibiotic_history,
             immuno_history: info.immuno_history,
@@ -1048,6 +1183,7 @@ Page({
         let that = this
         var jsonData = {
             operation_before_summary: that.data.operation_before_summary ? 1 : 0,
+            puncture_info: that.makePunctureInfo(),
             hospitalized_date: that.makeDefaultDate(that.data.hospitalized_date),
             antibiotic_history: that.data.antibiotic_history,
             immuno_history: that.data.immuno_history,
@@ -1124,6 +1260,16 @@ Page({
         }
         console.log("手术：" + JSON.stringify(jsonData))
         return JSON.stringify(jsonData)
+    },
+
+    makePunctureInfo() {
+        let select = []
+        this.data.punctureList.forEach(item => {
+            if (item.isSelected) {
+                select.push(item)
+            }
+        })
+        return JSON.stringify(select)
     },
 
     makeDefaultNum(num) {

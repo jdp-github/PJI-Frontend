@@ -377,14 +377,14 @@
                         </view>
                     </view>
                     <!-- 本次穿刺相关的后续手术治疗 -->
-                    <view class="cu-form-group {{puncture_summary?'clock':''}}">
+                    <view class="cu-form-group" bindtap="onRelateClick" data-type="3">
                         <view class='title' style='text-align:left'>本次穿刺相关的后续手术治疗</view>
-                        <view>暂无可关联手术</view>
+                        <view>{{bein_relate_msg}}</view>
                     </view>
                     <!-- 本次穿刺相关的后续随访 -->
-                    <view class="cu-form-group {{puncture_summary?'clock':''}}">
+                    <view class="cu-form-group" bindtap="onRelateClick" data-type="5">
                         <view class='title' style='text-align:left'>本次穿刺相关的后续随访</view>
-                        <view>暂无可关联随访</view>
+                        <view>{{follow_relate_msg}}</view>
                     </view>
                     <!-- 是否留有标本 -->
                     <view class="cu-form-group {{is_remain_sample_state==2?'clock':''}}">
@@ -399,7 +399,7 @@
                     <view wx:if="{{is_remain_sample==2}}" class="cu-form-group" bindtap='onSpecimenDesc'>
                         <view style='display:flex;flex-direction: column; '>
                             <view class='title' style='text-align:left'>标本存放情况</view>
-                            <textarea placeholder="暂未存放可用标本" style='width: 350rpx;text-align:left;' class='radius' disabled="" value='{{saveMsg}}' auto-height></textarea>
+                            <textarea placeholder="暂未存放可用标本" style='width: 350rpx;text-align:left;' class='radius' value='{{saveMsg}}' auto-height></textarea>
                         </view>
                     </view>
                 </view>
@@ -623,6 +623,37 @@
             <view class='padding-sm flex'>
                 <view class="flex-sub">
                     <button class='cu-btn  bg-green shadow block' bindtap="hideImageModal">
+                        关闭
+                    </button>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+</view>
+<!-- 关联弹窗 -->
+<view class="cu-modal drawer-modal justify-end {{modalName=='RelateDrawerModalR'?'show':''}}" bindtap='hideModal'>
+    <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;">
+        <scroll-view class="VerticalMain" scroll-y style="height:100%">
+            <view class="cu-list menu">
+                <view class="cu-bar bg-white solid-bottom">
+                    <view class='action' style="font-size: 24rpx;">
+                        <text class='icon-title text-green'></text>已关联的{{relateType==5?'随访':'手术'}}
+                    </view>
+                </view>
+                <view class="cu-item" wx:for="{{relateList}}" wx:key="" data-item="{{item}}">
+                    <view class="cu-item" style="width:100%;">
+                        <view class='content'>
+                            <text style="width:100%;margin-right:50rpx;">{{item.date_time}}</text>
+                            <text class="arrow text-blue text-df" catchtap="gotoRelate" data-item="{{item}}" style="padding:20rpx 0">点击查看</text>
+                            <!-- <text class='cu-tag bg-grey sm radius'>ID: </text> -->
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <!-- 底部按钮 -->
+            <view class='padding-sm flex'>
+                <view class="flex-sub">
+                    <button class='cu-btn  bg-green shadow block' bindtap="saveRelate">
                         关闭
                     </button>
                 </view>
