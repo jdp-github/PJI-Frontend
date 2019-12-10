@@ -86,13 +86,9 @@ Page({
         this.setData({
             [type]: parseInt(e.detail.value)
         })
-        // if (type == "purpose") {
-        //     if (e.detail.value == 1) {
-        //         this.requestRelateList(2)
-        //     } else if (e.detail.value == 2) {
-        //         this.requestRelateList(3)
-        //     }
-        // }
+        if (type == "purpose") {
+            this.requestRelateList()
+        }
     },
 
     onDateChange(e) {
@@ -191,10 +187,6 @@ Page({
             this.setData({
                 modalName: "RelateDrawerModalR"
             })
-            if (this.data.purpose != 0) {
-                let type = this.data.purpose == 1 ? 2 : 3
-                this.requestRelateList(type)
-            }
         }
     },
 
@@ -204,8 +196,12 @@ Page({
         })
     },
 
-    requestRelateList(type) {
+    requestRelateList() {
+        if (this.data.purpose == 0) {
+            return
+        }
         let that = this;
+        let type = that.data.purpose == 1 ? 2 : 3
         wx.request({
             url: constant.basePath,
             data: {
@@ -366,6 +362,8 @@ Page({
             plan: info.plan,
             remark: info.remark,
         })
+
+        this.requestRelateList()
     },
 
     getImgArr(jsonImg) {
@@ -533,7 +531,8 @@ Page({
         var jsonData = {
             follow_date: that.makeDefaultDate(that.data.follow_date),
             purpose: that.data.purpose,
-            puncture_info: that.makeRelateInfo(),
+            puncture_info: that.data.purpose == 1 ? that.makeRelateInfo() : '',
+            bein_info: that.data.purpose == 2 ? that.makeRelateInfo() : '',
             patient_desc: that.data.patient_desc,
             exterior: that.data.exterior,
             exterior_pic: that.makePicJson(that.data.exterior_pic),
@@ -592,7 +591,7 @@ Page({
                 item_id: that.data.itemId,
                 openid: app.globalData.openid,
                 type: 5,
-                state: that.data.caseInfo.puncture.puncture_state == 2 ? 2 : 1
+                state: that.data.caseInfo.follow_state == 2 ? 2 : 1
             },
             header: {
                 'content-type': 'application/json'

@@ -533,6 +533,7 @@ Page({
             this.setData({
                 modalName: "PunctureDrawerModalR"
             })
+            this.requestPunctureList()
         }
     },
 
@@ -563,8 +564,8 @@ Page({
                         that.data.punctureList.forEach(item => {
                             relateInfo.isSelected = item.item_id == relateInfo.item_id
                         })
-                        if (that.data.puncture_state) {
-                            let parseList = JSON.parse(that.data.puncture_state)
+                        if (that.data.puncture_info) {
+                            let parseList = JSON.parse(that.data.puncture_info)
                             parseList.forEach(item => {
                                 relateInfo.isSelected = item.item_id == relateInfo.item_id
                             })
@@ -623,7 +624,6 @@ Page({
             this.setData({
                 modalName: "FollowupDrawerModalR"
             })
-            this.getFollowupList()
         }
     },
 
@@ -633,17 +633,18 @@ Page({
         })
     },
 
-    getFollowupList(type) {
-        let followupList = JSON.parse(this.data.followup_info)
-        for (let i = 0, len = followupList.length; i < len; i++) {
-            let followupInfo = followupList[i];
-            followupInfo.date_time = util.formatTime(followupInfo.date_time, 'Y-M-D');
-           
-        }
+    getFollowupList() {
+        let followupList = JSON.parse(this.data.follow_info)
+        // for (let i = 0, len = followupList.length; i < len; i++) {
+        //     let followupInfo = followupList[i];
+        //     followupInfo.date_time = util.formatTime(followupInfo.date_time, 'Y-M-D');
+
+        // }
         this.setData({
             followupList: followupList
         });
 
+        let msg = ''
         if (followupList.length == 0) {
             msg = '暂无可关联随访'
         } else {
@@ -657,7 +658,7 @@ Page({
     gotoFollowup(e) {
         let itemInfo = e.currentTarget.dataset.item;
         wx.navigateTo({
-            url: '../../case/shoushu/shoushu?centerId=' + this.data.centerId + "&centerName=''" + "&caseId=" + this.data.caseId + "&itemId=" + itemInfo.item_id
+            url: '../../case/followup/followup?centerId=' + this.data.centerId + "&centerName=''" + "&caseId=" + this.data.caseId + "&itemId=" + itemInfo.item_id
         });
     },
 
@@ -684,6 +685,7 @@ Page({
                 addAvatar: app.globalData.avatarUrl,
             })
         }
+
         this.requestPunctureList()
     },
 
@@ -735,7 +737,7 @@ Page({
         this.setData({
             operation_before_summary: info.operation_before_summary == 1,
             puncture_info: info.puncture_info,
-            followup_info: info.followup_info,
+            follow_info: info.follow_info,
             hospitalized_date: this.getDefaultDate(info.hospitalized_date),
             antibiotic_history: info.antibiotic_history,
             immuno_history: info.immuno_history,
@@ -810,6 +812,10 @@ Page({
             antibiotic_scene: parseInt(info.antibiotic_scene),
             germ_name: info.germ_name,
         })
+
+        if (this.data.follow_info.length > 0) {
+            this.getFollowupList()
+        }
     },
 
     getImgArr(jsonImg) {
@@ -1328,7 +1334,7 @@ Page({
                 item_id: that.data.itemId,
                 openid: app.globalData.openid,
                 type: 3,
-                state: that.data.caseInfo.puncture.puncture_state == 2 ? 2 : 1
+                state: that.data.caseInfo.bein_state == 2 ? 2 : 1
             },
             header: {
                 'content-type': 'application/json'

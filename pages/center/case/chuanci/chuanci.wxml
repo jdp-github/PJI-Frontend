@@ -413,7 +413,7 @@
                     <button wx:else class='cu-btn line-green shadow' style="margin-right: 15rpx;" form-type="submit" bindtap='onSetCaseWrite'>
                         开始编辑
                     </button>
-                    <button class='cu-btn bg-green shadow' style="margin-left: 15rpx;" form-type="submit" bindtap='verify' disabled='{{isCreate || caseInfo.approve_button == 2}}'>
+                    <button class='cu-btn bg-green shadow' style="margin-left: 15rpx;" form-type="submit" bindtap='verify' disabled='{{isCreate}}'>
                         {{caseInfo.puncture_state != 2 ?"确认审核":"解除锁定"}}
                     </button>
                 </view>
@@ -640,11 +640,11 @@
                         <text class='icon-title text-green'></text>已关联的{{relateType==5?'随访':'手术'}}
                     </view>
                 </view>
-                <view class="cu-item" wx:for="{{relateList}}" wx:key="" data-item="{{item}}">
+                <view class="cu-item" wx:for="{{relateList}}" wx:key="" bindtap="gotoRelate" data-item="{{item}}">
                     <view class="cu-item" style="width:100%;">
                         <view class='content'>
                             <text style="width:100%;margin-right:50rpx;">{{item.date_time}}</text>
-                            <text class="arrow text-blue text-df" catchtap="gotoRelate" data-item="{{item}}" style="padding:20rpx 0">点击查看</text>
+                            <text class="arrow text-blue text-df" style="padding:20rpx 0">点击查看</text>
                             <!-- <text class='cu-tag bg-grey sm radius'>ID: </text> -->
                         </view>
                     </view>

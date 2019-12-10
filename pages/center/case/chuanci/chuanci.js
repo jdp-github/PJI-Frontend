@@ -2,6 +2,7 @@
 
 let constant = require('../../../../utils/constant.js');
 let util = require('../../../../utils/util.js');
+let regeneratorRuntime = require('../../../../lib/regenerator-runtime/runtime');
 
 const app = getApp();
 
@@ -163,8 +164,10 @@ Page({
         is_remain_sample_picker: ["请选择", "否", "是"],
         bein_info: {},
         bein_relate_msg: '暂无可关联手术',
+        bein_relate_list: [],
         follow_info: {},
         follow_relate_msg: '暂无可关联随访',
+        follow_relate_list: [],
         relateList: [],
         relateType: '',
         sample_desc: [],
@@ -427,10 +430,10 @@ Page({
     onRelateClick(e) {
         if (!this.data.base_info) {
             let type = e.currentTarget.dataset.type
-            this.getRelateList(type)
             this.setData({
                 modalName: "RelateDrawerModalR",
-                relateType: type
+                relateType: type,
+                relateList: type == 3 ? this.data.bein_relate_list : this.data.follow_relate_list
             })
         }
     },
@@ -445,14 +448,11 @@ Page({
         let relateList = type == 3 ? JSON.parse(this.data.bein_info) : JSON.parse(this.data.follow_info)
         for (let i = 0, len = relateList.length; i < len; i++) {
             let relateInfo = relateList[i];
-            relateInfo.date_time = util.formatTime(relateInfo.date_time, 'Y-M-D');
+            // relateInfo.date_time = util.formatTime(relateInfo.date_time, 'Y-M-D');
             this.data.relateList.forEach(item => {
                 relateInfo.isSelected = item.item_id == relateInfo.item_id
             })
         }
-        this.setData({
-            relateList: relateList
-        });
 
         let msg = ''
         if (type == 3) {
@@ -462,7 +462,8 @@ Page({
                 msg = '点击查看'
             }
             this.setData({
-                bein_relate_msg: msg
+                bein_relate_msg: msg,
+                bein_relate_list: relateList
             })
         } else if (type == 5) {
             if (relateList.length == 0) {
@@ -471,7 +472,8 @@ Page({
                 msg = '点击查看'
             }
             this.setData({
-                follow_relate_msg: msg
+                follow_relate_msg: msg,
+                follow_relate_list: relateList
             })
         }
     },
@@ -482,7 +484,7 @@ Page({
             wx.navigateTo({
                 url: '../../case/shoushu/shoushu?centerId=' + this.data.centerId + "&centerName=''" + "&caseId=" + this.data.caseId + "&itemId=" + itemInfo.item_id
             });
-        } else if (this.data.purpose == 5) {
+        } else if (this.data.relateType == 5) {
             wx.navigateTo({
                 url: '../../case/followup/followup?centerId=' + this.data.centerId + "&centerName=''" + "&caseId=" + this.data.caseId + "&itemId=" + itemInfo.item_id
             });
@@ -499,6 +501,12 @@ Page({
             itemId: options.itemId,
             isCreate: options.itemId == 0,
         });
+
+        this.init()
+        this.completeProgress();
+    },
+
+    init() {
         if (!this.data.isCreate) {
             this.requestCaseInfo();
         } else { // 新建
@@ -506,7 +514,6 @@ Page({
                 addAvatar: app.globalData.avatarUrl,
             })
         }
-        this.completeProgress();
     },
 
     requestCaseInfo() {
@@ -625,6 +632,14 @@ Page({
         this.setData({
             saveMsg: this.getSpecimenInfo(this.data.sample_desc)
         });
+        // 关联
+        if (this.data.bein_info.length > 0) {
+            this.getRelateList(3)
+        }
+        if (this.data.follow_info.length > 0) {
+            this.getRelateList(5)
+        }
+
     },
 
     getImgArr(jsonImg) {

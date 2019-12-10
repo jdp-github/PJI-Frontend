@@ -68,7 +68,7 @@
                             <view class="avatar-special bg-grey radius" style="display:flex;flex-direction:column;padding-top:10rpx;padding-bottom:10rpx">
                                 <view class="flex-sub" style="font-size:28rpx">{{item.patient_name}}</view>
                                 <view class="flex-sub" style="font-size:28rpx">ID:{{item.case_no}}</view>
-                                <view class="flex-sub" style="font-size:28rpx">{{item.side_name}}</view>
+                                <view class="flex-sub" style="font-size:28rpx">{{item.side_name}}  {{item.part_name}}</view>
                             </view>
                         </view>
 
