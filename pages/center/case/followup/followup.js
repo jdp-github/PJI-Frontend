@@ -86,13 +86,13 @@ Page({
         this.setData({
             [type]: parseInt(e.detail.value)
         })
-        if (type == "purpose") {
-            if (e.detail.value == 1) {
-                this.requestRelateList(2)
-            } else if (e.detail.value == 2) {
-                this.requestRelateList(3)
-            }
-        }
+        // if (type == "purpose") {
+        //     if (e.detail.value == 1) {
+        //         this.requestRelateList(2)
+        //     } else if (e.detail.value == 2) {
+        //         this.requestRelateList(3)
+        //     }
+        // }
     },
 
     onDateChange(e) {
@@ -191,6 +191,10 @@ Page({
             this.setData({
                 modalName: "RelateDrawerModalR"
             })
+            if (this.data.purpose != 0) {
+                let type = this.data.purpose == 1 ? 2 : 3
+                this.requestRelateList(type)
+            }
         }
     },
 
@@ -221,8 +225,8 @@ Page({
                         that.data.relateList.forEach(item => {
                             relateInfo.isSelected = item.item_id == relateInfo.item_id
                         })
-                        if (that.data.puncture_state) {
-                            let parseList = JSON.parse(that.data.puncture_state)
+                        if (that.data.puncture_info) {
+                            let parseList = JSON.parse(that.data.puncture_info)
                             parseList.forEach(item => {
                                 relateInfo.isSelected = item.item_id == relateInfo.item_id
                             })

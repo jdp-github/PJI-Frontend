@@ -73,7 +73,7 @@
                         <!-- 本次手术相关的诊断穿刺 -->
                         <view class="cu-form-group {{puncture_info_state == 2 ?'clock':''}}" bindtap="onPunctureClick" style="pointer-events:{{puncture_info_state == 2?'none':''}}">
                             <view class='title'>本次手术相关的诊断穿刺</view>
-                            <view style="display: flex;align-items: center;">{{relateSelect?'已选择':'请选择'}}
+                            <view style="display: flex;align-items: center;">{{punctureSelect?'已选择':'请选择'}}
                                 <view class="icon-right" style="font-size: 40rpx;color: #aaaab2;margin-left:5rpx;" />
                             </view>
                         </view>

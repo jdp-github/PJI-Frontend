@@ -596,6 +596,21 @@ Page({
         })
     },
 
+    onPunctureItemClick(e) {
+        let relateInfo = e.currentTarget.dataset.item;
+        for (let i = 0, length = this.data.punctureList.length; i < length; i++) {
+            if (relateInfo.item_id == this.data.punctureList[i].item_id) {
+                this.data.punctureList[i].isSelected = !this.data.punctureList[i].isSelected
+            }
+        }
+
+        this.setData({
+            punctureList: this.data.punctureList,
+        });
+        this.getPunctureFlag(this.data.punctureList)
+    },
+
+
     gotoPuncture(e) {
         let itemInfo = e.currentTarget.dataset.item;
         wx.navigateTo({
