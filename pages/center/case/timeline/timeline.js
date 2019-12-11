@@ -44,7 +44,7 @@ Page({
             data: {
                 service: 'Case.Timeline',
                 openid: app.globalData.openid,
-                case_no: that.data.caseInfo.case_no,
+                case_id: that.data.caseInfo.case_id,
             },
             header: {
                 'content-type': 'application/json'
@@ -110,6 +110,16 @@ Page({
         wx.navigateTo({
             url: '../followup/followup?centerId=' + this.data.centerId + "&centerName=" + this.data.centerName + "&caseId=" + this.data.caseInfo.case_id + "&itemId=" + 0
         });
+    },
+
+    onUnload() {
+        var pages = getCurrentPages();
+        if (pages.length > 1) {
+            //上一个页面实例对象
+            var prePage = pages[pages.length - 2];
+            //关键在这里
+            prePage.initData()
+        }
     },
 
     // ============ 事件 begin ============ //

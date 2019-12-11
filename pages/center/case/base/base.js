@@ -521,7 +521,7 @@ Page({
                 'content-type': 'application/json'
             },
             success(res) {
-                console.log("Case.CreateEditCaseBase:" + JSON.stringify(res))
+                console.log("Case.EditCaseBase:" + JSON.stringify(res))
                 that.hideLoading();
                 if (res.data.data.code == 0) {
                     that.setData({
@@ -560,7 +560,7 @@ Page({
             patient_name: that.data.name,
             case_no: that.data.caseNO,
             side: parseInt(that.data.side),
-            part: parseInt(that.data.side),
+            part: parseInt(that.data.part),
             create_time: new Date(that.data.createDate).getTime() / 1000,
             sex: that.data.sex,
             age: parseInt(that.data.age),

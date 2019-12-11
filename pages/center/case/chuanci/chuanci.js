@@ -159,7 +159,7 @@ Page({
         present_result_picker: ["请选择", "已能明确感染", "已能排除感染", "暂不能确定"],
         thistime_result: '',
         thistime_result_state: 1,
-        is_remain_sample: 0,
+        is_remain_sample: 1,
         is_remain_sample_state: 1,
         is_remain_sample_picker: ["请选择", "否", "是"],
         bein_info: {},
@@ -310,7 +310,7 @@ Page({
             present_result_state_value: stateValue,
             thistime_result: '',
             thistime_result_state: state,
-            is_remain_sample: 0,
+            is_remain_sample: 1,
             is_remain_sample_state: state,
         })
     },
@@ -617,7 +617,7 @@ Page({
             puncture_summary: info.puncture_summary == 1,
             present_result: info.present_result,
             thistime_result: info.thistime_result,
-            is_remain_sample: info.is_remain_sample,
+            is_remain_sample: info.sample_deposit.length > 0 ? 2 : 1,
             puncture_creator: info.puncture_creator,
             puncture_auditor: info.puncture_auditor,
             puncture_progress: info.puncture_progress,
@@ -911,10 +911,6 @@ Page({
             }
             if (this.data.thistime_result.length == 0) {
                 this.showToast("请填写本次诊疗周期最终诊断")
-                return false;
-            }
-            if (this.data.is_remain_sample == 0) {
-                this.showToast("请选择是否留有标本")
                 return false;
             }
         }
