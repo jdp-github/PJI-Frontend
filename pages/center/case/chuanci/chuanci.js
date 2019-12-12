@@ -658,7 +658,7 @@ Page({
         for (let i = 0; i < specimenArr.length; i++) {
             let box_name = specimenArr[i].box_name
             if (!specimenMap.has(box_name)) {
-                specimenMap.set(box_name, [])
+                specimenMap.set(box_name, [specimenArr[i].number])
             } else {
                 specimenMap.get(box_name).push(specimenArr[i].number)
             }

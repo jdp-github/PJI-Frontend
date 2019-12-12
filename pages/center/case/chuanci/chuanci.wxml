@@ -387,7 +387,7 @@
                         <view>{{follow_relate_msg}}</view>
                     </view>
                     <!-- 是否留有标本 -->
-                    <view class="cu-form-group {{is_remain_sample_state==2?'clock':''}}">
+                    <view class="cu-form-group">
                         <view class='title'>是否留有标本</view>
                         <picker value="{{is_remain_sample}}" range="{{is_remain_sample_picker}}" disabled data-type="is_remain_sample">
                             <view class="picker">

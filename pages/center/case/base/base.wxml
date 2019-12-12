@@ -205,7 +205,7 @@
                         开始编辑
                     </button>
                     <button class='cu-btn bg-green shadow' style="margin-left: 15rpx;" form-type="submit" bindtap='verify' disabled='{{isCreate || caseInfo.approve_button == 2}}'>
-                        {{caseInfo.base.base_state != 2 ?"确认审核":"解除锁定"}}
+                        {{caseInfo.base_state != 2 ?"确认审核":"解除锁定"}}
                     </button>
                 </view>
             </view>

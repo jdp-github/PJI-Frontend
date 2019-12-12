@@ -573,7 +573,7 @@ Page({
             for (let index = 0, length = picArr.length; index < length; index++) {
                 let item = picArr[index]
                 if (item) {
-                    picObj["pic" + (index + offSet + 1) + "Upload"] = item.picUpload
+                    picObj["pic" + (index + offSet + 1) + "Upload"] = item["pic" + (index + offSet + 1) + "Upload"] ? item["pic" + (index + offSet + 1) + "Upload"] : item.picUpload
                 }
             }
         }

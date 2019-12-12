@@ -205,7 +205,7 @@ Page({
                         noticeContent: res.data.data.info.content
                     });
                 } else {
-                    that.showToast(res.data.msg);
+                    that.showToast(res.data.data.msg);
                 }
             },
             fail(res) {

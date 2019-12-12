@@ -127,3 +127,7 @@ i {
 .clock {
     background-color: #fcd9da;
 }
+
+.cu-form-group textarea {
+    margin: 0 0 20rpx;
+}
