@@ -515,6 +515,7 @@ Page({
                 if (res.data.data.code == constant.response_success) {
                     let list = [];
                     let realStaffList = {};
+                    let sortByPrefix = {};
                     let realListCur = '';
                     for (let i = 0, len = res.data.data.list.length; i < len; i++) {
                         let staff = res.data.data.list[i];
@@ -527,13 +528,22 @@ Page({
                         }
                         realStaffList[prefixLetter].push(staff);
                     }
+
                     if (list.length == 0) {
                         realListCur = ''
                     } else {
                         realListCur = list[0];
                     }
+                    list.sort();
+                    for (let i = 0, len = list.length; i < len; i ++) {
+                        let prefix = list[i];
+                        if (!sortByPrefix[prefix]) {
+                            sortByPrefix[prefix] = [];
+                        }
+                        sortByPrefix[prefix] = realStaffList[prefix]
+                    }
                     that.setData({
-                        staffList: realStaffList,
+                        staffList: sortByPrefix,
                         list: [...new Set(list)],
                         listCur: realListCur
                     });
