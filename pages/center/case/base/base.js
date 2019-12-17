@@ -398,6 +398,7 @@ Page({
             tel1: info.telphone1,
             tel2: info.telphone2,
             tel2Disabled: this.getValueDisable(info.telphone2),
+            type: parseInt(info.type),
             medical_history: info.medical_history,
 
             first_displace_time: this.data.isCreate ? util.getNowFormatDate() : util.formatTime(info.first_displace_time, 'Y-M-D'),
@@ -456,7 +457,7 @@ Page({
     },
 
     getValueDisable(value) {
-        return value ? value.length <= 0 : false
+        return value.length <= 0
     },
 
 
@@ -828,7 +829,7 @@ Page({
                 service: 'Case.ClearWritingStatus',
                 case_id: that.data.caseId,
                 item_id: that.data.itemId,
-                type:1
+                type: 1
             },
             header: {
                 'content-type': 'application/json'
