@@ -19,7 +19,7 @@ Page({
 
         caseInfo: '',
         timeLineList: [],
-        typePicker: ["基本信息", "穿刺信息", "入院后信息", "用药方案", "复诊随访"]
+        typePicker: ["基本信息", "诊断穿刺", "入院手术", "用药方案", "门诊随访"]
     },
 
     onLoad: function(options) {
