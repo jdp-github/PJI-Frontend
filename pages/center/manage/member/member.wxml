@@ -1,0 +1,88 @@
+<view class="cu-custom" style="height:{{CustomBar}}px;">
+    <view class="cu-bar fixed bg-gradual-green" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+        <navigator class='action border-custom' open-type="navigateBack" delta="1" hover-class="none" style='width:{{Custom.width}}px;height:{{Custom.height}}px;margin-left:calc(750rpx - {{Custom.right}}px)'>
+            <text class='icon-back'></text>
+            <text class='icon-homefill'></text>
+        </navigator>
+        <view class='content' style='top:{{StatusBar}}px;'>基本信息</view>
+    </view>
+</view>
+<scroll-view scroll-y class="indexes" style='height:100%' scroll-with-animation="true" enable-back-to-top="true">
+    <view class="VerticalBox" style="height: 100%;">
+        <!-- 基本信息 -->
+        <scroll-view class="VerticalMain" scroll-y style="height:100%">
+            <view class="padding-left-special">
+                <view class='cu-bar solid-bottom bg-white'>
+                    <view class='action'>
+                        <text class='icon-title text-green'></text>基本信息</view>
+                </view>
+                <view class="cu-list menu menu-avatar">
+                    <view class="cu-item-special">
+
+                        <view class="cu-form-group">
+                            <view class='title'>身份</view>
+                            <view>研究主管</view>
+                        </view>
+                        <view class="cu-form-group">
+                            <view class='title'>电话</view>
+                            <view>123321123</view>
+                        </view>
+                        <view class="cu-form-group">
+                            <view class='title'>邮箱</view>
+                            <view>asdf@sdf.com</view>
+                        </view>
+
+                    </view>
+                </view>
+                <view class='cu-bar solid-bottom bg-white'>
+                    <view class='action'>
+                        <text class='icon-title text-green'></text>工作量统计</view>
+                        <view>23</view>
+                </view>
+                <view class='cu-bar solid-bottom bg-white'>
+                    <view class='action'>
+                        <text class='icon-title text-green'></text>事件录入总数</view>
+                </view>
+                <view class='cu-bar solid-bottom bg-white'>
+                    <view class='action'>
+                        <text class='icon-title text-green'></text>事件审核总数</view>
+                </view>
+                <view class='cu-bar solid-bottom bg-white'>
+                    <view class='action'>
+                        <text class='icon-title text-green'></text>标本存放总数</view>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+</scroll-view>
+
+<!-- 模态对话框 -->
+<view class='load-progress {{loadProgress!=0?"show":"hide"}}' style="top:{{CustomBar}}px;">
+    <view class='load-progress-bar bg-green' style="transform: translate3d(-{{100-loadProgress}}%, 0px, 0px);"></view>
+    <view class='load-progress-spinner text-green'></view>
+</view>
+
+<view class='cu-load load-modal' wx:if="{{loadModal}}">
+    <view class='gray-text'>处理中...</view>
+</view>
+
+<view class="load-curtain" wx:if="{{loadProgress!=0}}"></view>
+
+<view class="cu-modal {{modalName=='ErrModal'?'show':''}}">
+    <view class="cu-dialog">
+        <view class="cu-bar bg-white justify-end">
+            <view class='content'>无法操作</view>
+            <view class='action' bindtap='hideModal'>
+                <text class='icon-close text-red'></text>
+            </view>
+        </view>
+        <view class='padding-xl'>
+            <view class='flex-sub text-center'>
+                <view class='solid-bottom text-sl padding'>
+                    <text class='icon-warnfill text-red'></text>
+                </view>
+                <view class='padding'>{{errMsg}}</view>
+            </view>
+        </view>
+    </view>
+</view>

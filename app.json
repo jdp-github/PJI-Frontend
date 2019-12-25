@@ -1,50 +1,51 @@
 {
-  "pages": [
-    "pages/auth/auth",
-    "pages/center/case/followup/followup",
-    "pages/center/case/timeline/timeline",
-    "pages/center/case/shoushu/shoushu",
-    "pages/center/case/chuanci/chuanci",
-    "pages/center/case/base/base",
-    "pages/center/manage/manage",
-    "pages/center/center",
-    "pages/stats/stats",
-    "pages/person/person",
-    "pages/service/service",
-    "pages/register/register",
-    "pages/center/case/case",
-    "pages/center/specimen/specimen",
-    "pages/center/specimen/detail/detail",
-    "pages/center/specimen/save/save"
-  ],
-  "window": {
-    "backgroundTextStyle": "light",
-    "navigationStyle": "custom",
-    "navigationBarTextStyle": "white",
-    "navigationBarTitleText": "PJI-登记系统",
-    "navigationBarBackgroundColor": "#23292D",
-    "enablePullDownRefresh": false
-  },
-  "tabBar": {
-    "custom": true,
-    "list": [
-      {
-        "pagePath": "pages/center/center",
-        "text": "中心"
-      },
-      {
-        "pagePath": "pages/stats/stats",
-        "text": "统计"
-      },
-      {
-        "pagePath": "pages/service/service",
-        "text": "客服"
-      },
-      {
-        "pagePath": "pages/person/person",
-        "text": "我的"
-      }
-    ]
-  },
-  "sitemapLocation": "sitemap.json"
+    "pages": [
+        "pages/center/manage/member/member",
+        "pages/auth/auth",
+        "pages/center/case/followup/followup",
+        "pages/center/case/timeline/timeline",
+        "pages/center/case/shoushu/shoushu",
+        "pages/center/case/chuanci/chuanci",
+        "pages/center/case/base/base",
+        "pages/center/manage/manage",
+        "pages/center/center",
+        "pages/stats/stats",
+        "pages/person/person",
+        "pages/service/service",
+        "pages/register/register",
+        "pages/center/case/case",
+        "pages/center/specimen/specimen",
+        "pages/center/specimen/detail/detail",
+        "pages/center/specimen/save/save"
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationStyle": "custom",
+        "navigationBarTextStyle": "white",
+        "navigationBarTitleText": "PJI-登记系统",
+        "navigationBarBackgroundColor": "#23292D",
+        "enablePullDownRefresh": false
+    },
+    "tabBar": {
+        "custom": true,
+        "list": [
+            {
+                "pagePath": "pages/center/center",
+                "text": "中心"
+            },
+            {
+                "pagePath": "pages/stats/stats",
+                "text": "统计"
+            },
+            {
+                "pagePath": "pages/service/service",
+                "text": "客服"
+            },
+            {
+                "pagePath": "pages/person/person",
+                "text": "我的"
+            }
+        ]
+    },
+    "sitemapLocation": "sitemap.json"
 }
