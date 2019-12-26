@@ -6,11 +6,20 @@ page, .page {
 
 .cu-item-special, .cu-form-group .title, .cu-form-group input,
 .cu-form-group picker .picker {
-    font-size: 22rpx;
+    font-size: 30rpx;
     text-align: right;
 }
 
 .cu-form-group textarea, .cu-form-group textarea textarea {
     font-size: 22rpx;
     text-align: right;
+}
+
+.statis-view {
+    margin-right: 40rpx;
+    font-size: 30rpx;
+}
+
+.title text {
+    margin-right: 10rpx;
 }

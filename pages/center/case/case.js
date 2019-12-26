@@ -25,6 +25,11 @@ Page({
         endDate: util.getNowFormatDate(),
         stateIndex: 0,
         statePicker: ["全部病例", '未审核', '已审核'],
+        lastEventIndex: 0,
+        lastEvnetPicker: ['全部事件', '诊断穿刺', '入院手术', '药物治疗', '门诊随访'],
+        limitIndex: 0,
+        limitPicker: ['建档日期', '末次事件日期'],
+
         addCaseName: '',
         addCaseID: '',
         addCaseSideIndex: 0,
@@ -292,6 +297,18 @@ Page({
     StatePickerChange(e) {
         this.setData({
             stateIndex: e.detail.value
+        })
+        this.requestCaseList(this.data.searchValue);
+    },
+    LastEventPickerChange(e) {
+        this.setData({
+            lastEventIndex: e.detail.value
+        })
+        this.requestCaseList(this.data.searchValue);
+    },
+    LimitPickerChange(e) {
+        this.setData({
+            limitIndex: e.detail.value
         })
         this.requestCaseList(this.data.searchValue);
     },

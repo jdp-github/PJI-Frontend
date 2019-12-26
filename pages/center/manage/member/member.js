@@ -16,6 +16,10 @@ Page({
         modalName: '',
         errMsg: '',
         // -------- modal end ------------- //
+
+        memberId: '',
+        roleId: '',
+        roleList: [],
     },
 
     // -------- 提示框 begin -------- //
@@ -84,18 +88,96 @@ Page({
         // this.loadProgress();
         // this.setData({
         //     isAdmin: app.globalData.is_admin == '1',
-        //     centerId: options.centerId,
-        //     centerName: options.centerName,
-        //     caseId: options.caseId,
-        //     itemId: options.itemId,
-        //     isCreate: options.itemId == 0,
+        //     memberId: options.memberId,
         // });
-        // this.requestCaseInfo(this.data.caseId)
-        // this.setData({
-        //     addAvatar: app.globalData.avatarUrl
-        // })
+        // this.requestRoleList()
         // this.completeProgress();
     },
 
+    onCall(e) {
+        wx.makePhoneCall({
+            phoneNumber: '13898199268',
+            success() {},
+            fail() {}
+        })
+    },
 
+    onCopy(e) {
+        wx.setClipboardData({
+            //准备复制的数据
+            data: "123321",
+            success: function(res) {
+                wx.showToast({
+                    title: '复制成功',
+                });
+            }
+        });
+    },
+
+    onEditRole(e) {
+        this.setData({
+            modalName: "EditRole",
+            roleId: '',
+        });
+    },
+
+    onRoleChange: function(e) {
+        this.setData({
+            roleId: e.detail.value
+        });
+    },
+
+    requestRoleList: function() {
+        let that = this;
+        wx.request({
+            url: constant.basePath,
+            data: {
+                service: 'Center.GetCenterRole'
+            },
+            header: {
+                'content-type': 'application/json'
+            },
+            success(res) {
+                console.log("Center.GetCenterRole:" + JSON.stringify(res))
+                if (res.data.data.code == constant.response_success) {
+                    that.setData({
+                        roleList: res.data.data.list,
+                    });
+                } else {
+                    that.showToast(res.data.msg);
+                }
+            },
+            fail(res) {}
+        });
+    },
+    editMember: function(e) {
+        let that = this;
+        that.loadProgress();
+        wx.request({
+            url: constant.basePath,
+            data: {
+                service: 'Center.EditCenterMember',
+                openid: app.globalData.openid,
+                member_id: that.data.selectedStaff.member_id,
+                role_id: this.data.roleId
+            },
+            header: {
+                'content-type': 'application/json'
+            },
+            success(res) {
+                if (res.data.data.code == constant.response_success) {
+                    // that.requestCenterStaffList(that.data.searchValue);
+                } else {
+                    that.showToast(res.data.msg);
+                    that.completeProgress();
+                }
+                that.setData({
+                    modalName: ''
+                });
+            },
+            fail(res) {
+                that.completeProgress();
+            }
+        });
+    },
 });

@@ -9,6 +9,10 @@
     margin-left: 0rpx;
 }
 
+.cu-list.menu>.cu-item {
+    padding: 0;
+}
+
 .cu-list>.cu-item .move {
     display: flex;
     width: 150rpx;
@@ -83,15 +87,18 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    width: 50%;
+    padding-left: 20rpx;
+    padding-right: 20rpx;
+    font-size: 25rpx;
+    /* width: 50%; */
 }
 
 .first-line-container {
     font-size: 22rpx;
-    color: #fff;
-    margin-left: 10rpx;
+    color: #000;
+    /* margin-left: 10rpx; */
 }
 
-.flex>.flex-sub {
-    font-size: 25rpx;
+.flex-item {
+    font-size: 26rpx;
 }

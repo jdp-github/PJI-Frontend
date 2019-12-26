@@ -97,7 +97,7 @@ map, .mapBox {
 
 .cu-list>.cu-item .move {
     display: flex;
-    width: 280rpx;
+    width: 140rpx;
     height: 100%;
     position: absolute;
     right: 0;
@@ -105,7 +105,7 @@ map, .mapBox {
 }
 
 .cu-list>.cu-item.move-cur {
-    transform: translateX(-280rpx);
+    transform: translateX(-140rpx);
 }
 
 .margin-btn {

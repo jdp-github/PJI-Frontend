@@ -470,33 +470,10 @@ Page({
         }
     },
     initData: function() {
-        this.requestRoleList();
         this.requestCenterStaffList(this.data.searchValue);
         this.requestNotice();
     },
-    requestRoleList: function() {
-        let that = this;
-        wx.request({
-            url: constant.basePath,
-            data: {
-                service: 'Center.GetCenterRole'
-            },
-            header: {
-                'content-type': 'application/json'
-            },
-            success(res) {
-                console.log("Center.GetCenterRole:" + JSON.stringify(res))
-                if (res.data.data.code == constant.response_success) {
-                    that.setData({
-                        roleList: res.data.data.list,
-                    });
-                } else {
-                    that.showToast(res.data.msg);
-                }
-            },
-            fail(res) {}
-        });
-    },
+
     requestCenterStaffList: function(searchValue) {
         let that = this;
         wx.request({
@@ -535,7 +512,7 @@ Page({
                         realListCur = list[0];
                     }
                     list.sort();
-                    for (let i = 0, len = list.length; i < len; i ++) {
+                    for (let i = 0, len = list.length; i < len; i++) {
                         let prefix = list[i];
                         if (!sortByPrefix[prefix]) {
                             sortByPrefix[prefix] = [];
@@ -564,41 +541,14 @@ Page({
             selectedStaff: e.target.dataset.staff
         });
     },
-    onRoleChange: function(e) {
-        this.setData({
-            roleId: e.detail.value
+
+    gotoMember(e) {
+        let item = e.currentTarget.dataset.item
+        wx.navigateTo({
+            url: '../manage/member/member?memberId=' + item.member_id
         });
     },
-    editMember: function(e) {
-        let that = this;
-        that.loadProgress();
-        wx.request({
-            url: constant.basePath,
-            data: {
-                service: 'Center.EditCenterMember',
-                openid: app.globalData.openid,
-                member_id: that.data.selectedStaff.member_id,
-                role_id: this.data.roleId
-            },
-            header: {
-                'content-type': 'application/json'
-            },
-            success(res) {
-                if (res.data.data.code == constant.response_success) {
-                    that.requestCenterStaffList(that.data.searchValue);
-                } else {
-                    that.showToast(res.data.msg);
-                    that.completeProgress();
-                }
-                that.setData({
-                    modalName: ''
-                });
-            },
-            fail(res) {
-                that.completeProgress();
-            }
-        });
-    },
+
     deleteMember: function(e) {
         let that = this;
         that.loadProgress();

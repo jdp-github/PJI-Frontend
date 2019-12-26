@@ -16,10 +16,10 @@
         <button class='cu-btn bg-green shadow-blur round' bindtap="onSearch">搜索</button>
     </view>
 </view>
-<!-- 筛选 -->
+<!-- 筛选1 -->
 <view class="cu-bar bg-white fixed" style="top:{{CustomBar}}px; margin-top: 110rpx; width: 100%; border-bottom: 0;">
     <view class="filter-container">
-        <view class="title">开始:</view>
+        <view class="title">开始日期:</view>
         <picker mode="date" value="{{startDate}}" start="2015-01-01" end="2030-12-31" bindchange="StartDateChange">
             <view class="picker" style="margin-top:5rpx">
                 {{startDate}}
@@ -27,7 +27,7 @@
         </picker>
     </view>
     <view class="filter-container">
-        <view class="title">结束:</view>
+        <view class="title">结束日期:</view>
         <picker mode="date" value="{{endDate}}" start="2015-01-01" end="2030-12-31" bindchange="EndDateChange">
             <view class="picker" style="margin-top:5rpx">
                 {{endDate}}
@@ -43,7 +43,34 @@
         </picker>
     </view>
 </view>
-<scroll-view scroll-y class="indexes margin-bottom" scroll-into-view="indexes-{{listCurID}}" style='padding-top:220rpx;height:calc(100vh - {{CustomBar}}px)' scroll-with-animation="true" enable-back-to-top="true">
+<!-- 筛选2 -->
+<view class="cu-bar bg-white fixed" style="top:{{CustomBar}}px; margin-top: 210rpx; width: 100%; border-bottom: 0;">
+    <view class="filter-container">
+        <view class="title">末次事件:</view>
+        <picker value="{{lastEventIndex}}" range="{{lastEvnetPicker}}" bindchange="LastEventPickerChange">
+            <view class="picker">
+                {{lastEvnetPicker[lastEventIndex]}}
+            </view>
+        </picker>
+    </view>
+    <view class="filter-container">
+        <view class="title">限定依据:</view>
+        <picker value="{{limitIndex}}" range="{{limitPicker}}" bindchange="LimitPickerChange">
+            <view class="picker">
+                {{limitPicker[limitIndex]}}
+            </view>
+        </picker>
+    </view>
+    <view class="filter-container">
+        <view class="title">主诊:</view>
+        <picker value="{{stateIndex}}" range="{{statePicker}}" bindchange="StatePickerChange">
+            <view class="picker">
+                {{statePicker[stateIndex]}}
+            </view>
+        </picker>
+    </view>
+</view>
+<scroll-view scroll-y class="indexes margin-bottom" scroll-into-view="indexes-{{listCurID}}" style='padding-top:320rpx;height:calc(100vh - {{CustomBar}}px)' scroll-with-animation="true" enable-back-to-top="true">
     <view class="cu-list menu menu-avatar">
         <view style='display:flex;flex-direction:row'>
             <view class="flex-sub">
@@ -68,7 +95,7 @@
                             <view class="avatar-special bg-grey radius" style="display:flex;flex-direction:column;padding-top:10rpx;padding-bottom:10rpx">
                                 <view class="flex-sub" style="font-size:28rpx">{{item.patient_name}}</view>
                                 <view class="flex-sub" style="font-size:28rpx">{{item.case_no}}</view>
-                                <view class="flex-sub" style="font-size:28rpx">{{item.side_name}}  {{item.part_name}}</view>
+                                <view class="flex-sub" style="font-size:28rpx">{{item.side_name}} {{item.part_name}}</view>
                             </view>
                         </view>
 
@@ -77,32 +104,30 @@
                             <view class="flex-sub text-small">
                                 <div class="flex">
                                     <view class="flex-sub">
-                                        <view class="cu-tag round first-line-container" style="background-color:#00A8F9;">要素审核:{{item.element}}</view>
-                                        <view class="cu-tag round first-line-container" style="background-color:#FAADC7">药物治疗:{{item.medication}}</view>
-                                        <view class="cu-tag round first-line-container" style="background-color:#FFC814">标本取样:{{item.sample}}次</view>
+                                        <view class="cu-tag round first-line-container" style="background-color:#00A8F9;color:#fff">审核:{{item.element}}</view>
+                                        <view class="cu-tag round first-line-container">穿:{{item.medication}}</view>
+                                        <view class="cu-tag round first-line-container">术:{{item.sample}}</view>
+                                        <view class="cu-tag round first-line-container">药:{{item.sample}}</view>
+                                        <view class="cu-tag round first-line-container">访:{{item.sample}}</view>
                                     </view>
                                 </div>
                             </view>
                             <!-- 第二行 -->
                             <view class="flex-sub text-small" style="margin-top:10rpx;margin-left:10rpx">
-                                <div class="flex">
-                                    <view class="flex-sub">建档日期：
-                                        <view>{{item.create_time}}</view>
+                                <div class="flex" style="margin-top:20rpx;">
+                                    <view class="flex-item" style="min-width:220rpx;">主诊医师：{{item.pro_doctor}}
                                     </view>
-                                    <view class="flex-sub">末次要素：
-                                        <view>{{item.element}}</view>
-                                    </view>
-                                    <view class="flex-sub">主诊医师：
-                                        <view>{{item.pro_doctor}}</view>
+                                    <view class="flex-item" style="margin-left:15rpx">建档日期：{{item.create_time}}
                                     </view>
                                 </div>
                             </view>
                             <!-- 第三行 -->
                             <view class="flex-sub text-small" style="margin-top:10rpx;margin-left:10rpx;">
-                                <div class="flex">
-                                    <view class="flex-sub">穿刺记录:{{item.puncture}}次</view>
-                                    <view class="flex-sub">手术记录:{{item.operation}}次</view>
-                                    <view class="flex-sub">随访记录:{{item.follow}}次</view>
+                                <div class="flex" style="margin-top:20rpx">
+                                    <view class="flex-item" style="min-width:220rpx;">末次事件：{{item.element}}
+                                    </view>
+                                    <view class="flex-item" style="margin-left:15rpx">事件日期：{{item.create_time}}
+                                    </view>
                                 </div>
                             </view>
                         </view>
