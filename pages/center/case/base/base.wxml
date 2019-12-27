@@ -54,6 +54,7 @@
                 <view class='cu-bar solid-bottom bg-white'>
                     <view class='action'>
                         <text class='icon-title text-green'></text>基本信息</view>
+                    <button class="cu-btn line-black sm" style="margin-right:45rpx;" bindtap="onImport">导入</button>
                 </view>
                 <view class="cu-list menu menu-avatar">
                     <view class="cu-item-special">

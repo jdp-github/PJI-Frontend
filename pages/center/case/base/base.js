@@ -265,6 +265,7 @@ Page({
             remark: e.detail.value
         });
     },
+    onImport(e) {},
     // -------- 基本信息事件 end -------- //
 
     // -------- 提示框 begin -------- //
