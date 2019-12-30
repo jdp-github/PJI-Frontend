@@ -1,0 +1,29 @@
+<view class="cu-custom" style="height:{{CustomBar}}px;">
+	<view class="cu-bar fixed bg-gradual-green" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+		<navigator class='action border-custom' open-type="navigateBack" delta="1" hover-class="none" style='width:{{Custom.width}}px;height:{{Custom.height}}px;margin-left:calc(750rpx - {{Custom.right}}px)' bindtap="backToAuth">
+			<text class='icon-back'></text>
+			<text class='icon-homefill'></text>
+		</navigator>
+		<view class='content' style='top:{{StatusBar}}px;'>用药列表</view>
+	</view>
+	<view class="cu-bar bg-white fixed padding case-info flex" style="top:{{CustomBar}}px;">
+		<view class="flex-sub padding solids case-info-detail text-bold">张三 Y1234567 左髋</view>
+		<view class="flex-sub">
+			<view class="text-bold">
+				金黄色葡萄球菌
+				<button class='cu-tag bg-green shadow sm' style="margin-left: 10rpx;">详情</button>
+			</view>
+		</view>
+	</view>
+	<view class="cu-bar bg-white fixed padding case-info flex" style="top:{{CustomBar}}px;margin-top: 130rpx;">
+		<view class="flex-sub padding case-info-detail">抗生素总时长: 72 天</view>
+		<view class="flex-sub">
+			<view style="width: 100%;">
+				静脉总时长: 36 天
+			</view>
+			<view style="width: 100%;">
+				口服总时长: 36 天
+			</view>
+		</view>
+	</view>
+</view>

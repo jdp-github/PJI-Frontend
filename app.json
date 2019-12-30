@@ -1,5 +1,6 @@
 {
     "pages": [
+        "pages/medicine/medicine",
         "pages/auth/auth",
         "pages/center/manage/member/member",
         "pages/center/case/followup/followup",
