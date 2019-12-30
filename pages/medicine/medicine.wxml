@@ -50,7 +50,10 @@
 					<button class='cu-tag bg-green shadow sm' style="margin-left: 10rpx;margin-right: 10rpx;">静脉</button> 万古霉素
 				</view>
 				<view class="flex-sub">
-					0.5g 2/日
+					0.5g
+				</view>
+				<view class="flex-sub">
+					2/日
 				</view>
 				<view class="flex-sub">
 					依据: 经验用药 <button class='cu-tag bg-red shadow sm' style="margin-left: 10rpx;">副</button>
@@ -68,7 +71,10 @@
 					<button class='cu-tag bg-green shadow sm' style="margin-left: 10rpx;margin-right: 10rpx;">静脉</button> 万古霉素
 				</view>
 				<view class="flex-sub">
-					0.5g 2/日
+					0.5g
+				</view>
+				<view class="flex-sub">
+					2/日
 				</view>
 				<view class="flex-sub">
 					依据: 经验用药 <button class='cu-tag bg-red shadow sm' style="margin-left: 10rpx;">副</button>
