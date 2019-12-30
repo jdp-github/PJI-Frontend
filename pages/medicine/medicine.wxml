@@ -15,7 +15,7 @@
 			</view>
 		</view>
 	</view>
-	<view class="cu-bar bg-white fixed padding case-info flex" style="top:{{CustomBar}}px;margin-top: 130rpx;">
+	<view class="cu-bar bg-white fixed padding case-info flex" style="top:{{CustomBar}}px;margin-top: 120rpx;">
 		<view class="flex-sub padding case-info-detail">抗生素总时长: 72 天</view>
 		<view class="flex-sub">
 			<view style="width: 100%;">
@@ -27,3 +27,45 @@
 		</view>
 	</view>
 </view>
+
+<scroll-view scroll-y class="indexes margin-bottom" scroll-into-view="indexes-{{listCurID}}" style='padding-top:262rpx;height:calc(100vh - {{CustomBar}}px)' scroll-with-animation="true" enable-back-to-top="true">
+	<view class="cu-list menu menu-avatar">
+		<view style='display:flex;flex-direction:row'>
+			<view class="flex-sub">
+				<button class='cu-btn bg-green shadow margin-btn block'>
+					添加用药
+				</button>
+			</view>
+			<view class="flex-sub">
+				<button class='cu-btn bg-green shadow margin-btn block'>
+					刷新列表
+				</button>
+			</view>
+		</view>
+	</view>
+	<view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}}" style="padding-top:15rpx;padding-bottom:15rpx;">
+		<view class='content-item'>
+			<view class="flex border-blue">
+				<view class="flex-sub">
+					<button class='cu-tag bg-green shadow sm' style="margin-left: 10rpx;margin-right: 10rpx;">静脉</button> 万古霉素
+				</view>
+				<view class="flex-sub">
+					0.5g 2/日
+				</view>
+				<view class="flex-sub">
+					总时长: 28天
+				</view>
+			</view>
+			<view class="flex padding-special">
+				<view class="flex-sub">开始时间: 2019-2-1</view>
+				<view class="flex-sub">结束时间: 2019-2-1</view>
+				<view class="flex-sub">并发症: 无</view>
+			</view>
+		</view>
+	</view>
+	<view class="btn-block shadow">
+		<button class='cu-btn bg-green shadow margin-btn block'>
+			结束疗程
+		</button>
+	</view>
+</scroll-view>
