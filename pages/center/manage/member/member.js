@@ -18,6 +18,7 @@ Page({
         // -------- modal end ------------- //
 
         memberId: '',
+        info: {},
         roleId: '',
         roleList: [],
     },
@@ -85,13 +86,14 @@ Page({
     // -------- 模态对话框 end  -------- //
 
     onLoad: function(options) {
-        // this.loadProgress();
-        // this.setData({
-        //     isAdmin: app.globalData.is_admin == '1',
-        //     memberId: options.memberId,
-        // });
-        // this.requestRoleList()
-        // this.completeProgress();
+        this.loadProgress();
+        this.setData({
+            isAdmin: app.globalData.is_admin == '1',
+            memberId: options.memberId,
+        });
+        this.requestRoleList()
+        this.requestInfo()
+        this.completeProgress();
     },
 
     onCall(e) {
@@ -127,6 +129,31 @@ Page({
         });
     },
 
+    requestInfo() {
+        let that = this;
+        wx.request({
+            url: constant.basePath,
+            data: {
+                service: 'Center.GetMemberInfo',
+                member_id: that.data.memberId
+            },
+            header: {
+                'content-type': 'application/json'
+            },
+            success(res) {
+                console.log("Center.GetMemberInfo:" + JSON.stringify(res))
+                if (res.data.data.code == constant.response_success) {
+                    that.setData({
+                        info: res.data.data.info,
+                    });
+                } else {
+                    that.showToast(res.data.msg);
+                }
+            },
+            fail(res) {}
+        });
+    },
+
     requestRoleList: function() {
         let that = this;
         wx.request({
@@ -158,18 +185,18 @@ Page({
             data: {
                 service: 'Center.EditCenterMember',
                 openid: app.globalData.openid,
-                member_id: that.data.selectedStaff.member_id,
+                member_id: that.data.memberId,
                 role_id: this.data.roleId
             },
             header: {
                 'content-type': 'application/json'
             },
             success(res) {
+                that.completeProgress();
                 if (res.data.data.code == constant.response_success) {
-                    // that.requestCenterStaffList(that.data.searchValue);
+                    that.requestInfo();
                 } else {
-                    that.showToast(res.data.msg);
-                    that.completeProgress();
+                    that.showToast(res.data.data.msg);
                 }
                 that.setData({
                     modalName: ''

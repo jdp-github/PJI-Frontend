@@ -82,6 +82,7 @@ Page({
             currNoticeDate: util.formatTime(new Date() / 1000, 'Y-M-D')
         });
         this.initData();
+        this.completeProgress()
     },
     loadProgress: function() {
         if (this.data.loadProgress < 96) {
@@ -481,7 +482,7 @@ Page({
             data: {
                 service: 'Center.SearchCenterMember',
                 center_id: that.data.centerId,
-                keyword: '',
+                // keyword: '',
                 sort: 1
             },
             header: {
@@ -527,10 +528,8 @@ Page({
                 } else {
                     that.showToast(res.data.msg);
                 }
-                that.completeProgress();
             },
             fail(res) {
-                that.completeProgress();
             }
         });
     },

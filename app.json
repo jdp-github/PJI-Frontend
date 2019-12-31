@@ -1,7 +1,8 @@
 {
     "pages": [
-        "pages/medicine/medicine",
         "pages/auth/auth",
+        "pages/center/case/yongyao/yongyao",
+        "pages/center/case/medicine/medicine",
         "pages/center/manage/member/member",
         "pages/center/case/followup/followup",
         "pages/center/case/timeline/timeline",

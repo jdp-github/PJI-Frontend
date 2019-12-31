@@ -1,0 +1,207 @@
+<view class="cu-custom" style="height:{{CustomBar}}px;">
+    <view class="cu-bar fixed bg-gradual-green" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+        <navigator class='action border-custom' open-type="navigateBack" delta="1" hover-class="none" style='width:{{Custom.width}}px;height:{{Custom.height}}px;margin-left:calc(750rpx - {{Custom.right}}px)'>
+            <text class='icon-back'></text>
+            <text class='icon-homefill'></text>
+        </navigator>
+        <view class='content' style='top:{{StatusBar}}px;'>用药方案</view>
+    </view>
+</view>
+<view class="cu-bar bg-white fixed" style="top:{{CustomBar}}px;">
+    <view class="flex">
+        <view class='avatar-group'>
+            <view class="cu-avatar-group">
+                <view class='cu-tag radius' style="margin-right: 40rpx;">填</view>
+                <view class="cu-avatar round" style="background-image:url({{addAvatar}});"></view>
+            </view>
+        </view>
+    </view>
+    <view class="flex">
+        <view class='avatar-group'>
+            <view class="cu-avatar-group">
+                <view wx:if="{{updateAvatarArr.length > 0}}">
+                    <view class='cu-tag radius' style="margin-right: 40rpx;">修</view>
+                    <view class="cu-avatar round" wx:for="{{updateAvatarArr}}" wx:key style="background-image:url({{item}});"></view>
+                </view>
+                <view wx:else>
+                    <view class='cu-tag radius' style="margin-right: 10rpx;">修</view>
+                    <view class='cu-tag radius'>暂无</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="flex">
+        <view class='avatar-group'>
+            <view class="cu-avatar-group">
+                <view wx:if="{{approveAvatar.length > 0}}">
+                    <view class='cu-tag radius' style="margin-right: 40rpx;">审</view>
+                    <view class="cu-avatar round" style="background-image:url({{approveAvatar}});"></view>
+                </view>
+                <view wx:else>
+                    <view class='cu-tag radius' style="margin-right: 10rpx;">审</view>
+                    <view class='cu-tag radius'>暂无</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<scroll-view scroll-y class="indexes" scroll-into-view="indexes-{{listCurID}}" style='padding-top: 100rpx;height:100%' scroll-with-animation="true" enable-back-to-top="true">
+    <view class="VerticalBox" style="height: 100%;">
+
+        <scroll-view class="VerticalMain" scroll-y style="height:100%">
+            <view class="padding-left-special">
+                <view class="cu-list menu menu-avatar">
+                    <view class="cu-item-special">
+                        <!-- 用药依据 -->
+                        <view class="cu-form-group">
+                            <view class='title'>用药依据</view>
+                            <picker bindchange="onPickerChange" value="{{according_to}}" range="{{according_to_picker}}" data-type="according_to">
+                                <view class="picker">
+                                    {{according_to_picker[according_to]}}
+                                </view>
+                            </picker>
+                        </view>
+                        <!-- 药物名称 -->
+                        <view class="cu-form-group">
+                            <view class='title'>药物名称</view>
+                            <input placeholder="请输入文字" class='radius' bindinput="onInput" value='{{drug}}' data-type="drug"></input>
+                        </view>
+                        <!-- 途径 -->
+                        <view class="cu-form-group">
+                            <view class='title'>途径</view>
+                            <picker bindchange="onPickerChange" value="{{way}}" range="{{wayPicker}}" data-type="way">
+                                <view class="picker">
+                                    {{wayPicker[way]}}
+                                </view>
+                            </picker>
+                        </view>
+                        <!-- 剂量（g） -->
+                        <view class="cu-form-group">
+                            <view class='title'>剂量（g）</view>
+                            <input placeholder="请输入文字" class='radius' bindinput="onInput" value='{{dose}}' type="digit" data-type="dose"></input>
+                        </view>
+                        <!-- 频次 -->
+                        <view class="cu-form-group">
+                            <view class='title'>频次</view>
+                            <picker bindchange="onPickerChange" value="{{frequency}}" range="{{frequencyPicker}}" data-type="frequency">
+                                <view class="picker">
+                                    {{frequencyPicker[frequency]}}
+                                </view>
+                            </picker>
+                        </view>
+                        <!-- 本方案起始时间 -->
+                        <view class="cu-form-group">
+                            <view class='title'>本方案起始时间</view>
+                            <picker mode="date" value="{{start_time}}" start="2015-01-01" end="2030-12-31" bindchange="onDateChange" data-type="start_time">
+                                <view class="picker">
+                                    {{start_time}}
+                                </view>
+                            </picker>
+                        </view>
+                        <!-- 本方案终止时间 -->
+                        <view class="cu-form-group {{end_time_state==0?'disabled':end_time_state==2?'clock':''}}">
+                            <view class='title'>本方案终止时间</view>
+                            <picker mode="date" bindchange="onDateChange" value="{{end_time}}" start="2015-01-01" end="2030-12-31" disabled='{{end_time_state != 1}}' data-type="end_time">
+                                <view class="picker">
+                                    {{end_time}}
+                                </view>
+                            </picker>
+                            <i class="fa fa-{{end_time_state_value}} fa-2x" data-type="end_time_state" data-style="date" data-state="{{end_time_state}}" bindtap="on3StateChange"></i>
+                        </view>
+                        <!-- 药物副反应 -->
+                        <view class="cu-form-group {{side_effect_state==0?'disabled':side_effect_state==2?'clock':''}}">
+                            <view class='title'>药物副反应</view>
+                            <picker bindchange="onPickerChange" value="{{side_effect}}" range="{{side_effect_picker}}" disabled='{{side_effect_state != 1}}' data-type="side_effect">
+                                <view class="picker">
+                                    {{side_effect_picker[side_effect]}}
+                                </view>
+                            </picker>
+                            <i class="fa fa-{{side_effect_state_value}} fa-2x" data-type="side_effect_state" data-style="picker" data-state="{{side_effect_state}}" bindtap="on3StateChange"></i>
+                        </view>
+                        <!-- 备注 -->
+                        <view class="cu-form-group {{remark_state==0?'disabled':''}}">
+                            <view style='display:flex;flex-direction: column; '>
+                                <view class='title' style='text-align:left'>备注</view>
+                                <input style=' width: 350rpx;text-algin:left;' class='radius' style='text-align:left;' bindinput="onInput" value='{{remark}}' placeholder="请输入文字" disabled='{{remark_state!=1}}' data-type="remark"></input>
+                            </view>
+                            <i class="fa fa-{{remark_state_value}} fa-2x" data-type="remark_state" data-style="input" data-state="{{remark_state}}" bindtap="on2StateChange"></i>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <!-- 底部按钮 -->
+            <view class="btn-block bg-white shadow" hidden='{{isLook}}'>
+                <view class="flex margin-special">
+                    <button wx:if="{{isEdit || isCreate}}" class='cu-btn line-green shadow' style="margin-right: 15rpx;" form-type="submit" bindtap='submit' disabled='{{caseInfo.medication_submit_button == 0}}'>
+                        提交录入
+                    </button>
+                    <button wx:else class='cu-btn line-green shadow' style="margin-right: 15rpx;" form-type="submit" bindtap='onSetCaseWrite'>
+                        开始编辑
+                    </button>
+                    <button class='cu-btn bg-green shadow' style="margin-left: 15rpx;" form-type="submit" bindtap='verify' disabled='{{isCreate}}'>
+                        {{caseInfo.medication_state != 2 ?"确认审核":"解除锁定"}}
+                    </button>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+</scroll-view>
+
+<view class='load-progress {{loadProgress!=0?"show":"hide"}}' style="top:{{CustomBar}}px;">
+    <view class='load-progress-bar bg-green' style="transform: translate3d(-{{100-loadProgress}}%, 0px, 0px);"></view>
+    <view class='load-progress-spinner text-green'></view>
+</view>
+<view class='cu-load load-modal' wx:if="{{loadModal}}">
+    <view class='gray-text'>处理中...</view>
+</view>
+<view class="load-curtain" wx:if="{{loadProgress!=0}}"></view>
+<view class="cu-modal {{modalName=='ErrModal'?'show':''}}">
+    <view class="cu-dialog">
+        <view class="cu-bar bg-white justify-end">
+            <view class='content'>无法操作</view>
+            <view class='action' bindtap='hideModal'>
+                <text class='icon-close text-red'></text>
+            </view>
+        </view>
+        <view class='padding-xl'>
+            <view class='flex-sub text-center'>
+                <view class='solid-bottom text-sl padding'>
+                    <text class='icon-warnfill text-red'></text>
+                </view>
+                <view class='padding'>{{errMsg}}</view>
+            </view>
+        </view>
+    </view>
+</view>
+<!-- 右侧弹窗 -->
+<view class="cu-modal drawer-modal justify-end {{modalName=='RelateDrawerModalR'?'show':''}}" bindtap='hideModal'>
+    <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;">
+        <scroll-view class="VerticalMain" scroll-y style="height:100%">
+            <view class="cu-list menu">
+                <view class="cu-bar bg-white solid-bottom">
+                    <view class='action ' style="font-size: 24rpx;">
+                        <text class='icon-title text-green'></text>选择要关联的{{purpose==1?'穿刺':'手术'}}
+                    </view>
+                </view>
+                <view class="cu-item" wx:for="{{relateList}}" wx:key="" bindtap="onRelateItemClick" data-item="{{item}}">
+                    <view class="cu-item" style="width:100%;">
+                        <view class='content'>
+                            <text class="icon-roundcheck text-green" style="{{item.isSelected?'':'visibility:hidden;'}}" />
+                            <text class="{{item.isSelected?'text-green':''}}" style="width:100%;margin-right:50rpx;">{{item.date_time}}</text>
+                            <text class="arrow text-blue text-df" catchtap="gotoRelate" data-item="{{item}}" style="padding:20rpx 0">点击查看</text>
+                            <!-- <text class='cu-tag bg-grey sm radius'>ID: </text> -->
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <!-- 底部按钮 -->
+            <view class='padding-sm flex'>
+                <view class="flex-sub">
+                    <button class='cu-btn  bg-green shadow block' bindtap="saveRelate">
+                        确定
+                    </button>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+</view>

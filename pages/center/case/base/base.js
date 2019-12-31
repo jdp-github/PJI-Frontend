@@ -99,6 +99,10 @@ Page({
         other_disease: '',
         score: '',
         remark: '',
+
+        // ------ import ------ //
+        importList: [],
+        importInfo: {},
     },
 
     // -------- 基本信息事件 begin -------- //
@@ -265,7 +269,89 @@ Page({
             remark: e.detail.value
         });
     },
-    onImport(e) {},
+    onImportClick(e) {
+        this.setData({
+            modalName: "ImportDrawerModalR"
+        })
+
+        this.requestImportList()
+    },
+    onImportItemClick(e) {
+        let importInfo = e.currentTarget.dataset.item;
+        for (let i = 0, length = this.data.importList.length; i < length; i++) {
+            if (importInfo.id == this.data.importList[i].id) {
+                this.data.importList[i].isSelected = !this.data.importList[i].isSelected
+            }
+        }
+
+        this.setData({
+            importList: this.data.importList,
+            importInfo: importInfo
+        });
+    },
+    gotoRelate(e) {
+        let itemInfo = e.currentTarget.dataset.item;
+        wx.navigateTo({
+            url: '../../case/base/base?centerId=' + this.data.centerId + "&centerName=''" + "&caseId=" + this.data.caseId + "&itemId=" + itemInfo.id
+        });
+    },
+    importBase() {
+        if (!this.data.importInfo) {
+            return;
+        }
+        let info = this.data.importInfo
+        // 基本信息
+        this.setData({
+            sex: parseInt(info.sex),
+            age: this.getDefaultNum(info.age),
+            height: this.getDefaultNum(info.height),
+            weight: this.getDefaultNum(info.weight),
+            bmi: this.getDefaultNum(info.bmi),
+            chiefDoc: info.pro_doctor,
+            tel1: info.telphone1,
+            tel2: info.telphone2,
+            tel2Disabled: this.getValueDisable(info.telphone2),
+            type: parseInt(info.type),
+            medical_history: info.medical_history,
+
+            first_displace_time: this.data.isCreate ? util.getNowFormatDate() : util.formatTime(info.first_displace_time, 'Y-M-D'),
+            first_displace_reason: parseInt(info.first_displace_reason ? info.first_displace_reason : 0),
+            is_hospital_operation: info.is_hospital_operation,
+            last_operation_date: this.data.isCreate ? util.getNowFormatDate() : util.formatTime(info.last_operation_date, 'Y-M-D'),
+            repair_count: info.repair_count,
+            duration_symptoms_date: this.data.isCreate ? util.getNowFormatDate() : util.formatTime(info.duration_symptoms_date, 'Y-M-D'),
+            this_time_cause: info.this_time_cause,
+
+            is_rheumatism: info.is_rheumatism,
+            is_rheumatoid: info.is_rheumatoid,
+            is_as: info.is_as,
+            is_spa: info.is_spa,
+            is_psa: info.is_psa,
+            is_gout: info.is_gout,
+            is_cancer: info.is_cancer,
+            cure_state: info.cure_state,
+            radiotherapy: info.radiotherapy,
+            chemotherapy: info.chemotherapy,
+            glycuresis: info.glycuresis,
+            hypertension: info.hypertension,
+            cvd: info.cvd,
+            chd: info.chd,
+            ledvt: info.ledvt,
+            pud: info.pud,
+            copd: info.copd,
+            abnormal_heart: info.abnormal_heart,
+            abnormal_liver: info.abnormal_liver,
+            abnormal_renal: info.abnormal_renal,
+            abnormal_thyroid: info.abnormal_thyroid,
+            anemia: info.anemia,
+            is_smoke: info.is_smoke,
+            is_drink: info.is_drink,
+            other_disease: info.other_disease,
+            score: info.score,
+            remark: info.remark,
+        })
+        this.hideModal()
+    },
     // -------- 基本信息事件 end -------- //
 
     // -------- 提示框 begin -------- //
@@ -340,11 +426,54 @@ Page({
             itemId: options.itemId,
             isCreate: options.itemId == 0,
         });
-        this.requestCaseInfo(this.data.caseId)
-        this.setData({
-            addAvatar: app.globalData.avatarUrl
-        })
+        this.requestCaseInfo(this.data.caseId);
+        if (this.data.isCreate) { // 编辑
+            this.setData({
+                addAvatar: app.globalData.avatarUrl,
+            })
+        }
         this.completeProgress();
+    },
+
+    requestImportList() {
+        let that = this;
+        that.showLoading();
+        wx.request({
+            url: constant.basePath,
+            data: {
+                service: 'Case.GetStaffCaseList',
+                openid: app.globalData.openid,
+                case_no: that.data.caseNO,
+            },
+            header: {
+                'content-type': 'application/json'
+            },
+            success(res) {
+                console.log("Case.GetStaffCaseList:" + JSON.stringify(res))
+                that.hideLoading();
+                if (res.data.data.code == constant.response_success) {
+                    for (let i = 0, len = res.data.data.list.length; i < len; i++) {
+                        let caseInfo = res.data.data.list[i];
+                        // 建档日期
+                        if (caseInfo.create_time == 0) {
+                            caseInfo.create_time = "暂无"
+                        } else {
+                            caseInfo.create_time = util.formatTime(caseInfo.create_time, 'Y-M-D');
+                        }
+                    }
+
+                    that.setData({
+                        importList: res.data.data.list
+                    });
+                } else {
+                    that.showToast(res.data.msg);
+                }
+            },
+            fail(res) {
+                that.hideLoading();
+                that.showToast(res.data.msg);
+            }
+        });
     },
 
     requestCaseInfo(caseId) {

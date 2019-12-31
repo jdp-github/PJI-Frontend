@@ -87,6 +87,10 @@ Page({
             wx.navigateTo({
                 url: '../shoushu/shoushu?centerId=' + this.data.centerId + "&centerName=" + this.data.centerName + "&caseId=" + this.data.caseInfo.case_id + "&itemId=" + item.item_id
             });
+        } else if (item.type == 4) { // 用药
+            wx.navigateTo({
+                url: '../medicine/medicine?centerId=' + this.data.centerId + "&centerName=" + this.data.centerName + "&caseId=" + this.data.caseInfo.case_id + "&itemId=" + item.item_id + "&caseNO=" + this.data.caseInfo.case_no + "&userinfo=" + this.makeUserInfo()
+            });
         } else if (item.type == 5) { // 随访
             wx.navigateTo({
                 url: '../followup/followup?centerId=' + this.data.centerId + "&centerName=" + this.data.centerName + "&caseId=" + this.data.caseInfo.case_id + "&itemId=" + item.item_id
@@ -106,10 +110,27 @@ Page({
         });
     },
 
+    onMedicine() {
+        wx.navigateTo({
+            url: '../medicine/medicine?centerId=' + this.data.centerId + "&centerName=" + this.data.centerName + "&caseId=" + this.data.caseInfo.case_id + "&itemId=" + 0 + "&caseNO=" + this.data.caseInfo.case_no + "&userinfo=" + this.makeUserInfo()
+        });
+    },
+
     onFollowup() {
         wx.navigateTo({
             url: '../followup/followup?centerId=' + this.data.centerId + "&centerName=" + this.data.centerName + "&caseId=" + this.data.caseInfo.case_id + "&itemId=" + 0
         });
+    },
+
+    makeUserInfo() {
+        let that = this
+        let obj = {
+            patient_name: that.data.caseInfo.patient_name,
+            case_no: that.data.caseInfo.case_no,
+            side_name: that.data.caseInfo.side_name,
+            part_name: that.data.caseInfo.part_name,
+        }
+        return JSON.stringify(obj)
     },
 
     onUnload() {

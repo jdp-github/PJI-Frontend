@@ -80,12 +80,12 @@
                         <view class='text-gray text-sm'>{{item.role_name}}</view>
                     </view>
                     <view class="member-item-container" style="width:25%">
-                        <view class='text-black text-sm'>事件录入:{{item.create_count}}</view>
-                        <view class='text-black text-sm'>事件审核:{{item.puncture_count}}</view>
+                        <view class='text-black text-sm'>事件录入:{{item.input_count}}</view>
+                        <view class='text-black text-sm'>事件审核:{{item.apply_count}}</view>
                     </view>
                     <view class="member-item-container">
-                        <view class='text-black text-sm'>待完成事件:{{item.operation_count}}</view>
-                        <view class='text-black text-sm'>标本存放:{{item.visit_count}}</view>
+                        <view class='text-black text-sm'>待完成事件:{{item.alarm_count}}</view>
+                        <view class='text-black text-sm'>标本存放:{{item.sample_count}}</view>
                     </view>
                     <!-- <view class="member-item-container">
                         <view class='text-black text-sm'>手术录入:{{item.approve_count}}</view>

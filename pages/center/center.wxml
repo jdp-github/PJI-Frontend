@@ -31,7 +31,7 @@
         </view>
     </view>
 
-    <view class="cu-list menu menu-avatar" wx:for="{{centerList}}" wx:key="item.id">
+    <view class="cu-list menu menu-avatar" wx:for="{{centerList}}" wx:key="{{item.id}}">
         <!-- ONFH设计: 中心列表 -->
         <view class="center-card">
             <view class="center-img">

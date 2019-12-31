@@ -29,6 +29,8 @@ Page({
         lastEvnetPicker: ['全部事件', '诊断穿刺', '入院手术', '药物治疗', '门诊随访'],
         limitIndex: 0,
         limitPicker: ['建档日期', '末次事件日期'],
+        doctorIndex: 0,
+        doctorList: [],
 
         addCaseName: '',
         addCaseID: '',
@@ -51,12 +53,47 @@ Page({
     },
 
     initData() {
-        this.requestCaseList(this.data.searchValue);
+        this.requestDoctorList();
+        this.requestCaseList();
     },
 
-    requestCaseList: function(searchValue) {
+    requestDoctorList() {
         let that = this;
-        that.loadProgress();
+        wx.request({
+            url: constant.basePath,
+            data: {
+                service: 'Case.GetDoctorList',
+                center_id: that.data.centerId,
+            },
+            header: {
+                'content-type': 'application/json'
+            },
+            success(res) {
+                console.log("Case.GetDoctorList:" + JSON.stringify(res))
+                if (res.data.data.code == constant.response_success) {
+                    let doctorList = []
+                    res.data.data.list.forEach(item => {
+                        doctorList.push(item.pro_doctor)
+                    })
+                    doctorList.unshift('全体医师')
+                    that.setData({
+                        doctorList: doctorList
+                    });
+                } else {
+                    that.showToast(res.data.msg);
+                }
+
+            },
+            fail(res) {
+                that.hideLoading();
+                that.showToast(res.data.msg);
+            }
+        });
+    },
+
+    requestCaseList: function() {
+        let that = this;
+        that.showLoading();
         wx.request({
             url: constant.basePath,
             data: {
@@ -66,13 +103,17 @@ Page({
                 keyword: that.data.searchValue,
                 start_time: that.data.startDate,
                 end_time: that.data.endDate,
-                state: that.data.stateIndex
+                state: that.data.stateIndex,
+                date_type: that.data.limitIndex + 1,
+                pro_doctor: that.getProDoctor(),
+                last_element: that.data.lastEventIndex == 0 ? that.data.lastEventIndex : (parseInt(that.data.lastEventIndex) + 1)
             },
             header: {
                 'content-type': 'application/json'
             },
             success(res) {
                 console.log("Case.SearchCaseList:" + JSON.stringify(res))
+                that.hideLoading()
                 if (res.data.data.code == constant.response_success) {
                     for (let i = 0, len = res.data.data.list.length; i < len; i++) {
                         let caseInfo = res.data.data.list[i];
@@ -81,6 +122,22 @@ Page({
                             caseInfo.create_time = "暂无"
                         } else {
                             caseInfo.create_time = util.formatTime(caseInfo.create_time, 'Y-M-D');
+                        }
+                        if (caseInfo.last_time == 0) {
+                            caseInfo.last_time = "暂无"
+                        } else {
+                            caseInfo.last_time = util.formatTime(caseInfo.last_time, 'Y-M-D');
+                        }
+                        if (caseInfo.last_element == 1) {
+                            caseInfo.last_element = '基本信息'
+                        } else if (caseInfo.last_element == 2) {
+                            caseInfo.last_element = '诊断穿刺'
+                        } else if (caseInfo.last_element == 3) {
+                            caseInfo.last_element = '入院手术'
+                        } else if (caseInfo.last_element == 4) {
+                            caseInfo.last_element = '用药方案'
+                        } else if (caseInfo.last_element == 5) {
+                            caseInfo.last_element = '门诊随访'
                         }
                     }
 
@@ -93,12 +150,21 @@ Page({
 
             },
             fail(res) {
-                that.completeProgress();
+                that.hideLoading();
                 that.showToast(res.data.msg);
             }
         });
+    },
 
-        this.completeProgress();
+    getProDoctor() {
+        let doctorStr = ''
+        if (this.data.doctorList.length > 0) {
+            doctorStr = this.data.doctorList[this.data.doctorIndex]
+            if (doctorStr == "全体医师") {
+                doctorStr = ''
+            }
+        }
+        return doctorStr;
     },
 
     onAddCase: function(e) {
@@ -220,7 +286,7 @@ Page({
                 console.log("Case.DeleteCase:" + JSON.stringify(res));
                 that.completeProgress();
                 if (res.data.data.code == constant.response_success) {
-                    that.requestCaseList(that.data.searchValue);
+                    that.requestCaseList();
                     that.setData({
                         modalName: ''
                     });
@@ -273,7 +339,7 @@ Page({
             this.setData({
                 loadModal: false
             });
-        }, 1500);
+        }, 100);
     },
     showModal: function(modalName, msg = '') {
         this.setData({
@@ -292,25 +358,31 @@ Page({
         });
     },
     onSearch: function() {
-        this.requestCaseList(this.data.searchValue);
+        this.requestCaseList();
     },
     StatePickerChange(e) {
         this.setData({
-            stateIndex: e.detail.value
+            stateIndex: parseInt(e.detail.value)
         })
-        this.requestCaseList(this.data.searchValue);
+        this.requestCaseList();
+    },
+    DoctorPickerChange(e) {
+        this.setData({
+            doctorIndex: parseInt(e.detail.value)
+        })
+        this.requestCaseList();
     },
     LastEventPickerChange(e) {
         this.setData({
             lastEventIndex: e.detail.value
         })
-        this.requestCaseList(this.data.searchValue);
+        this.requestCaseList();
     },
     LimitPickerChange(e) {
         this.setData({
             limitIndex: e.detail.value
         })
-        this.requestCaseList(this.data.searchValue);
+        this.requestCaseList();
     },
     onAddNameInput: function(e) {
         this.setData({

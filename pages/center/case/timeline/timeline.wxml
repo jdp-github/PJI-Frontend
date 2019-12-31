@@ -26,11 +26,14 @@
     </view>
     <!-- button -->
     <view class="btn-container solid-bottom bg-white">
-        <button class='cu-btn bg-green shadow' bindtap="onPuncture">
+        <button class='cu-btn bg-green shadow' style="margin-right:5px" bindtap="onPuncture">
             <i class="fa fa-plus" style="margin-right:5rpx"></i>穿刺
         </button>
-        <button class='cu-btn bg-green shadow' bindtap="onShouShu">
+        <button class='cu-btn bg-green shadow' style="margin-right:5px" bindtap="onShouShu">
             <i class="fa fa-stethoscope" style="margin-right:5rpx"></i>手术
+        </button>
+        <button class='cu-btn bg-green shadow' style="margin-right:5px" bindtap="onMedicine">
+            <i class="fa fa-medkit" style="margin-right:5rpx"></i>用药
         </button>
         <button class='cu-btn bg-green shadow' bindtap="onFollowup">
             <i class="fa fa-hospital-o" style="margin-right:5rpx"></i>随访

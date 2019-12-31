@@ -63,9 +63,9 @@
     </view>
     <view class="filter-container">
         <view class="title">主诊:</view>
-        <picker value="{{stateIndex}}" range="{{statePicker}}" bindchange="StatePickerChange">
+        <picker value="{{doctorIndex}}" range="{{doctorList}}" bindchange="DoctorPickerChange">
             <view class="picker">
-                {{statePicker[stateIndex]}}
+                {{doctorList[doctorIndex]}}
             </view>
         </picker>
     </view>
@@ -105,17 +105,17 @@
                                 <div class="flex">
                                     <view class="flex-sub">
                                         <view class="cu-tag round first-line-container" style="background-color:#00A8F9;color:#fff">审核:{{item.element}}</view>
-                                        <view class="cu-tag round first-line-container">穿:{{item.medication}}</view>
-                                        <view class="cu-tag round first-line-container">术:{{item.sample}}</view>
-                                        <view class="cu-tag round first-line-container">药:{{item.sample}}</view>
-                                        <view class="cu-tag round first-line-container">访:{{item.sample}}</view>
+                                        <view class="cu-tag round first-line-container">穿:{{item.puncture}}</view>
+                                        <view class="cu-tag round first-line-container">术:{{item.operation}}</view>
+                                        <view class="cu-tag round first-line-container">药:{{item.medication}}</view>
+                                        <view class="cu-tag round first-line-container">访:{{item.follow}}</view>
                                     </view>
                                 </div>
                             </view>
                             <!-- 第二行 -->
                             <view class="flex-sub text-small" style="margin-top:10rpx;margin-left:10rpx">
                                 <div class="flex" style="margin-top:20rpx;">
-                                    <view class="flex-item" style="min-width:220rpx;">主诊医师：{{item.pro_doctor}}
+                                    <view class="flex-item" style="min-width:232rpx;">主诊医师：{{item.pro_doctor}}
                                     </view>
                                     <view class="flex-item" style="margin-left:15rpx">建档日期：{{item.create_time}}
                                     </view>
@@ -124,9 +124,9 @@
                             <!-- 第三行 -->
                             <view class="flex-sub text-small" style="margin-top:10rpx;margin-left:10rpx;">
                                 <div class="flex" style="margin-top:20rpx">
-                                    <view class="flex-item" style="min-width:220rpx;">末次事件：{{item.element}}
+                                    <view class="flex-item" style="min-width:232rpx;">末次事件：{{item.last_element}}
                                     </view>
-                                    <view class="flex-item" style="margin-left:15rpx">事件日期：{{item.create_time}}
+                                    <view class="flex-item" style="margin-left:15rpx">事件日期：{{item.last_time}}
                                     </view>
                                 </div>
                             </view>
