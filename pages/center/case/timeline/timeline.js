@@ -19,7 +19,7 @@ Page({
 
         caseInfo: '',
         timeLineList: [],
-        typePicker: ["基本信息", "诊断穿刺", "入院手术", "用药方案", "门诊随访"]
+        typePicker: ["基本信息", "诊断穿刺", "入院手术", "抗生素治疗开始", "门诊随访", "抗生素治疗终止"]
     },
 
     onLoad: function(options) {
@@ -35,6 +35,7 @@ Page({
     initData() {
         this.loadProgress();
         this.requestTimeLine();
+        this.completeProgress();
     },
 
     requestTimeLine: function() {
@@ -64,10 +65,8 @@ Page({
                 } else {
                     that.showToast(res.data.msg);
                 }
-                that.completeProgress();
             },
             fail(res) {
-                that.completeProgress();
                 that.showToast(res.data.msg);
             }
         });
@@ -87,7 +86,7 @@ Page({
             wx.navigateTo({
                 url: '../shoushu/shoushu?centerId=' + this.data.centerId + "&centerName=" + this.data.centerName + "&caseId=" + this.data.caseInfo.case_id + "&itemId=" + item.item_id
             });
-        } else if (item.type == 4) { // 用药
+        } else if (item.type == 4 || item.type == 6) { // 用药
             wx.navigateTo({
                 url: '../medicine/medicine?centerId=' + this.data.centerId + "&centerName=" + this.data.centerName + "&caseId=" + this.data.caseInfo.case_id + "&itemId=" + item.item_id + "&caseNO=" + this.data.caseInfo.case_no + "&userinfo=" + this.makeUserInfo()
             });

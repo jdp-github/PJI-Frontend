@@ -24,6 +24,7 @@ Page({
         itemId: '',
         userInfo: {},
 
+        baseInfo: {},
         medicineList: [],
         according_to_picker: ['请选择', '药敏指导', '经验用药'],
         wayPicker: ['请选择', '静脉', '口服', '局部灌洗'],
@@ -54,7 +55,7 @@ Page({
             url: constant.basePath,
             data: {
                 service: 'Case.GetMedicationList',
-                case_no: that.data.caseNO,
+                case_id: that.data.caseId,
             },
             header: {
                 'content-type': 'application/json'
@@ -77,6 +78,7 @@ Page({
                     })
 
                     that.setData({
+                        baseInfo: res.data.data.info,
                         medicineList: res.data.data.list
                     })
                 } else {
@@ -87,6 +89,10 @@ Page({
     },
 
     onAddYongyao(e) {
+        if (this.data.baseInfo.is_finish == 1) {
+            this.showToast("抗生素治疗已终止")
+            return
+        }
         wx.navigateTo({
             url: '../yongyao/yongyao?centerId=' + this.data.centerId + "&centerName=" + this.data.centerName + "&caseId=" + this.data.caseId + "&itemId=" + 0
         });
@@ -101,6 +107,59 @@ Page({
         wx.navigateTo({
             url: '../yongyao/yongyao?centerId=' + this.data.centerId + "&centerName=" + this.data.centerName + "&caseId=" + this.data.caseId + "&itemId=" + item.item_id
         });
+    },
+
+    onEndMedication() {
+        let that = this;
+        if (that.data.medicineList.length == 0) {
+            that.showToast("请添加用药")
+            return
+        }
+        let type = that.data.baseInfo.is_finish == 1 ? 2 : 1
+        wx.request({
+            url: constant.basePath,
+            data: {
+                service: 'Case.FinishMedication',
+                openid: app.globalData.openid,
+                case_id: that.data.caseId,
+                type: type
+            },
+            header: {
+                'content-type': 'application/json'
+            },
+            success(res) {
+                console.log("Case.FinishMedication:" + JSON.stringify(res))
+                if (res.data.data.code == constant.response_success) {
+                    // if (type == 1) {
+
+                    // } else {
+
+                    // }
+                    wx.navigateBack({
+                        delta: 1
+                    })
+                    that.reloadPrePage()
+                } else {
+                    that.showToast(res.data.data.msg);
+                }
+            }
+        });
+    },
+
+    reloadPrePage() {
+        var pages = getCurrentPages();
+        if (pages.length > 1) {
+            //上一个页面实例对象
+            var prePage = pages[pages.length - 2];
+            //关键在这里
+            prePage.initData()
+        }
+    },
+
+    onBack() {
+        wx.navigateBack({
+            delta: 1
+        })
     },
 
     // -------- 提示框 begin -------- //
@@ -144,4 +203,13 @@ Page({
         }, 1500);
     },
     // -------- 提示框 end -------- //
+    onUnload() {
+        var pages = getCurrentPages();
+        if (pages.length > 1) {
+            //上一个页面实例对象
+            var prePage = pages[pages.length - 2];
+            //关键在这里
+            prePage.initData()
+        }
+    },
 });

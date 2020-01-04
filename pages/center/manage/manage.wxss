@@ -108,6 +108,10 @@ map, .mapBox {
     transform: translateX(-140rpx);
 }
 
+.cu-list>.cu-item.move-cur-notice {
+    transform: translateX(-200rpx);
+}
+
 .margin-btn {
     margin: 0rpx 30rpx 15rpx 30rpx;
 }

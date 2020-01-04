@@ -279,9 +279,7 @@ Page({
     onImportItemClick(e) {
         let importInfo = e.currentTarget.dataset.item;
         for (let i = 0, length = this.data.importList.length; i < length; i++) {
-            if (importInfo.id == this.data.importList[i].id) {
-                this.data.importList[i].isSelected = !this.data.importList[i].isSelected
-            }
+            this.data.importList[i].isSelected = importInfo.id == this.data.importList[i].id
         }
 
         this.setData({
@@ -292,11 +290,12 @@ Page({
     gotoRelate(e) {
         let itemInfo = e.currentTarget.dataset.item;
         wx.navigateTo({
-            url: '../../case/base/base?centerId=' + this.data.centerId + "&centerName=''" + "&caseId=" + this.data.caseId + "&itemId=" + itemInfo.id
+            url: '../../case/base/base?centerId=' + itemInfo.center_id + "&centerName=" + itemInfo.center_name + "&caseId=" + itemInfo.id + "&itemId=''"
         });
     },
     importBase() {
         if (!this.data.importInfo) {
+            this.showToast("请选择要导入的病例")
             return;
         }
         let info = this.data.importInfo
@@ -351,6 +350,7 @@ Page({
             remark: info.remark,
         })
         this.hideModal()
+        this.showToast("导入成功")
     },
     // -------- 基本信息事件 end -------- //
 
@@ -587,7 +587,7 @@ Page({
     },
 
     getValueDisable(value) {
-        return value.length <= 0
+        return value ? value.length <= 0 : false
     },
 
 

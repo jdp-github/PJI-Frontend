@@ -22,19 +22,19 @@
         </view>
     </view>
     <view class="cu-bar bg-white fixed padding case-info flex solids" style="top:{{CustomBar}}px;margin-top: 140rpx;font-size:28rpx">
-        <view class="flex-sub padding">抗生素总时长: 72 天</view>
+        <view class="flex-sub padding">抗生素总时长: {{baseInfo.kang_time}} 天</view>
         <view class="flex-sub">
             <view style="width: 100%;">
-                静脉总时长: 36 天
+                静脉总时长: {{baseInfo.jing_time}} 天
             </view>
             <view style="width: 100%;">
-                口服总时长: 36 天
+                口服总时长: {{baseInfo.kou_time}} 天
             </view>
         </view>
     </view>
 </view>
 
-<scroll-view scroll-y class="indexes margin-bottom" scroll-into-view="indexes-{{listCurID}}" style='padding-top:280rpx;height:calc(100vh - {{CustomBar}}px)' scroll-with-animation="true" enable-back-to-top="true">
+<scroll-view scroll-y class="indexes margin-bottom" scroll-into-view="indexes-{{listCurID}}" style='padding-top:260rpx;height:calc(100vh - {{CustomBar}}px)' scroll-with-animation="true" enable-back-to-top="true">
     <view class="cu-list menu menu-avatar">
         <view style='display:flex;flex-direction:row'>
             <view class="flex-sub">
@@ -49,7 +49,7 @@
             </view>
         </view>
     </view>
-    <view class="cu-item" style="padding-top:15rpx;padding-bottom:15rpx;">
+    <view class="cu-item">
         <view class='content-item' wx:for="{{medicineList}}" wx:key="{{item.start_time}}" bindtap="onItemClick" data-item="{{item}}">
             <view class="flex border-blue" style="font-size:25rpx">
                 <view class="flex-sub">
@@ -65,20 +65,20 @@
                 </view>
             </view>
             <view class="flex padding-special" style="font-size:25rpx;">
-                <view class="flex-sub" style="flex:2">开始时间: {{item.start_time}}</view>
-                <view class="flex-sub" style="flex:2">结束时间: {{item.end_time}}</view>
-                <view class="flex-sub">总时长: {{item.duration}} 天</view>
+                <view>开始时间: {{item.start_time}}</view>
+                <view style="margin-left:20rpx">结束时间: {{item.end_time}}</view>
+                <view style="margin-left:20rpx">总时长: {{item.duration}} 天</view>
             </view>
         </view>
     </view>
     <view class="flex btn-block" style="margin-top:20rpx">
         <view class="flex-sub">
-            <button class='cu-btn bg-green shadow margin-btn block'>
-                结束疗程
+            <button class='cu-btn bg-green shadow margin-btn block' bindtap="onEndMedication">
+                {{baseInfo.is_finish==1?'解除锁定':'结束疗程'}}
             </button>
         </view>
         <view class="flex-sub">
-            <button class='cu-btn bg-green shadow margin-btn block'>
+            <button class='cu-btn bg-green shadow margin-btn block' bindtap="onBack">
                 确认返回
             </button>
         </view>

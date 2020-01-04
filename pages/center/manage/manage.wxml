@@ -33,7 +33,7 @@
         </view>
 
         <!-- 列表item -->
-        <view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}}" style="height:100%" wx:for="{{noticeList}}" wx:key="{{item.id}}" bindtouchstart='ListTouchStart' bindtouchmove='ListTouchMove' bindtouchend='ListTouchEnd' data-target="move-box-{{index}}"
+        <view class="cu-item {{modalName=='move-box-'+ index?'move-cur-notice':''}}" style="height:100%;" wx:for="{{noticeList}}" wx:key="{{item.id}}" bindtouchstart='ListTouchStart' bindtouchmove='ListTouchMove' bindtouchend='ListTouchEnd' data-target="move-box-{{index}}"
             bindtap='showNotice' data-item="{{item}}">
             <view class='content'>
                 <view class="item-container">
@@ -58,7 +58,7 @@
                     </view>
                 </view>
             </view>
-            <view class='move'>
+            <view class='move' style="width:200rpx">
                 <view class='bg-olive' style="background:#0081ff" data-item="{{item}}" catchtap="onEdit">编辑</view>
                 <view class='bg-red' data-item="{{item}}" catchtap='onDele' hidden='true'>删除</view>
             </view>
