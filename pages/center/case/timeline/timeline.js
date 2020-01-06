@@ -17,6 +17,7 @@ Page({
         currTab: 0,
         scrollLeft: 0,
 
+        isIn: 0,
         caseInfo: '',
         timeLineList: [],
         typePicker: ["基本信息", "诊断穿刺", "入院手术", "抗生素治疗开始", "门诊随访", "抗生素治疗终止"]
@@ -60,6 +61,7 @@ Page({
                     }
 
                     that.setData({
+                        isIn: res.data.data.info.is_in,
                         timeLineList: res.data.data.list
                     });
                 } else {
@@ -88,7 +90,7 @@ Page({
             });
         } else if (item.type == 4 || item.type == 6) { // 用药
             wx.navigateTo({
-                url: '../medicine/medicine?centerId=' + this.data.centerId + "&centerName=" + this.data.centerName + "&caseId=" + this.data.caseInfo.case_id + "&itemId=" + item.item_id + "&caseNO=" + this.data.caseInfo.case_no + "&userinfo=" + this.makeUserInfo()
+                url: '../medicine/medicine?caseId=' + this.data.caseInfo.case_id + "&itemId=" + item.item_id + "&userinfo=" + this.makeUserInfo()
             });
         } else if (item.type == 5) { // 随访
             wx.navigateTo({
@@ -109,9 +111,13 @@ Page({
         });
     },
 
-    onMedicine() {
+    onYongyao() {
+        if (this.data.isIn == 0) {
+            this.showToast("前序抗生素疗程尚未结束，无法创建新疗程")
+            return
+        }
         wx.navigateTo({
-            url: '../medicine/medicine?centerId=' + this.data.centerId + "&centerName=" + this.data.centerName + "&caseId=" + this.data.caseInfo.case_id + "&itemId=" + 0 + "&caseNO=" + this.data.caseInfo.case_no + "&userinfo=" + this.makeUserInfo()
+            url: '../yongyao/yongyao?caseId=' + this.data.caseInfo.case_id + "&itemId=" + 0 + "&userinfo=" + this.makeUserInfo() + "&isfromlist=" + false
         });
     },
 

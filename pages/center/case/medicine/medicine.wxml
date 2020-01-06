@@ -66,7 +66,7 @@
             </view>
             <view class="flex padding-special" style="font-size:25rpx;">
                 <view>开始时间: {{item.start_time}}</view>
-                <view style="margin-left:20rpx">结束时间: {{item.end_time}}</view>
+                <view style="margin-left:20rpx;min-width:235rpx;">结束时间: {{item.end_time}}</view>
                 <view style="margin-left:20rpx">总时长: {{item.duration}} 天</view>
             </view>
         </view>

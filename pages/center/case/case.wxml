@@ -115,7 +115,7 @@
                             <!-- 第二行 -->
                             <view class="flex-sub text-small" style="margin-top:10rpx;margin-left:10rpx">
                                 <div class="flex" style="margin-top:20rpx;">
-                                    <view class="flex-item" style="min-width:232rpx;">主诊医师：{{item.pro_doctor}}
+                                    <view class="flex-item" style="min-width:234rpx;">主诊医师：{{item.pro_doctor}}
                                     </view>
                                     <view class="flex-item" style="margin-left:15rpx">建档日期：{{item.create_time}}
                                     </view>

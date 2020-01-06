@@ -17,10 +17,7 @@ Page({
         modalName: '',
         errMsg: '',
         // -------- modal end ------------- //
-        centerId: '',
-        centerName: '',
         caseId: '',
-        caseNO: '',
         itemId: '',
         userInfo: {},
 
@@ -34,10 +31,7 @@ Page({
         this.loadProgress();
         this.setData({
             isAdmin: app.globalData.is_admin == '1',
-            centerId: options.centerId ? options.centerId : '',
-            centerName: options.centerName ? options.centerName : '',
             caseId: options.caseId,
-            caseNO: options.caseNO,
             itemId: options.itemId,
             userInfo: JSON.parse(options.userinfo)
         });
@@ -55,7 +49,7 @@ Page({
             url: constant.basePath,
             data: {
                 service: 'Case.GetMedicationList',
-                case_id: that.data.caseId,
+                item_id: that.data.itemId,
             },
             header: {
                 'content-type': 'application/json'
@@ -94,7 +88,7 @@ Page({
             return
         }
         wx.navigateTo({
-            url: '../yongyao/yongyao?centerId=' + this.data.centerId + "&centerName=" + this.data.centerName + "&caseId=" + this.data.caseId + "&itemId=" + 0
+            url: '../yongyao/yongyao?caseId=' + this.data.caseId + "&itemId=" + this.data.itemId + "&userinfo=" + JSON.stringify(this.data.userInfo) + "&isfromlist=" + true
         });
     },
 
@@ -103,9 +97,13 @@ Page({
     },
 
     onItemClick(e) {
+        if (this.data.baseInfo.is_finish == 1) {
+            this.showToast("抗生素治疗已终止")
+            return
+        }
         let item = e.currentTarget.dataset.item
         wx.navigateTo({
-            url: '../yongyao/yongyao?centerId=' + this.data.centerId + "&centerName=" + this.data.centerName + "&caseId=" + this.data.caseId + "&itemId=" + item.item_id
+            url: '../yongyao/yongyao?&caseId=' + this.data.caseId + "&itemId=" + item.item_id + "&medicId=" + item.medic_id + "&isfromlist=" + true
         });
     },
 
@@ -122,6 +120,7 @@ Page({
                 service: 'Case.FinishMedication',
                 openid: app.globalData.openid,
                 case_id: that.data.caseId,
+                item_id: that.data.itemId,
                 type: type
             },
             header: {

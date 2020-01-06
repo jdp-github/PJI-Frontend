@@ -19,16 +19,18 @@ Page({
         // -------- modal end ------------- //
 
         // -------- 公用信息 begin -------- //
-        centerId: '',
-        centerName: '',
         caseId: '',
         itemId: '',
+        medicId: '',
         isCreate: false,
         isEdit: false,
         caseInfo: {},
         addAvatar: '',
         updateAvatarArr: [],
         approveAvatar: '',
+
+        userInfo: '',
+        isfromlist: false,
         // -------- 公用信息 end -------- //
 
         // -------- 基本情况 begin -------- //
@@ -142,11 +144,12 @@ Page({
         this.loadProgress();
         this.setData({
             isAdmin: app.globalData.is_admin == '1',
-            centerId: options.centerId ? options.centerId : '',
-            centerName: options.centerName ? options.centerName : '',
             caseId: options.caseId,
             itemId: options.itemId,
-            isCreate: options.itemId == 0,
+            medicId: options.medicId ? options.medicId : 0,
+            isCreate: options.medicId ? options.medicId == 0 : true,
+            userInfo: options.userinfo,
+            isfromlist: options.isfromlist
         });
         if (!this.data.isCreate) { // 编辑
             this.requestCaseInfo();
@@ -166,6 +169,7 @@ Page({
                 service: 'Case.GetCaseInfo',
                 case_id: that.data.caseId,
                 item_id: that.data.itemId,
+                medic_id: that.data.medicId,
                 openid: app.globalData.openid,
                 type: 4
             },
@@ -278,6 +282,7 @@ Page({
                 service: 'Case.EditCaseMedication',
                 case_id: that.data.caseId,
                 item_id: that.data.itemId,
+                medic_id: that.data.medicId,
                 openid: app.globalData.openid,
                 json_data: that.makeData(),
                 fields_state: that.makeFiled()
@@ -290,10 +295,17 @@ Page({
                 that.hideLoading();
                 if (res.data.data.code == 0) {
                     that.showToast("提交成功")
-                    that.reloadPrePage()
-                    wx.navigateBack({
-                        delta: 1
-                    })
+                    if (that.data.isfromlist) {
+                        that.reloadPrePage()
+                        wx.navigateBack({
+                            delta: 1
+                        })
+                    } else {
+                        wx.redirectTo({
+                            url: '../medicine/medicine?caseId=' + res.data.data.info.case_id + "&itemId=" + res.data.data.info.item_id + "&userinfo=" + that.data.userInfo
+                        })
+                    }
+
                 } else {
                     that.showModal("ErrModal", res.data.data.msg);
                 }
@@ -394,6 +406,7 @@ Page({
                 service: 'Case.Approve',
                 case_id: that.data.caseId,
                 item_id: that.data.itemId,
+                medic_id: that.data.medicId,
                 openid: app.globalData.openid,
                 type: 4,
                 state: that.data.caseInfo.medication_state == 2 ? 2 : 1
@@ -428,36 +441,36 @@ Page({
         }
     },
 
-    onUnload() {
-        let that = this;
-        that.showLoading();
-        wx.request({
-            url: constant.basePath,
-            data: {
-                service: 'Case.ClearWritingStatus',
-                case_id: that.data.caseId,
-                item_id: that.data.itemId,
-                type: 4
-            },
-            header: {
-                'content-type': 'application/json'
-            },
-            success(res) {
-                that.hideLoading();
-                if (res.data.data.code == 0) {
-                    // that.reloadPrePage()
-                    // wx.navigateBack({
-                    //     delta: 1
-                    // })
-                } else {
-                    that.showModal("ErrModal", res.data.data.msg);
-                }
-            },
-            fail(res) {
-                that.hideLoading();
-            }
-        });
-    },
+    // onUnload() {
+    //     let that = this;
+    //     that.showLoading();
+    //     wx.request({
+    //         url: constant.basePath,
+    //         data: {
+    //             service: 'Case.ClearWritingStatus',
+    //             case_id: that.data.caseId,
+    //             item_id: that.data.itemId,
+    //             type: 4
+    //         },
+    //         header: {
+    //             'content-type': 'application/json'
+    //         },
+    //         success(res) {
+    //             that.hideLoading();
+    //             if (res.data.data.code == 0) {
+    //                 // that.reloadPrePage()
+    //                 // wx.navigateBack({
+    //                 //     delta: 1
+    //                 // })
+    //             } else {
+    //                 that.showModal("ErrModal", res.data.data.msg);
+    //             }
+    //         },
+    //         fail(res) {
+    //             that.hideLoading();
+    //         }
+    //     });
+    // },
 
     // -------- 提示框 begin -------- //
     loadProgress: function() {
