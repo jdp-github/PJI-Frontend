@@ -1,6 +1,7 @@
 {
     "pages": [
         "pages/auth/auth",
+        "pages/person/specimenAuth/specimenAuth",
         "pages/center/case/yongyao/yongyao",
         "pages/center/case/medicine/medicine",
         "pages/center/manage/member/member",

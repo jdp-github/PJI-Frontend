@@ -17,6 +17,10 @@ const SPECIMEN_TYPE_NO_RIGHT = 3;
 const SPECIMEN_TYPE_LIST = ['关节液', '血液', '组织'];
 const ECCENTRICITY_LIST = ['6600*3min', '1000g*5min', '1000g*10min', '未离心'];
 
+const SidePicker = ['', '左侧', '右侧'];
+const PartPicker = ['', '髋', '膝'];
+const PunctureTypePicker = ['', '置换术后', '翻修术后', '占位器术后', '初次', '其他'];
+
 Page({
     data: {
         loadProgress: 0,
@@ -37,19 +41,25 @@ Page({
         specimenGrid: [],
         selectedSpecimen: {},
         isGetAll: false,
+        isGetAllPrint: false,
         getAllList: [],
-        // 是否感染
-        infectTitle: '请选择',
-        infectValue: '',
-        infectIndex: 0,
-        // 手术类型
-        typeTitle: '请选择',
-        typeValue: '',
-        typeIndex: 0,
-        // 存放者
-        ownerTitle: '请选择',
-        ownerValue: '',
-        ownerIndex: 0,
+        getAllPrintList: [],
+        // 标本类型
+        specimenType: 0,
+        specimenTypePicker: ['全部类型', '关节液', '血液', '组织'],
+        // 病例类型
+        caseType: 0,
+        cassTypePicker: ['全部类型', '置换术后', "占位器", "初次", "其他"],
+        // 是否离心
+        isCentri: 0,
+        isCentriPicker: ['离心后', '未离心'],
+        // 是否无菌
+        isInfect: 0,
+        isInfectPicker: ['非无菌保存', '无菌保存'],
+        // 权限
+        right: 0,
+        rightPicker: ['已授权的标本', '我的标本', '全部标本'],
+
         staffList: [],
         staffNameList: [],
         // 弹出框
@@ -135,7 +145,7 @@ Page({
             boxId: options.boxId,
             centerId: options.centerId,
             caseId: options.caseId,
-            boxUse: options.boxUse
+            boxUse: options.boxUse,
         });
         this.clearFilter();
         this.initData();
@@ -147,15 +157,11 @@ Page({
     },
     clearFilter: function() {
         this.setData({
-            typeIndex: 0,
-            typeValue: '',
-            typeTitle: '请选择',
-            infectIndex: 0,
-            infectValue: '',
-            infectTitle: '请选择',
-            ownerIndex: 0,
-            ownerValue: '',
-            ownerTitle: '请选择'
+            specimenType: 0,
+            caseType: 0,
+            isCentri: 0,
+            isInfect: 0,
+            right: 0,
         });
     },
     requestCenterStaffList: function(centerId) {
@@ -202,7 +208,7 @@ Page({
             });
         });
     },
-    requestSampleList: function(msis, type, staffId) {
+    requestSampleList() {
         let that = this;
         return new Promise((resolve, reject) => {
             wx.request({
@@ -210,11 +216,12 @@ Page({
                 data: {
                     service: 'Sample.GetSampleList',
                     openid: app.globalData.openid,
+                    case_id: that.data.caseId,
                     box_id: that.data.boxId,
-                    is_asepsis: msis,
-                    type: type,
-                    staff_id: staffId,
-                    case_id: that.data.caseId
+                    type: that.data.specimenType,
+                    case_type: that.data.caseType,
+                    is_eccentricity: that.data.isCentri,
+                    is_asepsis: that.data.isInfect,
                 },
                 header: {
                     'content-type': 'application/json'
@@ -291,14 +298,22 @@ Page({
                 selectedItem.isChecked = false;
                 selectedItem.icon = selectedItem.origiIcon;
                 selectedItem.color_hex = selectedItem.origiColor;
-                this.data.getAllList.splice(this.data.getAllList.indexOf(selectedItem.sample_id), 1);
+                if (this.data.isGetAllPrint) {
+                    this.data.getAllPrintList.splice(this.data.getAllPrintList.indexOf(selectedItem), 1);
+                } else {
+                    this.data.getAllList.splice(this.data.getAllList.indexOf(selectedItem.sample_id), 1);
+                }
             } else {
                 selectedItem.isChecked = true;
                 selectedItem.origiColor = selectedItem.color_hex;
                 selectedItem.origiIcon = selectedItem.icon;
                 selectedItem.icon = "fa-calendar-check-o";
                 selectedItem.color_hex = "green";
-                this.data.getAllList.push(selectedItem.sample_id);
+                if (this.data.isGetAllPrint) {
+                    this.data.getAllPrintList.push(selectedItem);
+                } else {
+                    this.data.getAllList.push(selectedItem.sample_id);
+                }
             }
             this.setData({
                 specimenGrid: this.data.specimenGrid
@@ -333,7 +348,10 @@ Page({
                     } else {
                         specimenInfo.get_time = util.formatTime(specimenInfo.get_time, 'Y-M-D h:m');
                     }
-
+                    // 姓名
+                    specimenInfo.allName = specimenInfo.patient_name + " " + specimenInfo.case_no + " " + SidePicker[specimenInfo.side] + " " + PartPicker[specimenInfo.part]
+                    // 病例类型
+                    specimenInfo.case_type = PunctureTypePicker[specimenInfo.case_type]
                     // 标本类型
                     specimenInfo.typeValue = SPECIMEN_TYPE_LIST[specimenInfo.type - 1]
                     // 离心转数
@@ -352,6 +370,12 @@ Page({
             }
         });
     },
+    gotoPuncture() {
+        wx.navigateTo({
+            url: '../../case/chuanci/chuanci?centerId=' + this.data.centerId + "&centerName='1'" + "&caseId=" + this.data.selectedSpecimen.case_id + "&itemId=" + this.data.selectedSpecimen.item_id
+        });
+    },
+    onPrint() {},
     // ======================== 取出标本 begin ======================== //
     // 单取
     onSingleGetClick: function(e) {
@@ -382,13 +406,13 @@ Page({
             success(res) {
                 console.log("Sample.DeleteSample:" + JSON.stringify(res));
                 that.setData({
-                   deleteSpecimenId: ''
+                    deleteSpecimenId: ''
                 });
                 that.hideLoading();
                 if (res.data.data.code == constant.response_success) {
                     that.hideModal();
                     that.loadProgress();
-                    that.requestSampleList(that.data.infectIndex, that.data.typeIndex, that.data.staffList[that.data.ownerIndex].staff_id);
+                    that.requestSampleList(that.data.infectIndex, that.data.typeIndex, );
                 } else {
                     that.showToast(res.data.data.msg);
                 }
@@ -403,23 +427,32 @@ Page({
     },
     // 批量取出
     onMultipleGetClick: function() {
-        if (this.data.getAllList.length == 0) {
-            this.showToast('请选择要取出的标本');
-            return
-        }
-        let sample_ids = "";
-        let getAllList = this.data.getAllList;
-        for (let i = 0, length = getAllList.length; i < length; i++) {
-            sample_ids += getAllList[i] + ",";
-        }
-        sample_ids = sample_ids.substr(0, sample_ids.length - 1);
+        if (this.data.isGetAllPrint) {
+            if (this.data.getAllPrintList.length == 0) {
+                this.showToast('请选择要取出的标本');
+                return
+            }
+            console.log(this.data.getAllPrintList)
+        } else {
+            if (this.data.getAllList.length == 0) {
+                this.showToast('请选择要取出的标本');
+                return
+            }
+            console.log(this.data.getAllList)
+            let sample_ids = "";
+            let getAllList = this.data.getAllList;
+            for (let i = 0, length = getAllList.length; i < length; i++) {
+                sample_ids += getAllList[i] + ",";
+            }
+            sample_ids = sample_ids.substr(0, sample_ids.length - 1);
 
-        this.requestAbleBox(getAllList.length)
-        this.setData({
-            showDetail: false,
-            modalName: 'specimenInfo',
-            getSpecimenIds: sample_ids
-        })
+            this.requestAbleBox(getAllList.length)
+            this.setData({
+                showDetail: false,
+                modalName: 'specimenInfo',
+                getSpecimenIds: sample_ids
+            })
+        }
     },
     onMultipleGetBackClick: function() {
         this.hideModal()
@@ -430,9 +463,19 @@ Page({
             isGetAll: true
         });
     },
+    toGetAllPrintMode() {
+        this.clearFilter();
+        this.setData({
+            isGetAll: true,
+            isGetAllPrint: true
+        });
+    },
     toNormalMode: function() {
         this.setData({
-            isGetAll: false
+            isGetAll: false,
+            isGetAllPrint: false,
+            getAllList: [],
+            getAllPrintList: [],
         });
         this.clearSelectStatus();
     },
@@ -543,7 +586,8 @@ Page({
                         outerBoxIndex: 0,
                         outerBoxId: '',
                         getSpecimenIds: '',
-                        isGetAll: false
+                        isGetAll: false,
+                        getAllList: [],
                     })
                     that.hideModal()
                     that.showToast("取出成功，标本列表已跳转至[" + that.data.outerBoxTitle + "]")
@@ -559,53 +603,60 @@ Page({
     },
     // ======================== 取出标本 end ======================== //
 
-    // 感染筛选
-    onClickInfect: function(e) {
+    // 标本类型
+    onSpecimenTypeChange: function(e) {
         if (this.data.isGetAll) {
             return
         }
-        let tmp = parseInt(e.detail.value);
-        if (parseInt(e.detail.value) >= 0) {
-            this.setData({
-                infectValue: tmp,
-                infectTitle: this.data.infectList[tmp],
-                infectIndex: tmp
-            });
-            this.loadProgress();
-            this.requestSampleList(this.data.infectIndex, this.data.typeIndex, this.data.staffList[this.data.ownerIndex].staff_id);
-        }
+        this.setData({
+            specimenType: e.detail.value
+        })
+        this.loadProgress();
+        this.requestSampleList();
     },
-    // 类型筛选
-    onClickType: function(e) {
+    // 病例类型
+    onCaseTypeChange: function(e) {
         if (this.data.isGetAll) {
             return
         }
-        let tmp = parseInt(e.detail.value);
-        if (parseInt(e.detail.value) >= 0) {
-            this.setData({
-                typeValue: tmp,
-                typeTitle: this.data.typeList[tmp],
-                typeIndex: tmp
-            });
-            this.loadProgress();
-            this.requestSampleList(this.data.infectIndex, this.data.typeIndex, this.data.staffList[this.data.ownerIndex].staff_id);
-        }
+        this.setData({
+            caseType: e.detail.value
+        })
+        this.loadProgress();
+        this.requestSampleList();
     },
-    // 存放者筛选
-    onClickOwner: function(e) {
+    // 是否离心
+    onIsCentriChange: function(e) {
         if (this.data.isGetAll) {
             return
         }
-        let tmp = parseInt(e.detail.value);
-        if (parseInt(e.detail.value) >= 0) {
-            this.setData({
-                ownerValue: tmp,
-                ownerTitle: this.data.staffNameList[tmp],
-                ownerIndex: tmp
-            });
-            this.loadProgress();
-            this.requestSampleList(this.data.infectIndex, this.data.typeIndex, this.data.staffList[this.data.ownerIndex].staff_id);
+        this.setData({
+            isCentri: e.detail.value
+        })
+        this.loadProgress();
+        this.requestSampleList();
+    },
+    // 是否无菌
+    onInfectChange: function(e) {
+        if (this.data.isGetAll) {
+            return
         }
+        this.setData({
+            isInfect: e.detail.value
+        })
+        this.loadProgress();
+        this.requestSampleList();
+    },
+    // 权限
+    onRightChange: function(e) {
+        if (this.data.isGetAll) {
+            return
+        }
+        this.setData({
+            right: e.detail.value
+        })
+        this.loadProgress();
+        this.requestSampleList();
     },
     // 清空选中标本的状态
     clearSelectStatus: function() {

@@ -11,7 +11,7 @@
 <!-- tab -->
 <scroll-view scroll-x class="bg-white nav">
     <view class="flex text-center">
-        <view class="cu-item flex-sub {{index==currTab?'text-green cur':''}}" wx:for="{{tabList}}" wx:key bindtap="tabSelect" data-id="{{index}}">
+        <view class="cu-item flex-sub {{index==currTab?'text-green cur':''}}" wx:for="{{tabList}}" wx:key="id" bindtap="tabSelect" data-id="{{index}}">
             {{item}}
         </view>
     </view>
@@ -33,7 +33,7 @@
         </view>
 
         <!-- 列表item -->
-        <view class="cu-item {{modalName=='move-box-'+ index?'move-cur-notice':''}}" style="height:100%;" wx:for="{{noticeList}}" wx:key="{{item.id}}" bindtouchstart='ListTouchStart' bindtouchmove='ListTouchMove' bindtouchend='ListTouchEnd' data-target="move-box-{{index}}"
+        <view class="cu-item {{modalName=='move-box-'+ index?'move-cur-notice':''}}" style="height:100%;" wx:for="{{noticeList}}" wx:key="id" bindtouchstart='ListTouchStart' bindtouchmove='ListTouchMove' bindtouchend='ListTouchEnd' data-target="move-box-{{index}}"
             bindtap='showNotice' data-item="{{item}}">
             <view class='content'>
                 <view class="item-container">
@@ -68,10 +68,10 @@
 </scroll-view>
 <!-- 成员列表 -->
 <scroll-view wx-else scroll-y class="indexes margin-bottom" scroll-into-view="indexes-{{listCurID}}" style='height:calc(100vh - {{CustomBar}}px - 50px)' scroll-with-animation="true" enable-back-to-top="true">
-    <block wx:for="{{staffList}}" wx:key wx:for-index="key" wx:for-item="value">
+    <block wx:for="{{staffList}}" wx:key="id" wx:for-index="key" wx:for-item="value">
         <view class='padding padding-top-xs padding-bottom-xs indexItem-{{key}}' id="indexes-{{key}}" data-index="{{key}}">{{key}}</view>
         <view class="cu-list menu menu-avatar no-padding">
-            <view style="display:flex;flex-direction:row;justify-content:flex-start;align-items:center;height:100%;padding-top:10px;padding-bottom:10px" class="cu-item {{modalName=='move-box-'+ item.staff_id?'move-cur':''}}" wx:for="{{value}}" wx:key="{{item.staff_id}}"
+            <view style="display:flex;flex-direction:row;justify-content:flex-start;align-items:center;height:100%;padding-top:10px;padding-bottom:10px" class="cu-item {{modalName=='move-box-'+ item.staff_id?'move-cur':''}}" wx:for="{{value}}" wx:key="staff_id"
                 bindtouchstart='ListTouchStart' bindtouchmove='ListTouchMove' bindtouchend='ListTouchEnd' data-target="move-box-{{item.staff_id}}" bindtap="gotoMember" data-item="{{item}}">
                 <view class="cu-avatar round lg" style="background-image:url({{item.staff_avatar}});"></view>
                 <view style="display:flex;flex-direction:row;align-items:flex-end;width:100%">
@@ -178,7 +178,7 @@
 <!-- ------------ 成员列表 begin ------------ -->
 <view class='indexBar' style='height:calc(100vh - {{CustomBar}}px - 50px)' wx:if="{{indexBarDisplay}}">
     <view class='indexBar-box' bindtouchstart="tStart" bindtouchend="tEnd" catchtouchmove="tMove">
-        <view class="indexBar-item " wx:for="{{list}}" wx:key id='{{index}}' bindtouchstart="getCurrent" bindtouchend="setCurrent">{{list[index]}}</view>
+        <view class="indexBar-item " wx:for="{{list}}" wx:key="staff_id" id='{{index}}' bindtouchstart="getCurrent" bindtouchend="setCurrent">{{list[index]}}</view>
     </view>
 </view>
 <view hidden="{{hidden}}" class="indexToast">

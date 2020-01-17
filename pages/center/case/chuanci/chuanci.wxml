@@ -21,7 +21,7 @@
             <view class="cu-avatar-group">
                 <view wx:if="{{updateAvatarArr.length > 0}}">
                     <view class='cu-tag radius' style="margin-right: 40rpx;">修</view>
-                    <view class="cu-avatar round" wx:for="{{updateAvatarArr}}" wx:key style="background-image:url({{item}});"></view>
+                    <view class="cu-avatar round" wx:for="{{updateAvatarArr}}" wx:key="id" style="background-image:url({{item}});"></view>
                 </view>
                 <view wx:else>
                     <view class='cu-tag radius' style="margin-right: 10rpx;">修</view>
@@ -640,7 +640,7 @@
                         <text class='icon-title text-green'></text>已关联的{{relateType==5?'随访':'手术'}}
                     </view>
                 </view>
-                <view class="cu-item" wx:for="{{relateList}}" wx:key="" bindtap="gotoRelate" data-item="{{item}}">
+                <view class="cu-item" wx:for="{{relateList}}" wx:key="id" bindtap="gotoRelate" data-item="{{item}}">
                     <view class="cu-item" style="width:100%;">
                         <view class='content'>
                             <text style="width:100%;margin-right:50rpx;">{{item.date_time}}</text>

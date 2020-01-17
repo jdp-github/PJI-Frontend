@@ -4,14 +4,6 @@ let constant = require('../../../utils/constant.js');
 let util = require('../../../utils/util.js');
 
 const app = getApp();
-const SORT_BY_NAME_ASC = 1;
-const SORT_BY_NAME_DESC = -1;
-const SORT_BY_CREATE_DATE_ASC = 2;
-const SORT_BY_CREATE_DATE_DESC = -2;
-const SORT_BY_UPDATE_DATE_ASC = 3;
-const SORT_BY_UPDATE_DATE_DESC = -3;
-const SORT_BY_LOCK_ASC = 4;
-const SORT_BY_LOCK_DESC = -4;
 
 Page({
     data: {
@@ -30,33 +22,11 @@ Page({
         patient_name: '',
         // 搜索关键词
         searchValue: '',
-        // 排序
-        sortType: SORT_BY_NAME_ASC,
-        filterItems: [{
-                type: 'sort',
-                label: '名称',
-                value: 'name',
-                groups: ['001'],
-            },
-            {
-                type: 'sort',
-                label: '启用时间',
-                value: 'create_date',
-                groups: ['002'],
-            },
-            {
-                type: 'sort',
-                label: '修改时间',
-                value: 'update_date',
-                groups: ['003'],
-            },
-            {
-                type: 'sort',
-                label: '锁定',
-                value: 'lock',
-                groups: ['004'],
-            },
-        ],
+        createYearIndex: 0,
+        createYearPicker: [],
+        boxType: 1,
+        boxTypePicker: ['全部标本盒', '常规存储盒', '送检标本盒'],
+
         boxList: [],
         // 新增标本盒名
         boxName: '',
@@ -73,6 +43,18 @@ Page({
         this.setData({
             boxUse: e.detail.value
         })
+    },
+    boxTypePickerChange(e) {
+        this.setData({
+            boxType: e.detail.value
+        })
+        this.requestBoxList(this.data.searchValue);
+    },
+    createYearChange(e) {
+        this.setData({
+            createYearIndex: e.detail.value,
+        })
+        this.requestBoxList(this.data.searchValue);
     },
     onChooseImage: function(e) {
         let that = this;
@@ -124,8 +106,16 @@ Page({
     },
     onLoad: function(options) {
         this.loadProgress();
+
+        let yearList = []
+        for (let i = 2000; i <= 2050; i++) {
+            yearList.push(i)
+        }
+        yearList.unshift('全部')
         this.setData({
-            centerId: options.centerId
+            centerId: options.centerId,
+            createYearPicker: yearList,
+            createYearIndex: yearList.indexOf(new Date().getFullYear())
         });
         // 从病历页进来
         if (typeof(options.caseId) != "undefined") {
@@ -134,7 +124,8 @@ Page({
                 patient_name: options.patient_name
             });
         }
-        this.requestBoxList(this.data.searchValue, this.data.sortType);
+        this.requestBoxList(this.data.searchValue);
+        this.completeProgress()
     },
     loadProgress: function() {
         if (this.data.loadProgress < 96) {
@@ -185,43 +176,6 @@ Page({
             modalName: null
         })
     },
-    onFilterChange: function(e) {
-        const checkedItems = e.detail.checkedItems;
-        const params = {};
-        checkedItems.forEach((n) => {
-            if (n.checked) {
-                if (n.value === 'name') {
-                    params.sort = n.value;
-                    params.order = n.sort === 1 ? SORT_BY_NAME_ASC : SORT_BY_NAME_DESC
-                } else if (n.value === 'create_date') {
-                    params.sort = n.value;
-                    params.order = n.sort === 1 ? SORT_BY_CREATE_DATE_ASC : SORT_BY_CREATE_DATE_DESC
-                } else if (n.value === 'update_date') {
-                    params.sort = n.value;
-                    params.order = n.sort === 1 ? SORT_BY_UPDATE_DATE_ASC : SORT_BY_UPDATE_DATE_DESC
-                } else if (n.value === 'lock') {
-                    params.sort = n.value;
-                    params.order = n.sort === 1 ? SORT_BY_LOCK_ASC : SORT_BY_LOCK_DESC
-                }
-
-                this.setData({
-                    sortType: params.order
-                });
-                this.loadProgress();
-                this.requestBoxList(this.data.searchValue, this.data.sortType);
-            }
-        });
-    },
-    onFilterOpen: function(e) {
-        this.setData({
-            pageStyle: 'height: 100%; overflow: hidden',
-        });
-    },
-    onFilterClose: function(e) {
-        this.setData({
-            pageStyle: '',
-        });
-    },
     onSearchChange: function(e) {
         this.setData({
             searchValue: e.detail.value
@@ -229,7 +183,7 @@ Page({
     },
     onSearch: function() {
         this.loadProgress();
-        this.requestBoxList(this.data.searchValue, this.data.sortType);
+        this.requestBoxList(this.data.searchValue);
     },
     ListTouchStart: function(e) {
         this.setData({
@@ -257,9 +211,10 @@ Page({
     },
     onRefresh() {
         this.loadProgress();
-        this.requestBoxList(this.data.searchValue, this.data.sortType);
+        this.requestBoxList(this.data.searchValue);
+        this.completeProgress()
     },
-    requestBoxList: function(searchValue, sortType) {
+    requestBoxList: function(searchValue, isFirstTime) {
         let that = this;
         wx.request({
             url: constant.basePath,
@@ -269,7 +224,9 @@ Page({
                 center_id: that.data.centerId,
                 case_id: that.data.caseId,
                 keyword: searchValue,
-                sort: sortType
+                sort: 1,
+                uses: that.data.boxType,
+                year: that.data.createYearPicker[that.data.createYearIndex] == '全部' ? 0 : that.data.createYearPicker[that.data.createYearIndex]
             },
             header: {
                 'content-type': 'application/json'
@@ -288,14 +245,11 @@ Page({
                     that.setData({
                         boxList: res.data.data.list
                     });
-                    that.completeProgress();
                 } else {
                     that.showToast(res.data.msg);
                 }
             },
-            fail(res) {
-                that.completeProgress();
-            }
+            fail(res) {}
         });
     },
     cancelAddBox: function(e) {
@@ -378,7 +332,7 @@ Page({
                 that.hideLoading();
                 if (res.data.data.code == constant.response_success) {
                     that.loadProgress();
-                    that.requestBoxList(that.data.searchValue, that.data.sortType);
+                    that.requestBoxList(that.data.searchValue);
                 } else {
                     that.showToast(res.data.data.msg);
                 }
@@ -407,7 +361,7 @@ Page({
                 that.hideLoading();
                 if (res.data.data.code == constant.response_success) {
                     that.loadProgress();
-                    that.requestBoxList(that.data.searchValue, that.data.sortType);
+                    that.requestBoxList(that.data.searchValue);
                 } else {
                     that.showToast(res.data.data.msg);
                 }
@@ -456,7 +410,7 @@ Page({
                 that.hideLoading();
                 if (res.data.data.code == constant.response_success) {
                     that.loadProgress();
-                    that.requestBoxList(that.data.searchValue, that.data.sortType);
+                    that.requestBoxList(that.data.searchValue);
                     that.setData({
                         boxName: '',
                         depositary: '',

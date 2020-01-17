@@ -82,9 +82,9 @@
                 </wux-col>
             </wux-row>
         </view>
-        <view class="left-ruler-view" wx:for="{{specimenGrid}}" wx:key="">
+        <view class="left-ruler-view" wx:for="{{specimenGrid}}" wx:key="index">
             <wux-row>
-                <view wx:for="{{item}}" wx:key="">
+                <view wx:for="{{item}}" wx:key="index">
                     <!-- letter -->
                     <view wx:if="{{item.index == 0}}">
                         <wux-col span="2">
@@ -110,26 +110,42 @@
             </view>
         </view>
         <view class="cu-form-group">
-            <view class='title text-special'>是否无菌</view>
-            <picker bindchange="onClickInfect" value="{{infectValue}}" range="{{infectList}}">
-                <view class="picker">
-                    {{infectList[infectIndex]}}
-                </view>
-            </picker>
-        </view>
-        <view class="cu-form-group">
             <view class='title text-special'>标本类型</view>
-            <picker bindchange="onClickType" value="{{typeValue}}" range="{{typeList}}">
+            <picker bindchange="onSpecimenTypeChange" value="{{specimenType}}" range="{{specimenTypePicker}}">
                 <view class="picker">
-                    {{typeList[typeIndex]}}
+                    {{specimenTypePicker[specimenType]}}
                 </view>
             </picker>
         </view>
         <view class="cu-form-group">
-            <view class='title text-special'>存放者</view>
-            <picker bindchange="onClickOwner" value="{{ownerValue}}" range="{{staffNameList}}">
+            <view class='title text-special'>病例类型</view>
+            <picker bindchange="onCaseTypeChange" value="{{caseType}}" range="{{cassTypePicker}}">
                 <view class="picker">
-                    {{staffNameList[ownerIndex]}}
+                    {{cassTypePicker[caseType]}}
+                </view>
+            </picker>
+        </view>
+        <view class="cu-form-group">
+            <view class='title text-special'>是否离心</view>
+            <picker bindchange="onIsCentriChange" value="{{isCentri}}" range="{{isCentriPicker}}">
+                <view class="picker">
+                    {{isCentriPicker[isCentri]}}
+                </view>
+            </picker>
+        </view>
+        <view class="cu-form-group">
+            <view class='title text-special'>是否无菌</view>
+            <picker bindchange="onInfectChange" value="{{isInfect}}" range="{{isInfectPicker}}">
+                <view class="picker">
+                    {{isInfectPicker[isInfect]}}
+                </view>
+            </picker>
+        </view>
+        <view class="cu-form-group">
+            <view class='title text-special'>权限</view>
+            <picker bindchange="onRightChange" value="{{right}}" range="{{rightPicker}}">
+                <view class="picker">
+                    {{rightPicker[right]}}
                 </view>
             </picker>
         </view>
@@ -140,7 +156,10 @@
         </view>
         <!-- 底部按钮 -->
         <view class='padding-sm flex' wx:if='{{!isGetAll}}'>
-            <button class='cu-btn bg-green shadow' bindtap='toGetAllMode' style="width:100%;" disabled="{{boxUse == 2}}">
+            <button class='cu-btn bg-green shadow' bindtap='toGetAllPrintMode' style="width:100%;margin-right:20rpx;" disabled="{{boxUse == 2}}">
+                批量打印标签
+            </button>
+            <button class='cu-btn bg-green shadow' bindtap='toGetAllMode' style="width:100%;marin-right:20rpx;" disabled="{{boxUse == 2}}">
                 批量取出
             </button>
         </view>
@@ -148,7 +167,7 @@
             <view class="flex-sub" style="padding-right:10rpx;">
                 <view wx:if='{{isGetAll}}'>
                     <button class='cu-btn bg-green shadow' bindtap='onMultipleGetClick' style="width:100%;" disabled="{{boxUse == 2}}">
-                        取出
+                        {{isGetAllPrint?'打印':'取出'}}
                     </button>
                 </view>
             </view>
@@ -195,7 +214,7 @@
     <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;" wx:if="{{showDetail}}">
         <view class="cu-bar bg-white solid-bottom">
             <view class='action' style="font-size: 24rpx;">
-                <text class='icon-title text-green'></text>标本{{selectedSpecimen.number}}的信息
+                <text class='icon-title text-green'></text>{{boxInfo.name}} {{selectedSpecimen.number}}
             </view>
         </view>
         <view>
@@ -205,7 +224,11 @@
             </view>
             <view class="cu-form-group cu-form-group-sepcial text-align-left text-small">
                 <view class='title text-small special'>姓名</view>
-                <input class='radius text-small special' name='input' value="{{selectedSpecimen.patient_name?selectedSpecimen.patient_name:'-'}}" disabled></input>
+                <input class='radius text-small special' name='input' value="{{selectedSpecimen.allName}}" disabled></input>
+            </view>
+            <view class="cu-form-group cu-form-group-sepcial text-align-left text-small">
+                <view class='title text-small special'>病例类型</view>
+                <input class='radius text-small special' name='input' value="{{selectedSpecimen.case_type}}" disabled></input>
             </view>
             <view class="cu-form-group cu-form-group-sepcial text-align-left text-small">
                 <view class='title text-small special'>标本类型</view>
@@ -239,10 +262,21 @@
                 <view class='title text-small special'>取出者</view>
                 <input class='radius text-small special' name='input' value="{{selectedSpecimen.get_staff?selectedSpecimen.get_staff:'-'}}" disabled></input>
             </view>
+            <view class="cu-form-group cu-form-group-sepcial text-align-left text-small">
+                <view class='title text-small special'>取出位置</view>
+                <input class='radius text-small special' name='input' value="{{selectedSpecimen.number?selectedSpecimen.number:'-'}}" disabled></input>
+            </view>
+            <view class="cu-form-group cu-form-group-sepcial text-align-left text-small" bindtap="gotoPuncture" style="justify-content:flex-start">
+                <view class='title text-small special'>穿刺详情</view>
+                <view class='text-small text-blue'>点击查看</view>
+            </view>
         </view>
         <view class='padding-sm flex' style="display:{{selectedSpecimen.status == 2?'none':''}}">
             <view style='width:100%;display:flex;flex-direction:column'>
-                <button class='cu-btn bg-green shadow' bindtap="onSingleGetClick" data-id="{{selectedSpecimen.sample_id}}" style="width:100%;" disabled="{{boxUse == 2}}">
+                <button class='cu-btn bg-cyan shadow' bindtap="onPrint" data-id="{{selectedSpecimen.sample_id}}" style="width:100%;" disabled="{{boxUse == 2}}">
+                    打印标签
+                </button>
+                <button class='cu-btn bg-green shadow' bindtap="onSingleGetClick" data-id="{{selectedSpecimen.sample_id}}" style="width:100%;margin-top:20rpx;" disabled="{{boxUse == 2}}">
                     取出
                 </button>
                 <button class='cu-btn bg-red shadow' data-target="DeleteSpecimenModal" bindtap="showDeleteModal" data-id="{{selectedSpecimen.sample_id}}" style="width:100%;margin-top:20rpx;">

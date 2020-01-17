@@ -23,14 +23,17 @@ Page({
         registerCount: 0,
         approveCount: 0,
         TabCur: 0,
-        tabItems: ['我的申请', '需我审批']
+        tabItems: ['我的申请', '需我授权'],
+
+        specimenApplyList: [],
+        specimenApproveList: []
     },
-    onHide: function () {
+    onHide: function() {
         this.setData({
             modalName: ''
         });
     },
-    onShow: function () {
+    onShow: function() {
         if (typeof this.getTabBar === 'function' &&
             this.getTabBar()) {
             this.getTabBar().setData({
@@ -43,19 +46,27 @@ Page({
         }
         this.onLoad();
     },
-    onLoad: function () {
+    onLoad: function() {
         this.setData({
             avatarUrl: app.globalData.avatarUrl,
             nickName: app.globalData.nickName
         });
         this.init();
     },
-    init: async function () {
+    init: async function() {
         await this.requestUserInfo();
         // await this.requestRegister();
         await this.requestApprove();
+        this.requestApplySpecimenAuth();
+        this.requestApproveSpecimenAuth();
     },
-    loadProgress: function () {
+    tabSelect(e) {
+        this.setData({
+            TabCur: e.currentTarget.dataset.id,
+            scrollLeft: (e.currentTarget.dataset.id - 1) * 60
+        })
+    },
+    loadProgress: function() {
         if (this.data.loadProgress < 96) {
             this.setData({
                 loadProgress: this.data.loadProgress + 3
@@ -71,53 +82,53 @@ Page({
             });
         }
     },
-    completeProgress: function () {
+    completeProgress: function() {
         this.setData({
             loadProgress: 100
         });
     },
-    showToast: function (msg) {
+    showToast: function(msg) {
         wx.showToast({
             icon: 'none',
             title: msg,
         });
     },
-    showLoading: function () {
+    showLoading: function() {
         this.setData({
             loadModal: true
         });
     },
-    hideLoading: function () {
+    hideLoading: function() {
         setTimeout(() => {
             this.setData({
                 loadModal: false
             });
         }, 1500);
     },
-    backToAuth: function () {
+    backToAuth: function() {
         wx.navigateTo({
             url: '../auth/auth'
         });
     },
-    showDrawer: function (e) {
+    showDrawer: function(e) {
         this.setData({
             modalName: e.currentTarget.dataset.target
         });
     },
-    hideModal: function (e) {
+    hideModal: function(e) {
         this.setData({
             modalName: null
         });
     },
-    tabSelect: function (e) {
+    tabSelect: function(e) {
         this.setData({
             TabCur: e.currentTarget.dataset.id,
             scrollLeft: (e.currentTarget.dataset.id - 1) * 60
         });
     },
-    ignoreTap: function (e) {
-    },
-    requestUserInfo: function () {
+    ignoreTap: function(e) {},
+
+    requestUserInfo: function() {
         let that = this;
         return new Promise((resolve, reject) => {
             wx.request({
@@ -136,7 +147,7 @@ Page({
                             centerCount: res.data.data.info.center_list.length
                         });
                     } else {
-                        that.showToast(res.data.msg);
+                        that.showToast(res.data.data.msg);
                     }
                     resolve(res);
                 },
@@ -146,7 +157,7 @@ Page({
             });
         });
     },
-    requestRegister: function () {
+    requestRegister: function() {
         let that = this;
         return new Promise((resolve, reject) => {
             wx.request({
@@ -169,7 +180,7 @@ Page({
                             registerCount: res.data.data.list.length
                         });
                     } else {
-                        that.showToast(res.data.msg);
+                        that.showToast(res.data.data.msg);
                     }
                     resolve(res);
                 },
@@ -179,7 +190,7 @@ Page({
             });
         });
     },
-    requestApprove: function () {
+    requestApprove: function() {
         let that = this;
         return new Promise((resolve, reject) => {
             wx.request({
@@ -202,7 +213,7 @@ Page({
                             approveCount: res.data.data.list.length
                         });
                     } else {
-                        that.showToast(res.data.msg);
+                        that.showToast(res.data.data.msg);
                     }
                     // that.completeProgress();
                     resolve(res);
@@ -214,7 +225,7 @@ Page({
             });
         });
     },
-    onApprove: function (e) {
+    onApprove: function(e) {
         let that = this;
         that.showLoading();
         wx.request({
@@ -233,7 +244,7 @@ Page({
                     // that.requestRegister();
                     that.requestApprove();
                 } else {
-                    that.showToast(res.data.msg);
+                    that.showToast(res.data.data.msg);
                 }
                 that.hideLoading();
             },
@@ -243,7 +254,7 @@ Page({
             }
         });
     },
-    onRefuse: function (e) {
+    onRefuse: function(e) {
         let that = this;
         that.showLoading();
         wx.request({
@@ -262,7 +273,136 @@ Page({
                     // that.requestRegister();
                     that.requestApprove();
                 } else {
+                    that.showToast(res.data.data.msg);
+                }
+                that.hideLoading();
+            },
+            fail(res) {
+                that.hideLoading();
+                that.showToast(res.data.msg);
+            }
+        });
+    },
+    gotoSpecimenAuth() {
+        wx.navigateTo({
+            url: '../person/specimenAuth/specimenAuth'
+        });
+    },
+    requestApplySpecimenAuth() {
+        let that = this;
+        that.showLoading();
+        wx.request({
+            url: constant.basePath,
+            data: {
+                service: 'Sample.SampleAuthList',
+                openid: app.globalData.openid,
+                type: 1
+            },
+            header: {
+                'content-type': 'application/json'
+            },
+            success(res) {
+                if (res.data.data.code == constant.response_success) {
+                    let list = res.data.data.list
+                    list.forEach(item => {
+                        item.apply_time = util.formatTime(item.apply_time, 'Y-M-D');
+                        item.state_name = item.state == 0 ? '申请中' : item.state == 1 ? "成功" : "驳回"
+                    })
+                    that.setData({
+                        specimenApplyList: list
+                    })
+                } else {
+                    that.showToast(res.data.data.msg);
+                }
+                that.hideLoading();
+            },
+            fail(res) {
+                that.hideLoading();
+                that.showToast(res.data.msg);
+            }
+        });
+    },
+    requestApproveSpecimenAuth() {
+        let that = this;
+        that.showLoading();
+        wx.request({
+            url: constant.basePath,
+            data: {
+                service: 'Sample.SampleAuthList',
+                openid: app.globalData.openid,
+                type: 2
+            },
+            header: {
+                'content-type': 'application/json'
+            },
+            success(res) {
+                if (res.data.data.code == constant.response_success) {
+                    let list = res.data.data.list
+                    list.forEach(item => {
+                        item.apply_time = util.formatTime(item.apply_time, 'Y-M-D');
+                        item.state_name = item.state == 0 ? '申请中' : item.state == 1 ? "成功" : "驳回"
+                    })
+                    that.setData({
+                        specimenApproveList: list
+                    })
+                } else {
+                    that.showToast(res.data.data.msg);
+                }
+                that.hideLoading();
+            },
+            fail(res) {
+                that.hideLoading();
+                that.showToast(res.data.msg);
+            }
+        });
+    },
+    onSpecimenApprove(e) {
+        let that = this;
+        that.showLoading();
+        wx.request({
+            url: constant.basePath,
+            data: {
+                service: 'Sample.ApproveSampleAuth',
+                openid: app.globalData.openid,
+                auth_id: e.currentTarget.dataset.authid,
+                type: 1
+            },
+            header: {
+                'content-type': 'application/json'
+            },
+            success(res) {
+                if (res.data.data.code == constant.response_success) {
+                    that.requestApproveSpecimenAuth()
+                } else {
                     that.showToast(res.data.msg);
+                }
+                that.hideLoading();
+            },
+            fail(res) {
+                that.hideLoading();
+                that.showToast(res.data.data.msg);
+            }
+        });
+    },
+    onSpecimenRefuse(e) {
+        let that = this;
+        that.showLoading();
+        wx.request({
+            url: constant.basePath,
+            data: {
+                service: 'Sample.ApproveSampleAuth',
+                openid: app.globalData.openid,
+                auth_id: e.currentTarget.dataset.authid,
+                type: 2
+            },
+            header: {
+                'content-type': 'application/json'
+            },
+            success(res) {
+                if (res.data.data.code == constant.response_success) {
+                    that.requestApproveSpecimenAuth()
+                } else {
+                    that.showToast(res.data.data.msg);
                 }
                 that.hideLoading();
             },

@@ -18,6 +18,11 @@ Page({
         errMsg: '',
         // -------- modal end ------------- //
 
+        // -------- image begin ----------- //
+        showImageModal: false,
+        modalImage: '',
+        // -------- image end ----------- //
+
         // -------- 公用信息 begin -------- //
         isCreate: false,
         isEdit: false,
@@ -99,6 +104,12 @@ Page({
         other_disease: '',
         score: '',
         remark: '',
+        // 知情同意
+        is_agree: 0,
+        is_agree_state: 1,
+        is_agree_state_value: 'pencil',
+        is_agree_pic: '',
+        is_agree_pic_upload: '',
 
         // ------ import ------ //
         importList: [],
@@ -269,6 +280,21 @@ Page({
             remark: e.detail.value
         });
     },
+    onAgreeStateChange(e) {
+        if (this.data.is_agree_state == 1) {
+            this.setData({
+                is_agree_state: 2,
+                is_agree_state_value: "clock-o",
+                is_agree_pic: '',
+                is_agree: 0
+            })
+        } else {
+            this.setData({
+                is_agree_state: 1,
+                is_agree_state_value: "pencil",
+            })
+        }
+    },
     onImportClick(e) {
         this.setData({
             modalName: "ImportDrawerModalR"
@@ -353,6 +379,73 @@ Page({
         this.showToast("导入成功")
     },
     // -------- 基本信息事件 end -------- //
+
+    // -------- 图片 start --------- //
+    showImageModal: function(e) {
+        if (e.target.dataset.img && e.target.dataset.img != '') {
+            this.setData({
+                showImageModal: true,
+                modalImage: e.target.dataset.img
+            });
+        }
+    },
+    hideImageModal: function(e) {
+        this.setData({
+            showImageModal: false,
+        });
+    },
+    onChooseImage: function(e) {
+        let that = this;
+        wx.chooseImage({
+            count: 1,
+            sizeType: ['original', 'compressed'],
+            sourceType: ['album', 'camera'],
+            success(res) {
+                const tempFilePaths = res.tempFilePaths;
+                that.uploadImg(tempFilePaths[0])
+            }
+        });
+    },
+    uploadImg(filePath) {
+        let that = this;
+        that.showLoading();
+        wx.uploadFile({
+            url: constant.basePath + "",
+            filePath: filePath,
+            name: "file",
+            formData: {
+                service: 'Common.Upload'
+            },
+            header: {
+                "Content-Type": "multipart/form-data"
+            },
+            success(res) {
+                that.hideLoading();
+                let data = JSON.parse(res.data);
+                if (data.data.code == 0) {
+                    that.setData({
+                        is_agree: 1,
+                        is_agree_pic: data.data.info.url,
+                        is_agree_pic_upload: data.data.info.file,
+                    });
+                } else {
+                    that.showModal("ErrModal", data.msg);
+                }
+            },
+            fail(res) {
+                that.hideLoading();
+            }
+        });
+    },
+
+    onRemovePic: function(e) {
+        let that = this;
+        that.setData({
+            is_agree_pic: '',
+            is_agree_pic_upload: '',
+        });
+    },
+    // -------- 图片 end  ---------- //
 
     // -------- 提示框 begin -------- //
     loadProgress: function() {
@@ -495,6 +588,13 @@ Page({
                 that.hideLoading();
                 if (res.data.data.code == 0) {
                     that.initViewByData(res.data.data.info)
+                    // 状态
+                    res.data.data.field_state.forEach(item => {
+                        that.setData({
+                            [item.field_name + "_state"]: item.state,
+                            [item.field_name + "_state_value"]: item.state == 0 ? "ban" : item.state == 1 ? "pencil" : "clock-o"
+                        })
+                    })
                 } else {
                     that.showModal("ErrModal", res.data.msg);
                 }
@@ -566,6 +666,8 @@ Page({
             other_disease: info.other_disease,
             score: info.score,
             remark: info.remark,
+            is_agree: info.is_agree,
+            is_agree_pic: info.is_agree_pic,
 
             addAvatar: info.base_creator_avatar,
             updateAvatarArr: this.makeUpdateAvatar(info.base_editor_list),
@@ -587,7 +689,7 @@ Page({
     },
 
     getValueDisable(value) {
-        return value ? value.length <= 0 : false
+        return value ? value.length <= 0 : true
     },
 
 
@@ -646,7 +748,7 @@ Page({
                 item_id: that.data.itemId,
                 openid: app.globalData.openid,
                 json_data: that.makeBasicData(),
-                fields_state: "{}",
+                fields_state: that.makeFiled(),
             },
             header: {
                 'content-type': 'application/json'
@@ -659,9 +761,16 @@ Page({
                         caseId: res.data.data.info.case_id
                     })
                     that.showToast("提交成功")
-                    wx.redirectTo({
-                        url: '../timeline/timeline?centerId=' + that.data.centerId + "&centerName=" + that.data.centerName + "&caseInfo=" + that.makeCaseInfo()
-                    });
+                    if (that.data.isCreate) {
+                        wx.redirectTo({
+                            url: '../timeline/timeline?centerId=' + that.data.centerId + "&centerName=" + that.data.centerName + "&caseInfo=" + that.makeCaseInfo()
+                        });
+                    } else {
+                        that.reloadPrePage()
+                        wx.navigateBack({
+                            delta: 1
+                        })
+                    }
                 } else {
                     that.showModal("ErrModal", res.data.data.msg);
                 }
@@ -670,6 +779,22 @@ Page({
                 that.hideLoading();
             }
         });
+    },
+
+    makeFiled() {
+        let field_state = []
+        field_state.push(this.makeFiledObj("is_agree"));
+
+        let filedStr = JSON.stringify(field_state)
+        return filedStr
+    },
+
+    makeFiledObj(filedName) {
+        return {
+            field_name: filedName,
+            type: 1,
+            state: this.data[filedName + "_state"]
+        }
     },
 
     makeCaseInfo() {
@@ -737,6 +862,10 @@ Page({
             other_disease: that.data.other_disease,
             score: that.data.score,
             remark: that.data.remark,
+            is_agree: that.data.is_agree,
+            is_agree_pic: that.data.is_agree_pic_upload.length == 0 ? "" : JSON.stringify({
+                "is_agree_pic_upload": that.data.is_agree_pic_upload
+            })
         }
         console.log("基本信息：" + JSON.stringify(jsonData))
         return JSON.stringify(jsonData)
@@ -897,6 +1026,10 @@ Page({
         }
         if (this.data.remark.length == 0) {
             this.showToast("请填写病状体征中的备注")
+            return false;
+        }
+        if (this.data.is_agree_state == 1 && this.data.is_agree_pic.length == 0) {
+            this.showToast("请上传知情同意")
             return false;
         }
 

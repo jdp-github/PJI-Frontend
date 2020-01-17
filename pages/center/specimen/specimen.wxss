@@ -9,14 +9,14 @@
 }
 .cu-list>.cu-item .move {
     display: flex;
-    width: 400rpx;
+    width: 160rpx;
     height: 100%;
     position: absolute;
     right: 0;
     transform: translateX(100%);
 }
 .cu-list>.cu-item.move-cur {
-    transform: translateX(-400rpx);
+    transform: translateX(-160rpx);
 }
 .margin-btn {
     margin: 0rpx 30rpx 15rpx 30rpx;
@@ -34,4 +34,15 @@
 }
 .padding-bottom {
     padding-bottom: 15rpx;
+}
+
+.filter-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding-left: 20rpx;
+    padding-right: 20rpx;
+    font-size: 28rpx;
+    /* width: 50%; */
 }

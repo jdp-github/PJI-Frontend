@@ -544,7 +544,7 @@ Page({
                         })
                     })
                 } else {
-                    that.showModal("ErrModal", res.data.msg);
+                    that.showModal("ErrModal", res.data.data.msg);
                 }
             },
             fail(res) {

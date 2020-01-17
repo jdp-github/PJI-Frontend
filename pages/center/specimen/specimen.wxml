@@ -7,6 +7,7 @@
         <view class='content' style='top:{{StatusBar}}px;'>{{caseId.length > 0? patient_name+"的标本":"标本盒"}}</view>
     </view>
 </view>
+<!-- 搜索 -->
 <view class="cu-bar bg-white search fixed" style="top:{{CustomBar}}px;">
     <view class='search-form round'>
         <text class="icon-search"></text>
@@ -16,8 +17,23 @@
         <button class='cu-btn bg-green shadow-blur round' bindtap="onSearch">搜索</button>
     </view>
 </view>
-<view class="cu-bar bg-white fixed" style="top:{{CustomBar}}px; margin-top: 110rpx; width: 100%; border-bottom: 0;">
-    <wux-filterbar style="width: 100%;font-size: 24rpx;" items="{{ filterItems }}" bind:change="onFilterChange" bind:open="onFilterOpen" bind:close="onFilterClose" />
+<view class="cu-bar bg-white fixed" style="top:{{CustomBar}}px; margin-top: 110rpx; width: 100%; border-bottom: 0;display:flex;flex-direction:row;justify-content:center">
+    <view class="filter-container">
+        <view class="title">创建时间:</view>
+        <picker value="{{createYearIndex}}" range="{{createYearPicker}}" bindchange="createYearChange">
+            <view class="picker">
+                {{createYearPicker[createYearIndex]}}
+            </view>
+        </picker>
+    </view>
+    <view class="filter-container">
+        <view class="title">标本盒类型:</view>
+        <picker value="{{boxType}}" range="{{boxTypePicker}}" bindchange="boxTypePickerChange">
+            <view class="picker">
+                {{boxTypePicker[boxType]}}
+            </view>
+        </picker>
+    </view>
 </view>
 <scroll-view scroll-y class="indexes margin-bottom" scroll-into-view="indexes-{{listCurID}}" style='padding-top:220rpx;height:calc(100vh - {{CustomBar}}px)' scroll-with-animation="true" enable-back-to-top="true">
     <view class="cu-list menu menu-avatar">
@@ -33,25 +49,27 @@
                 </button>
             </view>
         </view>
-        <view view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}}" wx:for="{{boxList}}" wx:key="" bindtouchstart='ListTouchStart' bindtouchmove='ListTouchMove' bindtouchend='ListTouchEnd' data-target="move-box-{{index}}">
+        <view view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}}" wx:for="{{boxList}}" wx:key="index" bindtouchstart='ListTouchStart' bindtouchmove='ListTouchMove' bindtouchend='ListTouchEnd' data-target="move-box-{{index}}">
             <view class='content' data-selecteditem="{{item}}" bindtap="onItemClick">
                 <view class="flex">
                     <view class='flex-sub radius' style="padding-right: 30rpx;">
                         <view class="solids" style="width: 120rpx; height: 120rpx;">
                             <image src="{{item.image}}" style="width: 120rpx; height: 120rpx;"></image>
+                            <!-- <i class="icon-unlock text-green" wx:if="{{item.is_lock != 1}}"></i> -->
                         </view>
                     </view>
                     <view class='radius' style="flex:4;padding-right: 30rpx;">
                         <view class="flex-sub sub-title">
-                            <i class="icon-unlock text-green" wx:if="{{item.is_lock != 1}}"></i>
-                            <i class="icon-lock text-red" wx:if="{{item.is_lock == 1}}"></i> {{item.name}}
+                            <!-- <i class="icon-unlock text-green" wx:if="{{item.is_lock != 1}}"></i>
+                            <i class="icon-lock text-red" wx:if="{{item.is_lock == 1}}"></i> -->
+                            {{item.name}}
                             <view class="cu-tag sm radius" style="font-size: 22rpx;background-color:#ccc;color:#fff;font-weight:bold;margin-left:8rpx;">{{item.uses == 1?"常规存储":"送检用"}}</view>
                         </view>
                         <view class="flex-sub text-small text-gray">
                             {{item.depositary}} {{item.ctime}}
                         </view>
                         <view class="flex-sub">
-                            <view class="cu-progress radius striped active margin-top-special">
+                            <view class="cu-progress radius margin-top-special">
                                 <view class='bg-olive' style="width:{{item.used_volume}}%;">{{item.used_volume==0?'.':item.used_volume}}</view>
                             </view>
                         </view>
@@ -60,7 +78,7 @@
             </view>
             <view class='move'>
                 <!-- <view class='bg-cyan' data-selecteditem="{{item}}" bindtap="onItemClick">详情</view> -->
-                <view class='bg-olive' data-selecteditem="{{item}}" bindtap="onItemLockOrUnlock" disable="{{item.is_display_lock != 1?'disable':''}}">{{item.is_lock == 0?'锁定':'解锁'}}</view>
+                <!-- <view class='bg-olive' data-selecteditem="{{item}}" bindtap="onItemLockOrUnlock" disable="{{item.is_display_lock != 1?'disable':''}}">{{item.is_lock == 0?'锁定':'解锁'}}</view> -->
                 <view class='bg-red' data-selecteditem="{{item}}" bindtap='onItemDelete' hidden='true' disable="{{item.is_display_lock != 1?'disable':''}}">删除</view>
             </view>
         </view>
