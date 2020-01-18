@@ -105,7 +105,7 @@
             <view class="cu-item text-green cur">
                 需我审批
             </view>
-            <view wx:for='{{approveList}}' wx:key="apply_id" wx:if="{{TabCur==1}}">
+            <view wx:for='{{approveList}}' wx:key="apply_id">
                 <block>
                     <view class="content item-container border-container">
                         <view class="text-bold">{{item.order_number}}</view>
