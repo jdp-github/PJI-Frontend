@@ -306,6 +306,7 @@ Page({
                     let list = res.data.data.list
                     list.forEach(item => {
                         item.apply_time = util.formatTime(item.apply_time, 'Y-M-D');
+                        item.auth_time = util.formatTime(item.auth_time, 'Y-M-D');
                         item.state_name = item.state == 0 ? '申请中' : item.state == 1 ? "成功" : "驳回"
                     })
                     that.setData({

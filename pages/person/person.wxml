@@ -24,7 +24,7 @@
     <view class='flex flex-sub flex-direction solid-right'>
         <view class="text-xxl text-red text-decoration">{{userInfo.followup_count}}</view>
         <view class="margin-top-sm">
-            <text class='icon-taoxiaopu'></text> 手术治疗
+            <text class='icon-taoxiaopu'></text> 门诊随访
         </view>
     </view>
 </view>
@@ -141,8 +141,9 @@
                 <block>
                     <view class="content item-container border-container">
                         <view class="text-bold">{{item.auth_id}}</view>
-                        <view class="text-left margin-top">姓名: {{item.name}}</view>
+                        <view class="text-left margin-top">姓名: {{item.auth_staff_name}}</view>
                         <view class="text-left">申请日期: {{item.apply_time}}</view>
+                        <view class="text-left" wx:if="{{item.state!=0}}">审批日期: {{item.auth_time}}</view>
                         <view class="text-left">申请状态: {{item.state_name}}</view>
                     </view>
                 </block>
@@ -152,7 +153,7 @@
                 <block>
                     <view class="content item-container border-container">
                         <view class="text-bold">{{item.auth_id}}</view>
-                        <view class="text-left margin-top">姓名: {{item.name}}</view>
+                        <view class="text-left margin-top">姓名: {{item.staff_name}}</view>
                         <view class="text-left">申请日期: {{item.apply_time}}</view>
                         <view class="text-left">申请状态: {{item.state_name}}</view>
                         <view class="grid margin-top float-right" wx:if="{{item.state==0}}">
