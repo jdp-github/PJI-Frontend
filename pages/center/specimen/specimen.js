@@ -184,6 +184,7 @@ Page({
     onSearch: function() {
         this.loadProgress();
         this.requestBoxList(this.data.searchValue);
+        this.completeProgress();
     },
     ListTouchStart: function(e) {
         this.setData({
@@ -333,6 +334,7 @@ Page({
                 if (res.data.data.code == constant.response_success) {
                     that.loadProgress();
                     that.requestBoxList(that.data.searchValue);
+                    that.completeProgress();
                 } else {
                     that.showToast(res.data.data.msg);
                 }
@@ -362,6 +364,7 @@ Page({
                 if (res.data.data.code == constant.response_success) {
                     that.loadProgress();
                     that.requestBoxList(that.data.searchValue);
+                    that.completeProgress();
                 } else {
                     that.showToast(res.data.data.msg);
                 }
@@ -411,12 +414,14 @@ Page({
                 if (res.data.data.code == constant.response_success) {
                     that.loadProgress();
                     that.requestBoxList(that.data.searchValue);
+                    that.completeProgress()
                     that.setData({
                         boxName: '',
                         depositary: '',
                         boxUse: 1,
                         boxPicUrl: '',
-                        boxPicUploud: ''
+                        boxPicUploud: '',
+                        comment: ''
                     })
                 } else {
                     that.showToast(res.data.data.msg);
