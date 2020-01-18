@@ -57,8 +57,8 @@ Page({
         isInfect: 0,
         isInfectPicker: ['非无菌保存', '无菌保存'],
         // 权限
-        right: 0,
-        rightPicker: ['已授权的标本', '我的标本', '全部标本'],
+        right: 2,
+        rightPicker: ['全部标本', '我的标本', '已授权的标本'],
 
         staffList: [],
         staffNameList: [],
@@ -216,12 +216,13 @@ Page({
                 data: {
                     service: 'Sample.GetSampleList',
                     openid: app.globalData.openid,
-                    case_id: that.data.caseId,
                     box_id: that.data.boxId,
-                    type: that.data.specimenType,
-                    case_type: that.data.caseType,
-                    is_eccentricity: that.data.isCentri,
                     is_asepsis: that.data.isInfect,
+                    type: that.data.specimenType,
+                    case_id: that.data.caseId,
+                    is_eccentricity: that.data.isCentri,
+                    case_type: that.data.caseType,
+                    auth_type: that.data.right
                 },
                 header: {
                     'content-type': 'application/json'
