@@ -53,9 +53,8 @@ Page({
         });
         this.init();
     },
-    init: async function() {
-        await this.requestUserInfo();
-        // await this.requestRegister();
+    init: function() {
+        this.requestUserInfo();
     },
     tabSelect(e) {
         this.setData({
@@ -246,6 +245,7 @@ Page({
                 if (res.data.data.code == constant.response_success) {
                     // that.requestRegister();
                     that.requestApprove();
+                    that.requestUserInfo()
                 } else {
                     that.showToast(res.data.data.msg);
                 }
@@ -275,6 +275,7 @@ Page({
                 if (res.data.data.code == constant.response_success) {
                     // that.requestRegister();
                     that.requestApprove();
+                    that.requestUserInfo()
                 } else {
                     that.showToast(res.data.data.msg);
                 }
@@ -377,6 +378,7 @@ Page({
             success(res) {
                 if (res.data.data.code == constant.response_success) {
                     that.requestApproveSpecimenAuth()
+                    that.requestUserInfo()
                 } else {
                     that.showToast(res.data.msg);
                 }
@@ -405,6 +407,7 @@ Page({
             success(res) {
                 if (res.data.data.code == constant.response_success) {
                     that.requestApproveSpecimenAuth()
+                    that.requestUserInfo()
                 } else {
                     that.showToast(res.data.data.msg);
                 }
