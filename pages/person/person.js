@@ -56,9 +56,6 @@ Page({
     init: async function() {
         await this.requestUserInfo();
         // await this.requestRegister();
-        await this.requestApprove();
-        this.requestApplySpecimenAuth();
-        this.requestApproveSpecimenAuth();
     },
     tabSelect(e) {
         this.setData({
@@ -114,6 +111,12 @@ Page({
         this.setData({
             modalName: e.currentTarget.dataset.target
         });
+        if (this.data.modalName == 'SpecimenDrawer') {
+            this.requestApplySpecimenAuth();
+            this.requestApproveSpecimenAuth();
+        } else {
+            this.requestApprove();
+        }
     },
     hideModal: function(e) {
         this.setData({
