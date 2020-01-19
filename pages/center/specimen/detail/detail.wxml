@@ -264,7 +264,7 @@
             </view>
             <view class="cu-form-group cu-form-group-sepcial text-align-left text-small">
                 <view class='title text-small special'>取出位置</view>
-                <input class='radius text-small special' name='input' value="{{selectedSpecimen.number?selectedSpecimen.number:'-'}}" disabled></input>
+                <input class='radius text-small special' name='input' value="{{selectedSpecimen.get_new_box?selectedSpecimen.get_new_box+' '+selectedSpecimen.get_new_number:'-'}}" disabled></input>
             </view>
             <view class="cu-form-group cu-form-group-sepcial text-align-left text-small" bindtap="gotoPuncture" style="justify-content:flex-start">
                 <view class='title text-small special'>穿刺详情</view>
