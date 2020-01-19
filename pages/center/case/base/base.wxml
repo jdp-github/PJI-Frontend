@@ -443,7 +443,7 @@
                     <radio class='blue text-small' value='1' checked="{{ledvt ==1}}"></radio> 控制可
                 </view>
                 <view style="margin-left: 50rpx;">
-                    <radio class='blue margin-left-sm text-small' value='2' checked="{{ledvt ==1}}"></radio> 控制差
+                    <radio class='blue margin-left-sm text-small' value='2' checked="{{ledvt ==2}}"></radio> 控制差
                 </view>
             </radio-group>
             <!-- 消化性溃疡病 -->
@@ -537,15 +537,15 @@
             <view class=" cu-bar bg-white " style="justify-content:flex-start;padding-left:15rpx;min-height:60rpx; ">
                 <text class='icon-title text-green'></text>贫血
             </view>
-            <radio-group style="justify-content:center;min-height:80rpx; " class="cu-form-group solid-bottom " bindchange="radioChange " data-type="anemia ">
+            <radio-group style="justify-content:center;min-height:80rpx; " class="cu-form-group solid-bottom" bindchange="radioChange" data-type="anemia">
                 <view>
-                    <radio class='blue text-small' value='1' checked="{{anemia==1}} "></radio> 轻度
+                    <radio class='blue text-small' value='1' checked="{{anemia==1}}"></radio> 轻度
                 </view>
                 <view>
-                    <radio class='blue margin-left-sm text-small' value='2' checked="{{anemia==2}} "></radio> 中度
+                    <radio class='blue margin-left-sm text-small' value='2' checked="{{anemia==2}}"></radio> 中度
                 </view>
                 <view>
-                    <radio class='blue margin-left-sm text-small' value='3' checked="{{anemia==3}} "></radio> 重度
+                    <radio class='blue margin-left-sm text-small' value='3' checked="{{anemia==3}}"></radio> 重度
                 </view>
             </radio-group>
             <!-- 吸烟史 -->

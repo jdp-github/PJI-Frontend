@@ -52,7 +52,7 @@ Page({
         cassTypePicker: ['全部类型', '置换术后', "占位器", "初次", "其他"],
         // 是否离心
         isCentri: 0,
-        isCentriPicker: ['离心后', '未离心'],
+        isCentriPicker: ['未离心', '离心后'],
         // 是否无菌
         isInfect: 0,
         isInfectPicker: ['非无菌保存', '无菌保存'],

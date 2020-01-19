@@ -668,6 +668,7 @@ Page({
             remark: info.remark,
             is_agree: info.is_agree,
             is_agree_pic: info.is_agree_pic,
+            is_agree_pic_upload: info.is_agree_pic.replace(constant.domain + "img/", ""),
 
             addAvatar: info.base_creator_avatar,
             updateAvatarArr: this.makeUpdateAvatar(info.base_editor_list),
