@@ -527,6 +527,11 @@ Page({
             this.assignPic(this.data.exterior_pics, true)
         }
     },
+    onCloseDrawer() {
+        this.setData({
+            modalName: null
+        })
+    },
 
     onPunctureClick() {
         if (!this.data.base_info) {
@@ -762,7 +767,7 @@ Page({
             le_testpaper_stoste: info.le_testpaper_stoste,
             le_testpaper_stoste_pic: this.getImgArr(info.le_testpaper_stoste_pics),
             le_testpaper_centrifugal: info.le_testpaper_centrifugal,
-            le_testpaper_stoste_pic: this.getImgArr(info.le_testpaper_centrifugal_pics),
+            le_testpaper_centrifugal_pic: this.getImgArr(info.le_testpaper_centrifugal_pics),
             joint_fluid_wbc: this.getDefaultNum(info.joint_fluid_wbc),
             pmn: this.getDefaultNum(info.pmn),
             neutrophil: parseInt(info.neutrophil),
@@ -898,6 +903,7 @@ Page({
         that.showLoading();
         wx.request({
             url: constant.basePath,
+            method: "POST",
             data: {
                 service: 'Case.EditCaseBein',
                 case_id: that.data.caseId,
@@ -907,7 +913,7 @@ Page({
                 fields_state: that.makeFiled()
             },
             header: {
-                'content-type': 'application/json'
+                'content-type': 'application/x-www-form-urlencoded'
             },
             success(res) {
                 console.log("Case.EditCaseBein:" + JSON.stringify(res))
@@ -1464,10 +1470,40 @@ Page({
                 pic6: pics[2] ? pics[2].pic : ""
             })
         } else {
+            let pic1 = "",
+                pic2 = "",
+                pic3 = ""
+            if (pics[0]) {
+                if (pics[0].pic) {
+                    pic1 = pics[0].pic
+                } else if (pics[0].pic1) {
+                    pic1 = pics[0].pic1
+                } else {
+                    pic1 = ""
+                }
+            }
+            if (pics[1]) {
+                if (pics[1].pic) {
+                    pic2 = pics[1].pic
+                } else if (pics[1].pic2) {
+                    pic2 = pics[1].pic2
+                } else {
+                    pic2 = ""
+                }
+            }
+            if (pics[2]) {
+                if (pics[2].pic) {
+                    pic3 = pics[2].pic
+                } else if (pics[2].pic3) {
+                    pic3 = pics[2].pic3
+                } else {
+                    pic3 = ""
+                }
+            }
             this.setData({
-                pic1: pics[0] ? pics[0].pic : "",
-                pic2: pics[1] ? pics[1].pic : "",
-                pic3: pics[2] ? pics[2].pic : ""
+                pic1: pic1,
+                pic2: pic2,
+                pic3: pic3
             })
         }
     },

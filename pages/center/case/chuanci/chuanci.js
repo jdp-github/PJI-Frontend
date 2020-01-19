@@ -426,6 +426,11 @@ Page({
             this.assignPic(this.data.exterior_pics, true)
         }
     },
+    onCloseDrawer() {
+        this.setData({
+            modalName: null
+        })
+    },
 
     onRelateClick(e) {
         if (!this.data.base_info) {
@@ -1201,10 +1206,40 @@ Page({
                 pic6: pics[2] ? pics[2].pic : ""
             })
         } else {
+            let pic1 = "",
+                pic2 = "",
+                pic3 = ""
+            if (pics[0]) {
+                if (pics[0].pic) {
+                    pic1 = pics[0].pic
+                } else if (pics[0].pic1) {
+                    pic1 = pics[0].pic1
+                } else {
+                    pic1 = ""
+                }
+            }
+            if (pics[1]) {
+                if (pics[1].pic) {
+                    pic2 = pics[1].pic
+                } else if (pics[1].pic2) {
+                    pic2 = pics[1].pic2
+                } else {
+                    pic2 = ""
+                }
+            }
+            if (pics[2]) {
+                if (pics[2].pic) {
+                    pic3 = pics[2].pic
+                } else if (pics[2].pic3) {
+                    pic3 = pics[2].pic3
+                } else {
+                    pic3 = ""
+                }
+            }
             this.setData({
-                pic1: pics[0] ? pics[0].pic : "",
-                pic2: pics[1] ? pics[1].pic : "",
-                pic3: pics[2] ? pics[2].pic : ""
+                pic1: pic1,
+                pic2: pic2,
+                pic3: pic3
             })
         }
     },

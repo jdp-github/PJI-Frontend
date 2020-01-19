@@ -195,7 +195,7 @@
                         <!-- 知情同意 -->
                         <view class="cu-form-group">
                             <view class='title'>知情同意</view>
-                            <input class='radius' value="{{is_agree==0?'无':'有'}}"></input>
+                            <input class='radius' disabled value="{{is_agree==0?'无':'有'}}"></input>
                         </view>
                         <!-- 知情同意附件 -->
                         <view class="cu-form-group  {{is_agree_state==1?'':'clock'}}">
