@@ -83,23 +83,37 @@
 }
 
 .calendar-past {
-    background-color: #f7f7f7;
+    background-color: #F1F4F8;
 }
 
 .cu-tag.badge {
     right: -44rpx;
     height: 22rpx;
     font-size: 18rpx;
+    position: static;
+    margin-bottom: 2rpx;
+}
+
+.multiple-0 {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right: -40rpx;
+    top: 0;
 }
 
 .cu-tag.badge.multiple-1 {
-    postion: relative;
-    top: 15rpx;
+    float: left;
+    margin-top: 5rpx;
 }
 
 .cu-tag.badge.multiple-2 {
     postion: relative;
     top: 39rpx;
+}
+
+.cu-tag+.cu-tag {
+    margin-left: 0rpx;
 }
 
 .event-pharmacy {

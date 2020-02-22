@@ -1,0 +1,30 @@
+var addon = {
+    calculateDrug: function(index, item) {
+        var currentIndex = index + 1;
+        if (item.is_start === 1 && item.is_end === 1) {
+            return 'event-offset-' + index + ' ' + 'event-offset-' + index + '-end-' + currentIndex;
+        }
+        if (item.is_start === 1)  {
+            return 'event-offset-' + currentIndex;
+        }
+        if (item.is_end === 1) {
+            return 'event-offset-' + index + '-end-' + currentIndex;
+        }
+        if (item.drug_name !== '') {
+            return 'event-offset-' + index + '-end-' + currentIndex;
+        }
+    },
+    calculateTagStartEnd: function(item) {
+        if (item.is_start !== 1) {
+            return 'tag-not-start'
+        }
+        if (item.is_end !== 1) {
+            return 'tag-not-end'
+        }
+    }
+}
+
+module.exports = {
+    calculateDrug: addon.calculateDrug
+    calculateTagStartEnd: addon.calculateTagStartEnd
+}

@@ -12,7 +12,9 @@ Page({
         StatusBar: app.globalData.StatusBar,
         CustomBar: app.globalData.CustomBar,
         Custom: app.globalData.Custom,
-        eventTopPosition: "80rpx"
+        eventTopPosition: "80rpx",
+        weekRow: [1,2,3,4,5,6,7],
+        weekList: [],
     },
     onHide: function () {
         this.setData({
@@ -23,6 +25,7 @@ Page({
         this.initLogic();
     },
     initLogic: async function () {
+        this.requestCalendar();
     },
     loadProgress: function () {
         if (this.data.loadProgress < 96) {
@@ -68,4 +71,35 @@ Page({
             url: '../auth/auth'
         });
     },
+    requestCalendar: function () {
+        let that = this;
+        wx.request({
+            url: constant.basePath,
+            data: {
+                service: 'Case.Calendar',
+                case_id: 248,
+                month: '2020-01',
+                openid: 'oBwtp5EKSdNIL8jXX86k__ITR6vQ'
+            },
+            header: {
+                'content-type': 'application/json'
+            },
+            success(res) {
+                console.log("Case.GetDoctorList:" + JSON.stringify(res))
+                if (res.data.data.code == constant.response_success) {
+                    that.setData({
+                            weekList: res.data.data.list
+                        }
+                    )
+                } else {
+                    that.showToast(res.data.msg);
+                }
+
+            },
+            fail(res) {
+                that.hideLoading();
+                that.showToast(res.data.msg);
+            }
+        });
+    }
 });
