@@ -11,7 +11,6 @@
 </view>
 <scroll-view scroll-y class="indexes" scroll-into-view="indexes-{{listCurID}}" style='height:calc(100vh - {{CustomBar}}px - 50px)' scroll-with-animation="true" enable-back-to-top="true">
 	<view class="calendar-view margin-top padding">
-        
 		<!-- 日历表头 -->
 		<view class="calendar-header flex-column">
 			<view class="flex-cell flex-row">
@@ -27,20 +26,20 @@
 		<view wx:for="{{weekList}}" wx:key="day" wx:for-item="item" class="calendar-body flex-column">
 			<view class="flex-cell flex-row" style="position: relative">
 				<view wx:for="{{item.week_line}}" wx:key="index" wx:for-item="i" class="flex-cell" class="flex-cell flex-row solid-border-no-right padding-only-horizon date-number {{i.is_day_flag==2?'calendar-past':''}}">
-					<view class="cu-avatar sm radius {{i.is_day_flag==1?'bg-olive':''}}">
-                        {{ i.day }}
+                <view class="cu-avatar sm radius {{i.is_day_flag==1?'bg-olive':''}}">
+                {{ i.day }}
                         <view class="multiple-0">
-                            <view class="cu-tag badge sm" wx:if="{{i.is_create_case === 1}}">建档</view>
-							<view class="cu-tag badge sm" wx:if="{{i.is_bein === 1}}">入院</view>
-							<view class="cu-tag badge sm" wx:if="{{i.is_puncture === 1}}">穿刺</view>
-                        </view>
-					</view>
-					<view wx:for="{{i.medication}}" wx:key="item_id" wx:for-item="j" wx:for-index="idx" class="{{addon.calculateDrug(idx, j)}}" style="top: calc({{eventTopPosition}} + {{34 * idx}}rpx)">
-						<view class="event-pharmacy bg-red sm {{addon.calculateTagStartEnd(j)}}">{{j.drug_name}}</view>
-					</view>
-				</view>
+				<view class="cu-tag badge sm" wx:if="{{i.is_create_case === 1}}">建档</view>
+				<view class="cu-tag badge sm" wx:if="{{i.is_bein === 1}}">入院</view>
+				<view class="cu-tag badge sm" wx:if="{{i.is_puncture === 1}}">穿刺</view>
 			</view>
 		</view>
+		<view wx:for="{{i.medication}}" wx:key="item_id" wx:for-item="j" wx:for-index="idx" class="{{addon.calculateDrug(index, j)}}" style="top: calc({{eventTopPosition}} + {{34 * idx}}rpx)">
+			<view class="event-pharmacy bg-red sm ">{{j.drug_name}}</view>
+		</view>
+	</view>
+	</view>
+	</view>
 	</view>
 </scroll-view>
 <view class='load-progress {{loadProgress!=0?"show":"hide"}}' style="top:{{CustomBar}}px;">
