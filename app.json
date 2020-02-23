@@ -1,6 +1,5 @@
 {
     "pages": [
-        "pages/calendar/calendar",
         "pages/auth/auth",
         "pages/person/specimenAuth/specimenAuth",
         "pages/center/case/yongyao/yongyao",

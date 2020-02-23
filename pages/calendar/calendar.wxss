@@ -108,7 +108,7 @@
 }
 
 .cu-tag.badge.multiple-2 {
-    postion: relative;
+    position: relative;
     top: 39rpx;
 }
 

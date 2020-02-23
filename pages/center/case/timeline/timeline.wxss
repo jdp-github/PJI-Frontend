@@ -1,5 +1,7 @@
 @import "../../../../font-awesome.wxss";
 
+/* timeline */
+
 .title-container {
     display: flex;
     flex-direction: row;
@@ -59,4 +61,367 @@
 .timeline-item-content {
     display: flex;
     flex-direction: column;
+}
+
+/* calendar */
+
+.cu-list.menu>.cu-item .content {
+    line-height: 1.1em;
+    flex: 1;
+    font-size: 30rpx;
+}
+
+.filter-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding-left: 20rpx;
+    padding-right: 20rpx;
+    font-size: 35rpx;
+    margin-bottom: 25rpx;
+}
+
+.margin-tab-bottom {
+    margin-bottom: 120rpx;
+}
+
+.leader-text {
+    width: 100rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.calendar-view {
+    width: 100%;
+    font-size: 22rpx;
+    color: #626262;
+}
+
+.calendar-header {
+    width: 100%;
+    font-weight: 700;
+    background-color: #fff;
+}
+
+.calendar-header .solid-border-no-right {
+    border-top: 1rpx solid #ddd;
+    border-bottom: 1rpx solid #ddd;
+    border-left: 1rpx solid #ddd;
+}
+
+.calendar-header .solid-border {
+    border: 1rpx solid #ddd;
+}
+
+.calendar-header .padding-only-horizon {
+    padding: 0rpx 8rpx;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.flex-cell {
+    flex: 1;
+}
+
+.calendar-body {
+    width: 100%;
+    font-size: 22rpx;
+    background-color: #fff;
+}
+
+.calendar-body .solid-border-no-right {
+    border-bottom: 1rpx solid #ddd;
+    border-left: 1rpx solid #ddd;
+}
+
+.calendar-body .solid-border {
+    border-bottom: 1rpx solid #ddd;
+    border-left: 1rpx solid #ddd;
+    border-right: 1rpx solid #ddd;
+}
+
+.calendar-body .date-number {
+    padding: 8rpx 12rpx 8rpx 4rpx;
+    justify-content: left;
+    align-items: normal;
+    height: 184rpx;
+}
+
+.calendar-past {
+    background-color: #f1f4f8;
+}
+
+.cu-tag.badge {
+    right: -44rpx;
+    height: 22rpx;
+    font-size: 18rpx;
+    position: static;
+    margin-bottom: 2rpx;
+}
+
+.multiple-0 {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right: -40rpx;
+    top: 0;
+}
+
+.cu-tag.badge.multiple-1 {
+    float: left;
+    margin-top: 5rpx;
+}
+
+.cu-tag.badge.multiple-2 {
+    position: relative;
+    top: 39rpx;
+}
+
+.cu-tag+.cu-tag {
+    margin-left: 0rpx;
+}
+
+.event-pharmacy {
+    border-radius: 14rpx;
+    font-size: 18rpx;
+    padding: 2rpx 4rpx;
+    text-align: center;
+}
+
+/** ====  end at 7  ==== **/
+
+.event-offset-0 {
+    position: absolute;
+    top: 80rpx;
+    left: 0;
+    width: calc((100%/7) * 7);
+}
+
+.event-offset-1 {
+    position: absolute;
+    top: 80rpx;
+    left: calc(100%/7);
+    width: calc((100%/7) * 6);
+}
+
+.event-offset-2 {
+    position: absolute;
+    top: 80rpx;
+    left: calc(100%/7 + 100%/7);
+    width: calc((100%/7) * 5);
+}
+
+.event-offset-3 {
+    position: absolute;
+    top: 80rpx;
+    left: calc(100%/7 + (100%/7) * 2);
+    width: calc((100%/7) * 4);
+}
+
+.event-offset-4 {
+    position: absolute;
+    top: 80rpx;
+    left: calc(100%/7 + (100%/7) * 3);
+    width: calc((100%/7) * 3);
+}
+
+.event-offset-5 {
+    position: absolute;
+    top: 80rpx;
+    left: calc(100%/7 + (100%/7) * 4);
+    width: calc((100%/7) * 2);
+}
+
+.event-offset-6 {
+    position: absolute;
+    top: 80rpx;
+    left: calc(100%/7 + (100%/7) * 5);
+    width: calc(100%/7);
+}
+
+/** ====  end at 6  ==== **/
+
+.event-offset-0-end-6 {
+    position: absolute;
+    top: 80rpx;
+    left: 0;
+    width: calc((100%/7) * 6);
+}
+
+.event-offset-1-end-6 {
+    position: absolute;
+    top: 80rpx;
+    left: calc(100%/7);
+    width: calc((100%/7) * 5);
+}
+
+.event-offset-2-end-6 {
+    position: absolute;
+    top: 80rpx;
+    left: calc(100%/7 + 100%/7);
+    width: calc((100%/7) * 4);
+}
+
+.event-offset-3-end-6 {
+    position: absolute;
+    top: 80rpx;
+    left: calc(100%/7 + (100%/7) * 2);
+    width: calc((100%/7) * 3);
+}
+
+.event-offset-4-end-6 {
+    position: absolute;
+    top: 80rpx;
+    left: calc(100%/7 + (100%/7) * 3);
+    width: calc((100%/7) * 2);
+}
+
+.event-offset-5-end-6 {
+    position: absolute;
+    top: 80rpx;
+    left: calc(100%/7 + (100%/7) * 4);
+    width: calc((100%/7) * 1);
+}
+
+/** ====  end at 5  ==== **/
+
+.event-offset-0-end-5 {
+    position: absolute;
+    top: 80rpx;
+    left: 0;
+    width: calc((100%/7) * 5);
+}
+
+.event-offset-1-end-5 {
+    position: absolute;
+    top: 80rpx;
+    left: calc(100%/7);
+    width: calc((100%/7) * 4);
+}
+
+.event-offset-2-end-5 {
+    position: absolute;
+    top: 80rpx;
+    left: calc(100%/7 + 100%/7);
+    width: calc((100%/7) * 3);
+}
+
+.event-offset-3-end-5 {
+    position: absolute;
+    top: 80rpx;
+    left: calc(100%/7 + (100%/7) * 2);
+    width: calc((100%/7) * 2);
+}
+
+.event-offset-4-end-5 {
+    position: absolute;
+    top: 80rpx;
+    left: calc(100%/7 + (100%/7) * 3);
+    width: calc((100%/7) * 1);
+}
+
+/** ====  end at 4  ==== **/
+
+.event-offset-0-end-4 {
+    position: absolute;
+    top: 80rpx;
+    left: 0;
+    width: calc((100%/7) * 4);
+}
+
+.event-offset-1-end-4 {
+    position: absolute;
+    top: 80rpx;
+    left: calc(100%/7);
+    width: calc((100%/7) * 3);
+}
+
+.event-offset-2-end-4 {
+    position: absolute;
+    top: 80rpx;
+    left: calc(100%/7 + 100%/7);
+    width: calc((100%/7) * 2);
+}
+
+.event-offset-3-end-4 {
+    position: absolute;
+    top: 80rpx;
+    left: calc(100%/7 + (100%/7) * 2);
+    width: calc((100%/7) * 1);
+}
+
+/** ====  end at 3  ==== **/
+
+.event-offset-0-end-3 {
+    position: absolute;
+    top: 80rpx;
+    left: 0;
+    width: calc((100%/7) * 3);
+}
+
+.event-offset-1-end-3 {
+    position: absolute;
+    top: 80rpx;
+    left: calc(100%/7);
+    width: calc((100%/7) * 2);
+}
+
+.event-offset-2-end-3 {
+    position: absolute;
+    top: 80rpx;
+    left: calc(100%/7 + 100%/7);
+    width: calc((100%/7) * 1);
+}
+
+/** ====  end at 2  ==== **/
+
+.event-offset-0-end-2 {
+    position: absolute;
+    top: 80rpx;
+    left: 0;
+    width: calc((100%/7) * 2);
+}
+
+.event-offset-1-end-2 {
+    position: absolute;
+    top: 80rpx;
+    left: calc(100%/7);
+    width: calc((100%/7) * 1);
+}
+
+/** ====  end at 1  ==== **/
+
+.event-offset-0-end-1 {
+    position: absolute;
+    top: 80rpx;
+    left: 0;
+    width: calc((100%/7) * 1);
+}
+
+/** ==== tag not end ==== **/
+
+.tag-not-end {
+    border-bottom-right-radius: unset;
+    border-top-right-radius: unset;
+}
+
+/** ==== tag not start ==== **/
+
+.tag-not-start {
+    border-bottom-left-radius: unset;
+    border-top-left-radius: unset;
 }

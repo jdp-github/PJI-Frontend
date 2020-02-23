@@ -16,11 +16,23 @@ Page({
         tabList: ["要素速览", "诊疗日历"],
         currTab: 0,
         scrollLeft: 0,
-
+        // ---------------- timeline ---------------- //
         isIn: 0,
         caseInfo: '',
         timeLineList: [],
-        typePicker: ["基本信息", "诊断穿刺", "入院手术", "抗生素治疗开始", "门诊随访", "抗生素治疗终止"]
+        typePicker: ["基本信息", "诊断穿刺", "入院手术", "抗生素治疗开始", "门诊随访", "抗生素治疗终止"],
+        // ---------------- calendar ---------------- //
+        calendarDate: util.getNowFormatMonth(),
+        eventTopPosition: "80rpx",
+        weekRow: [1, 2, 3, 4, 5, 6, 7],
+        weekList: [],
+    },
+
+    tabSelect(e) {
+        this.setData({
+            currTab: e.currentTarget.dataset.id,
+            scrollLeft: (e.currentTarget.dataset.id - 1) * 60
+        })
     },
 
     onLoad: function(options) {
@@ -36,9 +48,11 @@ Page({
     initData() {
         this.loadProgress();
         this.requestTimeLine();
+        this.requestCalendar(this.data.calendarDate);
         this.completeProgress();
     },
 
+    // ---------------- timeline begin ---------------- //
     requestTimeLine: function() {
         let that = this;
         wx.request({
@@ -137,6 +151,47 @@ Page({
         }
         return JSON.stringify(obj)
     },
+
+    // ---------------- timeline end ---------------- //
+
+    // ---------------- calendar begin ---------------- //
+    requestCalendar: function(month) {
+        let that = this;
+        wx.request({
+            url: constant.basePath,
+            data: {
+                service: 'Case.Calendar',
+                case_id: that.data.caseInfo.case_id,
+                month: month,
+                openid: app.globalData.openid
+            },
+            header: {
+                'content-type': 'application/json'
+            },
+            success(res) {
+                console.log("Case.GetDoctorList:" + JSON.stringify(res))
+                if (res.data.data.code == constant.response_success) {
+                    that.setData({
+                        weekList: res.data.data.list
+                    })
+                } else {
+                    that.showToast(res.data.data.msg);
+                }
+
+            },
+            fail(res) {
+                that.hideLoading();
+                that.showToast(res.data.msg);
+            }
+        });
+    },
+    CalendarDateChange(e) {
+        this.setData({
+            calendarDate: e.detail.value
+        })
+        this.requestCalendar(this.data.calendarDate);
+    },
+    // ---------------- calendar end ---------------- //
 
     onUnload() {
         var pages = getCurrentPages();

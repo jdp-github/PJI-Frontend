@@ -13,21 +13,21 @@ Page({
         CustomBar: app.globalData.CustomBar,
         Custom: app.globalData.Custom,
         eventTopPosition: "80rpx",
-        weekRow: [1,2,3,4,5,6,7],
+        weekRow: [1, 2, 3, 4, 5, 6, 7],
         weekList: [],
     },
-    onHide: function () {
+    onHide: function() {
         this.setData({
             modalName: ''
         });
     },
-    onLoad: function () {
+    onLoad: function() {
         this.initLogic();
     },
-    initLogic: async function () {
+    initLogic: async function() {
         this.requestCalendar();
     },
-    loadProgress: function () {
+    loadProgress: function() {
         if (this.data.loadProgress < 96) {
             this.setData({
                 loadProgress: this.data.loadProgress + 3
@@ -43,35 +43,35 @@ Page({
             });
         }
     },
-    completeProgress: function () {
+    completeProgress: function() {
         this.setData({
             loadProgress: 100
         });
     },
-    showToast: function (msg) {
+    showToast: function(msg) {
         wx.showToast({
             icon: 'none',
             title: msg,
         });
     },
-    showLoading: function () {
+    showLoading: function() {
         this.setData({
             loadModal: true
         });
     },
-    hideLoading: function () {
+    hideLoading: function() {
         setTimeout(() => {
             this.setData({
                 loadModal: false
             });
         }, 1500);
     },
-    backToAuth: function () {
+    backToAuth: function() {
         wx.navigateTo({
             url: '../auth/auth'
         });
     },
-    requestCalendar: function () {
+    requestCalendar: function() {
         let that = this;
         wx.request({
             url: constant.basePath,
@@ -88,9 +88,8 @@ Page({
                 console.log("Case.GetDoctorList:" + JSON.stringify(res))
                 if (res.data.data.code == constant.response_success) {
                     that.setData({
-                            weekList: res.data.data.list
-                        }
-                    )
+                        weekList: res.data.data.list
+                    })
                 } else {
                     that.showToast(res.data.msg);
                 }
