@@ -41,7 +41,7 @@ Page({
         currNoticeTitle: '',
         currNoticeContent: "",
         currNoticeId: "",
-        currIsTop: false,
+        // currIsTop: false,
         currNoticeDate: '',
         // 0:查看，1:新增，2:编辑
         noticeState: VIEW_STATE,
@@ -238,7 +238,7 @@ Page({
             currNoticeTitle: "",
             currNoticeId: "",
             currAvatar: app.globalData.avatarUrl,
-            currIsTop: false,
+            // currIsTop: false,
         })
     },
     addNotice() {
@@ -281,7 +281,7 @@ Page({
             currNoticeTitle: e.currentTarget.dataset.item.title,
             currNoticeId: e.currentTarget.dataset.item.id,
             currAvatar: e.currentTarget.dataset.item.staff_avatar,
-            currIsTop: e.currentTarget.dataset.item.is_top == 1
+            // currIsTop: e.currentTarget.dataset.item.is_top == 1
         })
     },
     editNotice() {
@@ -296,7 +296,7 @@ Page({
                 notice_id: that.data.currNoticeId,
                 content: that.data.currNoticeContent,
                 title: that.data.currNoticeTitle,
-                is_top: that.data.currIsTop ? 1 : 0
+                // is_top: that.data.currIsTop ? 1 : 0
             },
             header: {
                 'content-type': 'application/json'
@@ -327,18 +327,19 @@ Page({
             currNoticeTitle: e.currentTarget.dataset.item.title,
             currNoticeId: e.currentTarget.dataset.item.id,
             currAvatar: e.currentTarget.dataset.item.staff_avatar,
-            currIsTop: e.currentTarget.dataset.item.is_top == 1
+            // currIsTop: e.currentTarget.dataset.item.is_top == 1
         })
     },
     onTopChange(e) {
         let that = this;
+        let item = e.target.dataset.item;
         wx.request({
             url: constant.basePath,
             data: {
                 service: 'Notice.SetTop',
                 openid: app.globalData.openid,
-                center_id: that.data.centerId,
-                notice_id: that.data.currNoticeId,
+                center_id: item.center_id,
+                notice_id: item.id,
                 is_top: e.detail.value ? 1 : 0
             },
             header: {
@@ -347,9 +348,7 @@ Page({
             success(res) {
                 console.log("Notice.SetTop:" + JSON.stringify(res))
                 if (res.data.data.code == constant.response_success) {
-                    that.setData({
-                        currIsTop: e.detail.value
-                    });
+                    that.refresh()
                 } else {
                     that.showToast(res.data.data.msg);
                 }
@@ -370,7 +369,7 @@ Page({
             currNoticeTitle: '',
             currNoticeContent: '',
             currNoticeId: '',
-            currIsTop: false,
+            // currIsTop: false,
             currNoticeDate: '',
             noticeState: VIEW_STATE
         })
@@ -529,8 +528,7 @@ Page({
                     that.showToast(res.data.msg);
                 }
             },
-            fail(res) {
-            }
+            fail(res) {}
         });
     },
     showModal: function(e) {

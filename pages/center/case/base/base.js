@@ -44,6 +44,7 @@ Page({
         createDate: '',
         sex: 0,
         sexPicker: ['请选择', '男', '女'],
+        birthDay: '',
         age: '',
         height: '',
         weight: '',
@@ -69,7 +70,7 @@ Page({
         last_operation_date: util.getNowFormatDate(),
         // 已翻修次数
         repair_count: 0,
-        repair_count_picker: ["请选择", "1", "2", "3", "4", "5", "6", "7", "8", "9", ],
+        repair_count_picker: ["请选择", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ],
         // 本次症状出现日期
         duration_symptoms_date: util.getNowFormatDate(),
         // 本次发病可能诱因
@@ -121,6 +122,18 @@ Page({
         this.setData({
             createDate: e.detail.value
         });
+        this.updateAge();
+    },
+    onBirthdayeChange: function(e) {
+        this.setData({
+            birthday: e.detail.value
+        });
+        this.updateAge();
+    },
+    updateAge() {
+        this.setData({
+            age: new Date(this.data.createDate).getFullYear() - new Date(this.data.birthday).getFullYear()
+        })
     },
     onSexChange: function(e) {
         this.setData({
@@ -619,6 +632,8 @@ Page({
             side: parseInt(info.side),
             part: parseInt(info.part),
             createDate: this.data.isCreate ? util.getNowFormatDate() : util.formatTime(info.create_time, 'Y-M-D'),
+            // TODO
+            birthday: this.data.isCreate ? util.getNowFormatDate() : util.getNowFormatDate(),
             sex: parseInt(info.sex),
             age: this.getDefaultNum(info.age),
             height: this.getDefaultNum(info.height),

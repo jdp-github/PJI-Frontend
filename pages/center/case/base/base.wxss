@@ -123,3 +123,6 @@ page, .page {
     background-color: #fcd9da;
 }
 
+.rightArrow::after {
+    content: " \e6a3 ";
+}

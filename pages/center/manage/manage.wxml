@@ -58,7 +58,8 @@
                     </view>
                 </view>
             </view>
-            <view class='move' style="width:200rpx">
+            <view class='move' style="width:330rpx">
+                <view class='bg-yellow' style="color:white" data-item="{{item}}" catchtap="onTopChange">置顶</view>
                 <view class='bg-olive' style="background:#0081ff" data-item="{{item}}" catchtap="onEdit">编辑</view>
                 <view class='bg-red' data-item="{{item}}" catchtap='onDele' hidden='true'>删除</view>
             </view>
@@ -71,8 +72,8 @@
     <block wx:for="{{staffList}}" wx:key="id" wx:for-index="key" wx:for-item="value">
         <view class='padding padding-top-xs padding-bottom-xs indexItem-{{key}}' id="indexes-{{key}}" data-index="{{key}}">{{key}}</view>
         <view class="cu-list menu menu-avatar no-padding">
-            <view style="display:flex;flex-direction:row;justify-content:flex-start;align-items:center;height:100%;padding-top:10px;padding-bottom:10px" class="cu-item {{modalName=='move-box-'+ item.staff_id?'move-cur':''}}" wx:for="{{value}}" wx:key="staff_id"
-                bindtouchstart='ListTouchStart' bindtouchmove='ListTouchMove' bindtouchend='ListTouchEnd' data-target="move-box-{{item.staff_id}}" bindtap="gotoMember" data-item="{{item}}">
+            <view style="display:flex;flex-direction:row;justify-content:flex-start;align-items:center;height:100%;padding-top:10px;padding-bottom:10px" class="cu-item {{modalName=='move-box-'+ item.staff_id?'move-cur':''}}" wx:for="{{value}}" wx:key="staff_id" bindtouchstart='ListTouchStart'
+                bindtouchmove='ListTouchMove' bindtouchend='ListTouchEnd' data-target="move-box-{{item.staff_id}}" bindtap="gotoMember" data-item="{{item}}">
                 <view class="cu-avatar round lg" style="background-image:url({{item.staff_avatar}});"></view>
                 <view style="display:flex;flex-direction:row;align-items:flex-end;width:100%">
                     <view class="member-item-container" style="width:20%">
@@ -121,10 +122,10 @@
             <view class="cu-form-group" style="display:flex;flex-direction:row;justify-content:space-between;align-items:center;">
                 <view class="cu-avatar round xl bg-gray margin-xs" style="background-image:url({{currAvatar}});"></view>
                 <view>{{currNoticeDate}}</view>
-                <view style="display:flex;flex-direction:row;">
+                <!-- <view style="display:flex;flex-direction:row;">
                     <view class='title'>置顶</view>
-                    <switch class='green sm' disabled="{{noticeState == 0}}" bindchange="onTopChange" checked='{{currIsTop}}'></switch>
-                </view>
+                    <switch class='green sm'  bindchange="onTopChange" checked='{{currIsTop}}'></switch>
+                </view> -->
             </view>
         </view>
         <view class="cu-bar bg-white justify-end" wx:if="{{noticeState != 0}}">

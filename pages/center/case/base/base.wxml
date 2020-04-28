@@ -96,8 +96,16 @@
                             </picker>
                         </view>
                         <view class="cu-form-group">
+                            <view class='title'>出生年月</view>
+                            <picker mode="date" value="{{birthday}}" start="1900-01-01" end="2050-12-31" bindchange="onBirthdayeChange">
+                                <view class="picker">
+                                    {{birthday}}
+                                </view>
+                            </picker>
+                        </view>
+                        <view class="cu-form-group disabled">
                             <view class='title'>年龄</view>
-                            <input placeholder="请输入年龄" class='radius' bindinput="onAgeInput" type="digit" value="{{age}}"></input>
+                            <input placeholder="请输入年龄" class='radius' bindinput="onAgeInput" type="digit" value="{{age}}" disabled></input>
                         </view>
                         <view class="cu-form-group">
                             <view class='title'>身高(m)</view>
@@ -189,11 +197,11 @@
                             <view class='title'>本次发病可能诱因</view>
                             <input placeholder='请输入文字, 不适用填NA' class='radius' bindinput="onThis_time_causeInput" value="{{this_time_cause}}"></input>
                         </view>
-                        <view class="cu-form-group" bindtap="onShowDrawer">
+                        <view class="cu-form-group rightArrow" bindtap="onShowDrawer">
                             <view class='title'>合并症</view>
                         </view>
                         <!-- 知情同意 -->
-                        <view class="cu-form-group">
+                        <view class="cu-form-group disabled">
                             <view class='title'>知情同意</view>
                             <input class='radius' disabled value="{{is_agree==0?'无':'有'}}"></input>
                         </view>

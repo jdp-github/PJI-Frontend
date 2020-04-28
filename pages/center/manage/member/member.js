@@ -98,7 +98,7 @@ Page({
 
     onCall(e) {
         wx.makePhoneCall({
-            phoneNumber: '13898199268',
+            phoneNumber: this.data.info.staff_phone,
             success() {},
             fail() {}
         })
@@ -107,7 +107,7 @@ Page({
     onCopy(e) {
         wx.setClipboardData({
             //准备复制的数据
-            data: "123321",
+            data: this.data.info.staff_email && this.data.info.staff_email.length > 0 ? this.data.info.staff_email : '',
             success: function(res) {
                 wx.showToast({
                     title: '复制成功',
