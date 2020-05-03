@@ -297,23 +297,23 @@ Page({
         })
     },
 
-    onPuncture_summarySwitchChange: function(e) {
-        this.setData({
-            puncture_summary: e.detail.value
-        });
+    // onPuncture_summarySwitchChange: function(e) {
+    //     this.setData({
+    //         puncture_summary: e.detail.value
+    //     });
 
-        let state = this.data.puncture_summary ? 2 : 1
-        let stateValue = this.data.assay_check ? "clock-o" : "pencil"
-        this.setData({
-            present_result: 0,
-            present_result_state: state,
-            present_result_state_value: stateValue,
-            thistime_result: '',
-            thistime_result_state: state,
-            is_remain_sample: 1,
-            is_remain_sample_state: state,
-        })
-    },
+    //     let state = this.data.puncture_summary ? 2 : 1
+    //     let stateValue = this.data.assay_check ? "clock-o" : "pencil"
+    //     this.setData({
+    //         present_result: 0,
+    //         present_result_state: state,
+    //         present_result_state_value: stateValue,
+    //         thistime_result: '',
+    //         thistime_result_state: state,
+    //         is_remain_sample: 1,
+    //         is_remain_sample_state: state,
+    //     })
+    // },
 
     onPickerChange(e) {
         let type = e.currentTarget.dataset.type

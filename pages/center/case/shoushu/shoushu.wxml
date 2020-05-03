@@ -229,6 +229,22 @@
                         </picker>
                         <i class="fa fa-{{neutrophil_state_value}} fa-2x" data-state="{{neutrophil_state}}" data-style="picker" data-type="neutrophil_state" bindtap="on3StateChange" style="pointer-events:{{operation_during_check?'none':''}}"></i>
                     </view>
+                    <!-- 其他检测 -->
+                    <view class="cu-form-group {{joint_fluid_wbc_state==0?'disabled':joint_fluid_wbc_state==2?'clock':''}}">
+                        <view style='display:flex;flex-direction: column; '>
+                            <view class='title' style='text-align:left'>其他检测</view>
+                            <input placeholder="请输入文字" class='radius' style='width: 350rpx;text-align:left;' bindinput="onInput" disabled='{{joint_fluid_wbc_state!=1}}' value='{{joint_fluid_wbc}}' data-type="joint_fluid_wbc"></input>
+                        </view>
+                        <i class="fa fa-{{joint_fluid_wbc_state_value}} fa-2x" data-state="{{joint_fluid_wbc_state}}" data-style="input" data-type="joint_fluid_wbc_state" bindtap="on3StateChange" style="pointer-events:{{operation_during_check?'none':''}}"></i>
+                    </view>
+                    <!-- 术中微生物检测 -->
+                    <view class='cu-bar solid-bottom solid-top bg-white'>
+                        <view class='action'>
+                            <text class='icon-title text-green'></text>术中微生物检测</view>
+                        <view>延后录入
+                            <switch class='green sm margin-right' bindchange="onOperation_during_checkSwitchChange" style='margin-left: 15rpx;' checked='{{operation_during_check}}'></switch>
+                        </view>
+                    </view>
                     <!-- 术中组织培养1 -->
                     <view class="cu-form-group {{tissue_culture1_state==0?'disabled':tissue_culture1_state==2?'clock':''}}">
                         <view style='display:flex;flex-direction: column; '>
@@ -484,6 +500,16 @@
                         </picker>
                         <i class="fa fa-{{leave_hospital_date_state_value}} fa-2x" data-state="{{leave_hospital_date_state}}" data-style="date" data-type="leave_hospital_date_state" bindtap="on3StateChange" style="pointer-events:{{leave_summary?'none':''}}"></i>
                     </view>
+                    <!-- 临床判定 -->
+                    <view class="cu-form-group {{msis_state==0?'disabled':msis_state==2?'clock':''}}">
+                        <view class='title'>临床判定</view>
+                        <picker bindchange="onPickerChange" value="{{msis}}" range="{{msis_picker}}" disabled="{{msis_state==2}}" data-type="msis">
+                            <view class="picker">
+                                {{msis_picker[msis]}}
+                            </view>
+                        </picker>
+                        <i class="fa fa-{{msis_state_value}} fa-2x" data-state="{{msis_state}}" data-style="picker" data-type="msis_state" bindtap="on3StateChange" style="pointer-events:{{leave_summary?'none':''}}"></i>
+                    </view>
                     <!-- 2014MSIS诊断标准 -->
                     <view class="cu-form-group {{msis_state==0?'disabled':msis_state==2?'clock':''}}">
                         <view class='title'>2014MSIS诊断标准</view>
@@ -504,11 +530,11 @@
                         </picker>
                         <i class="fa fa-{{icm_state_value}} fa-2x" data-state="{{icm_state}}" data-style="picker" data-type="icm_state" bindtap="on3StateChange" style="pointer-events:{{leave_summary?'none':''}}"></i>
                     </view>
-                    <!-- 住院期间特殊事件 -->
+                    <!-- 病原微生物最终判定 -->
                     <view class="cu-form-group {{special_event_state==0?'disabled':special_event_state==2?'clock':''}}">
                         <view style='display:flex;flex-direction: column; '>
-                            <view class='title' style='text-align:left'>住院期间特殊事件</view>
-                            <input placeholder="请输入文字" class='radius' style='width: 350rpx;text-align:left;' bindinput="onInput" value='{{special_event}}' disabled="{{special_event_state==2}}" data-type="special_event"></input>
+                            <view class='title' style='text-align:left'>病原微生物最终判定</view>
+                            <input placeholder="请输入具体细菌名称，或菌培养阴性" class='radius' style='width: 350rpx;text-align:left;' bindinput="onInput" value='{{special_event}}' disabled="{{special_event_state==2}}" data-type="special_event"></input>
                         </view>
                         <view>
                             <i class="fa fa-{{special_event_state_value}} fa-2x" data-state="{{special_event_state}}" data-style="input" data-type="special_event_state" bindtap="on3StateChange" style="pointer-events:{{leave_summary?'none':''}}"></i>
@@ -524,6 +550,11 @@
                         </picker>
                         <i class="fa fa-{{antibiotic_scene_state_value}} fa-2x" data-state="{{antibiotic_scene_state}}" data-style="picker" data-type="antibiotic_scene_state" bindtap="on3StateChange" style="pointer-events:{{leave_summary?'none':''}}"></i>
                     </view>
+                    <!-- 抗生素治疗方案 -->
+                    <view class="cu-form-group solid-bottom">
+                        <view class='title' style='text-align:left'>抗生素治疗方案</view>
+                        <i class="fa fa-angle-right fa-2x"></i>
+                    </view>
                     <!-- 细菌名称 -->
                     <view class="cu-form-group {{germ_name_state==0?'disabled':germ_name_state==2?'clock':''}}">
                         <view style='display:flex;flex-direction: column; '>
@@ -534,10 +565,7 @@
                             <i class="fa fa-{{germ_name_state_value}} fa-2x" data-state="{{germ_name_state}}" data-style="input" data-type="germ_name_state" bindtap="on3StateChange" style="pointer-events:{{leave_summary?'none':''}}"></i>
                         </view>
                     </view>
-                    <!-- 抗生素治疗方案 -->
-                    <view class="cu-form-group solid-bottom">
-                        <view class='title' style='text-align:left'>抗生素治疗方案</view>
-                    </view>
+
                 </view>
             </view>
             <!-- 底部按钮 -->

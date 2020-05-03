@@ -122,14 +122,15 @@
                         <!-- 病状体征 -->
                         <view class="cu-form-group {{base_info?'clock':''}}" bindtap="onShowDrawer">
                             <view class='title'>病状体征</view>
+                            <i class="fa fa-angle-right fa-2x"></i>
                         </view>
                     </view>
                 </view>
             </view>
-            <!-- 检查化验 -->
+            <!-- 外周血检测 -->
             <view class='cu-bar solid-bottom solid-top bg-white'>
                 <view class='action'>
-                    <text class='icon-title text-green'></text>检查化验</view>
+                    <text class='icon-title text-green'></text>外周血检测</view>
                 <view>延后录入
                     <switch class='green sm margin-right' bindchange="onCheckDelaySwitchChange" style='margin-left: 15rpx;' checked='{{assay_check}}'></switch>
                 </view>
@@ -184,6 +185,14 @@
                         </view>
                         <i class="fa fa-{{fibrinogen_state_value}} fa-2x" data-type="fibrinogen_state" data-style="input" data-state="{{fibrinogen_state}}" style="pointer-events:{{assay_check?'none':''}}" bindtap="on3StateChange"></i>
                     </view>
+                    <!-- 关节液检测 -->
+                    <view class='cu-bar solid-bottom solid-top bg-white'>
+                        <view class='action'>
+                            <text class='icon-title text-green'></text>关节液检测</view>
+                        <view>延后录入
+                            <switch class='green sm margin-right' bindchange="onCheckDelaySwitchChange" style='margin-left: 15rpx;' checked='{{assay_check}}'></switch>
+                        </view>
+                    </view>
                     <!-- 关节液描述 -->
                     <view class="cu-form-group {{joint_fluid_desc_state==2?'clock':''}}">
                         <view style='display:flex;flex-direction: column; '>
@@ -205,6 +214,23 @@
                             <view class='title' style='text-align:left'>抽出灌洗液总量(ml)</view>
                             <input placeholder="请输入数字" class='radius' style='width: 350rpx;text-align:left;' type='digit' bindinput="onInput" value='{{rinse_lavage_volume}}' disabled="{{rinse_lavage_volume_state==2}}" data-type="rinse_lavage_volume"></input>
                         </view>
+                    </view>
+                    <!-- 打入每个培养瓶液体性质 -->
+                    <view class="cu-form-group {{culture_type_state==2?'clock':''}}">
+                        <view class='title'>打入每个培养瓶液体性质</view>
+                        <picker bindchange="onPickerChange" value="{{culture_type}}" range="{{culture_type_picker}}" disabled="{{culture_type_state==2}}" data-type="culture_type">
+                            <view class="picker">
+                                {{culture_type_picker[culture_type]}}
+                            </view>
+                        </picker>
+                    </view>
+                    <!-- 打入每个培养瓶液体量（ml） -->
+                    <view class="cu-form-group {{culture_bottle_fluid_volume_state==0?'disabled':culture_bottle_fluid_volume_state==2?'clock':''}}">
+                        <view style='display:flex;flex-direction: column; '>
+                            <view class='title' style='text-align:left'>打入每个培养瓶液体量（ml）</view>
+                            <input style=' width: 350rpx;text-algin:left;' class='radius' type='digit' style='text-align:left;' bindinput="onInput" value='{{culture_bottle_fluid_volume}}' placeholder="请输入数字" disabled='{{culture_bottle_fluid_volume_state!=1}}' data-type="culture_bottle_fluid_volume"></input>
+                        </view>
+                        <i class="fa fa-{{culture_bottle_fluid_volume_state_value}} fa-2x" data-type="culture_bottle_fluid_volume_state" data-style="input" data-state="{{culture_bottle_fluid_volume_state}}" style="pointer-events:{{assay_check?'none':''}}" bindtap="on2StateChange"></i>
                     </view>
                     <!-- LE试纸（离心前） -->
                     <view class="cu-form-group {{le_testpaper_stoste_state==2?'clock':''}}">
@@ -242,6 +268,14 @@
                         </view>
                         <i class="fa fa-{{pmn_state_value}} fa-2x" data-type="pmn_state" data-style="input" data-state="{{pmn_state}}" style="pointer-events:{{assay_check?'none':''}}" bindtap="on3StateChange"></i>
                     </view>
+                    <!-- 病原菌检测 -->
+                    <view class='cu-bar solid-bottom solid-top bg-white'>
+                        <view class='action'>
+                            <text class='icon-title text-green'></text>病原菌检测</view>
+                        <view>延后录入
+                            <switch class='green sm margin-right' bindchange="onCheckDelaySwitchChange" style='margin-left: 15rpx;' checked='{{assay_check}}'></switch>
+                        </view>
+                    </view>
                     <!-- 窦道咽拭子1 -->
                     <view class="cu-form-group {{sious_throat_swabs1_state==0?'disabled':sious_throat_swabs1_state==2?'clock':''}}">
                         <view style='display:flex;flex-direction: column; '>
@@ -274,23 +308,6 @@
                             <button class='cu-btn round sm' style='margin-left: 15rpx;' disabled='{{sious_throat_swabs3_state!=1}}' bindtap="showModal" data-target="threeImgModal" data-imgtype="sious_throat_swabs3_pic">上传图片</button>
                             <i class="fa fa-{{sious_throat_swabs3_state_value}} fa-2x" data-type="sious_throat_swabs3_state" data-style="input_pic" data-state="{{sious_throat_swabs3_state}}" style="pointer-events:{{assay_check?'none':''}}" bindtap="on3StateChange"></i>
                         </view>
-                    </view>
-                    <!-- 打入每个培养瓶液体性质 -->
-                    <view class="cu-form-group {{culture_type_state==2?'clock':''}}">
-                        <view class='title'>打入每个培养瓶液体性质</view>
-                        <picker bindchange="onPickerChange" value="{{culture_type}}" range="{{culture_type_picker}}" disabled="{{culture_type_state==2}}" data-type="culture_type">
-                            <view class="picker">
-                                {{culture_type_picker[culture_type]}}
-                            </view>
-                        </picker>
-                    </view>
-                    <!-- 打入每个培养瓶液体量（ml） -->
-                    <view class="cu-form-group {{culture_bottle_fluid_volume_state==0?'disabled':culture_bottle_fluid_volume_state==2?'clock':''}}">
-                        <view style='display:flex;flex-direction: column; '>
-                            <view class='title' style='text-align:left'>打入每个培养瓶液体量（ml）</view>
-                            <input style=' width: 350rpx;text-algin:left;' class='radius' type='digit' style='text-align:left;' bindinput="onInput" value='{{culture_bottle_fluid_volume}}' placeholder="请输入数字" disabled='{{culture_bottle_fluid_volume_state!=1}}' data-type="culture_bottle_fluid_volume"></input>
-                        </view>
-                        <i class="fa fa-{{culture_bottle_fluid_volume_state_value}} fa-2x" data-type="culture_bottle_fluid_volume_state" data-style="input" data-state="{{culture_bottle_fluid_volume_state}}" style="pointer-events:{{assay_check?'none':''}}" bindtap="on2StateChange"></i>
                     </view>
                     <!-- 需氧+真菌结果 -->
                     <view class="cu-form-group {{aerobic_result_state==0?'disabled':aerobic_result_state==2?'clock':''}}">
@@ -339,6 +356,14 @@
                         </view>
                         <i class="fa fa-{{ngs_result_state_value}} fa-2x" data-type="ngs_result_state" data-style="input" data-state="{{ngs_result_state}}" style="pointer-events:{{assay_check?'none':''}}" bindtap="on3StateChange"></i>
                     </view>
+                    <!-- 其他检测 -->
+                    <view class='cu-bar solid-bottom solid-top bg-white'>
+                        <view class='action'>
+                            <text class='icon-title text-green'></text>其他检测</view>
+                        <view>延后录入
+                            <switch class='green sm margin-right' bindchange="onPuncture_summarySwitchChange" style='margin-left: 15rpx;' checked='{{puncture_summary}}'></switch>
+                        </view>
+                    </view>
                     <!-- 其他检查 -->
                     <view class="cu-form-group solid-bottom {{other_check_state==2?'clock':''}}">
                         <view style='display:flex;flex-direction: column; '>
@@ -352,15 +377,12 @@
             <view class='cu-bar solid-bottom solid-top bg-white'>
                 <view class='action'>
                     <text class='icon-title text-green'></text>穿刺小结</view>
-                <view>延后录入
-                    <switch class='green sm margin-right' bindchange="onPuncture_summarySwitchChange" style='margin-left: 15rpx;' checked='{{puncture_summary}}'></switch>
-                </view>
             </view>
             <!-- item -->
-            <view class="cu-list menu menu-avatar">
+            <view class="cu-list menu menu-avatar disabled">
                 <view class="cu-item-special">
                     <!-- 目前诊断（包括本次穿刺结果） -->
-                    <view class="cu-form-group {{present_result_state==0?'disabled':present_result_state==2?'clock':''}}">
+                    <view class="cu-form-group {{present_result_state==0?'disabled':present_result_state==2?'clock':''}} disabled">
                         <view class='title'>目前诊断（包括本次穿刺结果）</view>
                         <picker bindchange="onPickerChange" value="{{present_result}}" range="{{present_result_picker}}" disabled='{{present_result_state != 1}}' data-type="present_result">
                             <view class="picker">
@@ -370,24 +392,24 @@
                         <i class="fa fa-{{present_result_state_value}} fa-2x" style="pointer-events:{{puncture_summary?'none':''}}" data-type="present_result_state" data-style="picker" data-state="{{present_result_state}}" bindtap="on3StateChange"></i>
                     </view>
                     <!-- 本次诊疗周期最终诊断 -->
-                    <view class="cu-form-group {{thistime_result_state==2?'clock':''}}">
+                    <view class="cu-form-group {{thistime_result_state==2?'clock':''}} disabled">
                         <view style='display:flex;flex-direction: column; '>
                             <view class='title' style='text-align:left'>本次诊疗周期最终诊断</view>
                             <input placeholder="请输入文字" class='radius' style='width: 350rpx;text-align:left;' type='number' bindinput="onInput" value='{{thistime_result}}' disabled="{{thistime_result_state==2}}" data-type="thistime_result"></input>
                         </view>
                     </view>
                     <!-- 本次穿刺相关的后续手术治疗 -->
-                    <view class="cu-form-group" bindtap="onRelateClick" data-type="3">
+                    <view class="cu-form-group disabled" bindtap="onRelateClick" data-type="3">
                         <view class='title' style='text-align:left'>本次穿刺相关的后续手术治疗</view>
                         <view>{{bein_relate_msg}}</view>
                     </view>
                     <!-- 本次穿刺相关的后续随访 -->
-                    <view class="cu-form-group" bindtap="onRelateClick" data-type="5">
+                    <view class="cu-form-group disabled" bindtap="onRelateClick" data-type="5">
                         <view class='title' style='text-align:left'>本次穿刺相关的后续随访</view>
                         <view>{{follow_relate_msg}}</view>
                     </view>
                     <!-- 是否留有标本 -->
-                    <view class="cu-form-group">
+                    <view class="cu-form-group disabled">
                         <view class='title'>是否留有标本</view>
                         <picker value="{{is_remain_sample}}" range="{{is_remain_sample_picker}}" disabled data-type="is_remain_sample">
                             <view class="picker">
@@ -396,7 +418,7 @@
                         </picker>
                     </view>
                     <!-- 标本存放情况 -->
-                    <view wx:if="{{is_remain_sample==2}}" class="cu-form-group" bindtap='onSpecimenDesc'>
+                    <view wx:if="{{is_remain_sample==2}}" class="cu-form-group disabled" bindtap='onSpecimenDesc'>
                         <view style='display:flex;flex-direction: column; '>
                             <view class='title' style='text-align:left'>标本存放情况</view>
                             <textarea placeholder="暂未存放可用标本" style='width: 350rpx;text-align:left;' class='radius' value='{{saveMsg}}' auto-height></textarea>
@@ -508,6 +530,21 @@
 <view class="cu-modal drawer-modal justify-end {{modalName=='DrawerModalR'?'show':''}}" bindtap='hideModal'>
     <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;">
         <scroll-view class="VerticalMain" scroll-y style="height:100%">
+            <!-- 与假体相通的窦道 -->
+            <view class="cu-bar bg-white" style="justify-content:flex-start;padding-left:15rpx;min-height:60rpx;">
+                <text class='icon-title text-green'></text>与假体相通的窦道
+            </view>
+            <radio-group style="justify-content:center;align-items:center" class="cu-form-group solid-bottom" bindchange="onRadioChange" data-type="is_sinus">
+                <view>
+                    <radio class='blue text-small' value='1' checked="{{is_sinus == 1}}"></radio> 有
+                </view>
+                <view>
+                    <radio class='blue margin-left-sm text-small' value='0' checked="{{is_sinus == 0}}"></radio> 无
+                </view>
+                <view>
+                    <radio class='blue margin-left-sm text-small' value='2' checked="{{is_sinus == 2}}"></radio> 不确定
+                </view>
+            </radio-group>
             <!-- 发热（体温） -->
             <view class="cu-bar bg-white" style="justify-content:flex-start;padding-left:15rpx;min-height:60rpx;">
                 <text class='icon-title text-green'></text>发热（体温）
@@ -568,21 +605,35 @@
                     <radio class='blue margin-left-sm text-small' value='0' checked="{{is_pain == 0}}"></radio> 无
                 </view>
             </radio-group>
-            <!-- 与假体相通的窦道 -->
+            <!-- 活动受限（Reduced range of motion） -->
             <view class="cu-bar bg-white" style="justify-content:flex-start;padding-left:15rpx;min-height:60rpx;">
-                <text class='icon-title text-green'></text>与假体相通的窦道
+                <text class='icon-title text-green'></text>活动受限（Reduced range of motion）
             </view>
-            <radio-group style="justify-content:center;align-items:center" class="cu-form-group solid-bottom" bindchange="onRadioChange" data-type="is_sinus">
+            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="onRadioChange" data-type="is_pain">
                 <view>
-                    <radio class='blue text-small' value='1' checked="{{is_sinus == 1}}"></radio> 有
+                    <radio class='blue text-small' value='1' checked="{{is_pain == 1}}"></radio> 有
                 </view>
-                <view>
-                    <radio class='blue margin-left-sm text-small' value='0' checked="{{is_sinus == 0}}"></radio> 无
-                </view>
-                <view>
-                    <radio class='blue margin-left-sm text-small' value='2' checked="{{is_sinus == 2}}"></radio> 不确定
+                <view style="margin-left: 50rpx;">
+                    <radio class='blue margin-left-sm text-small' value='0' checked="{{is_pain == 0}}"></radio> 无
                 </view>
             </radio-group>
+            <!-- 切口持续渗液 -->
+            <view class="cu-bar bg-white" style="justify-content:flex-start;padding-left:15rpx;min-height:60rpx;">
+                <text class='icon-title text-green'></text>切口持续渗液
+            </view>
+            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="onRadioChange" data-type="is_pain">
+                <view>
+                    <radio class='blue text-small' value='1' checked="{{is_pain == 1}}"></radio> 有
+                </view>
+                <view style="margin-left: 50rpx;">
+                    <radio class='blue margin-left-sm text-small' value='0' checked="{{is_pain == 0}}"></radio> 无
+                </view>
+            </radio-group>
+            <!-- 其他要说明的情况 -->
+            <view class="cu-bar bg-white" style="justify-content:flex-start;padding-left:15rpx;min-height:60rpx;">
+                <text class='icon-title text-green'></text>其他要说明的情况
+            </view>
+            <input style="text-align:left;padding-left:20rpx;height:80rpx; " placeholder="请输入 " class='radius bg-white solid-bottom' bindinput="onOther_diseaseInput" value="{{other_disease}}"></input>
             <!-- 外观照 -->
             <view class="cu-bar bg-white" style="justify-content:flex-start;padding-left:15rpx;min-height:60rpx;">
                 <text class='icon-title text-green'></text>外观照

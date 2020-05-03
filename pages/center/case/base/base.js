@@ -58,19 +58,25 @@ Page({
         typePicker: ['请选择', '置换术后', '占位器术后', '初次', '其他内置物', '翻修术后'],
         // 简要病史
         medical_history: '',
+        history_check: false,
         // 初次置换时间
         first_displace_time: util.getNowFormatDate(),
+        first_displace_time_state: 0,
         // 初次置换原因
         first_displace_reason: 0,
         first_displace_reason_picker: ['请选择', '骨关节炎', '股骨头坏死', '类风湿性关节炎直性脊柱炎', '先天性髋关节发育不良', '其他'],
+        first_displace_reason_state: 0,
         // 是否本院手术病例
         is_hospital_operation: 0,
         is_hospital_operation_picker: ['请选择', '是', '否'],
+        is_hospital_operation_state: 0,
         // 末次手术日期
         last_operation_date: util.getNowFormatDate(),
+        last_operation_date_state: 0,
         // 已翻修次数
         repair_count: 0,
         repair_count_picker: ["请选择", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ],
+        repair_count_state: 0,
         // 本次症状出现日期
         duration_symptoms_date: util.getNowFormatDate(),
         // 本次发病可能诱因
@@ -201,6 +207,28 @@ Page({
         this.setData({
             medical_history: e.detail.value
         });
+    },
+    onHistorySwitchChange(e) {
+        this.setData({
+            history_check: e.detail.value
+        })
+        if (!this.data.history_check) {
+            this.setData({
+                first_displace_time: '请选择日期',
+                first_displace_reason: 0,
+                is_hospital_operation: 0,
+                last_operation_date: '请选择日期',
+                repair_count: 0
+            })
+        }
+        let state = this.data.history_check ? 1 : 0
+        this.setData({
+            first_displace_time_state: state,
+            first_displace_reason_state: state,
+            is_hospital_operation_state: state,
+            last_operation_date_state: state,
+            repair_count_state: state,
+        })
     },
     onFirst_displace_timeChange(e) {
         this.setData({
@@ -924,18 +952,29 @@ Page({
             this.showToast("请填写简要病史")
             return false;
         }
-        if (this.data.first_displace_reason == 0) {
-            this.showToast("请选择初次置换原因")
-            return false;
+        if (this.data.history_check) {
+            if (this.data.first_displace_time == '请选择日期') {
+                this.showToast("请选择初次置换时间")
+                return false;
+            }
+            if (this.data.first_displace_reason == 0) {
+                this.showToast("请选择初次置换原因")
+                return false;
+            }
+            if (this.data.is_hospital_operation == 0) {
+                this.showToast("请选择是否本院手术病例")
+                return false;
+            }
+            if (this.data.last_operation_date == '请选择日期') {
+                this.showToast("请选择末次手术日期")
+                return false;
+            }
+            if (this.data.repair_count == 0) {
+                this.showToast("请选择已翻修次数")
+                return false;
+            }
         }
-        if (this.data.is_hospital_operation == 0) {
-            this.showToast("请选择是否本院手术病例")
-            return false;
-        }
-        if (this.data.repair_count == 0) {
-            this.showToast("请选择已翻修次数")
-            return false;
-        }
+
         if (this.data.this_time_cause.length == 0) {
             this.showToast("请填写本次发病可能诱因")
             return false;

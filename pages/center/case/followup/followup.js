@@ -292,7 +292,7 @@ Page({
             isCreate: options.itemId == 0,
         });
         if (!this.data.isCreate) { // 编辑
-            this.requestCaseInfo();
+            // this.requestCaseInfo();
         } else { // 新建
             this.setData({
                 addAvatar: app.globalData.avatarUrl,

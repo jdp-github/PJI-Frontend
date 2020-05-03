@@ -164,6 +164,7 @@ Page({
             url: constant.basePath,
             data: {
                 service: 'Notice.GetNoticeList',
+                center_id: that.data.centerId,
                 keyword: ''
             },
             header: {

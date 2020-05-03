@@ -123,6 +123,8 @@ page, .page {
     background-color: #fcd9da;
 }
 
-.rightArrow::after {
-    content: " \e6a3 ";
+.pop_item_title {
+    justify-content: flex-start;
+    padding-left: 15rpx;
+    min-height: 60rpx;
 }

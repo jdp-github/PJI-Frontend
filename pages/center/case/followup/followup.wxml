@@ -70,9 +70,9 @@
                                 </view>
                             </picker>
                         </view>
-                        <!-- 关联 -->
+                        <!-- 请关联本次随访针对事件 -->
                         <view class="cu-form-group {{purpose == 0 ?'disabled':''}}" bindtap="onRelateClick" style="pointer-events:{{purpose == 0?'none':''}}">
-                            <view class='title'>{{purpose == 2?'请选择关联手术':'请选择关联穿刺'}}</view>
+                            <view class='title'>请关联本次随访针对事件</view>
                             <view style="display: flex;align-items: center;">{{relateSelect?'已选择':'请选择'}}
                                 <view class="icon-right" style="font-size: 40rpx;color: #aaaab2;margin-left:5rpx;" />
                             </view>
@@ -84,39 +84,6 @@
                                 <input style=' width: 350rpx;text-algin:left;' class='radius' style='text-align:left;' bindinput="onInput" value='{{patient_desc}}' placeholder="请输入文字" disabled='{{patient_desc_state!=1}}' data-type="patient_desc"></input>
                             </view>
                             <i class="fa fa-{{patient_desc_state_value}} fa-2x" data-type="patient_desc_state" data-style="input" data-state="{{patient_desc_state}}" style="pointer-events:{{assay_check?'none':''}}" bindtap="on2StateChange"></i>
-                        </view>
-                        <!-- 外观状态 -->
-                        <view class="cu-form-group {{exterior_state==0?'disabled':exterior_state==2?'clock':''}}">
-                            <view style='display:flex;flex-direction: column; '>
-                                <view class='title' style='text-align:left'>外观状态</view>
-                                <input placeholder="请输入文字" class='radius' style='width: 350rpx;text-align:left;' bindinput="onInput" disabled='{{exterior_state!=1}}' value='{{exterior}}' data-type="exterior"></input>
-                            </view>
-                            <view>
-                                <button class='cu-btn round sm' disabled='{{exterior_state!=1}}' bindtap="showModal" data-target="threeImgModal" data-imgtype="exterior_pic">上传图片</button>
-                                <i class="fa fa-{{exterior_state_value}} fa-2x" data-type="exterior_state" data-style="input_pic" data-state="{{exterior_state}}" style="pointer-events:{{assay_check?'none':''}}" bindtap="on2StateChange"></i>
-                            </view>
-                        </view>
-                        <!-- 新增化验结果 -->
-                        <view class="cu-form-group {{assay_result_state==0?'disabled':assay_result_state==2?'clock':''}}">
-                            <view style='display:flex;flex-direction: column; '>
-                                <view class='title' style='text-align:left'>新增化验结果</view>
-                                <input placeholder="请输入文字" class='radius' style='width: 350rpx;text-align:left;' bindinput="onInput" disabled='{{assay_result_state!=1}}' value='{{assay_result}}' data-type="assay_result"></input>
-                            </view>
-                            <view>
-                                <button class='cu-btn round sm' style='margin-left: 15rpx;' disabled='{{assay_result_state!=1}}' value='{{assay_result}}' bindtap="showModal" data-target="threeImgModal" data-imgtype="assay_result_pic">上传图片</button>
-                                <i class="fa fa-{{assay_result_state_value}} fa-2x" data-type="assay_result_state" data-style="input_pic" data-state="{{assay_result_state}}" style="pointer-events:{{assay_check?'none':''}}" bindtap="on3StateChange"></i>
-                            </view>
-                        </view>
-                        <!-- 新增检查结果 -->
-                        <view class="cu-form-group {{check_result_state==0?'disabled':check_result_state==2?'clock':''}}">
-                            <view style='display:flex;flex-direction: column; '>
-                                <view class='title' style='text-align:left'>新增检查结果</view>
-                                <input placeholder="请输入文字" class='radius' style='width: 350rpx;text-align:left;' bindinput="onInput" disabled='{{check_result_state!=1}}' value='{{check_result}}' data-type="check_result"></input>
-                            </view>
-                            <view>
-                                <button class='cu-btn round sm' style='margin-left: 15rpx;' disabled='{{check_result_state!=1}}' bindtap="showModal" data-target="threeImgModal" data-imgtype="check_result_pic">上传图片</button>
-                                <i class="fa fa-{{check_result_state_value}} fa-2x" data-type="check_result_state" data-style="input_pic" data-state="{{check_result_state}}" style="pointer-events:{{assay_check?'none':''}}" bindtap="on3StateChange"></i>
-                            </view>
                         </view>
                         <!-- 目前诊断 -->
                         <view class="cu-form-group {{diagnose_state==0?'disabled':diagnose_state==2?'clock':''}}">
@@ -136,6 +103,47 @@
                                     {{plan_picker[plan]}}
                                 </view>
                             </picker>
+                        </view>
+                        <!-- 本次随访资料 -->
+                        <view class='cu-bar solid-bottom bg-white'>
+                            <view class='action'>
+                                <text class='icon-title text-green'></text>本次随访资料</view>
+                            <view>
+                                <switch class='green sm margin-right' bindchange="onHistorySwitchChange" style='margin-left: 15rpx;' checked='{{history_check}}'></switch>
+                            </view>
+                        </view>
+                        <!-- 外观状态 -->
+                        <view class="cu-form-group {{exterior_state==0?'disabled':exterior_state==2?'clock':''}}">
+                            <view style='display:flex;flex-direction: column; '>
+                                <view class='title' style='text-align:left'>外观状态</view>
+                                <input placeholder="请输入文字" class='radius' style='width: 350rpx;text-align:left;' bindinput="onInput" disabled='{{exterior_state!=1}}' value='{{exterior}}' data-type="exterior"></input>
+                            </view>
+                            <view>
+                                <button class='cu-btn round sm' disabled='{{exterior_state!=1}}' bindtap="showModal" data-target="threeImgModal" data-imgtype="exterior_pic">上传图片</button>
+                                <i class="fa fa-{{exterior_state_value}} fa-2x" data-type="exterior_state" data-style="input_pic" data-state="{{exterior_state}}" style="pointer-events:{{assay_check?'none':''}}" bindtap="on2StateChange"></i>
+                            </view>
+                        </view>
+                        <!-- 新增化验 -->
+                        <view class="cu-form-group {{assay_result_state==0?'disabled':assay_result_state==2?'clock':''}}">
+                            <view style='display:flex;flex-direction: column; '>
+                                <view class='title' style='text-align:left'>新增化验</view>
+                                <input placeholder="请输入文字" class='radius' style='width: 350rpx;text-align:left;' bindinput="onInput" disabled='{{assay_result_state!=1}}' value='{{assay_result}}' data-type="assay_result"></input>
+                            </view>
+                            <view>
+                                <button class='cu-btn round sm' style='margin-left: 15rpx;' disabled='{{assay_result_state!=1}}' value='{{assay_result}}' bindtap="showModal" data-target="threeImgModal" data-imgtype="assay_result_pic">上传图片</button>
+                                <i class="fa fa-{{assay_result_state_value}} fa-2x" data-type="assay_result_state" data-style="input_pic" data-state="{{assay_result_state}}" style="pointer-events:{{assay_check?'none':''}}" bindtap="on3StateChange"></i>
+                            </view>
+                        </view>
+                        <!-- 新增检查 -->
+                        <view class="cu-form-group {{check_result_state==0?'disabled':check_result_state==2?'clock':''}}">
+                            <view style='display:flex;flex-direction: column; '>
+                                <view class='title' style='text-align:left'>新增检查</view>
+                                <input placeholder="请输入文字" class='radius' style='width: 350rpx;text-align:left;' bindinput="onInput" disabled='{{check_result_state!=1}}' value='{{check_result}}' data-type="check_result"></input>
+                            </view>
+                            <view>
+                                <button class='cu-btn round sm' style='margin-left: 15rpx;' disabled='{{check_result_state!=1}}' bindtap="showModal" data-target="threeImgModal" data-imgtype="check_result_pic">上传图片</button>
+                                <i class="fa fa-{{check_result_state_value}} fa-2x" data-type="check_result_state" data-style="input_pic" data-state="{{check_result_state}}" style="pointer-events:{{assay_check?'none':''}}" bindtap="on3StateChange"></i>
+                            </view>
                         </view>
                         <!-- 备注 -->
                         <view class="cu-form-group">
