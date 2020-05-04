@@ -341,7 +341,7 @@ Page({
                 openid: app.globalData.openid,
                 center_id: item.center_id,
                 notice_id: item.id,
-                is_top: e.detail.value ? 1 : 0
+                is_top: 1
             },
             header: {
                 'content-type': 'application/json'

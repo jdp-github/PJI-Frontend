@@ -44,7 +44,7 @@ Page({
         createDate: '',
         sex: 0,
         sexPicker: ['请选择', '男', '女'],
-        birthDay: '',
+        birthday: '',
         age: '',
         height: '',
         weight: '',
@@ -82,17 +82,11 @@ Page({
         // 本次发病可能诱因
         this_time_cause: '',
         // 弹出框
-        is_rheumatism: 0,
         is_rheumatoid: 0,
         is_as: 0,
-        is_spa: 0,
-        is_psa: 0,
         is_gout: 0,
+        is_rheumatism: 0,
         is_cancer: 0,
-        cure_state: 0,
-        radiotherapy: 0,
-        radiotherapy_picker: ['请选择', '1月内', '3月内', '半年内', '1年内', '1年以上'],
-        chemotherapy: 0,
         glycuresis: 0,
         hypertension: 0,
         cvd: 0,
@@ -105,12 +99,13 @@ Page({
         abnormal_renal: 0,
         abnormal_thyroid: 0,
         anemia: 0,
-        is_smoke: 0,
-        is_drink: 0,
-        is_drink_picker: ['请选择', '少量', '中量', '大量', '已戒3月以上'],
-        other_disease: '',
-        score: '',
-        remark: '',
+        remark1: '',
+        week_immuno: 0,
+        week_antibiotic: 0,
+        month_chemotherapy: 0,
+        month_radiotherapy: 0,
+        remark2: '',
+
         // 知情同意
         is_agree: 0,
         is_agree_state: 1,
@@ -281,45 +276,11 @@ Page({
             [param]: parseInt(e.detail.value)
         })
     },
-    onRadiotherapyChange: function(e) {
+    onInput(e) {
+        let type = e.currentTarget.dataset.type
         this.setData({
-            radiotherapy: parseInt(e.detail.value),
-        });
-    },
-    onChemotherapyChange(e) {
-        this.setData({
-            chemotherapy: parseInt(e.detail.value),
-        });
-    },
-    onIs_smokeChange: function(e) {
-        this.setData({
-            is_smoke: parseInt(e.detail.value),
-        });
-    },
-    onIs_drinkChange: function(e) {
-        this.setData({
-            is_drink: parseInt(e.detail.value),
-        });
-    },
-    onRadiotherapyChange: function(e) {
-        this.setData({
-            radiotherapy: parseInt(e.detail.value),
-        });
-    },
-    onOther_diseaseInput: function(e) {
-        this.setData({
-            other_disease: e.detail.value
-        });
-    },
-    onScoreInput: function(e) {
-        this.setData({
-            score: e.detail.value
-        });
-    },
-    onRemarkInput: function(e) {
-        this.setData({
-            remark: e.detail.value
-        });
+            [type]: e.detail.value
+        })
     },
     onAgreeStateChange(e) {
         if (this.data.is_agree_state == 1) {
@@ -391,13 +352,8 @@ Page({
             is_rheumatism: info.is_rheumatism,
             is_rheumatoid: info.is_rheumatoid,
             is_as: info.is_as,
-            is_spa: info.is_spa,
-            is_psa: info.is_psa,
             is_gout: info.is_gout,
             is_cancer: info.is_cancer,
-            cure_state: info.cure_state,
-            radiotherapy: info.radiotherapy,
-            chemotherapy: info.chemotherapy,
             glycuresis: info.glycuresis,
             hypertension: info.hypertension,
             cvd: info.cvd,
@@ -410,11 +366,6 @@ Page({
             abnormal_renal: info.abnormal_renal,
             abnormal_thyroid: info.abnormal_thyroid,
             anemia: info.anemia,
-            is_smoke: info.is_smoke,
-            is_drink: info.is_drink,
-            other_disease: info.other_disease,
-            score: info.score,
-            remark: info.remark,
         })
         this.hideModal()
         this.showToast("导入成功")
@@ -660,8 +611,7 @@ Page({
             side: parseInt(info.side),
             part: parseInt(info.part),
             createDate: this.data.isCreate ? util.getNowFormatDate() : util.formatTime(info.create_time, 'Y-M-D'),
-            // TODO
-            birthday: this.data.isCreate ? util.getNowFormatDate() : util.getNowFormatDate(),
+            birthday: util.formatTime(info.birthday, 'Y-M-D'),
             sex: parseInt(info.sex),
             age: this.getDefaultNum(info.age),
             height: this.getDefaultNum(info.height),
@@ -683,15 +633,10 @@ Page({
             this_time_cause: info.this_time_cause,
 
             is_rheumatism: info.is_rheumatism,
-            is_rheumatoid: info.is_rheumatoid,
             is_as: info.is_as,
-            is_spa: info.is_spa,
-            is_psa: info.is_psa,
             is_gout: info.is_gout,
+            is_rheumatoid: info.is_rheumatoid,
             is_cancer: info.is_cancer,
-            cure_state: info.cure_state,
-            radiotherapy: info.radiotherapy,
-            chemotherapy: info.chemotherapy,
             glycuresis: info.glycuresis,
             hypertension: info.hypertension,
             cvd: info.cvd,
@@ -704,11 +649,14 @@ Page({
             abnormal_renal: info.abnormal_renal,
             abnormal_thyroid: info.abnormal_thyroid,
             anemia: info.anemia,
-            is_smoke: info.is_smoke,
-            is_drink: info.is_drink,
-            other_disease: info.other_disease,
-            score: info.score,
-            remark: info.remark,
+            remark1: info.remark1,
+
+            week_immuno: info.week_immuno,
+            week_anticoagulant: info.week_anticoagulant,
+            week_antibiotic: info.week_antibiotic,
+            month_chemotherapy: info.month_chemotherapy,
+            month_radiotherapy: info.month_radiotherapy,
+            remark2: info.remark2,
             is_agree: info.is_agree,
             is_agree_pic: info.is_agree_pic,
             is_agree_pic_upload: info.is_agree_pic.replace(constant.domain + "img/", ""),
@@ -829,6 +777,12 @@ Page({
         let field_state = []
         field_state.push(this.makeFiledObj("is_agree"));
 
+        field_state.push(this.makeFiledObj("first_displace_time"));
+        field_state.push(this.makeFiledObj("first_displace_reason"));
+        field_state.push(this.makeFiledObj("is_hospital_operation"));
+        field_state.push(this.makeFiledObj("last_operation_date"));
+        field_state.push(this.makeFiledObj("repair_count"));
+
         let filedStr = JSON.stringify(field_state)
         return filedStr
     },
@@ -862,6 +816,7 @@ Page({
             side: parseInt(that.data.side),
             part: parseInt(that.data.part),
             create_time: new Date(that.data.createDate).getTime() / 1000,
+            birthday: new Date(that.data.birthday).getTime() / 1000,
             sex: that.data.sex,
             age: parseInt(that.data.age),
             height: parseFloat(that.data.height),
@@ -879,16 +834,12 @@ Page({
             repair_count: parseInt(that.data.repair_count),
             duration_symptoms_date: new Date(that.data.duration_symptoms_date).getTime() / 1000,
             this_time_cause: that.data.this_time_cause,
-            is_rheumatism: parseInt(that.data.is_rheumatism),
+
             is_rheumatoid: parseInt(that.data.is_rheumatoid),
             is_as: parseInt(that.data.is_as),
-            is_spa: parseInt(that.data.is_spa),
-            is_psa: parseInt(that.data.is_psa),
             is_gout: parseInt(that.data.is_gout),
+            is_rheumatism: parseInt(that.data.is_rheumatism),
             is_cancer: parseInt(that.data.is_cancer),
-            cure_state: parseInt(that.data.cure_state),
-            radiotherapy: parseInt(that.data.radiotherapy),
-            chemotherapy: parseInt(that.data.chemotherapy),
             glycuresis: parseInt(that.data.glycuresis),
             hypertension: parseInt(that.data.hypertension),
             cvd: parseInt(that.data.cvd),
@@ -901,11 +852,15 @@ Page({
             abnormal_renal: parseInt(that.data.abnormal_renal),
             abnormal_thyroid: parseInt(that.data.abnormal_thyroid),
             anemia: parseInt(that.data.anemia),
-            is_smoke: parseInt(that.data.is_smoke),
-            is_drink: parseInt(that.data.is_drink),
-            other_disease: that.data.other_disease,
-            score: that.data.score,
-            remark: that.data.remark,
+            remark1: that.data.remark1,
+
+            week_immuno: that.data.week_immuno,
+            week_anticoagulant: that.data.week_anticoagulant,
+            week_antibiotic: that.data.week_antibiotic,
+            month_chemotherapy: that.data.month_chemotherapy,
+            month_radiotherapy: that.data.month_radiotherapy,
+            remark2: that.data.remark2,
+
             is_agree: that.data.is_agree,
             is_agree_pic: that.data.is_agree_pic_upload.length == 0 ? "" : JSON.stringify({
                 "is_agree_pic_upload": that.data.is_agree_pic_upload
@@ -920,8 +875,8 @@ Page({
             this.showToast("请选择性别")
             return false;
         }
-        if (this.data.age.length <= 0) {
-            this.showToast("请填写年龄")
+        if (this.data.birthday == '请选择日期') {
+            this.showToast("请选择出生日期")
             return false;
         }
         if (this.data.height.length <= 0) {
@@ -952,6 +907,10 @@ Page({
             this.showToast("请填写简要病史")
             return false;
         }
+        if (this.data.this_time_cause.length == 0) {
+            this.showToast("请填写本次发病可能诱因")
+            return false;
+        }
         if (this.data.history_check) {
             if (this.data.first_displace_time == '请选择日期') {
                 this.showToast("请选择初次置换时间")
@@ -975,114 +934,6 @@ Page({
             }
         }
 
-        if (this.data.this_time_cause.length == 0) {
-            this.showToast("请填写本次发病可能诱因")
-            return false;
-        }
-        if (this.data.is_rheumatism.length == 0) {
-            this.showToast("请选择病状体征中的风湿免疫性疾病")
-            return false;
-        }
-        if (this.data.is_rheumatoid.length == 0) {
-            this.showToast("请选择病状体征中的类风湿")
-            return false;
-        }
-        if (this.data.is_as.length == 0) {
-            this.showToast("请选择病状体征中的强直性脊柱炎")
-            return false;
-        }
-        if (this.data.is_spa.length == 0) {
-            this.showToast("请选择病状体征中的脊柱关节病")
-            return false;
-        }
-        if (this.data.is_psa.length == 0) {
-            this.showToast("请选择病状体征中的银屑病性关节炎")
-            return false;
-        }
-        if (this.data.is_gout.length == 0) {
-            this.showToast("请选择病状体征中的痛风")
-            return false;
-        }
-        if (this.data.is_cancer.length == 0) {
-            this.showToast("请选择病状体征中的恶性肿瘤病史")
-            return false;
-        }
-        if (this.data.cure_state.length == 0) {
-            this.showToast("请选择病状体征中的治愈情况")
-            return false;
-        }
-        if (this.data.radiotherapy == 0) {
-            this.showToast("请选择病状体征中的放疗病史")
-            return false;
-        }
-        if (this.data.chemotherapy == 0) {
-            this.showToast("请选择病状体征中的化疗病史")
-            return false;
-        }
-        if (this.data.glycuresis.length == 0) {
-            this.showToast("请选择病状体征中的糖尿病")
-            return false;
-        }
-        if (this.data.hypertension.length == 0) {
-            this.showToast("请选择病状体征中的高血压")
-            return false;
-        }
-        if (this.data.cvd.length == 0) {
-            this.showToast("请选择病状体征中的脑血管病")
-            return false;
-        }
-        if (this.data.chd.length == 0) {
-            this.showToast("请选择病状体征中的冠心病")
-            return false;
-        }
-        if (this.data.ledvt.length == 0) {
-            this.showToast("请选择病状体征中的下肢静脉血栓")
-            return false;
-        }
-        if (this.data.pud.length == 0) {
-            this.showToast("请选择病状体征中的消化性溃疡病")
-            return false;
-        }
-        if (this.data.copd.length == 0) {
-            this.showToast("请选择病状体征中的慢性肺阻病")
-            return false;
-        }
-        if (this.data.abnormal_heart.length == 0) {
-            this.showToast("请选择病状体征中的心功能异常")
-            return false;
-        }
-        if (this.data.abnormal_liver.length == 0) {
-            this.showToast("请选择病状体征中的肝功能异常")
-            return false;
-        }
-        if (this.data.abnormal_renal.length == 0) {
-            this.showToast("请选择病状体征中的病状体征中的肾功能异常")
-            return false;
-        }
-        if (this.data.abnormal_thyroid.length == 0) {
-            this.showToast("请选择病状体征中的甲状腺功能异常")
-            return false;
-        }
-        if (this.data.anemia.length == 0) {
-            this.showToast("请选择病状体征中的贫血")
-            return false;
-        }
-        if (this.data.is_smoke == 0) {
-            this.showToast("请选择病状体征中的吸烟史")
-            return false;
-        }
-        if (this.data.is_drink == 0) {
-            this.showToast("请选择病状体征中的饮酒史")
-            return false;
-        }
-        if (this.data.other_disease.length == 0) {
-            this.showToast("请填写病状体征中的其他疾病")
-            return false;
-        }
-        if (this.data.remark.length == 0) {
-            this.showToast("请填写病状体征中的备注")
-            return false;
-        }
         if (this.data.is_agree_state == 1 && this.data.is_agree_pic.length == 0) {
             this.showToast("请上传知情同意")
             return false;

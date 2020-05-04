@@ -230,19 +230,19 @@
                         <i class="fa fa-{{neutrophil_state_value}} fa-2x" data-state="{{neutrophil_state}}" data-style="picker" data-type="neutrophil_state" bindtap="on3StateChange" style="pointer-events:{{operation_during_check?'none':''}}"></i>
                     </view>
                     <!-- 其他检测 -->
-                    <view class="cu-form-group {{joint_fluid_wbc_state==0?'disabled':joint_fluid_wbc_state==2?'clock':''}}">
+                    <view class="cu-form-group {{other_check_state==0?'disabled':other_check_state==2?'clock':''}}">
                         <view style='display:flex;flex-direction: column; '>
                             <view class='title' style='text-align:left'>其他检测</view>
-                            <input placeholder="请输入文字" class='radius' style='width: 350rpx;text-align:left;' bindinput="onInput" disabled='{{joint_fluid_wbc_state!=1}}' value='{{joint_fluid_wbc}}' data-type="joint_fluid_wbc"></input>
+                            <input placeholder="请输入文字" class='radius' style='width: 350rpx;text-align:left;' bindinput="onInput" disabled='{{other_check_state!=1}}' value='{{other_check}}' data-type="other_check"></input>
                         </view>
-                        <i class="fa fa-{{joint_fluid_wbc_state_value}} fa-2x" data-state="{{joint_fluid_wbc_state}}" data-style="input" data-type="joint_fluid_wbc_state" bindtap="on3StateChange" style="pointer-events:{{operation_during_check?'none':''}}"></i>
+                        <i class="fa fa-{{other_check_state_value}} fa-2x" data-state="{{other_check_state}}" data-style="input" data-type="other_check_state" bindtap="on3StateChange" style="pointer-events:{{operation_during_check?'none':''}}"></i>
                     </view>
                     <!-- 术中微生物检测 -->
                     <view class='cu-bar solid-bottom solid-top bg-white'>
                         <view class='action'>
                             <text class='icon-title text-green'></text>术中微生物检测</view>
                         <view>延后录入
-                            <switch class='green sm margin-right' bindchange="onOperation_during_checkSwitchChange" style='margin-left: 15rpx;' checked='{{operation_during_check}}'></switch>
+                            <switch class='green sm margin-right' bindchange="onMicro_test_checkSwitchChange" style='margin-left: 15rpx;' checked='{{micro_test_check}}'></switch>
                         </view>
                     </view>
                     <!-- 术中组织培养1 -->
@@ -501,14 +501,14 @@
                         <i class="fa fa-{{leave_hospital_date_state_value}} fa-2x" data-state="{{leave_hospital_date_state}}" data-style="date" data-type="leave_hospital_date_state" bindtap="on3StateChange" style="pointer-events:{{leave_summary?'none':''}}"></i>
                     </view>
                     <!-- 临床判定 -->
-                    <view class="cu-form-group {{msis_state==0?'disabled':msis_state==2?'clock':''}}">
+                    <view class="cu-form-group {{clinical_judge_state==0?'disabled':clinical_judge_state==2?'clock':''}}">
                         <view class='title'>临床判定</view>
-                        <picker bindchange="onPickerChange" value="{{msis}}" range="{{msis_picker}}" disabled="{{msis_state==2}}" data-type="msis">
+                        <picker bindchange="onPickerChange" value="{{clinical_judge}}" range="{{msis_picker}}" disabled="{{clinical_judge_state==2}}" data-type="clinical_judge">
                             <view class="picker">
-                                {{msis_picker[msis]}}
+                                {{msis_picker[clinical_judge]}}
                             </view>
                         </picker>
-                        <i class="fa fa-{{msis_state_value}} fa-2x" data-state="{{msis_state}}" data-style="picker" data-type="msis_state" bindtap="on3StateChange" style="pointer-events:{{leave_summary?'none':''}}"></i>
+                        <i class="fa fa-{{clinical_judge_state_value}} fa-2x" data-state="{{clinical_judge_state}}" data-style="picker" data-type="clinical_judge_state" bindtap="on3StateChange" style="pointer-events:{{leave_summary?'none':''}}"></i>
                     </view>
                     <!-- 2014MSIS诊断标准 -->
                     <view class="cu-form-group {{msis_state==0?'disabled':msis_state==2?'clock':''}}">

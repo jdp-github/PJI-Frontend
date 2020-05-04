@@ -306,12 +306,12 @@
             <view class="cu-bar bg-white pop_item_title">
                 <text class='icon-title '></text>类风湿关节炎
             </view>
-            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="is_rheumatism">
+            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="is_rheumatoid">
                 <view>
-                    <radio class='blue text-small' value='0' checked="{{is_rheumatism ==0}}"></radio> 无
+                    <radio class='blue text-small' value='0' checked="{{is_rheumatoid ==0}}"></radio> 无
                 </view>
                 <view style="margin-left:50rpx">
-                    <radio class='blue text-small' value='1' checked="{{is_rheumatism ==1}}"></radio> 有
+                    <radio class='blue text-small' value='1' checked="{{is_rheumatoid ==1}}"></radio> 有
                 </view>
             </radio-group>
             <!-- 强直性脊柱炎 -->
@@ -320,10 +320,10 @@
             </view>
             <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="is_as">
                 <view>
-                    <radio class='blue text-small' value='1' checked="{{is_as ==1}}"></radio> 无
+                    <radio class='blue text-small' value='0' checked="{{is_as ==1}}"></radio> 无
                 </view>
                 <view style="margin-left: 50rpx;">
-                    <radio class='blue margin-left-sm text-small' value='2' checked="{{is_as ==2}}"></radio> 有
+                    <radio class='blue margin-left-sm text-small' value='1' checked="{{is_as ==2}}"></radio> 有
                 </view>
             </radio-group>
             <!-- 痛风 -->
@@ -332,23 +332,22 @@
             </view>
             <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="is_gout">
                 <view>
-                    <radio class='blue text-small' value='1' checked="{{is_gout ==1}}"></radio> 无
+                    <radio class='blue text-small' value='0' checked="{{is_gout ==1}}"></radio> 无
                 </view>
                 <view style="margin-left: 50rpx;">
-                    <radio class='blue margin-left-sm text-small' value='2' checked="{{is_gout !=1}}"></radio> 有
+                    <radio class='blue margin-left-sm text-small' value='1' checked="{{is_gout !=1}}"></radio> 有
                 </view>
             </radio-group>
             <!-- 其他风湿免疫性疾病 -->
             <view class="cu-bar bg-white pop_item_title">
                 <text class='icon-title '></text>其他风湿免疫性疾病
-
             </view>
-            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="is_spa">
+            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="is_rheumatism">
                 <view>
-                    <radio class='blue text-small' value='1' checked="{{is_spa ==1}}"></radio> 无
+                    <radio class='blue text-small' value='0' checked="{{is_rheumatism ==0}}"></radio> 无
                 </view>
                 <view style="margin-left: 50rpx;">
-                    <radio class='blue margin-left-sm text-small' value='2' checked="{{is_spa ==2}}"></radio> 有
+                    <radio class='blue margin-left-sm text-small' value='1' checked="{{is_rheumatism ==1}}"></radio> 有
                 </view>
             </radio-group>
             <!-- 恶性肿瘤病史 -->
@@ -357,10 +356,10 @@
             </view>
             <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="is_cancer">
                 <view>
-                    <radio class='blue text-small' value='1' checked="{{is_cancer ==1}}"></radio> 有
+                    <radio class='blue text-small' value='0' checked="{{is_cancer ==0}}"></radio> 无
                 </view>
                 <view style="margin-left: 50rpx;">
-                    <radio class='blue margin-left-sm text-small' value='0' checked="{{is_cancer ==0}}"></radio> 无
+                    <radio class='blue margin-left-sm text-small' value='1' checked="{{is_cancer ==1}}"></radio> 有
                 </view>
             </radio-group>
             <!-- 糖尿病 -->
@@ -369,10 +368,10 @@
             </view>
             <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="glycuresis">
                 <view>
-                    <radio class='blue text-small' value='1' checked="{{glycuresis ==1}}"></radio> 无
+                    <radio class='blue text-small' value='0' checked="{{glycuresis ==0}}"></radio> 无
                 </view>
                 <view style="margin-left: 50rpx;">
-                    <radio class='blue margin-left-sm text-small' value='2' checked="{{glycuresis ==2}}"></radio> 有
+                    <radio class='blue margin-left-sm text-small' value='1' checked="{{glycuresis ==1}}"></radio> 有
                 </view>
             </radio-group>
             <!-- 高血压 -->
@@ -381,10 +380,10 @@
             </view>
             <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="hypertension">
                 <view>
-                    <radio class='blue text-small' value='1' checked="{{hypertension ==1}}"></radio> 无
+                    <radio class='blue text-small' value='0' checked="{{hypertension ==0}}"></radio> 无
                 </view>
                 <view style="margin-left: 50rpx;">
-                    <radio class='blue margin-left-sm text-small' value='2' checked="{{hypertension ==2}}"></radio> 有
+                    <radio class='blue margin-left-sm text-small' value='1' checked="{{hypertension ==1}}"></radio> 有
                 </view>
             </radio-group>
             <!-- 脑血管病 -->
@@ -393,10 +392,10 @@
             </view>
             <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="cvd">
                 <view>
-                    <radio class='blue text-small' value='1' checked="{{cvd ==1}}"></radio> 无
+                    <radio class='blue text-small' value='0' checked="{{cvd ==0}}"></radio> 无
                 </view>
                 <view style="margin-left: 50rpx;">
-                    <radio class='blue margin-left-sm text-small' value='2' checked="{{cvd ==2}}"></radio> 有
+                    <radio class='blue margin-left-sm text-small' value='1' checked="{{cvd ==1}}"></radio> 有
                 </view>
             </radio-group>
             <!-- 冠心病 -->
@@ -405,10 +404,10 @@
             </view>
             <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="chd">
                 <view>
-                    <radio class='blue text-small' value='1' checked="{{chd ==1}}"></radio> 无
+                    <radio class='blue text-small' value='0' checked="{{chd ==0}}"></radio> 无
                 </view>
                 <view style="margin-left: 50rpx;">
-                    <radio class='blue margin-left-sm text-small' value='2' checked="{{chd ==2}}"></radio> 有
+                    <radio class='blue margin-left-sm text-small' value='1' checked="{{chd ==1}}"></radio> 有
                 </view>
             </radio-group>
             <!-- 下肢静脉血栓 -->
@@ -417,10 +416,10 @@
             </view>
             <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="ledvt">
                 <view>
-                    <radio class='blue text-small' value='1' checked="{{ledvt ==1}}"></radio> 无
+                    <radio class='blue text-small' value='0' checked="{{ledvt ==0}}"></radio> 无
                 </view>
                 <view style="margin-left: 50rpx;">
-                    <radio class='blue margin-left-sm text-small' value='2' checked="{{ledvt ==2}}"></radio> 有
+                    <radio class='blue margin-left-sm text-small' value='1' checked="{{ledvt ==1}}"></radio> 有
                 </view>
             </radio-group>
             <!-- 消化性溃疡病 -->
@@ -429,10 +428,10 @@
             </view>
             <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="pud">
                 <view>
-                    <radio class='blue text-small' value='1' checked="{{pud ==1}}"></radio> 无
+                    <radio class='blue text-small' value='0' checked="{{pud ==0}}"></radio> 无
                 </view>
                 <view style="margin-left: 50rpx;">
-                    <radio class='blue margin-left-sm text-small' value='2' checked="{{pud ==2}}"></radio> 有
+                    <radio class='blue margin-left-sm text-small' value='1' checked="{{pud ==1}}"></radio> 有
                 </view>
             </radio-group>
             <!-- 慢性肺阻病 -->
@@ -441,12 +440,11 @@
             </view>
             <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="copd">
                 <view>
-                    <radio class='blue text-small' value='1' checked="{{copd ==1}}"></radio> 无
+                    <radio class='blue text-small' value='0' checked="{{copd ==0}}"></radio> 无
                 </view>
                 <view style="margin-left: 50rpx;">
-                    <radio class='blue margin-left-sm text-small' value='2' checked="{{copd ==2}}"></radio> 有
+                    <radio class='blue margin-left-sm text-small' value='1' checked="{{copd ==1}}"></radio> 有
                 </view>
-
             </radio-group>
             <!-- 心功能异常 -->
             <view class="cu-bar bg-white pop_item_title">
@@ -454,10 +452,10 @@
             </view>
             <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="abnormal_heart">
                 <view>
-                    <radio class='blue text-small' value='1' checked="{{abnormal_heart ==1}}"></radio> 无
+                    <radio class='blue text-small' value='0' checked="{{abnormal_heart ==0}}"></radio> 无
                 </view>
                 <view style="margin-left: 50rpx;">
-                    <radio class='blue margin-left-sm text-small' value='2' checked="{{abnormal_heart ==2}}"></radio> 有
+                    <radio class='blue margin-left-sm text-small' value='1' checked="{{abnormal_heart ==1}}"></radio> 有
                 </view>
             </radio-group>
             <!-- 肝功能异常 -->
@@ -466,10 +464,10 @@
             </view>
             <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="abnormal_liver">
                 <view>
-                    <radio class='blue text-small' value='1' checked="{{abnormal_liver ==1}}"></radio> 无
+                    <radio class='blue text-small' value='0' checked="{{abnormal_liver ==0}}"></radio> 无
                 </view>
                 <view style="margin-left: 50rpx;">
-                    <radio class='blue margin-left-sm text-small' value='2' checked="{{abnormal_liver ==2}}"></radio> 有
+                    <radio class='blue margin-left-sm text-small' value='1' checked="{{abnormal_liver ==1}}"></radio> 有
                 </view>
             </radio-group>
             <!-- 肾功能异常 -->
@@ -478,10 +476,10 @@
             </view>
             <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="abnormal_renal">
                 <view>
-                    <radio class='blue text-small' value='1' checked="{{abnormal_renal ==1}}"></radio> 无
+                    <radio class='blue text-small' value='0' checked="{{abnormal_renal ==0}}"></radio> 无
                 </view>
                 <view style="margin-left: 50rpx;">
-                    <radio class='blue margin-left-sm text-small' value='2' checked="{{abnormal_renal ==2}}"></radio> 有
+                    <radio class='blue margin-left-sm text-small' value='1' checked="{{abnormal_renal ==1}}"></radio> 有
                 </view>
             </radio-group>
             <!-- 甲状腺功能异常 -->
@@ -490,10 +488,10 @@
             </view>
             <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="abnormal_thyroid">
                 <view>
-                    <radio class='blue text-small' value='1' checked="{{abnormal_thyroid ==1}}"></radio> 无
+                    <radio class='blue text-small' value='0' checked="{{abnormal_thyroid ==0}}"></radio> 无
                 </view>
                 <view style="margin-left: 50rpx;">
-                    <radio class='blue margin-left-sm text-small' value='2' checked="{{abnormal_thyroid ==2}}"></radio> 有
+                    <radio class='blue margin-left-sm text-small' value='1' checked="{{abnormal_thyroid ==1}}"></radio> 有
                 </view>
             </radio-group>
             <!-- 贫血 -->
@@ -502,18 +500,17 @@
             </view>
             <radio-group style="justify-content:center;min-height:80rpx; " class="cu-form-group solid-bottom" bindchange="radioChange" data-type="anemia">
                 <view>
-                    <radio class='blue text-small' value='1' checked="{{anemia==1}}"></radio> 无
+                    <radio class='blue text-small' value='0' checked="{{anemia==0}}"></radio> 无
                 </view>
                 <view style="margin-left: 50rpx;">
-                    <radio class='blue margin-left-sm text-small' value='2' checked="{{anemia==2}}"></radio> 有
+                    <radio class='blue margin-left-sm text-small' value='1' checked="{{anemia==1}}"></radio> 有
                 </view>
             </radio-group>
-
             <!-- 其他要说明的情况 -->
             <view class="cu-bar bg-white pop_item_title">
                 <text class='icon-title '></text>其他要说明的情况
             </view>
-            <input style="text-align:left;padding-left:20rpx;height:80rpx; " placeholder="请输入 " class='radius bg-white solid-bottom' bindinput="onOther_diseaseInput" value="{{other_disease}}"></input>
+            <input style="text-align:left;padding-left:20rpx;height:80rpx; " placeholder="请输入 " class='radius bg-white solid-bottom' bindinput="onInput" value="{{remark1}}" data-type="remark1"></input>
             <!-- 用药史 -->
             <view class='cu-bar solid-bottom bg-white'>
                 <view class='action'>
@@ -523,67 +520,67 @@
             <view class="cu-bar bg-white pop_item_title">
                 <text class='icon-title '></text>1周内使用免疫抑制剂
             </view>
-            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="is_rheumatism">
+            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="week_immuno">
                 <view>
-                    <radio class='blue text-small' value='0' checked="{{is_rheumatism ==0}}"></radio> 无
+                    <radio class='blue text-small' value='0' checked="{{week_immuno ==0}}"></radio> 无
                 </view>
                 <view style="margin-left:50rpx">
-                    <radio class='blue text-small' value='1' checked="{{is_rheumatism ==1}}"></radio> 有
+                    <radio class='blue text-small' value='1' checked="{{week_immuno ==1}}"></radio> 有
                 </view>
             </radio-group>
             <!-- 1周内使用抗凝血药物 -->
             <view class="cu-bar bg-white pop_item_title">
                 <text class='icon-title '></text>1周内使用抗凝血药物
             </view>
-            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="is_rheumatism">
+            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="week_anticoagulant">
                 <view>
-                    <radio class='blue text-small' value='0' checked="{{is_rheumatism ==0}}"></radio> 无
+                    <radio class='blue text-small' value='0' checked="{{week_anticoagulant ==0}}"></radio> 无
                 </view>
                 <view style="margin-left:50rpx">
-                    <radio class='blue text-small' value='1' checked="{{is_rheumatism ==1}}"></radio> 有
+                    <radio class='blue text-small' value='1' checked="{{week_anticoagulant ==1}}"></radio> 有
                 </view>
             </radio-group>
             <!-- 1周内使用抗生素 -->
             <view class="cu-bar bg-white pop_item_title">
                 <text class='icon-title '></text>1周内使用抗生素
             </view>
-            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="is_rheumatism">
+            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="week_antibiotic">
                 <view>
-                    <radio class='blue text-small' value='0' checked="{{is_rheumatism ==0}}"></radio> 无
+                    <radio class='blue text-small' value='0' checked="{{week_antibiotic ==0}}"></radio> 无
                 </view>
                 <view style="margin-left:50rpx">
-                    <radio class='blue text-small' value='1' checked="{{is_rheumatism ==1}}"></radio> 有
+                    <radio class='blue text-small' value='1' checked="{{week_antibiotic ==1}}"></radio> 有
                 </view>
             </radio-group>
             <!-- 3月内化疗史 -->
             <view class="cu-bar bg-white pop_item_title">
                 <text class='icon-title '></text>3月内化疗史
             </view>
-            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="is_rheumatism">
+            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="month_chemotherapy">
                 <view>
-                    <radio class='blue text-small' value='0' checked="{{is_rheumatism ==0}}"></radio> 无
+                    <radio class='blue text-small' value='0' checked="{{month_chemotherapy ==0}}"></radio> 无
                 </view>
                 <view style="margin-left:50rpx">
-                    <radio class='blue text-small' value='1' checked="{{is_rheumatism ==1}}"></radio> 有
+                    <radio class='blue text-small' value='1' checked="{{month_chemotherapy ==1}}"></radio> 有
                 </view>
             </radio-group>
             <!-- 3月内放疗史 -->
             <view class="cu-bar bg-white pop_item_title">
                 <text class='icon-title '></text>3月内放疗史
             </view>
-            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="is_rheumatism">
+            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="month_radiotherapy">
                 <view>
-                    <radio class='blue text-small' value='0' checked="{{is_rheumatism ==0}}"></radio> 无
+                    <radio class='blue text-small' value='0' checked="{{month_radiotherapy ==0}}"></radio> 无
                 </view>
                 <view style="margin-left:50rpx">
-                    <radio class='blue text-small' value='1' checked="{{is_rheumatism ==1}}"></radio> 有
+                    <radio class='blue text-small' value='1' checked="{{month_radiotherapy ==1}}"></radio> 有
                 </view>
             </radio-group>
             <!-- 其他要说明的情况 -->
             <view class="cu-bar bg-white pop_item_title">
                 <text class='icon-title '></text>其他要说明的情况
             </view>
-            <input style="text-align:left;padding-left:20rpx;height:80rpx; " placeholder="请输入 " class='radius bg-white solid-bottom' bindinput="onOther_diseaseInput" value="{{other_disease}}"></input>
+            <input style="text-align:left;padding-left:20rpx;height:80rpx; " placeholder="请输入 " class='radius bg-white solid-bottom' bindinput="onInput" value="{{remark2}}" data-type="remark2"></input>
             <!-- 底部按钮 -->
             <view class='padding-sm flex'>
                 <view class="flex-sub ">

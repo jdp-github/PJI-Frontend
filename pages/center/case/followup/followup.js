@@ -51,6 +51,8 @@ Page({
         patient_desc: '',
         patient_desc_state: 1,
         patient_desc_state_value: 'pencil',
+
+        this_followup_check: false,
         exterior: '',
         exterior_pic: [],
         exterior_state: 1,
@@ -70,6 +72,7 @@ Page({
         plan: 0,
         plan_picker: ["请选择", "观察随访", "口服抗生素压制", "诊断性穿刺", "入院手术治疗", "其他"],
         remark: '',
+        remark_state: 0,
 
         // ------- 图片上传 start --------- //
         pic1: '',
@@ -79,6 +82,23 @@ Page({
         pic3: '',
         pic3Upload: '',
         // ------- 图片上传 end  ---------- //
+    },
+
+    onThis_followup_checkChange(e) {
+        this.setData({
+            this_followup_check: e.detail.value
+        })
+        let state = this.data.this_followup_check ? 2 : 1
+        let stateValue = this.data.this_followup_check ? "clock-o" : "pencil"
+        this.setData({
+            exterior_state: state,
+            exterior_state_value: stateValue,
+            assay_result_state: state,
+            assay_result_state_value: stateValue,
+            check_result_state: state,
+            check_result_state_value: stateValue,
+            remark_state: state,
+        })
     },
 
     onPickerChange(e) {
@@ -292,7 +312,7 @@ Page({
             isCreate: options.itemId == 0,
         });
         if (!this.data.isCreate) { // 编辑
-            // this.requestCaseInfo();
+            this.requestCaseInfo();
         } else { // 新建
             this.setData({
                 addAvatar: app.globalData.avatarUrl,
@@ -477,18 +497,6 @@ Page({
             this.showToast("请填写患者主诉")
             return false;
         }
-        if (this.data.exterior_state == 1 && this.data.exterior.length == 0) {
-            this.showToast("请填写外观状态")
-            return false;
-        }
-        if (this.data.assay_result_state == 1 && this.data.assay_result.length == 0) {
-            this.showToast("请填写新增化验结果")
-            return false;
-        }
-        if (this.data.check_result_state == 1 && this.data.check_result.length == 0) {
-            this.showToast("请填写新增检查结果")
-            return false;
-        }
         if (this.data.diagnose_state == 1 && this.data.diagnose == 0) {
             this.showToast("请选择目前诊断")
             return false;
@@ -497,10 +505,26 @@ Page({
             this.showToast("请选择下一步计划")
             return false;
         }
-        if (this.data.remark.length == 0) {
-            this.showToast("请填写备注")
-            return false;
+        if (!this.data.this_followup_check) {
+            if (this.data.exterior_state == 1 && this.data.exterior.length == 0) {
+                this.showToast("请填写外观状态")
+                return false;
+            }
+            if (this.data.assay_result_state == 1 && this.data.assay_result.length == 0) {
+                this.showToast("请填写新增化验结果")
+                return false;
+            }
+            if (this.data.check_result_state == 1 && this.data.check_result.length == 0) {
+                this.showToast("请填写新增检查结果")
+                return false;
+            }
+
+            if (this.data.remark.length == 0) {
+                this.showToast("请填写备注")
+                return false;
+            }
         }
+
 
         return true
     },

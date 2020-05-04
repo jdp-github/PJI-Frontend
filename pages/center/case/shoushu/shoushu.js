@@ -110,6 +110,13 @@ Page({
         neutrophil_state: 1,
         neutrophil_state_value: 'pencil',
         neutrophil_picker: ['请选择', '<5', '5-10', '>10'],
+        other_check: '',
+        other_check_state: 1,
+        other_check_state_vallue: 'pencil',
+        // -------- 术中诊断 end -------- //
+
+        // -------- 术中微生物检测 begin -------- //
+        micro_test_check: false,
         tissue_culture1: '',
         tissue_culture1_state: 1,
         tissue_culture1_state_value: 'pencil',
@@ -158,7 +165,7 @@ Page({
         splitting_mngs_result_state: 1,
         splitting_mngs_result_state_value: 'pencil',
         splitting_mngs_result_pic: [],
-        // -------- 术中诊断 end -------- //
+        // -------- 术中微生物检测 end -------- //
 
         // -------- 术中治疗 begin -------- //
         operation_during_treat: false,
@@ -199,6 +206,9 @@ Page({
         leave_hospital_date: '请选择日期',
         leave_hospital_date_state: 1,
         leave_hospital_date_state_value: "pencil",
+        clinical_judge: 0,
+        clinical_judge_state: 1,
+        clinical_judge_state_value: 'pencil',
         msis: 0,
         msis_state: 1,
         msis_picker: ['请选择', '感染', '非感染', '不能确定'],
@@ -242,42 +252,19 @@ Page({
         let state = this.data.operation_before_summary ? 2 : 1
         let stateValue = this.data.operation_before_summary ? "clock-o" : "pencil"
         this.setData({
-            hospitalized_date: '请选择日期',
             hospitalized_date_state: state,
             puncture_info_state: state,
-            antibiotic_history: 0,
             antibiotic_history_state: state,
-            punctureList: [],
             punctureSelect: false,
-            immuno_history: 0,
             immuno_history_state: state,
-            is_heat: 0,
-            is_erythema: 0,
-            is_swelling: 0,
-            is_fever: 0,
-            is_pain: 0,
-            is_sinus: 0,
-            exterior_pics: [],
-            pic4: '',
-            pic4Upload: '',
-            pic5: '',
-            pic5Upload: '',
-            pic6: '',
-            pic6Upload: '',
-            esr: '',
             esr_state: state,
             esr_state_value: stateValue,
-            crp: '',
             crp_state: state,
             crp_state_value: stateValue,
-            conver_crp: '',
-            il6: '',
             il6_state: state,
             il6_state_value: stateValue,
-            dimer: '',
             dimer_state: state,
             dimer_state_value: stateValue,
-            fibrinogen: '',
             fibrinogen_state: state,
             fibrinogen_state_value: stateValue,
         })
@@ -289,72 +276,50 @@ Page({
         let state = this.data.operation_during_check ? 2 : 1
         let stateValue = this.data.operation_during_check ? "clock-o" : "pencil"
         this.setData({
-            operation_date: '请选择日期',
             operation_date_state: state,
-            culture_pus: 0,
-            culture_pus_pic: [],
             culture_pus_state: state,
-            le_testpaper_stoste: 0,
-            le_testpaper_stoste_pic: [],
             le_testpaper_stoste_state: state,
-            le_testpaper_centrifugal: 0,
-            le_testpaper_centrifugal_pic: [],
             le_testpaper_centrifugal_state: state,
-            joint_fluid_wbc: '',
             joint_fluid_wbc_state: state,
             joint_fluid_wbc_state_value: stateValue,
-            pmn: '',
             pmn_state: state,
             pmn_state_value: stateValue,
-            neutrophil: 0,
             neutrophil_state: state,
             neutrophil_state_value: stateValue,
-            tissue_culture1: '',
-            tissue_culture1_pic: [],
+            other_check_state: state,
+            other_check_state_vallue: stateValue,
+
+        })
+    },
+    onMicro_test_checkSwitchChange(e) {
+        this.setData({
+            micro_test_check: e.detail.value
+        });
+        let state = this.data.operation_during_treat ? 2 : 1
+        let stateValue = this.data.operation_during_treat ? "clock-o" : "pencil"
+        this.setData({
             tissue_culture1_state: state,
             tissue_culture1_state_value: stateValue,
-            tissue_culture2: '',
-            tissue_culture2_pic: [],
             tissue_culture2_state: state,
             tissue_culture2_state_value: stateValue,
-            tissue_culture3: '',
-            tissue_culture3_pic: [],
             tissue_culture3_state: state,
             tissue_culture3_state_value: stateValue,
-            tissue_culture4: '',
-            tissue_culture4_pic: [],
             tissue_culture4_state: state,
             tissue_culture4_state_value: stateValue,
-            tissue_culture5: '',
-            tissue_culture5_pic: [],
             tissue_culture5_state: state,
             tissue_culture5_state_value: stateValue,
-            tissue_mngs: '',
-            tissue_mngs_pic: [],
             tissue_mngs_state: state,
             tissue_mngs_state_value: stateValue,
-            joint_aerobic_result: '',
-            joint_aerobic_result_pic: [],
             joint_aerobic_result_state: state,
             joint_aerobic_result_state_value: stateValue,
-            joint_anaerobic_result: '',
-            joint_anaerobic_result_pic: [],
             joint_anaerobic_result_state: state,
             joint_anaerobic_result_state_value: stateValue,
-            joint_mngs_result: '',
-            joint_mngs_result_pic: [],
             joint_mngs_result_state: state,
             joint_mngs_result_state_value: stateValue,
-            splitting_aerobic_result: '',
-            splitting_aerobic_result_pic: [],
             splitting_aerobic_result_state: state,
             splitting_aerobic_result_state_value: stateValue,
-            splitting_anaerobic_result: '',
-            splitting_anaerobic_result_pic: [],
             splitting_anaerobic_result_state: state,
             splitting_anaerobic_result_state_value: stateValue,
-            splitting_mngs_result: '',
-            splitting_mngs_result_pic: [],
             splitting_mngs_result_state: state,
             splitting_mngs_result_state_value: stateValue,
         })
@@ -367,30 +332,19 @@ Page({
         let state = this.data.operation_during_treat ? 2 : 1
         let stateValue = this.data.operation_during_treat ? "clock-o" : "pencil"
         this.setData({
-            pro_doctor: '',
             pro_doctor_state: state,
-            narcosis_level: 0,
             narcosis_level_state: state,
-            narcosis_type: 0,
             narcosis_type_state: state,
-            operation: 0,
             operation_state: state,
-            prosthesis: 0,
             prosthesis_state: state,
-            operation_duration: '',
             operation_duration_state: state,
-            haemorrhage_volume: '',
             haemorrhage_volume_state: state,
-            bone_cement_type: 0,
             bone_cement_type_state: state,
             bone_cement_type_state_value: stateValue,
-            bone_cement_volume: '',
             bone_cement_volume_state: state,
             bone_cement_volume_state_value: stateValue,
-            data_pic: [],
             data_pic_state: state,
             data_pic_state_value: stateValue,
-            data_video: [],
             data_video_state: state,
             data_video_state_value: stateValue,
         })
@@ -771,6 +725,9 @@ Page({
             joint_fluid_wbc: this.getDefaultNum(info.joint_fluid_wbc),
             pmn: this.getDefaultNum(info.pmn),
             neutrophil: parseInt(info.neutrophil),
+            other_check: info.other_check,
+
+
             tissue_culture1: info.tissue_culture1,
             tissue_culture1_pic: this.getImgArr(info.tissue_culture1_pic),
             tissue_culture2: info.tissue_culture2,
@@ -811,6 +768,7 @@ Page({
 
             leave_summary: info.leave_summary == 1,
             leave_hospital_date: this.getDefaultDate(info.leave_hospital_date),
+            clinical_judge: parseInt(info.clinical_judge),
             msis: parseInt(info.msis),
             icm: parseInt(info.icm),
             special_event: info.special_event,
@@ -1022,6 +980,12 @@ Page({
                 this.showToast("请选择组织病理(中性粒细胞计数)")
                 return false;
             }
+            if (this.data.other_check.length == 0) {
+                this.showToast("请输入其他检测")
+                return false;
+            }
+        }
+        if (!this.data.micro_test_check) {
             if (this.data.tissue_culture1_state == 1 && this.data.tissue_culture1.length == 0) {
                 this.showToast("请填写术中组织培养1")
                 return false;
@@ -1117,6 +1081,10 @@ Page({
                 this.showToast("请选择出院日期")
                 return false;
             }
+            if (this.data.clinical_judge == 0) {
+                this.showToast("请选择临床判定")
+                return false;
+            }
             if (this.data.msis == 0) {
                 this.showToast("请选择2014MSIS诊断标准")
                 return false;
@@ -1160,6 +1128,8 @@ Page({
         field_state.push(this.makeFiledObj("joint_fluid_wbc"));
         field_state.push(this.makeFiledObj("pmn"));
         field_state.push(this.makeFiledObj("neutrophil"));
+        field_state.push(this.makeFiledObj("other_check"));
+
         field_state.push(this.makeFiledObj("tissue_culture1"));
         field_state.push(this.makeFiledObj("tissue_culture2"));
         field_state.push(this.makeFiledObj("tissue_culture3"));
@@ -1187,6 +1157,7 @@ Page({
         field_state.push(this.makeFiledObj("data_video"));
 
         field_state.push(this.makeFiledObj("leave_hospital_date"));
+        field_state.push(this.makeFiledObj("clinical_judge"));
         field_state.push(this.makeFiledObj("msis"));
         field_state.push(this.makeFiledObj("icm"));
         field_state.push(this.makeFiledObj("special_event"));
@@ -1239,6 +1210,8 @@ Page({
             joint_fluid_wbc: parseInt(this.makeDefaultValue(that.data.joint_fluid_wbc)),
             pmn: parseFloat(this.makeDefaultValue(that.data.pmn)),
             neutrophil: that.data.neutrophil,
+            other_check: that.data.other_check,
+
             tissue_culture1: that.data.tissue_culture1,
             tissue_culture1_pic: that.makePicJson(that.data.tissue_culture1_pic),
             tissue_culture2: that.data.tissue_culture2,
@@ -1279,6 +1252,7 @@ Page({
 
             leave_summary: that.data.leave_summary ? 1 : 0,
             leave_hospital_date: that.makeDefaultDate(that.data.leave_hospital_date),
+            clinical_judge: that.data.clinical_judge,
             msis: that.data.msis,
             icm: that.data.icm,
             special_event: that.data.special_event,

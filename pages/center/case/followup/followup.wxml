@@ -109,14 +109,14 @@
                             <view class='action'>
                                 <text class='icon-title text-green'></text>本次随访资料</view>
                             <view>
-                                <switch class='green sm margin-right' bindchange="onHistorySwitchChange" style='margin-left: 15rpx;' checked='{{history_check}}'></switch>
+                                <switch class='green sm margin-right' bindchange="onThis_followup_checkChange" style='margin-left: 15rpx;' checked='{{this_followup_check}}'></switch>
                             </view>
                         </view>
                         <!-- 外观状态 -->
                         <view class="cu-form-group {{exterior_state==0?'disabled':exterior_state==2?'clock':''}}">
                             <view style='display:flex;flex-direction: column; '>
                                 <view class='title' style='text-align:left'>外观状态</view>
-                                <input placeholder="请输入文字" class='radius' style='width: 350rpx;text-align:left;' bindinput="onInput" disabled='{{exterior_state!=1}}' value='{{exterior}}' data-type="exterior"></input>
+                                <input placeholder="非必填项" class='radius' style='width: 350rpx;text-align:left;' bindinput="onInput" disabled='{{exterior_state!=1}}' value='{{exterior}}' data-type="exterior"></input>
                             </view>
                             <view>
                                 <button class='cu-btn round sm' disabled='{{exterior_state!=1}}' bindtap="showModal" data-target="threeImgModal" data-imgtype="exterior_pic">上传图片</button>
@@ -127,7 +127,7 @@
                         <view class="cu-form-group {{assay_result_state==0?'disabled':assay_result_state==2?'clock':''}}">
                             <view style='display:flex;flex-direction: column; '>
                                 <view class='title' style='text-align:left'>新增化验</view>
-                                <input placeholder="请输入文字" class='radius' style='width: 350rpx;text-align:left;' bindinput="onInput" disabled='{{assay_result_state!=1}}' value='{{assay_result}}' data-type="assay_result"></input>
+                                <input placeholder="非必填项" class='radius' style='width: 350rpx;text-align:left;' bindinput="onInput" disabled='{{assay_result_state!=1}}' value='{{assay_result}}' data-type="assay_result"></input>
                             </view>
                             <view>
                                 <button class='cu-btn round sm' style='margin-left: 15rpx;' disabled='{{assay_result_state!=1}}' value='{{assay_result}}' bindtap="showModal" data-target="threeImgModal" data-imgtype="assay_result_pic">上传图片</button>
@@ -138,7 +138,7 @@
                         <view class="cu-form-group {{check_result_state==0?'disabled':check_result_state==2?'clock':''}}">
                             <view style='display:flex;flex-direction: column; '>
                                 <view class='title' style='text-align:left'>新增检查</view>
-                                <input placeholder="请输入文字" class='radius' style='width: 350rpx;text-align:left;' bindinput="onInput" disabled='{{check_result_state!=1}}' value='{{check_result}}' data-type="check_result"></input>
+                                <input placeholder="非必填项" class='radius' style='width: 350rpx;text-align:left;' bindinput="onInput" disabled='{{check_result_state!=1}}' value='{{check_result}}' data-type="check_result"></input>
                             </view>
                             <view>
                                 <button class='cu-btn round sm' style='margin-left: 15rpx;' disabled='{{check_result_state!=1}}' bindtap="showModal" data-target="threeImgModal" data-imgtype="check_result_pic">上传图片</button>
@@ -146,10 +146,10 @@
                             </view>
                         </view>
                         <!-- 备注 -->
-                        <view class="cu-form-group">
+                        <view class="cu-form-group {{remark_state==0?'disabled':''}}">
                             <view style='display:flex;flex-direction: column; '>
                                 <view class='title' style='text-align:left'>备注</view>
-                                <input placeholder="请输入文字" class='radius' style='width: 350rpx;text-align:left;' bindinput="onInput" value='{{remark}}' disabled="{{remark_state==2}}" data-type="remark"></input>
+                                <input placeholder="非必填项" class='radius' style='width: 350rpx;text-align:left;' bindinput="onInput" value='{{remark}}' disabled="{{remark_state==2}}" data-type="remark"></input>
                             </view>
                         </view>
                     </view>
