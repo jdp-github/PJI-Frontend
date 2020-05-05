@@ -132,7 +132,7 @@
                 <view class='action'>
                     <text class='icon-title text-green'></text>外周血检测</view>
                 <view>延后录入
-                    <switch class='green sm margin-right' bindchange="onCheckDelaySwitchChange" style='margin-left: 15rpx;' checked='{{assay_check}}'></switch>
+                    <switch class='green sm margin-right' bindchange="onCheckDelaySwitchChange" style='margin-left: 15rpx;' checked='{{out_check}}'></switch>
                 </view>
             </view>
             <!-- item -->
@@ -190,7 +190,7 @@
                         <view class='action'>
                             <text class='icon-title text-green'></text>关节液检测</view>
                         <view>延后录入
-                            <switch class='green sm margin-right' bindchange="onCheckDelaySwitchChange" style='margin-left: 15rpx;' checked='{{assay_check}}'></switch>
+                            <switch class='green sm margin-right' bindchange="onFluidSwitchChange" style='margin-left: 15rpx;' checked='{{joint_fluid_check}}'></switch>
                         </view>
                     </view>
                     <!-- 关节液描述 -->
@@ -273,7 +273,7 @@
                         <view class='action'>
                             <text class='icon-title text-green'></text>病原菌检测</view>
                         <view>延后录入
-                            <switch class='green sm margin-right' bindchange="onCheckDelaySwitchChange" style='margin-left: 15rpx;' checked='{{assay_check}}'></switch>
+                            <switch class='green sm margin-right' bindchange="onPathogenSwitchChange" style='margin-left: 15rpx;' checked='{{pathogen_check}}'></switch>
                         </view>
                     </view>
                     <!-- 窦道咽拭子1 -->
@@ -361,7 +361,7 @@
                         <view class='action'>
                             <text class='icon-title text-green'></text>其他检测</view>
                         <view>延后录入
-                            <switch class='green sm margin-right' bindchange="onPuncture_summarySwitchChange" style='margin-left: 15rpx;' checked='{{puncture_summary}}'></switch>
+                            <switch class='green sm margin-right' bindchange="onOtherSwitchChange" style='margin-left: 15rpx;' checked='{{other}}'></switch>
                         </view>
                     </view>
                     <!-- 其他检查 -->
@@ -536,10 +536,10 @@
             </view>
             <radio-group style="justify-content:center;align-items:center" class="cu-form-group solid-bottom" bindchange="onRadioChange" data-type="is_sinus">
                 <view>
-                    <radio class='blue text-small' value='1' checked="{{is_sinus == 1}}"></radio> 有
+                    <radio class='blue  text-small' value='0' checked="{{is_sinus == 0}}"></radio> 无
                 </view>
                 <view>
-                    <radio class='blue margin-left-sm text-small' value='0' checked="{{is_sinus == 0}}"></radio> 无
+                    <radio class='blue margin-left-sm text-small' value='1' checked="{{is_sinus == 1}}"></radio> 有
                 </view>
                 <view>
                     <radio class='blue margin-left-sm text-small' value='2' checked="{{is_sinus == 2}}"></radio> 不确定
@@ -551,10 +551,10 @@
             </view>
             <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="onRadioChange" data-type="is_heat">
                 <view>
-                    <radio class='blue text-small' value='1' checked="{{is_heat == 1}}"></radio> 有
+                    <radio class='blue margin-left-sm text-small' value='0' checked="{{is_heat == 0}}"></radio> 无
                 </view>
                 <view style="margin-left: 50rpx;">
-                    <radio class='blue margin-left-sm text-small' value='0' checked="{{is_heat == 0}}"></radio> 无
+                    <radio class='blue text-small' value='1' checked="{{is_heat == 1}}"></radio> 有
                 </view>
             </radio-group>
             <!-- 皮肤发红（Erythema） -->
@@ -563,10 +563,10 @@
             </view>
             <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="onRadioChange" data-type="is_erythema">
                 <view>
-                    <radio class='blue text-small' value='1' checked="{{is_erythema == 1}}"></radio> 有
+                    <radio class='blue margin-left-sm text-small' value='0' checked="{{is_erythema == 0}}"></radio> 无
                 </view>
                 <view style="margin-left: 50rpx;">
-                    <radio class='blue margin-left-sm text-small' value='0' checked="{{is_erythema == 0}}"></radio> 无
+                    <radio class='blue text-small' value='1' checked="{{is_erythema == 1}}"></radio> 有
                 </view>
             </radio-group>
             <!-- 积液/肿胀（Effusion/swelling） -->
@@ -575,10 +575,10 @@
             </view>
             <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="onRadioChange" data-type="is_swelling">
                 <view>
-                    <radio class='blue text-small' value='1' checked="{{is_swelling == 1}}"></radio> 有
+                    <radio class='blue margin-left-sm text-small' value='0' checked="{{is_swelling == 0}}"></radio> 无
                 </view>
                 <view style="margin-left: 50rpx;">
-                    <radio class='blue margin-left-sm text-small' value='0' checked="{{is_swelling == 0}}"></radio> 无
+                    <radio class='blue text-small' value='1' checked="{{is_swelling == 1}}"></radio> 有
                 </view>
             </radio-group>
             <!-- 局部皮温增高（fever） -->
@@ -587,10 +587,10 @@
             </view>
             <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="onRadioChange" data-type="is_fever">
                 <view>
-                    <radio class='blue text-small' value='1' checked="{{is_fever == 1}}"></radio> 有
+                    <radio class='blue margin-left-sm text-small' value='0' checked="{{is_fever == 0}}"></radio> 无
                 </view>
                 <view style="margin-left: 50rpx;">
-                    <radio class='blue margin-left-sm text-small' value='0' checked="{{is_fever == 0}}"></radio> 无
+                    <radio class='blue text-small' value='1' checked="{{is_fever == 1}}"></radio> 有
                 </view>
             </radio-group>
             <!-- 疼痛（Pain） -->
@@ -599,41 +599,41 @@
             </view>
             <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="onRadioChange" data-type="is_pain">
                 <view>
-                    <radio class='blue text-small' value='1' checked="{{is_pain == 1}}"></radio> 有
+                    <radio class='blue margin-left-sm text-small' value='0' checked="{{is_pain == 0}}"></radio> 无
                 </view>
                 <view style="margin-left: 50rpx;">
-                    <radio class='blue margin-left-sm text-small' value='0' checked="{{is_pain == 0}}"></radio> 无
+                    <radio class='blue text-small' value='1' checked="{{is_pain == 1}}"></radio> 有
                 </view>
             </radio-group>
             <!-- 活动受限（Reduced range of motion） -->
             <view class="cu-bar bg-white" style="justify-content:flex-start;padding-left:15rpx;min-height:60rpx;">
                 <text class='icon-title text-green'></text>活动受限（Reduced range of motion）
             </view>
-            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="onRadioChange" data-type="is_pain">
+            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="onRadioChange" data-type="is_activity_limit">
                 <view>
-                    <radio class='blue text-small' value='1' checked="{{is_pain == 1}}"></radio> 有
+                    <radio class='blue margin-left-sm text-small' value='0' checked="{{is_activity_limit == 0}}"></radio> 无
                 </view>
                 <view style="margin-left: 50rpx;">
-                    <radio class='blue margin-left-sm text-small' value='0' checked="{{is_pain == 0}}"></radio> 无
+                    <radio class='blue text-small' value='1' checked="{{is_activity_limit == 1}}"></radio> 有
                 </view>
             </radio-group>
             <!-- 切口持续渗液 -->
             <view class="cu-bar bg-white" style="justify-content:flex-start;padding-left:15rpx;min-height:60rpx;">
                 <text class='icon-title text-green'></text>切口持续渗液
             </view>
-            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="onRadioChange" data-type="is_pain">
+            <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="onRadioChange" data-type="is_seepage">
                 <view>
-                    <radio class='blue text-small' value='1' checked="{{is_pain == 1}}"></radio> 有
+                    <radio class='blue margin-left-sm text-small' value='0' checked="{{is_seepage == 0}}"></radio> 无
                 </view>
                 <view style="margin-left: 50rpx;">
-                    <radio class='blue margin-left-sm text-small' value='0' checked="{{is_pain == 0}}"></radio> 无
+                    <radio class='blue text-small' value='1' checked="{{is_seepage == 1}}"></radio> 有
                 </view>
             </radio-group>
             <!-- 其他要说明的情况 -->
             <view class="cu-bar bg-white" style="justify-content:flex-start;padding-left:15rpx;min-height:60rpx;">
                 <text class='icon-title text-green'></text>其他要说明的情况
             </view>
-            <input style="text-align:left;padding-left:20rpx;height:80rpx; " placeholder="请输入 " class='radius bg-white solid-bottom' bindinput="onOther_diseaseInput" value="{{other_disease}}"></input>
+            <input style="text-align:left;padding-left:20rpx;height:80rpx; " placeholder="请输入 " class='radius bg-white solid-bottom' bindinput="onInput" data-type="remark" value="{{remark}}"></input>
             <!-- 外观照 -->
             <view class="cu-bar bg-white" style="justify-content:flex-start;padding-left:15rpx;min-height:60rpx;">
                 <text class='icon-title text-green'></text>外观照

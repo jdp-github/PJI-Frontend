@@ -162,7 +162,7 @@
                             <view class='action'>
                                 <text class='icon-title text-green'></text>既往手术史</view>
                             <view>
-                                <switch class='green sm margin-right' bindchange="onHistorySwitchChange" style='margin-left: 15rpx;' checked='{{history_check}}'></switch>
+                                <switch class='green sm margin-right' bindchange="onHistorySwitchChange" style='margin-left: 15rpx;' checked='{{operation_history}}'></switch>
                             </view>
                         </view>
                         <!-- 初次置换时间 -->
@@ -320,10 +320,10 @@
             </view>
             <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="is_as">
                 <view>
-                    <radio class='blue text-small' value='0' checked="{{is_as ==1}}"></radio> 无
+                    <radio class='blue text-small' value='0' checked="{{is_as ==0}}"></radio> 无
                 </view>
                 <view style="margin-left: 50rpx;">
-                    <radio class='blue margin-left-sm text-small' value='1' checked="{{is_as ==2}}"></radio> 有
+                    <radio class='blue margin-left-sm text-small' value='1' checked="{{is_as ==1}}"></radio> 有
                 </view>
             </radio-group>
             <!-- 痛风 -->
@@ -332,10 +332,10 @@
             </view>
             <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="radioChange" data-type="is_gout">
                 <view>
-                    <radio class='blue text-small' value='0' checked="{{is_gout ==1}}"></radio> 无
+                    <radio class='blue text-small' value='0' checked="{{is_gout ==0}}"></radio> 无
                 </view>
                 <view style="margin-left: 50rpx;">
-                    <radio class='blue margin-left-sm text-small' value='1' checked="{{is_gout !=1}}"></radio> 有
+                    <radio class='blue margin-left-sm text-small' value='1' checked="{{is_gout ==1}}"></radio> 有
                 </view>
             </radio-group>
             <!-- 其他风湿免疫性疾病 -->

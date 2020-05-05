@@ -116,7 +116,7 @@ Page({
         // -------- 术中诊断 end -------- //
 
         // -------- 术中微生物检测 begin -------- //
-        micro_test_check: false,
+        microbe_check: false,
         tissue_culture1: '',
         tissue_culture1_state: 1,
         tissue_culture1_state_value: 'pencil',
@@ -291,9 +291,9 @@ Page({
 
         })
     },
-    onMicro_test_checkSwitchChange(e) {
+    onMicrobe_checkSwitchChange(e) {
         this.setData({
-            micro_test_check: e.detail.value
+            microbe_check: e.detail.value
         });
         let state = this.data.operation_during_treat ? 2 : 1
         let stateValue = this.data.operation_during_treat ? "clock-o" : "pencil"
@@ -727,7 +727,7 @@ Page({
             neutrophil: parseInt(info.neutrophil),
             other_check: info.other_check,
 
-
+            microbe_check: info.microbe_check,
             tissue_culture1: info.tissue_culture1,
             tissue_culture1_pic: this.getImgArr(info.tissue_culture1_pic),
             tissue_culture2: info.tissue_culture2,
@@ -985,7 +985,7 @@ Page({
                 return false;
             }
         }
-        if (!this.data.micro_test_check) {
+        if (!this.data.microbe_check) {
             if (this.data.tissue_culture1_state == 1 && this.data.tissue_culture1.length == 0) {
                 this.showToast("请填写术中组织培养1")
                 return false;
@@ -1212,6 +1212,7 @@ Page({
             neutrophil: that.data.neutrophil,
             other_check: that.data.other_check,
 
+            isValueRight: that.data.isValueRight,
             tissue_culture1: that.data.tissue_culture1,
             tissue_culture1_pic: that.makePicJson(that.data.tissue_culture1_pic),
             tissue_culture2: that.data.tissue_culture2,

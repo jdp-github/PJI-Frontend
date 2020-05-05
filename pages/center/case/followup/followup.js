@@ -52,7 +52,7 @@ Page({
         patient_desc_state: 1,
         patient_desc_state_value: 'pencil',
 
-        this_followup_check: false,
+        follow_data: false,
         exterior: '',
         exterior_pic: [],
         exterior_state: 1,
@@ -84,12 +84,12 @@ Page({
         // ------- 图片上传 end  ---------- //
     },
 
-    onThis_followup_checkChange(e) {
+    onFollow_dataChange(e) {
         this.setData({
-            this_followup_check: e.detail.value
+            follow_data: e.detail.value
         })
-        let state = this.data.this_followup_check ? 2 : 1
-        let stateValue = this.data.this_followup_check ? "clock-o" : "pencil"
+        let state = this.data.follow_data ? 2 : 1
+        let stateValue = this.data.follow_data ? "clock-o" : "pencil"
         this.setData({
             exterior_state: state,
             exterior_state_value: stateValue,
@@ -372,6 +372,7 @@ Page({
             purpose: info.purpose,
             puncture_info: info.puncture_info,
             patient_desc: info.patient_desc,
+            follow_data: info.follow_data,
             exterior: info.exterior,
             exterior_pic: this.getImgArr(info.exterior_pic),
             assay_result: info.assay_result,
@@ -505,7 +506,7 @@ Page({
             this.showToast("请选择下一步计划")
             return false;
         }
-        if (!this.data.this_followup_check) {
+        if (!this.data.follow_data) {
             if (this.data.exterior_state == 1 && this.data.exterior.length == 0) {
                 this.showToast("请填写外观状态")
                 return false;
@@ -558,6 +559,7 @@ Page({
             puncture_info: that.data.purpose == 1 ? that.makeRelateInfo() : '',
             bein_info: that.data.purpose == 2 ? that.makeRelateInfo() : '',
             patient_desc: that.data.patient_desc,
+            follow_data: that.data.follow_data,
             exterior: that.data.exterior,
             exterior_pic: that.makePicJson(that.data.exterior_pic),
             assay_result: that.data.assay_result,

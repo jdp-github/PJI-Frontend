@@ -242,7 +242,7 @@
                         <view class='action'>
                             <text class='icon-title text-green'></text>术中微生物检测</view>
                         <view>延后录入
-                            <switch class='green sm margin-right' bindchange="onMicro_test_checkSwitchChange" style='margin-left: 15rpx;' checked='{{micro_test_check}}'></switch>
+                            <switch class='green sm margin-right' bindchange="onMicrobe_checkSwitchChange" style='margin-left: 15rpx;' checked='{{microbe_check}}'></switch>
                         </view>
                     </view>
                     <!-- 术中组织培养1 -->

@@ -58,7 +58,7 @@ Page({
         typePicker: ['请选择', '置换术后', '占位器术后', '初次', '其他内置物', '翻修术后'],
         // 简要病史
         medical_history: '',
-        history_check: false,
+        operation_history: false,
         // 初次置换时间
         first_displace_time: util.getNowFormatDate(),
         first_displace_time_state: 0,
@@ -101,6 +101,7 @@ Page({
         anemia: 0,
         remark1: '',
         week_immuno: 0,
+        week_anticoagulant: 0,
         week_antibiotic: 0,
         month_chemotherapy: 0,
         month_radiotherapy: 0,
@@ -205,9 +206,9 @@ Page({
     },
     onHistorySwitchChange(e) {
         this.setData({
-            history_check: e.detail.value
+            operation_history: e.detail.value
         })
-        if (!this.data.history_check) {
+        if (!this.data.operation_history) {
             this.setData({
                 first_displace_time: '请选择日期',
                 first_displace_reason: 0,
@@ -216,7 +217,7 @@ Page({
                 repair_count: 0
             })
         }
-        let state = this.data.history_check ? 1 : 0
+        let state = this.data.operation_history ? 1 : 0
         this.setData({
             first_displace_time_state: state,
             first_displace_reason_state: state,
@@ -624,6 +625,7 @@ Page({
             type: parseInt(info.type),
             medical_history: info.medical_history,
 
+            operation_history: info.medical_history,
             first_displace_time: this.data.isCreate ? util.getNowFormatDate() : util.formatTime(info.first_displace_time, 'Y-M-D'),
             first_displace_reason: parseInt(info.first_displace_reason ? info.first_displace_reason : 0),
             is_hospital_operation: info.is_hospital_operation,
@@ -827,6 +829,8 @@ Page({
             telphone2: that.data.tel2,
             type: parseInt(that.data.type),
             medical_history: that.data.medical_history,
+
+            operation_history: that.data.operation_history,
             first_displace_time: new Date(that.data.first_displace_time).getTime() / 1000,
             first_displace_reason: that.data.first_displace_reason,
             is_hospital_operation: parseInt(that.data.is_hospital_operation),
@@ -911,7 +915,7 @@ Page({
             this.showToast("请填写本次发病可能诱因")
             return false;
         }
-        if (this.data.history_check) {
+        if (this.data.operation_history) {
             if (this.data.first_displace_time == '请选择日期') {
                 this.showToast("请选择初次置换时间")
                 return false;

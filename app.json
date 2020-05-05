@@ -1,9 +1,9 @@
 {
     "pages": [
         "pages/auth/auth",
+        "pages/center/case/chuanci/chuanci",
         "pages/center/case/followup/followup",
         "pages/center/case/shoushu/shoushu",
-        "pages/center/case/chuanci/chuanci",
         "pages/center/case/base/base",
         "pages/person/specimenAuth/specimenAuth",
         "pages/center/case/yongyao/yongyao",

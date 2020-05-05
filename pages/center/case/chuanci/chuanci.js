@@ -69,11 +69,14 @@ Page({
         is_fever: 0,
         is_pain: 0,
         is_sinus: 0,
+        is_activity_limit: 0,
+        is_seepage: 0,
+        remark: '',
         exterior_pics: [],
         // -------- 基本情况 end -------- //
 
         // -------- 检查化验 begin -------- //
-        assay_check: false,
+        out_check: false,
         esr: '',
         esr_state: 1,
         esr_state_value: 'pencil',
@@ -90,6 +93,8 @@ Page({
         fibrinogen: '',
         fibrinogen_state: 1,
         fibrinogen_state_value: 'pencil',
+
+        joint_fluid_check: false,
         joint_fluid_desc: '',
         joint_fluid_desc_state: 1,
         joint_fluid_desc_pic: [],
@@ -112,6 +117,8 @@ Page({
         pmn_state: 1,
         pmn_state_value: 'pencil',
         joint_fluid_wbc_state_value: 'pencil',
+
+        pathogen_check: false,
         sious_throat_swabs1: '',
         sious_throat_swabs1_state: 1,
         sious_throat_swabs1_state_value: 'pencil',
@@ -147,6 +154,8 @@ Page({
         ngs_result: '',
         ngs_result_state: 1,
         ngs_result_state_value: 'pencil',
+
+        other: false,
         other_check: '',
         other_check_state: 1,
         // -------- 检查化验 end -------- //
@@ -190,130 +199,106 @@ Page({
         // ------- 图片上传 end  ---------- //
     },
 
+    // 基本情况
     onBaseDelaySwitchChange: function(e) {
         this.setData({
             base_info: e.detail.value
         });
         let state = this.data.base_info ? 2 : 1
         this.setData({
-            puncture_date: '请选择日期',
             puncture_date_state: state,
-            puncture_type: 0,
             puncture_type_state: state,
-            puncture_desc: '',
             puncture_desc_state: state,
-            last_operation_duration: '',
-            symptoms_duration: '',
-            properties: '',
-            antibiotic_history: 0,
             antibiotic_history_state: state,
-            immuno_history: 0,
             immuno_history_state: state,
         })
     },
+    // 外周血检测
     onCheckDelaySwitchChange: function(e) {
         this.setData({
-            assay_check: e.detail.value
+            out_check: e.detail.value
         });
-        let state = this.data.assay_check ? 2 : 1
-        let stateValue = this.data.assay_check ? "clock-o" : "pencil"
+        let state = this.data.out_check ? 2 : 1
+        let stateValue = this.data.out_check ? "clock-o" : "pencil"
         this.setData({
-            esr: '',
             esr_state: state,
             esr_state_value: stateValue,
-            crp: '',
             crp_state: state,
             crp_state_value: stateValue,
-            conver_crp: '',
-            il6: '',
             il6_state: state,
             il6_state_value: stateValue,
-            dimer: '',
             dimer_state: state,
             dimer_state_value: stateValue,
-            fibrinogen: '',
             fibrinogen_state: state,
             fibrinogen_state_value: stateValue,
-            joint_fluid_desc: '',
-            joint_fluid_desc_pic: [],
+        })
+    },
+    // 关节液检测
+    onFluidSwitchChange(e) {
+        this.setData({
+            joint_fluid_check: e.detail.value
+        });
+        let state = this.data.out_check ? 2 : 1
+        let stateValue = this.data.out_check ? "clock-o" : "pencil"
+        this.setData({
             joint_fluid_desc_state: state,
             joint_fluid_desc_state_value: stateValue,
-            rinse_fluid_volume: '',
             rinse_fluid_volume_state: state,
             rinse_fluid_volume_state_value: stateValue,
-            rinse_lavage_volume: '',
             rinse_lavage_volume_state: state,
             rinse_lavage_volume_state_value: stateValue,
-            le_testpaper_stoste: 0,
-            le_testpaper_stoste_pic: [],
             le_testpaper_stoste_state: state,
             le_testpaper_stoste_state_value: stateValue,
-            le_testpaper_centrifugal: 0,
-            le_testpaper_centrifugal_pic: [],
             le_testpaper_centrifugal_state: state,
             le_testpaper_centrifugal_state_value: stateValue,
-            joint_fluid_wbc: '',
             joint_fluid_wbc_state: state,
             joint_fluid_wbc_state_value: stateValue,
-            pmn: '',
             pmn_state: state,
             pmn_state_value: stateValue,
-            sious_throat_swabs1: '',
-            sious_throat_swabs1_pic: [],
-            sious_throat_swabs1_state: state,
-            sious_throat_swabs1_state_value: stateValue,
-            sious_throat_swabs2: '',
-            sious_throat_swabs2_pic: [],
-            sious_throat_swabs2_state: state,
-            sious_throat_swabs2_state_value: stateValue,
-            sious_throat_swabs3: '',
-            sious_throat_swabs3_pic: [],
-            sious_throat_swabs3_state: state,
-            sious_throat_swabs3_state_value: stateValue,
-            culture_type: 0,
             culture_type_state: state,
             culture_type_state_value: stateValue,
-            culture_bottle_fluid_volume: '',
             culture_bottle_fluid_volume_state: state,
             culture_bottle_fluid_volume_state_value: stateValue,
-            aerobic_result: '',
+        })
+    },
+    // 病原菌检测
+    onPathogenSwitchChange(e) {
+        this.setData({
+            pathogen_check: e.detail.value
+        });
+        let state = this.data.out_check ? 2 : 1
+        let stateValue = this.data.out_check ? "clock-o" : "pencil"
+        this.setData({
+            sious_throat_swabs1_state: state,
+            sious_throat_swabs1_state_value: stateValue,
+            sious_throat_swabs2_state: state,
+            sious_throat_swabs2_state_value: stateValue,
+            sious_throat_swabs3_state: state,
+            sious_throat_swabs3_state_value: stateValue,
             aerobic_result_state: state,
             aerobic_result_state_value: stateValue,
-            anaerobic_result: '',
             anaerobic_result_state: state,
             anaerobic_result_state_value: stateValue,
-            ngs_type: 0,
             ngs_type_state: state,
             ngs_type_state_value: stateValue,
-            ngs_fluid_volume: '',
             ngs_fluid_volume_state: state,
             ngs_fluid_volume_state_value: stateValue,
-            ngs_result: '',
             ngs_result_state: state,
             ngs_result_state_value: stateValue,
-            other_check: '',
+        })
+    },
+    // 其他检测
+    onOtherSwitchChange(e) {
+        this.setData({
+            other: e.detail.value
+        });
+        let state = this.data.out_check ? 2 : 1
+        let stateValue = this.data.out_check ? "clock-o" : "pencil"
+        this.setData({
             other_check_state: state,
             other_check_state_value: stateValue,
         })
     },
-
-    // onPuncture_summarySwitchChange: function(e) {
-    //     this.setData({
-    //         puncture_summary: e.detail.value
-    //     });
-
-    //     let state = this.data.puncture_summary ? 2 : 1
-    //     let stateValue = this.data.assay_check ? "clock-o" : "pencil"
-    //     this.setData({
-    //         present_result: 0,
-    //         present_result_state: state,
-    //         present_result_state_value: stateValue,
-    //         thistime_result: '',
-    //         thistime_result_state: state,
-    //         is_remain_sample: 1,
-    //         is_remain_sample_state: state,
-    //     })
-    // },
 
     onPickerChange(e) {
         let type = e.currentTarget.dataset.type
@@ -585,13 +570,15 @@ Page({
             is_sinus: parseInt(info.is_sinus),
             exterior_pics: this.getImgArr(info.exterior_pics),
 
-            assay_check: info.assay_check == 1,
+            out_check: info.out_check == 1,
             esr: this.getDefaultNum(info.esr),
             crp: this.getDefaultNum(info.crp),
             conver_crp: this.getDefaultNum(info.conver_crp),
             il6: this.getDefaultNum(info.il6),
             dimer: this.getDefaultNum(info.dimer),
             fibrinogen: this.getDefaultNum(info.fibrinogen),
+
+            joint_fluid_check: info.joint_fluid_check,
             joint_fluid_desc: info.joint_fluid_desc,
             joint_fluid_desc_pic: this.getImgArr(info.joint_fluid_desc_pics),
             rinse_fluid_volume: this.getDefaultNum(info.rinse_fluid_volume),
@@ -602,6 +589,8 @@ Page({
             le_testpaper_centrifugal_pic: this.getImgArr(info.le_testpaper_centrifugal_pics),
             joint_fluid_wbc: this.getDefaultNum(info.joint_fluid_wbc),
             pmn: this.getDefaultNum(info.pmn),
+
+            pathogen_check: info.pathogen_check,
             sious_throat_swabs1: info.sious_throat_swabs1,
             sious_throat_swabs1_pic: this.getImgArr(info.sious_throat_swabs1_pic),
             sious_throat_swabs2: info.sious_throat_swabs2,
@@ -617,9 +606,11 @@ Page({
             ngs_type: info.ngs_type,
             ngs_fluid_volume: this.getDefaultNum(info.ngs_fluid_volume),
             ngs_result: info.ngs_result,
+
+            other: info.other,
             other_check: info.other_check,
 
-            puncture_summary: info.puncture_summary == 1,
+            // puncture_summary: info.puncture_summary == 1,
             present_result: info.present_result,
             thistime_result: info.thistime_result,
             is_remain_sample: info.sample_deposit.length > 0 ? 2 : 1,
@@ -815,7 +806,8 @@ Page({
                 return false;
             }
         }
-        if (!this.data.assay_check) {
+        // 外周血
+        if (!this.data.out_check) {
             if (this.data.esr_state == 1 && this.data.esr.length == 0) {
                 this.showToast("请填写ESR")
                 return false;
@@ -836,6 +828,9 @@ Page({
                 this.showToast("请填写Fibrinogen")
                 return false;
             }
+        }
+        // 关节液检测
+        if (!this.data.joint_fluid_check) {
             if (this.data.joint_fluid_desc.length == 0) {
                 this.showToast("请填写关节液描述")
                 return false;
@@ -846,6 +841,14 @@ Page({
             }
             if (this.data.rinse_lavage_volume.length == 0) {
                 this.showToast("请填写抽出灌洗液总量")
+                return false;
+            }
+            if (this.data.culture_type == 0) {
+                this.showToast("请选择打入每个培养瓶液体性质")
+                return false;
+            }
+            if (this.data.culture_bottle_fluid_volume_state == 1 && this.data.culture_bottle_fluid_volume.length == 0) {
+                this.showToast("请填写打入每个培养瓶液体量")
                 return false;
             }
             if (this.data.le_testpaper_stoste == 0) {
@@ -864,6 +867,9 @@ Page({
                 this.showToast("请填写PMN%")
                 return false;
             }
+        }
+        // 病原菌检测
+        if (!this.data.pathogen_check) {
             if (this.data.sious_throat_swabs1_state == 1 && this.data.sious_throat_swabs1.length == 0) {
                 this.showToast("请填写窦道咽拭子1")
                 return false;
@@ -876,14 +882,7 @@ Page({
                 this.showToast("请填写窦道咽拭子3")
                 return false;
             }
-            if (this.data.culture_type == 0) {
-                this.showToast("请选择打入每个培养瓶液体性质")
-                return false;
-            }
-            if (this.data.culture_bottle_fluid_volume_state == 1 && this.data.culture_bottle_fluid_volume.length == 0) {
-                this.showToast("请填写打入每个培养瓶液体量")
-                return false;
-            }
+
             if (this.data.aerobic_result_state == 1 && this.data.aerobic_result.length == 0) {
                 this.showToast("请填写本次需氧+真菌培养结果")
                 return false;
@@ -904,21 +903,24 @@ Page({
                 this.showToast("请填写NGS结果")
                 return false;
             }
+        }
+        // 其他检测
+        if (!this.data.other) {
             if (this.data.other_check.length == 0) {
                 this.showToast("请填写其他检查")
                 return false;
             }
         }
-        if (!this.data.puncture_summary) {
-            if (this.data.present_result_state == 1 && this.data.present_result == 0) {
-                this.showToast("请选择目前诊断")
-                return false;
-            }
-            if (this.data.thistime_result.length == 0) {
-                this.showToast("请填写本次诊疗周期最终诊断")
-                return false;
-            }
-        }
+        // if (!this.data.puncture_summary) {
+        //     if (this.data.present_result_state == 1 && this.data.present_result == 0) {
+        //         this.showToast("请选择目前诊断")
+        //         return false;
+        //     }
+        //     if (this.data.thistime_result.length == 0) {
+        //         this.showToast("请填写本次诊疗周期最终诊断")
+        //         return false;
+        //     }
+        // }
 
         return true
     },
@@ -992,13 +994,15 @@ Page({
             is_sinus: that.data.is_sinus,
             exterior_pics: that.makePicJson(that.data.exterior_pics, true),
 
-            assay_check: that.data.assay_check ? 1 : 0,
+            out_check: that.data.out_check ? 1 : 0,
             esr: parseInt(this.makeDefaultValue(that.data.esr)),
             crp: parseFloat(this.makeDefaultValue(that.data.crp)),
             conver_crp: parseFloat(this.makeDefaultValue(that.data.conver_crp)),
             il6: parseFloat(this.makeDefaultValue(that.data.il6)),
             dimer: parseFloat(this.makeDefaultValue(that.data.dimer)),
             fibrinogen: parseFloat(this.makeDefaultValue(that.data.fibrinogen)),
+
+            joint_fluid_check: that.data.joint_fluid_check,
             joint_fluid_desc: that.data.joint_fluid_desc,
             joint_fluid_desc_pics: that.makePicJson(that.data.joint_fluid_desc_pic),
             rinse_fluid_volume: parseFloat(this.makeDefaultValue(that.data.rinse_fluid_volume)),
@@ -1009,6 +1013,8 @@ Page({
             le_testpaper_centrifugal_pics: that.makePicJson(that.data.le_testpaper_centrifugal_pic),
             joint_fluid_wbc: parseInt(this.makeDefaultValue(that.data.joint_fluid_wbc)),
             pmn: parseFloat(this.makeDefaultValue(that.data.pmn)),
+
+            pathogen_check: that.data.pathogen_check,
             sious_throat_swabs1: that.data.sious_throat_swabs1,
             sious_throat_swabs1_pic: that.makePicJson(that.data.sious_throat_swabs1_pic),
             sious_throat_swabs2: that.data.sious_throat_swabs2,
@@ -1024,12 +1030,14 @@ Page({
             ngs_type: that.data.ngs_type,
             ngs_fluid_volume: parseFloat(this.makeDefaultValue(that.data.ngs_fluid_volume)),
             ngs_result: that.data.ngs_result,
+
+            other: that.data.other,
             other_check: that.data.other_check,
 
-            puncture_summary: that.data.puncture_summary ? 1 : 0,
-            present_result: that.data.present_result,
-            thistime_result: that.data.thistime_result,
-            is_remain_sample: that.data.is_remain_sample,
+            // puncture_summary: that.data.puncture_summary ? 1 : 0,
+            // present_result: that.data.present_result,
+            // thistime_result: that.data.thistime_result,
+            // is_remain_sample: that.data.is_remain_sample,
         }
         console.log("穿刺：" + JSON.stringify(jsonData))
         return JSON.stringify(jsonData)

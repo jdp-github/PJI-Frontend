@@ -109,7 +109,7 @@
                             <view class='action'>
                                 <text class='icon-title text-green'></text>本次随访资料</view>
                             <view>
-                                <switch class='green sm margin-right' bindchange="onThis_followup_checkChange" style='margin-left: 15rpx;' checked='{{this_followup_check}}'></switch>
+                                <switch class='green sm margin-right' bindchange="onFollow_dataChange" style='margin-left: 15rpx;' checked='{{follow_data}}'></switch>
                             </view>
                         </view>
                         <!-- 外观状态 -->
