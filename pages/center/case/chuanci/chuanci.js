@@ -238,8 +238,8 @@ Page({
         this.setData({
             joint_fluid_check: e.detail.value
         });
-        let state = this.data.out_check ? 2 : 1
-        let stateValue = this.data.out_check ? "clock-o" : "pencil"
+        let state = this.data.joint_fluid_check ? 2 : 1
+        let stateValue = this.data.joint_fluid_check ? "clock-o" : "pencil"
         this.setData({
             joint_fluid_desc_state: state,
             joint_fluid_desc_state_value: stateValue,

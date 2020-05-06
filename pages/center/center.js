@@ -19,8 +19,6 @@ Page({
         centerTempList: [], // 存储中心列表，取消搜索时恢复数据用
         visibleCenter: false,
         centerName: '',
-        noticeTitle: '',
-        noticeContent: ""
     },
     onHide: function() {
         this.setData({
@@ -167,6 +165,9 @@ Page({
                             center.no_approve_percentage = Math.round((center.no_approve_cases / total) * 100) / 100;
                             center.no_completed_percentage = Math.round((center.no_completed_cases / total) * 100) / 100;
                         }
+                        if (center.notice && center.notice.length > 0) {
+                            center.topNotice = center.notice[0]
+                        }
                     }
                     that.setData({
                         centerList: res.data.data.list,
@@ -175,44 +176,13 @@ Page({
                 } else {
                     that.showToast(res.data.msg);
                 }
-
-                if (that.data.centerList && that.data.centerList.length > 0) {
-                    that.requestNotice(that.data.centerList[0].center_id)
-                }
             },
             fail(res) {
                 that.hideLoading()
             }
         });
     },
-    requestNotice(centerId) {
-        let that = this;
-        wx.request({
-            url: constant.basePath,
-            data: {
-                service: 'Notice.GetDisplayNotice',
-                center_id: centerId
-            },
-            header: {
-                'content-type': 'application/json'
-            },
-            success(res) {
-                console.log("Notice.GetDisplayNotice:" + JSON.stringify(res))
-                // that.hideLoading();
-                if (res.data.data.code == constant.response_success) {
-                    that.setData({
-                        noticeTitle: res.data.data.info.title,
-                        noticeContent: res.data.data.info.content
-                    });
-                } else {
-                    that.showToast(res.data.data.msg);
-                }
-            },
-            fail(res) {
-                that.hideLoading();
-            }
-        });
-    },
+    
     onSearchChange: function(e) {
         this.setData({
             searchValue: e.detail.value

@@ -72,7 +72,7 @@ Page({
         plan: 0,
         plan_picker: ["请选择", "观察随访", "口服抗生素压制", "诊断性穿刺", "入院手术治疗", "其他"],
         remark: '',
-        remark_state: 0,
+        remark_state: 1,
 
         // ------- 图片上传 start --------- //
         pic1: '',
@@ -98,6 +98,7 @@ Page({
             check_result_state: state,
             check_result_state_value: stateValue,
             remark_state: state,
+            remark_state_value: stateValue
         })
     },
 
@@ -372,7 +373,8 @@ Page({
             purpose: info.purpose,
             puncture_info: info.puncture_info,
             patient_desc: info.patient_desc,
-            follow_data: info.follow_data,
+
+            follow_data: parseInt(info.follow_data) == 1,
             exterior: info.exterior,
             exterior_pic: this.getImgArr(info.exterior_pic),
             assay_result: info.assay_result,
@@ -537,6 +539,7 @@ Page({
         field_state.push(this.makeFiledObj("assay_result"));
         field_state.push(this.makeFiledObj("check_result"));
         field_state.push(this.makeFiledObj("diagnose"));
+        field_state.push(this.makeFiledObj("remark"));
 
         let filedStr = JSON.stringify(field_state)
         console.log("随访state：" + filedStr)

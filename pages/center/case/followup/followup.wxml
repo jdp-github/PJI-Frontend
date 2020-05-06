@@ -96,7 +96,7 @@
                             <i class="fa fa-{{diagnose_state_value}} fa-2x" style="pointer-events:{{puncture_summary?'none':''}}" data-type="diagnose_state" data-style="picker" data-state="{{diagnose_state}}" bindtap="on2StateChange"></i>
                         </view>
                         <!-- 下一步计划 -->
-                        <view class="cu-form-group">
+                        <view class="cu-form-group solid-bottom">
                             <view class='title'>下一步计划</view>
                             <picker bindchange="onPickerChange" value="{{plan}}" range="{{plan_picker}}" disabled='{{plan_state==2}}' data-type="plan">
                                 <view class="picker">
@@ -108,7 +108,7 @@
                         <view class='cu-bar solid-bottom bg-white'>
                             <view class='action'>
                                 <text class='icon-title text-green'></text>本次随访资料</view>
-                            <view>
+                            <view style="font-size:28rpx;padding-top:6rpx">延后录入
                                 <switch class='green sm margin-right' bindchange="onFollow_dataChange" style='margin-left: 15rpx;' checked='{{follow_data}}'></switch>
                             </view>
                         </view>
@@ -146,7 +146,7 @@
                             </view>
                         </view>
                         <!-- 备注 -->
-                        <view class="cu-form-group {{remark_state==0?'disabled':''}}">
+                        <view class="cu-form-group {{remark_state==0?'disabled':remark_state==2?'clock':''}}">
                             <view style='display:flex;flex-direction: column; '>
                                 <view class='title' style='text-align:left'>备注</view>
                                 <input placeholder="非必填项" class='radius' style='width: 350rpx;text-align:left;' bindinput="onInput" value='{{remark}}' disabled="{{remark_state==2}}" data-type="remark"></input>

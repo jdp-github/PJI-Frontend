@@ -97,7 +97,7 @@
                         </view>
                         <view class="cu-form-group">
                             <view class='title'>出生年月</view>
-                            <picker mode="date" value="{{birthday}}" start="1900-01-01" end="2050-12-31" bindchange="onBirthdayeChange">
+                            <picker mode="date" fields="month" value="{{birthday}}" start="1900-01-01" end="2050-12-31" bindchange="onBirthdayeChange">
                                 <view class="picker">
                                     {{birthday}}
                                 </view>
@@ -105,7 +105,7 @@
                         </view>
                         <view class="cu-form-group disabled">
                             <view class='title'>年龄</view>
-                            <input placeholder="请输入年龄" class='radius' bindinput="onAgeInput" type="digit" value="{{age}}" disabled></input>
+                            <input placeholder="自动生成" class='radius' bindinput="onAgeInput" type="digit" value="{{age}}" disabled></input>
                         </view>
                         <view class="cu-form-group">
                             <view class='title'>身高(m)</view>

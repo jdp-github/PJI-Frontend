@@ -20,7 +20,7 @@ Page({
         isIn: 0,
         caseInfo: '',
         timeLineList: [],
-        typePicker: ["基本信息", "诊断穿刺", "入院手术", "抗生素治疗开始", "门诊随访", "抗生素治疗终止"],
+        typePicker: ["基本信息", "诊断穿刺", "入院手术", "抗生素治疗开始", "门诊随访", "抗生素治疗终止", "手术", "出院"],
         // ---------------- calendar ---------------- //
         calendarDate: util.getNowFormatMonth(),
         eventTopPosition: "80rpx",
@@ -98,7 +98,7 @@ Page({
             wx.navigateTo({
                 url: '../chuanci/chuanci?centerId=' + this.data.centerId + "&centerName=" + this.data.centerName + "&caseId=" + this.data.caseInfo.case_id + "&itemId=" + item.item_id
             });
-        } else if (item.type == 3) { // 手术
+        } else if (item.type == 3 || item.type == 7 || item.type == 8) { // 手术
             wx.navigateTo({
                 url: '../shoushu/shoushu?centerId=' + this.data.centerId + "&centerName=" + this.data.centerName + "&caseId=" + this.data.caseInfo.case_id + "&itemId=" + item.item_id
             });

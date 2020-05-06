@@ -44,7 +44,7 @@ Page({
         createDate: '',
         sex: 0,
         sexPicker: ['请选择', '男', '女'],
-        birthday: '',
+        birthday: '1970-01',
         age: '',
         height: '',
         weight: '',
@@ -612,9 +612,8 @@ Page({
             side: parseInt(info.side),
             part: parseInt(info.part),
             createDate: this.data.isCreate ? util.getNowFormatDate() : util.formatTime(info.create_time, 'Y-M-D'),
-            birthday: util.formatTime(info.birthday, 'Y-M-D'),
+            birthday: this.data.isCreate ? util.formatTime(new Date(this.data.birthday), 'Y-M') : util.formatTime(info.birthday, 'Y-M'),
             sex: parseInt(info.sex),
-            age: this.getDefaultNum(info.age),
             height: this.getDefaultNum(info.height),
             weight: this.getDefaultNum(info.weight),
             bmi: this.getDefaultNum(info.bmi),
@@ -625,11 +624,11 @@ Page({
             type: parseInt(info.type),
             medical_history: info.medical_history,
 
-            operation_history: info.medical_history,
-            first_displace_time: this.data.isCreate ? util.getNowFormatDate() : util.formatTime(info.first_displace_time, 'Y-M-D'),
+            operation_history: parseInt(info.operation_history) == 1,
+            first_displace_time: this.data.isCreate ? util.getNowFormatDate() : info.first_displace_time ? util.formatTime(info.first_displace_time, 'Y-M-D') : '请选择日期',
             first_displace_reason: parseInt(info.first_displace_reason ? info.first_displace_reason : 0),
             is_hospital_operation: info.is_hospital_operation,
-            last_operation_date: this.data.isCreate ? util.getNowFormatDate() : util.formatTime(info.last_operation_date, 'Y-M-D'),
+            last_operation_date: this.data.isCreate ? util.getNowFormatDate() : info.last_operation_date ? util.formatTime(info.last_operation_date, 'Y-M-D') : '请选择日期',
             repair_count: info.repair_count,
             duration_symptoms_date: this.data.isCreate ? util.getNowFormatDate() : util.formatTime(info.duration_symptoms_date, 'Y-M-D'),
             this_time_cause: info.this_time_cause,
@@ -668,6 +667,7 @@ Page({
             approveAvatar: info.base_auditor_avatar,
             isBaseLock: info.is_lock
         })
+        this.updateAge()
     },
 
     getDefaultNum(num) {
@@ -830,7 +830,7 @@ Page({
             type: parseInt(that.data.type),
             medical_history: that.data.medical_history,
 
-            operation_history: that.data.operation_history,
+            operation_history: that.data.operation_history ? 1 : 0,
             first_displace_time: new Date(that.data.first_displace_time).getTime() / 1000,
             first_displace_reason: that.data.first_displace_reason,
             is_hospital_operation: parseInt(that.data.is_hospital_operation),
@@ -858,11 +858,11 @@ Page({
             anemia: parseInt(that.data.anemia),
             remark1: that.data.remark1,
 
-            week_immuno: that.data.week_immuno,
-            week_anticoagulant: that.data.week_anticoagulant,
-            week_antibiotic: that.data.week_antibiotic,
-            month_chemotherapy: that.data.month_chemotherapy,
-            month_radiotherapy: that.data.month_radiotherapy,
+            week_immuno: parseInt(that.data.week_immuno),
+            week_anticoagulant: parseInt(that.data.week_anticoagulant),
+            week_antibiotic: parseInt(that.data.week_antibiotic),
+            month_chemotherapy: parseInt(that.data.month_chemotherapy),
+            month_radiotherapy: parseInt(that.data.month_radiotherapy),
             remark2: that.data.remark2,
 
             is_agree: that.data.is_agree,

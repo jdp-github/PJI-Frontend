@@ -102,6 +102,7 @@
                         </view>
                         <view class="cu-form-group {{operation_before_summary?'clock':''}}" bindtap="onShowDrawer">
                             <view class='title'>病状体征</view>
+                            <i class="fa fa-angle-right fa-2x"></i>
                         </view>
                         <!-- ESR (mm/h) -->
                         <view class="cu-form-group {{esr_state==0?'disabled':esr_state==2?'clock':''}}">

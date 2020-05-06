@@ -97,8 +97,8 @@
         <view class="center-notice">
             <view class="center-notice-inner">
                 <view>
-                    <text class='icon-notificationfill'></text>公告:{{noticeTitle}}
-                    <view class='center-notice-content'>{{noticeContent}}</view>
+                    <text class='icon-notificationfill'></text>公告:{{item.topNotice.title}}
+                    <view class='center-notice-content'>{{item.topNotice.content}}</view>
                 </view>
             </view>
         </view>

@@ -295,8 +295,8 @@ Page({
         this.setData({
             microbe_check: e.detail.value
         });
-        let state = this.data.operation_during_treat ? 2 : 1
-        let stateValue = this.data.operation_during_treat ? "clock-o" : "pencil"
+        let state = this.data.microbe_check ? 2 : 1
+        let stateValue = this.data.microbe_check ? "clock-o" : "pencil"
         this.setData({
             tissue_culture1_state: state,
             tissue_culture1_state_value: stateValue,
@@ -357,22 +357,18 @@ Page({
         let state = this.data.leave_summary ? 2 : 1
         let stateValue = this.data.leave_summary ? "clock-o" : "pencil"
         this.setData({
-            leave_hospital_date: '请选择日期',
             leave_hospital_date_state: state,
             leave_hospital_date_state_value: stateValue,
-            msis: 0,
+            clinical_judge_state: state,
+            clinical_judge_state_value: stateValue,
             msis_state: state,
             msis_state_value: stateValue,
-            icm: 0,
             icm_state: state,
             icm_state_value: stateValue,
-            special_event: '',
             special_event_state: state,
             special_event_state_value: stateValue,
-            antibiotic_scene: 0,
             antibiotic_scene_state: state,
             antibiotic_scene_state_value: stateValue,
-            germ_name: '',
             germ_name_state: state,
             germ_name_state_value: stateValue,
         })
@@ -759,10 +755,10 @@ Page({
             narcosis_type: parseInt(info.narcosis_type),
             operation: parseInt(info.operation),
             prosthesis: parseInt(info.prosthesis),
-            operation_duration: info.operation_duration,
-            haemorrhage_volume: info.haemorrhage_volume,
+            operation_duration: this.getDefaultNum(info.operation_duration),
+            haemorrhage_volume: this.getDefaultNum(info.haemorrhage_volume),
             bone_cement_type: parseInt(info.bone_cement_type),
-            bone_cement_volume: info.bone_cement_volume,
+            bone_cement_volume: this.getDefaultNum(info.bone_cement_volume),
             data_pic: this.getImgArr(info.data_pic),
             data_video: this.getImgArr(info.data_video),
 
