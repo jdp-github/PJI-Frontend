@@ -40,12 +40,15 @@ Page({
         addAvatar: '',
         updateAvatarArr: [],
         approveAvatar: '',
+        this_time_result_picker: ['暂无信息', '感染', '非感染', '不能确定'],
         // -------- 公用信息 end -------- //
 
         // -------- 基本情况 begin -------- //
         base_info: false,
         puncture_date: '请选择日期',
         puncture_date_state: 1,
+        last_operation_date: '',
+        duration_symptoms_date: '',
         puncture_type: 0,
         puncture_type_picker: ['请选择', '置换术后', '翻修术后', '占位器术后', '初次', '其他'],
         puncture_type_state: 1,
@@ -311,8 +314,10 @@ Page({
         let type = e.currentTarget.dataset.type
         this.setData({
             [type]: e.detail.value,
-            last_operation_duration: util.getIntervalMonth(new Date(), new Date(e.detail.value)),
-            symptoms_duration: util.getIntervalDay(new Date(e.detail.value), new Date()),
+            last_operation_duration: util.getIntervalMonth(new Date(e.detail.value), new Date(this.data.last_operation_date)),
+            symptoms_duration: util.getIntervalWeek(new Date(e.detail.value), new Date(this.data.duration_symptoms_date)),
+        })
+        this.setData({
             properties: this.data.symptoms_duration <= 21 ? '急性' : '慢性'
         })
     },
@@ -418,7 +423,7 @@ Page({
     },
 
     onRelateClick(e) {
-        if (!this.data.base_info) {
+        if (this.data.base_info) {
             let type = e.currentTarget.dataset.type
             this.setData({
                 modalName: "RelateDrawerModalR",
@@ -555,11 +560,12 @@ Page({
         this.setData({
             base_info: info.base_info == 1,
             puncture_date: this.getDefaultDate(info.puncture_date),
+            last_operation_date: this.getDefaultDate(info.last_operation_date),
+            duration_symptoms_date: this.getDefaultDate(info.duration_symptoms_date),
             puncture_type: info.puncture_type,
             puncture_desc: info.puncture_desc,
-            last_operation_duration: this.getDefaultNum(info.last_operation_duration),
-            symptoms_duration: this.getDefaultNum(info.symptoms_duration),
-            properties: info.properties,
+            last_operation_duration: util.getIntervalMonth(new Date(info.puncture_date * 1000), new Date(info.last_operation_date * 1000)),
+            symptoms_duration: util.getIntervalWeek(new Date(info.puncture_date * 1000), new Date(info.duration_symptoms_date * 1000)),
             antibiotic_history: info.antibiotic_history,
             immuno_history: info.immuno_history,
             is_heat: parseInt(info.is_heat),
@@ -568,6 +574,9 @@ Page({
             is_fever: parseInt(info.is_fever),
             is_pain: parseInt(info.is_pain),
             is_sinus: parseInt(info.is_sinus),
+            is_activity_limit: parseInt(info.is_activity_limit),
+            is_seepage: parseInt(info.is_seepage),
+            remark: info.remark,
             exterior_pics: this.getImgArr(info.exterior_pics),
 
             out_check: info.out_check == 1,
@@ -612,7 +621,7 @@ Page({
 
             // puncture_summary: info.puncture_summary == 1,
             present_result: info.present_result,
-            thistime_result: info.thistime_result,
+            thistime_result: this.makeThisTimeResult(info.thistime_result),
             is_remain_sample: info.sample_deposit.length > 0 ? 2 : 1,
             puncture_creator: info.puncture_creator,
             puncture_auditor: info.puncture_auditor,
@@ -622,6 +631,9 @@ Page({
             follow_info: info.follow_info,
             // 已存标本
             sample_desc: info.sample_deposit
+        })
+        this.setData({
+            properties: this.data.symptoms_duration * 7 <= 21 ? '急性' : '慢性'
         })
 
         // 标本存放情况
@@ -635,7 +647,13 @@ Page({
         if (this.data.follow_info.length > 0) {
             this.getRelateList(5)
         }
+    },
 
+    makeThisTimeResult(thistime_result) {
+        const clinical = '临床判定:' + this.data.this_time_result_picker[thistime_result.clinical_judge]
+        const msis = '2014MSIS诊断标准:' + this.data.this_time_result_picker[thistime_result.msis]
+        const icm = '2018ICM新标准:' + this.data.this_time_result_picker[thistime_result.icm]
+        return clinical + "，" + msis + "，" + icm;
     },
 
     getImgArr(jsonImg) {
@@ -668,12 +686,12 @@ Page({
     },
 
     getDefaultNum(num) {
-        return num > 0 ? num : ""
+        return num;
     },
 
     getDefaultDate(date) {
-        var dateValue = "请选择日期"
-        if (date != null && date != 0) {
+        let dateValue = "请选择日期"
+        if (date != null) {
             dateValue = util.formatTime(date, 'Y-M-D')
         }
         return dateValue
@@ -981,8 +999,8 @@ Page({
             puncture_date: that.makeDefaultDate(that.data.puncture_date),
             puncture_type: that.data.puncture_type,
             puncture_desc: that.data.puncture_desc,
-            last_operation_duration: that.makeDefaultNum(that.data.last_operation_duration),
-            symptoms_duration: that.makeDefaultNum(that.data.symptoms_duration),
+            last_operation_duration: that.data.last_operation_duration,
+            symptoms_duration: that.data.symptoms_duration,
             properties: that.data.properties,
             antibiotic_history: that.data.antibiotic_history,
             immuno_history: that.data.immuno_history,
@@ -992,6 +1010,9 @@ Page({
             is_fever: that.data.is_fever,
             is_pain: that.data.is_pain,
             is_sinus: that.data.is_sinus,
+            is_activity_limit: that.data.is_activity_limit,
+            is_seepage: that.data.is_seepage,
+            remark: that.data.remark,
             exterior_pics: that.makePicJson(that.data.exterior_pics, true),
 
             out_check: that.data.out_check ? 1 : 0,

@@ -13,7 +13,7 @@
 		"autoAudits": false
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.10.1",
+	"libVersion": "2.11.0",
 	"appid": "wx1e3bc514b1d29f4d",
 	"projectname": "PJI-Frontend",
 	"debugOptions": {

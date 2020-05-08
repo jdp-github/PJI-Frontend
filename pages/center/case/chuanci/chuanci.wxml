@@ -64,7 +64,7 @@
                         <!-- 穿刺日期 -->
                         <view class="cu-form-group {{puncture_date_state==2?'clock':''}}">
                             <view class='title'>穿刺日期</view>
-                            <picker mode="date" value="{{puncture_date}}" start="2015-01-01" end="2030-12-31" bindchange="onDateChange" disabled="{{puncture_date_state==2}}" data-type="puncture_date">
+                            <picker mode="date" value="{{puncture_date}}" start="1970-01-01" end="2050-12-31" bindchange="onDateChange" disabled="{{puncture_date_state==2}}" data-type="puncture_date">
                                 <view class="picker">
                                     {{puncture_date}}
                                 </view>
@@ -382,7 +382,7 @@
             <view class="cu-list menu menu-avatar disabled">
                 <view class="cu-item-special">
                     <!-- 目前诊断（包括本次穿刺结果） -->
-                    <view class="cu-form-group {{present_result_state==0?'disabled':present_result_state==2?'clock':''}} disabled">
+                    <view class="cu-form-group {{present_result_state==0?'disabled':present_result_state==2?'clock':''}}">
                         <view class='title'>目前诊断（包括本次穿刺结果）</view>
                         <picker bindchange="onPickerChange" value="{{present_result}}" range="{{present_result_picker}}" disabled='{{present_result_state != 1}}' data-type="present_result">
                             <view class="picker">
@@ -393,9 +393,9 @@
                     </view>
                     <!-- 本次诊疗周期最终诊断 -->
                     <view class="cu-form-group {{thistime_result_state==2?'clock':''}} disabled">
-                        <view style='display:flex;flex-direction: column; '>
+                        <view style='display:flex;flex-direction: column;width:100% '>
                             <view class='title' style='text-align:left'>本次诊疗周期最终诊断</view>
-                            <input placeholder="请输入文字" class='radius' style='width: 350rpx;text-align:left;' type='number' bindinput="onInput" value='{{thistime_result}}' disabled="{{thistime_result_state==2}}" data-type="thistime_result"></input>
+                            <input placeholder="请输入文字" class='radius' style='width: 100%;text-align:left;' value='{{thistime_result}}' disabled data-type="thistime_result"></input>
                         </view>
                     </view>
                     <!-- 本次穿刺相关的后续手术治疗 -->
@@ -633,7 +633,7 @@
             <view class="cu-bar bg-white" style="justify-content:flex-start;padding-left:15rpx;min-height:60rpx;">
                 <text class='icon-title text-green'></text>其他要说明的情况
             </view>
-            <input style="text-align:left;padding-left:20rpx;height:80rpx; " placeholder="请输入 " class='radius bg-white solid-bottom' bindinput="onInput" data-type="remark" value="{{remark}}"></input>
+            <input style="text-align:left;padding-left:20rpx;height:80rpx; " placeholder="请输入文字，非必填 " class='radius bg-white solid-bottom' bindinput="onInput" data-type="remark" value="{{remark}}"></input>
             <!-- 外观照 -->
             <view class="cu-bar bg-white" style="justify-content:flex-start;padding-left:15rpx;min-height:60rpx;">
                 <text class='icon-title text-green'></text>外观照

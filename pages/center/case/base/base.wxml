@@ -81,7 +81,7 @@
                         </view>
                         <view class="cu-form-group">
                             <view class='title'>建档日期</view>
-                            <picker mode="date" value="{{createDate}}" start="2015-01-01" end="2050-01-01" bindchange="onCreateDateChange">
+                            <picker mode="date" value="{{createDate}}" start="1970-01-01" end="2050-01-01" bindchange="onCreateDateChange">
                                 <view class="picker">
                                     {{createDate}}
                                 </view>
@@ -147,7 +147,7 @@
                         </view>
                         <view class="cu-form-group">
                             <view class='title'>本次症状出现日期</view>
-                            <picker mode="date" value="{{duration_symptoms_date}}" start="2015-01-01" end="2050-01-01" bindchange="onDuration_symptoms_dateChange">
+                            <picker mode="date" value="{{duration_symptoms_date}}" start="1970-01-01" end="2050-01-01" bindchange="onDuration_symptoms_dateChange">
                                 <view class="picker">
                                     {{duration_symptoms_date}}
                                 </view>
@@ -168,7 +168,7 @@
                         <!-- 初次置换时间 -->
                         <view class="cu-form-group {{first_displace_time_state==0?'disabled':''}}">
                             <view class='title'>初次置换时间</view>
-                            <picker mode="date" value="{{first_displace_time}}" start="2015-01-01" end="2050-01-01" bindchange="onFirst_displace_timeChange">
+                            <picker mode="date" value="{{first_displace_time}}" start="1970-01-01" end="2050-01-01" bindchange="onFirst_displace_timeChange">
                                 <view class="picker">
                                     {{first_displace_time}}
                                 </view>
@@ -195,7 +195,7 @@
                         <!-- 末次手术日期 -->
                         <view class="cu-form-group {{last_operation_date_state==0?'disabled':''}}">
                             <view class='title'>末次手术日期</view>
-                            <picker mode="date" value="{{last_operation_date}}" start="2015-01-01" end="2050-01-01" bindchange="onLast_operation_dateChange">
+                            <picker mode="date" value="{{last_operation_date}}" start="1970-01-01" end="2050-01-01" bindchange="onLast_operation_dateChange">
                                 <view class="picker">
                                     {{last_operation_date}}
                                 </view>

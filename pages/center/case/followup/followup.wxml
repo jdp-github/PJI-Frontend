@@ -55,7 +55,7 @@
                         <!-- 门诊时间 -->
                         <view class="cu-form-group {{follow_date_state==2?'clock':''}}">
                             <view class='title'>门诊时间</view>
-                            <picker mode="date" value="{{follow_date}}" start="2015-01-01" end="2030-12-31" bindchange="onDateChange" disabled="{{follow_date_state==2}}" data-type="follow_date">
+                            <picker mode="date" value="{{follow_date}}" start="1970-01-01" end="2050-12-31" bindchange="onDateChange" disabled="{{follow_date_state==2}}" data-type="follow_date">
                                 <view class="picker">
                                     {{follow_date}}
                                 </view>

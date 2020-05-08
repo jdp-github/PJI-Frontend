@@ -66,10 +66,16 @@ function getIntervalDay(startDate, endDate) {
     return parseInt(intervalDay / 60 / 60 / 24)
 }
 
+function getIntervalWeek(startDate, endDate) {
+    let intervalDay = startDate.getTime() / 1000 - endDate.getTime() / 1000
+    return parseInt(intervalDay / 60 / 60 / 24 / 7)
+}
+
 module.exports = {
     formatTime: formatTime,
     getNowFormatDate: getNowFormatDate,
     getIntervalMonth: getIntervalMonth,
     getIntervalDay: getIntervalDay,
+    getIntervalWeek: getIntervalWeek,
     getNowFormatMonth: getNowFormatMonth
 };
