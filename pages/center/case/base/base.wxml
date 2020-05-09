@@ -168,7 +168,7 @@
                         <!-- 初次置换时间 -->
                         <view class="cu-form-group {{first_displace_time_state==0?'disabled':''}}">
                             <view class='title'>初次置换时间</view>
-                            <picker mode="date" value="{{first_displace_time}}" start="1970-01-01" end="2050-01-01" bindchange="onFirst_displace_timeChange">
+                            <picker mode="date" value="{{first_displace_time}}" start="1970-01-01" end="2050-01-01" bindchange="onFirst_displace_timeChange" disabled="{{first_displace_time_state==0}}">
                                 <view class="picker">
                                     {{first_displace_time}}
                                 </view>
@@ -177,7 +177,7 @@
                         <!-- 初次置换原因 -->
                         <view class="cu-form-group {{first_displace_reason_state==0?'disabled':''}}">
                             <view class='title'>初次置换原因</view>
-                            <picker bindchange="onFirst_displace_reasonChange" value="{{first_displace_reason}}" range="{{first_displace_reason_picker}}">
+                            <picker bindchange="onFirst_displace_reasonChange" value="{{first_displace_reason}}" range="{{first_displace_reason_picker}}" disabled="{{first_displace_reason_state==0}}">
                                 <view class="picker">
                                     {{first_displace_reason_picker[first_displace_reason]}}
                                 </view>
@@ -186,7 +186,7 @@
                         <!-- 是否本院手术病例 -->
                         <view class="cu-form-group {{is_hospital_operation_state==0?'disabled':''}}">
                             <view class='title'>是否本院手术病例</view>
-                            <picker bindchange="onIs_hospital_operationChange" value="{{is_hospital_operation}}" range="{{is_hospital_operation_picker}}">
+                            <picker bindchange="onIs_hospital_operationChange" value="{{is_hospital_operation}}" range="{{is_hospital_operation_picker}}" disabled="{{is_hospital_operation_state==0}}">
                                 <view class="picker">
                                     {{is_hospital_operation_picker[is_hospital_operation]}}
                                 </view>
@@ -195,16 +195,16 @@
                         <!-- 末次手术日期 -->
                         <view class="cu-form-group {{last_operation_date_state==0?'disabled':''}}">
                             <view class='title'>末次手术日期</view>
-                            <picker mode="date" value="{{last_operation_date}}" start="1970-01-01" end="2050-01-01" bindchange="onLast_operation_dateChange">
+                            <picker mode="date" value="{{last_operation_date}}" start="1970-01-01" end="2050-01-01" bindchange="onLast_operation_dateChange" disabled="{{last_operation_date_state==0}}">
                                 <view class="picker">
                                     {{last_operation_date}}
                                 </view>
                             </picker>
                         </view>
                         <!-- 已翻修次数 -->
-                        <view class="cu-form-group {{repair_count_state==0?'disabled':''}}">
+                        <view class="cu-form-group {{repair_count_state==0?'disabled':''}} solid-bottom">
                             <view class='title'>已翻修次数</view>
-                            <picker bindchange="onRepair_countChange" value="{{repair_count}}" range="{{repair_count_picker}}">
+                            <picker bindchange="onRepair_countChange" value="{{repair_count}}" range="{{repair_count_picker}}" disabled="{{repair_count_state==0}}">
                                 <view class="picker">
                                     {{repair_count_picker[repair_count]}}
                                 </view>

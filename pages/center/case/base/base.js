@@ -60,7 +60,7 @@ Page({
         medical_history: '',
         operation_history: false,
         // 初次置换时间
-        first_displace_time: util.getNowFormatDate(),
+        first_displace_time: '请选择日期',
         first_displace_time_state: 0,
         // 初次置换原因
         first_displace_reason: 0,
@@ -71,7 +71,7 @@ Page({
         is_hospital_operation_picker: ['请选择', '是', '否'],
         is_hospital_operation_state: 0,
         // 末次手术日期
-        last_operation_date: util.getNowFormatDate(),
+        last_operation_date: '请选择日期',
         last_operation_date_state: 0,
         // 已翻修次数
         repair_count: 0,
@@ -342,10 +342,10 @@ Page({
             type: parseInt(info.type),
             medical_history: info.medical_history,
 
-            first_displace_time: this.data.isCreate ? util.getNowFormatDate() : util.formatTime(info.first_displace_time, 'Y-M-D'),
+            first_displace_time: this.data.isCreate ? '请选择日期' : util.formatTime(info.first_displace_time, 'Y-M-D'),
             first_displace_reason: parseInt(info.first_displace_reason ? info.first_displace_reason : 0),
             is_hospital_operation: info.is_hospital_operation,
-            last_operation_date: this.data.isCreate ? util.getNowFormatDate() : util.formatTime(info.last_operation_date, 'Y-M-D'),
+            last_operation_date: this.data.isCreate ? '请选择日期' : util.formatTime(info.last_operation_date, 'Y-M-D'),
             repair_count: info.repair_count,
             duration_symptoms_date: this.data.isCreate ? util.getNowFormatDate() : util.formatTime(info.duration_symptoms_date, 'Y-M-D'),
             this_time_cause: info.this_time_cause,
@@ -625,10 +625,10 @@ Page({
             medical_history: info.medical_history,
 
             operation_history: parseInt(info.operation_history) == 1,
-            first_displace_time: this.data.isCreate ? util.getNowFormatDate() : info.first_displace_time ? util.formatTime(info.first_displace_time, 'Y-M-D') : '请选择日期',
+            first_displace_time: this.data.isCreate ? '请选择日期' : info.first_displace_time ? util.formatTime(info.first_displace_time, 'Y-M-D') : '请选择日期',
             first_displace_reason: parseInt(info.first_displace_reason ? info.first_displace_reason : 0),
             is_hospital_operation: info.is_hospital_operation,
-            last_operation_date: this.data.isCreate ? util.getNowFormatDate() : info.last_operation_date ? util.formatTime(info.last_operation_date, 'Y-M-D') : '请选择日期',
+            last_operation_date: this.data.isCreate ? '请选择日期' : info.last_operation_date ? util.formatTime(info.last_operation_date, 'Y-M-D') : '请选择日期',
             repair_count: info.repair_count,
             duration_symptoms_date: this.data.isCreate ? util.getNowFormatDate() : util.formatTime(info.duration_symptoms_date, 'Y-M-D'),
             this_time_cause: info.this_time_cause,

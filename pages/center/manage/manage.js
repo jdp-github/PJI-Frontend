@@ -239,6 +239,7 @@ Page({
             currNoticeTitle: "",
             currNoticeId: "",
             currAvatar: app.globalData.avatarUrl,
+            currNoticeDate: util.formatTime(new Date() / 1000, "Y-M-D")
             // currIsTop: false,
         })
     },
@@ -282,6 +283,7 @@ Page({
             currNoticeTitle: e.currentTarget.dataset.item.title,
             currNoticeId: e.currentTarget.dataset.item.id,
             currAvatar: e.currentTarget.dataset.item.staff_avatar,
+            currNoticeDate: e.currentTarget.dataset.item.ctime
             // currIsTop: e.currentTarget.dataset.item.is_top == 1
         })
     },
@@ -328,6 +330,7 @@ Page({
             currNoticeTitle: e.currentTarget.dataset.item.title,
             currNoticeId: e.currentTarget.dataset.item.id,
             currAvatar: e.currentTarget.dataset.item.staff_avatar,
+            currNoticeDate: e.currentTarget.dataset.item.ctime
             // currIsTop: e.currentTarget.dataset.item.is_top == 1
         })
     },

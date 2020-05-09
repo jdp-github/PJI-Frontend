@@ -620,7 +620,7 @@ Page({
             other_check: info.other_check,
 
             // puncture_summary: info.puncture_summary == 1,
-            present_result: info.present_result,
+            present_result: parseInt(info.present_result),
             thistime_result: this.makeThisTimeResult(info.thistime_result),
             is_remain_sample: info.sample_deposit.length > 0 ? 2 : 1,
             puncture_creator: info.puncture_creator,
@@ -686,7 +686,7 @@ Page({
     },
 
     getDefaultNum(num) {
-        return num;
+        return num > 0 ? num : '';
     },
 
     getDefaultDate(date) {
@@ -929,11 +929,12 @@ Page({
                 return false;
             }
         }
+        if (this.data.present_result_state == 1 && this.data.present_result == 0) {
+            this.showToast("请选择目前诊断")
+            return false;
+        }
         // if (!this.data.puncture_summary) {
-        //     if (this.data.present_result_state == 1 && this.data.present_result == 0) {
-        //         this.showToast("请选择目前诊断")
-        //         return false;
-        //     }
+
         //     if (this.data.thistime_result.length == 0) {
         //         this.showToast("请填写本次诊疗周期最终诊断")
         //         return false;
@@ -999,8 +1000,8 @@ Page({
             puncture_date: that.makeDefaultDate(that.data.puncture_date),
             puncture_type: that.data.puncture_type,
             puncture_desc: that.data.puncture_desc,
-            last_operation_duration: that.data.last_operation_duration,
-            symptoms_duration: that.data.symptoms_duration,
+            last_operation_duration: that.makeDefaultNum(that.data.last_operation_duration),
+            symptoms_duration: that.makeDefaultNum(that.data.symptoms_duration),
             properties: that.data.properties,
             antibiotic_history: that.data.antibiotic_history,
             immuno_history: that.data.immuno_history,
@@ -1055,10 +1056,10 @@ Page({
             other: that.data.other,
             other_check: that.data.other_check,
 
-            // puncture_summary: that.data.puncture_summary ? 1 : 0,
-            // present_result: that.data.present_result,
-            // thistime_result: that.data.thistime_result,
-            // is_remain_sample: that.data.is_remain_sample,
+            puncture_summary: 1,
+            present_result: that.data.present_result,
+            thistime_result: that.data.thistime_result,
+            is_remain_sample: that.data.is_remain_sample,
         }
         console.log("穿刺：" + JSON.stringify(jsonData))
         return JSON.stringify(jsonData)
