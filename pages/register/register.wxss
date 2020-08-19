@@ -5,3 +5,9 @@
 .box view.cu-bar {
     margin-top: 20rpx;
 }
+
+.bottom{
+    width: 100%;
+    position: absolute;
+    bottom: 50rpx;
+}
