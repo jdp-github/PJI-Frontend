@@ -532,11 +532,11 @@
 }
 
 .text-green {
-    color: #39b54a;
+    color: #0081ff;
 }
 
 .bg-green {
-    background-color: #39b54a;
+    background-color: #0081ff;
     color: #fff;
 }
 

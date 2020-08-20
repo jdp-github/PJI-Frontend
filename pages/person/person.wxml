@@ -1,175 +1,179 @@
-<view class='UCenter-bg'>
-    <view class="cu-avatar round xl bg-gray margin-xs" style="background-image:url({{avatarUrl}});"></view>
-    <view class='text-xl'>PJI-登记系统
-        <text class='text-df'>v2.0</text>
-    </view>
-    <view class='margin-top-sm'>
-        <text>{{nickName}}</text>
-    </view>
-    <!-- <image src='https://image.weilanwl.com/gif/wave.gif' mode='scaleToFill' class='gif-wave'></image> -->
+<view class='top-container cu-list card-menu' style="margin-top:150rpx;">
+	<view class="cu-avatar round xl bg-gray" style="background-image:url({{avatarUrl}});"></view>
+	<view class="right-container">
+		<view class="line-container">{{userInfo.name}}({{nickName}})</view>
+		<view class="line-container">
+			<text class='icon-phone text-gray'></text>
+			<text class='text-grey' style="margin-left:10rpx">电话: {{userInfo.phone}}</text>
+		</view>
+		<view class="line-container">
+			<text class='icon-mail text-gray'></text>
+			<text class='text-grey' style="margin-left:10rpx">邮箱: {{userInfo.email?userInfo.email:'暂无'}}</text>
+		</view>
+	</view>
+
 </view>
-<view class='padding flex text-center text-grey bg-white shadow-warp'>
-    <view class='flex flex-sub flex-direction solid-right'>
-        <view class="text-xxl text-red text-decoration">{{userInfo.puncture_count}}</view>
-        <view class="margin-top-sm">
-            <text class='icon-cardboardfill'></text> 诊断穿刺
-        </view>
-    </view>
-    <view class='flex flex-sub flex-direction solid-right'>
-        <view class="text-xxl text-red text-decoration">{{userInfo.bein_count}}</view>
-        <view class="margin-top-sm">
-            <text class='icon-taoxiaopu'></text> 手术治疗
-        </view>
-    </view>
-    <view class='flex flex-sub flex-direction solid-right'>
-        <view class="text-xxl text-red text-decoration">{{userInfo.followup_count}}</view>
-        <view class="margin-top-sm">
-            <text class='icon-taoxiaopu'></text> 门诊随访
-        </view>
-    </view>
-</view>
-<view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg">
-    <view class="cu-item">
-        <view class='content' hover-class='none' bindtap="showDrawer" data-target="DrawerModalRight">
-            <view style="display:flex;flex-direction:row;" class='action title-style-3'>
-                <text class='text-xl text-bold text-grey'>系统消息</text>
-                <text style="flex:2;text-align:right;margin-right:20px;" class='text-xl text-bold text-red self-end margin-left-sm'>{{userInfo.system_count}}</text>
-            </view>
-        </view>
-    </view>
-    <view class="cu-item">
-        <view class='content' hover-class='none' bindtap="showDrawer" data-target="SpecimenDrawer">
-            <view style="display:flex;flex-direction:row;" class='action title-style-3'>
-                <text class='text-xl text-bold text-grey'>标本授权</text>
-                <text style="flex:2;text-align:right;margin-right:20px;" class='text-xl text-bold text-red self-end margin-left-sm'>{{userInfo.auth_count}}</text>
-            </view>
-        </view>
-    </view>
+<view class='statis-container cu-list card-menu shadow-lg'>
+	<view class='flex flex-sub flex-direction solid-right static-container'>
+		<view class="text-xxl text-blue text-decoration">{{userInfo.puncture_count}}</view>
+		<view class="margin-top-sm">
+			<text class='icon-cardboardfill'></text> 诊断穿刺
+		</view>
+	</view>
+	<view class='flex flex-sub flex-direction solid-right static-container'>
+		<view class="text-xxl text-blue text-decoration">{{userInfo.bein_count}}</view>
+		<view class="margin-top-sm">
+			<text class='icon-taoxiaopu'></text> 手术治疗
+		</view>
+	</view>
+	<view class='flex flex-sub flex-direction solid-right static-container'>
+		<view class="text-xxl text-blue text-decoration">{{userInfo.followup_count}}</view>
+		<view class="margin-top-sm">
+			<text class='icon-taoxiaopu'></text> 门诊随访
+		</view>
+	</view>
 </view>
 <view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg">
-    <view class="cu-item">
-        <view class='content' hover-class='none'>
-            <view class='action title-style-3'>
-                <text class='text-xl text-bold text-grey'>基本信息</text>
-                <!-- <text class='text-Abc text-gray self-end margin-left-sm'>Info</text> -->
-            </view>
-        </view>
-    </view>
-    <view class="cu-item">
-        <view class='content' hover-class='none'>
-            <text class='icon-people text-grey'></text>
-            <text class='text-grey'>姓名: {{userInfo.name}}</text>
-        </view>
-    </view>
-    <view class="cu-item">
-        <view class='content' hover-class='none'>
-            <text class='icon-phone text-gray'></text>
-            <text class='text-grey'>电话: {{userInfo.phone}}</text>
-        </view>
-    </view>
-    <view class="cu-item">
-        <view class='content' hover-class='none'>
-            <text class='icon-mail text-gray'></text>
-            <text class='text-grey'>邮箱: {{userInfo.email?userInfo.email:'暂无'}}</text>
-        </view>
-    </view>
+	<view class="cu-item">
+		<view class='content' hover-class='none' bindtap="showDrawer" data-target="DrawerModalRight">
+			<view style="display:flex;flex-direction:row;" class='action title-style-3'>
+				<text class='text-xl text-bold text-grey'>系统消息</text>
+				<text style="flex:2;text-align:right;margin-right:20px;" class='text-xl text-bold text-red self-end margin-left-sm'>{{userInfo.system_count}}</text>
+			</view>
+		</view>
+	</view>
+	<view class="cu-item">
+		<view class='content' hover-class='none' bindtap="showDrawer" data-target="SpecimenDrawer">
+			<view style="display:flex;flex-direction:row;" class='action title-style-3'>
+				<text class='text-xl text-bold text-grey'>标本授权</text>
+				<text style="flex:2;text-align:right;margin-right:20px;" class='text-xl text-bold text-red self-end margin-left-sm'>{{userInfo.auth_count}}</text>
+			</view>
+		</view>
+	</view>
 </view>
+<!-- <view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg">
+	<view class="cu-item">
+		<view class='content' hover-class='none'>
+			<view class='action title-style-3'>
+				<text class='text-xl text-bold text-grey'>基本信息</text>
+			</view>
+		</view>
+	</view>
+	<view class="cu-item">
+		<view class='content' hover-class='none'>
+			<text class='icon-people text-grey'></text>
+			<text class='text-grey'>姓名: {{userInfo.name}}</text>
+		</view>
+	</view>
+	<view class="cu-item">
+		<view class='content' hover-class='none'>
+			<text class='icon-phone text-gray'></text>
+			<text class='text-grey'>电话: {{userInfo.phone}}</text>
+		</view>
+	</view>
+	<view class="cu-item">
+		<view class='content' hover-class='none'>
+			<text class='icon-mail text-gray'></text>
+			<text class='text-grey'>邮箱: {{userInfo.email?userInfo.email:'暂无'}}</text>
+		</view>
+	</view>
+</view> -->
 <view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg">
-    <view class="cu-item">
-        <view class='content' hover-class='none'>
-            <view class='action title-style-3'>
-                <text class='text-xl text-bold text-grey'>所属中心</text>
-                <!-- <text class='text-Abc text-gray self-end margin-left-sm'>Center</text> -->
-            </view>
-        </view>
-    </view>
-    <view class="cu-item" wx:for="{{userInfo.center_list}}" wx:key="id">
-        <view class='content' hover-class='none'>
-            <text class='text-grey'>{{item.center_name}}</text>
-            <view class='cu-tag radius sm' style="margin-left: 8rpx;">{{item.role_list[0].role_name}}</view>
-        </view>
-    </view>
+	<view class="cu-item">
+		<view class='content' hover-class='none'>
+			<view class='action title-style-3'>
+				<text class='text-xl text-bold text-grey'>所属中心</text>
+				<!-- <text class='text-Abc text-gray self-end margin-left-sm'>Center</text> -->
+			</view>
+		</view>
+	</view>
+	<view class="cu-item" wx:for="{{userInfo.center_list}}" wx:key="id">
+		<view class='content' hover-class='none' style="display:flex;flex-direction:row;just-content:center">
+			<text class='text-grey' style="flex:1">{{item.center_name}}</text>
+			<view class='cu-tag radius' style="margin-left: 15rpx;">{{item.role_list[0].role_name}}</view>
+		</view>
+	</view>
 </view>
 <view class='cu-tabbar-height'></view>
 <view class='load-progress {{loadProgress!=0?"show":"hide"}}' style="top:{{CustomBar}}px;">
-    <view class='load-progress-bar bg-green' style="transform: translate3d(-{{100-loadProgress}}%, 0px, 0px);"></view>
-    <view class='load-progress-spinner text-green'></view>
+	<view class='load-progress-bar bg-green' style="transform: translate3d(-{{100-loadProgress}}%, 0px, 0px);"></view>
+	<view class='load-progress-spinner text-green'></view>
 </view>
 <view class='cu-load load-modal' wx:if="{{loadModal}}">
-    <view class='gray-text'>处理中...</view>
+	<view class='gray-text'>处理中...</view>
 </view>
 <view class="load-curtain" wx:if="{{loadProgress!=0}}"></view>
 <view class="cu-modal drawer-modal justify-end {{modalName=='DrawerModalRight'?'show':''}}" bindtap='hideModal'>
-    <view class="cu-dialog basis-lg" catchtap="ignoreTap" style="top:{{CustomBar}}px;height:100%;width:100%;padding-bottom: 145rpx;">
-        <scroll-view scroll-y class="bg-white nav text-center" style="height:100%;width:100%;padding-bottom: 115rpx;">
-            <view class="cu-item text-green cur">
-                需我审批
-            </view>
-            <view wx:for='{{approveList}}' wx:key="apply_id">
-                <block>
-                    <view class="content item-container border-container">
-                        <view class="text-bold">{{item.order_number}}</view>
-                        <view class="text-left margin-top">姓名: {{item.name}}</view>
-                        <view class="text-left">电话: {{item.phone}}</view>
-                        <view class="text-left">邮箱: {{item.email}}</view>
-                        <view class="text-left">申请中心: {{item.center_name}}</view>
-                        <view class="text-left">申请角色: {{item.role_name}}</view>
-                        <view class="text-left">申请日期: {{item.apply_time}}</view>
-                        <view class="grid margin-top float-right">
-                            <view class="grid col-6">
-                                <view class="cu-btn round sm bg-green" data-applyid="{{item.apply_id}}" bindtap="onApprove">同意</view>
-                            </view>
-                            <view class="grid col-6">
-                                <view class="cu-btn round sm bg-red" data-applyid="{{item.apply_id}}" bindtap="onRefuse" style="margin-left: 10rpx;"> 拒绝</view>
-                            </view>
-                        </view>
-                    </view>
-                </block>
-            </view>
-        </scroll-view>
-    </view>
+	<view class="cu-dialog basis-lg" catchtap="ignoreTap" style="top:{{CustomBar}}px;height:100%;width:100%;padding-bottom: 145rpx;">
+		<scroll-view scroll-y class="bg-white nav text-center" style="height:100%;width:100%;padding-bottom: 115rpx;">
+			<view class="cu-item text-green cur">
+				需我审批
+			</view>
+			<view wx:for='{{approveList}}' wx:key="apply_id">
+				<block>
+					<view class="content item-container border-container">
+						<view class="text-bold">{{item.order_number}}</view>
+						<view class="text-left margin-top">姓名: {{item.name}}</view>
+						<view class="text-left">电话: {{item.phone}}</view>
+						<view class="text-left">邮箱: {{item.email}}</view>
+						<view class="text-left">申请中心: {{item.center_name}}</view>
+						<view class="text-left">申请角色: {{item.role_name}}</view>
+						<view class="text-left">申请日期: {{item.apply_time}}</view>
+						<view class="grid margin-top float-right">
+							<view class="grid col-6">
+								<view class="cu-btn round sm bg-green" data-applyid="{{item.apply_id}}" bindtap="onApprove">同意</view>
+							</view>
+							<view class="grid col-6">
+								<view class="cu-btn round sm bg-red" data-applyid="{{item.apply_id}}" bindtap="onRefuse" style="margin-left: 10rpx;"> 拒绝</view>
+							</view>
+						</view>
+					</view>
+				</block>
+			</view>
+		</scroll-view>
+	</view>
 </view>
 <!-- 标本授权 -->
 <view class="cu-modal drawer-modal justify-end {{modalName=='SpecimenDrawer'?'show':''}}" bindtap='hideModal'>
-    <view class="cu-dialog basis-lg" catchtap="ignoreTap" style="top:{{CustomBar}}px;height:100%;width:100%;padding-bottom: 145rpx;">
-        <scroll-view scroll-y class="bg-white nav text-center" style="height:100%;width:100%;padding-bottom: 115rpx;">
-            <view class="cu-item {{index==TabCur?'text-green cur':''}}" wx:for="{{tabItems}}" wx:key="id" bindtap='tabSelect' data-id="{{index}}">
-                {{tabItems[index]}}
-            </view>
-            <!-- 我的申请 -->
-            <view wx:for='{{specimenApplyList}}' wx:key="apply_id" wx:if="{{TabCur==0}}">
-                <block>
-                    <view class="content item-container border-container">
-                        <view class="text-bold">{{item.auth_id}}</view>
-                        <view class="text-left margin-top">姓名: {{item.auth_staff_name}}</view>
-                        <view class="text-left">申请日期: {{item.apply_time}}</view>
-                        <view class="text-left" wx:if="{{item.state!=0}}">审批日期: {{item.auth_time}}</view>
-                        <view class="text-left">申请状态: {{item.state_name}}</view>
-                    </view>
-                </block>
-            </view>
-            <!-- 需我授权 -->
-            <view wx:for='{{specimenApproveList}}' wx:key="auth_id" wx:if="{{TabCur==1}}">
-                <block>
-                    <view class="content item-container border-container">
-                        <view class="text-bold">{{item.auth_id}}</view>
-                        <view class="text-left margin-top">姓名: {{item.staff_name}}</view>
-                        <view class="text-left">申请日期: {{item.apply_time}}</view>
-                        <view class="text-left">申请状态: {{item.state_name}}</view>
-                        <view class="grid margin-top float-right" wx:if="{{item.state==0}}">
-                            <view class="grid col-6">
-                                <view class="cu-btn round sm bg-green" data-authid="{{item.auth_id}}" bindtap="onSpecimenApprove">同意</view>
-                            </view>
-                            <view class="grid col-6">
-                                <view class="cu-btn round sm bg-red" data-authid="{{item.auth_id}}" bindtap="onSpecimenRefuse" style="margin-left: 10rpx;"> 拒绝</view>
-                            </view>
-                        </view>
-                    </view>
-                </block>
-            </view>
-            <button class='cu-btn bg-green shadow margin-btn block' style="margin:30rpx;" bindtap="gotoSpecimenAuth">
-                申请标本授权
-            </button>
-        </scroll-view>
-    </view>
+	<view class="cu-dialog basis-lg" catchtap="ignoreTap" style="top:{{CustomBar}}px;height:100%;width:100%;padding-bottom: 145rpx;">
+		<scroll-view scroll-y class="bg-white nav text-center" style="height:100%;width:100%;padding-bottom: 115rpx;">
+			<view class="cu-item {{index==TabCur?'text-green cur':''}}" wx:for="{{tabItems}}" wx:key="id" bindtap='tabSelect' data-id="{{index}}">
+				{{tabItems[index]}}
+			</view>
+			<!-- 我的申请 -->
+			<view wx:for='{{specimenApplyList}}' wx:key="apply_id" wx:if="{{TabCur==0}}">
+				<block>
+					<view class="content item-container border-container">
+						<view class="text-bold">{{item.auth_id}}</view>
+						<view class="text-left margin-top">姓名: {{item.auth_staff_name}}</view>
+						<view class="text-left">申请日期: {{item.apply_time}}</view>
+						<view class="text-left" wx:if="{{item.state!=0}}">审批日期: {{item.auth_time}}</view>
+						<view class="text-left">申请状态: {{item.state_name}}</view>
+					</view>
+				</block>
+			</view>
+			<!-- 需我授权 -->
+			<view wx:for='{{specimenApproveList}}' wx:key="auth_id" wx:if="{{TabCur==1}}">
+				<block>
+					<view class="content item-container border-container">
+						<view class="text-bold">{{item.auth_id}}</view>
+						<view class="text-left margin-top">姓名: {{item.staff_name}}</view>
+						<view class="text-left">申请日期: {{item.apply_time}}</view>
+						<view class="text-left">申请状态: {{item.state_name}}</view>
+						<view class="grid margin-top float-right" wx:if="{{item.state==0}}">
+							<view class="grid col-6">
+								<view class="cu-btn round sm bg-green" data-authid="{{item.auth_id}}" bindtap="onSpecimenApprove">同意</view>
+							</view>
+							<view class="grid col-6">
+								<view class="cu-btn round sm bg-red" data-authid="{{item.auth_id}}" bindtap="onSpecimenRefuse" style="margin-left: 10rpx;"> 拒绝</view>
+							</view>
+						</view>
+					</view>
+				</block>
+			</view>
+			<button class='cu-btn bg-green shadow margin-btn block' style="margin:30rpx;" bindtap="gotoSpecimenAuth">
+				申请标本授权
+			</button>
+		</scroll-view>
+	</view>
 </view>
