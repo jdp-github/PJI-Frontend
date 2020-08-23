@@ -1,240 +1,240 @@
 <view class="cu-custom" style="height:{{CustomBar}}px;">
-    <view class="cu-bar fixed bg-gradual-green" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
-        <navigator class='action border-custom' open-type="navigateBack" delta="1" hover-class="none" style='width:{{Custom.width}}px;height:{{Custom.height}}px;margin-left:calc(750rpx - {{Custom.right}}px)'>
-            <text class='icon-back'></text>
-            <text class='icon-homefill'></text>
-        </navigator>
-        <view class='content' style='top:{{StatusBar}}px;'>病历列表</view>
-    </view>
+	<view class="cu-bar fixed bg-gradual-blue" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+		<navigator class='action border-custom' open-type="navigateBack" delta="1" hover-class="none" style='width:{{Custom.width}}px;height:{{Custom.height}}px;margin-left:calc(750rpx - {{Custom.right}}px)'>
+			<text class='icon-back'></text>
+			<text class='icon-homefill'></text>
+		</navigator>
+		<view class='content' style='top:{{StatusBar}}px;'>病历列表</view>
+	</view>
 </view>
 <view class="cu-bar bg-white search fixed" style="top:{{CustomBar}}px;">
-    <view class='search-form round'>
-        <text class="icon-search"></text>
-        <input type="text" placeholder="搜索病厉、名称、关键字" confirm-type="search" value="{{searchValue}}" bindinput="onSearchChange"></input>
-    </view>
-    <view class='action'>
-        <button class='cu-btn bg-green shadow-blur round' bindtap="onSearch">搜索</button>
-    </view>
+	<view class='search-form round'>
+		<text class="icon-search"></text>
+		<input type="text" placeholder="搜索病厉、名称、关键字" confirm-type="search" value="{{searchValue}}" bindinput="onSearchChange"></input>
+	</view>
+	<view class='action'>
+		<button class='cu-btn bg-blue shadow-blur round' bindtap="onSearch">搜索</button>
+	</view>
 </view>
 <!-- 筛选1 -->
 <view class="cu-bar bg-white fixed" style="top:{{CustomBar}}px; margin-top: 110rpx; width: 100%; border-bottom: 0;">
-    <view class="filter-container">
-        <view class="title">开始日期:</view>
-        <picker mode="date" value="{{startDate}}" start="2015-01-01" end="2030-12-31" bindchange="StartDateChange">
-            <view class="picker" style="margin-top:5rpx">
-                {{startDate}}
-            </view>
-        </picker>
-    </view>
-    <view class="filter-container">
-        <view class="title">结束日期:</view>
-        <picker mode="date" value="{{endDate}}" start="2015-01-01" end="2030-12-31" bindchange="EndDateChange">
-            <view class="picker" style="margin-top:5rpx">
-                {{endDate}}
-            </view>
-        </picker>
-    </view>
-    <view class="filter-container">
-        <view class="title">状态:</view>
-        <picker value="{{stateIndex}}" range="{{statePicker}}" bindchange="StatePickerChange">
-            <view class="picker">
-                {{statePicker[stateIndex]}}
-            </view>
-        </picker>
-    </view>
+	<view class="filter-container">
+		<view class="title">开始日期:</view>
+		<picker mode="date" value="{{startDate}}" start="2015-01-01" end="2030-12-31" bindchange="StartDateChange">
+			<view class="picker" style="margin-top:5rpx">
+				{{startDate}}
+			</view>
+		</picker>
+	</view>
+	<view class="filter-container">
+		<view class="title">结束日期:</view>
+		<picker mode="date" value="{{endDate}}" start="2015-01-01" end="2030-12-31" bindchange="EndDateChange">
+			<view class="picker" style="margin-top:5rpx">
+				{{endDate}}
+			</view>
+		</picker>
+	</view>
+	<view class="filter-container">
+		<view class="title">状态:</view>
+		<picker value="{{stateIndex}}" range="{{statePicker}}" bindchange="StatePickerChange">
+			<view class="picker">
+				{{statePicker[stateIndex]}}
+			</view>
+		</picker>
+	</view>
 </view>
 <!-- 筛选2 -->
 <view class="cu-bar bg-white fixed" style="top:{{CustomBar}}px; margin-top: 210rpx; width: 100%; border-bottom: 0;">
-    <view class="filter-container">
-        <view class="title">末次事件:</view>
-        <picker value="{{lastEventIndex}}" range="{{lastEvnetPicker}}" bindchange="LastEventPickerChange">
-            <view class="picker">
-                {{lastEvnetPicker[lastEventIndex]}}
-            </view>
-        </picker>
-    </view>
-    <view class="filter-container">
-        <view class="title">限定依据:</view>
-        <picker value="{{limitIndex}}" range="{{limitPicker}}" bindchange="LimitPickerChange">
-            <view class="picker">
-                {{limitPicker[limitIndex]}}
-            </view>
-        </picker>
-    </view>
-    <view class="filter-container">
-        <view class="title">主诊:</view>
-        <picker value="{{doctorIndex}}" range="{{doctorList}}" bindchange="DoctorPickerChange">
-            <view class="picker">
-                {{doctorList[doctorIndex]}}
-            </view>
-        </picker>
-    </view>
+	<view class="filter-container">
+		<view class="title">末次事件:</view>
+		<picker value="{{lastEventIndex}}" range="{{lastEvnetPicker}}" bindchange="LastEventPickerChange">
+			<view class="picker">
+				{{lastEvnetPicker[lastEventIndex]}}
+			</view>
+		</picker>
+	</view>
+	<view class="filter-container">
+		<view class="title">限定依据:</view>
+		<picker value="{{limitIndex}}" range="{{limitPicker}}" bindchange="LimitPickerChange">
+			<view class="picker">
+				{{limitPicker[limitIndex]}}
+			</view>
+		</picker>
+	</view>
+	<view class="filter-container">
+		<view class="title">主诊:</view>
+		<picker value="{{doctorIndex}}" range="{{doctorList}}" bindchange="DoctorPickerChange">
+			<view class="picker">
+				{{doctorList[doctorIndex]}}
+			</view>
+		</picker>
+	</view>
 </view>
 <scroll-view scroll-y class="indexes margin-bottom" scroll-into-view="indexes-{{listCurID}}" style='padding-top:320rpx;height:calc(100vh - {{CustomBar}}px)' scroll-with-animation="true" enable-back-to-top="true">
-    <view class="cu-list menu menu-avatar">
-        <view style='display:flex;flex-direction:row'>
-            <view class="flex-sub">
-                <button class='cu-btn bg-green shadow margin-btn block' bindtap="onAddCase">
-                    患者建档
-                </button>
-            </view>
-            <view class="flex-sub">
-                <button class='cu-btn bg-green shadow margin-btn block' bindtap="onRefresh">
-                    刷新列表
-                </button>
-            </view>
-        </view>
-        <!-- item -->
-        <view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}}" style="padding-top:15rpx;padding-bottom:15rpx;" wx:for="{{caseList}}" wx:key="" bindtouchstart='ListTouchStart' bindtouchmove='ListTouchMove' bindtouchend='ListTouchEnd' data-target="move-box-{{index}}"
-            data-case="{{item}}" bindtap="onLookCase">
-            <view class='content'>
-                <view class="flex-twice">
-                    <view class="flex">
-                        <!-- 左侧灰框 -->
-                        <view class='flex-sub radius' style="padding-right: 15rpx;">
-                            <view class="avatar-special bg-grey radius" style="display:flex;flex-direction:column;padding-top:10rpx;padding-bottom:10rpx">
-                                <view class="flex-sub" style="font-size:28rpx">{{item.patient_name}}</view>
-                                <view class="flex-sub" style="font-size:28rpx">{{item.case_no}}</view>
-                                <view class="flex-sub" style="font-size:28rpx">{{item.side_name}} {{item.part_name}}</view>
-                            </view>
-                        </view>
+	<view class="cu-list menu menu-avatar">
+		<view style='display:flex;flex-direction:row;margin:30rpx 0'>
+			<view class="flex-sub">
+				<button class='cu-btn bg-blue shadow margin-btn block' style="color:white" bindtap="onAddCase">
+					患者建档
+				</button>
+			</view>
+			<view class="flex-sub">
+				<button class='cu-btn bg-white shadow margin-btn block' style="color:black" bindtap="onRefresh">
+					刷新列表
+				</button>
+			</view>
+		</view>
+		<!-- item -->
+		<view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}}" style="padding-top:15rpx;padding-bottom:15rpx;margin-bottom:30rpx" wx:for="{{caseList}}" wx:key="" bindtouchstart='ListTouchStart' bindtouchmove='ListTouchMove' bindtouchend='ListTouchEnd' data-target="move-box-{{index}}" data-case="{{item}}" bindtap="onLookCase">
+			<view class='content'>
+				<view class="item-container">
+					<!-- 上 -->
+					<view class="item-first-line-container">
+						<!-- 左灰框 -->
+						<view class='radius' style="margin-right: 15rpx;">
+							<view class="avatar-special radius" style="display:flex;flex-direction:column;padding-top:10rpx;padding-bottom:10rpx">
+								<view class="flex-sub" style="font-size:28rpx">{{item.patient_name}}</view>
+								<view class="flex-sub" style="font-size:28rpx">{{item.side_name}} {{item.part_name}}</view>
+							</view>
+						</view>
+						<!-- 右侧 -->
+						<view class='item-right-container'>
+							<!-- 第一行 -->
+							<view style="font-size:28rpx">病历号：{{item.case_no}}</view>
+							<!-- 第二行 -->
+							<view class="item-type-container">
+								<view class="cu-tag radius first-line-container" style="background-color:#00A8F9;color:#fff">审核：{{item.element}}</view>
+								<view class="tag radius first-line-container">穿：{{item.puncture}}</view>
+								<view class="tag radius first-line-container">术：{{item.operation}}</view>
+								<view class="tag radius first-line-container">药:{{item.medication}}</view>
+								<view class="tag radius first-line-container">访：{{item.follow}}</view>
+							</view>
+						</view>
+					</view>
+					<view class="horizontal-line"></view>
+					<!-- 下 -->
+					<view class="item-second-line-container">
+						<!-- 第一行 -->
+						<view style="display:flex;flex-direction:column;flex:auto">
+							<view class="flex-item" style="min-width:234rpx;">主诊医师：{{item.pro_doctor}}
+							</view>
+							<view class="flex-item">建档日期：{{item.create_time}}
+							</view>
+						</view>
+						<!-- 第二行 -->
+						<view style="display:flex;flex-direction:column;flex:auto">
+							<view class="flex-item" style="min-width:232rpx;">末次事件：{{item.last_element}}
+							</view>
+							<view class="flex-item">事件日期：{{item.last_time}}
+							</view>
+						</view>
+					</view>
+					<!-- 左侧灰框 -->
 
-                        <view class='flex-treble radius text-gray'>
-                            <!-- 第一行 -->
-                            <view class="flex-sub text-small">
-                                <div class="flex">
-                                    <view class="flex-sub">
-                                        <view class="cu-tag round first-line-container" style="background-color:#00A8F9;color:#fff">审核:{{item.element}}</view>
-                                        <view class="cu-tag round first-line-container">穿:{{item.puncture}}</view>
-                                        <view class="cu-tag round first-line-container">术:{{item.operation}}</view>
-                                        <view class="cu-tag round first-line-container">药:{{item.medication}}</view>
-                                        <view class="cu-tag round first-line-container">访:{{item.follow}}</view>
-                                    </view>
-                                </div>
-                            </view>
-                            <!-- 第二行 -->
-                            <view class="flex-sub text-small" style="margin-top:10rpx;margin-left:10rpx">
-                                <div class="flex" style="margin-top:20rpx;">
-                                    <view class="flex-item" style="min-width:234rpx;">主诊医师：{{item.pro_doctor}}
-                                    </view>
-                                    <view class="flex-item" style="margin-left:15rpx">建档日期：{{item.create_time}}
-                                    </view>
-                                </div>
-                            </view>
-                            <!-- 第三行 -->
-                            <view class="flex-sub text-small" style="margin-top:10rpx;margin-left:10rpx;">
-                                <div class="flex" style="margin-top:20rpx">
-                                    <view class="flex-item" style="min-width:232rpx;">末次事件：{{item.last_element}}
-                                    </view>
-                                    <view class="flex-item" style="margin-left:15rpx">事件日期：{{item.last_time}}
-                                    </view>
-                                </div>
-                            </view>
-                        </view>
-                    </view>
-                </view>
-            </view>
+				</view>
+			</view>
 
-            <view class='move'>
-                <!-- <view class='bg-olive' data-case="{{item}}" bindtap="onEditCase">编辑</view> -->
-                <view class='bg-red' data-case="{{item}}" catchtap='onDeleCase' hidden='true' disabled="{{item.delete_button == 0}}">删除</view>
-            </view>
-        </view>
-    </view>
+			<view class='move'>
+				<!-- <view class='bg-olive' data-case="{{item}}" bindtap="onEditCase">编辑</view> -->
+				<view class='bg-red' data-case="{{item}}" catchtap='onDeleCase' hidden='true' disabled="{{item.delete_button == 0}}">删除</view>
+			</view>
+		</view>
+	</view>
 </scroll-view>
+
 <view class='load-progress {{loadProgress!=0?"show":"hide"}}' style="top:{{CustomBar}}px;">
-    <view class='load-progress-bar bg-green' style="transform: translate3d(-{{100-loadProgress}}%, 0px, 0px);"></view>
-    <view class='load-progress-spinner text-green'></view>
+	<view class='load-progress-bar bg-blue' style="transform: translate3d(-{{100-loadProgress}}%, 0px, 0px);"></view>
+	<view class='load-progress-spinner text-blue'></view>
 </view>
 <view class='cu-load load-modal' wx:if="{{loadModal}}">
-    <view class='gray-text'>处理中...</view>
+	<view class='gray-text'>处理中...</view>
 </view>
 <view class="load-curtain" wx:if="{{loadProgress!=0}}"></view>
 <!-- dialog -->
 <view class="cu-modal {{modalName=='ErrModal'?'show':''}}">
-    <view class="cu-dialog">
-        <view class="cu-bar bg-white justify-end">
-            <view class='content'>无法操作</view>
-            <view class='action' bindtap='hideModal'>
-                <text class='icon-close text-green'></text>
-            </view>
-        </view>
-        <view class='padding-xl'>
-            <view class='flex-sub text-center'>
-                <view class='solid-bottom text-sl padding'>
-                    <text class='icon-warnfill text-green'></text>
-                </view>
-                <view class='padding'>{{errMsg}}</view>
-            </view>
-            <button wx:if="{{caseId.length>0}}" class='cu-btn bg-green shadow' bindtap='showExistCase'>查看</button>
-        </view>
+	<view class="cu-dialog">
+		<view class="cu-bar bg-white justify-end">
+			<view class='content'>无法操作</view>
+			<view class='action' bindtap='hideModal'>
+				<text class='icon-close text-blue'></text>
+			</view>
+		</view>
+		<view class='padding-xl'>
+			<view class='flex-sub text-center'>
+				<view class='solid-bottom text-sl padding'>
+					<text class='icon-warnfill text-blue'></text>
+				</view>
+				<view class='padding'>{{errMsg}}</view>
+			</view>
+			<button wx:if="{{caseId.length>0}}" class='cu-btn bg-blue shadow' bindtap='showExistCase'>查看</button>
+		</view>
 
-    </view>
+	</view>
 </view>
 <view class="cu-modal {{modalName=='DeleteCaseModal'?'show':''}}">
-    <view class="cu-dialog">
-        <view class="cu-bar bg-white justify-end">
-            <view class='content'>删除病历</view>
-            <view class='action' bindtap='hideModal'>
-                <text class='icon-close text-green'></text>
-            </view>
-        </view>
-        <view class='padding-xl'>
-            <view class='flex-sub text-center'>
-                <view class='solid-bottom text-sl padding'>
-                    <text class='icon-warnfill text-green'></text>
-                </view>
-                <view class='padding'>是否删除{{selectedCase.patient_name}}的病历</view>
-            </view>
-        </view>
-        <view class="cu-bar bg-white justify-end">
-            <view class='action'>
-                <button class='cu-btn line-green text-green' bindtap='hideModal'>取消</button>
-                <button class='cu-btn bg-green margin-left-15' bindtap='hideModal' bindtap="deleCase">确定</button>
-            </view>
-        </view>
-    </view>
+	<view class="cu-dialog">
+		<view class="cu-bar bg-white justify-end">
+			<view class='content'>删除病历</view>
+			<view class='action' bindtap='hideModal'>
+				<text class='icon-close text-blue'></text>
+			</view>
+		</view>
+		<view class='padding-xl'>
+			<view class='flex-sub text-center'>
+				<view class='solid-bottom text-sl padding'>
+					<text class='icon-warnfill text-blue'></text>
+				</view>
+				<view class='padding'>是否删除{{selectedCase.patient_name}}的病历</view>
+			</view>
+		</view>
+		<view class="cu-bar bg-white justify-end">
+			<view class='action'>
+				<button class='cu-btn line-blue text-blue' bindtap='hideModal'>取消</button>
+				<button class='cu-btn bg-blue margin-left-15' bindtap='hideModal' bindtap="deleCase">确定</button>
+			</view>
+		</view>
+	</view>
 </view>
 <!-- 新建病历 -->
 <view class="cu-modal show" wx:if="{{modalName=='AddCase'}}">
-    <view class="cu-dialog">
-        <view class="cu-bar bg-white justify-end">
-            <view class='content'>新建病历</view>
-            <view class='action' bindtap='hideModal'>
-                <text class='icon-close text-green'></text>
-            </view>
-        </view>
-        <view class='padding-xl'>
-            <view class="cu-form-group">
-                <view class="title">姓名</view>
-                <input placeholder="请输入姓名" bindinput="onAddNameInput" value="{{addCaseName}}"></input>
-            </view>
-            <view class="cu-form-group margin-top">
-                <view class="title">ID号</view>
-                <input placeholder="请输入ID" bindinput="onAddIDInput" value="{{addCaseID}}"></input>
-            </view>
-            <view class="cu-form-group margin-top">
-                <view class="title">侧别</view>
-                <picker bindchange="SidePickerChange" value="{{addCaseSideIndex}}" range="{{addCaseSidePicker}}">
-                    <view class="picker">
-                        {{addCaseSidePicker[addCaseSideIndex]}}
-                    </view>
-                </picker>
-            </view>
-            <view class="cu-form-group margin-top">
-                <view class="title">部位</view>
-                <picker bindchange="PartPickerChange" value="{{addCasePartIndex}}" range="{{addCasePartPicker}}">
-                    <view class="picker">
-                        {{addCasePartPicker[addCasePartIndex]}}
-                    </view>
-                </picker>
-            </view>
-        </view>
-        <view class="cu-bar bg-white justify-end">
-            <view class='action'>
-                <button class='cu-btn bg-green margin-left' style='margin-right:10rpx' bindtap="onSubmitAdd">确定</button>
-                <button class='cu-btn line-green text-green' bindtap='onHideAdd' style='margin-left:10rpx'>取消</button>
-            </view>
-        </view>
-    </view>
+	<view class="cu-dialog">
+		<view class="cu-bar bg-white justify-end">
+			<view class='content'>新建病历</view>
+			<view class='action' bindtap='hideModal'>
+				<text class='icon-close text-blue'></text>
+			</view>
+		</view>
+		<view class='padding-xl'>
+			<view class="cu-form-group">
+				<view class="title">姓名</view>
+				<input placeholder="请输入姓名" bindinput="onAddNameInput" value="{{addCaseName}}"></input>
+			</view>
+			<view class="cu-form-group margin-top">
+				<view class="title">ID号</view>
+				<input placeholder="请输入ID" bindinput="onAddIDInput" value="{{addCaseID}}"></input>
+			</view>
+			<view class="cu-form-group margin-top">
+				<view class="title">侧别</view>
+				<picker bindchange="SidePickerChange" value="{{addCaseSideIndex}}" range="{{addCaseSidePicker}}">
+					<view class="picker">
+						{{addCaseSidePicker[addCaseSideIndex]}}
+					</view>
+				</picker>
+			</view>
+			<view class="cu-form-group margin-top">
+				<view class="title">部位</view>
+				<picker bindchange="PartPickerChange" value="{{addCasePartIndex}}" range="{{addCasePartPicker}}">
+					<view class="picker">
+						{{addCasePartPicker[addCasePartIndex]}}
+					</view>
+				</picker>
+			</view>
+		</view>
+		<view class="cu-bar bg-white justify-end">
+			<view class='action'>
+				<button class='cu-btn bg-blue margin-left' style='margin-right:10rpx' bindtap="onSubmitAdd">确定</button>
+				<button class='cu-btn line-blue text-blue' bindtap='onHideAdd' style='margin-left:10rpx'>取消</button>
+			</view>
+		</view>
+	</view>
 </view>

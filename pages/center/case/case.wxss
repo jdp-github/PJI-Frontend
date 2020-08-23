@@ -1,5 +1,15 @@
 @import "../../../miniprogram_npm/wux-weapp/styles/index.wxss";
 
+.root {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+}
+
 .cu-avatar {
     width: 80rpx;
     height: 80rpx;
@@ -26,6 +36,8 @@
     transform: translateX(-150rpx);
 }
 
+
+
 .margin-btn {
     margin: 0rpx 30rpx 15rpx 30rpx;
 }
@@ -33,6 +45,13 @@
 .cu-list.menu-avatar>.cu-item {
     padding-left: 15rpx;
     height: 100%;
+}
+
+.horizontal-line {
+    height: 1px;
+    width: calc(100%-15rpx);
+    background: #ddd;
+    margin: 15rpx 15rpx 15rpx 0;
 }
 
 .avatar-special {
@@ -43,8 +62,8 @@
     padding: 0;
     justify-content: center;
     align-items: center;
-    background: #ccc;
-    color: #fff;
+    background: #f7f8fa;
+    color: black;
     position: relative;
     background-size: cover;
     background-position: center;
@@ -82,6 +101,14 @@
     margin-left: 15rpx;
 }
 
+.filter-root {
+    display: flex;
+    flex-direction: column;
+    padding: 15rpx;
+    width: calc(100%-15rpx);
+    margin-right: 15rpx;
+}
+
 .filter-container {
     display: flex;
     flex-direction: row;
@@ -95,9 +122,45 @@
 .first-line-container {
     font-size: 22rpx;
     color: #000;
+    background: #ddd;
     /* margin-left: 10rpx; */
 }
 
 .flex-item {
     font-size: 26rpx;
+}
+
+.item-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.tag {
+    padding: 0 16rpx;
+    margin-left: 10rpx;
+}
+
+.item-first-line-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.item-right-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.item-type-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.item-second-line-container {
+    display: flex;
+    width: calc(100%-15rpx);
+    margin-right: 15rpx;
+    flex-direction: row;
+    background: #f7f8fa;
+    border-radius: 5rpx;
+    padding: 15rpx;
 }

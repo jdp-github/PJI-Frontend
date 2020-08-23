@@ -207,7 +207,6 @@ Page({
                 'content-type': 'application/json'
             },
             success(res) {
-                console.log("Center.SearchCenterMember:" + JSON.stringify(res))
                 if (res.data.data.code == constant.response_success) {
                     let list = [];
                     let realStaffList = {};

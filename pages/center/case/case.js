@@ -69,7 +69,6 @@ Page({
                 'content-type': 'application/json'
             },
             success(res) {
-                console.log("Case.GetDoctorList:" + JSON.stringify(res))
                 if (res.data.data.code == constant.response_success) {
                     let doctorList = []
                     res.data.data.list.forEach(item => {
@@ -112,7 +111,6 @@ Page({
                 'content-type': 'application/json'
             },
             success(res) {
-                console.log("Case.SearchCaseList:" + JSON.stringify(res))
                 that.hideLoading()
                 if (res.data.data.code == constant.response_success) {
                     for (let i = 0, len = res.data.data.list.length; i < len; i++) {
@@ -207,7 +205,6 @@ Page({
                 'content-type': 'application/json'
             },
             success(res) {
-                console.log("Case.CreateCase:" + JSON.stringify(res));
                 if (res.data.data.code == constant.response_success) {
                     wx.navigateTo({
                         url: '../case/base/base?caseId=' + res.data.data.info.case_id + "&itemId=0" + "&centerId=" + that.data.centerId + "&centerName=" + that.data.centerName
@@ -283,7 +280,6 @@ Page({
                 'content-type': 'application/json'
             },
             success(res) {
-                console.log("Case.DeleteCase:" + JSON.stringify(res));
                 that.completeProgress();
                 if (res.data.data.code == constant.response_success) {
                     that.requestCaseList();

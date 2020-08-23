@@ -144,7 +144,6 @@ Page({
             },
             success(res) {
                 // that.hideLoading()
-                console.log("Center.SearchStaffCenter:" + JSON.stringify(res))
                 if (res.data.data.code == constant.response_success) {
                     for (let i = 0, len = res.data.data.list.length; i < len; i++) {
                         let center = res.data.data.list[i];
