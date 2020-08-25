@@ -1,5 +1,5 @@
 <view class="cu-custom" style="height:{{CustomBar}}px;">
-    <view class="cu-bar fixed bg-gradual-green" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+    <view class="cu-bar fixed bg-gradual-blue" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
         <navigator class='action border-custom' open-type="navigateBack" delta="1" hover-class="none" style='width:{{Custom.width}}px;height:{{Custom.height}}px;margin-left:calc(750rpx - {{Custom.right}}px)'>
             <text class='icon-back'></text>
             <text class='icon-homefill'></text>
@@ -107,9 +107,9 @@
                         <!-- 本次随访资料 -->
                         <view class='cu-bar solid-bottom bg-white'>
                             <view class='action'>
-                                <text class='icon-title text-green'></text>本次随访资料</view>
+                                <text class='icon-title text-blue'></text>本次随访资料</view>
                             <view style="font-size:28rpx;padding-top:6rpx">延后录入
-                                <switch class='green sm margin-right' bindchange="onFollow_dataChange" style='margin-left: 15rpx;' checked='{{follow_data}}'></switch>
+                                <switch class='blue sm margin-right' bindchange="onFollow_dataChange" style='margin-left: 15rpx;' checked='{{follow_data}}'></switch>
                             </view>
                         </view>
                         <!-- 外观状态 -->
@@ -158,13 +158,13 @@
             <!-- 底部按钮 -->
             <view class="btn-block bg-white shadow" hidden='{{isLook}}'>
                 <view class="flex margin-special">
-                    <button wx:if="{{isEdit || isCreate}}" class='cu-btn line-green shadow' style="margin-right: 15rpx;" form-type="submit" bindtap='submit' disabled='{{caseInfo.followup_submit_button == 0}}'>
+                    <button wx:if="{{isEdit || isCreate}}" class='cu-btn line-blue shadow' style="margin-right: 15rpx;" form-type="submit" bindtap='submit' disabled='{{caseInfo.followup_submit_button == 0}}'>
                         提交录入
                     </button>
-                    <button wx:else class='cu-btn line-green shadow' style="margin-right: 15rpx;" form-type="submit" bindtap='onSetCaseWrite'>
+                    <button wx:else class='cu-btn line-blue shadow' style="margin-right: 15rpx;" form-type="submit" bindtap='onSetCaseWrite'>
                         开始编辑
                     </button>
-                    <button class='cu-btn bg-green shadow' style="margin-left: 15rpx;" form-type="submit" bindtap='verify' disabled='{{isCreate}}'>
+                    <button class='cu-btn bg-blue shadow' style="margin-left: 15rpx;" form-type="submit" bindtap='verify' disabled='{{isCreate}}'>
                         {{caseInfo.follow_state != 2 ?"确认审核":"解除锁定"}}
                     </button>
                 </view>
@@ -230,8 +230,8 @@
     </view>
 </view>
 <view class='load-progress {{loadProgress!=0?"show":"hide"}}' style="top:{{CustomBar}}px;">
-    <view class='load-progress-bar bg-green' style="transform: translate3d(-{{100-loadProgress}}%, 0px, 0px);"></view>
-    <view class='load-progress-spinner text-green'></view>
+    <view class='load-progress-bar bg-blue' style="transform: translate3d(-{{100-loadProgress}}%, 0px, 0px);"></view>
+    <view class='load-progress-spinner text-blue'></view>
 </view>
 <view class='cu-load load-modal' wx:if="{{loadModal}}">
     <view class='gray-text'>处理中...</view>
@@ -262,14 +262,14 @@
             <view class="cu-list menu">
                 <view class="cu-bar bg-white solid-bottom">
                     <view class='action ' style="font-size: 24rpx;">
-                        <text class='icon-title text-green'></text>选择要关联的{{purpose==1?'穿刺':'手术'}}
+                        <text class='icon-title text-blue'></text>选择要关联的{{purpose==1?'穿刺':'手术'}}
                     </view>
                 </view>
                 <view class="cu-item" wx:for="{{relateList}}" wx:key="" bindtap="onRelateItemClick" data-item="{{item}}">
                     <view class="cu-item" style="width:100%;">
                         <view class='content'>
-                            <text class="icon-roundcheck text-green" style="{{item.isSelected?'':'visibility:hidden;'}}" />
-                            <text class="{{item.isSelected?'text-green':''}}" style="width:100%;margin-right:50rpx;">{{item.date_time}}</text>
+                            <text class="icon-roundcheck text-blue" style="{{item.isSelected?'':'visibility:hidden;'}}" />
+                            <text class="{{item.isSelected?'text-blue':''}}" style="width:100%;margin-right:50rpx;">{{item.date_time}}</text>
                             <text class="arrow text-blue text-df" catchtap="gotoRelate" data-item="{{item}}" style="padding:20rpx 0">点击查看</text>
                             <!-- <text class='cu-tag bg-grey sm radius'>ID: </text> -->
                         </view>
@@ -279,7 +279,7 @@
             <!-- 底部按钮 -->
             <view class='padding-sm flex'>
                 <view class="flex-sub">
-                    <button class='cu-btn  bg-green shadow block' bindtap="saveRelate">
+                    <button class='cu-btn  bg-blue shadow block' bindtap="saveRelate">
                         确定
                     </button>
                 </view>

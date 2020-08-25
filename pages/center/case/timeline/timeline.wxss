@@ -7,12 +7,12 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    width: 100%;
     font-size: 16px;
     padding: 10rpx;
+    margin: 15rpx 15rpx 0 15rpx;
 }
 
-.title-container> view {
+.title-container>view {
     margin-left: 20rpx;
 }
 
@@ -24,9 +24,10 @@
     width: 100%;
     font-size: 16px;
     padding: 20rpx;
+    background: transparent;
 }
 
-.btn-container> button {
+.btn-container>button {
     width: 180rpx;
 }
 
@@ -59,8 +60,24 @@
 }
 
 .timeline-item-content {
+    width: 100%;
+    margin-left: 15rpx;
+    background: #f7f8fa;
+    padding: 15rpx;
+}
+
+.delete-btn {
+    position: fixed;
+    bottom: 20rpx;
+    right: 20rpx;
+    width: 120rpx;
+    height: 120rpx;
+    border-radius: 60rpx;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 30rpx;
 }
 
 /* calendar */

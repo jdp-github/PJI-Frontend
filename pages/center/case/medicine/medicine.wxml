@@ -1,5 +1,5 @@
 <view class="cu-custom" style="height:{{CustomBar}}px;">
-    <view class="cu-bar fixed bg-gradual-green" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+    <view class="cu-bar fixed bg-gradual-blue" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
         <navigator class='action border-custom' open-type="navigateBack" delta="1" hover-class="none" style='width:{{Custom.width}}px;height:{{Custom.height}}px;margin-left:calc(750rpx - {{Custom.right}}px)' bindtap="backToAuth">
             <text class='icon-back'></text>
             <text class='icon-homefill'></text>
@@ -16,7 +16,7 @@
             <!-- <view class="flex padding-special">
                 <view class="flex-sub text-bold" style="font-size:25rpx;">
                     金黄色葡萄球菌
-                    <button class='cu-tag bg-green shadow sm' style="margin-left: 10rpx;">详情</button>
+                    <button class='cu-tag bg-blue shadow sm' style="margin-left: 10rpx;">详情</button>
                 </view>
             </view> -->
         </view>
@@ -38,12 +38,12 @@
     <view class="cu-list menu menu-avatar">
         <view style='display:flex;flex-direction:row'>
             <view class="flex-sub">
-                <button class='cu-btn bg-green shadow margin-btn block' bindtap="onAddYongyao">
+                <button class='cu-btn bg-blue shadow margin-btn block' bindtap="onAddYongyao">
                     添加用药
                 </button>
             </view>
             <view class="flex-sub">
-                <button class='cu-btn bg-green shadow margin-btn block' bindtap="onRefresh">
+                <button class='cu-btn bg-blue shadow margin-btn block' bindtap="onRefresh">
                     刷新列表
                 </button>
             </view>
@@ -53,7 +53,7 @@
         <view class='content-item' wx:for="{{medicineList}}" wx:key="{{item.start_time}}" bindtap="onItemClick" data-item="{{item}}">
             <view class="flex border-blue" style="font-size:25rpx">
                 <view class="flex-sub">
-                    <button class='cu-tag bg-green shadow sm' style="margin-left: 10rpx;margin-right: 10rpx;">{{wayPicker[item.way]}}</button> {{item.drug}}
+                    <button class='cu-tag bg-blue shadow sm' style="margin-left: 10rpx;margin-right: 10rpx;">{{wayPicker[item.way]}}</button> {{item.drug}}
                 </view>
                 <view class="flex-sub">
                     <text>{{item.dose}}g</text>
@@ -73,12 +73,12 @@
     </view>
     <view class="flex btn-block" style="margin-top:20rpx">
         <view class="flex-sub">
-            <button class='cu-btn bg-green shadow margin-btn block' bindtap="onEndMedication">
+            <button class='cu-btn bg-blue shadow margin-btn block' bindtap="onEndMedication">
                 {{baseInfo.is_finish==1?'解除锁定':'结束疗程'}}
             </button>
         </view>
         <view class="flex-sub">
-            <button class='cu-btn bg-green shadow margin-btn block' bindtap="onBack">
+            <button class='cu-btn bg-blue shadow margin-btn block' bindtap="onBack">
                 确认返回
             </button>
         </view>

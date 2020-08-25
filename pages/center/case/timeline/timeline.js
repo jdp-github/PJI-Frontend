@@ -35,7 +35,7 @@ Page({
         })
     },
 
-    onLoad: function(options) {
+    onLoad: function (options) {
         this.setData({
             caseInfo: JSON.parse(options.caseInfo),
             centerId: options.centerId,
@@ -53,7 +53,7 @@ Page({
     },
 
     // ---------------- timeline begin ---------------- //
-    requestTimeLine: function() {
+    requestTimeLine: function () {
         let that = this;
         wx.request({
             url: constant.basePath,
@@ -152,10 +152,53 @@ Page({
         return JSON.stringify(obj)
     },
 
+    onDeleCase: function (e) {
+        this.showModal("DeleteCaseModal");
+    },
+    deleCase: function () {
+        let that = this;
+        that.loadProgress();
+        wx.request({
+            url: constant.basePath,
+            data: {
+                service: 'Case.DeleteCase',
+                openid: app.globalData.openid,
+                case_id: that.data.caseInfo.case_id
+            },
+            header: {
+                'content-type': 'application/json'
+            },
+            success(res) {
+                that.completeProgress();
+                if (res.data.data.code == constant.response_success) {
+                    that.reloadPrePage()
+                    wx.navigateBack({
+                        delta: 1
+                    })
+                } else {
+                    that.showModal("ErrModal", res.data.data.msg);
+                }
+            },
+            fail(res) {
+                that.completeProgress();
+            }
+        });
+    },
+
+    reloadPrePage() {
+        var pages = getCurrentPages();
+        if (pages.length > 1) {
+            //上一个页面实例对象
+            var prePage = pages[pages.length - 2];
+            //关键在这里
+            prePage.initData()
+        }
+    },
+
     // ---------------- timeline end ---------------- //
 
     // ---------------- calendar begin ---------------- //
-    requestCalendar: function(month) {
+    requestCalendar: function (month) {
         let that = this;
         wx.request({
             url: constant.basePath,
@@ -204,7 +247,7 @@ Page({
     },
 
     // ============ 事件 begin ============ //
-    loadProgress: function() {
+    loadProgress: function () {
         if (this.data.loadProgress < 96) {
             this.setData({
                 loadProgress: this.data.loadProgress + 3
@@ -220,41 +263,41 @@ Page({
             });
         }
     },
-    completeProgress: function() {
+    completeProgress: function () {
         this.setData({
             loadProgress: 100
         });
     },
-    showToast: function(msg) {
+    showToast: function (msg) {
         wx.showToast({
             icon: 'none',
             title: msg,
         });
     },
-    showLoading: function() {
+    showLoading: function () {
         this.setData({
             loadModal: true
         });
     },
-    hideLoading: function() {
+    hideLoading: function () {
         setTimeout(() => {
             this.setData({
                 loadModal: false
             });
         }, 1500);
     },
-    showModal: function(modalName, msg = '') {
+    showModal: function (modalName, msg = '') {
         this.setData({
             modalName: modalName,
             errMsg: msg
         });
     },
-    hideModal: function(e) {
+    hideModal: function (e) {
         this.setData({
             modalName: null
         });
     },
-    onRefresh: function(e) {
+    onRefresh: function (e) {
         this.initData()
     },
 

@@ -40,15 +40,18 @@ Page({
         addCasePartPicker: ['请选择', '髋', '膝'],
         caseList: [],
         selectedCase: {},
-        errMsg: ''
+        errMsg: '',
+
+        height: util.computHeight(app.globalData.CustomBar)
     },
 
-    onLoad: function(options) {
+    onLoad: function (options) {
         this.setData({
             centerId: options.centerId,
             centerName: options.centerName,
             isAdmin: app.globalData.is_admin == '1'
         });
+
         this.initData()
     },
 
@@ -90,7 +93,7 @@ Page({
         });
     },
 
-    requestCaseList: function() {
+    requestCaseList: function () {
         let that = this;
         that.showLoading();
         wx.request({
@@ -165,7 +168,7 @@ Page({
         return doctorStr;
     },
 
-    onAddCase: function(e) {
+    onAddCase: function (e) {
         this.setData({
             modalName: 'AddCase'
         })
@@ -252,53 +255,16 @@ Page({
     },
 
     // 查看
-    onLookCase: function(e) {
+    onLookCase: function (e) {
         let caseInfo = e.currentTarget.dataset.case;
         wx.navigateTo({
             url: '../case/timeline/timeline?caseInfo=' + JSON.stringify(caseInfo) + "&centerId=" + this.data.centerId + "&centerName=" + this.data.centerName + "&isLook=" + true
         });
     },
 
-    onDeleCase: function(e) {
-        let selectedCase = e.currentTarget.dataset.case;
-        this.setData({
-            selectedCase: selectedCase
-        });
-        this.showModal("DeleteCaseModal");
-    },
-    deleCase: function() {
-        let that = this;
-        that.loadProgress();
-        wx.request({
-            url: constant.basePath,
-            data: {
-                service: 'Case.DeleteCase',
-                openid: app.globalData.openid,
-                case_id: that.data.selectedCase.case_id
-            },
-            header: {
-                'content-type': 'application/json'
-            },
-            success(res) {
-                that.completeProgress();
-                if (res.data.data.code == constant.response_success) {
-                    that.requestCaseList();
-                    that.setData({
-                        modalName: ''
-                    });
-                } else {
-                    that.showModal("ErrModal", res.data.data.msg);
-                }
-            },
-            fail(res) {
-                that.completeProgress();
-            }
-        });
-    },
-
     // ============ 事件 begin ============ //
 
-    loadProgress: function() {
+    loadProgress: function () {
         if (this.data.loadProgress < 96) {
             this.setData({
                 loadProgress: this.data.loadProgress + 3
@@ -314,46 +280,46 @@ Page({
             });
         }
     },
-    completeProgress: function() {
+    completeProgress: function () {
         this.setData({
             loadProgress: 100
         });
     },
-    showToast: function(msg) {
+    showToast: function (msg) {
         wx.showToast({
             icon: 'none',
             title: msg,
         });
     },
-    showLoading: function() {
+    showLoading: function () {
         this.setData({
             loadModal: true
         });
     },
-    hideLoading: function() {
+    hideLoading: function () {
         setTimeout(() => {
             this.setData({
                 loadModal: false
             });
         }, 100);
     },
-    showModal: function(modalName, msg = '') {
+    showModal: function (modalName, msg = '') {
         this.setData({
             modalName: modalName,
             errMsg: msg
         });
     },
-    hideModal: function(e) {
+    hideModal: function (e) {
         this.setData({
             modalName: null
         });
     },
-    onSearchChange: function(e) {
+    onSearchChange: function (e) {
         this.setData({
             searchValue: e.detail.value
         });
     },
-    onSearch: function() {
+    onSearch: function () {
         this.requestCaseList();
     },
     StatePickerChange(e) {
@@ -380,12 +346,12 @@ Page({
         })
         this.requestCaseList();
     },
-    onAddNameInput: function(e) {
+    onAddNameInput: function (e) {
         this.setData({
             addCaseName: e.detail.value
         });
     },
-    onAddIDInput: function(e) {
+    onAddIDInput: function (e) {
         this.setData({
             addCaseID: e.detail.value
         });
@@ -412,17 +378,17 @@ Page({
         })
         this.requestCaseList(this.data.searchValue);
     },
-    ListTouchStart: function(e) {
+    ListTouchStart: function (e) {
         this.setData({
             ListTouchStart: e.touches[0].pageX
         });
     },
-    ListTouchMove: function(e) {
+    ListTouchMove: function (e) {
         this.setData({
             ListTouchDirection: e.touches[0].pageX - this.data.ListTouchStart > 0 ? 'right' : 'left'
         });
     },
-    ListTouchEnd: function(e) {
+    ListTouchEnd: function (e) {
         if (this.data.ListTouchDirection == 'left') {
             this.setData({
                 modalName: e.currentTarget.dataset.target
@@ -437,7 +403,7 @@ Page({
         });
     },
 
-    onRefresh: function(e) {
+    onRefresh: function (e) {
         this.initData()
     },
 

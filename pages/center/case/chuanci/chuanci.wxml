@@ -1,5 +1,5 @@
 <view class="cu-custom" style="height:{{CustomBar}}px;">
-    <view class="cu-bar fixed bg-gradual-green" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+    <view class="cu-bar fixed bg-gradual-blue" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
         <navigator class='action border-custom' open-type="navigateBack" delta="1" hover-class="none" style='width:{{Custom.width}}px;height:{{Custom.height}}px;margin-left:calc(750rpx - {{Custom.right}}px)'>
             <text class='icon-back'></text>
             <text class='icon-homefill'></text>
@@ -53,9 +53,9 @@
                 <!-- 基本情况 -->
                 <view class='cu-bar solid-bottom bg-white'>
                     <view class='action'>
-                        <text class='icon-title text-green'></text>基本情况</view>
+                        <text class='icon-title text-blue'></text>基本情况</view>
                     <view>延后录入
-                        <switch class='green sm margin-right' bindchange="onBaseDelaySwitchChange" style='margin-left: 15rpx;' checked='{{base_info}}'></switch>
+                        <switch class='blue sm margin-right' bindchange="onBaseDelaySwitchChange" style='margin-left: 15rpx;' checked='{{base_info}}'></switch>
                     </view>
                 </view>
                 <!-- item -->
@@ -130,9 +130,9 @@
             <!-- 外周血检测 -->
             <view class='cu-bar solid-bottom solid-top bg-white'>
                 <view class='action'>
-                    <text class='icon-title text-green'></text>外周血检测</view>
+                    <text class='icon-title text-blue'></text>外周血检测</view>
                 <view>延后录入
-                    <switch class='green sm margin-right' bindchange="onCheckDelaySwitchChange" style='margin-left: 15rpx;' checked='{{out_check}}'></switch>
+                    <switch class='blue sm margin-right' bindchange="onCheckDelaySwitchChange" style='margin-left: 15rpx;' checked='{{out_check}}'></switch>
                 </view>
             </view>
             <!-- item -->
@@ -188,9 +188,9 @@
                     <!-- 关节液检测 -->
                     <view class='cu-bar solid-bottom solid-top bg-white'>
                         <view class='action'>
-                            <text class='icon-title text-green'></text>关节液检测</view>
+                            <text class='icon-title text-blue'></text>关节液检测</view>
                         <view>延后录入
-                            <switch class='green sm margin-right' bindchange="onFluidSwitchChange" style='margin-left: 15rpx;' checked='{{joint_fluid_check}}'></switch>
+                            <switch class='blue sm margin-right' bindchange="onFluidSwitchChange" style='margin-left: 15rpx;' checked='{{joint_fluid_check}}'></switch>
                         </view>
                     </view>
                     <!-- 关节液描述 -->
@@ -271,9 +271,9 @@
                     <!-- 病原菌检测 -->
                     <view class='cu-bar solid-bottom solid-top bg-white'>
                         <view class='action'>
-                            <text class='icon-title text-green'></text>病原菌检测</view>
+                            <text class='icon-title text-blue'></text>病原菌检测</view>
                         <view>延后录入
-                            <switch class='green sm margin-right' bindchange="onPathogenSwitchChange" style='margin-left: 15rpx;' checked='{{pathogen_check}}'></switch>
+                            <switch class='blue sm margin-right' bindchange="onPathogenSwitchChange" style='margin-left: 15rpx;' checked='{{pathogen_check}}'></switch>
                         </view>
                     </view>
                     <!-- 窦道咽拭子1 -->
@@ -359,9 +359,9 @@
                     <!-- 其他检测 -->
                     <view class='cu-bar solid-bottom solid-top bg-white'>
                         <view class='action'>
-                            <text class='icon-title text-green'></text>其他检测</view>
+                            <text class='icon-title text-blue'></text>其他检测</view>
                         <view>延后录入
-                            <switch class='green sm margin-right' bindchange="onOtherSwitchChange" style='margin-left: 15rpx;' checked='{{other}}'></switch>
+                            <switch class='blue sm margin-right' bindchange="onOtherSwitchChange" style='margin-left: 15rpx;' checked='{{other}}'></switch>
                         </view>
                     </view>
                     <!-- 其他检查 -->
@@ -376,7 +376,7 @@
             <!-- 穿刺小结 -->
             <view class='cu-bar solid-bottom solid-top bg-white'>
                 <view class='action'>
-                    <text class='icon-title text-green'></text>穿刺小结</view>
+                    <text class='icon-title text-blue'></text>穿刺小结</view>
             </view>
             <!-- item -->
             <view class="cu-list menu menu-avatar disabled">
@@ -429,13 +429,13 @@
             <!-- 底部按钮 -->
             <view class="btn-block bg-white shadow" hidden='{{isLook}}'>
                 <view class="flex margin-special">
-                    <button wx:if="{{isEdit || isCreate}}" class='cu-btn line-green shadow' style="margin-right: 15rpx;" form-type="submit" bindtap='submit' disabled='{{caseInfo.puncture_submit_button == 0}}'>
+                    <button wx:if="{{isEdit || isCreate}}" class='cu-btn line-blue shadow' style="margin-right: 15rpx;" form-type="submit" bindtap='submit' disabled='{{caseInfo.puncture_submit_button == 0}}'>
                         提交录入
                     </button>
-                    <button wx:else class='cu-btn line-green shadow' style="margin-right: 15rpx;" form-type="submit" bindtap='onSetCaseWrite'>
+                    <button wx:else class='cu-btn line-blue shadow' style="margin-right: 15rpx;" form-type="submit" bindtap='onSetCaseWrite'>
                         开始编辑
                     </button>
-                    <button class='cu-btn bg-green shadow' style="margin-left: 15rpx;" form-type="submit" bindtap='verify' disabled='{{isCreate}}'>
+                    <button class='cu-btn bg-blue shadow' style="margin-left: 15rpx;" form-type="submit" bindtap='verify' disabled='{{isCreate}}'>
                         {{caseInfo.puncture_state != 2 ?"确认审核":"解除锁定"}}
                     </button>
                 </view>
@@ -450,7 +450,7 @@
     <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;">
         <view class="cu-bar bg-white solid-bottom">
             <view class='action ' style="font-size: 24rpx;">
-                <text class='icon-title text-green'></text>上传图片
+                <text class='icon-title text-blue'></text>上传图片
             </view>
         </view>
         <view class="cu-form-group margin-top centerPlace">
@@ -501,8 +501,8 @@
     </view>
 </view>
 <view class='load-progress {{loadProgress!=0?"show":"hide"}}' style="top:{{CustomBar}}px;">
-    <view class='load-progress-bar bg-green' style="transform: translate3d(-{{100-loadProgress}}%, 0px, 0px);"></view>
-    <view class='load-progress-spinner text-green'></view>
+    <view class='load-progress-bar bg-blue' style="transform: translate3d(-{{100-loadProgress}}%, 0px, 0px);"></view>
+    <view class='load-progress-spinner text-blue'></view>
 </view>
 <view class='cu-load load-modal' wx:if="{{loadModal}}">
     <view class='gray-text'>处理中...</view>
@@ -532,7 +532,7 @@
         <scroll-view class="VerticalMain" scroll-y style="height:100%">
             <!-- 与假体相通的窦道 -->
             <view class="cu-bar bg-white" style="justify-content:flex-start;padding-left:15rpx;min-height:60rpx;">
-                <text class='icon-title text-green'></text>与假体相通的窦道
+                <text class='icon-title text-blue'></text>与假体相通的窦道
             </view>
             <radio-group style="justify-content:center;align-items:center" class="cu-form-group solid-bottom" bindchange="onRadioChange" data-type="is_sinus">
                 <view>
@@ -547,7 +547,7 @@
             </radio-group>
             <!-- 发热（体温） -->
             <view class="cu-bar bg-white" style="justify-content:flex-start;padding-left:15rpx;min-height:60rpx;">
-                <text class='icon-title text-green'></text>发热（体温）
+                <text class='icon-title text-blue'></text>发热（体温）
             </view>
             <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="onRadioChange" data-type="is_heat">
                 <view>
@@ -559,7 +559,7 @@
             </radio-group>
             <!-- 皮肤发红（Erythema） -->
             <view class="cu-bar bg-white" style="justify-content:flex-start;padding-left:15rpx;min-height:60rpx;">
-                <text class='icon-title text-green'></text>皮肤发红（Erythema）
+                <text class='icon-title text-blue'></text>皮肤发红（Erythema）
             </view>
             <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="onRadioChange" data-type="is_erythema">
                 <view>
@@ -571,7 +571,7 @@
             </radio-group>
             <!-- 积液/肿胀（Effusion/swelling） -->
             <view class="cu-bar bg-white" style="justify-content:flex-start;padding-left:15rpx;min-height:60rpx;">
-                <text class='icon-title text-green'></text>积液/肿胀（Effusion/swelling）
+                <text class='icon-title text-blue'></text>积液/肿胀（Effusion/swelling）
             </view>
             <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="onRadioChange" data-type="is_swelling">
                 <view>
@@ -583,7 +583,7 @@
             </radio-group>
             <!-- 局部皮温增高（fever） -->
             <view class="cu-bar bg-white" style="justify-content:flex-start;padding-left:15rpx;min-height:60rpx;">
-                <text class='icon-title text-green'></text>局部皮温增高（fever）
+                <text class='icon-title text-blue'></text>局部皮温增高（fever）
             </view>
             <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="onRadioChange" data-type="is_fever">
                 <view>
@@ -595,7 +595,7 @@
             </radio-group>
             <!-- 疼痛（Pain） -->
             <view class="cu-bar bg-white" style="justify-content:flex-start;padding-left:15rpx;min-height:60rpx;">
-                <text class='icon-title text-green'></text>疼痛（Pain）
+                <text class='icon-title text-blue'></text>疼痛（Pain）
             </view>
             <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="onRadioChange" data-type="is_pain">
                 <view>
@@ -607,7 +607,7 @@
             </radio-group>
             <!-- 活动受限（Reduced range of motion） -->
             <view class="cu-bar bg-white" style="justify-content:flex-start;padding-left:15rpx;min-height:60rpx;">
-                <text class='icon-title text-green'></text>活动受限（Reduced range of motion）
+                <text class='icon-title text-blue'></text>活动受限（Reduced range of motion）
             </view>
             <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="onRadioChange" data-type="is_activity_limit">
                 <view>
@@ -619,7 +619,7 @@
             </radio-group>
             <!-- 切口持续渗液 -->
             <view class="cu-bar bg-white" style="justify-content:flex-start;padding-left:15rpx;min-height:60rpx;">
-                <text class='icon-title text-green'></text>切口持续渗液
+                <text class='icon-title text-blue'></text>切口持续渗液
             </view>
             <radio-group style="justify-content:center;min-height:80rpx;" class="cu-form-group solid-bottom" bindchange="onRadioChange" data-type="is_seepage">
                 <view>
@@ -631,12 +631,12 @@
             </radio-group>
             <!-- 其他要说明的情况 -->
             <view class="cu-bar bg-white" style="justify-content:flex-start;padding-left:15rpx;min-height:60rpx;">
-                <text class='icon-title text-green'></text>其他要说明的情况
+                <text class='icon-title text-blue'></text>其他要说明的情况
             </view>
             <input style="text-align:left;padding-left:20rpx;height:80rpx; " placeholder="请输入文字，非必填 " class='radius bg-white solid-bottom' bindinput="onInput" data-type="remark" value="{{remark}}"></input>
             <!-- 外观照 -->
             <view class="cu-bar bg-white" style="justify-content:flex-start;padding-left:15rpx;min-height:60rpx;">
-                <text class='icon-title text-green'></text>外观照
+                <text class='icon-title text-blue'></text>外观照
             </view>
             <view class="cu-form-group">
                 <view class="grid col-3 grid-square flex-sub centerPlace">
@@ -673,7 +673,7 @@
             <!-- 底部按钮 -->
             <view class='padding-sm flex'>
                 <view class="flex-sub">
-                    <button class='cu-btn  bg-green shadow block' bindtap="onCloseDrawer">
+                    <button class='cu-btn  bg-blue shadow block' bindtap="onCloseDrawer">
                         关闭
                     </button>
                 </view>
@@ -688,7 +688,7 @@
             <view class="cu-list menu">
                 <view class="cu-bar bg-white solid-bottom">
                     <view class='action' style="font-size: 24rpx;">
-                        <text class='icon-title text-green'></text>已关联的{{relateType==5?'随访':'手术'}}
+                        <text class='icon-title text-blue'></text>已关联的{{relateType==5?'随访':'手术'}}
                     </view>
                 </view>
                 <view class="cu-item" wx:for="{{relateList}}" wx:key="id" bindtap="gotoRelate" data-item="{{item}}">
@@ -704,7 +704,7 @@
             <!-- 底部按钮 -->
             <view class='padding-sm flex'>
                 <view class="flex-sub">
-                    <button class='cu-btn  bg-green shadow block' bindtap="saveRelate">
+                    <button class='cu-btn  bg-blue shadow block' bindtap="saveRelate">
                         关闭
                     </button>
                 </view>

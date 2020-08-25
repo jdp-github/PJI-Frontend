@@ -1,5 +1,5 @@
 <view class="cu-custom" style="height:{{CustomBar}}px;">
-    <view class="cu-bar fixed bg-gradual-green" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+    <view class="cu-bar fixed bg-gradual-blue" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
         <navigator class='action border-custom' open-type="navigateBack" delta="1" hover-class="none" style='width:{{Custom.width}}px;height:{{Custom.height}}px;margin-left:calc(750rpx - {{Custom.right}}px)'>
             <text class='icon-back'></text>
             <text class='icon-homefill'></text>
@@ -53,7 +53,7 @@
             <view class="padding-left-special">
                 <view class='cu-bar solid-bottom bg-white'>
                     <view class='action'>
-                        <text class='icon-title text-green'></text>基本信息</view>
+                        <text class='icon-title text-blue'></text>基本信息</view>
                     <button class="cu-btn line-black sm" style="margin-right:45rpx;" bindtap="onImportClick">导入</button>
                 </view>
                 <view class="cu-list menu menu-avatar">
@@ -130,7 +130,7 @@
                         <view class="cu-form-group {{tel2Disabled?'disabled':''}}">
                             <view class='title'>联系电话2</view>
                             <input placeholder="请输入联系方式" class='radius' bindinput="onTel2Input" value='{{tel2}}' disabled='{{tel2Disabled}}'></input>
-                            <switch class='green sm' bindchange="onTel2SwitchChange" checked='{{!tel2Disabled}}'></switch>
+                            <switch class='blue sm' bindchange="onTel2SwitchChange" checked='{{!tel2Disabled}}'></switch>
                         </view>
 
                         <view class="cu-form-group">
@@ -160,9 +160,9 @@
                         <!-- 既往手术史 -->
                         <view class='cu-bar solid-bottom bg-white'>
                             <view class='action'>
-                                <text class='icon-title text-green'></text>既往手术史</view>
+                                <text class='icon-title text-blue'></text>既往手术史</view>
                             <view>
-                                <switch class='green sm margin-right' bindchange="onHistorySwitchChange" style='margin-left: 15rpx;' checked='{{operation_history}}'></switch>
+                                <switch class='blue sm margin-right' bindchange="onHistorySwitchChange" style='margin-left: 15rpx;' checked='{{operation_history}}'></switch>
                             </view>
                         </view>
                         <!-- 初次置换时间 -->
@@ -213,13 +213,13 @@
                         <!-- 合并症 -->
                         <view class='cu-bar solid-bottom bg-white' bindtap="onShowDrawer">
                             <view class='action'>
-                                <text class='icon-title text-green'></text>合并症</view>
+                                <text class='icon-title text-blue'></text>合并症</view>
                             <i class="fa fa-angle-right fa-2x" style="margin-right:30rpx"></i>
                         </view>
                         <!-- 知情同意 -->
                         <view class='cu-bar solid-bottom bg-white disabled' bindtap="onShowDrawer">
                             <view class='action'>
-                                <text class='icon-title text-green'></text>知情同意</view>
+                                <text class='icon-title text-blue'></text>知情同意</view>
                             <input class='radius' style="margin-right:30rpx" disabled value="{{is_agree==0?'无':'有'}}"></input>
                         </view>
                         <!-- 知情同意附件 -->
@@ -248,13 +248,13 @@
             <!-- 底部按钮 -->
             <view class="btn-block bg-white shadow" hidden='{{isLook}}'>
                 <view class="flex margin-special">
-                    <button wx:if="{{isEdit || isCreate}}" class='cu-btn line-green shadow' style="margin-right: 15rpx;" form-type="submit" bindtap='submit' disabled='{{caseInfo.base_submit_button == 0}}'>
+                    <button wx:if="{{isEdit || isCreate}}" class='cu-btn line-blue shadow' style="margin-right: 15rpx;" form-type="submit" bindtap='submit' disabled='{{caseInfo.base_submit_button == 0}}'>
                         提交录入
                     </button>
-                    <button wx:else class='cu-btn line-green shadow' style="margin-right: 15rpx;" form-type="submit" bindtap="onSetCaseWrite">
+                    <button wx:else class='cu-btn line-blue shadow' style="margin-right: 15rpx;" form-type="submit" bindtap="onSetCaseWrite">
                         开始编辑
                     </button>
-                    <button class='cu-btn bg-green shadow' style="margin-left: 15rpx;" form-type="submit" bindtap='verify' disabled='{{isCreate || caseInfo.approve_button == 2}}'>
+                    <button class='cu-btn bg-blue shadow' style="margin-left: 15rpx;" form-type="submit" bindtap='verify' disabled='{{isCreate || caseInfo.approve_button == 2}}'>
                         {{caseInfo.base_state != 2 ?"确认审核":"解除锁定"}}
                     </button>
                 </view>
@@ -265,8 +265,8 @@
 
 <!-- 模态对话框 -->
 <view class='load-progress {{loadProgress!=0?"show":"hide"}}' style="top:{{CustomBar}}px;">
-    <view class='load-progress-bar bg-green' style="transform: translate3d(-{{100-loadProgress}}%, 0px, 0px);"></view>
-    <view class='load-progress-spinner text-green'></view>
+    <view class='load-progress-bar bg-blue' style="transform: translate3d(-{{100-loadProgress}}%, 0px, 0px);"></view>
+    <view class='load-progress-spinner text-blue'></view>
 </view>
 
 <view class='cu-load load-modal' wx:if="{{loadModal}}">
@@ -300,7 +300,7 @@
             <!-- 伴随疾病 -->
             <view class='cu-bar solid-bottom bg-white'>
                 <view class='action'>
-                    <text class='icon-title text-green'></text>伴随疾病</view>
+                    <text class='icon-title text-blue'></text>伴随疾病</view>
             </view>
             <!-- 类风湿关节炎 -->
             <view class="cu-bar bg-white pop_item_title">
@@ -514,7 +514,7 @@
             <!-- 用药史 -->
             <view class='cu-bar solid-bottom bg-white'>
                 <view class='action'>
-                    <text class='icon-title text-green'></text>用药史</view>
+                    <text class='icon-title text-blue'></text>用药史</view>
             </view>
             <!-- 1周内使用免疫抑制剂 -->
             <view class="cu-bar bg-white pop_item_title">
@@ -584,7 +584,7 @@
             <!-- 底部按钮 -->
             <view class='padding-sm flex'>
                 <view class="flex-sub ">
-                    <button class='cu-btn  bg-green shadow block' bindtap="onCloseDrawer">
+                    <button class='cu-btn  bg-blue shadow block' bindtap="onCloseDrawer">
                         关闭
                     </button>
                 </view>
@@ -599,14 +599,14 @@
             <view class="cu-list menu">
                 <view class="cu-bar bg-white solid-bottom">
                     <view class='action ' style="font-size: 24rpx;">
-                        <text class='icon-title text-green'></text>选择要导入的病历
+                        <text class='icon-title text-blue'></text>选择要导入的病历
                     </view>
                 </view>
                 <view class="cu-item" wx:for="{{importList}}" wx:key="" bindtap="onImportItemClick" data-item="{{item}}">
                     <view class="cu-item" style="width:100%;">
                         <view class='content'>
-                            <text class="icon-roundcheck text-green" style="{{item.isSelected?'':'visibility:hidden;'}}" />
-                            <text class="{{item.isSelected?'text-green':''}}" style="width:100%;margin-right:50rpx;">{{sidePicker[item.side]+" "+partPicker[item.part]+" "+item.create_time}}</text>
+                            <text class="icon-roundcheck text-blue" style="{{item.isSelected?'':'visibility:hidden;'}}" />
+                            <text class="{{item.isSelected?'text-blue':''}}" style="width:100%;margin-right:50rpx;">{{sidePicker[item.side]+" "+partPicker[item.part]+" "+item.create_time}}</text>
                             <text class="arrow text-blue text-df" catchtap="gotoRelate" data-item="{{item}}" style="padding:20rpx 0">点击查看</text>
                             <!-- <text class='cu-tag bg-grey sm radius'>ID: </text> -->
                         </view>
@@ -616,7 +616,7 @@
             <!-- 底部按钮 -->
             <view class='padding-sm flex'>
                 <view class="flex-sub">
-                    <button class='cu-btn  bg-green shadow block' bindtap="importBase">
+                    <button class='cu-btn  bg-blue shadow block' bindtap="importBase">
                         确定
                     </button>
                 </view>

@@ -5,6 +5,12 @@ function formatNumber(n) {
     return n[1] ? n : '0' + n;
 }
 
+
+function computHeight(custombarHeight) {
+    let screenHeight = wx.getSystemInfoSync().windowHeight;
+    return screenHeight - custombarHeight;
+}
+
 function formatTime(number, format) {
     let formateArr = ['Y', 'M', 'D', 'h', 'm', 's'];
     let returnArr = [];
@@ -77,5 +83,6 @@ module.exports = {
     getIntervalMonth: getIntervalMonth,
     getIntervalDay: getIntervalDay,
     getIntervalWeek: getIntervalWeek,
-    getNowFormatMonth: getNowFormatMonth
+    getNowFormatMonth: getNowFormatMonth,
+    computHeight: computHeight
 };
