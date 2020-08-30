@@ -85,7 +85,7 @@
 			</view>
 		</view>
 		<!-- item -->
-		<view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}}" style="padding-top:15rpx;padding-bottom:15rpx;margin-bottom:30rpx" wx:for="{{caseList}}" wx:key="" bindtouchstart='ListTouchStart' bindtouchmove='ListTouchMove' bindtouchend='ListTouchEnd' data-target="move-box-{{index}}" data-case="{{item}}" bindtap="onLookCase">
+		<view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}}" style="padding-top:15rpx;padding-bottom:15rpx;margin-bottom:30rpx" wx:for="{{caseList}}" wx:key="" data-target="move-box-{{index}}" data-case="{{item}}" bindtap="onLookCase">
 			<view class='content'>
 				<view class="item-container">
 					<!-- 上 -->
@@ -134,10 +134,10 @@
 				</view>
 			</view>
 
-			<view class='move'>
-				<!-- <view class='bg-olive' data-case="{{item}}" bindtap="onEditCase">编辑</view> -->
+			<!-- <view class='move'>
+				<view class='bg-olive' data-case="{{item}}" bindtap="onEditCase">编辑</view>
 				<view class='bg-red' data-case="{{item}}" catchtap='onDeleCase' hidden='true' disabled="{{item.delete_button == 0}}">删除</view>
-			</view>
+			</view> -->
 		</view>
 	</view>
 </scroll-view>

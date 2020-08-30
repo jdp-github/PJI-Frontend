@@ -16,16 +16,17 @@ Page({
         isAdmin: false,
         searchValue: '',
         centerList: [],
-        centerTempList: [], // 存储中心列表，取消搜索时恢复数据用
+        centerIndex: 0,
+        centerInfo: {},
         visibleCenter: false,
         centerName: '',
     },
-    onHide: function() {
+    onHide: function () {
         this.setData({
             modalName: ''
         });
     },
-    onShow: function() {
+    onShow: function () {
         if (typeof this.getTabBar === 'function' &&
             this.getTabBar()) {
             this.getTabBar().setData({
@@ -40,7 +41,7 @@ Page({
         });
         this.onLoad();
     },
-    onLoad: function() {
+    onLoad: function () {
         this.loadProgress()
         let that = this;
         this.setData({
@@ -49,13 +50,7 @@ Page({
         this.initData();
         this.completeProgress()
     },
-    onPullDownRefresh: function() {
-        this.setData({
-            searchValue: ''
-        });
-        this.initData();
-    },
-    loadProgress: function() {
+    loadProgress: function () {
         if (this.data.loadProgress < 96) {
             this.setData({
                 loadProgress: this.data.loadProgress + 3
@@ -71,66 +66,40 @@ Page({
             });
         }
     },
-    completeProgress: function() {
+    completeProgress: function () {
         this.setData({
             loadProgress: 100
         });
     },
-    showToast: function(msg) {
+    showToast: function (msg) {
         wx.showToast({
             icon: 'none',
             title: msg,
         });
     },
-    showLoading: function() {
+    showLoading: function () {
         this.setData({
             loadModal: true
         });
     },
-    hideLoading: function() {
+    hideLoading: function () {
         setTimeout(() => {
             this.setData({
                 loadModal: false
             });
         }, 1500);
     },
-    ListTouchStart: function(e) {
-        this.setData({
-            ListTouchStart: e.touches[0].pageX
-        });
-    },
-
-    ListTouchMove: function(e) {
-        this.setData({
-            ListTouchDirection: e.touches[0].pageX - this.data.ListTouchStart > 0 ? 'right' : 'left'
-        });
-    },
-
-    ListTouchEnd: function(e) {
-        if (this.data.ListTouchDirection == 'left') {
-            this.setData({
-                modalName: e.currentTarget.dataset.target
-            });
-        } else {
-            this.setData({
-                modalName: null
-            });
-        }
-        this.setData({
-            ListTouchDirection: null
-        });
-    },
-    showModal: function(msg) {
+    showModal: function (msg) {
         this.setData({
             modalName: "AddCenterModal"
         });
     },
-    hideModal: function(e) {
+    hideModal: function (e) {
         this.setData({
             modalName: null
         });
     },
-    initData: function() {
+    initData: function () {
         let that = this;
         // that.showLoading()
         wx.request({
@@ -170,7 +139,7 @@ Page({
                     }
                     that.setData({
                         centerList: res.data.data.list,
-                        centerTempList: res.data.data.list
+                        centerInfo: res.data.data.list[that.data.centerIndex]
                     });
                 } else {
                     that.showToast(res.data.msg);
@@ -181,90 +150,100 @@ Page({
             }
         });
     },
-    
-    onSearchChange: function(e) {
-        this.setData({
-            searchValue: e.detail.value
-        });
-    },
-    onSearch: function(e) {
-        let that = this;
-        that.showLoading();
-        wx.request({
-            url: constant.basePath,
-            data: {
-                service: 'Center.SearchStaffCenter',
-                openid: app.globalData.openid,
-                keyword: that.data.searchValue
-            },
-            header: {
-                'content-type': 'application/json'
-            },
-            success(res) {
-                that.hideLoading();
-                if (res.data.data.code == constant.response_success) {
-                    for (let i = 0, len = res.data.data.list.length; i < len; i++) {
-                        let center = res.data.data.list[i];
-                        if (center.center_ctime != null) {
-                            center.center_ctime = util.formatTime(center.center_ctime, 'Y-M-D');
-                        }
-                        if (center.center_leader == null) {
-                            center.center_leader = '暂无';
-                        }
-                        center.center_name_prefix_letter = center.center_name.substr(0, 1);
-                        let total = center.completed_cases + center.no_approve_cases + center.no_completed_cases;
-                        if (total == 0) {
-                            center.completed_percentage = 0;
-                            center.no_approve_percentage = 0;
-                            center.no_completed_percentage = 0;
-                        } else {
-                            center.completed_percentage = Math.round((center.completed_cases / total) * 100) / 100;
-                            center.no_approve_percentage = Math.round((center.no_approve_cases / total) * 100) / 100;
-                            center.no_completed_percentage = Math.round((center.no_completed_cases / total) * 100) / 100;
-                        }
-                    }
-                    that.setData({
-                        centerList: res.data.data.list
-                    });
 
-                } else {
-                    that.showToast(res.data.msg);
-                }
-            },
-            fail(res) {
-                that.hideLoading();
-            }
+    onCenterChange: function (e) {
+        this.setData({
+            centerIndex: parseInt(e.detail.value)
         });
     },
-    onClickCase: function(e) {
+
+    // onSearchChange: function(e) {
+    //     this.setData({
+    //         searchValue: e.detail.value
+    //     });
+    // },
+    // onSearch: function(e) {
+    //     let that = this;
+    //     that.showLoading();
+    //     wx.request({
+    //         url: constant.basePath,
+    //         data: {
+    //             service: 'Center.SearchStaffCenter',
+    //             openid: app.globalData.openid,
+    //             keyword: that.data.searchValue
+    //         },
+    //         header: {
+    //             'content-type': 'application/json'
+    //         },
+    //         success(res) {
+    //             that.hideLoading();
+    //             if (res.data.data.code == constant.response_success) {
+    //                 for (let i = 0, len = res.data.data.list.length; i < len; i++) {
+    //                     let center = res.data.data.list[i];
+    //                     if (center.center_ctime != null) {
+    //                         center.center_ctime = util.formatTime(center.center_ctime, 'Y-M-D');
+    //                     }
+    //                     if (center.center_leader == null) {
+    //                         center.center_leader = '暂无';
+    //                     }
+    //                     center.center_name_prefix_letter = center.center_name.substr(0, 1);
+    //                     let total = center.completed_cases + center.no_approve_cases + center.no_completed_cases;
+    //                     if (total == 0) {
+    //                         center.completed_percentage = 0;
+    //                         center.no_approve_percentage = 0;
+    //                         center.no_completed_percentage = 0;
+    //                     } else {
+    //                         center.completed_percentage = Math.round((center.completed_cases / total) * 100) / 100;
+    //                         center.no_approve_percentage = Math.round((center.no_approve_cases / total) * 100) / 100;
+    //                         center.no_completed_percentage = Math.round((center.no_completed_cases / total) * 100) / 100;
+    //                     }
+    //                 }
+    //                 that.setData({
+    //                     centerList: res.data.data.list
+    //                 });
+
+    //             } else {
+    //                 that.showToast(res.data.msg);
+    //             }
+    //         },
+    //         fail(res) {
+    //             that.hideLoading();
+    //         }
+    //     });
+    // },
+    onClickCase: function (e) {
         wx.navigateTo({
-            url: '../center/case/case?centerId=' + e.currentTarget.dataset.center.center_id + "&centerName=" + e.currentTarget.dataset.center.center_name
+            url: '../center/case/case?centerId=' + this.data.centerInfo.center_id + "&centerName=" + this.data.centerInfo.center_name
         });
     },
-    onClickStats: function(e) {
+    onClickStats: function (e) {
         wx.navigateTo({
-            url: '../stats/stats?centerId=' + e.currentTarget.dataset.center.center_id
+            url: '../stats/stats?centerId=' + this.data.centerInfo.center_id
         });
     },
-    onClickSpecimen: function(e) {
+    onClickSpecimen: function (e) {
         wx.navigateTo({
-            url: '../center/specimen/specimen?centerId=' + e.currentTarget.dataset.center.center_id + "&centerName=" + e.currentTarget.dataset.center.center_name
+            url: '../center/specimen/specimen?centerId=' + this.data.centerInfo.center_id + "&centerName=" + this.data.centerInfo.center_name
         })
     },
-    onClickManage: function(e) {
-        // wx.navigateTo({
-        //     url: '../notice/notice?centerId=' + e.currentTarget.dataset.centerid
-        // })
+    onClickMember: function (e) {
         wx.navigateTo({
-            url: '../center/manage/manage?centerId=' + e.currentTarget.dataset.centerid
+            url: './member/member?centerId=' + this.data.centerInfo.center_id
         })
     },
-    centerNameInput: function(e) {
+
+    onClickNotice(e) {
+        wx.navigateTo({
+            url: '../center/notice/notice?centerId=' + this.data.centerInfo.center_id
+        })
+    },
+
+    centerNameInput: function (e) {
         this.setData({
             centerName: e.detail.value
         });
     },
-    addCenter: function() {
+    addCenter: function () {
         let that = this;
         if (that.data.centerName.length == 0) {
             that.showToast('请输入中心名');
@@ -297,7 +276,7 @@ Page({
             }
         });
     },
-    backToAuth: function() {
+    backToAuth: function () {
         wx.navigateTo({
             url: '../auth/auth'
         });

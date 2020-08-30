@@ -1,5 +1,5 @@
 <view class="cu-custom" style="height:{{CustomBar}}px;">
-    <view class="cu-bar fixed bg-gradual-green" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+    <view class="cu-bar fixed bg-gradual-blue" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
         <navigator class='action border-custom' open-type="navigateBack" delta="1" hover-class="none" style='width:{{Custom.width}}px;height:{{Custom.height}}px;margin-left:calc(750rpx - {{Custom.right}}px)'>
             <text class='icon-back'></text>
             <text class='icon-homefill'></text>
@@ -48,7 +48,7 @@
     </view>
     <view class="cu-bar bg-white solid-bottom margin-top">
         <view class='action' style="font-size: 24rpx;">
-            <text class='icon-title text-green'></text>关联信息
+            <text class='icon-title text-blue'></text>关联信息
         </view>
     </view>
     <view class="cu-bar bg-white search">
@@ -57,14 +57,14 @@
             <input type="text" placeholder="请输入患者姓名或病历号" confirm-type="search" value="{{searchValue}}" bindinput="onSearchChange"></input>
         </view>
         <view class='action'>
-            <button class='cu-btn bg-green shadow-blur round' bindtap="onSearch">搜索</button>
+            <button class='cu-btn bg-blue shadow-blur round' bindtap="onSearch">搜索</button>
         </view>
     </view>
     <view class="cu-list menu">
         <view class="cu-item arrow" wx:for="{{caseList}}" wx:key="">
             <view class="cu-item arrow" style="width:100%;" data-item="{{item}}" catchtap="onItemClick">
                 <view class='content'>
-                    <text class="{{item.isSelected?'icon-check text-green':'icon-edit'}}" style="width:100%;text-align:left;"> {{item.case_no}} {{item.patient_name}} ({{item.create_time}})</text>
+                    <text class="{{item.isSelected?'icon-check text-blue':'icon-edit'}}" style="width:100%;text-align:left;"> {{item.case_no}} {{item.patient_name}} ({{item.create_time}})</text>
                     <!-- <text class='cu-tag bg-grey sm radius'>ID: </text> -->
                 </view>
             </view>
@@ -72,12 +72,12 @@
     </view>
     <view class='padding-sm flex'>
         <view class='flex-sub' style="margin-right: 15rpx;">
-            <button class='cu-btn bg-green shadow block' bindtap="onPutClick">
+            <button class='cu-btn bg-blue shadow block' bindtap="onPutClick">
                 存放
             </button>
         </view>
         <view class='flex-sub'>
-            <button class='cu-btn line-green shadow block' bindtap="onBackClick">
+            <button class='cu-btn line-blue shadow block' bindtap="onBackClick">
                 返回
             </button>
         </view>
@@ -90,14 +90,14 @@
             <view class="cu-list menu">
                 <view class="cu-bar bg-white solid-bottom">
                     <view class='action ' style="font-size: 24rpx;">
-                        <text class='icon-title text-green'></text>选择要关联的穿刺
+                        <text class='icon-title text-blue'></text>选择要关联的穿刺
                     </view>
                 </view>
                 <view class="cu-item" wx:for="{{punctureList}}" wx:key="" bindtap="onPunctureItemClick" data-item="{{item}}">
                     <view class="cu-item" style="width:100%;">
                         <view class='content'>
-                            <text class="icon-roundcheck text-green" style="{{item.isSelected?'':'visibility:hidden;'}}" />
-                            <text class="{{item.isSelected?'text-green':''}}" style="width:100%;margin-right:50rpx;">{{item.date_time}}</text>
+                            <text class="icon-roundcheck text-blue" style="{{item.isSelected?'':'visibility:hidden;'}}" />
+                            <text class="{{item.isSelected?'text-blue':''}}" style="width:100%;margin-right:50rpx;">{{item.date_time}}</text>
                             <text class="arrow text-blue text-df" catchtap="gotoPuncture" data-item="{{item}}" style="padding:20rpx 0">点击查看</text>
                             <!-- <text class='cu-tag bg-grey sm radius'>ID: </text> -->
                         </view>
@@ -107,7 +107,7 @@
             <!-- 底部按钮 -->
             <view class='padding-sm flex'>
                 <view class="flex-sub">
-                    <button class='cu-btn  bg-green shadow block' bindtap="savePuncture">
+                    <button class='cu-btn  bg-blue shadow block' bindtap="savePuncture">
                         确定
                     </button>
                 </view>

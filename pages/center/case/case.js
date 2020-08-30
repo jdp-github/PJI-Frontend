@@ -378,31 +378,7 @@ Page({
         })
         this.requestCaseList(this.data.searchValue);
     },
-    ListTouchStart: function (e) {
-        this.setData({
-            ListTouchStart: e.touches[0].pageX
-        });
-    },
-    ListTouchMove: function (e) {
-        this.setData({
-            ListTouchDirection: e.touches[0].pageX - this.data.ListTouchStart > 0 ? 'right' : 'left'
-        });
-    },
-    ListTouchEnd: function (e) {
-        if (this.data.ListTouchDirection == 'left') {
-            this.setData({
-                modalName: e.currentTarget.dataset.target
-            });
-        } else {
-            this.setData({
-                modalName: null
-            });
-        }
-        this.setData({
-            ListTouchDirection: null
-        });
-    },
-
+    
     onRefresh: function (e) {
         this.initData()
     },

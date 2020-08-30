@@ -1,5 +1,5 @@
 <view class="cu-custom" style="height:{{CustomBar}}px;">
-    <view class="cu-bar fixed bg-gradual-green" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+    <view class="cu-bar fixed bg-gradual-blue" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
         <navigator class='action border-custom' open-type="navigateBack" delta="1" hover-class="none" style='width:{{Custom.width}}px;height:{{Custom.height}}px;margin-left:calc(750rpx - {{Custom.right}}px)'>
             <text class='icon-back'></text>
             <text class='icon-homefill'></text>
@@ -14,7 +14,7 @@
         <input type="text" placeholder="搜索标本盒、名称、关键字" confirm-type="search" value="{{searchValue}}" bindinput="onSearchChange"></input>
     </view>
     <view class='action'>
-        <button class='cu-btn bg-green shadow-blur round' bindtap="onSearch">搜索</button>
+        <button class='cu-btn bg-blue shadow-blur round' bindtap="onSearch">搜索</button>
     </view>
 </view>
 <view class="cu-bar bg-white fixed" style="top:{{CustomBar}}px; margin-top: 110rpx; width: 100%; border-bottom: 0;display:flex;flex-direction:row;justify-content:center">
@@ -39,12 +39,12 @@
     <view class="cu-list menu menu-avatar">
         <view style='display:flex;flex-direction:row'>
             <view class="flex-sub">
-                <button class='cu-btn bg-green shadow block margin-btn' bindtap="showModal" data-target="DrawerModalR">
+                <button class='cu-btn bg-blue shadow block margin-btn' bindtap="showModal" data-target="DrawerModalR">
                     添加标本盒
                 </button>
             </view>
             <view class="flex-sub">
-                <button class='cu-btn bg-green shadow block margin-btn' bindtap="onRefresh" data-target="DrawerModalR">
+                <button class='cu-btn bg-blue shadow block margin-btn' bindtap="onRefresh" data-target="DrawerModalR">
                     刷新列表
                 </button>
             </view>
@@ -55,12 +55,12 @@
                     <view class='flex-sub radius' style="padding-right: 30rpx;">
                         <view class="solids" style="width: 120rpx; height: 120rpx;">
                             <image src="{{item.image}}" style="width: 120rpx; height: 120rpx;"></image>
-                            <!-- <i class="icon-unlock text-green" wx:if="{{item.is_lock != 1}}"></i> -->
+                            <!-- <i class="icon-unlock text-blue" wx:if="{{item.is_lock != 1}}"></i> -->
                         </view>
                     </view>
                     <view class='radius' style="flex:4;padding-right: 30rpx;">
                         <view class="flex-sub sub-title">
-                            <!-- <i class="icon-unlock text-green" wx:if="{{item.is_lock != 1}}"></i>
+                            <!-- <i class="icon-unlock text-blue" wx:if="{{item.is_lock != 1}}"></i>
                             <i class="icon-lock text-red" wx:if="{{item.is_lock == 1}}"></i> -->
                             {{item.name}}
                             <view class="cu-tag sm radius" style="font-size: 22rpx;background-color:#ccc;color:#fff;font-weight:bold;margin-left:8rpx;">{{item.uses == 1?"常规存储":"送检用"}}</view>
@@ -85,8 +85,8 @@
     </view>
 </scroll-view>
 <view class='load-progress {{loadProgress!=0?"show":"hide"}}' style="top:{{CustomBar}}px;">
-    <view class='load-progress-bar bg-green' style="transform: translate3d(-{{100-loadProgress}}%, 0px, 0px);"></view>
-    <view class='load-progress-spinner text-green'></view>
+    <view class='load-progress-bar bg-blue' style="transform: translate3d(-{{100-loadProgress}}%, 0px, 0px);"></view>
+    <view class='load-progress-spinner text-blue'></view>
 </view>
 <view class='cu-load load-modal' wx:if="{{loadModal}}">
     <view class='gray-text'>处理中...</view>
@@ -96,7 +96,7 @@
     <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;">
         <view class="cu-bar bg-white solid-bottom">
             <view class='action' style="font-size: 24rpx;">
-                <text class='icon-title text-green'></text>新增标本盒
+                <text class='icon-title text-blue'></text>新增标本盒
             </view>
         </view>
         <view class="cu-form-group">
@@ -133,12 +133,12 @@
         </view>
         <view class='padding-sm flex'>
             <view class="flex-sub">
-                <button class='cu-btn  bg-green shadow sm block' bindtap="okAddBox">
+                <button class='cu-btn  bg-blue shadow sm block' bindtap="okAddBox">
                     确定
                 </button>
             </view>
             <view class="flex-sub" style="margin-left: 15rpx">
-                <button class='cu-btn line-green shadow sm block' bindtap="cancelAddBox" bindinput="onInput" data-prop='depositary'>
+                <button class='cu-btn line-blue shadow sm block' bindtap="cancelAddBox" bindinput="onInput" data-prop='depositary'>
                     取消
                 </button>
             </view>

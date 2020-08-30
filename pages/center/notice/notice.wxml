@@ -1,0 +1,121 @@
+<!-- header -->
+<view class="cu-custom" style="height:{{CustomBar-50}}px;">
+	<view class="cu-bar fixed bg-gradual-blue" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+		<navigator class='action border-custom' open-type="navigateBack" delta="1" hover-class="none" style='width:{{Custom.width}}px;height:{{Custom.height}}px;margin-left:calc(750rpx - {{Custom.right}}px)' bindtap="backToAuth">
+			<text class='icon-back'></text>
+			<text class='icon-homefill'></text>
+		</navigator>
+		<view class='content' style='top:{{StatusBar}}px;'>公告列表</view>
+	</view>
+</view>
+
+<!-- 通知公告 -->
+<scroll-view scroll-y class="margin-bottom" style='padding-top:20rpx;height:calc(100vh - {{CustomBar}}px)' scroll-with-animation="true" enable-back-to-top="true">
+	<view class="cu-list menu menu-avatar">
+		<view style='display:flex;flex-direction:row'>
+			<view class="flex-sub">
+				<button class='cu-btn bg-blue shadow margin-btn block' bindtap='onAddNotice'>
+					发布公告
+				</button>
+			</view>
+			<view class="flex-sub">
+				<button class='cu-btn bg-blue shadow margin-btn block' bindtap='refresh'>
+					刷新列表
+				</button>
+			</view>
+		</view>
+
+		<!-- 列表item -->
+		<view class="item-container radius {{modalName=='move-box-'+ index?'move-cur-notice':''}}" style="height:100%;" wx:for="{{noticeList}}" wx:key="id" data-target="move-box-{{index}}" bindtap='showNotice' data-item="{{item}}">
+			<view class="title-container">
+				<view class="item-title">{{item.title}}</view>
+				<view wx:if="{{item.is_top == 1}}" class='cu-tag radius bg-blue small fl'>
+					<i class="fa fa-bookmark"></i>
+				</view>
+			</view>
+			<view class="item-time">{{item.ctime}}</view>
+			<view class="horizontal-line"></view>
+			<view class="content-container">{{item.content}}</view>
+			<view class="horizontal-line"></view>
+			<view class="btn-container">
+				<button class="cu-btn shadow" style="margin-right:15rpx;" data-item="{{item}}" catchtap="onTopChange">置顶</button>
+				<button class="cu-btn shadow" style="margin-right:15rpx;" data-item="{{item}}" catchtap="onEdit">重新发布</button>
+				<button class="cu-btn bg-red shadow" data-item="{{item}}" catchtap='onDele'>删除</button>
+			</view>
+		</view>
+	</view>
+</scroll-view>
+
+
+<!-- ------------ 通知公告 begin ------------ -->
+<view class="cu-modal show" wx:if="{{modalName=='NoticeDialog'}}">
+	<view class="cu-dialog">
+		<view class="cu-bar bg-white justify-end">
+			<view class='content'>{{noticeState == 0?"查看":noticeState == 1?"新增":"编辑"}}公告</view>
+			<view class='action' bindtap='hideModal'>
+				<text class='icon-close text-red'></text>
+			</view>
+		</view>
+		<view class='padding-xl'>
+			<view class="cu-form-group" style='height:200px'>
+				<view class="notice-dialog-container">
+					<input class='radius' style="flex-grow:1" placeholder="请输入公告标题" type="text" bindinput="onTitleInput" value="{{currNoticeTitle}}" />
+					<textarea class='notice-dialog-content radius' style="padding:5px;flex-grow:3;" placeholder="请输入公告内容" bindinput='onNoticeInput' value='{{currNoticeContent}}' />
+					</view>
+            </view>
+            <view class="cu-form-group" style="display:flex;flex-direction:row;justify-content:space-between;align-items:center;">
+                <view class="cu-avatar round bg-gray margin-xs" style="background-image:url({{currAvatar}});"></view>
+                <view>{{currNoticeDate}}</view>
+                <!-- <view style="display:flex;flex-direction:row;">
+                    <view class='title'>置顶</view>
+                    <switch class='blue sm'  bindchange="onTopChange" checked='{{currIsTop}}'></switch>
+                </view> -->
+            </view>
+        </view>
+        <view class="cu-bar bg-white justify-end" wx:if="{{noticeState != 0}}">
+            <view class='action'>
+                <button class='cu-btn bg-blue margin-left' style='margin-right:10rpx' bindtap="onSubmit">确定</button>
+                <button class='cu-btn line-blue text-blue' bindtap='hideModal' style='margin-left:10rpx'>取消</button>
+            </view>
+        </view>
+    </view>
+</view>
+
+<view class='cu-load load-modal' wx:if="{{loadModal}}">
+    <view class='gray-text'>处理中...</view>
+</view>
+<view class="load-curtain" wx:if="{{loadProgress!=0}}"></view>
+
+<view class="cu-modal {{modalName=='DeleteNoticeModal'?'show':''}}">
+    <view class="cu-dialog">
+        <view class="cu-bar bg-white justify-end">
+            <view class='content'>删除</view>
+            <view class='action' bindtap='hideModal'>
+                <text class='icon-close text-red'></text>
+            </view>
+        </view>
+        <view class='padding-xl'>
+            <view class='flex-sub text-center'>
+                <view class='solid-bottom text-sl padding'>
+                    <text class='icon-warnfill text-red'></text>
+                </view>
+                <view class='padding'>是否删除</view>
+            </view>
+        </view>
+        <!-- <view class='solids-bottom padding-xs flex align-center' wx:if='{{!isAdmin}}'>
+            <view class='flex-sub text-center'>
+                <view class='solid-bottom text-sl padding'>
+                    <text class='icon-warnfill text-red'></text>
+                </view>
+                <view class='padding'>当前用户暂无权限</view>
+            </view>
+        </view> -->
+        <view class="cu-bar bg-white justify-end">
+            <view class='action'>
+                <button class='cu-btn bg-blue' style="margin-right:20rpx;" bindtap='hideModal' bindtap="dele">确定</button>
+                <button class='cu-btn line-blue text-blue' bindtap='hideModal'>取消</button>
+            </view>
+        </view>
+    </view>
+</view>
+<!-- ------------ 通知公告 end ------------ -->

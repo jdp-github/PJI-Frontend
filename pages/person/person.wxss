@@ -1,20 +1,24 @@
+.cu-list.card-menu {
+    margin-left: 15rpx;
+    margin-right: 15rpx;
+}
+
 .top-container {
     display: flex;
     flex-direction: row;
     align-items: center;
     background: white;
-    margin-bottom: 50rpx;
     padding: 30rpx;
 }
 
-.right-container{
+.right-container {
     display: flex;
     flex-direction: column;
     margin-left: 30rpx;
     font-size: 30rpx;
 }
 
-.line-container{
+.line-container {
     margin-top: 15rpx;
 }
 
@@ -24,7 +28,6 @@
     background: white;
     justify-content: center;
     padding: 30rpx 0;
-    margin-bottom: 50rpx;
 }
 
 .static-container {
@@ -65,4 +68,3 @@
 .special-bg-yellow {
     background-color: #f8b425;
 }
-

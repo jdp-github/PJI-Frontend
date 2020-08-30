@@ -1,5 +1,5 @@
 <view class="cu-custom" style="height:{{CustomBar}}px;">
-    <view class="cu-bar fixed bg-gradual-green" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+    <view class="cu-bar fixed bg-gradual-blue" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
         <navigator class='action border-custom' open-type="navigateBack" delta="1" hover-class="none" style='width:{{Custom.width}}px;height:{{Custom.height}}px;margin-left:calc(750rpx - {{Custom.right}}px)'>
             <text class='icon-back'></text>
             <text class='icon-homefill'></text>
@@ -106,7 +106,7 @@
         </view>
         <view class="cu-bar bg-white solid-bottom margin-top">
             <view class='action' style="font-size: 24rpx;">
-                <text class='icon-title text-green'></text>标本筛选
+                <text class='icon-title text-blue'></text>标本筛选
             </view>
         </view>
         <view class="cu-form-group">
@@ -151,29 +151,29 @@
         </view>
         <view class="cu-bar bg-white solid-bottom margin-top">
             <view class='action' style="font-size: 24rpx;">
-                <text class='icon-title text-green'></text>操作区域
+                <text class='icon-title text-blue'></text>操作区域
             </view>
         </view>
         <!-- 底部按钮 -->
         <view class='padding-sm flex' wx:if='{{!isGetAll}}'>
-            <button class='cu-btn bg-green shadow' bindtap='toGetAllPrintMode' style="width:100%;margin-right:20rpx;" disabled="{{boxUse == 2}}">
+            <button class='cu-btn bg-blue shadow' bindtap='toGetAllPrintMode' style="width:100%;margin-right:20rpx;" disabled="{{boxUse == 2}}">
                 批量打印标签
             </button>
-            <button class='cu-btn bg-green shadow' bindtap='toGetAllMode' style="width:100%;marin-right:20rpx;" disabled="{{boxUse == 2}}">
+            <button class='cu-btn bg-blue shadow' bindtap='toGetAllMode' style="width:100%;marin-right:20rpx;" disabled="{{boxUse == 2}}">
                 批量取出
             </button>
         </view>
         <view class="padding-sm flex">
             <view class="flex-sub" style="padding-right:10rpx;">
                 <view wx:if='{{isGetAll}}'>
-                    <button class='cu-btn bg-green shadow' bindtap='onMultipleGetClick' style="width:100%;" disabled="{{boxUse == 2}}">
+                    <button class='cu-btn bg-blue shadow' bindtap='onMultipleGetClick' style="width:100%;" disabled="{{boxUse == 2}}">
                         {{isGetAllPrint?'打印':'取出'}}
                     </button>
                 </view>
             </view>
             <view class="flex-sub">
                 <view wx:if='{{isGetAll}}'>
-                    <button class='cu-btn line-green shadow' bindtap='toNormalMode' style="width:100%;">
+                    <button class='cu-btn line-blue shadow' bindtap='toNormalMode' style="width:100%;">
                         返回
                     </button>
                 </view>
@@ -187,7 +187,7 @@
     <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;" wx:if="{{!showDetail}}">
         <view class="cu-bar bg-white solid-bottom">
             <view class='action' style="font-size: 24rpx;">
-                <text class='icon-title text-green'></text>取出标本
+                <text class='icon-title text-blue'></text>取出标本
             </view>
         </view>
         <view>
@@ -202,10 +202,10 @@
         </view>
         <view class='padding-sm flex'>
             <!-- 真正的取出 -->
-            <button class='cu-btn bg-green shadow margin-right' bindtap="onFinalGet" style="width:100%;" disabled="{{boxUse == 2}}">
+            <button class='cu-btn bg-blue shadow margin-right' bindtap="onFinalGet" style="width:100%;" disabled="{{boxUse == 2}}">
                 取出
             </button>
-            <button class='cu-btn line-green shadow' bindtap="onMultipleGetBackClick" style="width:100%;">
+            <button class='cu-btn line-blue shadow' bindtap="onMultipleGetBackClick" style="width:100%;">
                 返回
             </button>
         </view>
@@ -214,7 +214,7 @@
     <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;" wx:if="{{showDetail}}">
         <view class="cu-bar bg-white solid-bottom">
             <view class='action' style="font-size: 24rpx;">
-                <text class='icon-title text-green'></text>{{boxInfo.name}} {{selectedSpecimen.number}}
+                <text class='icon-title text-blue'></text>{{boxInfo.name}} {{selectedSpecimen.number}}
             </view>
         </view>
         <view>
@@ -276,7 +276,7 @@
                 <button class='cu-btn bg-cyan shadow' bindtap="onPrint" data-id="{{selectedSpecimen.sample_id}}" style="width:100%;" disabled="{{boxUse == 2}}">
                     打印标签
                 </button>
-                <button class='cu-btn bg-green shadow' bindtap="onSingleGetClick" data-id="{{selectedSpecimen.sample_id}}" style="width:100%;margin-top:20rpx;" disabled="{{boxUse == 2}}">
+                <button class='cu-btn bg-blue shadow' bindtap="onSingleGetClick" data-id="{{selectedSpecimen.sample_id}}" style="width:100%;margin-top:20rpx;" disabled="{{boxUse == 2}}">
                     取出
                 </button>
                 <button class='cu-btn bg-red shadow' data-target="DeleteSpecimenModal" bindtap="showDeleteModal" data-id="{{selectedSpecimen.sample_id}}" style="width:100%;margin-top:20rpx;">
@@ -287,8 +287,8 @@
     </view>
 </view>
 <view class='load-progress {{loadProgress!=0?"show":"hide"}}' style="top:{{CustomBar}}px;">
-    <view class='load-progress-bar bg-green' style="transform: translate3d(-{{100-loadProgress}}%, 0px, 0px);"></view>
-    <view class='load-progress-spinner text-green'></view>
+    <view class='load-progress-bar bg-blue' style="transform: translate3d(-{{100-loadProgress}}%, 0px, 0px);"></view>
+    <view class='load-progress-spinner text-blue'></view>
 </view>
 <view class="cu-modal {{deleteModalName=='DeleteSpecimenModal'?'show':''}}">
     <view class="cu-dialog">
@@ -305,8 +305,8 @@
         </view>
         <view class="cu-bar bg-white justify-end">
             <view class='action'>
-                <button class='cu-btn line-green text-green' bindtap='hideDeleteModal'>取消</button>
-                <button class='cu-btn bg-green margin-left' bindtap="onSingleDeleClick">确定</button>
+                <button class='cu-btn line-blue text-blue' bindtap='hideDeleteModal'>取消</button>
+                <button class='cu-btn bg-blue margin-left' bindtap="onSingleDeleClick">确定</button>
             </view>
         </view>
     </view>

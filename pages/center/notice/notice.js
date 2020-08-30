@@ -21,8 +21,6 @@ Page({
         StatusBar: app.globalData.StatusBar,
         CustomBar: app.globalData.CustomBar,
         Custom: app.globalData.Custom,
-        tabList: ["公告管理", "中心成员"],
-        currTab: 0,
         scrollLeft: 0,
 
         centerId: '',
@@ -63,17 +61,10 @@ Page({
 
     // --------------- 公共 begin --------------- //
 
-    tabSelect(e) {
-        this.setData({
-            currTab: e.currentTarget.dataset.id,
-            scrollLeft: (e.currentTarget.dataset.id - 1) * 60
-        })
-    },
-
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function(options) {
+    onLoad: function (options) {
         this.loadProgress();
         this.setData({
             centerId: options.centerId,
@@ -84,7 +75,14 @@ Page({
         this.initData();
         this.completeProgress()
     },
-    loadProgress: function() {
+
+
+    initData: function () {
+        this.requestNotice();
+    },
+
+
+    loadProgress: function () {
         if (this.data.loadProgress < 96) {
             this.setData({
                 loadProgress: this.data.loadProgress + 3
@@ -100,57 +98,32 @@ Page({
             });
         }
     },
-    completeProgress: function() {
+    completeProgress: function () {
         this.setData({
             loadProgress: 100
         });
     },
-    showToast: function(msg) {
+    showToast: function (msg) {
         wx.showToast({
             icon: 'none',
             title: msg,
         });
     },
-    showLoading: function() {
+    showLoading: function () {
         this.setData({
             loadModal: true
         });
     },
-    hideLoading: function() {
+    hideLoading: function () {
         setTimeout(() => {
             this.setData({
                 loadModal: false
             });
         }, 500);
     },
-    hideModal: function(e) {
+    hideModal: function (e) {
         this.setData({
             modalName: null
-        });
-    },
-
-    ListTouchStart: function(e) {
-        this.setData({
-            ListTouchStart: e.touches[0].pageX
-        });
-    },
-    ListTouchMove: function(e) {
-        this.setData({
-            ListTouchDirection: e.touches[0].pageX - this.data.ListTouchStart > 0 ? 'right' : 'left'
-        });
-    },
-    ListTouchEnd: function(e) {
-        if (this.data.ListTouchDirection == 'left') {
-            this.setData({
-                modalName: e.currentTarget.dataset.target
-            });
-        } else {
-            this.setData({
-                modalName: null
-            });
-        }
-        this.setData({
-            ListTouchDirection: null
         });
     },
 
@@ -171,7 +144,6 @@ Page({
                 'content-type': 'application/json'
             },
             success(res) {
-                console.log("Notice.GetNoticeList:" + JSON.stringify(res))
                 that.hideLoading();
                 if (res.data.data.code == constant.response_success) {
                     for (let i = 0, length = res.data.data.list.length; i < length; i++) {
@@ -216,7 +188,6 @@ Page({
                 'content-type': 'application/json'
             },
             success(res) {
-                console.log("Notice.DeleteNotice:" + JSON.stringify(res))
                 that.hideLoading();
                 that.hideModal();
                 if (res.data.data.code == constant.response_success) {
@@ -231,7 +202,7 @@ Page({
             }
         });
     },
-    onAddNotice: function(e) {
+    onAddNotice: function (e) {
         this.setData({
             modalName: "NoticeDialog",
             noticeState: ADD_STATE,
@@ -259,7 +230,6 @@ Page({
                 'content-type': 'application/json'
             },
             success(res) {
-                console.log("Notice.CreateNotice:" + JSON.stringify(res))
                 that.hideLoading();
                 that.hideModal();
                 that.clearData()
@@ -305,7 +275,6 @@ Page({
                 'content-type': 'application/json'
             },
             success(res) {
-                console.log("Notice.EditNotice:" + JSON.stringify(res))
                 that.hideLoading();
                 that.hideModal();
                 that.clearData()
@@ -350,7 +319,6 @@ Page({
                 'content-type': 'application/json'
             },
             success(res) {
-                console.log("Notice.SetTop:" + JSON.stringify(res))
                 if (res.data.data.code == constant.response_success) {
                     that.refresh()
                 } else {
@@ -379,12 +347,12 @@ Page({
         })
     },
     // ============== UI begin ============== //
-    onHide: function() {
+    onHide: function () {
         this.setData({
             modalName: ''
         });
     },
-    onShow: function() {
+    onShow: function () {
         if (typeof this.getTabBar === 'function' &&
             this.getTabBar()) {
             this.getTabBar().setData({
@@ -392,192 +360,20 @@ Page({
                 emitter: app.globalData.emitter
             });
             app.globalData.emitter.on('addEmitter', () => {
-                console.log("person modal");
             });
         }
     },
 
-    onTitleInput: function(e) {
+    onTitleInput: function (e) {
         this.setData({
             currNoticeTitle: e.detail.value
         });
     },
-    onNoticeInput: function(e) {
+    onNoticeInput: function (e) {
         this.setData({
             currNoticeContent: e.detail.value
         });
     },
     // --------------- 通知公告 end--------------- //
 
-    // --------------- 成员列表 begin--------------- //
-    onReady: function() {
-        let that = this;
-        wx.createSelectorQuery().select('.indexBar-box').boundingClientRect(function(res) {
-            that.setData({
-                boxTop: res ? res.top : 0
-            });
-        }).exec();
-        wx.createSelectorQuery().select('.indexes').boundingClientRect(function(res) {
-            that.setData({
-                barTop: res ? res.top : 0
-            });
-        }).exec();
-    },
-    getCurrent: function(e) {
-        this.setData({
-            hidden: false,
-            listCur: this.data.list[e.target.id],
-        });
-    },
-
-    setCurrent: function(e) {
-        this.setData({
-            hidden: true,
-            listCur: this.data.listCur
-        });
-    },
-    tMove: function(e) {
-        let y = e.touches[0].clientY,
-            offsettop = this.data.boxTop,
-            that = this;
-        if (y > offsettop) {
-            let num = parseInt((y - offsettop) / 20);
-            this.setData({
-                listCur: that.data.list[num]
-            });
-        }
-    },
-    tStart: function() {
-        this.setData({
-            hidden: false
-        });
-    },
-    tEnd: function() {
-        this.setData({
-            hidden: true,
-            listCurID: this.data.listCur
-        });
-    },
-    indexSelect: function(e) {
-        let that = this;
-        let barHeight = this.data.barHeight;
-        let list = this.data.list;
-        let scrollY = Math.ceil(list.length * e.detail.y / barHeight);
-        for (let i = 0; i < list.length; i++) {
-            if (scrollY < i + 1) {
-                that.setData({
-                    listCur: list[i],
-                    movableY: i * 20
-                });
-                return false
-            }
-        }
-    },
-    initData: function() {
-        this.requestCenterStaffList(this.data.searchValue);
-        this.requestNotice();
-    },
-
-    requestCenterStaffList: function(searchValue) {
-        let that = this;
-        wx.request({
-            url: constant.basePath,
-            data: {
-                service: 'Center.SearchCenterMember',
-                center_id: that.data.centerId,
-                // keyword: '',
-                sort: 1
-            },
-            header: {
-                'content-type': 'application/json'
-            },
-            success(res) {
-                console.log("Center.SearchCenterMember:" + JSON.stringify(res))
-                if (res.data.data.code == constant.response_success) {
-                    let list = [];
-                    let realStaffList = {};
-                    let sortByPrefix = {};
-                    let realListCur = '';
-                    for (let i = 0, len = res.data.data.list.length; i < len; i++) {
-                        let staff = res.data.data.list[i];
-                        staff.auth_time = util.formatTime(staff.auth_time, 'Y-M-D');
-                        let prefixLetter = C2Pin.firstChar(res.data.data.list[i].staff_name).substr(0, 1).toUpperCase();
-                        list[i] = prefixLetter;
-                        // 重新组织相同首字母的人员
-                        if (!realStaffList[prefixLetter]) {
-                            realStaffList[prefixLetter] = [];
-                        }
-                        realStaffList[prefixLetter].push(staff);
-                    }
-
-                    if (list.length == 0) {
-                        realListCur = ''
-                    } else {
-                        realListCur = list[0];
-                    }
-                    list.sort();
-                    for (let i = 0, len = list.length; i < len; i++) {
-                        let prefix = list[i];
-                        if (!sortByPrefix[prefix]) {
-                            sortByPrefix[prefix] = [];
-                        }
-                        sortByPrefix[prefix] = realStaffList[prefix]
-                    }
-                    that.setData({
-                        staffList: sortByPrefix,
-                        list: [...new Set(list)],
-                        listCur: realListCur
-                    });
-                } else {
-                    that.showToast(res.data.msg);
-                }
-            },
-            fail(res) {}
-        });
-    },
-    showModal: function(e) {
-        this.setData({
-            modalName: e.currentTarget.dataset.target,
-            roleId: '',
-            selectedStaff: e.target.dataset.staff
-        });
-    },
-
-    gotoMember(e) {
-        let item = e.currentTarget.dataset.item
-        wx.navigateTo({
-            url: '../manage/member/member?memberId=' + item.member_id
-        });
-    },
-
-    deleteMember: function(e) {
-        let that = this;
-        that.loadProgress();
-        wx.request({
-            url: constant.basePath,
-            data: {
-                service: 'Center.DeleteCenterMember',
-                openid: app.globalData.openid,
-                member_id: that.data.selectedStaff.member_id
-            },
-            header: {
-                'content-type': 'application/json'
-            },
-            success(res) {
-                if (res.data.data.code == constant.response_success) {
-                    that.requestCenterStaffList(that.data.searchValue)
-                } else {
-                    that.showToast(res.data.msg);
-                    that.completeProgress();
-                }
-                that.setData({
-                    modalName: ''
-                });
-            },
-            fail(res) {
-                that.completeProgress();
-            }
-        });
-    },
-    // --------------- 成员列表 end--------------- //
 })

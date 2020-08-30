@@ -1,4 +1,13 @@
-<view class='top-container cu-list card-menu' style="margin-top:150rpx;">
+<view class="cu-custom" style="height:{{CustomBar}}px;">
+	<view class="cu-bar fixed bg-gradual-blue" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+		<!-- <navigator class='action border-custom' open-type="navigateBack" delta="1" hover-class="none" style='width:{{Custom.width}}px;height:{{Custom.height}}px;margin-left:calc(750rpx - {{Custom.right}}px)'>
+			<text class='icon-back'></text>
+			<text class='icon-homefill'></text>
+		</navigator> -->
+		<view class='content' style='top:{{StatusBar}}px;'>我的</view>
+	</view>
+</view>
+<view class='top-container cu-list card-menu' style="margin-top:30rpx;">
 	<view class="cu-avatar round xl bg-gray" style="background-image:url({{avatarUrl}});"></view>
 	<view class="right-container">
 		<view class="line-container">{{userInfo.name}}({{nickName}})</view>
@@ -33,7 +42,7 @@
 		</view>
 	</view>
 </view>
-<view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg">
+<view class="cu-list menu card-menu shadow-lg">
 	<view class="cu-item">
 		<view class='content' hover-class='none' bindtap="showDrawer" data-target="DrawerModalRight">
 			<view style="display:flex;flex-direction:row;" class='action title-style-3'>
@@ -51,7 +60,7 @@
 		</view>
 	</view>
 </view>
-<!-- <view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg">
+<!-- <view class="cu-list menu card-menu margin-top-xl shadow-lg">
 	<view class="cu-item">
 		<view class='content' hover-class='none'>
 			<view class='action title-style-3'>
@@ -78,7 +87,7 @@
 		</view>
 	</view>
 </view> -->
-<view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg">
+<view class="cu-list menu card-menu margin-top-xl shadow-lg">
 	<view class="cu-item">
 		<view class='content' hover-class='none'>
 			<view class='action title-style-3'>

@@ -1,0 +1,100 @@
+<!-- header -->
+<view class="cu-custom" style="height:{{CustomBar-50}}px;">
+	<view class="cu-bar fixed bg-gradual-blue" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+		<navigator class='action border-custom' open-type="navigateBack" delta="1" hover-class="none" style='width:{{Custom.width}}px;height:{{Custom.height}}px;margin-left:calc(750rpx - {{Custom.right}}px)' bindtap="backToAuth">
+			<text class='icon-back'></text>
+			<text class='icon-homefill'></text>
+		</navigator>
+		<view class='content' style='top:{{StatusBar}}px;'>中心</view>
+	</view>
+</view>
+<!-- 成员列表 -->
+<scroll-view scroll-y class="indexes margin-bottom" scroll-into-view="indexes-{{listCurID}}" style='height:calc(100vh - {{CustomBar}}px - 50px)' scroll-with-animation="true" enable-back-to-top="true">
+	<block wx:for="{{staffList}}" wx:key="id" wx:for-index="key" wx:for-item="value">
+		<view class='padding padding-top-xs padding-bottom-xs indexItem-{{key}}' id="indexes-{{key}}" data-index="{{key}}">{{key}}</view>
+		<view class="item-container radius" wx:for="{{value}}" wx:key="staff_id" bindtap="gotoMember" data-item="{{item}}">
+			<view class="item-top" data-target="move-box-{{item.staff_id}}">
+				<view class="cu-avatar round lg" style="background-image:url({{item.staff_avatar}});"></view>
+				<view style="display:flex;flex-direction:row;align-items:flex-end;width:100%">
+					<view class="member-item-container" style="width:20%">
+						<view class='text-grey'>{{item.staff_name}}</view>
+						<view class='text-gray text-sm' style="margin-top:10rpx">{{item.role_name}}</view>
+					</view>
+					<view class="member-item-container" style="width:25%">
+						<view class='text-black text-sm'>事件录入:{{item.input_count}}</view>
+						<view class='text-black text-sm' style="margin-top:10rpx">事件审核:{{item.apply_count}}</view>
+					</view>
+					<view class="member-item-container">
+						<view class='text-black text-sm'>待完成事件:{{item.alarm_count}}</view>
+						<view class='text-black text-sm' style="margin-top:10rpx">标本存放:{{item.sample_count}}</view>
+					</view>
+					<!-- <view class="member-item-container">
+                        <view class='text-black text-sm'>手术录入:{{item.approve_count}}</view>
+                        <view class='text-black text-sm'>标本存放:{{item.sample_count}}</view>
+                    </view> -->
+				</view>
+				<!-- <view class='move'>
+					<view class='bg-olive' bindtap="showModal" data-target="EditMemberModal" data-staff="{{item}}">编辑</view>
+					<view class='bg-red' bindtap="showModal" data-target="DeleteMemberModal" data-staff="{{item}}">删除</view>
+				</view> -->
+			</view>
+			<view class="line"></view>
+			<view style="display:flex;flex-direction:row;justify-content:flex-end">
+				<button class='cu-btn shadow' style="width:180rpx;margin-right:15rpx">查看详情</button>
+				<button class='cu-btn bg-red' style="width:150rpx" catchtap="showModal" data-target="DeleteMemberModal" data-staff="{{item}}">删除</button>
+			</view>
+		</view>
+	</block>
+</scroll-view>
+
+
+<!-- ------------ 成员列表 begin ------------ -->
+<view class='indexBar' style='height:calc(100vh - {{CustomBar}}px - 50px)' wx:if="{{indexBarDisplay}}">
+	<view class='indexBar-box' bindtouchstart="tStart" bindtouchend="tEnd" catchtouchmove="tMove">
+		<view class="indexBar-item " wx:for="{{list}}" wx:key="staff_id" id='{{index}}' bindtouchstart="getCurrent" bindtouchend="setCurrent">{{list[index]}}</view>
+	</view>
+</view>
+<view hidden="{{hidden}}" class="indexToast">
+	{{listCur}}
+</view>
+<view class='load-progress {{loadProgress!=0?"show":"hide"}}' style="top:{{CustomBar}}px;">
+	<view class='load-progress-bar bg-blue' style="transform: translate3d(-{{100-loadProgress}}%, 0px, 0px);"></view>
+	<view class='load-progress-spinner text-blue'></view>
+</view>
+<view class='cu-load load-modal' wx:if="{{loadModal}}">
+	<view class='gray-text'>处理中...</view>
+</view>
+<view class="load-curtain" wx:if="{{loadProgress!=0}}"></view>
+<view class="cu-modal {{modalName=='DeleteMemberModal'?'show':''}}">
+	<view class="cu-dialog">
+		<view class="cu-bar bg-white justify-end">
+			<view class='content'>删除成员</view>
+			<view class='action' bindtap='hideModal'>
+				<text class='icon-close text-red'></text>
+			</view>
+		</view>
+		<view class='padding-xl' wx:if='{{isAdmin}}'>
+			<view class='flex-sub text-center'>
+				<view class='solid-bottom text-sl padding'>
+					<text class='icon-warnfill text-red'></text>
+				</view>
+				<view class='padding'>是否删除{{selectedStaff.staff_name}}</view>
+			</view>
+		</view>
+		<view class='solids-bottom padding-xs flex align-center' wx:if='{{!isAdmin}}'>
+			<view class='flex-sub text-center'>
+				<view class='solid-bottom text-sl padding'>
+					<text class='icon-warnfill text-red'></text>
+				</view>
+				<view class='padding'>当前用户暂无权限</view>
+			</view>
+		</view>
+		<view class="cu-bar bg-white justify-end">
+			<view class='action'>
+				<button class='cu-btn bg-blue margin-left' style="margin-right:10px" bindtap='hideModal' wx:if="{{isAdmin}}" bindtap="deleteMember">确定</button>
+				<button class='cu-btn line-blue text-blue' bindtap='hideModal'>取消</button>
+			</view>
+		</view>
+	</view>
+</view>
+<!-- ------------ 成员列表 end  ------------ -->

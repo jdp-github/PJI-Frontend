@@ -1,16 +1,15 @@
 @import '../../../../font-awesome.wxss';
 
-page, .page {
-    background-color: #fff;
-}
-
-.cu-item-special, .cu-form-group .title, .cu-form-group input,
+.cu-item-special,
+.cu-form-group .title,
+.cu-form-group input,
 .cu-form-group picker .picker {
     font-size: 30rpx;
     text-align: right;
 }
 
-.cu-form-group textarea, .cu-form-group textarea textarea {
+.cu-form-group textarea,
+.cu-form-group textarea textarea {
     font-size: 22rpx;
     text-align: right;
 }
@@ -22,4 +21,11 @@ page, .page {
 
 .title text {
     margin-right: 10rpx;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    margin: 15rpx;
+    margin-top: 30rpx;
 }
