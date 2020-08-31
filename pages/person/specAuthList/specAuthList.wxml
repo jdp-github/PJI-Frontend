@@ -1,0 +1,55 @@
+<view class="cu-custom" style="height:{{CustomBar}}px;">
+	<view class="cu-bar fixed bg-gradual-blue" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+		<navigator class='action border-custom' open-type="navigateBack" delta="1" hover-class="none" style='width:{{Custom.width}}px;height:{{Custom.height}}px;margin-left:calc(750rpx - {{Custom.right}}px)'>
+			<text class='icon-back'></text>
+			<text class='icon-homefill'></text>
+		</navigator>
+		<view class='content' style='top:{{StatusBar}}px;'>标本授权</view>
+	</view>
+</view>
+<!-- 标本授权 -->
+<view class="root" style="top:{{CustomBar}}px;height:100%;width:100%;">
+	<scroll-view scroll-y class="nav text-center" style="height:100%;width:100%;">
+		<view class="cu-item {{index==TabCur?'text-blue cur':''}}" wx:for="{{tabItems}}" wx:key="id" bindtap='tabSelect' data-id="{{index}}">
+			{{tabItems[index]}}
+		</view>
+		<!-- 我的申请 -->
+		<view wx:for='{{specimenApplyList}}' wx:key="apply_id" wx:if="{{TabCur==0}}">
+			<view class="item-container radius">
+				<view class="item-line">
+					<view style="flex:auto;text-align:left">姓名: {{item.auth_staff_name}}</view>
+					<view>申请日期: {{item.apply_time}}</view>
+				</view>
+				<view class="line"></view>
+				<view class="item-line">
+					<view style="flex:auto;text-align:left">申请编号：{{item.auth_id}}</view>
+					<view>申请状态: {{item.state_name}}</view>
+				</view>
+				<view class="line" wx:if="{{item.state!=0}}"></view>
+				<view class="text-left" wx:if="{{item.state!=0}}">审批日期: {{item.auth_time}}</view>
+			</view>
+		</view>
+		<!-- 需我授权 -->
+		<view wx:for='{{specimenApproveList}}' wx:key="auth_id" wx:if="{{TabCur==1}}">
+			<view class="item-container radius">
+				<view class="item-line">
+					<view style="flex:auto;text-align:left">姓名: {{item.staff_name}}</view>
+					<view>申请日期: {{item.apply_time}}</view>
+				</view>
+				<view class="line"></view>
+				<view class="item-line">
+					<view style="flex:auto;text-align:left">编号：{{item.auth_id}}</view>
+					<view>申请状态: {{item.state_name}}</view>
+				</view>
+				<view wx:if="{{item.state==0}}" class="line"></view>
+				<view class="item-line" style="justify-content: flex-end;" wx:if="{{item.state==0}}">
+					<button class='cu-btn bg-blue shadow' data-authid="{{item.auth_id}}" bindtap="onSpecimenApprove">同意</button>
+					<button class='cu-btn bg-red shadow' data-authid="{{item.auth_id}}" bindtap="onSpecimenRefuse" style="margin-left: 10rpx;">拒绝</button>
+				</view>
+			</view>
+		</view>
+		<button class='cu-btn bg-blue shadow margin-btn block' style="margin:30rpx;" bindtap="gotoSpecimenAuth">
+			申请标本授权
+		</button>
+	</scroll-view>
+</view>

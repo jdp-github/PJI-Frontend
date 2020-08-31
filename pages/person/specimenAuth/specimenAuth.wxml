@@ -1,6 +1,6 @@
 <!-- header -->
 <view class="cu-custom" style="height:{{CustomBar-50}}px;">
-    <view class="cu-bar fixed bg-gradual-green" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+    <view class="cu-bar fixed bg-gradual-blue" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
         <navigator class='action border-custom' open-type="navigateBack" delta="1" hover-class="none" style='width:{{Custom.width}}px;height:{{Custom.height}}px;margin-left:calc(750rpx - {{Custom.right}}px)' bindtap="backToAuth">
             <text class='icon-back'></text>
             <text class='icon-homefill'></text>
@@ -16,22 +16,23 @@
                 {{centerNameList[centerIndex]}}
             </view>
         </picker>
+        <view class="icon-unfold" style="margin-left:15rpx"></view>
     </view>
 </view>
 <!-- 成员列表 -->
 <scroll-view wx-else scroll-y class="indexes margin-bottom" scroll-into-view="indexes-{{listCurID}}" style='height:calc(100vh - {{CustomBar}}px - 50px);margin-top:110rpx' scroll-with-animation="true" enable-back-to-top="true">
     <block wx:for="{{staffList}}" wx:key="id" wx:for-index="key" wx:for-item="value">
-        <view class='padding padding-top-xs padding-bottom-xs indexItem-{{key}}' id="indexes-{{key}}" data-index="{{key}}">{{key}}</view>
+        <view class='indexItem-{{key}}' style="padding-left:20rpx" id="indexes-{{key}}" data-index="{{key}}">{{key}}</view>
         <view class="cu-list menu menu-avatar no-padding">
-            <view style="display:flex;flex-direction:row;justify-content:flex-start;align-items:center;height:100%;padding-top:10px;padding-bottom:10px" class="cu-item" wx:for="{{value}}" wx:key="{{item.staff_id}}">
+            <view class="cu-item item-container radius" wx:for="{{value}}" wx:key="{{item.staff_id}}">
                 <view class="cu-avatar round lg" style="background-image:url({{item.staff_avatar}});"></view>
                 <view style="display:flex;flex-direction:row;align-items:flex-end;width:100%">
-                    <view class="member-item-container" style="width:20%">
+                    <view class="member-item-container" style="width:30%">
                         <view class='text-grey'>{{item.staff_name}}</view>
                         <view class='text-gray text-sm'>{{item.role_name}}</view>
                     </view>
                     <view class="member-item-container">
-                        <button class='cu-btn bg-green shadow margin-btn block' style="display:absolute;left:200rpx" bindtap="onAuth" data-item="{{item}}">
+                        <button class='cu-btn bg-blue shadow margin-btn block' style="display:absolute;left:150rpx" bindtap="onAuth" data-item="{{item}}">
                             申请授权
                         </button>
                     </view>
@@ -55,8 +56,8 @@
     {{listCur}}
 </view>
 <view class='load-progress {{loadProgress!=0?"show":"hide"}}' style="top:{{CustomBar}}px;">
-    <view class='load-progress-bar bg-green' style="transform: translate3d(-{{100-loadProgress}}%, 0px, 0px);"></view>
-    <view class='load-progress-spinner text-green'></view>
+    <view class='load-progress-bar bg-blue' style="transform: translate3d(-{{100-loadProgress}}%, 0px, 0px);"></view>
+    <view class='load-progress-spinner text-blue'></view>
 </view>
 <view class='cu-load load-modal' wx:if="{{loadModal}}">
     <view class='gray-text'>处理中...</view>
@@ -88,8 +89,8 @@
         </view>
         <view class="cu-bar bg-white justify-end">
             <view class='action'>
-                <button class='cu-btn bg-green margin-left' style="margin-right:10px" bindtap='hideModal' wx:if="{{isAdmin}}" bindtap="deleteMember">确定</button>
-                <button class='cu-btn line-green text-green' bindtap='hideModal'>取消</button>
+                <button class='cu-btn bg-blue margin-left' style="margin-right:10px" bindtap='hideModal' wx:if="{{isAdmin}}" bindtap="deleteMember">确定</button>
+                <button class='cu-btn line-blue text-blue' bindtap='hideModal'>取消</button>
             </view>
         </view>
     </view>

@@ -1,0 +1,28 @@
+.root {
+    height: 100%;
+}
+
+.item-container {
+    background: white;
+    margin: 20rpx;
+    padding: 20rpx;
+    display: flex;
+    flex-direction: column;
+}
+
+.item-line {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.item-line:first-child {
+    flex: auto;
+}
+
+.line {
+    width: 100%;
+    height: 1px;
+    background: #ddd;
+    margin: 20rpx 0;
+}
