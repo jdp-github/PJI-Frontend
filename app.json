@@ -16,6 +16,7 @@
         "pages/person/person",
         "pages/person/specimenAuth/specimenAuth",
         "pages/person/specAuthList/specAuthList",
+        "pages/person/authList/authList",
         "pages/service/service",
         "pages/register/register",
         "pages/center/case/case",

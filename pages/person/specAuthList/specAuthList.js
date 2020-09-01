@@ -84,7 +84,12 @@ Page({
             });
         }, 1500);
     },
-
+    showToast: function (msg) {
+        wx.showToast({
+            icon: 'none',
+            title: msg,
+        });
+    },
     
     gotoSpecimenAuth() {
         wx.navigateTo({
@@ -177,7 +182,7 @@ Page({
             success(res) {
                 if (res.data.data.code == constant.response_success) {
                     that.requestApproveSpecimenAuth()
-                    that.requestUserInfo()
+                    that.reloadPrePage()
                 } else {
                     that.showToast(res.data.msg);
                 }
@@ -206,7 +211,7 @@ Page({
             success(res) {
                 if (res.data.data.code == constant.response_success) {
                     that.requestApproveSpecimenAuth()
-                    that.requestUserInfo()
+                    that.reloadPrePage()
                 } else {
                     that.showToast(res.data.data.msg);
                 }
@@ -217,5 +222,15 @@ Page({
                 that.showToast(res.data.msg);
             }
         });
-    }
+    },
+
+    reloadPrePage() {
+        var pages = getCurrentPages();
+        if (pages.length > 1) {
+            //上一个页面实例对象
+            var prePage = pages[pages.length - 2];
+            //关键在这里
+            prePage.initData()
+        }
+    },
 })

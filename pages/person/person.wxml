@@ -44,7 +44,7 @@
 </view>
 <view class="cu-list menu card-menu shadow-lg">
 	<view class="cu-item">
-		<view class='content' hover-class='none' bindtap="showDrawer" data-target="DrawerModalRight">
+		<view class='content' hover-class='none' bindtap="gotoAuthList">
 			<view style="display:flex;flex-direction:row;" class='action title-style-3'>
 				<text class='text-xl text-bold text-grey'>系统消息</text>
 				<text style="flex:2;text-align:right;margin-right:20px;" class='text-xl text-bold text-red self-end margin-left-sm'>{{userInfo.system_count}}</text>
@@ -112,34 +112,3 @@
 	<view class='gray-text'>处理中...</view>
 </view>
 <view class="load-curtain" wx:if="{{loadProgress!=0}}"></view>
-<!-- 需我审批 -->
-<view class="cu-modal drawer-modal justify-end {{modalName=='DrawerModalRight'?'show':''}}" bindtap='hideModal'>
-	<view class="cu-dialog basis-lg" catchtap="ignoreTap" style="top:{{CustomBar}}px;height:100%;width:100%;padding-bottom: 145rpx;">
-		<scroll-view scroll-y class="bg-white nav text-center" style="height:100%;width:100%;padding-bottom: 115rpx;">
-			<view class="cu-item text-green cur">
-				需我审批
-			</view>
-			<view wx:for='{{approveList}}' wx:key="apply_id">
-				<block>
-					<view class="content item-container border-container">
-						<view class="text-bold">{{item.order_number}}</view>
-						<view class="text-left margin-top">姓名: {{item.name}}</view>
-						<view class="text-left">电话: {{item.phone}}</view>
-						<view class="text-left">邮箱: {{item.email}}</view>
-						<view class="text-left">申请中心: {{item.center_name}}</view>
-						<view class="text-left">申请角色: {{item.role_name}}</view>
-						<view class="text-left">申请日期: {{item.apply_time}}</view>
-						<view class="grid margin-top float-right">
-							<view class="grid col-6">
-								<view class="cu-btn round sm bg-green" data-applyid="{{item.apply_id}}" bindtap="onApprove">同意</view>
-							</view>
-							<view class="grid col-6">
-								<view class="cu-btn round sm bg-red" data-applyid="{{item.apply_id}}" bindtap="onRefuse" style="margin-left: 10rpx;"> 拒绝</view>
-							</view>
-						</view>
-					</view>
-				</block>
-			</view>
-		</scroll-view>
-	</view>
-</view>

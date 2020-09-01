@@ -18,10 +18,8 @@ Page({
         avatarUrl: '',
         nickName: '',
         registerList: [],
-        approveList: [],
         centerCount: 0,
         registerCount: 0,
-        approveCount: 0,
     },
     onHide: function () {
         this.setData({
@@ -46,9 +44,9 @@ Page({
             avatarUrl: app.globalData.avatarUrl,
             nickName: app.globalData.nickName
         });
-        this.init();
+        this.initData();
     },
-    init: function () {
+    initData: function () {
         this.requestUserInfo();
     },
     tabSelect(e) {
@@ -105,7 +103,6 @@ Page({
         this.setData({
             modalName: e.currentTarget.dataset.target
         });
-        this.requestApprove();
     },
     hideModal: function (e) {
         this.setData({
@@ -176,104 +173,16 @@ Page({
             });
         });
     },
-    requestApprove: function () {
-        let that = this;
-        return new Promise((resolve, reject) => {
-            wx.request({
-                url: constant.basePath,
-                data: {
-                    service: 'Staff.GetApproveList',
-                    openid: app.globalData.openid
-                },
-                header: {
-                    'content-type': 'application/json'
-                },
-                success(res) {
-                    if (res.data.data.code == constant.response_success) {
-                        for (let i = 0, len = res.data.data.list.length; i < len; i++) {
-                            let approveInfo = res.data.data.list[i];
-                            approveInfo.apply_time = util.formatTime(approveInfo.apply_time, 'Y-M-D');
-                        }
-                        that.setData({
-                            approveList: res.data.data.list,
-                            approveCount: res.data.data.list.length
-                        });
-                    } else {
-                        that.showToast(res.data.data.msg);
-                    }
-                    // that.completeProgress();
-                    resolve(res);
-                },
-                fail(res) {
-                    // that.completeProgress();
-                    reject(res);
-                }
-            });
-        });
-    },
-    onApprove: function (e) {
-        let that = this;
-        that.showLoading();
-        wx.request({
-            url: constant.basePath,
-            data: {
-                service: 'Staff.Approve',
-                openid: app.globalData.openid,
-                apply_id: e.target.dataset.applyid,
-                type: 1
-            },
-            header: {
-                'content-type': 'application/json'
-            },
-            success(res) {
-                if (res.data.data.code == constant.response_success) {
-                    // that.requestRegister();
-                    that.requestApprove();
-                    that.requestUserInfo()
-                } else {
-                    that.showToast(res.data.data.msg);
-                }
-                that.hideLoading();
-            },
-            fail(res) {
-                that.hideLoading();
-                that.showToast(res.data.msg);
-            }
-        });
-    },
-    onRefuse: function (e) {
-        let that = this;
-        that.showLoading();
-        wx.request({
-            url: constant.basePath,
-            data: {
-                service: 'Staff.Approve',
-                openid: app.globalData.openid,
-                apply_id: e.target.dataset.applyid,
-                type: 2
-            },
-            header: {
-                'content-type': 'application/json'
-            },
-            success(res) {
-                if (res.data.data.code == constant.response_success) {
-                    // that.requestRegister();
-                    that.requestApprove();
-                    that.requestUserInfo()
-                } else {
-                    that.showToast(res.data.data.msg);
-                }
-                that.hideLoading();
-            },
-            fail(res) {
-                that.hideLoading();
-                that.showToast(res.data.msg);
-            }
-        });
-    },
+
     gotoSpecAuthList() {
         wx.navigateTo({
             url: '../person/specAuthList/specAuthList'
         });
     },
+
+    gotoAuthList() {
+        wx.navigateTo({
+            url: '../person/authList/authList'
+        });
+    }
 });

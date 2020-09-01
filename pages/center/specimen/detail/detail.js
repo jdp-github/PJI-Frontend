@@ -80,7 +80,7 @@ Page({
         // 待删除的标本id
         deleteSpecimenId: ''
     },
-    loadProgress: function() {
+    loadProgress: function () {
         if (this.data.loadProgress < 96) {
             this.setData({
                 loadProgress: this.data.loadProgress + 3
@@ -96,23 +96,23 @@ Page({
             });
         }
     },
-    completeProgress: function() {
+    completeProgress: function () {
         this.setData({
             loadProgress: 100
         });
     },
-    showToast: function(msg) {
+    showToast: function (msg) {
         wx.showToast({
             icon: 'none',
             title: msg,
         });
     },
-    showLoading: function() {
+    showLoading: function () {
         this.setData({
             loadModal: true
         });
     },
-    hideLoading: function() {
+    hideLoading: function () {
         setTimeout(() => {
             this.setData({
                 loadModal: false
@@ -140,7 +140,7 @@ Page({
             deleteModalName: null,
         });
     },
-    onLoad: function(options) {
+    onLoad: function (options) {
         this.setData({
             boxId: options.boxId,
             centerId: options.centerId,
@@ -150,12 +150,12 @@ Page({
         this.clearFilter();
         this.initData();
     },
-    initData: async function() {
+    initData: async function () {
         this.loadProgress();
         await this.requestCenterStaffList(this.data.centerId);
         await this.requestSampleList();
     },
-    clearFilter: function() {
+    clearFilter: function () {
         this.setData({
             specimenType: 0,
             caseType: 0,
@@ -164,7 +164,7 @@ Page({
             right: 0,
         });
     },
-    requestCenterStaffList: function(centerId) {
+    requestCenterStaffList: function (centerId) {
         let that = this;
         return new Promise((resolve, reject) => {
             wx.request({
@@ -255,7 +255,7 @@ Page({
             });
         });
     },
-    makeSpecimenGrid: function(specimenList) {
+    makeSpecimenGrid: function (specimenList) {
         let specimenGrid = [];
         let row = [];
         for (let i = 0, column = 0, length = specimenList.length; i < length; i++) {
@@ -275,7 +275,7 @@ Page({
         }
         return specimenGrid;
     },
-    onItemClick: function(e) {
+    onItemClick: function (e) {
         let specimen = e.currentTarget.dataset.selecteditem;
         if (specimen.color_type == SPECIMEN_TYPE_NO_RIGHT) { // 无权限
             this.showToast('您无权限查看');
@@ -321,7 +321,7 @@ Page({
             });
         }
     },
-    showDetail: function(specimenId) {
+    showDetail: function (specimenId) {
         this.setData({
             modalName: 'specimenInfo',
             showDetail: true
@@ -376,21 +376,23 @@ Page({
             url: '../../case/chuanci/chuanci?centerId=' + this.data.centerId + "&centerName='1'" + "&caseId=" + this.data.selectedSpecimen.case_id + "&itemId=" + this.data.selectedSpecimen.item_id
         });
     },
-    onPrint() {},
+    onPrint(e) {
+        this.printLabel(e.target.dataset.id);
+    },
     // ======================== 取出标本 begin ======================== //
     // 单取
-    onSingleGetClick: function(e) {
+    onSingleGetClick: function (e) {
         this.setData({
             showDetail: false,
             getSpecimenIds: e.target.dataset.id
         })
         this.requestAbleBox(1)
     },
-    onGetBackClick: function() {
+    onGetBackClick: function () {
         this.hideModal()
     },
     // 删除
-    onSingleDeleClick: function(e) {
+    onSingleDeleClick: function (e) {
         let that = this;
         that.hideDeleteModal();
         that.showLoading();
@@ -427,12 +429,16 @@ Page({
         });
     },
     // 批量取出
-    onMultipleGetClick: function() {
+    onMultipleGetClick: function () {
         if (this.data.isGetAllPrint) {
             if (this.data.getAllPrintList.length == 0) {
                 this.showToast('请选择要取出的标本');
                 return
             }
+            const sampleIdArr = this.data.getAllPrintList.map(item => {
+                return item.sample_id
+            })
+            this.printLabel(sampleIdArr.join(","));
             console.log(this.data.getAllPrintList)
         } else {
             if (this.data.getAllList.length == 0) {
@@ -455,10 +461,34 @@ Page({
             })
         }
     },
-    onMultipleGetBackClick: function() {
+
+    printLabel(sample_ids) {
+        let that = this;
+        wx.request({
+            url: constant.basePath,
+            data: {
+                service: 'Sample.PrintSample',
+                openid: app.globalData.openid,
+                sample_ids: sample_ids,
+            },
+            header: {
+                'content-type': 'application/json'
+            },
+            success(res) {
+                if (res.data.data.code == constant.response_success) {
+                    that.showToast('打印成功');
+                } else {
+                    that.showToast(res.data.msg);
+                }
+            },
+            fail(res) {}
+        });
+    },
+
+    onMultipleGetBackClick: function () {
         this.hideModal()
     },
-    toGetAllMode: function() {
+    toGetAllMode: function () {
         this.clearFilter();
         this.setData({
             isGetAll: true
@@ -471,7 +501,7 @@ Page({
             isGetAllPrint: true
         });
     },
-    toNormalMode: function() {
+    toNormalMode: function () {
         this.setData({
             isGetAll: false,
             isGetAllPrint: false,
@@ -518,7 +548,7 @@ Page({
             }
         });
     },
-    onClickOuterBox: function(e) {
+    onClickOuterBox: function (e) {
         let tmp = parseInt(e.detail.value);
         if (tmp >= 0) {
             this.setData({
@@ -605,7 +635,7 @@ Page({
     // ======================== 取出标本 end ======================== //
 
     // 标本类型
-    onSpecimenTypeChange: function(e) {
+    onSpecimenTypeChange: function (e) {
         if (this.data.isGetAll) {
             return
         }
@@ -616,7 +646,7 @@ Page({
         this.requestSampleList();
     },
     // 病例类型
-    onCaseTypeChange: function(e) {
+    onCaseTypeChange: function (e) {
         if (this.data.isGetAll) {
             return
         }
@@ -627,7 +657,7 @@ Page({
         this.requestSampleList();
     },
     // 是否离心
-    onIsCentriChange: function(e) {
+    onIsCentriChange: function (e) {
         if (this.data.isGetAll) {
             return
         }
@@ -638,7 +668,7 @@ Page({
         this.requestSampleList();
     },
     // 是否无菌
-    onInfectChange: function(e) {
+    onInfectChange: function (e) {
         if (this.data.isGetAll) {
             return
         }
@@ -649,7 +679,7 @@ Page({
         this.requestSampleList();
     },
     // 权限
-    onRightChange: function(e) {
+    onRightChange: function (e) {
         if (this.data.isGetAll) {
             return
         }
@@ -660,7 +690,7 @@ Page({
         this.requestSampleList();
     },
     // 清空选中标本的状态
-    clearSelectStatus: function() {
+    clearSelectStatus: function () {
         let specimenGrid = this.data.specimenGrid;
         for (let i = 0, column = specimenGrid.length; i < column; i++) {
             for (let j = 0, row = specimenGrid[i].length; j < row; j++) {

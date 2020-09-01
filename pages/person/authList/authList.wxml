@@ -1,0 +1,39 @@
+<view class="cu-custom" style="height:{{CustomBar}}px;">
+	<view class="cu-bar fixed bg-gradual-blue" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+		<navigator class='action border-custom' open-type="navigateBack" delta="1" hover-class="none" style='width:{{Custom.width}}px;height:{{Custom.height}}px;margin-left:calc(750rpx - {{Custom.right}}px)'>
+			<text class='icon-back'></text>
+			<text class='icon-homefill'></text>
+		</navigator>
+		<view class='content' style='top:{{StatusBar}}px;'>审批</view>
+	</view>
+</view>
+
+<scroll-view scroll-y class="nav text-center" style="height:100%;width:100%;">
+	<view wx:for='{{approveList}}' wx:key="apply_id">
+		<view class="item-container radius">
+			<view class="item-line">
+				<view style="flex:auto;text-align:left">姓名: {{item.name}}</view>
+				<view>{{item.order_number}}</view>
+			</view>
+			<view class="line"></view>
+			<view class="item-line">
+				<view style="flex:auto;text-align:left">电话: {{item.phone}}</view>
+				<view>邮箱: {{item.email}}</view>
+			</view>
+			<view class="line"></view>
+			<view class="item-line">
+				<view style="flex:auto;text-align:left">申请中心: {{item.center_name}}</view>
+				<view>申请日期: {{item.apply_time}}</view>
+			</view>
+			<view class="line"></view>
+			<view class="item-line">
+				<view style="flex:auto;text-align:left">申请角色: {{item.role_name}}</view>
+			</view>
+			<view class="line"></view>
+			<view class="item-line" style="justify-content: flex-end;">
+				<button class='cu-btn bg-blue shadow' data-applyid="{{item.apply_id}}" bindtap="onApprove">同意</button>
+				<button class='cu-btn bg-red shadow' data-applyid="{{item.apply_id}}" bindtap="onRefuse" style="margin-left: 10rpx;">拒绝</button>
+			</view>
+		</view>
+	</view>
+</scroll-view>

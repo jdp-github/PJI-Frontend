@@ -19,9 +19,9 @@
 		<view class="icon-unfold" style="margin-left:15rpx"></view>
 	</view>
 	<!-- 公告 -->
-	<view class="notify-container radius">
+	<view class="notify-container radius" bindtap="onClickNotice">
 		<view class="icon-notificationfill"></view>
-		<view style="margin-left:15rpx">{{centerInfo.topNotice.title}}</view>
+		<view style="margin-left:15rpx;word-break: break-all;">{{centerInfo.topNotice.title}}</view>
 	</view>
 	<!-- <view style='display:flex;flex-direction:row'>
 		<view class="flex-sub" style="margin:10px">
