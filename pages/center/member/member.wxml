@@ -11,7 +11,7 @@
 <!-- 成员列表 -->
 <scroll-view scroll-y class="indexes margin-bottom" scroll-into-view="indexes-{{listCurID}}" style='height:calc(100vh - {{CustomBar}}px - 50px)' scroll-with-animation="true" enable-back-to-top="true">
 	<block wx:for="{{staffList}}" wx:key="id" wx:for-index="key" wx:for-item="value">
-		<view class='padding padding-top-xs padding-bottom-xs indexItem-{{key}}' id="indexes-{{key}}" data-index="{{key}}">{{key}}</view>
+		<view class='indexItem-{{key}}' style="padding:20rpx 0 0 20rpx" id="indexes-{{key}}" data-index="{{key}}">{{key}}</view>
 		<view class="item-container radius" wx:for="{{value}}" wx:key="staff_id" bindtap="gotoMember" data-item="{{item}}">
 			<view class="item-top" data-target="move-box-{{item.staff_id}}">
 				<view class="cu-avatar round lg" style="background-image:url({{item.staff_avatar}});"></view>

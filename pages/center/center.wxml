@@ -11,7 +11,7 @@
 
 	<!-- 中心picker -->
 	<view class="picker-container radius">
-		<picker bindchange="onCenterChange" value="{{centerIndex}}" range="{{centerList}}" range-key="center_name">
+		<picker style="width:100%;text-align:center" bindchange="onCenterChange" value="{{centerIndex}}" range="{{centerList}}" range-key="center_name">
 			<view class="picker">
 				{{centerList[centerIndex].center_name}}
 			</view>

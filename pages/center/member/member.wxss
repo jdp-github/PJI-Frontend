@@ -87,8 +87,8 @@ movable-view.indexBar-item::before {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    margin: 15rpx;
-    padding: 15rpx;
+    margin: 20rpx;
+    padding: 20rpx;
 }
 
 .item-top {
@@ -104,5 +104,5 @@ movable-view.indexBar-item::before {
     width: 100%;
     height: 1px;
     background: #ddd;
-    margin: 15rpx 0;
+    margin: 20rpx 0;
 }

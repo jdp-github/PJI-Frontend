@@ -1,6 +1,6 @@
 .cu-list.card-menu {
-    margin-left: 15rpx;
-    margin-right: 15rpx;
+    margin-left: 20rpx;
+    margin-right: 20rpx;
 }
 
 .top-container {
@@ -19,7 +19,7 @@
 }
 
 .line-container {
-    margin-top: 15rpx;
+    margin-top: 20rpx;
 }
 
 .statis-container {
@@ -37,7 +37,7 @@
 
 .item-container {
     margin: 20rpx 20rpx 0rpx 20rpx;
-    padding: 15rpx;
+    padding:20rpx;
     overflow: hidden;
 }
 

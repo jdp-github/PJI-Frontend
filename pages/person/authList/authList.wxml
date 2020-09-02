@@ -4,7 +4,7 @@
 			<text class='icon-back'></text>
 			<text class='icon-homefill'></text>
 		</navigator>
-		<view class='content' style='top:{{StatusBar}}px;'>审批</view>
+		<view class='content' style='top:{{StatusBar}}px;'>系统消息</view>
 	</view>
 </view>
 

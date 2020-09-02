@@ -9,8 +9,8 @@ page {
 }
 
 .picker-container {
-    padding: 15rpx;
-    margin: 15rpx;
+    padding: 20rpx;
+    margin: 20rpx;
     background: white;
     display: flex;
     flex-direction: row;
@@ -24,16 +24,16 @@ page {
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 15rpx;
-    margin: 15rpx;
+    padding: 20rpx;
+    margin: 20rpx;
     font-size: 35rpx;
     color: #856404;
 }
 
 /* 科室管理 */
 .manage-container {
-    margin: 15rpx;
-    padding: 15rpx;
+    margin: 20rpx;
+    padding: 20rpx;
     background: white;
     font-size: 30rpx;
     display: flex;
@@ -64,8 +64,8 @@ page {
 
 /* 登记系统 */
 .core-container {
-    margin: 15rpx;
-    padding: 15rpx;
+    margin: 20rpx;
+    padding: 20rpx;
     background: white;
     font-size: 30rpx;
     display: flex;

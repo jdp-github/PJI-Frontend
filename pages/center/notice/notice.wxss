@@ -41,8 +41,8 @@
 .item-container {
     display: flex;
     flex-direction: column;
-    margin: 15rpx;
-    padding: 15rpx;
+    margin: 20rpx;
+    padding: 20rpx;
     background: white;
 }
 
@@ -116,5 +116,5 @@ page {
 .horizontal-line {
     height: 1px;
     background: #ddd;
-    margin: 15rpx 0;
+    margin: 20rpx 0;
 }

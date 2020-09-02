@@ -153,7 +153,8 @@ Page({
 
     onCenterChange: function (e) {
         this.setData({
-            centerIndex: parseInt(e.detail.value)
+            centerIndex: parseInt(e.detail.value),
+            centerInfo: this.data.centerList[parseInt(e.detail.value)]
         });
     },
 
