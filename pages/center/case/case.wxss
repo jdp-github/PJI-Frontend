@@ -1,5 +1,10 @@
 @import "../../../miniprogram_npm/wux-weapp/styles/index.wxss";
 
+page {
+    height: 100%;
+    background-color: #f7f8fa;
+}
+
 .root {
     position: absolute;
     left: 0;
@@ -13,6 +18,19 @@
 .cu-avatar {
     width: 80rpx;
     height: 80rpx;
+}
+
+.margin-left-15 {
+    margin-left: 15rpx;
+}
+
+.item-block {
+    padding: 30rpx 0rpx;
+    margin-bottom: 30rpx;
+    margin-left: 15rpx;
+    margin-right: 15rpx;
+    border: 1px solid #ebedf0;
+    border-radius: 6rpx;
 }
 
 .margin-left {
@@ -121,6 +139,7 @@
     font-size: 22rpx;
     color: #000;
     background: #ddd;
+    border-color: #ddd;
     /* margin-left: 10rpx; */
 }
 
@@ -135,7 +154,13 @@
 
 .tag {
     padding: 0 16rpx;
-    margin-left: 10rpx;
+    margin-left: 6rpx;
+    color: #9a9a9a;
+    height: 40rpx;
+}
+
+.cu-tag {
+    height: 40rpx;
 }
 
 .item-first-line-container {

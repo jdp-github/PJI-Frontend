@@ -80,29 +80,6 @@
     font-size: 30rpx;
 }
 
-/* calendar */
-
-.cu-list.menu>.cu-item .content {
-    line-height: 1.1em;
-    flex: 1;
-    font-size: 30rpx;
-}
-
-.filter-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    padding-left: 20rpx;
-    padding-right: 20rpx;
-    font-size: 35rpx;
-    margin-bottom: 25rpx;
-}
-
-.margin-tab-bottom {
-    margin-bottom: 120rpx;
-}
-
 .leader-text {
     width: 100rpx;
     overflow: hidden;
@@ -110,335 +87,144 @@
     white-space: nowrap;
 }
 
-.calendar-view {
-    width: 100%;
-    font-size: 22rpx;
-    color: #626262;
-}
-
-.calendar-header {
-    width: 100%;
-    font-weight: 700;
-    background-color: #fff;
-}
-
-.calendar-header .solid-border-no-right {
-    border-top: 1rpx solid #ddd;
-    border-bottom: 1rpx solid #ddd;
-    border-left: 1rpx solid #ddd;
-}
-
-.calendar-header .solid-border {
-    border: 1rpx solid #ddd;
-}
-
-.calendar-header .padding-only-horizon {
-    padding: 0rpx 8rpx;
-}
-
-.flex-row {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-}
-
-.flex-column {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: stretch;
-}
-
 .flex-cell {
     flex: 1;
 }
 
-.calendar-body {
-    width: 100%;
-    font-size: 22rpx;
-    background-color: #fff;
+.caseHeader {
+    background: #F7F8FA;
+    padding: 5rpx 0rpx;
 }
 
-.calendar-body .solid-border-no-right {
-    border-bottom: 1rpx solid #ddd;
-    border-left: 1rpx solid #ddd;
-}
-
-.calendar-body .solid-border {
-    border-bottom: 1rpx solid #ddd;
-    border-left: 1rpx solid #ddd;
-    border-right: 1rpx solid #ddd;
-}
-
-.calendar-body .date-number {
-    padding: 8rpx 12rpx 8rpx 4rpx;
-    justify-content: left;
-    align-items: normal;
-    height: 184rpx;
-}
-
-.calendar-past {
-    background-color: #f1f4f8;
-}
-
-.cu-tag.badge {
-    right: -44rpx;
-    height: 22rpx;
-    font-size: 18rpx;
-    position: static;
-    margin-bottom: 2rpx;
-}
-
-.multiple-0 {
+.caseInfo {
+    margin: 0rpx 30rpx;
+    font-size: 28rpx;
+    height: 80rpx;
+    border-radius: 6rpx;
+    border: 1px solid #F1F4F8;
+    background: #FFFFFF;
     display: flex;
-    flex-direction: column;
-    position: absolute;
-    right: -40rpx;
-    top: 0;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0rpx 30rpx;
 }
 
-.cu-tag.badge.multiple-1 {
-    float: left;
-    margin-top: 5rpx;
+.caseInfoDescription {
+    color: #707070;
+    font-size: 24rpx;
 }
 
-.cu-tag.badge.multiple-2 {
+.btnView {
+    margin: 10rpx 30rpx;
+    font-size: 26rpx;
+    height: 70rpx;
+    display: flex;
+    justify-content: space-between;
+}
+
+.smallBtn {
+    min-width: 160rpx!important;
+    height: 70rpx!important;
+}
+
+.timelineView {
+    margin: 30rpx;
+}
+
+.timeline .time {
+    font-size: 28rpx;
+    color: #707070;
+    text-decoration: underline;
+}
+
+.timeline .content, .timeline .content-blue {
+    height: 115rpx;
     position: relative;
-    top: 39rpx;
+    display: block;
+    z-index: 0;
+    padding: 10rpx 20rpx 5rpx 160rpx;
 }
 
-.cu-tag+.cu-tag {
-    margin-left: 0rpx;
+.timeline .content .detail, .timeline .content-blue .detail {
+    height: 115rpx;
+    border-radius: 12rpx;
+    background-color: #F7F8FA;
+    border: 1px solid #EBEDF0;
+    font-size: 24rpx;
+    color: #707070;
 }
 
-.event-pharmacy {
-    border-radius: 14rpx;
-    font-size: 18rpx;
-    padding: 2rpx 4rpx;
+.timeline .content-blue .detail {
+    border: 1px solid #39A9ED;
+}
+
+.timeline .content::before, .timeline .content-blue::before {
+    content: "\F192";
+    display: block;
+    position: absolute;
+    top: 40rpx;
+    z-index: 9;
+    background: #FFFFFF;
+    width: 50rpx;
+    height: 50rpx;
     text-align: center;
+    border: none;
+    left: 52rpx;
+    font: normal normal normal 28rpx/1 'Font Awesome 5 Free';
+    line-height: 50rpx;
+    color: #DDDDDD;
 }
 
-/** ====  end at 7  ==== **/
+.timeline .content-blue::before {
+    color: #39A9ED;
+}
 
-.event-offset-0 {
+.timeline .content::after, .timeline .content-blue::after {
+    content: "";
+    display: block;
     position: absolute;
-    top: 80rpx;
-    left: 0;
-    width: calc((100%/7) * 7);
+    width: 1rpx;
+    background: #DDDDDD;
+    left: 75rpx;
+    height: 100%;
+    top: 0;
+    z-index: 8;
 }
 
-.event-offset-1 {
-    position: absolute;
-    top: 80rpx;
-    left: calc(100%/7);
-    width: calc((100%/7) * 6);
+.tableTitle {
+    text-align: left;
+    color: #000000;
 }
 
-.event-offset-2 {
-    position: absolute;
-    top: 80rpx;
-    left: calc(100%/7 + 100%/7);
-    width: calc((100%/7) * 5);
+.borderBottom {
+    padding-bottom: 10rpx;
+    border-bottom: 1px solid #EBEDF0;
 }
 
-.event-offset-3 {
-    position: absolute;
-    top: 80rpx;
-    left: calc(100%/7 + (100%/7) * 2);
-    width: calc((100%/7) * 4);
+.tableDetail {
+    text-align: left;
 }
 
-.event-offset-4 {
-    position: absolute;
-    top: 80rpx;
-    left: calc(100%/7 + (100%/7) * 3);
-    width: calc((100%/7) * 3);
+.tablePadding {
+    padding: 10rpx 15rpx;
 }
 
-.event-offset-5 {
-    position: absolute;
-    top: 80rpx;
-    left: calc(100%/7 + (100%/7) * 4);
-    width: calc((100%/7) * 2);
+.prompt {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24rpx;
+    color: #707070;
+    margin-top: 30rpx;
 }
 
-.event-offset-6 {
-    position: absolute;
-    top: 80rpx;
-    left: calc(100%/7 + (100%/7) * 5);
-    width: calc(100%/7);
+.canvasHeader {
+    margin: 30rpx 0rpx;
+    text-align: center;
+    font-size: 24rpx;
 }
 
-/** ====  end at 6  ==== **/
-
-.event-offset-0-end-6 {
-    position: absolute;
-    top: 80rpx;
-    left: 0;
-    width: calc((100%/7) * 6);
-}
-
-.event-offset-1-end-6 {
-    position: absolute;
-    top: 80rpx;
-    left: calc(100%/7);
-    width: calc((100%/7) * 5);
-}
-
-.event-offset-2-end-6 {
-    position: absolute;
-    top: 80rpx;
-    left: calc(100%/7 + 100%/7);
-    width: calc((100%/7) * 4);
-}
-
-.event-offset-3-end-6 {
-    position: absolute;
-    top: 80rpx;
-    left: calc(100%/7 + (100%/7) * 2);
-    width: calc((100%/7) * 3);
-}
-
-.event-offset-4-end-6 {
-    position: absolute;
-    top: 80rpx;
-    left: calc(100%/7 + (100%/7) * 3);
-    width: calc((100%/7) * 2);
-}
-
-.event-offset-5-end-6 {
-    position: absolute;
-    top: 80rpx;
-    left: calc(100%/7 + (100%/7) * 4);
-    width: calc((100%/7) * 1);
-}
-
-/** ====  end at 5  ==== **/
-
-.event-offset-0-end-5 {
-    position: absolute;
-    top: 80rpx;
-    left: 0;
-    width: calc((100%/7) * 5);
-}
-
-.event-offset-1-end-5 {
-    position: absolute;
-    top: 80rpx;
-    left: calc(100%/7);
-    width: calc((100%/7) * 4);
-}
-
-.event-offset-2-end-5 {
-    position: absolute;
-    top: 80rpx;
-    left: calc(100%/7 + 100%/7);
-    width: calc((100%/7) * 3);
-}
-
-.event-offset-3-end-5 {
-    position: absolute;
-    top: 80rpx;
-    left: calc(100%/7 + (100%/7) * 2);
-    width: calc((100%/7) * 2);
-}
-
-.event-offset-4-end-5 {
-    position: absolute;
-    top: 80rpx;
-    left: calc(100%/7 + (100%/7) * 3);
-    width: calc((100%/7) * 1);
-}
-
-/** ====  end at 4  ==== **/
-
-.event-offset-0-end-4 {
-    position: absolute;
-    top: 80rpx;
-    left: 0;
-    width: calc((100%/7) * 4);
-}
-
-.event-offset-1-end-4 {
-    position: absolute;
-    top: 80rpx;
-    left: calc(100%/7);
-    width: calc((100%/7) * 3);
-}
-
-.event-offset-2-end-4 {
-    position: absolute;
-    top: 80rpx;
-    left: calc(100%/7 + 100%/7);
-    width: calc((100%/7) * 2);
-}
-
-.event-offset-3-end-4 {
-    position: absolute;
-    top: 80rpx;
-    left: calc(100%/7 + (100%/7) * 2);
-    width: calc((100%/7) * 1);
-}
-
-/** ====  end at 3  ==== **/
-
-.event-offset-0-end-3 {
-    position: absolute;
-    top: 80rpx;
-    left: 0;
-    width: calc((100%/7) * 3);
-}
-
-.event-offset-1-end-3 {
-    position: absolute;
-    top: 80rpx;
-    left: calc(100%/7);
-    width: calc((100%/7) * 2);
-}
-
-.event-offset-2-end-3 {
-    position: absolute;
-    top: 80rpx;
-    left: calc(100%/7 + 100%/7);
-    width: calc((100%/7) * 1);
-}
-
-/** ====  end at 2  ==== **/
-
-.event-offset-0-end-2 {
-    position: absolute;
-    top: 80rpx;
-    left: 0;
-    width: calc((100%/7) * 2);
-}
-
-.event-offset-1-end-2 {
-    position: absolute;
-    top: 80rpx;
-    left: calc(100%/7);
-    width: calc((100%/7) * 1);
-}
-
-/** ====  end at 1  ==== **/
-
-.event-offset-0-end-1 {
-    position: absolute;
-    top: 80rpx;
-    left: 0;
-    width: calc((100%/7) * 1);
-}
-
-/** ==== tag not end ==== **/
-
-.tag-not-end {
-    border-bottom-right-radius: unset;
-    border-top-right-radius: unset;
-}
-
-/** ==== tag not start ==== **/
-
-.tag-not-start {
-    border-bottom-left-radius: unset;
-    border-top-left-radius: unset;
+.canvasScrollView {
+    width: 100%;
+    height: 100%;
 }

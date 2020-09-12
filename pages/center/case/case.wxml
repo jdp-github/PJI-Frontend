@@ -73,40 +73,36 @@
 <scroll-view scroll-y class="indexes margin-bottom" scroll-into-view="indexes-{{listCurID}}" style='padding-top:320rpx;height:calc(100vh - {{CustomBar}}px)' scroll-with-animation="true" enable-back-to-top="true">
 	<view class="cu-list menu menu-avatar">
 		<view style='display:flex;flex-direction:row;margin:20rpx 0'>
-			<view class="flex-sub">
-				<button class='cu-btn bg-blue shadow margin-btn block' style="color:white" bindtap="onAddCase">
-					患者建档
-				</button>
-			</view>
-			<view class="flex-sub">
-				<button class='cu-btn bg-white shadow margin-btn block' style="color:black" bindtap="onRefresh">
-					刷新列表
-				</button>
-			</view>
+			<button class='cu-btn bg-blue shadow block round margin-left-15' style="color:white" bindtap="onAddCase">
+				患者建档
+			</button>
+			<button class='cu-btn bg-white shadow block round margin-left-15' style="color:black" bindtap="onRefresh">
+				刷新列表
+			</button>
 		</view>
 		<!-- item -->
-		<view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}}" style="padding-top:15rpx;padding-bottom:15rpx;margin-bottom:30rpx" wx:for="{{caseList}}" wx:key="" data-target="move-box-{{index}}" data-case="{{item}}" bindtap="onLookCase">
-			<view class='content'>
+		<view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}} item-block" wx:for="{{caseList}}" wx:key="" data-target="move-box-{{index}}" data-case="{{item}}" bindtap="onLookCase">
+			<view class='content' style="padding: 30rpx 0rpx;">
 				<view class="item-container">
 					<!-- 上 -->
 					<view class="item-first-line-container">
 						<!-- 左灰框 -->
 						<view class='radius' style="margin-right: 15rpx;">
 							<view class="avatar-special radius" style="display:flex;flex-direction:column;padding-top:10rpx;padding-bottom:10rpx">
-								<view class="flex-sub" style="font-size:28rpx">{{item.patient_name}}</view>
-								<view class="flex-sub" style="font-size:28rpx">{{item.side_name}} {{item.part_name}}</view>
+								<view class="flex-sub" style="font-size:22rpx">{{item.patient_name}}</view>
+								<view class="flex-sub" style="font-size:22rpx">{{item.side_name}} {{item.part_name}}</view>
 							</view>
 						</view>
 						<!-- 右侧 -->
 						<view class='item-right-container'>
 							<!-- 第一行 -->
-							<view style="font-size:28rpx">病历号：{{item.case_no}}</view>
+							<view style="font-size:22rpx;text-align:right;color:#9a9a9a;">病历号：{{item.case_no}}</view>
 							<!-- 第二行 -->
 							<view class="item-type-container">
 								<view class="cu-tag radius first-line-container" style="background-color:#00A8F9;color:#fff">审核：{{item.element}}</view>
 								<view class="tag radius first-line-container">穿：{{item.puncture}}</view>
 								<view class="tag radius first-line-container">术：{{item.operation}}</view>
-								<view class="tag radius first-line-container">药:{{item.medication}}</view>
+								<view class="tag radius first-line-container">药: {{item.medication}}</view>
 								<view class="tag radius first-line-container">访：{{item.follow}}</view>
 							</view>
 						</view>

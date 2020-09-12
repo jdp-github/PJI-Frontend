@@ -3,23 +3,23 @@
         <view class="cu-avatar round xl bg-gray margin-xs"
         style="background-image:url({{avatarUrl}});">
         </view>
-        <view class='text-xl'>
+        <view class='text-lg'>
             PJI-登记系统
             <text class='text-df'>v2.0</text>
         </view>
-        <view class='margin-top-sm'>
-            <text class='text-df' style='color:#8799a3'>授权后的信息仅用于小程序</text>
+        <view class='margin-top-xs'>
+            <text class='text-df' style='color:#8799a3'>授权后的信息仅用于该小程序</text>
         </view>
     </view>
     <view class='bottom'>
-        <view class='basis-xs padding-sm radius'>
-            <button class='cu-btn  bg-blue shadow lg block' data-type="login" open-type="getUserInfo"
+        <view class='basis-xs padding-xs radius'>
+            <button class='cu-btn bg-blue shadow block round' data-type="login" open-type="getUserInfo"
                     bindgetuserinfo="onGetUserInfo">
                 微信登录
             </button>
         </view>
-        <view class='basis-xs padding-sm radius'>
-            <button class='cu-btn line-blue shadow lg block' data-type="register" open-type="getUserInfo"
+        <view class='basis-xs padding-xs radius'>
+            <button class='cu-btn line-blue shadow block round' data-type="register" open-type="getUserInfo"
                     bindgetuserinfo="onGetUserInfo">
                 注册申请
             </button>

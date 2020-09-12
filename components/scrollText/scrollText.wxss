@@ -1,0 +1,26 @@
+.scrolltextbg{
+  background-color: #fffbe8;   /*滚动栏背景颜色 */
+  font-size:28rpx; /*文字大小,调了文字大小后,要调每个字符的计算量,为该大小的一半,在scrollText.js文件45行 */
+  height: 80rpx;
+  line-height:80rpx;
+  color: #ED6A0C;
+  width: 750rpx;
+  display: flex;
+  flex-direction: row;
+}
+
+.scrolltextimg{
+  width: 50rpx;
+  height: 50rpx;
+  padding: 15rpx 15rpx
+}
+
+.scrolltextv {
+  margin-left: 20rpx;
+  width: 580rpx;   /*文字滚动框宽度 */
+  overflow:hidden;
+}
+
+.scrolltext {
+  white-space: nowrap;
+}

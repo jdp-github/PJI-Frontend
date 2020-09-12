@@ -1,0 +1,36 @@
+<navigator url="{{url}}" hover-class="none" class='scrolltextbg'>
+  <view style="padding-left: 20rpx;">公告: </view>
+  <scroll-view class="scrolltextv">
+      <view class="scrolltext" style="transform: translateX({{-scrolltextmovevalue}}rpx)">
+        <text style="margin-right:{{scrolltextmargin}}rpx;">{{text}}</text>
+        <text style="margin-right:{{scrolltextmargin}}rpx;">{{text}}</text>
+      </view>
+  </scroll-view>
+</navigator>
+
+
+<!--使用方法
+
+  1.在需要使用的页面.json 文件中声明组件:
+    {
+      "usingComponents": {
+        "scrollText": "/components/scrollText/scrolltext"
+      }
+    }
+
+    "scrollText"=>声明组件的标签名称
+    "/components/scrollText/scrolltext"=>组件的存储路径
+
+  2.在需要使用的页面插入代码:
+    <scrollText text="填入你需要滚动的文本,支持{{变量}}格式"></scrollText>
+
+  3.组件参数:
+    1.text:填入你需要滚动的文本,支持{{变量}}格式,滚动框宽度为580rpx,如果少于580rpx则不发生滚动
+    2.url:点击组件跳转的页面路径
+    3.speed:组件滚动的速度,默认为3
+
+  4.组件CSS修改说明,详见scrollText.css文件
+
+  5.如有疑问联系QQ305008495,  更多更好的组件尽在《晒尔信息网》小程序
+
+-->

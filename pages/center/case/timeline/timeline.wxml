@@ -74,45 +74,23 @@
 	<view class="delete-btn bg-red" bindtap="onDeleCase" disabled="{{caseInfo.delete_button == 0}}">删除</view>
 	<!-- calendar -->
 	<scroll-view wx-if="{{currTab != 0}}" scroll-y class="indexes" scroll-into-view="indexes-{{listCurID}}" style='height:calc(100vh - {{CustomBar}}px - 50px)' scroll-with-animation="true" enable-back-to-top="true">
-		<view class="calendar-view padding">
-			<view class="filter-container">
-				<view class="title">请选择月份:</view>
-				<picker mode="date" value="{{calendarDate}}" start="2015-01-01" end="2030-12-31" bindchange="CalendarDateChange" fields="month">
-					<view class="picker" style="margin-top:5rpx">
-						{{calendarDate}}
-					</view>
-				</picker>
+		<view class="calendar-view">
+			<!-- 筛选提示 -->
+			<view class="prompt">
+				请横屏浏览, 效果更佳
 			</view>
-			<!-- 日历表头 -->
-			<!-- 日历表头 -->
-			<view class="calendar-header flex-column">
-				<view class="flex-cell flex-row">
-					<text class="flex-cell flex-row solid-border-no-right padding-only-horizon">周一</text>
-					<text class="flex-cell flex-row solid-border-no-right padding-only-horizon">周二</text>
-					<text class="flex-cell flex-row solid-border-no-right padding-only-horizon">周三</text>
-					<text class="flex-cell flex-row solid-border-no-right padding-only-horizon">周四</text>
-					<text class="flex-cell flex-row solid-border-no-right padding-only-horizon">周五</text>
-					<text class="flex-cell flex-row solid-border padding-only-horizon">周六</text>
-					<text class="flex-cell flex-row solid-border-no-right padding-only-horizon">周日</text>
+			<!-- 画布头 -->
+			<view class="canvasHeader">
+				<view class="flex">
+					<view class="flex-sub text-center">静脉</view>
+					<view class="flex-sub text-center">口服</view>
+					<view class="flex-sub text-center">局部</view>
+					<view class="flex-sub text-center">事件</view>
 				</view>
 			</view>
-			<view wx:for="{{weekList}}" wx:key="day" wx:for-item="item" class="calendar-body flex-column">
-				<view class="flex-cell flex-row" style="position: relative">
-					<view wx:for="{{item.week_line}}" wx:key="index" wx:for-item="i" class="flex-cell" class="flex-cell flex-row solid-border-no-right padding-only-horizon date-number {{i.is_day_flag==2?'calendar-past':''}}">
-						<view class="cu-avatar sm radius {{i.is_day_flag==1?'bg-olive':''}}">
-							{{ i.day }}
-							<view class="multiple-0">
-								<view class="cu-tag badge sm" wx:if="{{i.is_create_case === 1}}">建档</view>
-								<view class="cu-tag badge sm" wx:if="{{i.is_bein === 1}}">入院</view>
-								<view class="cu-tag badge sm" wx:if="{{i.is_puncture === 1}}">穿刺</view>
-							</view>
-						</view>
-						<view wx:for="{{i.medication}}" wx:key="item_id" wx:for-item="j" wx:for-index="idx" class="{{addon.calculateDrug(index, j)}}" style="top: calc({{eventTopPosition}} + {{34 * idx}}rpx)">
-							<view class="event-pharmacy bg-red sm ">{{j.drug_name}}</view>
-						</view>
-					</view>
-				</view>
-			</view>
+			<scroll-view class="canvasScrollView" scroll-y>
+				<canvas id="timelineCanvas" canvas-id="timelineCanvas" style="width:{{windowWidth + 'px'}};height:{{(days + 1) * axisHeight + 'px'}}" disable-scroll="true"/>
+			</scroll-view>
 		</view>
 	</scroll-view>
 </view>

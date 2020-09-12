@@ -49,13 +49,13 @@
         </view>
     </view>
     <view class='bottom'>
-        <view class='basis-xs margin-xs padding-sm radius'>
-            <button class='cu-btn  bg-blue shadow lg block' form-type="submit">
+        <view class='basis-xs margin-xs padding-xs radius'>
+            <button class='cu-btn  bg-blue shadow block round' form-type="submit">
                 提交申请
             </button>
         </view>
-        <view class='basis-xs margin-xs padding-sm radius'>
-            <button class='cu-btn line-blue shadow lg block' form-type="reset">
+        <view class='basis-xs margin-xs padding-xs radius'>
+            <button class='cu-btn line-blue shadow block round' form-type="reset">
                 重置表单
             </button>
         </view>

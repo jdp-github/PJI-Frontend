@@ -1,11 +1,35 @@
 page {
     height: 100%;
+    background-color: #f7f8fa;
 }
 
 .root {
     height: 100%;
     display: flex;
     flex-direction: column;
+}
+
+.departmentOverview {
+    border-radius: 10rpx;
+    border: 2rpx solid #ebedf0;
+    background-color: #fff;
+}
+
+.departmentNotice {
+    font-size: 30rpx;
+    color: #ED6A0C;
+    margin: 15rpx 30rpx 15rpx 30rpx;
+    padding: 0rpx;
+    background-color: #FDFDFD;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid #F1F4F8;
+    border-bottom: 1px solid #F1F4F8;
+    border-radius: 10rpx;
 }
 
 .picker-container {
@@ -32,13 +56,11 @@ page {
 
 /* 科室管理 */
 .manage-container {
-    margin: 20rpx;
+    margin: 0rpx 15rpx;
     padding: 20rpx;
-    background: white;
     font-size: 30rpx;
     display: flex;
     flex-direction: column;
-    color: white;
 }
 
 .manage-title {
@@ -49,25 +71,22 @@ page {
 .manage-content {
     display: flex;
     flex-direction: row;
-    height: 180rpx;
 }
 
 .manage-item {
-    display: flex;
-    flex-direction: row;
-    flex: auto;
-    color: white;
-    align-items: center;
-    justify-content: center;
+    float: left;
+    font-size: 20rpx;
+    color: #9a9a9a;
+    padding: 20rpx;
 }
 
 
 /* 登记系统 */
 .core-container {
-    margin: 20rpx;
     padding: 20rpx;
     background: white;
     font-size: 30rpx;
+    margin: 30rpx 15rpx;
     display: flex;
     flex-direction: column;
     color: white;
@@ -81,7 +100,7 @@ page {
 .core-content {
     display: flex;
     flex-direction: row;
-    height: 300rpx;
+    height: 180rpx;
 }
 
 .core-case {
@@ -92,7 +111,9 @@ page {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    margin-right: 15rpx;
+    margin-right: 10rpx;
+    border-radius: 4rpx;
+    font-size: 28rpx;
 }
 
 .core-right {
@@ -106,9 +127,11 @@ page {
     flex-direction: row;
     flex: auto;
     background: #46d9e6;
-    margin-bottom: 15rpx;
+    margin-bottom: 10rpx;
     align-items: center;
     justify-content: center;
+    border-radius: 4rpx;
+    font-size: 28rpx;
 }
 
 .core-statis {
@@ -118,8 +141,9 @@ page {
     background: #94d23d;
     align-items: center;
     justify-content: center;
+    border-radius: 4rpx;
+    font-size: 28rpx;
 }
-
 
 .center-card {
     height: 200rpx;

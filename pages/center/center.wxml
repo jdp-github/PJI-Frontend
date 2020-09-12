@@ -10,8 +10,8 @@
 <view class="root">
 
 	<!-- 中心picker -->
-	<view class="picker-container radius">
-		<picker style="width:100%;text-align:center" bindchange="onCenterChange" value="{{centerIndex}}" range="{{centerList}}" range-key="center_name">
+	<view class="picker-container radius departmentOverview">
+		<picker style="text-align:center" bindchange="onCenterChange" value="{{centerIndex}}" range="{{centerList}}" range-key="center_name">
 			<view class="picker">
 				{{centerList[centerIndex].center_name}}
 			</view>
@@ -19,13 +19,11 @@
 		<view class="icon-unfold" style="margin-left:15rpx"></view>
 	</view>
 	<!-- 公告 -->
-	<view class="notify-container radius" bindtap="onClickNotice">
-		<view class="icon-notificationfill"></view>
-		<view style="margin-left:15rpx;word-break: break-all;">{{centerInfo.topNotice.title}}</view>
-	</view>
+		<scrollText style="margin: 0rpx 20rpx;display: flex;flex-direction: row;justify-content: center;" text="{{centerInfo.topNotice.title}}" bindtap="onClickNotice">
+		</scrollText>
 	<!-- <view style='display:flex;flex-direction:row'>
 		<view class="flex-sub" style="margin:10px">
-			
+
 		</view>
 	</view> -->
 	<!-- core -->
@@ -53,11 +51,11 @@
 			<!-- <button class='cu-btn bg-blue shadow margin-btn block' bindtap='showModal'>
 				新增中心
 			</button> -->
-			<view class="manage-item" style="background:#e6c2cc" bindtap="onClickMember">
-				<view class='icon-friend' style="margin-right:15rpx"></view>人员列表
+			<view class="manage-item" style="background:#ddd;broder-color:#ddd;" bindtap="onClickMember">
+				人员列表
 			</view>
-			<view class="manage-item" style="margin-left:15rpx;background:#bf95dd" bindtap="onClickNotice">
-				<view class='icon-notification' style="margin-right:15rpx"></view>公告列表
+			<view class="manage-item" style="margin-left:10rpx;background:#ddd;broder-color:#ddd;" bindtap="onClickNotice">
+				公告列表
 			</view>
 		</view>
 	</view>

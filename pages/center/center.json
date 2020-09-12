@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "scrollText": "/components/scrollText/scrollText"
+  },
   "enablePullDownRefresh": false
 }

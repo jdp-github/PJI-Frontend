@@ -1,3 +1,7 @@
+page {
+    background-color: #f7f8fa;
+}
+
 .root {
     display: flex;
     flex-direction: column;
@@ -5,8 +9,8 @@
 }
 
 .UCenter-bg {
+    margin-top: 160rpx;
     display: flex;
-    justify-content: center;
     overflow: hidden;
     position: relative;
     flex-direction: column;
