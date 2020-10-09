@@ -44,6 +44,7 @@ Page({
     },
 
     tabSelect(e) {
+        this.requestCalendar()
         this.setData({
             currTab: e.currentTarget.dataset.id,
             scrollLeft: (e.currentTarget.dataset.id - 1) * 60
@@ -61,8 +62,6 @@ Page({
                 })
             }
         })
-
-        that.requestCalendar()
     },
 
     onLoad: function (options) {
@@ -78,6 +77,7 @@ Page({
     initData() {
         this.loadProgress();
         this.requestTimeLine();
+        this.requestCalendar()
         this.completeProgress();
     },
 
@@ -384,6 +384,7 @@ Page({
         })
         // 用药
         that.data.fakeData.events.useDrug.forEach(temp => {
+            let randomColor = getRandomColor()
             for (var i = 0; i < 2; i++) {
                 let item = temp.start
                 if (i === 0) {
@@ -396,7 +397,7 @@ Page({
                 let endFormat = new Date(item).getTime()
                 let diff = Math.floor((endFormat - startFormat) / (24 * 3600 * 1000))
                 // 绘制事件标签
-                ctx.setFillStyle('#39A9ED')
+                ctx.setFillStyle(randomColor)
                 ctx.fillRect(4 * that.data.axisWidth - that.data.eventDateTagsOrder[diff] * that.data.tagMargin, diff * that.data.axisHeight + that.data.whiteHeight / 2, that.data.tagWidth, that.data.tagHeight)
                 ctx.setStrokeStyle('#DDDDDD')
                 ctx.beginPath()
@@ -409,6 +410,46 @@ Page({
                 fillTextVertical(ctx, i === 0 ? '开始' : '结束', 4 * that.data.axisWidth - that.data.eventDateTagsOrder[diff] * that.data.tagMargin + that.data.textOffset, diff * that.data.axisHeight + that.data.whiteHeight / 2 + that.data.textOffsetVertical)
                 that.data.eventDateTagsOrder[diff] = that.data.eventDateTagsOrder[diff] + 1
             }
+        })
+        // 手术
+        that.data.fakeData.events.operation.forEach(item => {
+            // 判断天数差, 用于计算坐标
+            let startFormat = new Date('' + that.data.fakeData.events.createCase[0]).getTime()
+            let endFormat = new Date(item).getTime()
+            let diff = Math.floor((endFormat - startFormat) / (24 * 3600 * 1000))
+            // 绘制事件标签
+            ctx.setFillStyle('#FF9966')
+            ctx.fillRect(4 * that.data.axisWidth - that.data.eventDateTagsOrder[diff] * that.data.tagMargin, diff * that.data.axisHeight + that.data.whiteHeight / 2, that.data.tagWidth, that.data.tagHeight)
+            ctx.setStrokeStyle('#DDDDDD')
+            ctx.beginPath()
+            ctx.moveTo(30, diff * that.data.axisHeight + that.data.whiteHeight)
+            ctx.lineTo(4 * that.data.axisWidth - that.data.eventDateTagsOrder[diff] * that.data.tagMargin, diff * that.data.axisHeight + that.data.whiteHeight)
+            ctx.stroke()
+            ctx.textAlign = 'center'
+            ctx.textBaseline = 'bottom'
+            ctx.setFillStyle('white')
+            fillTextVertical(ctx, '手术', 4 * that.data.axisWidth - that.data.eventDateTagsOrder[diff] * that.data.tagMargin + that.data.textOffset, diff * that.data.axisHeight + that.data.whiteHeight / 2 + that.data.textOffsetVertical)
+            that.data.eventDateTagsOrder[diff] = that.data.eventDateTagsOrder[diff] + 1
+        })
+        // 穿刺
+        that.data.fakeData.events.puncture.forEach(item => {
+            // 判断天数差, 用于计算坐标
+            let startFormat = new Date('' + that.data.fakeData.events.createCase[0]).getTime()
+            let endFormat = new Date(item).getTime()
+            let diff = Math.floor((endFormat - startFormat) / (24 * 3600 * 1000))
+            // 绘制事件标签
+            ctx.setFillStyle('#CCCC00')
+            ctx.fillRect(4 * that.data.axisWidth - that.data.eventDateTagsOrder[diff] * that.data.tagMargin, diff * that.data.axisHeight + that.data.whiteHeight / 2, that.data.tagWidth, that.data.tagHeight)
+            ctx.setStrokeStyle('#DDDDDD')
+            ctx.beginPath()
+            ctx.moveTo(30, diff * that.data.axisHeight + that.data.whiteHeight)
+            ctx.lineTo(4 * that.data.axisWidth - that.data.eventDateTagsOrder[diff] * that.data.tagMargin, diff * that.data.axisHeight + that.data.whiteHeight)
+            ctx.stroke()
+            ctx.textAlign = 'center'
+            ctx.textBaseline = 'bottom'
+            ctx.setFillStyle('white')
+            fillTextVertical(ctx, '穿刺', 4 * that.data.axisWidth - that.data.eventDateTagsOrder[diff] * that.data.tagMargin + that.data.textOffset, diff * that.data.axisHeight + that.data.whiteHeight / 2 + that.data.textOffsetVertical)
+            that.data.eventDateTagsOrder[diff] = that.data.eventDateTagsOrder[diff] + 1
         })
         // 出院
         that.data.fakeData.events.outHospital.forEach(item => {
@@ -684,3 +725,13 @@ function fillTextVertical (ctx, text, x, y) {
         }
     }
 }
+
+function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+

@@ -71,7 +71,7 @@
 			</view>
 		</view>
 	</scroll-view>
-	<view class="delete-btn bg-red" bindtap="onDeleCase" disabled="{{caseInfo.delete_button == 0}}">删除</view>
+	<view class="delete-btn bg-red" wx-if="{{currTab == 0}}" bindtap="onDeleCase" disabled="{{caseInfo.delete_button == 0}}">删除</view>
 	<!-- calendar -->
 	<scroll-view wx-if="{{currTab != 0}}" scroll-y class="indexes" scroll-into-view="indexes-{{listCurID}}" style='height:calc(100vh - {{CustomBar}}px - 50px)' scroll-with-animation="true" enable-back-to-top="true">
 		<view class="calendar-view">
