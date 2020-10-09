@@ -60,7 +60,7 @@
 			<view class="cu-form-group" style='height:200px'>
 				<view class="notice-dialog-container">
 					<input class='radius' style="flex-grow:1" placeholder="请输入公告标题" type="text" bindinput="onTitleInput" value="{{currNoticeTitle}}" />
-					<textarea class='notice-dialog-content radius' style="padding:5px;flex-grow:3;" placeholder="请输入公告内容" bindinput='onNoticeInput' value='{{currNoticeContent}}' />
+					<textarea class='notice-dialog-content radius' style="padding:5px;flex-grow:3;" placeholder="请输入公告内容" maxlength="-1" bindinput='onNoticeInput' value='{{currNoticeContent}}' />
 					</view>
             </view>
             <view class="cu-form-group" style="display:flex;flex-direction:row;justify-content:space-between;align-items:center;">
