@@ -40,55 +40,7 @@ Page({
         oralMedicationDateTagsOrder: {}, // 口服用药标签顺序
         venousTransfusionDateTagsOrder: {}, // 静脉用药标签顺序
         days: 0, // 计算后要显示的日期长度
-        fakeData: {
-            'events': {
-                'createCase': ['2020-04-01'], // 建档日期
-                'inHospital': ['2020-04-01'], // 入院
-                'useDrug': [
-                    {
-                        'start': '2020-04-02',
-                        'end': '2020-04-30'
-                    }
-                ], // 用药, 需要给出其实日期到最长用药的截止日期
-                'outHospital': ['2020-04-30'] // 出院
-            }, // 记录(建档/入院/用药/穿刺/手术/出院)等各种事件信息
-            'localTreatment': [
-                {
-                    'drugID': '1', // 药品ID
-                    'drugName': '甲硝唑', // 药品名称
-                    'startDate': '2020-04-02', // 开始时间
-                    'duration': 7 // 用药时长
-                }
-            ], // 局部用药
-            'oralMedication': [
-                {
-                    'drugID': '2', // 药品ID
-                    'drugName': '万古霉素', // 药品名称
-                    'startDate': '2020-04-03', // 开始时间
-                    'duration': 7 // 用药时长
-                },
-                {
-                    'drugID': '2', // 药品ID
-                    'drugName': '万古霉素', // 药品名称
-                    'startDate': '2020-04-12', // 开始时间
-                    'duration': 7 // 用药时长
-                },
-                {
-                    'drugID': '4', // 药品ID
-                    'drugName': '强力美素', // 药品名称
-                    'startDate': '2020-04-03', // 开始时间
-                    'duration': 4 // 用药时长
-                }
-            ], // 口服用药
-            'venousTransfusion': [
-                {
-                    'drugID': '3', // 药品ID
-                    'drugName': '利福平', // 药品名称
-                    'startDate': '2020-04-02', // 开始时间
-                    'duration': 4 // 用药时长
-                }
-            ] // 静脉用药
-        } // 测试数据
+        fakeData: {}
     },
 
     tabSelect(e) {
@@ -110,60 +62,7 @@ Page({
             }
         })
 
-        const ctx = wx.createCanvasContext('timelineCanvas', this)
-        // 设置字号
-        ctx.setFontSize(12)
-        // 设置显示天数
-        let days = 0
-        let dateEnd = ''
-        let dateStart = '' + that.data.fakeData.events.createCase[0]
-        if (that.data.fakeData.events.outHospital.length >= 1) {
-            dateEnd = that.data.fakeData.events.outHospital[that.data.fakeData.events.outHospital.length - 1]
-        } else {
-            if (that.data.fakeData.events.useDrug.length >= 1) {
-                dateEnd = that.data.fakeData.events.useDrug[that.data.fakeData.events.outHospital.length - 1].end
-            }
-        }
-        if (dateEnd === '') {
-            days = that.data.defaultDays
-        } else {
-            let startFormat = new Date(dateStart).getTime()
-            let endFormat = new Date(dateEnd).getTime()
-            days = Math.floor((endFormat - startFormat) / (24 * 3600 * 1000)) + 1
-        }
-        that.setData({
-            days: days
-        })
-        // 缓存字典, 用于后续判断排序顺序
-        for (var i = 0; i < days; i++) {
-            that.data.eventDateTagsOrder[i] = 0
-            that.data.localTreatmentDateTagsOrder[i] = 0
-            that.data.oralMedicationDateTagsOrder[i] = 0
-            that.data.venousTransfusionDateTagsOrder[i] = 0
-        }
-        that.setData({
-            eventDateTagsOrder: that.data.eventDateTagsOrder,
-            localTreatmentDateTagsOrder: that.data.localTreatmentDateTagsOrder,
-            oralMedicationDateTagsOrder: that.data.oralMedicationDateTagsOrder,
-            venousTransfusionDateTagsOrder: that.data.venousTransfusionDateTagsOrder
-        })
-        // 绘制参考线
-        that.drawLineY(ctx, that.data.days, 30, true)
-        that.drawLineY(ctx, that.data.days, 30 + that.data.axisWidth, false)
-        that.drawLineY(ctx, that.data.days, 30 + 2 * that.data.axisWidth, false)
-        that.drawLineY(ctx, that.data.days, 30 + 3 * that.data.axisWidth, false)
-        // 绘制参考线文本
-        that.drawLineYText(ctx, that.data.days + 1, 30)
-        // 绘制事件
-        that.drawEvents(ctx)
-        // 绘制局部用药
-        that.drawLocalTreatment(ctx)
-        // 绘制口服用药
-        that.drawOralMedication(ctx)
-        // 绘制静脉用药
-        that.drawVenousTransfusion(ctx)
-        // 绘制
-        ctx.draw()
+        that.requestCalendar()
     },
 
     onLoad: function (options) {
@@ -179,7 +78,6 @@ Page({
     initData() {
         this.loadProgress();
         this.requestTimeLine();
-        this.requestCalendar(this.data.calendarDate);
         this.completeProgress();
     },
 
@@ -199,11 +97,7 @@ Page({
             success(res) {
                 console.log("Case.Timeline:" + JSON.stringify(res))
                 if (res.data.data.code == constant.response_success) {
-                    for (let i = 0, len = res.data.data.list.length; i < len; i++) {
-                        let timeLineInfo = res.data.data.list[i];
-                        timeLineInfo.time = timeLineInfo.time.split(" ")[0]
-                        timeLineInfo.typeName = that.data.typePicker[timeLineInfo.type - 1]
-                    }
+
 
                     that.setData({
                         isIn: res.data.data.info.is_in,
@@ -329,14 +223,13 @@ Page({
     // ---------------- timeline end ---------------- //
 
     // ---------------- calendar begin ---------------- //
-    requestCalendar: function (month) {
+    requestCalendar: function () {
         let that = this;
         wx.request({
             url: constant.basePath,
             data: {
                 service: 'Case.Calendar',
                 case_id: that.data.caseInfo.case_id,
-                month: month,
                 openid: app.globalData.openid
             },
             header: {
@@ -346,8 +239,62 @@ Page({
                 console.log("Case.GetDoctorList:" + JSON.stringify(res))
                 if (res.data.data.code == constant.response_success) {
                     that.setData({
-                        weekList: res.data.data.list
+                        fakeData: res.data.data.fakeData
                     })
+                    const ctx = wx.createCanvasContext('timelineCanvas', this)
+                    // 设置字号
+                    ctx.setFontSize(12)
+                    // 设置显示天数
+                    let days = 0
+                    let dateEnd = ''
+                    let dateStart = '' + that.data.fakeData.events.createCase[0]
+                    if (that.data.fakeData.events.outHospital.length >= 1) {
+                        dateEnd = that.data.fakeData.events.outHospital[that.data.fakeData.events.outHospital.length - 1]
+                    } else {
+                        if (that.data.fakeData.events.useDrug.length >= 1) {
+                            dateEnd = that.data.fakeData.events.useDrug[that.data.fakeData.events.outHospital.length - 1].end
+                        }
+                    }
+                    if (dateEnd === '') {
+                        days = that.data.defaultDays
+                    } else {
+                        let startFormat = new Date(dateStart).getTime()
+                        let endFormat = new Date(dateEnd).getTime()
+                        days = Math.floor((endFormat - startFormat) / (24 * 3600 * 1000)) + 1
+                    }
+                    that.setData({
+                        days: days
+                    })
+                    // 缓存字典, 用于后续判断排序顺序
+                    for (var i = 0; i < days; i++) {
+                        that.data.eventDateTagsOrder[i] = 0
+                        that.data.localTreatmentDateTagsOrder[i] = 0
+                        that.data.oralMedicationDateTagsOrder[i] = 0
+                        that.data.venousTransfusionDateTagsOrder[i] = 0
+                    }
+                    that.setData({
+                        eventDateTagsOrder: that.data.eventDateTagsOrder,
+                        localTreatmentDateTagsOrder: that.data.localTreatmentDateTagsOrder,
+                        oralMedicationDateTagsOrder: that.data.oralMedicationDateTagsOrder,
+                        venousTransfusionDateTagsOrder: that.data.venousTransfusionDateTagsOrder
+                    })
+                    // 绘制参考线
+                    that.drawLineY(ctx, that.data.days, 30, true)
+                    that.drawLineY(ctx, that.data.days, 30 + that.data.axisWidth, false)
+                    that.drawLineY(ctx, that.data.days, 30 + 2 * that.data.axisWidth, false)
+                    that.drawLineY(ctx, that.data.days, 30 + 3 * that.data.axisWidth, false)
+                    // 绘制参考线文本
+                    that.drawLineYText(ctx, that.data.days + 1, 30)
+                    // 绘制事件
+                    that.drawEvents(ctx)
+                    // 绘制局部用药
+                    that.drawLocalTreatment(ctx)
+                    // 绘制口服用药
+                    that.drawOralMedication(ctx)
+                    // 绘制静脉用药
+                    that.drawVenousTransfusion(ctx)
+                    // 绘制
+                    ctx.draw()
                 } else {
                     that.showToast(res.data.data.msg);
                 }
@@ -359,12 +306,7 @@ Page({
             }
         });
     },
-    CalendarDateChange(e) {
-        this.setData({
-            calendarDate: e.detail.value
-        })
-        this.requestCalendar(this.data.calendarDate);
-    },
+
 
     drawLineY (ctx, days, xPos, tick) {
         var that = this
