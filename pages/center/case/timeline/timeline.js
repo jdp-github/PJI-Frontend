@@ -252,7 +252,17 @@ Page({
                         dateEnd = that.data.fakeData.events.outHospital[that.data.fakeData.events.outHospital.length - 1]
                     } else {
                         if (that.data.fakeData.events.useDrug.length >= 1) {
-                            dateEnd = that.data.fakeData.events.useDrug[that.data.fakeData.events.outHospital.length - 1].end
+                            let dateTemp = Date.parse(that.data.fakeData.events.useDrug[0].end)
+                            dateEnd = that.data.fakeData.events.useDrug[0].end
+                            if (that.data.fakeData.events.useDrug.length > 1) {
+                                for (var i = 1; i < that.data.fakeData.events.useDrug.length; i++) {
+                                    var d1 = Date.parse(that.data.fakeData.events.useDrug[i].end)
+                                    if (d1 > dateTemp) {
+                                       dateTemp = d1
+                                        dateEnd = that.data.fakeData.events.useDrug[i].end
+                                    }
+                                }
+                            }
                         }
                     }
                     if (dateEnd === '') {
@@ -262,8 +272,24 @@ Page({
                         let endFormat = new Date(dateEnd).getTime()
                         days = Math.floor((endFormat - startFormat) / (24 * 3600 * 1000)) + 1
                     }
+                    let useDrugDateStart = ''
+                    if (that.data.fakeData.events.useDrug.length >= 1) {
+                        let useDrugDateTemp = Date.parse(that.data.fakeData.events.useDrug[0].start)
+                        useDrugDateStart = that.data.fakeData.events.useDrug[0].start
+                        if (that.data.fakeData.events.useDrug.length > 1) {
+                            for (var i = 1; i < that.data.fakeData.events.useDrug.length; i++) {
+                                var d1 = Date.parse(that.data.fakeData.events.useDrug[i].start)
+                                if (d1 < useDrugDateTemp) {
+                                    useDrugDateTemp = d1
+                                    useDrugDateStart = that.data.fakeData.events.useDrug[i].start
+                                }
+                            }
+                        }
+                    }
                     that.setData({
-                        days: days
+                        days: days,
+                        useDrugDateStart: useDrugDateStart,
+                        useDrugDateEnd: dateEnd
                     })
                     // 缓存字典, 用于后续判断排序顺序
                     for (var i = 0; i < days; i++) {
@@ -383,34 +409,31 @@ Page({
             that.data.eventDateTagsOrder[diff] = that.data.eventDateTagsOrder[diff] + 1
         })
         // 用药
-        that.data.fakeData.events.useDrug.forEach(temp => {
-            let randomColor = getRandomColor()
-            for (var i = 0; i < 2; i++) {
-                let item = temp.start
-                if (i === 0) {
-                    item = temp.start
-                } else {
-                    item = temp.end
-                }
-                // 判断天数差, 用于计算坐标
-                let startFormat = new Date('' + that.data.fakeData.events.createCase[0]).getTime()
-                let endFormat = new Date(item).getTime()
-                let diff = Math.floor((endFormat - startFormat) / (24 * 3600 * 1000))
-                // 绘制事件标签
-                ctx.setFillStyle(randomColor)
-                ctx.fillRect(4 * that.data.axisWidth - that.data.eventDateTagsOrder[diff] * that.data.tagMargin, diff * that.data.axisHeight + that.data.whiteHeight / 2, that.data.tagWidth, that.data.tagHeight)
-                ctx.setStrokeStyle('#DDDDDD')
-                ctx.beginPath()
-                ctx.moveTo(30, diff * that.data.axisHeight + that.data.whiteHeight)
-                ctx.lineTo(4 * that.data.axisWidth - that.data.eventDateTagsOrder[diff] * that.data.tagMargin, diff * that.data.axisHeight + that.data.whiteHeight)
-                ctx.stroke()
-                ctx.textAlign = 'center'
-                ctx.textBaseline = 'bottom'
-                ctx.setFillStyle('white')
-                fillTextVertical(ctx, i === 0 ? '开始' : '结束', 4 * that.data.axisWidth - that.data.eventDateTagsOrder[diff] * that.data.tagMargin + that.data.textOffset, diff * that.data.axisHeight + that.data.whiteHeight / 2 + that.data.textOffsetVertical)
-                that.data.eventDateTagsOrder[diff] = that.data.eventDateTagsOrder[diff] + 1
+        for (var i = 0; i < 2; i++) {
+            let item = that.data.useDrugDateStart
+            if (i === 0) {
+                item = that.data.useDrugDateStart
+            } else {
+                item = that.data.useDrugDateEnd
             }
-        })
+            // 判断天数差, 用于计算坐标
+            let startFormat = new Date('' + that.data.fakeData.events.createCase[0]).getTime()
+            let endFormat = new Date(item).getTime()
+            let diff = Math.floor((endFormat - startFormat) / (24 * 3600 * 1000))
+            // 绘制事件标签
+            ctx.setFillStyle('#39A9ED')
+            ctx.fillRect(4 * that.data.axisWidth - that.data.eventDateTagsOrder[diff] * that.data.tagMargin, diff * that.data.axisHeight + that.data.whiteHeight / 2, that.data.tagWidth, that.data.tagHeight)
+            ctx.setStrokeStyle('#DDDDDD')
+            ctx.beginPath()
+            ctx.moveTo(30, diff * that.data.axisHeight + that.data.whiteHeight)
+            ctx.lineTo(4 * that.data.axisWidth - that.data.eventDateTagsOrder[diff] * that.data.tagMargin, diff * that.data.axisHeight + that.data.whiteHeight)
+            ctx.stroke()
+            ctx.textAlign = 'center'
+            ctx.textBaseline = 'bottom'
+            ctx.setFillStyle('white')
+            fillTextVertical(ctx, i === 0 ? '开始' : '结束', 4 * that.data.axisWidth - that.data.eventDateTagsOrder[diff] * that.data.tagMargin + that.data.textOffset, diff * that.data.axisHeight + that.data.whiteHeight / 2 + that.data.textOffsetVertical)
+            that.data.eventDateTagsOrder[diff] = that.data.eventDateTagsOrder[diff] + 1
+        }
         // 手术
         that.data.fakeData.events.operation.forEach(item => {
             // 判断天数差, 用于计算坐标
@@ -498,17 +521,17 @@ Page({
             ctx.beginPath()
             ctx.setStrokeStyle('#ED6A0C')
             ctx.moveTo(3 * that.data.axisWidth - that.data.localTreatmentDateTagsOrder[diff] * that.data.tagMargin + that.data.textOffset, diff * that.data.axisHeight + that.data.whiteHeight + 3 * that.data.textOffsetVertical)
-            ctx.lineTo(3 * that.data.axisWidth - that.data.localTreatmentDateTagsOrder[diff] * that.data.tagMargin + that.data.textOffset, diff * that.data.axisHeight + that.data.whiteHeight + item.duration * that.data.axisHeight - that.data.textOffsetVertical)
+            ctx.lineTo(3 * that.data.axisWidth - that.data.localTreatmentDateTagsOrder[diff] * that.data.tagMargin + that.data.textOffset, (diff - 1) * that.data.axisHeight + that.data.whiteHeight + item.duration * that.data.axisHeight - that.data.textOffsetVertical)
             ctx.stroke()
             ctx.beginPath()
-            ctx.moveTo(3 * that.data.axisWidth - that.data.localTreatmentDateTagsOrder[diff] * that.data.tagMargin, diff * that.data.axisHeight + that.data.whiteHeight + item.duration * that.data.axisHeight - that.data.textOffsetVertical)
-            ctx.lineTo(3 * that.data.axisWidth - that.data.localTreatmentDateTagsOrder[diff] * that.data.tagMargin + that.data.tagWidth, diff * that.data.axisHeight + that.data.whiteHeight + item.duration * that.data.axisHeight - that.data.textOffsetVertical)
+            ctx.moveTo(3 * that.data.axisWidth - that.data.localTreatmentDateTagsOrder[diff] * that.data.tagMargin, (diff - 1) * that.data.axisHeight + that.data.whiteHeight + item.duration * that.data.axisHeight - that.data.textOffsetVertical)
+            ctx.lineTo(3 * that.data.axisWidth - that.data.localTreatmentDateTagsOrder[diff] * that.data.tagMargin + that.data.tagWidth, (diff - 1) * that.data.axisHeight + that.data.whiteHeight + item.duration * that.data.axisHeight - that.data.textOffsetVertical)
             ctx.stroke()
             // 绘制持续时长文字
             ctx.textAlign = 'center'
             ctx.textBaseline = 'bottom'
             ctx.setFillStyle('black')
-            fillTextVertical(ctx, item.duration + 'days', 3 * that.data.axisWidth - that.data.localTreatmentDateTagsOrder[diff] * that.data.tagMargin + that.data.textOffset, diff * that.data.axisHeight + that.data.whiteHeight + item.duration * that.data.axisHeight / 2 - that.data.textOffsetVertical)
+            fillTextVertical(ctx, item.duration + 'days', 3 * that.data.axisWidth - that.data.localTreatmentDateTagsOrder[diff] * that.data.tagMargin + that.data.textOffset, (diff - 1) * that.data.axisHeight + that.data.whiteHeight + item.duration * that.data.axisHeight / 2 - that.data.textOffsetVertical)
             // 需要增加排序索引, 避免重叠
             for (var i = 0; i < item.duration; i++) {
                 if (i !== 0) {
@@ -529,32 +552,32 @@ Page({
             let diff = Math.floor((endFormat - startFormat) / (24 * 3600 * 1000))
             // 绘制事件标签
             ctx.setFillStyle('#82C91E')
-            ctx.fillRect(2 * that.data.axisWidth - that.data.oralMedicationDateTagsOrder[diff] * that.data.tagMargin, diff * that.data.axisHeight + that.data.whiteHeight / 2, that.data.tagWidth, that.data.tagHeight)
+            ctx.fillRect(2 * that.data.axisWidth - that.data.oralMedicationDateTagsOrder[diff] * that.data.tagMargin, (diff) * that.data.axisHeight + that.data.whiteHeight / 2, that.data.tagWidth, that.data.tagHeight)
             ctx.setStrokeStyle('#DDDDDD')
             ctx.beginPath()
             ctx.moveTo(30, diff * that.data.axisHeight + that.data.whiteHeight)
-            ctx.lineTo(2 * that.data.axisWidth - that.data.oralMedicationDateTagsOrder[diff] * that.data.tagMargin, diff * that.data.axisHeight + that.data.whiteHeight)
+            ctx.lineTo(2 * that.data.axisWidth - that.data.oralMedicationDateTagsOrder[diff] * that.data.tagMargin, (diff) * that.data.axisHeight + that.data.whiteHeight)
             ctx.stroke()
             // 绘制标签文字
             ctx.textAlign = 'center'
             ctx.textBaseline = 'bottom'
             ctx.setFillStyle('white')
-            fillTextVertical(ctx, item.drugName.slice(0, 2), 2 * that.data.axisWidth - that.data.oralMedicationDateTagsOrder[diff] * that.data.tagMargin + that.data.textOffset, diff * this.data.axisHeight + this.data.whiteHeight / 2 + this.data.textOffsetVertical)
+            fillTextVertical(ctx, item.drugName.slice(0, 2), 2 * that.data.axisWidth - that.data.oralMedicationDateTagsOrder[diff] * that.data.tagMargin + that.data.textOffset, (diff) * this.data.axisHeight + this.data.whiteHeight / 2 + this.data.textOffsetVertical)
             // 绘制持续时长线条
             ctx.beginPath()
             ctx.setStrokeStyle('#82C91E')
-            ctx.moveTo(2 * that.data.axisWidth - that.data.oralMedicationDateTagsOrder[diff] * that.data.tagMargin + that.data.textOffset, diff * that.data.axisHeight + that.data.whiteHeight + 3 * that.data.textOffsetVertical)
-            ctx.lineTo(2 * that.data.axisWidth - that.data.oralMedicationDateTagsOrder[diff] * that.data.tagMargin + that.data.textOffset, diff * that.data.axisHeight + that.data.whiteHeight + item.duration * that.data.axisHeight - that.data.textOffsetVertical)
+            ctx.moveTo(2 * that.data.axisWidth - that.data.oralMedicationDateTagsOrder[diff] * that.data.tagMargin + that.data.textOffset, (diff) * that.data.axisHeight + that.data.whiteHeight + 3 * that.data.textOffsetVertical)
+            ctx.lineTo(2 * that.data.axisWidth - that.data.oralMedicationDateTagsOrder[diff] * that.data.tagMargin + that.data.textOffset, (diff - 1) * that.data.axisHeight + that.data.whiteHeight + item.duration * that.data.axisHeight - that.data.textOffsetVertical)
             ctx.stroke()
             ctx.beginPath()
-            ctx.moveTo(2 * that.data.axisWidth - that.data.oralMedicationDateTagsOrder[diff] * that.data.tagMargin, diff * that.data.axisHeight + that.data.whiteHeight + item.duration * that.data.axisHeight - that.data.textOffsetVertical)
-            ctx.lineTo(2 * that.data.axisWidth - that.data.oralMedicationDateTagsOrder[diff] * that.data.tagMargin + that.data.tagWidth, diff * that.data.axisHeight + that.data.whiteHeight + item.duration * that.data.axisHeight - that.data.textOffsetVertical)
+            ctx.moveTo(2 * that.data.axisWidth - that.data.oralMedicationDateTagsOrder[diff] * that.data.tagMargin, (diff - 1) * that.data.axisHeight + that.data.whiteHeight + item.duration * that.data.axisHeight - that.data.textOffsetVertical)
+            ctx.lineTo(2 * that.data.axisWidth - that.data.oralMedicationDateTagsOrder[diff] * that.data.tagMargin + that.data.tagWidth, (diff - 1) * that.data.axisHeight + that.data.whiteHeight + item.duration * that.data.axisHeight - that.data.textOffsetVertical)
             ctx.stroke()
             // 绘制持续时长文字
             ctx.textAlign = 'center'
             ctx.textBaseline = 'bottom'
             ctx.setFillStyle('black')
-            fillTextVertical(ctx, item.duration + 'days', 2 * that.data.axisWidth - that.data.oralMedicationDateTagsOrder[diff] * that.data.tagMargin + that.data.textOffset, diff * that.data.axisHeight + that.data.whiteHeight + item.duration * that.data.axisHeight / 2 - that.data.textOffsetVertical)
+            fillTextVertical(ctx, item.duration + 'days', 2 * that.data.axisWidth - that.data.oralMedicationDateTagsOrder[diff] * that.data.tagMargin + that.data.textOffset, (diff - 1) * that.data.axisHeight + that.data.whiteHeight + item.duration * that.data.axisHeight / 2 - that.data.textOffsetVertical)
             // 需要增加排序索引, 避免重叠
             for (var i = 0; i < item.duration; i++) {
                 if (i !== 0) {
@@ -575,32 +598,32 @@ Page({
             let diff = Math.floor((endFormat - startFormat) / (24 * 3600 * 1000))
             // 绘制事件标签
             ctx.setFillStyle('#36CEE3')
-            ctx.fillRect(that.data.axisWidth - that.data.venousTransfusionDateTagsOrder[diff] * that.data.tagMargin, diff * that.data.axisHeight + that.data.whiteHeight / 2, that.data.tagWidth, that.data.tagHeight)
+            ctx.fillRect(that.data.axisWidth - that.data.venousTransfusionDateTagsOrder[diff] * that.data.tagMargin, (diff) * that.data.axisHeight + that.data.whiteHeight / 2, that.data.tagWidth, that.data.tagHeight)
             ctx.setStrokeStyle('#DDDDDD')
             ctx.beginPath()
             ctx.moveTo(30, diff * that.data.axisHeight + that.data.whiteHeight)
-            ctx.lineTo(that.data.axisWidth - that.data.venousTransfusionDateTagsOrder[diff] * that.data.tagMargin, diff * that.data.axisHeight + that.data.whiteHeight)
+            ctx.lineTo(that.data.axisWidth - that.data.venousTransfusionDateTagsOrder[diff] * that.data.tagMargin, (diff) * that.data.axisHeight + that.data.whiteHeight)
             ctx.stroke()
             // 绘制标签文字
             ctx.textAlign = 'center'
             ctx.textBaseline = 'bottom'
             ctx.setFillStyle('white')
-            fillTextVertical(ctx, item.drugName.slice(0, 2), that.data.axisWidth - that.data.venousTransfusionDateTagsOrder[diff] * that.data.tagMargin + that.data.textOffset, diff * that.data.axisHeight + that.data.whiteHeight / 2 + that.data.textOffsetVertical)
+            fillTextVertical(ctx, item.drugName.slice(0, 2), that.data.axisWidth - that.data.venousTransfusionDateTagsOrder[diff] * that.data.tagMargin + that.data.textOffset, (diff) * that.data.axisHeight + that.data.whiteHeight / 2 + that.data.textOffsetVertical)
             // 绘制持续时长线条
             ctx.beginPath()
             ctx.setStrokeStyle('#36CEE3')
-            ctx.moveTo(that.data.axisWidth - that.data.venousTransfusionDateTagsOrder[diff] * that.data.tagMargin + that.data.textOffset, diff * that.data.axisHeight + that.data.whiteHeight + 3 * that.data.textOffsetVertical)
-            ctx.lineTo(that.data.axisWidth - that.data.venousTransfusionDateTagsOrder[diff] * that.data.tagMargin + that.data.textOffset, diff * that.data.axisHeight + that.data.whiteHeight + item.duration * that.data.axisHeight - that.data.textOffsetVertical)
+            ctx.moveTo(that.data.axisWidth - that.data.venousTransfusionDateTagsOrder[diff] * that.data.tagMargin + that.data.textOffset, (diff) * that.data.axisHeight + that.data.whiteHeight + 3 * that.data.textOffsetVertical)
+            ctx.lineTo(that.data.axisWidth - that.data.venousTransfusionDateTagsOrder[diff] * that.data.tagMargin + that.data.textOffset, (diff - 1) * that.data.axisHeight + that.data.whiteHeight + item.duration * that.data.axisHeight - that.data.textOffsetVertical)
             ctx.stroke()
             ctx.beginPath()
-            ctx.moveTo(that.data.axisWidth - that.data.venousTransfusionDateTagsOrder[diff] * that.data.tagMargin, diff * that.data.axisHeight + that.data.whiteHeight + item.duration * that.data.axisHeight - that.data.textOffsetVertical)
-            ctx.lineTo(that.data.axisWidth - that.data.venousTransfusionDateTagsOrder[diff] * that.data.tagMargin + that.data.tagWidth, diff * that.data.axisHeight + that.data.whiteHeight + item.duration * that.data.axisHeight - that.data.textOffsetVertical)
+            ctx.moveTo(that.data.axisWidth - that.data.venousTransfusionDateTagsOrder[diff] * that.data.tagMargin, (diff - 1) * that.data.axisHeight + that.data.whiteHeight + item.duration * that.data.axisHeight - that.data.textOffsetVertical)
+            ctx.lineTo(that.data.axisWidth - that.data.venousTransfusionDateTagsOrder[diff] * that.data.tagMargin + that.data.tagWidth, (diff - 1) * that.data.axisHeight + that.data.whiteHeight + item.duration * that.data.axisHeight - that.data.textOffsetVertical)
             ctx.stroke()
             // 绘制持续时长文字
             ctx.textAlign = 'center'
             ctx.textBaseline = 'bottom'
             ctx.setFillStyle('black')
-            fillTextVertical(ctx, item.duration + 'days', that.data.axisWidth - that.data.venousTransfusionDateTagsOrder[diff] * that.data.tagMargin + that.data.textOffset, diff * that.data.axisHeight + that.data.whiteHeight + item.duration * that.data.axisHeight / 2 - that.data.textOffsetVertical)
+            fillTextVertical(ctx, item.duration + 'days', that.data.axisWidth - that.data.venousTransfusionDateTagsOrder[diff] * that.data.tagMargin + that.data.textOffset, (diff - 1) * that.data.axisHeight + that.data.whiteHeight + item.duration * that.data.axisHeight / 2 - that.data.textOffsetVertical)
             // 需要增加排序索引, 避免重叠
             for (var i = 0; i < item.duration; i++) {
                 if (i !== 0) {
