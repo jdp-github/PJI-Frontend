@@ -26,7 +26,7 @@ Page({
         stateIndex: 0,
         statePicker: ["全部病例", '未审核', '已审核'],
         lastEventIndex: 0,
-        lastEvnetPicker: ['全部事件', '诊断穿刺', '入院手术', '药物治疗', '门诊随访'],
+        lastEvnetPicker: ['全部事件', '诊断穿刺', '入院手术', '药物治疗', '门诊随访', '结束疗程', '手术', '出院'],
         limitIndex: 0,
         limitPicker: ['建档日期', '末次事件日期'],
         doctorIndex: 0,
@@ -139,6 +139,12 @@ Page({
                             caseInfo.last_element = '用药方案'
                         } else if (caseInfo.last_element == 5) {
                             caseInfo.last_element = '门诊随访'
+                        } else if (caseInfo.last_element == 6) {
+                            caseInfo.last_element = '结束疗程'
+                        } else if (caseInfo.last_element == 7) {
+                            caseInfo.last_element = '手术'
+                        } else if (caseInfo.last_element == 8) {
+                            caseInfo.last_element = '出院'
                         }
                     }
 
@@ -378,7 +384,7 @@ Page({
         })
         this.requestCaseList(this.data.searchValue);
     },
-    
+
     onRefresh: function (e) {
         this.initData()
     },

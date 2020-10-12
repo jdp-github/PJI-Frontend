@@ -97,7 +97,11 @@ Page({
             success(res) {
                 console.log("Case.Timeline:" + JSON.stringify(res))
                 if (res.data.data.code == constant.response_success) {
-
+                    for (let i = 0, len = res.data.data.list.length; i < len; i++) {
+                        let timeLineInfo = res.data.data.list[i];
+                        timeLineInfo.time = timeLineInfo.time.split(" ")[0]
+                        timeLineInfo.typeName = that.data.typePicker[timeLineInfo.type - 1]
+                    }
 
                     that.setData({
                         isIn: res.data.data.info.is_in,
@@ -258,7 +262,7 @@ Page({
                                 for (var i = 1; i < that.data.fakeData.events.useDrug.length; i++) {
                                     var d1 = Date.parse(that.data.fakeData.events.useDrug[i].end)
                                     if (d1 > dateTemp) {
-                                       dateTemp = d1
+                                        dateTemp = d1
                                         dateEnd = that.data.fakeData.events.useDrug[i].end
                                     }
                                 }
@@ -334,7 +338,7 @@ Page({
     },
 
 
-    drawLineY (ctx, days, xPos, tick) {
+    drawLineY(ctx, days, xPos, tick) {
         var that = this
         ctx.beginPath()
         ctx.moveTo(xPos, that.data.whiteHeight)
@@ -351,7 +355,7 @@ Page({
         }
     },
 
-    drawLineYText (ctx, days, xPos) {
+    drawLineYText(ctx, days, xPos) {
         var that = this
         for (var i = 0; i < days; i++) {
             ctx.textAlign = 'center'
@@ -365,7 +369,7 @@ Page({
         }
     },
 
-    drawEvents (ctx) {
+    drawEvents(ctx) {
         var that = this
         // 建档
         that.data.fakeData.events.createCase.forEach(item => {
@@ -496,7 +500,7 @@ Page({
         })
     },
 
-    drawLocalTreatment (ctx) {
+    drawLocalTreatment(ctx) {
         var that = this
         // 局部用药
         that.data.fakeData.localTreatment.forEach(item => {
@@ -542,7 +546,7 @@ Page({
         })
     },
 
-    drawOralMedication (ctx) {
+    drawOralMedication(ctx) {
         var that = this
         // 局部用药
         that.data.fakeData.oralMedication.forEach(item => {
@@ -588,7 +592,7 @@ Page({
         })
     },
 
-    drawVenousTransfusion (ctx) {
+    drawVenousTransfusion(ctx) {
         var that = this
         // 静脉用药
         that.data.fakeData.venousTransfusion.forEach(item => {
@@ -703,12 +707,12 @@ Page({
     // ============ 事件 end ============ //
 });
 
-function formatNumber (n) {
+function formatNumber(n) {
     const str = n.toString()
     return str[1] ? str : `0${str}`
 }
 
-function formatTime (date, more) {
+function formatTime(date, more) {
     const year = date.getFullYear()
     const month = date.getMonth() + 1
     const day = date.getDate()
@@ -727,7 +731,7 @@ function formatTime (date, more) {
     }
 }
 
-function fillTextVertical (ctx, text, x, y) {
+function fillTextVertical(ctx, text, x, y) {
     let letterSpacing = 2
     for (let i = 0; i < text.length; i++) {
         const str = text.slice(i, i + 1).toString()
@@ -757,4 +761,3 @@ function getRandomColor() {
     }
     return color;
 }
-
