@@ -3,7 +3,7 @@
 let constant = require('../../utils/constant.js');
 
 const app = getApp();
-const isTel = (value) => !/^1[34578]\d{9}$/.test(value);
+const isTel = (value) => !/^1[345678]\d{9}$/.test(value);
 
 Page({
     data: {

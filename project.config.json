@@ -1,41 +1,30 @@
 {
-	"description": "app's configuration",
-	"packOptions": {
-		"ignore": []
-	},
-	"setting": {
-		"urlCheck": true,
-		"es6": true,
-		"postcss": true,
-		"minified": true,
-		"newFeature": true,
-		"nodeModules": true,
-		"autoAudits": false
-	},
-	"compileType": "miniprogram",
-	"libVersion": "2.6.1",
-	"appid": "wx1e3bc514b1d29f4d",
-	"projectname": "PJI-Frontend",
-	"debugOptions": {
-		"hidedInDevtools": []
-	},
-	"isGameTourist": false,
-	"condition": {
-		"search": {
-			"current": -1,
-			"list": []
-		},
-		"conversation": {
-			"current": -1,
-			"list": []
-		},
-		"game": {
-			"currentL": -1,
-			"list": []
-		},
-		"miniprogram": {
-			"current": -1,
-			"list": []
-		}
-	}
+  "description": "app's configuration",
+  "packOptions": {
+    "ignore": [],
+    "include": []
+  },
+  "setting": {
+    "urlCheck": true,
+    "es6": true,
+    "postcss": true,
+    "minified": true,
+    "newFeature": true,
+    "nodeModules": true,
+    "autoAudits": false,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    }
+  },
+  "compileType": "miniprogram",
+  "libVersion": "2.6.1",
+  "appid": "wx1e3bc514b1d29f4d",
+  "projectname": "PJI-Frontend",
+  "condition": {},
+  "editorSetting": {
+    "tabIndent": "insertSpaces",
+    "tabSize": 2
+  }
 }
