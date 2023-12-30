@@ -1,9 +1,5 @@
 {
   "description": "app's configuration",
-  "packOptions": {
-    "ignore": [],
-    "include": []
-  },
   "setting": {
     "urlCheck": true,
     "es6": true,
@@ -16,15 +12,24 @@
       "ignore": [],
       "disablePlugins": [],
       "outputPath": ""
-    }
+    },
+    "coverView": false,
+    "enhance": false,
+    "showShadowRootInWxmlPanel": false,
+    "packNpmRelationList": [],
+    "ignoreUploadUnusedFiles": true
   },
   "compileType": "miniprogram",
-  "libVersion": "2.6.1",
-  "appid": "wx1e3bc514b1d29f4d",
-  "projectname": "PJI-Frontend",
   "condition": {},
   "editorSetting": {
     "tabIndent": "insertSpaces",
     "tabSize": 2
-  }
+  },
+  "libVersion": "2.11.0",
+  "packOptions": {
+    "ignore": [],
+    "include": []
+  },
+  "appid": "wx1e3bc514b1d29f4d",
+  "projectname": "PJI-Frontend"
 }
