@@ -40,14 +40,6 @@
                 "text": "中心"
             },
             {
-                "pagePath": "pages/stats/stats",
-                "text": "统计"
-            },
-            {
-                "pagePath": "pages/service/service",
-                "text": "客服"
-            },
-            {
                 "pagePath": "pages/person/person",
                 "text": "我的"
             }
