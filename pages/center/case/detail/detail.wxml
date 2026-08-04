@@ -284,6 +284,22 @@
                             </view>
                             <switch class='green sm' bindchange="onGjyzxSwitchChange" style='margin-left: 15rpx;' checked='{{!gjyzxDisabled}}'></switch>
                         </view>
+                        <!-- 灌洗液白细胞计数（cells/μL） -->
+                        <view class="cu-form-group {{gxybxbDisabled?'disabled':''}}">
+                            <view style='display:flex;flex-direction: column; '>
+                                <view class='title' style='text-align:left'>灌洗液白细胞计数(cells/μL)</view>
+                                <input placeholder="请输入数字，请注意单位换算" class='radius' style='width: 350rpx;text-align:left;' type='number' bindinput="onGxybxbInput" disabled='{{gxybxbDisabled}}' value='{{gxybxb}}'></input>
+                            </view>
+                            <switch class='green sm' bindchange="onGxybxbSwitchChange" style='margin-left: 15rpx;' checked='{{!gxybxbDisabled}}'></switch>
+                        </view>
+                        <!-- 灌洗液中性粒细胞百分比（0.01） -->
+                        <view class="cu-form-group {{gxyzxDisabled?'disabled':''}}">
+                            <view style='display:flex;flex-direction: column; '>
+                                <view class='title' style='text-align:left'>灌洗液中性粒细胞百分比(0.01)</view>
+                                <input placeholder="请注意格式，保留小数点2位" style=' width: 350rpx;text-align:left;' class='radius' type='digit' bindinput="onGxyzxInput" disabled='{{gxyzxDisabled}}' value='{{gxyzx}}'></input>
+                            </view>
+                            <switch class='green sm' bindchange="onGxyzxSwitchChange" style='margin-left: 15rpx;' checked='{{!gxyzxDisabled}}'></switch>
+                        </view>
                         <!-- 本次培养送检类型 -->
                         <view class="cu-form-group {{bcpysjDisabled?'disabled':''}}">
                             <view class='title'>本次培养送检类型</view>

@@ -122,6 +122,10 @@ Page({
         gjybxbDisabled: true,
         gjyzx: '',
         gjyzxDisabled: true,
+        gxybxb: '',
+        gxybxbDisabled: true,
+        gxyzx: '',
+        gxyzxDisabled: true,
         bcpysjIndex: 0,
         bcpysjPicker: ["请选择", "关节液", "灌洗液", "混合液"],
         bcpysjDisabled: false,
@@ -878,6 +882,36 @@ Page({
         if (this.data.gjyzxDisabled) {
             this.setData({
                 gjyzx: ''
+            })
+        }
+    },
+    onGxybxbInput: function(e) {
+        this.setData({
+            gxybxb: e.detail.value
+        });
+    },
+    onGxybxbSwitchChange: function(e) {
+        this.setData({
+            gxybxbDisabled: !e.detail.value
+        });
+        if (this.data.gxybxbDisabled) {
+            this.setData({
+                gxybxb: ''
+            })
+        }
+    },
+    onGxyzxInput: function(e) {
+        this.setData({
+            gxyzx: e.detail.value
+        });
+    },
+    onGxyzxSwitchChange: function(e) {
+        this.setData({
+            gxyzxDisabled: !e.detail.value
+        });
+        if (this.data.gxyzxDisabled) {
+            this.setData({
+                gxyzx: ''
             })
         }
     },
@@ -1848,6 +1882,10 @@ Page({
             gjybxbDisabled: this.getNumDisable(info.puncture.joint_fluid_leukocyte),
             gjyzx: this.getDefaultNum(info.puncture.neutrophils_percent),
             gjyzxDisabled: this.getNumDisable(info.puncture.neutrophils_percent),
+            gxybxb: this.getDefaultNum(info.puncture.rinse_lavage_leukocyte),
+            gxybxbDisabled: this.getNumDisable(info.puncture.rinse_lavage_leukocyte),
+            gxyzx: this.getDefaultNum(info.puncture.rinse_lavage_neutrophils_percent),
+            gxyzxDisabled: this.getNumDisable(info.puncture.rinse_lavage_neutrophils_percent),
             bcpysjIndex: info.puncture.culture_type,
             bcpysjDisabled: this.getNumDisable(info.puncture.culture_type),
             drgpyp: this.getDefaultNum(info.puncture.culture_bottle_fluid_volume),
@@ -2179,6 +2217,14 @@ Page({
             this.showToast("请填写关节液中心粒细胞百分比")
             return false;
         }
+        if (!this.data.gxybxbDisabled && this.data.gxybxb.length == 0) {
+            this.showToast("请填写灌洗液白细胞计数")
+            return false;
+        }
+        if (!this.data.gxyzxDisabled && this.data.gxyzx.length == 0) {
+            this.showToast("请填写灌洗液中性粒细胞百分比")
+            return false;
+        }
         if (!this.data.bcpysjDisabled && this.data.bcpysjIndex == 0) {
             this.showToast("请选择本次培养送检类型")
             return false;
@@ -2254,6 +2300,8 @@ Page({
             le_testpaper_centr_pic: JSON.stringify(leCentrPic),
             joint_fluid_leukocyte: parseInt(this.getDefaultValue(that.data.gjybxb)),
             neutrophils_percent: parseFloat(this.getDefaultValue(that.data.gjyzx)),
+            rinse_lavage_leukocyte: parseInt(this.getDefaultValue(that.data.gxybxb)),
+            rinse_lavage_neutrophils_percent: parseFloat(this.getDefaultValue(that.data.gxyzx)),
             culture_type: parseInt(this.getDefaultValue(that.data.bcpysjIndex)),
             culture_bottle_fluid_volume: parseFloat(this.getDefaultValue(that.data.drgpyp)),
             aerobic_culture_result: that.data.bcxyResult,
