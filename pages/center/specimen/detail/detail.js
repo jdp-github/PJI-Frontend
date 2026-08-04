@@ -15,7 +15,7 @@ const SPECIMEN_TYPE_GET = 2;
 const SPECIMEN_TYPE_NO_RIGHT = 3;
 
 const SPECIMEN_TYPE_LIST = ['关节液', '血液', '组织'];
-const ECCENTRICITY_LIST = ['6600*3min', '1000g*5min', '1000g*10min', '未离心'];
+const ECCENTRICITY_LIST = ['6600rpm*3min', '1000g*5min', '1000g*10min', '未离心', '4500rpm*10min', '3000rpm*10min'];
 
 Page({
     data: {

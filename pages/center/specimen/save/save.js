@@ -23,7 +23,7 @@ Page({
         remark: '',
         typeList: ['关节液', '血液', '组织'],
         typeIndex: 0,
-        eccentricityList: ['6600*3min', '1000g*5min', '1000g*10min', '未离心'],
+        eccentricityList: ['6600rpm*3min', '1000g*5min', '1000g*10min', '未离心', '4500rpm*10min', '3000rpm*10min'],
         eccentricityIndex: 0,
         axenicList: ['否', '是'],
         axenicIndex: 0
