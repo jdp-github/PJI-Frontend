@@ -269,7 +269,7 @@ Page({
     onItemClick: function(e) {
         let specimen = e.currentTarget.dataset.selecteditem;
         if (specimen.color_type == SPECIMEN_TYPE_NO_RIGHT) { // 无权限
-            this.showToast('您无权限查看');
+            this.showToast('这不是您存放的标本，请联系存放者或管理员');
             return
         }
 
