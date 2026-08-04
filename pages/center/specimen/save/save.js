@@ -93,15 +93,18 @@ Page({
         that.showLoading();
         wx.request({
             url: constant.basePath,
+            method: 'POST',
             data: {
                 service: 'Case.SearchCaseList',
                 openid: app.globalData.openid,
                 center_id: this.data.centerId,
                 keyword: searchValue,
-                sort: 1
+                sort: 1,
+                page: 1,
+                page_size: 50
             },
             header: {
-                'content-type': 'application/json'
+                'content-type': 'application/x-www-form-urlencoded'
             },
             success(res) {
                 console.log("Case.SearchCaseList:" + JSON.stringify(res))

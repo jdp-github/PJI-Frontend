@@ -75,7 +75,7 @@
                         </view>
                         <view class="cu-form-group">
                             <view class='title'>建档日期</view>
-                            <picker mode="date" value="{{createDate}}" start="2015-01-01" end="2025-01-01" bindchange="onCreateDateChange">
+                            <picker mode="date" value="{{createDate}}" start="2015-01-01" end="2050-12-31" bindchange="onCreateDateChange">
                                 <view class="picker">
                                     {{createDate}}
                                 </view>
@@ -215,7 +215,7 @@
                         <!-- 穿刺日期 -->
                         <view class="cu-form-group  {{ccDateDisabled?'disabled':''}}">
                             <view class='title'>穿刺日期</view>
-                            <picker mode="date" value="{{chuangciDate}}" start="2015-01-01" end="2025-01-01" bindchange="onChuanciDateChange" disabled='{{ccDateDisabled}}'>
+                            <picker mode="date" value="{{chuangciDate}}" start="2015-01-01" end="2050-12-31" bindchange="onChuanciDateChange" disabled='{{ccDateDisabled}}'>
                                 <view class="picker">
                                     {{chuangciDate}}
                                 </view>
@@ -473,7 +473,7 @@
                         <!-- 手术日期 -->
                         <view class="cu-form-group  {{ssDateDisabled?'disabled':''}}">
                             <view class='title'>手术日期</view>
-                            <picker mode="date" value="{{shoushuDate}}" start="2015-01-01" end="2025-01-01" bindchange="onShoushuDateChange" disabled='{{ssDateDisabled}}'>
+                            <picker mode="date" value="{{shoushuDate}}" start="2015-01-01" end="2050-12-31" bindchange="onShoushuDateChange" disabled='{{ssDateDisabled}}'>
                                 <view class="picker">
                                     {{shoushuDate}}
                                 </view>

@@ -159,21 +159,27 @@ Page({
         let that = this;
         wx.request({
             url: constant.basePath,
+            method: 'POST',
             data: {
                 service: 'Case.SearchCaseList',
                 openid: app.globalData.openid,
                 center_id: that.data.centerId,
                 keyword: searchValue,
-                sort: sortType
+                sort: sortType,
+                page: 1,
+                page_size: 50
             },
             header: {
-                'content-type': 'application/json'
+                'content-type': 'application/x-www-form-urlencoded'
             },
             success(res) {
                 console.log("Case.SearchCaseList:" + JSON.stringify(res))
-                if (res.data.data.code == constant.response_success) {
-                    for (let i = 0, len = res.data.data.list.length; i < len; i++) {
-                        let caseInfo = res.data.data.list[i];
+                const body = res.data;
+                const data = body && body.data;
+                if (data && data.code == constant.response_success) {
+                    const list = data.list || [];
+                    for (let i = 0, len = list.length; i < len; i++) {
+                        let caseInfo = list[i];
                         // 日期
                         if (caseInfo.puncture_date == 0) {
                             caseInfo.puncture_date = "暂无"
@@ -194,16 +200,16 @@ Page({
                     }
 
                     that.setData({
-                        caseList: res.data.data.list
+                        caseList: list
                     });
                 } else {
-                    that.showToast(res.data.msg);
+                    that.showToast((data && data.msg) || (body && body.msg) || '请求失败');
                 }
                 that.completeProgress();
             },
             fail(res) {
                 that.completeProgress();
-                that.showToast(res.data.msg);
+                that.showToast('网络请求失败');
             }
         });
     },
@@ -246,12 +252,13 @@ Page({
                 'content-type': 'application/json'
             },
             success(res) {
-                if (res.data.data.code == 0) {
+                const data = res.data && res.data.data;
+                if (data && data.code == 0) {
                     wx.navigateTo({
                         url: '../../center/case/detail/detail?case_id=' + caseInfo.case_id + "&centerId=" + that.data.centerId + "&centerName=" + that.data.centerName
                     });
                 } else {
-                    that.showModal("ErrModal", res.data.data.msg);
+                    that.showModal("ErrModal", (data && data.msg) || (res.data && res.data.msg) || '请求失败');
                 }
                 that.hideLoading();
             },
@@ -324,14 +331,15 @@ Page({
             success(res) {
                 console.log("Case.DeleteCase:" + JSON.stringify(res));
                 that.completeProgress();
-                if (res.data.data.code == constant.response_success) {
+                const data = res.data && res.data.data;
+                if (data && data.code == constant.response_success) {
                     that.loadProgress();
                     that.requestCaseList(that.data.searchValue, that.data.sortType);
                     that.setData({
                         modalName: ''
                     });
                 } else {
-                    that.showModal("ErrModal", res.data.data.msg);
+                    that.showModal("ErrModal", (data && data.msg) || (res.data && res.data.msg) || '请求失败');
                 }
             },
             fail(res) {

@@ -39,7 +39,15 @@ function getNowFormatDate() {
     return currentdate;
 }
 
+function buildQuery(params) {
+    return Object.keys(params).map(function(key) {
+        var value = params[key];
+        return key + '=' + encodeURIComponent(value == null ? '' : value);
+    }).join('&');
+}
+
 module.exports = {
     formatTime: formatTime,
-    getNowFormatDate: getNowFormatDate
+    getNowFormatDate: getNowFormatDate,
+    buildQuery: buildQuery
 };
