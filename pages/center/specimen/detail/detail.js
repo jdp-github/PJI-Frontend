@@ -15,7 +15,6 @@ const SPECIMEN_TYPE_GET = 2;
 const SPECIMEN_TYPE_NO_RIGHT = 3;
 
 const SPECIMEN_TYPE_LIST = ['关节液', '血液', '组织'];
-const ECCENTRICITY_LIST = ['6600rpm*3min', '1000g*5min', '1000g*10min', '未离心', '4500rpm*10min', '3000rpm*10min'];
 
 Page({
     data: {
@@ -337,7 +336,7 @@ Page({
                     // 标本类型
                     specimenInfo.typeValue = SPECIMEN_TYPE_LIST[specimenInfo.type - 1]
                     // 离心转数
-                    specimenInfo.eccentricityValue = ECCENTRICITY_LIST[specimenInfo.eccentricity]
+                    specimenInfo.eccentricityValue = constant.getEccentricityLabel(specimenInfo.eccentricity)
                     // 是否无菌
                     specimenInfo.isAsepsisValue = specimenInfo.is_asepsis == 0 ? "否" : "是"
                     that.setData({

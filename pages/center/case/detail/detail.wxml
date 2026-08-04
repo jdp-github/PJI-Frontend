@@ -187,14 +187,22 @@
                             <view class='title'>简要病史</view>
                             <input placeholder='请输入文字, 没有请填"无"' class='radius' bindinput="onJybsInput" value="{{jybs}}"></input>
                         </view>
+                        <!-- 是否存在与假体相通的窦道 -->
+                        <view class="cu-form-group">
+                            <view class='title'>是否存在与假体相通的窦道</view>
+                            <picker bindchange="onSinusTractChange" value="{{sinusTract}}" range="{{sinusTractPicker}}">
+                                <view class="picker">
+                                    {{sinusTractPicker[sinusTract]}}
+                                </view>
+                            </picker>
+                        </view>
                         <!-- 体征 -->
                         <view class="cu-form-group">
                             <view class='title'>体征</view>
                             <checkbox-group bindchange="onTzChange" class="tz-checkbox-group">
-                                <label class="tz-checkbox-item"><checkbox class="tz-checkbox" value="1" checked="{{tzHong}}"/>红</label>
-                                <label class="tz-checkbox-item"><checkbox class="tz-checkbox" value="2" checked="{{tzZhong}}"/>肿</label>
-                                <label class="tz-checkbox-item"><checkbox class="tz-checkbox" value="3" checked="{{tzRe}}"/>热</label>
-                                <label class="tz-checkbox-item"><checkbox class="tz-checkbox" value="4" checked="{{tzJxt}}"/>静息痛</label>
+                                <label class="tz-checkbox-item" wx:for="{{tzSignOptions}}" wx:key="value">
+                                    <checkbox class="tz-checkbox" value="{{item.value}}" checked="{{item.checked}}"/>{{item.label}}
+                                </label>
                             </checkbox-group>
                         </view>
                         <view class="cu-form-group">

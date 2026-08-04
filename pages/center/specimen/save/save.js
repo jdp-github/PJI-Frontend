@@ -23,7 +23,8 @@ Page({
         remark: '',
         typeList: ['关节液', '血液', '组织'],
         typeIndex: 0,
-        eccentricityList: ['6600rpm*3min', '1000g*5min', '1000g*10min', '未离心', '4500rpm*10min', '3000rpm*10min'],
+        eccentricityList: constant.getEccentricitySortedLabels(),
+        eccentricityIds: constant.getEccentricitySortedIds(),
         eccentricityIndex: 0,
         axenicList: ['否', '是'],
         axenicIndex: 0
@@ -190,7 +191,7 @@ Page({
                 sample_id: that.data.specimenInfo.sample_id,
                 case_id: that.data.selectedCaseInfo.case_id,
                 type: parseInt(that.data.typeIndex) + 1,
-                eccentricity: parseInt(that.data.eccentricityIndex),
+                eccentricity: parseInt(that.data.eccentricityIds[that.data.eccentricityIndex]),
                 is_asepsis: parseInt(that.data.axenicIndex),
                 remark: that.data.remark
             },

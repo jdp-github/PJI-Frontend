@@ -5,6 +5,24 @@ let util = require('../../../../utils/util.js');
 
 const app = getApp();
 
+const TZ_SIGN_DEFS = [
+    { value: '1', label: '全身发热' },
+    { value: '2', label: '皮肤红' },
+    { value: '3', label: '关节肿' },
+    { value: '4', label: '皮温高' },
+    { value: '5', label: '静息痛' },
+];
+
+function buildTzSignOptions(selected) {
+    return TZ_SIGN_DEFS.map(function(item) {
+        return {
+            value: item.value,
+            label: item.label,
+            checked: selected.indexOf(item.value) >= 0
+        };
+    });
+}
+
 Page({
     data: {
         showImageModal: false,
@@ -98,13 +116,12 @@ Page({
         jwxjpyResult: '',
         jwxjpyResultDisabled: true,
         tzSelected: [],
-        tzHong: false,
-        tzZhong: false,
-        tzRe: false,
-        tzJxt: false,
+        tzSignOptions: buildTzSignOptions([]),
         antibiotic: 0,
         antibioticPicker: ['请选择', '是', '否'],
         jybs: '',
+        sinusTract: 0,
+        sinusTractPicker: ['请选择', '否', '是', '是且伴大块皮肤/组织缺损'],
         cbzd: '',
         tssxbz: '',
         isBaseLock: 0,
@@ -756,10 +773,7 @@ Page({
         const selected = e.detail.value;
         this.setData({
             tzSelected: selected,
-            tzHong: selected.indexOf('1') >= 0,
-            tzZhong: selected.indexOf('2') >= 0,
-            tzRe: selected.indexOf('3') >= 0,
-            tzJxt: selected.indexOf('4') >= 0,
+            tzSignOptions: buildTzSignOptions(selected)
         });
     },
     onAntibioticChange: function(e) {
@@ -770,6 +784,11 @@ Page({
     onJybsInput: function(e) {
         this.setData({
             jybs: e.detail.value
+        });
+    },
+    onSinusTractChange: function(e) {
+        this.setData({
+            sinusTract: e.detail.value,
         });
     },
     onCbzdInput: function(e) {
@@ -1880,13 +1899,11 @@ Page({
             jwxjpyResultDisabled: this.getValueDisable(info.base.previous_culture_result || ''),
             antibiotic: info.base.is_used_antibiotics,
             jybs: info.base.medical_history,
+            sinusTract: info.base.is_sinus_tract || 0,
             cbzd: info.base.diagnose,
             tssxbz: info.base.special_matter,
             tzSelected: physicalSigns.tzSelected,
-            tzHong: physicalSigns.tzHong,
-            tzZhong: physicalSigns.tzZhong,
-            tzRe: physicalSigns.tzRe,
-            tzJxt: physicalSigns.tzJxt,
+            tzSignOptions: physicalSigns.tzSignOptions,
             addAvatar: info.base.base_creator_avatar,
             updateAvatarArr: this.makeUpdateAvatar(info.base.base_editor_list),
             approveAvatar: info.base.base_auditor_avatar,
@@ -2078,10 +2095,7 @@ Page({
         const selected = (signs || '').split(',').filter(Boolean);
         return {
             tzSelected: selected,
-            tzHong: selected.indexOf('1') >= 0,
-            tzZhong: selected.indexOf('2') >= 0,
-            tzRe: selected.indexOf('3') >= 0,
-            tzJxt: selected.indexOf('4') >= 0,
+            tzSignOptions: buildTzSignOptions(selected)
         };
     },
 
@@ -2188,6 +2202,7 @@ Page({
             previous_culture_result: that.data.jwxjpyResult,
             is_used_antibiotics: parseInt(that.data.antibiotic),
             medical_history: that.data.jybs,
+            is_sinus_tract: parseInt(that.data.sinusTract),
             physical_signs: that.data.tzSelected.join(','),
             diagnose: that.data.cbzd,
             special_matter: that.data.tssxbz,
@@ -2521,6 +2536,10 @@ Page({
         }
         if (this.data.jybs.length <= 0) {
             this.showToast("请填写简要病史")
+            return false;
+        }
+        if (this.data.sinusTract == 0) {
+            this.showToast("请选择是否存在与假体相通的窦道")
             return false;
         }
         if (this.data.cbzd.length <= 0) {

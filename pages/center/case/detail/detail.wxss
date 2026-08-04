@@ -123,7 +123,8 @@ page, .page {
 .tz-checkbox-item {
     display: inline-flex;
     align-items: center;
-    margin-left: 12rpx;
+    margin-left: 8rpx;
+    margin-bottom: 6rpx;
     font-size: 22rpx;
     color: #555;
     line-height: 1;
