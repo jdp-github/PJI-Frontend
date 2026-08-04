@@ -95,6 +95,13 @@ Page({
         ris: 0,
         risPicker: ['请选择', '否', '类风湿', '强制性脊柱炎', '其他 (请在备注中标明)'],
         qtbsjb: '',
+        jwxjpyResult: '',
+        jwxjpyResultDisabled: true,
+        tzSelected: [],
+        tzHong: false,
+        tzZhong: false,
+        tzRe: false,
+        tzJxt: false,
         antibiotic: 0,
         antibioticPicker: ['请选择', '是', '否'],
         jybs: '',
@@ -728,6 +735,31 @@ Page({
     onQtbsjbInput: function(e) {
         this.setData({
             qtbsjb: e.detail.value
+        });
+    },
+    onJwxjpyResultInput: function(e) {
+        this.setData({
+            jwxjpyResult: e.detail.value
+        });
+    },
+    onJwxjpyResultSwitchChange: function(e) {
+        this.setData({
+            jwxjpyResultDisabled: !e.detail.value
+        });
+        if (this.data.jwxjpyResultDisabled) {
+            this.setData({
+                jwxjpyResult: ''
+            })
+        }
+    },
+    onTzChange: function(e) {
+        const selected = e.detail.value;
+        this.setData({
+            tzSelected: selected,
+            tzHong: selected.indexOf('1') >= 0,
+            tzZhong: selected.indexOf('2') >= 0,
+            tzRe: selected.indexOf('3') >= 0,
+            tzJxt: selected.indexOf('4') >= 0,
         });
     },
     onAntibioticChange: function(e) {
@@ -1819,6 +1851,7 @@ Page({
         // 基本信息
         let tempOperationDateArray = [0, parseInt(info.base.last_to_now_unit), parseInt(info.base.last_to_now)];
         let tempSymptomsUnit = [0, parseInt(info.base.duration_symptoms_unit), parseInt(info.base.duration_symptoms)];
+        let physicalSigns = this.parsePhysicalSigns(info.base.physical_signs);
         this.setData({
             name: info.base.patient_name,
             caseNO: info.base.case_no,
@@ -1843,10 +1876,17 @@ Page({
             xingzhiValue: info.base.duration_symptoms_prop == 1 ? "急性" : "慢性",
             ris: info.base.is_merge_disease,
             qtbsjb: info.base.other_concomitant_diseases,
+            jwxjpyResult: info.base.previous_culture_result || '',
+            jwxjpyResultDisabled: this.getValueDisable(info.base.previous_culture_result || ''),
             antibiotic: info.base.is_used_antibiotics,
             jybs: info.base.medical_history,
             cbzd: info.base.diagnose,
             tssxbz: info.base.special_matter,
+            tzSelected: physicalSigns.tzSelected,
+            tzHong: physicalSigns.tzHong,
+            tzZhong: physicalSigns.tzZhong,
+            tzRe: physicalSigns.tzRe,
+            tzJxt: physicalSigns.tzJxt,
             addAvatar: info.base.base_creator_avatar,
             updateAvatarArr: this.makeUpdateAvatar(info.base.base_editor_list),
             approveAvatar: info.base.base_auditor_avatar,
@@ -2034,6 +2074,17 @@ Page({
         return value <= 0
     },
 
+    parsePhysicalSigns(signs) {
+        const selected = (signs || '').split(',').filter(Boolean);
+        return {
+            tzSelected: selected,
+            tzHong: selected.indexOf('1') >= 0,
+            tzZhong: selected.indexOf('2') >= 0,
+            tzRe: selected.indexOf('3') >= 0,
+            tzJxt: selected.indexOf('4') >= 0,
+        };
+    },
+
     makeUpdateAvatar(avatarObjList) {
         var avatarList = [];
         var avatarLen = avatarObjList.length;
@@ -2134,8 +2185,10 @@ Page({
 
             is_merge_disease: parseInt(that.data.ris),
             other_concomitant_diseases: that.data.qtbsjb,
+            previous_culture_result: that.data.jwxjpyResult,
             is_used_antibiotics: parseInt(that.data.antibiotic),
             medical_history: that.data.jybs,
+            physical_signs: that.data.tzSelected.join(','),
             diagnose: that.data.cbzd,
             special_matter: that.data.tssxbz,
         }
@@ -2456,6 +2509,10 @@ Page({
         }
         if (this.data.qtbsjb.length <= 0) {
             this.showToast("请填写其他伴随疾病")
+            return false;
+        }
+        if (!this.data.jwxjpyResultDisabled && this.data.jwxjpyResult.length == 0) {
+            this.showToast("请填写既往/外院细菌培养结果")
             return false;
         }
         if (this.data.antibiotic == 0) {

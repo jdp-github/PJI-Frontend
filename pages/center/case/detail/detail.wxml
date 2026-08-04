@@ -167,6 +167,14 @@
                             <view class='title'>其他伴随疾病</view>
                             <input placeholder='请输入文字, 没有请填"无"' class='radius' bindinput="onQtbsjbInput" value="{{qtbsjb}}"></input>
                         </view>
+                        <!-- 既往/外院细菌培养结果 -->
+                        <view class="cu-form-group {{jwxjpyResultDisabled?'disabled':''}}">
+                            <view style='display:flex;flex-direction: column;'>
+                                <view class='title' style='text-align:left'>既往/外院细菌培养结果</view>
+                                <input placeholder="请输入培养结果，不适用请点击右侧" style='width: 380rpx;text-align:left;' class='radius' bindinput="onJwxjpyResultInput" disabled='{{jwxjpyResultDisabled}}' value='{{jwxjpyResult}}'></input>
+                            </view>
+                            <switch class='green sm' bindchange="onJwxjpyResultSwitchChange" style='margin-left: 15rpx;' checked='{{!jwxjpyResultDisabled}}'></switch>
+                        </view>
                         <view class="cu-form-group">
                             <view class='title'>近期(2周)应用抗生素</view>
                             <picker bindchange="onAntibioticChange" value="{{antibiotic}}" range="{{antibioticPicker}}">
@@ -178,6 +186,16 @@
                         <view class="cu-form-group">
                             <view class='title'>简要病史</view>
                             <input placeholder='请输入文字, 没有请填"无"' class='radius' bindinput="onJybsInput" value="{{jybs}}"></input>
+                        </view>
+                        <!-- 体征 -->
+                        <view class="cu-form-group">
+                            <view class='title'>体征</view>
+                            <checkbox-group bindchange="onTzChange" class="tz-checkbox-group">
+                                <label class="tz-checkbox-item"><checkbox class="tz-checkbox" value="1" checked="{{tzHong}}"/>红</label>
+                                <label class="tz-checkbox-item"><checkbox class="tz-checkbox" value="2" checked="{{tzZhong}}"/>肿</label>
+                                <label class="tz-checkbox-item"><checkbox class="tz-checkbox" value="3" checked="{{tzRe}}"/>热</label>
+                                <label class="tz-checkbox-item"><checkbox class="tz-checkbox" value="4" checked="{{tzJxt}}"/>静息痛</label>
+                            </checkbox-group>
                         </view>
                         <view class="cu-form-group">
                             <view class='title'>初步诊断</view>
